@@ -1,0 +1,22 @@
+#company-logo-wrapper {
+    margin-top: 10px;
+    position: relative;
+    width: 300px;
+    padding: 21px 21px 0 0;
+}
+#company-logo {
+    position: relative;
+    width: inherit;
+}
+#company-logo-wrapper:hover #delete{
+    display: block;
+}
+#delete{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+}

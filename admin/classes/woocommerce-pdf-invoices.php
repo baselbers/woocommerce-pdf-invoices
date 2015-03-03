@@ -13,8 +13,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		public function plugins_loaded() {
 			if ( class_exists('WC_Order') ) {
-				require_once( WPI_DIR . 'includes/classes/wpi-order.php' );
-				$invoice = new WPI_Invoice(new WPI_Order(12));
+				$invoice = new WPI_Invoice(new WC_Order(12));
 				//$invoice->generate();
 			}
 		}

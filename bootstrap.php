@@ -35,11 +35,10 @@ define( 'WPI_URL', plugins_url( '', __FILE__ ) );
 define( 'WPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . 'includes/views/templates/' );
 
 require_once( WPI_DIR . 'admin/classes/woocommerce-pdf-invoices.php' );
-require_once( WPI_DIR . 'admin/classes/wpi-settings.php' );
 require_once( WPI_DIR . 'admin/classes/wpi-general-settings.php' );
 require_once( WPI_DIR . 'admin/classes/wpi-template-settings.php' );
 require_once( WPI_DIR . 'includes/classes/wpi-invoice.php' );
 
 if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
-    $GLOBALS['bewpi'] = new BE_WooCommerce_PDF_Invoices();
+    new BE_WooCommerce_PDF_Invoices(new WPI_General_Settings(), new WPI_Template_Settings());
 }

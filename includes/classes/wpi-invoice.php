@@ -1,10 +1,15 @@
 <?php
 
 class WPI_Invoice {
+
     private $order;
+
     private $general_settings;
+
     private $template_settings;
+
     private $number;
+
     private $invoice_number_meta_key = '_bewpi_invoice_number';
 
     public function __construct( $order = '' ) {
@@ -22,16 +27,22 @@ class WPI_Invoice {
         $this->suffix                   = get_post_meta( $this->order->id, '_bewpi_invoice_suffix', true );
         $this->date                     = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
 
-        if( $this->number == "" ) {
+        if( empty( $this->number ) ) {
             $this->get_next_invoice_number($this->order->id);
         }
     }
 
     public function get_formatted_date() {
         $date_format = $this->template_settings['invoice_date_format'];
+        $date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
+
         if( $date_format != "" ) {
-            return date($date_format, $this->order->order_date);
+            $formatted_date = $date->format($date_format);
+        } else {
+            $formatted_date = $date->format($date, "d-m-Y");
         }
+
+        return $formatted_date;
     }
 
     public function get_formatted_order_year() {
@@ -88,7 +99,7 @@ class WPI_Invoice {
 
         $current_year = getdate()['year'];
         if ( $this->template_settings['reset_invoice_number'] ) {
-            $last_year = $this->template_settings['last_invoice_year'];
+            $last_year = $this->template_settings['last_invoiced_year'];
 
             if ( $last_year != "" && is_numeric( $last_year ) ) {
                 if ( $last_year < $current_year ) {
@@ -98,13 +109,17 @@ class WPI_Invoice {
             }
         }
 
+        if( empty( $this->number ) && empty( $this->template_settings['invoice_number'] ) ) {
+            $this->number = 1;
+        }
+
         // Create new invoice number and insert into database.
         $this->create_invoice_number($order_id, $this->number);
 
         // Set the current year as the last invoiced.
-        $this->template_settings['last_invoice_year'] = $current_year;
+        $this->template_settings['last_invoiced_year'] = $current_year;
 
-        // Get the the current invoice number and return.
+        // Get the invoice number.
         $this->number = $this->get_invoice_number($order_id);
         $this->template_settings['invoice_number'] = $this->number;
         update_option( 'template_settings', $this->template_settings );
@@ -114,8 +129,8 @@ class WPI_Invoice {
 
     public function get_formatted_invoice_number() {
         $invoice_number_format = $this->template_settings['invoice_format'];
-        //$digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
-        //$this->number = sprintf($digit_str, $this->number);
+        $digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
+        $this->number = sprintf($digit_str, $this->number);
 
         return $invoice_number_format = str_replace(
             array( '[prefix]', '[suffix]', '[number]' ),

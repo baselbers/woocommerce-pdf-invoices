@@ -5,7 +5,7 @@
     }
     /* Invoice template 1 CSS */
     #body {
-        padding: 40px 40px 60px;
+        padding: 40px 40px 0;
         color: #5A5E61;
     }
     .row {
@@ -16,11 +16,13 @@
         float: left;
     }
     .logo .center {
-        width: 55%;
+        width: 45%;
         margin: 0 auto;
+        border: 1px solid black;
     }
     .logo .left, .logo .right {
-        width: 15%;
+        width: 20%;
+        border: 1px solid black;
     }
     .logo .right {
         float: right;
@@ -42,16 +44,17 @@
     }
     .company-address {
         text-align: right;
-        padding-right: 40px;
+        padding-right: 0;
+        font-size: 16px;
     }
     .intro, .coupon, .title, #invoice-number {
         text-align: center;
     }
     .intro {
-        font-size: 18px;
+        font-size: 16px;
     }
     #expires, #invoice-number{
-        font-size: 12px;
+        font-size: 12px !important;
     }
     .coupon {
         padding-left: 40px;
@@ -73,7 +76,7 @@
         color: white;
         background-color: #52AF68;
     }
-    .title h1 {
+    .title h1, .title span {
         margin: 0; padding: 0;
     }
     #invoice-number {
@@ -86,6 +89,7 @@
         padding: 20px;
         width: 100%;
         background-color: #F8F8F8;
+        /*margin-bottom: 20px;*/
     }
     td, th {
         padding: 10px;
@@ -112,45 +116,51 @@
     }
     .discount td, .subtotal td, .tax td, .shipping td {
         font-weight: normal;
-        font-size: 12px;
+        font-size: 14px;
     }
-    .payment-method {
+    .payment-method, .customer-note{
         font-size: 12px;
         font-weight: normal;
     }
-    /*#footer {
-        position: absolute;
-        bottom: 0;
+    .payment-method {
+        vertical-align: middle;
+    }
+    .customer-note {
+        color: black;
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+        padding: 10px;
+        /*background-color: #E8E8E8;*/
+    }
+    #footer {
         width: 100%;
         font-size: 14px;
+        background-color: #3A3F43;
     }
     .questions, .company-address  {
         padding: 40px;
-    }
-    .questions {
         width: 40%;
         float: left;
+        border: 1px solid black;
     }
     .questions p {
         margin: 0;
-    }*/
+    }
 </style>
-    <div id="body">
+    <div id="body" class="row">
         <div class="row logo">
             <div class="left"></div>
             <div class="center">
                 <div id="company-logo" class="circle uppercase"><span>My company</span></div>
             </div>
-            <div class="company-address right">
-                <?php echo $this->template_settings['company_address']; ?>
-                <!--<span class="uppercase"><strong>Company</strong></span><br/>
-                Street<br/>
-                City<br/>
-                Country-->
+            <div class="right">
+                <?php //echo nl2br( $this->template_settings['company_address'] ); ?>
+                <?php //echo nl2br( $this->template_settings['company_details'] ); ?>
             </div>
         </div>
         <div class="row intro">
-            <h1>Thank you!</h1>
+            <!--<h1>Thank you!</h1>-->
             <p>
                 Thanks for shopping with us today.<br/>
                 You'll find your invoice below.
@@ -181,61 +191,68 @@
             <table class="products">
                 <thead>
                     <tr class="border-bottom">
-                        <?php if( $this->template_settings['show_sku'] ) { $colspan = 3; ?>
-                        <th class="align-left uppercase">SKU</th>
-                        <?php } else { $colspan = 2; ?>
                         <th class="align-left">Description</th>
+                        <?php if( $this->template_settings['show_sku'] ) { $colspan = 3; ?>
+                            <th class="align-center uppercase">SKU</th>
+                        <?php } else { $colspan = 2; } ?>
                         <th class="align-center">Quantity</th>
                         <th>Unit price</th>
                         <th>Total</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach( $this->order->get_items( 'line_item' ) as $item ) {
+                        $product = wc_get_product( $item['product_id'] ); ?>
                     <tr class="product border-bottom">
+                        <td class="align-left normalcase"><?php echo $product->get_title(); ?></td>
                         <?php if( $this->template_settings['show_sku'] ) { ?>
-                        <td class="align-left uppercase">SAU101</td>
+                            <td class="align-center uppercase"><?php echo $product->get_sku(); ?></td>
                         <?php } ?>
-                        <td class="align-left normalcase">Awesome Widget</td>
-                        <td class="align-center">1</td>
-                        <td>8.09</td>
-                        <td>8.09</td>
+                        <td class="align-center"><?php echo $item['qty']; ?></td>
+                        <td><?php echo wc_price( $product->get_price_excluding_tax() ); ?></td>
+                        <td><?php echo wc_price( $product->get_price_excluding_tax( $item['qty'] ) ); ?></td>
                     </tr>
-                    <?php if( $this->template_settings['show_discount'] ) { ?>
+                    <?php } ?>
+                    <?php if( $this->template_settings['show_discount'] && $this->order->get_total_discount != 0 ) { ?>
                     <tr class="discount">
                         <td colspan="<?php echo $colspan; ?>"></td>
                         <td class="border-bottom">Discount</td>
-                        <td class="border-bottom">0.00</td>
-                    </tr>
-                    <?php } ?>
-                    <tr class="subtotal">
-                        <td colspan="<?php echo $colspan; ?>"></td>
-                        <td class="border-bottom">Subtotal</td>
-                        <td class="border-bottom">8.09</td>
-                    </tr>
-                    <?php if( $this->template_settings['show_tax'] ) { ?>
-                    <tr class="tax">
-                        <td colspan="<?php echo $colspan; ?>"></td>
-                        <td class="border-bottom">Tax 21%</td>
-                        <td class="border-bottom">1.70</td>
+                        <td class="border-bottom"><?php echo wc_price( $this->order->get_total_discount() ); ?></td>
                     </tr>
                     <?php } ?>
                     <?php if( $this->template_settings['show_shipping'] ) { ?>
-                    <tr class="shipping">
+                        <tr class="shipping">
+                            <td colspan="<?php echo $colspan; ?>"></td>
+                            <td class="border-bottom">Shipping</td>
+                            <td class="border-bottom normalcase"><?php echo wc_price( $this->order->get_total_shipping() ); ?></td>
+                        </tr>
+                    <?php } ?>
+                    <?php if( $this->template_settings['show_subtotal'] ) { ?>
+                    <tr class="subtotal">
                         <td colspan="<?php echo $colspan; ?>"></td>
-                        <td class="border-bottom">Shipping</td>
-                        <td class="border-bottom normalcase">Free Shipping</td>
+                        <td class="border-bottom">Subtotal</td>
+                        <td class="border-bottom"><?php echo wc_price( $this->order->get_subtotal() ); ?></td>
+                    </tr>
+                    <?php } ?>
+                    <?php if( $this->template_settings['show_tax'] ) { ?>
+                    <tr class="tax">
+                        <td colspan="<?php echo $colspan; ?>"></td>
+                        <td class="border-bottom">Tax</td>
+                        <td class="border-bottom"><?php echo wc_price( $this->order->get_total_tax() ); ?></td>
                     </tr>
                     <?php } ?>
                     <tr>
-                        <td class="payment-method align-left normalcase" colspan="<?php echo $colspan; ?>">Paid with Visa:<br/>**** **** **** 1234</td>
+                        <td class="payment-method align-left normalcase" colspan="<?php echo $colspan; ?>">Payment via <?php echo $this->order->payment_method_title; ?></td>
                         <td class="total border-bottom">Total</td>
-                        <td class="total border-bottom">9.79</td>
+                        <td class="total border-bottom"><?php echo wc_price( $this->order->get_total() ); ?></td>
                     </tr>
                 </tbody>
             </table>
+            <div class="customer-note">
+                <?php echo $this->order->get_customer_order_notes()[0]->comment_content; ?>
+            </div>
         </div>
-
-<!--<div id="footer">
+<div id="footer">
     <div class="questions">
         <span><strong>Questions?</strong></span>
         <p>
@@ -248,4 +265,4 @@
         City<br/>
         Country
     </div>
-</div>-->
+</div>

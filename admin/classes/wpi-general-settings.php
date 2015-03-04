@@ -1,12 +1,15 @@
 <?php
 
-class WPI_General_Settings extends WPI_Settings {
-    protected $settings_key = 'general_settings';
-    public $settings;
+class WPI_General_Settings {
+
+    private $settings_key = 'general_settings';
+
     private $defaults = array(
         'email_type' => '3',
         'new_order' => false
     );
+
+    public $settings;
 
     function __construct() {
         add_action('init', array(&$this, 'load_settings'));

@@ -1,8 +1,9 @@
 <?php
 
-class WPI_Template_Settings extends WPI_Settings {
-    protected $settings_key = 'template_settings';
-    public $settings;
+class WPI_Template_Settings {
+
+    private $settings_key = 'template_settings';
+
     private $defaults = array(
         'template_id' => 1,
         'company_name' => '',
@@ -11,19 +12,24 @@ class WPI_Template_Settings extends WPI_Settings {
         'company_details' => '',
         'invoice_notes' => '',
         'show_discount' => 0,
+        'show_subtotal' => 0,
         'show_tax' => 0,
         'show_shipping' => 0,
         'show_customer_notes' => 0,
         'show_sku' => 0,
-        'next_invoice_number' => 0,
+        'next_invoice_number' => 1,
         'invoice_number_digits' => 3,
         'invoice_prefix' => '',
         'invoice_suffix' => '',
         'invoice_format' => '[prefix]-[number]-[suffix]',
         'reset_invoice_number' => 0,
-        'invoice_date_format' => 'd/m/Y',
-        'last_invoice_year' => ''
+        'invoice_date_format' => 'F jS Y',
+        'last_invoiced_year' => '',
+        'invoice_number' => 1
     );
+
+    public $settings;
+
     private $templates = array(
         array(
             'id' => 1,
@@ -46,6 +52,8 @@ class WPI_Template_Settings extends WPI_Settings {
         if( $this->settings['template_id'] != "" ) {
             $this->settings['template_filename'] = $this->get_template_filename( $this->settings['template_id'] );
         }
+
+        update_option( $this->settings_key, $this->settings );
     }
 
     function register_settings() {
@@ -57,11 +65,6 @@ class WPI_Template_Settings extends WPI_Settings {
         add_settings_field( 'company_address', 'Company address', array( &$this, 'company_address_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'company_details', 'Company details', array( &$this, 'company_details_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_notes', 'Invoice notes', array( &$this, 'invoice_notes_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_tax', 'Show tax', array( &$this, 'show_tax_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_discount', 'Show discount', array( &$this, 'show_discount_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_shipping', 'Show shipping', array( &$this, 'show_shipping_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_customer_notes', 'Show customer notes', array( &$this, 'show_customer_notes_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_sku', 'Show SKU', array( &$this, 'show_sku_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'next_invoice_number', 'Next invoice number', array( &$this, 'next_invoice_number_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_number_digits', 'Number of digits', array( &$this, 'invoice_number_digits_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_prefix', 'Invoice number prefix', array( &$this, 'invoice_prefix_option' ), $this->settings_key, 'section_template' );
@@ -69,14 +72,21 @@ class WPI_Template_Settings extends WPI_Settings {
         add_settings_field( 'invoice_format', 'Invoice number format', array( &$this, 'invoice_format_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'reset_invoice_number', 'Reset on 1st January', array( &$this, 'reset_invoice_number_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_date_format', 'Invoice date format', array( &$this, 'invoice_date_format_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_sku', 'Show SKU', array( &$this, 'show_sku_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_discount', 'Show discount', array( &$this, 'show_discount_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_subtotal', 'Show subtotal', array( &$this, 'show_subtotal_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_tax', 'Show tax', array( &$this, 'show_tax_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_shipping', 'Show shipping', array( &$this, 'show_shipping_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_customer_notes', 'Show customer notes', array( &$this, 'show_customer_notes_option' ), $this->settings_key, 'section_template' );
         //add_settings_field( 'preview_invoice', 'Preview invoice', array( &$this, 'preview_invoice_option' ), $this->settings_key, 'section_template' );
 
+        /*
         ?>
-        <script type="application/javascript">
+        <!--<script type="application/javascript">
             var ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
             var nonce = '<?php echo wp_create_nonce('wpi_preview_invoice'); ?>';
-        </script>
-    <?php
+        </script>-->
+    <?php */
     }
 
     function section_template_desc() { echo 'Template section description goes here.'; }
@@ -136,6 +146,15 @@ class WPI_Template_Settings extends WPI_Settings {
         ?>
         <textarea name="<?php echo $this->settings_key; ?>[invoice_notes]" rows="5" cols="50"><?php echo $this->settings['invoice_notes']; ?></textarea>
         <?php
+    }
+
+    function show_subtotal_option() {
+        ?>
+        <input  type="checkbox"
+                name="<?php echo $this->settings_key; ?>[show_subtotal]"
+                value="1"
+            <?php checked( $this->settings['show_subtotal'] ); ?> />
+    <?php
     }
 
     function show_tax_option() {

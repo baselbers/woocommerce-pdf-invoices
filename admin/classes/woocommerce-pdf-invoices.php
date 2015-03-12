@@ -23,7 +23,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'admin_notices', array(&$this, 'admin_notices' ) );
 			//add_action('plugins_loaded', array($this, 'plugins_loaded') );
 			add_shortcode( 'foobar', array(&$this, 'foobar_func') );
-			add_filter( 'woocommerce_email_attachments', array($this, 'woocommerce_email_attachements',10,3 ));
+			add_action('wp_ajax_wpi_create_invoice', array($this, 'wpi_create_invoice'));
+			add_action('wp_ajax_nopriv_wpi_create_invoice', array($this, 'wpi_create_invoice'));
+
+			add_action('woocommerce_order_actions', array( $this, 'my_woocommerce_order_actions', 10, 1) );
+			add_action('woocommerce_order_action_my_action', array( $this, 'do_my_action', 10, 1) );
+
+			add_action('woocommerce_admin_order_actions_end', array($this, 'woocommerce_admin_order_actions_end'));
+
+			add_action( 'add_meta_boxes', array(&$this, 'add_meta_box_to_order_page' ) );
+			//add_filter( 'woocommerce_email_attachments', array($this, 'woocommerce_email_attachements',10,3 ));
 		}
 
 		public function add_woocommerce_submenu_page() {
@@ -67,13 +76,64 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			settings_errors( 'wpi_notices' );
 		}
 
-		public function woocommerce_email_attachements( $attachments, $status , $order ) {}
+		public function woocommerce_email_attachements( $attachments, $status , $order ) {
+			if( $status == $this->general_settings['email_type'] || $status == $this->general_settings['new_order'] ) {
+				$invoice = new WPI_Invoice($order);
+				$content = $invoice->generate("S");
+				//$content = chunk_split(base64_encode($content));
+				$attachments[] = $content;
+			}
+
+			return $attachments;
+		}
+
 		public function plugins_loaded() {}
 
 		function foobar_func( $atts ){
 			if ( class_exists('WC_Order') ) {
-				$invoice = new WPI_Invoice(new WC_Order(124));
+				$invoice = new WPI_Invoice(new WC_Order(125));
 				$invoice->generate();
+			}
+		}
+
+		/**
+		 * Adds a box to the main column on the Post and Page edit screens.
+		 */
+		function add_meta_box_to_order_page() {
+			add_meta_box(
+				'order_page_create_invoice',
+				__( 'PDF Invoice', 'myplugin_textdomain' ),
+				array( &$this, 'show_order_page_create_invoice' ),
+				'shop_order',
+				'side',
+				'high'
+			);
+		}
+
+		function woocommerce_admin_order_actions_end( $order ) {
+			?>
+			<a href="<?php echo admin_url('admin-ajax.php'); ?>?action=wpi_create_invoice&order_id=<?php echo $order->id; ?>&nonce=<?php echo wp_create_nonce('wpi_create_invoice'); ?>" class="button tips wpi-admin-order-create-invoice-btn" target="_blank"></a>
+		<?php
+		}
+
+		function show_order_page_create_invoice( $post ) {
+			?>
+			<a href="<?php echo admin_url('admin-ajax.php'); ?>?action=wpi_create_invoice&order_id=<?php echo $post->ID; ?>&nonce=<?php echo wp_create_nonce('wpi_create_invoice'); ?>" target="_blank"><button type="button">Invoice</button></a>
+			<?php
+		}
+
+		function wpi_create_invoice() {
+			$action = $_REQUEST["action"];
+			$order_id = $_REQUEST["order_id"];
+			$nonce = $_REQUEST["nonce"];
+			if (!wp_verify_nonce($nonce, $action)) {
+				die( 'Invalid request' );
+			} else if( empty($order_id) ) {
+				die( 'Invalid order id');
+			} else {
+				// Valid request so generate the invoice.
+				$invoice = new WPI_Invoice(new WC_Order($order_id));
+				$invoice->generate("D");
 			}
 		}
 	}

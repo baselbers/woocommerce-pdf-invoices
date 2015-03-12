@@ -138,14 +138,14 @@ class WPI_Invoice {
             $invoice_number_format );
     }
 
-    public function generate() {
+    public function generate($dest) {
         set_time_limit(0);
         include WPI_DIR . "lib/mpdf/mpdf.php";
 
-        $mpdf = new mPDF('', 'A4', 0, '', 0, 0, 0, 0, 0, 0, '');
+        $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
         $mpdf->useOnlyCoreFonts = true;    // false is default
-        $mpdf->SetTitle("Acme Trading Co. - Invoice");
-        $mpdf->SetAuthor("Acme Trading Co.");
+        $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
+        $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
         $mpdf->showWatermarkText = false;
         $mpdf->SetDisplayMode('fullpage');
         $mpdf->useSubstitutions = false;
@@ -159,10 +159,53 @@ class WPI_Invoice {
 
         ob_end_clean();
 
+        $footer = $this->get_footer();
+
+        $mpdf->SetHTMLFooter($footer);
+
         $mpdf->WriteHTML($html);
 
-        $mpdf->Output();
+        $filename = $this->get_formatted_invoice_number() . ".pdf";
+
+        $mpdf->Output($filename, $dest);
 
         exit;
+    }
+
+    function get_footer() {
+        ob_start(); ?>
+
+        <table class="foot">
+            <tbody>
+            <tr>
+                <td class="border" colspan="2">
+                    <?php echo $this->template_settings['terms']; ?><br/>
+                    <?php if( count($this->order->get_customer_order_notes() ) > 0 ) { ?>
+                        <p>
+                            <strong>Customer note </strong><?php echo $this->order->get_customer_order_notes()[0]->comment_content; ?>
+                        </p>
+                    <?php } ?>
+                </td>
+            </tr>
+            <tr>
+                <td class="company-details">
+                    <p>
+                        <?php echo nl2br( $this->template_settings['company_details'] ); ?>
+                    </p>
+                </td>
+                <td class="payment">
+                    <p>
+                        <strong>Payment</strong> via <?php echo $this->order->payment_method_title; ?>
+                    </p>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <?php $html = ob_get_contents();
+
+        ob_end_clean();
+
+        return $html;
     }
 }

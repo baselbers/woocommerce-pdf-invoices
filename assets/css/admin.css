@@ -20,3 +20,13 @@
     width: 20px;
     cursor: pointer;
 }
+.wpi-admin-order-create-invoice-btn {
+    background-image: url(../img/invoice.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    text-indent: -9999px;
+    position: relative;
+    padding: 0 !important;
+    height: 2em !important;
+    width: 2em;
+}

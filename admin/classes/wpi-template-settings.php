@@ -10,7 +10,7 @@ class WPI_Template_Settings {
         'company_logo' => '',
         'company_address' => '',
         'company_details' => '',
-        'invoice_notes' => '',
+        'terms' => '',
         'show_discount' => 0,
         'show_subtotal' => 0,
         'show_tax' => 0,
@@ -25,7 +25,8 @@ class WPI_Template_Settings {
         'reset_invoice_number' => 0,
         'invoice_date_format' => 'F jS Y',
         'last_invoiced_year' => '',
-        'invoice_number' => 1
+        'invoice_number' => 1,
+        'intro_text' => 'Many thanks for your purchase. If you have any questions about your invoice, please feel free to contact us at your conveniance. We will reply as soon as we get your message.'
     );
 
     public $settings;
@@ -33,16 +34,14 @@ class WPI_Template_Settings {
     private $templates = array(
         array(
             'id' => 1,
-            'name' => 'Flat',
-            'filename' => 'invoice-flat.php'
+            'name' => 'Micro',
+            'filename' => 'invoice-micro.php'
         )
     );
 
     function __construct() {
         add_action('init', array(&$this, 'load_settings'));
         add_action('admin_init', array($this, 'register_settings'));
-        add_action('wp_ajax_wpi_preview_invoice', array($this, 'preview_invoice'));
-        add_action('wp_ajax_nopriv_wpi_preview_invoice', array($this, 'preview_invoice'));
     }
 
     function load_settings() {
@@ -62,9 +61,10 @@ class WPI_Template_Settings {
         add_settings_field( 'template_id', 'Template', array( &$this, 'template_id_option' ), $this->settings_key, 'section_template', array('templates' => $this->templates));
         add_settings_field( 'company_name', 'Company name', array( &$this, 'company_name_option' ), $this->settings_key, 'section_template');
         add_settings_field( 'company_logo', 'Company logo', array( &$this, 'company_logo_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'intro_text', 'Intro text', array( &$this, 'intro_text_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'company_address', 'Company address', array( &$this, 'company_address_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'company_details', 'Company details', array( &$this, 'company_details_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_notes', 'Invoice notes', array( &$this, 'invoice_notes_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'terms', 'Terms & conditions, policies etc.', array( &$this, 'terms_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'next_invoice_number', 'Next invoice number', array( &$this, 'next_invoice_number_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_number_digits', 'Number of digits', array( &$this, 'invoice_number_digits_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'invoice_prefix', 'Invoice number prefix', array( &$this, 'invoice_prefix_option' ), $this->settings_key, 'section_template' );
@@ -78,15 +78,7 @@ class WPI_Template_Settings {
         add_settings_field( 'show_tax', 'Show tax', array( &$this, 'show_tax_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'show_shipping', 'Show shipping', array( &$this, 'show_shipping_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'show_customer_notes', 'Show customer notes', array( &$this, 'show_customer_notes_option' ), $this->settings_key, 'section_template' );
-        //add_settings_field( 'preview_invoice', 'Preview invoice', array( &$this, 'preview_invoice_option' ), $this->settings_key, 'section_template' );
-
-        /*
-        ?>
-        <!--<script type="application/javascript">
-            var ajax_url = '<?php echo admin_url('admin-ajax.php'); ?>';
-            var nonce = '<?php echo wp_create_nonce('wpi_preview_invoice'); ?>';
-        </script>-->
-    <?php */
+//        add_settings_field( 'preview_invoice', 'Preview invoice', array( &$this, 'preview_invoice_option' ), $this->settings_key, 'section_template' );
     }
 
     function section_template_desc() { echo 'Template section description goes here.'; }
@@ -130,6 +122,12 @@ class WPI_Template_Settings {
     <?php
     }
 
+    function intro_text_option() {
+        ?>
+        <textarea name="<?php echo $this->settings_key; ?>[intro_text]" rows="5" cols="50"><?php echo $this->settings['intro_text']; ?></textarea>
+    <?php
+    }
+
     function company_address_option() {
         ?>
         <textarea name="<?php echo $this->settings_key; ?>[company_address]" rows="5" cols="50"><?php echo $this->settings['company_address']; ?></textarea>
@@ -142,9 +140,9 @@ class WPI_Template_Settings {
         <?php
     }
 
-    function invoice_notes_option() {
+    function terms_option() {
         ?>
-        <textarea name="<?php echo $this->settings_key; ?>[invoice_notes]" rows="5" cols="50"><?php echo $this->settings['invoice_notes']; ?></textarea>
+        <textarea name="<?php echo $this->settings_key; ?>[terms]" rows="5" cols="50"><?php echo $this->settings['terms']; ?></textarea>
         <?php
     }
 
@@ -271,24 +269,11 @@ class WPI_Template_Settings {
         <?php
     }
 
-    /*function preview_invoice_option() {
+    function preview_invoice_option() {
         ?>
-        <button type="button" name="preview-invoice" onclick="Settings.previewInvoice()">Preview</button>
+        <a href="<?php echo admin_url('admin-ajax.php'); ?>?action=wpi_preview_invoice&security=<?php echo wp_create_nonce('wpi_preview_invoice'); ?>" target="_blank">Preview</a>
     <?php
-    }*/
-
-    /*function preview_invoice() {
-        $action = $_REQUEST["action"];
-        $nonce = $_REQUEST["security"];
-        if (!wp_verify_nonce($nonce, $action)) {
-            die( 'Invalid request' );
-        } else {
-            // Valid request so generate the invoice.
-            $invoice = new WPI_Invoice($this->general_settings, $this->settings);
-            $template_filename = WPI_DIR . 'admin/views/invoice-sample.php';
-            $invoice->generate($template_filename);
-        }
-    }*/
+    }
 
     public function get_template_filename($template_id) {
         foreach ($this->templates as $template) {
@@ -327,6 +312,8 @@ class WPI_Template_Settings {
             }
         } else if( empty( $_POST['company_logo'] ) ) {
             return "";
+        } else {
+            return $_POST['company_logo'];
         }
     }
 

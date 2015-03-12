@@ -12,6 +12,8 @@ class WPI_Invoice {
 
     private $invoice_number_meta_key = '_bewpi_invoice_number';
 
+    public $save_path;
+
     public function __construct( $order = '' ) {
         $this->order = $order;
         $this->general_settings = (array) get_option( 'general_settings' );
@@ -167,7 +169,13 @@ class WPI_Invoice {
 
         $filename = $this->get_formatted_invoice_number() . ".pdf";
 
+        if( $dest == "F" )
+            $this->save_path = $filename = WPI_TMP_DIR . $filename;
+
         $mpdf->Output($filename, $dest);
+
+        if( $dest == "F" )
+            return $this->save_path;
 
         exit;
     }

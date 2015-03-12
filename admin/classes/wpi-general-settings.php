@@ -5,8 +5,8 @@ class WPI_General_Settings {
     private $settings_key = 'general_settings';
 
     private $defaults = array(
-        'email_type' => '3',
-        'new_order' => false
+        'email_type' => 'customer_invoice',
+        'new_order' => 0
     );
 
     public $settings;
@@ -40,15 +40,15 @@ class WPI_General_Settings {
             array(
                 'emails' => array(
                     array(
-                        'id' => 1,
+                        'id' => 'customer_processing_order',
                         'name' => 'Processing order'
                     ),
                     array(
-                        'id' => 2,
+                        'id' => 'customer_completed_order',
                         'name' => 'Completed order'
                     ),
                     array(
-                        'id' => 3,
+                        'id' => 'customer_invoice',
                         'name' => 'Customer invoice'
                     )
                 )

@@ -16,23 +16,30 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		);
 
 		public function __construct($general_settings, $template_settings) {
-			$this->general_settings = $general_settings;
-			$this->template_settings = $template_settings;
-			add_action( 'admin_menu', array(&$this, 'add_woocommerce_submenu_page'));
-			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
-			add_action( 'admin_notices', array(&$this, 'admin_notices' ) );
-			//add_action('plugins_loaded', array($this, 'plugins_loaded') );
-			add_shortcode( 'foobar', array(&$this, 'foobar_func') );
-			add_action('wp_ajax_wpi_create_invoice', array($this, 'wpi_create_invoice'));
-			add_action('wp_ajax_nopriv_wpi_create_invoice', array($this, 'wpi_create_invoice'));
 
-			add_action('woocommerce_order_actions', array( $this, 'my_woocommerce_order_actions', 10, 1) );
-			add_action('woocommerce_order_action_my_action', array( $this, 'do_my_action', 10, 1) );
+			$this->cleanup_tmp_dir();
+
+			$this->general_settings = $general_settings;
+
+			$this->template_settings = $template_settings;
+
+			add_action( 'admin_menu', array(&$this, 'add_woocommerce_submenu_page'));
+
+			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+
+			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
+
+			add_action( 'admin_notices', array(&$this, 'admin_notices' ) );
+
+			add_shortcode( 'foobar', array(&$this, 'foobar_func') );
+
+			add_action('wp_ajax_wpi_create_invoice', array($this, 'wpi_create_invoice'));
+			
+			add_action('wp_ajax_nopriv_wpi_create_invoice', array($this, 'wpi_create_invoice'));
 
 			add_action('woocommerce_admin_order_actions_end', array($this, 'woocommerce_admin_order_actions_end'));
 
 			add_action( 'add_meta_boxes', array(&$this, 'add_meta_box_to_order_page' ) );
-			//add_filter( 'woocommerce_email_attachments', array($this, 'woocommerce_email_attachements',10,3 ));
 		}
 
 		public function add_woocommerce_submenu_page() {
@@ -76,24 +83,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			settings_errors( 'wpi_notices' );
 		}
 
-		public function woocommerce_email_attachements( $attachments, $status , $order ) {
-			if( $status == $this->general_settings['email_type'] || $status == $this->general_settings['new_order'] ) {
+		function attach_invoice_to_email( $attachments, $status, $order ) {
+			if( $status == $this->general_settings->settings['email_type']
+				|| $this->general_settings->settings['new_order'] && $status == "new_order" ) {
 				$invoice = new WPI_Invoice($order);
-				$content = $invoice->generate("S");
-				//$content = chunk_split(base64_encode($content));
-				$attachments[] = $content;
+				$path_to_pdf = $invoice->generate("F");
+				$attachments[] = $path_to_pdf;
 			}
-
 			return $attachments;
 		}
 
-		public function plugins_loaded() {}
-
-		function foobar_func( $atts ){
-			if ( class_exists('WC_Order') ) {
-				$invoice = new WPI_Invoice(new WC_Order(125));
-				$invoice->generate();
-			}
+		function cleanup_tmp_dir() {
+			array_map('unlink', glob( WPI_TMP_DIR . "*.pdf"));
 		}
 
 		/**

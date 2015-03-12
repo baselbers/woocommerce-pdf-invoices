@@ -33,6 +33,7 @@ define( 'WPI_NAME', 'WooCommerce PDF Invoices' );
 define( 'WPI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPI_URL', plugins_url( '', __FILE__ ) );
 define( 'WPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . 'includes/views/templates/' );
+define( 'WPI_TMP_DIR', plugin_dir_path( __FILE__ ) . 'tmp/' );
 
 require_once( WPI_DIR . 'admin/classes/woocommerce-pdf-invoices.php' );
 require_once( WPI_DIR . 'admin/classes/wpi-general-settings.php' );

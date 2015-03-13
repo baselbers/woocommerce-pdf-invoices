@@ -57,7 +57,7 @@ class WPI_Template_Settings {
 
     function register_settings() {
         register_setting( $this->settings_key, $this->settings_key, array(&$this, 'validate') );
-        add_settings_section( 'section_template', 'Template Settings', array( &$this, 'section_template_desc' ), $this->settings_key );
+        add_settings_section( 'section_template', 'Template Settings', '', $this->settings_key );
         add_settings_field( 'template_id', 'Template', array( &$this, 'template_id_option' ), $this->settings_key, 'section_template', array('templates' => $this->templates));
         add_settings_field( 'company_name', 'Company name', array( &$this, 'company_name_option' ), $this->settings_key, 'section_template');
         add_settings_field( 'company_logo', 'Company logo', array( &$this, 'company_logo_option' ), $this->settings_key, 'section_template' );
@@ -81,8 +81,6 @@ class WPI_Template_Settings {
 //        add_settings_field( 'preview_invoice', 'Preview invoice', array( &$this, 'preview_invoice_option' ), $this->settings_key, 'section_template' );
     }
 
-    function section_template_desc() { echo 'Template section description goes here.'; }
-
     function template_id_option( $args ) {
         ?>
         <select id="template-type-option" name="<?php echo $this->settings_key; ?>[template_id]">
@@ -90,7 +88,7 @@ class WPI_Template_Settings {
             foreach ($args['templates'] as $template) {
                 ?>
                 <option value="<?php echo $template['id']; ?>"   <?php selected( $this->settings['template_id'], $template['id'] ); ?>><?php echo $template['name']; ?></option>
-                <?php
+            <?php
             }
             ?>
         </select>
@@ -108,6 +106,7 @@ class WPI_Template_Settings {
     function company_logo_option() {
         ?>
         <input id="upload-file" type="file" name="company_logo" accept="image/*" />
+        <div class="notes">Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png.</div>
         <input type="hidden" id="company-logo-value" name="company_logo" value="<?php echo esc_attr( $this->settings['company_logo'] ); ?>" />
         <?php
         if ($this->settings['company_logo'] != "") {
@@ -125,6 +124,7 @@ class WPI_Template_Settings {
     function intro_text_option() {
         ?>
         <textarea name="<?php echo $this->settings_key; ?>[intro_text]" rows="5" cols="50"><?php echo $this->settings['intro_text']; ?></textarea>
+        <div class="notes">Text to greet, congratulate or thank the customer.</div>
     <?php
     }
 
@@ -137,13 +137,13 @@ class WPI_Template_Settings {
     function company_details_option() {
         ?>
         <textarea name="<?php echo $this->settings_key; ?>[company_details]" rows="5" cols="50"><?php echo $this->settings['company_details']; ?></textarea>
-        <?php
+    <?php
     }
 
     function terms_option() {
         ?>
         <textarea name="<?php echo $this->settings_key; ?>[terms]" rows="5" cols="50"><?php echo $this->settings['terms']; ?></textarea>
-        <?php
+    <?php
     }
 
     function show_subtotal_option() {
@@ -205,6 +205,7 @@ class WPI_Template_Settings {
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[next_invoice_number]"
                 value="<?php echo $this->settings['next_invoice_number']; ?>" />
+        <div class="notes">Invoice number to use for next invoice.</div>
         <?php
     }
 
@@ -216,6 +217,7 @@ class WPI_Template_Settings {
                 min="3"
                 max="6"
             />
+        <div class="notes">Number of zero digits.</div>
         <?php
     }
 
@@ -224,6 +226,7 @@ class WPI_Template_Settings {
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_prefix]"
                 value="<?php echo $this->settings['invoice_prefix']; ?>" />
+        <div class="notes">Prefix text for the invoice number. Not required.</div>
         <?php
     }
 
@@ -232,6 +235,7 @@ class WPI_Template_Settings {
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_suffix]"
                 value="<?php echo $this->settings['invoice_suffix']; ?>" />
+        <div class="notes">Suffix text for the invoice number. Not required.</div>
         <?php
     }
 
@@ -240,6 +244,7 @@ class WPI_Template_Settings {
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_format]"
                 value="<?php echo $this->settings['invoice_format']; ?>" />
+        <div class="notes">Determine format for invoice number. Use [prefix], [suffix] and [number] as placeholders.</div>
         <?php
     }
 
@@ -249,6 +254,7 @@ class WPI_Template_Settings {
                 name="<?php echo $this->settings_key; ?>[reset_invoice_number]"
                 value="1"
                 <?php checked( $this->settings['reset_invoice_number'] ); ?> />
+        <div class="notes">Start all over on the first of January.</div>
         <?php
     }
 
@@ -257,23 +263,15 @@ class WPI_Template_Settings {
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_date_format]"
                 value="<?php echo $this->settings['invoice_date_format']; ?>" />
+        <div class="notes">Determine the <a href="http://php.net/manual/en/datetime.formats.date.php">format</a> of the date.</div>
         <?php
     }
 
-    function show_notes_option() {
-        ?>
-        <input  type="checkbox"
-                name="<?php echo $this->settings_key; ?>[show_notes]"
-                value="<?php echo $this->settings['show_notes']; ?>"
-            <?php checked( $this->settings['show_notes'] ); ?> />
-        <?php
-    }
-
-    function preview_invoice_option() {
+    /*function preview_invoice_option() {
         ?>
         <a href="<?php echo admin_url('admin-ajax.php'); ?>?action=wpi_preview_invoice&security=<?php echo wp_create_nonce('wpi_preview_invoice'); ?>" target="_blank">Preview</a>
     <?php
-    }
+    }*/
 
     public function get_template_filename($template_id) {
         foreach ($this->templates as $template) {

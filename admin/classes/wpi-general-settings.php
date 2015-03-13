@@ -6,7 +6,9 @@ class WPI_General_Settings {
 
     private $defaults = array(
         'email_type' => 'customer_invoice',
-        'new_order' => 0
+        'new_order' => 0,
+        'email_it_in' => 0,
+        'email_it_in_account' => ''
     );
 
     public $settings;
@@ -54,7 +56,9 @@ class WPI_General_Settings {
                 )
             )
         );
-        add_settings_field( 'new_order_option', 'Attach to New order Email', array( &$this, 'new_order_option' ), $this->settings_key, 'section_general' );
+        add_settings_field( 'new_order', 'Attach to New order Email', array( &$this, 'new_order_option' ), $this->settings_key, 'section_general' );
+        add_settings_field( 'email_it_in', 'Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive', array( &$this, 'email_it_in_option' ), $this->settings_key, 'section_general' );
+        add_settings_field( 'email_it_in_account', 'Email It In account', array( &$this, 'email_it_in_account_option' ), $this->settings_key, 'section_general' );
     }
 
     function email_type_option( $args ) {
@@ -62,7 +66,7 @@ class WPI_General_Settings {
         <select id="email-type-option" name="<?php echo $this->settings_key; ?>[email_type]">
             <!--<option selected hidden>-- Select --</option>-->
             <?php
-            foreach ($args['emails'] as $email) {
+            foreach( $args['emails'] as $email ) {
                 ?>
                 <option value="<?php echo $email['id']; ?>"   <?php selected( $this->settings['email_type'], $email['id'] ); ?>><?php echo $email['name']; ?></option>
             <?php
@@ -75,6 +79,21 @@ class WPI_General_Settings {
     function new_order_option() {
         ?>
         <input type="checkbox" name="<?php echo $this->settings_key; ?>[new_order]" value="1" <?php checked( $this->settings['new_order'] ); ?>/>
+        <div class="notes">For bookkeeping purposes.</div>
         <?php
+    }
+
+    function email_it_in_option() {
+        ?>
+        <input type="checkbox" name="<?php echo $this->settings_key; ?>[email_it_in]" value="1" <?php checked( $this->settings['email_it_in'] ); ?>/>
+        <div class="notes">Signup at <a href="https://emailitin.com">emailitin.com</a> and enter your account beyond.</div>
+    <?php
+    }
+
+    function email_it_in_account_option() {
+        ?>
+        <input type="text" name="<?php echo $this->settings_key; ?>[email_it_in_account]" value="<?php echo $this->settings['email_it_in_account']; ?>"/>
+        <div class="notes">Enter your Email It In account.</div>
+    <?php
     }
 }

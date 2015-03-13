@@ -30,3 +30,7 @@
     height: 2em !important;
     width: 2em;
 }
+.notes {
+    display: inline;
+    font-style: italic;
+}

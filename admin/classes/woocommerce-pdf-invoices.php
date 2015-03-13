@@ -27,6 +27,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
 
+			add_filter( 'woocommerce_email_headers', array( &$this, 'add_recipient_to_email_headers' ), 10, 2);
+
 			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
 
 			add_action( 'admin_notices', array(&$this, 'admin_notices' ) );
@@ -34,7 +36,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_shortcode( 'foobar', array(&$this, 'foobar_func') );
 
 			add_action('wp_ajax_wpi_create_invoice', array($this, 'wpi_create_invoice'));
-			
+
 			add_action('wp_ajax_nopriv_wpi_create_invoice', array($this, 'wpi_create_invoice'));
 
 			add_action('woocommerce_admin_order_actions_end', array($this, 'woocommerce_admin_order_actions_end'));
@@ -81,6 +83,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		function admin_notices() {
 			settings_errors( 'wpi_notices' );
+		}
+
+		function add_recipient_to_email_headers($headers, $status) {
+			if( $status == $this->general_settings->settings['email_type'] ) {
+				if( $this->general_settings->settings['email_it_in']
+					&& $this->general_settings->settings['email_it_in_account'] != "" ) {
+					$email_it_in_account = $this->general_settings->settings['email_it_in_account'];
+					$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
+				}
+			}
+			return $headers;
 		}
 
 		function attach_invoice_to_email( $attachments, $status, $order ) {

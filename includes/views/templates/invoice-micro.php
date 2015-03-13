@@ -106,18 +106,11 @@
         .foot td {
             border: 1px solid white;
         }
-        /* Change the colors. Don't forget the bgcolor from total-amount td.
-        Color examples:
-        - blue: #11B0E7;
-        - orange: #FCB040;
-        - purple: #CB68A8;
-        - green: #A7C609;
-        - red: #DE5622; */
         .number, .grand-total {
-            color: #11B0E7;
+            color: <?php echo $this->template_settings['color_theme']; ?>;
         }
         .foot td.border {
-            border-bottom: 8px solid #11B0E7;
+            border-bottom: 8px solid <?php echo $this->template_settings['color_theme']; ?>;
         }
         /* End change colors */
         .space td {
@@ -161,7 +154,7 @@
                 <span class="number"># <?php echo $this->get_formatted_invoice_number(); ?></span><br/>
                 <span class="date"><?php echo $this->get_formatted_date(); ?></span>
             </td>
-            <td class="total-amount" bgcolor="#11B0E7">
+            <td class="total-amount" bgcolor="<?php echo $this->template_settings['color_theme']; ?>">
 					<span>
 					<h1 class="amount"><?php echo wc_price( $this->order->get_total() ); ?></h1>
 					<p class="thanks">

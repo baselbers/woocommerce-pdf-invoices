@@ -6,6 +6,7 @@ class WPI_Template_Settings {
 
     private $defaults = array(
         'template_id' => 1,
+        'color_theme' => '#11B0E7',
         'company_name' => '',
         'company_logo' => '',
         'company_address' => '',
@@ -35,7 +36,14 @@ class WPI_Template_Settings {
         array(
             'id' => 1,
             'name' => 'Micro',
-            'filename' => 'invoice-micro.php'
+            'filename' => 'invoice-micro.php',
+            'colors' => array(
+                'Blue' => '#11B0E7',
+                'Green' => '#A7C609',
+                'Orange' => '#FCB040',
+                'Purple' => '#CB68A8',
+                'Red' => '#DE5622'
+            )
         )
     );
 
@@ -49,7 +57,7 @@ class WPI_Template_Settings {
         $this->settings = array_merge( $this->defaults, $this->settings );
 
         if( $this->settings['template_id'] != "" ) {
-            $this->settings['template_filename'] = $this->get_template_filename( $this->settings['template_id'] );
+            $this->settings['template_filename'] = $this->get_template( $this->settings['template_id'] )['filename'];
         }
 
         update_option( $this->settings_key, $this->settings );
@@ -59,6 +67,7 @@ class WPI_Template_Settings {
         register_setting( $this->settings_key, $this->settings_key, array(&$this, 'validate') );
         add_settings_section( 'section_template', 'Template Settings', '', $this->settings_key );
         add_settings_field( 'template_id', 'Template', array( &$this, 'template_id_option' ), $this->settings_key, 'section_template', array('templates' => $this->templates));
+        add_settings_field( 'color_theme', 'Color theme', array( &$this, 'color_theme_option' ), $this->settings_key, 'section_template', $this->get_template($this->settings['template_id'])['colors']);
         add_settings_field( 'company_name', 'Company name', array( &$this, 'company_name_option' ), $this->settings_key, 'section_template');
         add_settings_field( 'company_logo', 'Company logo', array( &$this, 'company_logo_option' ), $this->settings_key, 'section_template' );
         add_settings_field( 'intro_text', 'Intro text', array( &$this, 'intro_text_option' ), $this->settings_key, 'section_template' );
@@ -83,7 +92,7 @@ class WPI_Template_Settings {
 
     function template_id_option( $args ) {
         ?>
-        <select id="template-type-option" name="<?php echo $this->settings_key; ?>[template_id]">
+        <select id="template-type-option" name="<?php echo $this->settings_key; ?>[template_id]" disabled>
             <?php
             foreach ($args['templates'] as $template) {
                 ?>
@@ -92,6 +101,21 @@ class WPI_Template_Settings {
             }
             ?>
         </select>
+    <?php
+    }
+
+    function color_theme_option( $args ) {
+        ?>
+        <select name="<?php echo $this->settings_key; ?>[color_theme]">
+            <?php
+            foreach ($args as $key => $value) {
+                ?>
+                <option style="background-color: <?php echo $value; ?>;" value="<?php echo $value; ?>"   <?php selected( $this->settings['color_theme'], $value ); ?>><?php echo $key ?></option>
+            <?php
+            }
+            ?>
+        </select>
+        <div class="notes">Determine wich color fits your company needs.</div>
     <?php
     }
 
@@ -105,8 +129,8 @@ class WPI_Template_Settings {
 
     function company_logo_option() {
         ?>
+        <div class="notes">Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png.</div><br/>
         <input id="upload-file" type="file" name="company_logo" accept="image/*" />
-        <div class="notes">Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png.</div>
         <input type="hidden" id="company-logo-value" name="company_logo" value="<?php echo esc_attr( $this->settings['company_logo'] ); ?>" />
         <?php
         if ($this->settings['company_logo'] != "") {
@@ -123,8 +147,8 @@ class WPI_Template_Settings {
 
     function intro_text_option() {
         ?>
+        <div class="notes block">Text to greet, congratulate or thank the customer.</div><br/>
         <textarea name="<?php echo $this->settings_key; ?>[intro_text]" rows="5" cols="50"><?php echo $this->settings['intro_text']; ?></textarea>
-        <div class="notes">Text to greet, congratulate or thank the customer.</div>
     <?php
     }
 
@@ -273,10 +297,10 @@ class WPI_Template_Settings {
     <?php
     }*/
 
-    public function get_template_filename($template_id) {
+    public function get_template($template_id) {
         foreach ($this->templates as $template) {
             if ($template['id'] == $template_id) {
-                return $template['filename'];
+                return $template;
             }
         }
     }

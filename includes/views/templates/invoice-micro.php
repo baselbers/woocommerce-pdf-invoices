@@ -150,7 +150,7 @@
         <tbody>
         <tr>
             <td class="invoice-details">
-                <h1 class="title">Invoice</h1>
+                <h1 class="title"><?php _e( 'Invoice', $this->textdomain ); ?></h1>
                 <span class="number"># <?php echo $this->get_formatted_invoice_number(); ?></span><br/>
                 <span class="date"><?php echo $this->get_formatted_date(); ?></span>
             </td>
@@ -168,17 +168,17 @@
     <table class="products">
         <thead>
         <tr>
-            <th class="align-left">Description</th>
+            <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
             <?php
             if( $this->template_settings['show_sku'] ) {
                 $colspan = 3;
-                echo '<th class="align-center uppercase">SKU</th>';
+                echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
             } else {
                 $colspan = 2; }
             ?>
-            <th class="align-left">Quantity</th>
-            <th class="align-left">Unit price</th>
-            <th class="align-right">Total</th>
+            <th class="align-left"><?php _e( 'Quantity', $this->textdomain ); ?></th>
+            <th class="align-left"><?php _e( 'Unit price', $this->textdomain ); ?></th>
+            <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
         </tr>
         </thead>
         <tbody>
@@ -203,7 +203,7 @@
         <?php if( $this->template_settings['show_discount'] && $this->order->get_total_discount != 0 ) { ?>
             <tr class="discount after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%">Discount</td>
+                <td width="25%"><?php _e( 'Discount', $this->textdomain ); ?></td>
                 <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_discount() ); ?></td>
             </tr>
         <?php } ?>
@@ -211,7 +211,7 @@
         <?php if( $this->template_settings['show_shipping'] ) { ?>
             <tr class="shipping after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%">Shipping</td>
+                <td width="25%"><?php _e( 'Shipping', $this->textdomain ); ?></td>
                 <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_shipping() ); ?></td>
             </tr>
         <?php } ?>
@@ -219,7 +219,7 @@
         <?php if( $this->template_settings['show_subtotal'] ) { ?>
             <tr class="subtotal after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%">Subtotal</td>
+                <td width="25%"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
                 <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_subtotal() ); ?></td>
             </tr>
         <?php } ?>
@@ -227,14 +227,14 @@
         <?php if( $this->template_settings['show_tax'] ) { ?>
             <tr class="tax">
                 <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%">Tax</td>
+                <td width="25%"><?php _e( 'Tax', $this->textdomain ); ?></td>
                 <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_tax() ); ?></td>
             </tr>
         <?php } ?>
         <!-- Total -->
         <tr>
             <td colspan="<?php echo $colspan; ?>"></td>
-            <td class="total" width="25%">Total</td>
+            <td class="total" width="25%"><?php _e( 'Total', $this->textdomain ); ?></td>
             <td class="grand-total align-right" width="25%"><?php echo wc_price( $this->order->get_total() ); ?></td>
         </tr>
         </tbody>

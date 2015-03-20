@@ -1,6 +1,6 @@
 <?php
 
-class WPI_Template_Settings {
+class WPI_Template_Settings extends WPI_Settings{
 
     private $settings_key = 'template_settings';
 
@@ -9,6 +9,7 @@ class WPI_Template_Settings {
         'color_theme' => '#11B0E7',
         'company_name' => '',
         'company_logo' => '',
+        'intro_text' => '',
         'company_address' => '',
         'company_details' => '',
         'terms' => '',
@@ -26,8 +27,7 @@ class WPI_Template_Settings {
         'reset_invoice_number' => 0,
         'invoice_date_format' => 'F jS Y',
         'last_invoiced_year' => '',
-        'invoice_number' => 1,
-        'intro_text' => 'Many thanks for your purchase. If you have any questions about your invoice, please feel free to contact us at your conveniance. We will reply as soon as we get your message.'
+        'invoice_number' => 1
     );
 
     public $settings;
@@ -36,23 +36,21 @@ class WPI_Template_Settings {
         array(
             'id' => 1,
             'name' => 'Micro',
-            'filename' => 'invoice-micro.php',
-            'colors' => array(
-                'Blue' => '#11B0E7',
-                'Green' => '#A7C609',
-                'Orange' => '#FCB040',
-                'Purple' => '#CB68A8',
-                'Red' => '#DE5622'
-            )
+            'filename' => 'invoice-micro.php'
         )
     );
 
-    function __construct() {
+    public function __construct() {
         add_action('init', array(&$this, 'load_settings'));
         add_action('admin_init', array($this, 'register_settings'));
+
+        /**
+         * Displays all messages registered to 'template_settings'
+         */
+        add_action( 'admin_notices', array( &$this, 'show_settings_notices' ) );
     }
 
-    function load_settings() {
+    public function load_settings() {
         $this->settings = (array) get_option( $this->settings_key );
         $this->settings = array_merge( $this->defaults, $this->settings );
 
@@ -63,38 +61,42 @@ class WPI_Template_Settings {
         update_option( $this->settings_key, $this->settings );
     }
 
-    function register_settings() {
+    public function register_settings() {
         register_setting( $this->settings_key, $this->settings_key, array(&$this, 'validate') );
-        add_settings_section( 'section_template', 'Template Settings', '', $this->settings_key );
-        add_settings_field( 'template_id', 'Template', array( &$this, 'template_id_option' ), $this->settings_key, 'section_template', array('templates' => $this->templates));
-        add_settings_field( 'color_theme', 'Color theme', array( &$this, 'color_theme_option' ), $this->settings_key, 'section_template', $this->get_template($this->settings['template_id'])['colors']);
-        add_settings_field( 'company_name', 'Company name', array( &$this, 'company_name_option' ), $this->settings_key, 'section_template');
-        add_settings_field( 'company_logo', 'Company logo', array( &$this, 'company_logo_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'intro_text', 'Intro text', array( &$this, 'intro_text_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'company_address', 'Company address', array( &$this, 'company_address_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'company_details', 'Company details', array( &$this, 'company_details_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'terms', 'Terms & conditions, policies etc.', array( &$this, 'terms_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'next_invoice_number', 'Next invoice number', array( &$this, 'next_invoice_number_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_number_digits', 'Number of digits', array( &$this, 'invoice_number_digits_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_prefix', 'Invoice number prefix', array( &$this, 'invoice_prefix_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_suffix', 'Invoice number suffix', array( &$this, 'invoice_suffix_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_format', 'Invoice number format', array( &$this, 'invoice_format_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'reset_invoice_number', 'Reset on 1st January', array( &$this, 'reset_invoice_number_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'invoice_date_format', 'Invoice date format', array( &$this, 'invoice_date_format_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_sku', 'Show SKU', array( &$this, 'show_sku_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_discount', 'Show discount', array( &$this, 'show_discount_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_subtotal', 'Show subtotal', array( &$this, 'show_subtotal_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_tax', 'Show tax', array( &$this, 'show_tax_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_shipping', 'Show shipping', array( &$this, 'show_shipping_option' ), $this->settings_key, 'section_template' );
-        add_settings_field( 'show_customer_notes', 'Show customer notes', array( &$this, 'show_customer_notes_option' ), $this->settings_key, 'section_template' );
+        add_settings_section( 'section_template', __( 'Template Settings', $this->textdomain ), '', $this->settings_key );
+        add_settings_field( 'template_id', __( 'Template', $this->textdomain ), array( &$this, 'template_id_option' ), $this->settings_key, 'section_template', $this->templates );
+        add_settings_field( 'color_theme', __( 'Color theme', $this->textdomain ), array( &$this, 'color_theme_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'company_name', __( 'Company name', $this->textdomain ), array( &$this, 'company_name_option' ), $this->settings_key, 'section_template');
+        add_settings_field( 'company_logo', __( 'Company logo', $this->textdomain ), array( &$this, 'company_logo_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'intro_text', __( 'Intro text', $this->textdomain ), array( &$this, 'intro_text_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'company_address', __( 'Company address', $this->textdomain ), array( &$this, 'company_address_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'company_details', __( 'Company details', $this->textdomain ), array( &$this, 'company_details_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'terms', __( 'Terms & conditions, policies etc.', $this->textdomain ), array( &$this, 'terms_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'next_invoice_number', __( 'Next invoice number', $this->textdomain ), array( &$this, 'next_invoice_number_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'invoice_number_digits', __( 'Number of digits', $this->textdomain ), array( &$this, 'invoice_number_digits_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'invoice_prefix', __( 'Invoice number prefix', $this->textdomain ), array( &$this, 'invoice_prefix_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'invoice_suffix', __( 'Invoice number suffix', $this->textdomain ), array( &$this, 'invoice_suffix_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'invoice_format', __( 'Invoice number format', $this->textdomain ), array( &$this, 'invoice_format_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'reset_invoice_number', __( 'Reset on 1st January', $this->textdomain ), array( &$this, 'reset_invoice_number_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'invoice_date_format', __( 'Invoice date format', $this->textdomain ), array( &$this, 'invoice_date_format_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_sku', __( 'Show SKU', $this->textdomain ), array( &$this, 'show_sku_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_discount', __( 'Show discount', $this->textdomain ), array( &$this, 'show_discount_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_subtotal', __( 'Show subtotal', $this->textdomain ), array( &$this, 'show_subtotal_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_tax', __( 'Show tax', $this->textdomain ), array( &$this, 'show_tax_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_shipping', __( 'Show shipping', $this->textdomain ), array( &$this, 'show_shipping_option' ), $this->settings_key, 'section_template' );
+        add_settings_field( 'show_customer_notes', __( 'Show customer notes', $this->textdomain ), array( &$this, 'show_customer_notes_option' ), $this->settings_key, 'section_template' );
 //        add_settings_field( 'preview_invoice', 'Preview invoice', array( &$this, 'preview_invoice_option' ), $this->settings_key, 'section_template' );
     }
 
-    function template_id_option( $args ) {
+    public function show_settings_notices() {
+        settings_errors( $this->settings_key );
+    }
+
+    public function template_id_option( $args ) {
         ?>
-        <select id="template-type-option" name="<?php echo $this->settings_key; ?>[template_id]" disabled>
+        <select id="template-type-option" name="<?php echo $this->settings_key; ?>[template_id]">
             <?php
-            foreach ($args['templates'] as $template) {
+            foreach ($args as $template) {
                 ?>
                 <option value="<?php echo $template['id']; ?>"   <?php selected( $this->settings['template_id'], $template['id'] ); ?>><?php echo $template['name']; ?></option>
             <?php
@@ -104,22 +106,14 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function color_theme_option( $args ) {
+    public function color_theme_option( $args ) {
         ?>
-        <select name="<?php echo $this->settings_key; ?>[color_theme]">
-            <?php
-            foreach ($args as $key => $value) {
-                ?>
-                <option style="background-color: <?php echo $value; ?>;" value="<?php echo $value; ?>"   <?php selected( $this->settings['color_theme'], $value ); ?>><?php echo $key ?></option>
-            <?php
-            }
-            ?>
-        </select>
-        <div class="notes">Determine wich color fits your company needs.</div>
+        <input id="color-picker" type="color" name="<?php echo $this->settings_key; ?>[color_theme]" value="<?php echo $this->settings['color_theme']; ?>"/>
+        <div class="notes"><?php _e( 'Color theme of the invoice.', $this->textdomain ); ?></div>
     <?php
     }
 
-    function company_name_option() {
+    public function company_name_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[company_name]"
@@ -127,9 +121,9 @@ class WPI_Template_Settings {
         <?php
     }
 
-    function company_logo_option() {
+    public function company_logo_option() {
         ?>
-        <div class="notes">Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png.</div><br/>
+        <div class="notes"><?php _e( 'Please upload an image less then 200Kb and make sure it\'s a jpeg, jpg or png.', $this->textdomain ); ?></div><br/>
         <input id="upload-file" type="file" name="company_logo" accept="image/*" />
         <input type="hidden" id="company-logo-value" name="company_logo" value="<?php echo esc_attr( $this->settings['company_logo'] ); ?>" />
         <?php
@@ -137,7 +131,7 @@ class WPI_Template_Settings {
             ?>
             <div id="company-logo-wrapper">
                 <img id="company-logo" src="<?php echo esc_attr( $this->settings['company_logo'] ); ?>" />
-                <img id="delete" src="<?php echo WPI_URL . '/assets/img/delete-icon.png'; ?>" onclick="Settings.removeCompanyLogo()" />
+                <img id="delete" src="<?php echo WPI_URL . '/assets/img/delete-icon.png'; ?>" onclick="Settings.removeCompanyLogo()" title="<?php _e( 'Remove logo', $this->textdomain ); ?>" />
             </div>
         <?php
         }
@@ -145,32 +139,35 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function intro_text_option() {
+    public function intro_text_option() {
         ?>
-        <div class="notes block">Text to greet, congratulate or thank the customer.</div><br/>
-        <textarea name="<?php echo $this->settings_key; ?>[intro_text]" rows="5" cols="50"><?php echo $this->settings['intro_text']; ?></textarea>
+        <div class="notes block"><?php echo $this->get_allowed_tags_str(); ?></div>
+        <textarea name="<?php echo $this->settings_key; ?>[intro_text]" rows="5" cols="50"><?php _e( esc_textarea( $this->settings['intro_text'], $this->textdomain ) ); ?></textarea>
     <?php
     }
 
-    function company_address_option() {
+    public function company_address_option() {
         ?>
-        <textarea name="<?php echo $this->settings_key; ?>[company_address]" rows="5" cols="50"><?php echo $this->settings['company_address']; ?></textarea>
+        <div class="notes block"><?php echo $this->get_allowed_tags_str(); ?></div>
+        <textarea name="<?php echo $this->settings_key; ?>[company_address]" rows="5" cols="50"><?php echo esc_textarea( $this->settings['company_address'] ); ?></textarea>
     <?php
     }
 
-    function company_details_option() {
+    public function company_details_option() {
         ?>
-        <textarea name="<?php echo $this->settings_key; ?>[company_details]" rows="5" cols="50"><?php echo $this->settings['company_details']; ?></textarea>
+        <div class="notes block"><?php echo $this->get_allowed_tags_str(); ?></div>
+        <textarea name="<?php echo $this->settings_key; ?>[company_details]" rows="5" cols="50"><?php echo esc_textarea( $this->settings['company_details'] ); ?></textarea>
     <?php
     }
 
-    function terms_option() {
+    public function terms_option() {
         ?>
-        <textarea name="<?php echo $this->settings_key; ?>[terms]" rows="5" cols="50"><?php echo $this->settings['terms']; ?></textarea>
+        <div class="notes block"><?php echo $this->get_allowed_tags_str(); ?></div>
+        <textarea name="<?php echo $this->settings_key; ?>[terms]" rows="5" cols="50"><?php _e( esc_textarea( $this->settings['terms'], $this->textdomain ) ); ?></textarea>
     <?php
     }
 
-    function show_subtotal_option() {
+    public function show_subtotal_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_subtotal]"
@@ -179,7 +176,7 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function show_tax_option() {
+    public function show_tax_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_tax]"
@@ -188,7 +185,7 @@ class WPI_Template_Settings {
         <?php
     }
 
-    function show_discount_option() {
+    public function show_discount_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_discount]"
@@ -197,7 +194,7 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function show_shipping_option() {
+    public function show_shipping_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_shipping]"
@@ -206,7 +203,7 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function show_customer_notes_option() {
+    public function show_customer_notes_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_customer_notes]"
@@ -215,7 +212,7 @@ class WPI_Template_Settings {
         <?php
     }
 
-    function show_sku_option() {
+    public function show_sku_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[show_sku]"
@@ -224,16 +221,16 @@ class WPI_Template_Settings {
     <?php
     }
 
-    function next_invoice_number_option() {
+    public function next_invoice_number_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[next_invoice_number]"
                 value="<?php echo $this->settings['next_invoice_number']; ?>" />
-        <div class="notes">Invoice number to use for next invoice.</div>
+        <div class="notes"><?php _e( 'Invoice number to use for next invoice.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function invoice_number_digits_option() {
+    public function invoice_number_digits_option() {
         ?>
         <input  type="number"
                 name="<?php echo $this->settings_key; ?>[invoice_number_digits]"
@@ -241,53 +238,53 @@ class WPI_Template_Settings {
                 min="3"
                 max="6"
             />
-        <div class="notes">Number of zero digits.</div>
+        <div class="notes"><?php _e( 'Number of zero digits.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function invoice_prefix_option() {
+    public function invoice_prefix_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_prefix]"
                 value="<?php echo $this->settings['invoice_prefix']; ?>" />
-        <div class="notes">Prefix text for the invoice number. Not required.</div>
+        <div class="notes"><?php _e( 'Prefix text for the invoice number. Not required.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function invoice_suffix_option() {
+    public function invoice_suffix_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_suffix]"
                 value="<?php echo $this->settings['invoice_suffix']; ?>" />
-        <div class="notes">Suffix text for the invoice number. Not required.</div>
+        <div class="notes"><?php _e( 'Suffix text for the invoice number. Not required.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function invoice_format_option() {
+    public function invoice_format_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_format]"
                 value="<?php echo $this->settings['invoice_format']; ?>" />
-        <div class="notes">Determine format for invoice number. Use [prefix], [suffix] and [number] as placeholders.</div>
+        <div class="notes"><?php _e( 'Use [prefix], [suffix] and [number] as placeholders. [number] is required.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function reset_invoice_number_option() {
+    public function reset_invoice_number_option() {
         ?>
         <input  type="checkbox"
                 name="<?php echo $this->settings_key; ?>[reset_invoice_number]"
                 value="1"
                 <?php checked( $this->settings['reset_invoice_number'] ); ?> />
-        <div class="notes">Start all over on the first of January.</div>
+        <div class="notes"><?php _e( 'Reset on the first of January.', $this->textdomain ); ?></div>
         <?php
     }
 
-    function invoice_date_format_option() {
+    public function invoice_date_format_option() {
         ?>
         <input  type="text"
                 name="<?php echo $this->settings_key; ?>[invoice_date_format]"
                 value="<?php echo $this->settings['invoice_date_format']; ?>" />
-        <div class="notes">Determine the <a href="http://php.net/manual/en/datetime.formats.date.php">format</a> of the date.</div>
+        <div class="notes"><?php printf( __( '%sFormat%s of the date. Examples: %s or %s', $this->textdomain ), '<a href="http://php.net/manual/en/datetime.formats.date.php">', '</a>', '"m.d.y"', '"F jS Y"' ); ?></div>
         <?php
     }
 
@@ -297,20 +294,164 @@ class WPI_Template_Settings {
     <?php
     }*/
 
-    public function get_template($template_id) {
+    public function get_template( $template_id ) {
+        $template = "";
         foreach ($this->templates as $template) {
             if ($template['id'] == $template_id) {
                 return $template;
             }
         }
+        return $template;
     }
 
     public function validate( $input ) {
-        $input['company_logo'] = $this->upload_file();
-        return $input;
+        $output = array();
+
+        // Validate template id
+        if( $this->is_valid_int( $input['template_id'] ) ) {
+            $output['template_id'] = $input['template_id'];
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid-template-value',
+                __( 'Invalid template.', $this->textdomain )
+            );
+        }
+
+        // Validate color theme.
+        if( is_string( $this->is_valid_hex_color( $input['color_theme'] ) ) ) {
+            $output['color_theme'] = $this->is_valid_hex_color( $input['color_theme'] );
+        } else if( $this->is_valid_hex_color( $input['color_theme'] ) ) {
+            $output['color_theme'] = $input['color_theme'];
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid-color-hex',
+                __( 'Invalid color theme code.', $this->textdomain )
+            );
+        }
+
+        // Validate company name
+        if( $this->is_valid_str( $input['company_name'] ) ) {
+            $output['company_name'] = $input['company_name'];
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid-company-name',
+                __( 'Invalid company name.', $this->textdomain )
+            );
+        }
+
+        // Validate company logo
+        $output['company_logo'] = $this->upload_file();
+
+        // Validate textarea's
+        $ta_errors = 0;
+        $textarea_values = array( 'intro_text' => $input['intro_text'], 'company_address' => $input['company_address'], 'company_details' => $input['company_details'], 'terms' => $input['terms'] );
+        foreach( $textarea_values as $key => $value ) {
+            ( $this->validate_textarea( $value ) ) ? $output[$key] = $value : $ta_errors += 1;
+        }
+
+        if( $ta_errors > 0 ) {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid_textarea_value',
+                __( 'Invalid input into one of the textarea\'s.', $this->textdomain )
+            );
+        }
+
+        // Validate next invoice number
+        if( $this->is_valid_int( $input['next_invoice_number'] ) ) {
+            $output['next_invoice_number'] = $input['next_invoice_number'];
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid_next_invoice_number',
+                __( 'Invalid (next) invoice number.', $this->textdomain )
+            );
+        }
+
+        // Validate zero digits
+        $ind_errors = 0;
+        if( $this->is_valid_int( $input['invoice_number_digits'] ) ) {
+            ( $input['invoice_number_digits'] >= 3 && $input['invoice_number_digits'] <= 6 )
+                ? $output['invoice_number_digits'] = $input['invoice_number_digits']
+                : $ind_errors += 1;
+        } else {
+            $ind_errors += 1;
+        }
+
+        if( $ind_errors > 0 ) {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid_invoice_number_digits',
+                __( 'Invalid invoice number digits.', $this->textdomain )
+            );
+        }
+
+        // Validate invoice number prefix and suffix.
+        $output['invoice_prefix'] = esc_html( $input['invoice_prefix'] );
+        $output['invoice_suffix'] = esc_html( $input['invoice_suffix'] );
+
+        // Validate invoice number format
+        if( $this->is_valid_str( $input['invoice_format'] ) ) {
+            if( strpos( $input['invoice_format'], '[number]' ) !== false ) {
+                $output['invoice_format'] = $input['invoice_format'];
+            } else {
+                add_settings_error(
+                    esc_attr( $this->settings_key ),
+                    'invalid_invoice_format-1',
+                    __( 'The [number] placeholder is required as invoice number format.', $this->textdomain )
+                );
+            }
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid_invoice_format-2',
+                __( 'Invalid invoice number format.', $this->textdomain )
+            );
+        }
+
+        // Validate all checkboxes
+        $cb_errors = 0;
+        $checkbox_values = array(
+            'reset_invoice_number' => $input['reset_invoice_number'],
+            'show_sku' => $input['show_sku'],
+            'show_discount' => $input['show_discount'],
+            'show_subtotal' => $input['show_subtotal'],
+            'show_tax' => $input['show_tax'],
+            'show_shipping' => $input['show_shipping'],
+            'show_customer_notes' => $input['show_customer_notes']
+        );
+
+        foreach( $checkbox_values as $key => $value ) {
+            ( $this->validate_checkbox( $value ) ) ? $output[$key] = $value : $output[$key] = 0;
+        }
+
+        if( $cb_errors > 0 ) {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid-checkbox-value',
+                __( 'Please don\'t try to change the values.', $this->textdomain )
+            );
+        }
+
+        if( $this->is_valid_str( $input['invoice_date_format'] ) ) {
+            $output['invoice_date_format'] = $input['invoice_date_format'];
+        } else {
+            add_settings_error(
+                esc_attr( $this->settings_key ),
+                'invalid-date-format',
+                __( 'Invalid date format.', $this->textdomain )
+            );
+        }
+
+        return $output;
     }
 
     private function upload_file() {
+        $return = "";
+
         if( $_FILES['company_logo']['error'] == 0 ) {
             $file = $_FILES['company_logo'];
             if ($file['size'] <= 200000) {
@@ -318,33 +459,36 @@ class WPI_Template_Settings {
                 $company_logo = wp_handle_upload($file, $override);
                 $validate_file_code = validate_file($company_logo['url']);
                 if ($validate_file_code == 0) {
-                    return $company_logo['url'];
+                    $return = $company_logo['url'];
                 } else {
                     switch ($validate_file_code) {
                         case 1:
-                            $this->add_settings_error('File is invalid and contains either \'..\' or \'./\'.');
+                            add_settings_error(
+                                esc_attr( $this->settings_key ),
+                                'file-invalid-1',
+                                __( 'File is invalid and contains either \'..\' or \'./\'.', $this->textdomain )
+                            );
                             break;
                         case 2:
-                            $this->add_settings_error('File is invalid and contains \':\' after the first character.');
+                            add_settings_error(
+                                esc_attr( $this->settings_key ),
+                                'file-invalid-2',
+                                __( 'File is invalid and contains \':\' after the first character.', $this->textdomain )
+                            );
                             break;
                     }
                 }
             } else {
-                $this->add_settings_error('Please upload image with extension jpg, jpeg or png.');
+                add_settings_error(
+                    esc_attr( $this->settings_key ),
+                    'file-invalid-3',
+                    __( 'Please upload image with extension jpg, jpeg or png.', $this->textdomain )
+                );
             }
-        } else if( empty( $_POST['company_logo'] ) ) {
-            return "";
-        } else {
-            return $_POST['company_logo'];
+        } else if( !empty( $_POST['company_logo'] ) ) {
+            $return =  $_POST['company_logo'];
         }
-    }
 
-    function add_settings_error( $error_message ) {
-        add_settings_error(
-            'wpi_notices',
-            esc_attr( 'settings_updated' ),
-            __( $error_message ),
-            'error'
-        );
+        return $return;
     }
 }

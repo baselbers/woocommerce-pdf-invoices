@@ -4,18 +4,25 @@ class WPI_Invoice {
 
     private $order;
 
+    private $textdomain;
+
     private $general_settings;
 
     private $template_settings;
 
     private $number;
 
+    private $formatted_number;
+
     private $invoice_number_meta_key = '_bewpi_invoice_number';
 
-    public $save_path;
+    private $file;
 
-    public function __construct( $order = '' ) {
+    private $date;
+
+    public function __construct( $order = '', $textdomain ) {
         $this->order = $order;
+        $this->textdomain = $textdomain;
         $this->general_settings = (array) get_option( 'general_settings' );
         $this->template_settings = (array) get_option( 'template_settings' );
 
@@ -23,28 +30,37 @@ class WPI_Invoice {
     }
 
     private function init() {
-        $this->invoice_number_meta_key  = '_bewpi_invoice_number';
-        $this->number                   = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
-        $this->prefix                   = get_post_meta( $this->order->id, '_bewpi_invoice_prefix', true );
-        $this->suffix                   = get_post_meta( $this->order->id, '_bewpi_invoice_suffix', true );
-        $this->date                     = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
+        $this->number = get_post_meta( $this->order->id, $this->invoice_number_meta_key, true );
+        $this->formatted_number = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
+        $this->date = get_post_meta( $this->order->id, '_bewpi_invoice_date', true);
 
-        if( empty( $this->number ) ) {
-            $this->get_next_invoice_number($this->order->id);
+        // No invoice generated yet
+        if( empty( $this->number ) || empty( $this->date ) ) {
+            $this->create_next_invoice_number($this->order->id);
+            $this->date = $this->create_formatted_date();
         }
     }
 
-    public function get_formatted_date() {
+    public function create_formatted_date() {
         $date_format = $this->template_settings['invoice_date_format'];
-        $date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
+        //$date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
+        //$date = date( $date_format );
 
         if( $date_format != "" ) {
-            $formatted_date = $date->format($date_format);
+            //$formatted_date = $date->format($date_format);
+            $formatted_date = date( $date_format );
         } else {
-            $formatted_date = $date->format($date, "d-m-Y");
+            //$formatted_date = $date->format($date, "d-m-Y");
+            $formatted_date = date( 'd-m-Y' );
         }
 
+        add_post_meta( $this->order->id, '_bewpi_invoice_date', $formatted_date );
+
         return $formatted_date;
+    }
+
+    public function get_formatted_date() {
+        return $this->date;
     }
 
     public function get_formatted_order_year() {
@@ -83,7 +99,7 @@ class WPI_Invoice {
             SELECT meta_value
             FROM $wpdb->postmeta
             WHERE post_id = $order_id
-            AND meta_key = '_bewpi_invoice_number'
+            AND meta_key = $this->invoice_number_meta_key
             "
         );
 
@@ -92,7 +108,7 @@ class WPI_Invoice {
         }
     }
 
-    function get_next_invoice_number( $order_id ) {
+    function create_next_invoice_number( $order_id ) {
 
         if( $this->template_settings['next_invoice_number'] != ""
             && $this->template_settings['next_invoice_number'] > $this->template_settings['invoice_number'] ) {
@@ -126,10 +142,12 @@ class WPI_Invoice {
         $this->template_settings['invoice_number'] = $this->number;
         update_option( 'template_settings', $this->template_settings );
 
-        return $this->number;
+        // Format invoice number
+        $this->formatted_number = $this->format_invoice_number();
+        add_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', $this->formatted_number );
     }
 
-    public function get_formatted_invoice_number() {
+    private function format_invoice_number() {
         $invoice_number_format = $this->template_settings['invoice_format'];
         $digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
         $this->number = sprintf($digit_str, $this->number);
@@ -138,6 +156,10 @@ class WPI_Invoice {
             array( '[prefix]', '[suffix]', '[number]' ),
             array( $this->template_settings['invoice_prefix'], $this->template_settings['invoice_suffix'], $this->number ),
             $invoice_number_format );
+    }
+
+    public function get_formatted_invoice_number() {
+        return $this->formatted_number;
     }
 
     public function generate($dest) {
@@ -167,17 +189,52 @@ class WPI_Invoice {
 
         $mpdf->WriteHTML($html);
 
-        $filename = $this->get_formatted_invoice_number() . ".pdf";
+        $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
 
-        if( $dest == "F" )
-            $this->save_path = $filename = WPI_TMP_DIR . $filename;
+        $mpdf->Output($file, $dest);
 
-        $mpdf->Output($filename, $dest);
+        return $file;
+    }
 
-        if( $dest == "F" )
-            return $this->save_path;
+    public function view_invoice( $download ) {
+        $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
+        $filename = $this->formatted_number . ".pdf";
 
-        exit;
+        if( $this->exists() ) {
+
+            if( $download ) {
+                header( 'Content-type: application / pdf' );
+                header('Content-Disposition: attachment; filename="' . $filename . '"');
+                header( 'Content-Transfer-Encoding: binary' );
+                header('Content-Length: ' . filesize($file));
+                header( 'Accept-Ranges: bytes' );
+            } else {
+                header('Content-type: application/pdf');
+                header('Content-Disposition: inline; filename="' . $filename . '"');
+                header('Content-Transfer-Encoding: binary');
+                header('Accept-Ranges: bytes');
+            }
+
+            @readfile($file);
+            exit;
+
+        } else {
+            die('No invoice found.');
+        }
+    }
+
+    public function delete() {
+        if( $this->exists() )
+            unlink( $this->file );
+    }
+
+    public function exists() {
+        $this->file = WPI_TMP_DIR . $this->get_formatted_invoice_number() . ".pdf";
+        return file_exists( $this->file );
+    }
+
+    public function get_file() {
+        return $this->file;
     }
 
     function get_footer() {
@@ -190,7 +247,7 @@ class WPI_Invoice {
                     <?php echo $this->template_settings['terms']; ?><br/>
                     <?php if( count($this->order->get_customer_order_notes() ) > 0 ) { ?>
                         <p>
-                            <strong>Customer note </strong><?php echo $this->order->get_customer_order_notes()[0]->comment_content; ?>
+                            <strong><?php _e( 'Customer note', $this->textdomain); ?> </strong><?php echo $this->order->get_customer_order_notes()[0]->comment_content; ?>
                         </p>
                     <?php } ?>
                 </td>

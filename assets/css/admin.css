@@ -1,3 +1,6 @@
+.be_woocommerce_pdf_invoices_settings_form select {
+    width: 348px;
+}
 #company-logo-wrapper {
     margin-top: 10px;
     position: relative;
@@ -16,8 +19,8 @@
     top: 0;
     right: 0;
     display: none;
-    height: 20px;
-    width: 20px;
+    height: 30px;
+    width: 30px;
     cursor: pointer;
 }
 .wpi-admin-order-create-invoice-btn {
@@ -33,4 +36,10 @@
 .notes {
     display: inline;
     font-style: italic;
+}
+.block {
+    display: block;
+}
+#color-picker {
+    height: 28px;
 }

@@ -8,21 +8,21 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://example.com
+ * @link
  * @since             1.0.0
- * @package           Plugin_Name
+ * @package           WooCommerce_PDF_Invoices
  *
  * @wordpress-plugin
  * Plugin Name:       WooCommerce PDF Invoices
- * Plugin URI:        http://example.com/plugin-name-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress dashboard.
- * Version:           1.0.0
- * Author:            Bas Elbers
- * Author URI:        http://example.com/
+ * Plugin URI:
+ * Description:       Generate customized PDF invoice and automatically attach to WooCommerce email type of your choice.
+ * Version:           2.0.0
+ * Author:            baaaaas
+ * Author URI:
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       plugin-name
- * Domain Path:       /languages
+ * Text Domain:       be-woocommerce-pdf-invoices
+ * Domain Path:       /lang
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -34,8 +34,10 @@ define( 'WPI_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WPI_URL', plugins_url( '', __FILE__ ) );
 define( 'WPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . 'includes/views/templates/' );
 define( 'WPI_TMP_DIR', plugin_dir_path( __FILE__ ) . 'tmp/' );
+define( 'WPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
 
 require_once( WPI_DIR . 'admin/classes/woocommerce-pdf-invoices.php' );
+require_once( WPI_DIR . 'admin/classes/wpi-settings.php' );
 require_once( WPI_DIR . 'admin/classes/wpi-general-settings.php' );
 require_once( WPI_DIR . 'admin/classes/wpi-template-settings.php' );
 require_once( WPI_DIR . 'includes/classes/wpi-invoice.php' );

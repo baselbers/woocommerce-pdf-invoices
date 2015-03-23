@@ -44,6 +44,35 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'add_meta_boxes', array( &$this, 'add_meta_box_to_order_page' ) );
 		}
 
+        public function init_plugin_actions() {
+            if( isset( $_GET['wpi_action'] ) && isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) && isset( $_GET['nonce'] ) ) {
+                $action = $_GET['wpi_action'];
+                $order_id = $_GET['post'];
+                $nonce = $_REQUEST["nonce"];
+
+                if (!wp_verify_nonce($nonce, $action)) {
+                    die( 'Invalid request' );
+                } else if( empty($order_id) ) {
+                    die( 'Invalid order ID');
+                } else {
+                    $invoice = new WPI_Invoice(new WC_Order($order_id), $this->textdomain);
+                    switch( $_GET['wpi_action'] ) {
+                        case "view":
+                            $invoice->view_invoice( true );
+                            break;
+                        case "cancel":
+                            if( $invoice->exists() )
+                                unlink( $invoice->get_file() );
+                            break;
+                        case "create":
+                            if( !$invoice->exists() )
+                                $invoice->generate("F");
+                            break;
+                    }
+                }
+            }
+        }
+
         public function init_ajax_calls() {
             add_action( 'wp_ajax_wpi_show_invoice', array( &$this, 'wpi_show_invoice' ) );
             add_action( 'wp_ajax_nopriv_wpi_show_invoice', array( &$this, 'wpi_show_invoice' ) );
@@ -110,9 +139,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		function attach_invoice_to_email( $attachments, $status, $order ) {
 			if( $status == $this->general_settings->settings['email_type']
 				|| $this->general_settings->settings['new_order'] && $status == "new_order" ) {
-				$invoice = new WPI_Invoice($order, $this->textdomain);
-				$path_to_pdf = $invoice->generate("F");
-				$attachments[] = $path_to_pdf;
+
+                $invoice = new WPI_Invoice($order, $this->textdomain);
+
+                if( $invoice->exists() ) {
+                    $path_to_pdf = WPI_TMP_DIR . $invoice->get_formatted_invoice_number() . ".pdf";
+                } else {
+                    $path_to_pdf = $invoice->generate("F");
+                }
+
+                $attachments[] = $path_to_pdf;
 			}
 			return $attachments;
 		}
@@ -132,29 +168,36 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		function woocommerce_order_page_action_create_invoice( $order ) {
-			?>
-			<a title="<?php _e( 'Show invoice', $this->textdomain ); ?>" href="<?php echo admin_url('admin-ajax.php'); ?>?action=wpi_show_invoice&order_id=<?php echo $order->id; ?>&nonce=<?php echo wp_create_nonce('wpi_show_invoice'); ?>" class="button tips wpi-admin-order-create-invoice-btn" target="_blank"></a>
-		<?php
+            $invoice = new WPI_Invoice(new WC_Order($order->id), $this->textdomain);
+            if( $invoice->exists() ) {
+                $this->show_invoice_button('View invoice', $order->id, 'view', '', ['class="button tips wpi-admin-order-create-invoice-btn"'] );
+            }
 		}
 
         private function show_invoice_number_info($date, $number) {
-            echo '<table class="invoice-info">
+            echo '<table class="invoice-info" width="100%">
                 <tr>
                     <td>Invoiced on:</td>
-                    <td>' . $date . '</td>
+                    <td align="right">' . $date . '</td>
                 </tr>
                 <tr>
                     <td>Invoice number:</td>
-                    <td>' . $number . '</td>
+                    <td align="right">' . $number . '</td>
                 </tr>
             </table>';
         }
 
-        private function show_invoice_button($title, $wpi_action, $btn_title) {
+        private function show_invoice_button($title, $order_id, $wpi_action, $btn_title, $arr = []) {
             $title = __( $title, $this->textdomain );
-            $href = admin_url() . 'post.php?post=' . $_GET['post'] . '&action=edit&wpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
+            $href = admin_url() . 'post.php?post=' . $order_id . '&action=edit&wpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
             $btn_title = __( $btn_title, $this->textdomain );
-            echo '<a title="' . $title . '" href="' . $href . '"><button type="button">' . $btn_title . '</button></a>';
+
+            $attr = '';
+            foreach($arr as $str) {
+                $attr .= $str . ' ';
+            }
+
+            echo '<a title="' . $title . '" href="' . $href . '" ' . $attr . '><button type="button">' . $btn_title . '</button></a>';
         }
 
 		function woocommerce_order_details_page_meta_box_create_invoice( $post ) {
@@ -166,54 +209,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             );
 
             if( $invoice->exists() ) {
-                $this->show_invoice_button('View invoice', 'view', 'View' );
-                $this->show_invoice_button('Cancel invoice', 'cancel', 'Cancel' );
+                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View' );
+                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel' );
             } else {
-                $this->show_invoice_button('Create invoice', 'create', 'Create' );
+                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create' );
             }
 		}
-
-        public function init_plugin_actions() {
-            if( isset( $_GET['wpi_action'] ) && isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) && isset( $_GET['nonce'] ) ) {
-                $action = $_GET['wpi_action'];
-                $order_id = $_GET['post'];
-                $nonce = $_REQUEST["nonce"];
-
-                if (!wp_verify_nonce($nonce, $action)) {
-                    die( 'Invalid request' );
-                } else if( empty($order_id) ) {
-                    die( 'Invalid order ID');
-                } else {
-                    $invoice = new WPI_Invoice(new WC_Order($order_id), $this->textdomain);
-                    switch( $_GET['wpi_action'] ) {
-                        case "view":
-                            $invoice->view_invoice( true );
-                            break;
-                        case "cancel":
-                            if( $invoice->exists() )
-                                unlink( $invoice->get_file() );
-                            break;
-                        case "create":
-                            if( !$invoice->exists() )
-                                $invoice->generate("F");
-                            break;
-                    }
-                }
-            }
-        }
-
-        public function wpi_show_invoice() {
-            $action = $_REQUEST["action"];
-            $order_id = $_REQUEST["order_id"];
-            $nonce = $_REQUEST["nonce"];
-            if (!wp_verify_nonce($nonce, $action)) {
-                die( 'Invalid request' );
-            } else if( empty( $order_id ) ) {
-                die( 'Invalid order id' );
-            } else {
-                $invoice = new WPI_Invoice(new WC_Order($order_id), $this->textdomain);
-                $invoice->view_invoice( true );
-            }
-        }
 	}
 }

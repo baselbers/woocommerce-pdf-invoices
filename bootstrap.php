@@ -1,23 +1,16 @@
 <?php
 
 /**
- * The plugin bootstrap file
- *
- * This file is read by WordPress to generate the plugin information in the plugin
- * Dashboard. This file also includes all of the dependencies used by the plugin,
- * registers the activation and deactivation functions, and defines a function
- * that starts the plugin.
- *
- * @link
- * @since             1.0.0
- * @package           WooCommerce_PDF_Invoices
+ * @version           2.0.0
+ * @package           WooCommerce PDF Invoices
+ * @author            Bas Elbers
  *
  * @wordpress-plugin
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:
- * Description:       Generate customized PDF invoice and automatically attach to WooCommerce email type of your choice.
+ * Description:       Generates customized PDF invoices and automatically attaches it to a WooCommerce email type of your choice.
  * Version:           2.0.0
- * Author:            baaaaas
+ * Author:            Bas Elbers
  * Author URI:
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

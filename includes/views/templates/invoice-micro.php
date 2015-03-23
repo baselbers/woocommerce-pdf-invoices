@@ -1,6 +1,9 @@
 <html>
 <head>
     <style>
+        h1.company-logo {
+            font-size: 30px;
+        }
         img.company-logo {
             max-height: 150px;
         }

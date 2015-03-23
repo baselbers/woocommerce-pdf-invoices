@@ -33,6 +33,9 @@
     height: 2em !important;
     width: 2em;
 }
+.wpi-admin-order-create-invoice-btn button {
+    display: none;
+}
 .notes {
     display: inline;
     font-style: italic;

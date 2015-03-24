@@ -126,12 +126,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                             $invoice->view_invoice( true );
                             break;
                         case "cancel":
-                            if( $invoice->exists() )
-                                unlink( $invoice->get_file() );
+                            $invoice->delete();
                             break;
                         case "create":
-                            if( !$invoice->exists() )
-                                $invoice->generate("F");
+                            $invoice->generate("F");
                             break;
                     }
                 }
@@ -323,17 +321,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Show all the meta box actions/buttons on the order details page to create, view or cancel/delete an invoice.
          * @param $post
          */
-		function woocommerce_order_details_page_meta_box_create_invoice( $post ) {
+		public function woocommerce_order_details_page_meta_box_create_invoice( $post ) {
             $invoice = new WPI_Invoice(new WC_Order($post->ID), $this->textdomain);
 
-            $this->show_invoice_number_info(
-                $invoice->get_formatted_date(),
-                $invoice->get_formatted_invoice_number()
-            );
-
             if( $invoice->exists() ) {
+                $this->show_invoice_number_info($invoice->get_formatted_date(), $invoice->get_formatted_invoice_number());
                 $this->show_invoice_button('View invoice', $post->ID, 'view', 'View' );
-                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel' );
+                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', ['onclick="return confirm(\'Are you sure to delete the invoice?\')"'] );
             } else {
                 $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create' );
             }

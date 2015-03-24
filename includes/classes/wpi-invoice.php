@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
+if ( ! class_exists( 'WPI_Invoice' ) ) {
 
     /**
      * Makes the invoice.
@@ -83,15 +83,38 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Gets all the existing invoice data from database or creates new invoice number.
          */
         private function init() {
-            $this->number = get_post_meta($this->order->id, $this->invoice_number_meta_key, true);
+            $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true);
             $this->formatted_number = get_post_meta($this->order->id, '_bewpi_formatted_invoice_number', true);
             $this->date = get_post_meta($this->order->id, '_bewpi_invoice_date', true);
+        }
 
-            // No invoice generated yet
-            if (empty($this->number) || empty($this->date)) {
-                $this->create_next_invoice_number($this->order->id);
-                $this->date = $this->create_formatted_date();
+        /**
+         * Gets next invoice number based on the user input.
+         * @param $order_id
+         */
+        function get_next_invoice_number($last_invoice_number) {
+            // Check if it has been the first of january.
+            if ($this->template_settings['reset_invoice_number']) {
+                $last_year = $this->template_settings['last_invoiced_year'];
+
+                if ( !empty( $last_year ) && is_numeric($last_year)) {
+                    $current_year = getdate()['year'];
+                    if ($last_year < $current_year) {
+                        // Set new year as last invoiced year and reset invoice number
+                        return 1;
+                    }
+                }
             }
+
+            // Check if the next invoice number should be used.
+            $next_invoice_number = $this->template_settings['next_invoice_number'];
+            if ( !empty( $next_invoice_number )
+                && empty( $last_invoice_number )
+                || $next_invoice_number > $last_invoice_number) {
+                return $next_invoice_number;
+            }
+
+            return $last_invoice_number;
         }
 
         /**
@@ -117,35 +140,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         }
 
         /**
-         * Getter for formatted date.
-         * @return mixed
-         */
-        public function get_formatted_date() {
-            return $this->date;
-        }
-
-        /**
-         * Gets the year from the WooCommerce order date.
-         * @return bool|string
-         */
-        public function get_formatted_order_year() {
-            return date("Y", strtotime($this->order->order_date));
-        }
-
-        /**
-         * Gets the template from template dir.
-         * @return string
-         */
-        private function get_template() {
-            return WPI_TEMPLATES_DIR . $this->template_settings['template_filename'];
-        }
-
-        /**
          * Creates new invoice number with SQL MAX CAST.
          * @param $order_id
          * @param $number
          */
-        function create_invoice_number($order_id, $number) {
+        function create_invoice_number($next_number) {
             global $wpdb;
 
             // attempt the query up to 3 times for a much higher success rate if it fails (due to Deadlock)
@@ -154,80 +153,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                 // this seems to me like the safest way to avoid order number clashes
                 $query = $wpdb->prepare(
                     "
-                INSERT INTO {$wpdb->postmeta} (post_id, meta_key, meta_value)
+                    INSERT INTO {$wpdb->postmeta} (post_id, meta_key, meta_value)
                     SELECT %d, %s, IF( MAX( CAST( meta_value as UNSIGNED ) ) IS NULL, %d, MAX( CAST( meta_value as UNSIGNED ) ) + 1 )
                     FROM {$wpdb->postmeta}
                     WHERE meta_key = %s
                 ",
-                    $order_id, $this->invoice_number_meta_key, $number, $this->invoice_number_meta_key
+                    $this->order->id, $this->invoice_number_meta_key, $next_number, $this->invoice_number_meta_key
                 );
                 $success = $wpdb->query($query);
             }
-        }
 
-        /**
-         * Get's the invoice number from db.
-         * @param $order_id
-         * @return mixed
-         */
-        function get_invoice_number($order_id) {
-            global $wpdb;
-
-            $results = $wpdb->get_results(
-                "
-            SELECT meta_value
-            FROM $wpdb->postmeta
-            WHERE post_id = $order_id
-            AND meta_key = $this->invoice_number_meta_key
-            "
-            );
-
-            if (count($results) == 1) {
-                return $results[0]->meta_value;
-            }
-        }
-
-        /**
-         * Creates next invoice number based on the user input.
-         * @param $order_id
-         */
-        function create_next_invoice_number($order_id) {
-            if ($this->template_settings['next_invoice_number'] != ""
-                && $this->template_settings['next_invoice_number'] > $this->template_settings['invoice_number']
-            ) {
-                $this->number = $this->template_settings['next_invoice_number'];
-            }
-
-            $current_year = getdate()['year'];
-            if ($this->template_settings['reset_invoice_number']) {
-                $last_year = $this->template_settings['last_invoiced_year'];
-
-                if ($last_year != "" && is_numeric($last_year)) {
-                    if ($last_year < $current_year) {
-                        //  set new year as last invoiced year and reset invoice number
-                        $this->number = 1;
-                    }
-                }
-            }
-
-            if (empty($this->number) && empty($this->template_settings['invoice_number'])) {
-                $this->number = 1;
-            }
-
-            // Create new invoice number and insert into database.
-            $this->create_invoice_number($order_id, $this->number);
-
-            // Set the current year as the last invoiced.
-            $this->template_settings['last_invoiced_year'] = $current_year;
-
-            // Get the invoice number.
-            $this->number = $this->get_invoice_number($order_id);
-            $this->template_settings['invoice_number'] = $this->number;
-            update_option('template_settings', $this->template_settings);
-
-            // Format invoice number
-            $this->formatted_number = $this->format_invoice_number();
-            add_post_meta($this->order->id, '_bewpi_formatted_invoice_number', $this->formatted_number);
+            return $success;
         }
 
         /**
@@ -239,18 +175,23 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             $digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
             $this->number = sprintf($digit_str, $this->number);
 
-            return $invoice_number_format = str_replace(
+            $invoice_number_format = str_replace(
                 array('[prefix]', '[suffix]', '[number]'),
                 array($this->template_settings['invoice_prefix'], $this->template_settings['invoice_suffix'], $this->number),
                 $invoice_number_format);
+
+            add_post_meta($this->order->id, '_bewpi_formatted_invoice_number', $invoice_number_format);
+
+            return $invoice_number_format;
         }
 
         /**
-         * Getter for formatted invoice number.
-         * @return mixed
+         * When an invoice gets generated again then the post meta needs to get deleted.
          */
-        public function get_formatted_invoice_number() {
-            return $this->formatted_number;
+        private function delete_all_post_meta() {
+            delete_post_meta( $this->order->id, '_bewpi_invoice_number' );
+            delete_post_meta( $this->order->id, '_bewpi_formatted_invoice_number' );
+            delete_post_meta( $this->order->id, '_bewpi_invoice_date' );
         }
 
         /**
@@ -259,37 +200,65 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return string
          */
         public function generate($dest) {
-            set_time_limit(0);
-            include WPI_DIR . "lib/mpdf/mpdf.php";
+            if( !$this->exists() ) {
 
-            $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
-            $mpdf->useOnlyCoreFonts = true;    // false is default
-            $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
-            $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
-            $mpdf->showWatermarkText = false;
-            $mpdf->SetDisplayMode('fullpage');
-            $mpdf->useSubstitutions = false;
-            //$mpdf->simpleTables = true;
+                $last_invoice_number = $this->template_settings['last_invoice_number'];
 
-            ob_start();
+                // Get the up following invoice number
+                $next_invoice_number = $this->get_next_invoice_number($last_invoice_number);
 
-            require_once WPI_TEMPLATES_DIR . $this->template_settings['template_filename'];
+                // Create new invoice number and insert into database.
+                $invoice_number_created = $this->create_invoice_number($next_invoice_number);
 
-            $html = ob_get_contents();
+                if( $invoice_number_created ) {
+                    // Set the current year as the last invoiced.
+                    $this->template_settings['last_invoiced_year'] = getdate()['year'];
 
-            ob_end_clean();
+                    // Get the new invoice number from db.
+                    $this->number = $this->get_invoice_number();
+                    $this->template_settings['last_invoice_number'] = $this->number;
 
-            $footer = $this->get_footer();
+                    $this->formatted_number = $this->format_invoice_number();
 
-            $mpdf->SetHTMLFooter($footer);
+                    update_option('template_settings', $this->template_settings);
 
-            $mpdf->WriteHTML($html);
+                    $this->date = $this->create_formatted_date();
 
-            $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
+                    // Go generate
+                    set_time_limit(0);
+                    include WPI_DIR . "lib/mpdf/mpdf.php";
 
-            $mpdf->Output($file, $dest);
+                    $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
+                    $mpdf->useOnlyCoreFonts = true;    // false is default
+                    $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
+                    $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
+                    $mpdf->showWatermarkText = false;
+                    $mpdf->SetDisplayMode('fullpage');
+                    $mpdf->useSubstitutions = false;
 
-            return $file;
+                    ob_start();
+
+                    require_once $this->get_template();
+
+                    $html = ob_get_contents();
+
+                    ob_end_clean();
+
+                    $footer = $this->get_footer();
+
+                    $mpdf->SetHTMLFooter($footer);
+
+                    $mpdf->WriteHTML($html);
+
+                    $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
+
+                    $mpdf->Output($file, $dest);
+
+                    return $file;
+                }
+            } else {
+                die('Invoice already exists.');
+            }
         }
 
         /**
@@ -297,10 +266,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $download
          */
         public function view_invoice($download) {
-            $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
-            $filename = $this->formatted_number . ".pdf";
-
             if ($this->exists()) {
+                $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
+                $filename = $this->formatted_number . ".pdf";
 
                 if ($download) {
                     header('Content-type: application / pdf');
@@ -327,8 +295,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Delete invoice from tmp dir.
          */
         public function delete() {
-            if ($this->exists())
+            if ($this->exists()) {
                 unlink($this->file);
+                $this->delete_all_post_meta();
+            }
         }
 
         /**
@@ -338,14 +308,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         public function exists() {
             $this->file = WPI_TMP_DIR . $this->get_formatted_invoice_number() . ".pdf";
             return file_exists($this->file);
-        }
-
-        /**
-         * Gets the file path.
-         * @return mixed
-         */
-        public function get_file() {
-            return $this->file;
         }
 
         /**
@@ -387,6 +349,70 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             ob_end_clean();
 
             return $html;
+        }
+
+        /**
+         * Get's the invoice number from db.
+         * @param $order_id
+         * @return mixed
+         */
+        function get_invoice_number() {
+            global $wpdb;
+
+            $results = $wpdb->get_results(
+                $wpdb->prepare(
+                    "
+                    SELECT meta_value
+                    FROM $wpdb->postmeta
+                    WHERE post_id = %d
+                    AND meta_key = %s
+                    ", $this->order->id, $this->invoice_number_meta_key
+                )
+            );
+
+            if (count($results) == 1) {
+                return $results[0]->meta_value;
+            }
+        }
+
+        /**
+         * Getter for formatted invoice number.
+         * @return mixed
+         */
+        public function get_formatted_invoice_number() {
+            return $this->formatted_number;
+        }
+
+        /**
+         * Getter for formatted date.
+         * @return mixed
+         */
+        public function get_formatted_date() {
+            return $this->date;
+        }
+
+        /**
+         * Gets the year from the WooCommerce order date.
+         * @return bool|string
+         */
+        public function get_formatted_order_year() {
+            return date("Y", strtotime($this->order->order_date));
+        }
+
+        /**
+         * Gets the template from template dir.
+         * @return string
+         */
+        private function get_template() {
+            return WPI_TEMPLATES_DIR . $this->template_settings['template_filename'];
+        }
+
+        /**
+         * Gets the file path.
+         * @return mixed
+         */
+        public function get_file() {
+            return $this->file;
         }
     }
 }

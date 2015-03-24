@@ -43,7 +43,7 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
             'reset_invoice_number' => 0,
             'invoice_date_format' => 'F jS Y',
             'last_invoiced_year' => '',
-            'invoice_number' => 1
+            'last_invoice_number' => 1
         );
 
         /**

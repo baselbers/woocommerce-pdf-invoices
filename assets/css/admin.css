@@ -1,4 +1,6 @@
-.be_woocommerce_pdf_invoices_settings_form select {
+.be_woocommerce_pdf_invoices_settings_form select,
+.be_woocommerce_pdf_invoices_settings_form input[type="text"],
+.be_woocommerce_pdf_invoices_settings_form textarea {
     width: 348px;
 }
 #company-logo-wrapper {
@@ -45,4 +47,13 @@
 }
 #color-picker {
     height: 28px;
+}
+.foot {
+    font-size: 12px;
+}
+.invoice-info {
+    margin-bottom: 10px;
+}
+.invoice-btn {
+    margin-right: 3px;
 }

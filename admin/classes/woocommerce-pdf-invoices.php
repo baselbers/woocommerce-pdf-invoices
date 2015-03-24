@@ -286,11 +286,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             echo '<table class="invoice-info" width="100%">
                 <tr>
                     <td>Invoiced on:</td>
-                    <td align="right">' . $date . '</td>
+                    <td align="right"><b>' . $date . '</b></td>
                 </tr>
                 <tr>
                     <td>Invoice number:</td>
-                    <td align="right">' . $number . '</td>
+                    <td align="right"><b>' . $number . '</b></td>
                 </tr>
             </table>';
         }
@@ -326,10 +326,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info($invoice->get_formatted_date(), $invoice->get_formatted_invoice_number());
-                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View' );
-                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', ['onclick="return confirm(\'Are you sure to delete the invoice?\')"'] );
+                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View', ['class="invoice-btn"'] );
+                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', ['class="invoice-btn"', 'onclick="return confirm(\'Are you sure to delete the invoice?\')"'] );
             } else {
-                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create' );
+                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create', ['class="invoice-btn"'] );
             }
 		}
 	}

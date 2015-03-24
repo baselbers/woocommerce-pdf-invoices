@@ -238,8 +238,17 @@
         <tr>
             <td colspan="<?php echo $colspan; ?>"></td>
             <td class="total" width="25%"><?php _e( 'Total', $this->textdomain ); ?></td>
-            <td class="grand-total align-right" width="25%"><?php echo wc_price( $this->order->get_total() ); ?></td>
+            <td class="grand-total align-right" width="25%">
+                <?php echo wc_price( $this->order->get_total() ) ?>
+            </td>
         </tr>
+        <?php /*<tr>
+            <td colspan="<?php echo $colspan; ?>"></td>
+            <td class="refunded" width="25%"><?php _e( 'Refunded', $this->textdomain ); ?></td>
+            <td class="refunded-total align-right" width="25%">
+                <?php echo wc_price( $this->order->get_total_refunded() ) ?>
+            </td>
+        </tr> */?>
         </tbody>
     </table>
 </div>

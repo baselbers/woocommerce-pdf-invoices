@@ -143,7 +143,7 @@ if ( ! class_exists( 'WPI_General_Settings' ) ) {
             <input type="checkbox" name="<?php echo $this->settings_key; ?>[email_it_in]"
                    value="1" <?php checked($this->settings['email_it_in']); ?>/>
             <div
-                class="notes"><?php printf(__('Signup at %s and enter your account beyond.', $this->textdomain), '<a href="https://emailitin.com">emailitin.com</a>'); ?></div>
+                class="notes"><?php printf(__('Signup at %s and enter your account below.', $this->textdomain), '<a href="https://emailitin.com">emailitin.com</a>'); ?></div>
         <?php
         }
 

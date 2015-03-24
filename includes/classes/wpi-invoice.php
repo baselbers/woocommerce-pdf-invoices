@@ -414,5 +414,14 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
         public function get_file() {
             return $this->file;
         }
+
+        /**
+         * Get total with or without refunds
+         */
+        public function get_formatted_total() {
+            if( $this->order->get_total_refunded() > 0 ) {
+                $total = wc_price( $this->order->get_total() - $this->order->get_total_refunded() );
+            }
+        }
     }
 }

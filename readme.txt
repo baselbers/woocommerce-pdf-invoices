@@ -1,5 +1,5 @@
 === Plugin Name ===
-Contributors: baaaaas
+Contributors: Bas Elbers
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
@@ -44,9 +44,12 @@ Well, please send me a request by Email or add a support thread and I will make 
 
 == Screenshots ==
 
-1. Settings page.
-2. Settings page.
-3. Generated PDF invoice.
+1. General settings
+2. Template settings
+3. View or Cancel the invoice from the order page.
+4. Create a new invoice from the order page.
+5. View the invoice from the shop order page.
+6. Nice and clean invoice template with the ability to change the color.
 
 == Installation ==
 
@@ -56,7 +59,7 @@ Automatic installation is the easiest option as WordPress handles the file trans
 In the search field type "WooCommerce PDF Invoices" and click Search Plugins. Once you've found our plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking Install Now. After clicking that link you will be asked if you're sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
 
 = Manual installation =
-The manual installation method involves downloading our eCommerce plugin and uploading it to your webserver via your favourite FTP application.
+The manual installation method involves downloading our plugin and uploading it to your webserver via your favourite FTP application.
 
 1. Download the plugin file to your computer and unzip it
 2. Using an FTP program, or your hosting control panel, upload the unzipped plugin folder to your WordPress installation's wp-content/plugins/ directory.

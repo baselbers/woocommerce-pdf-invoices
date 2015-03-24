@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-03-23 16:23+0100\n"
-"PO-Revision-Date: 2015-03-23 16:26+0100\n"
+"POT-Creation-Date: 2015-03-24 21:18+0100\n"
+"PO-Revision-Date: 2015-03-24 21:19+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -19,267 +19,267 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/classes/woocommerce-pdf-invoices.php:83
+#: admin/classes/woocommerce-pdf-invoices.php:152
 msgid "General"
 msgstr "Algemeen"
 
-#: admin/classes/woocommerce-pdf-invoices.php:84
-#: admin/classes/wpi-template-settings.php:67
+#: admin/classes/woocommerce-pdf-invoices.php:153
+#: admin/classes/wpi-template-settings.php:109
 msgid "Template"
 msgstr ""
 
-#: admin/classes/woocommerce-pdf-invoices.php:92
+#: admin/classes/woocommerce-pdf-invoices.php:167
 msgid "Invoices"
 msgstr "Facturen"
 
-#: admin/classes/woocommerce-pdf-invoices.php:162
+#: admin/classes/woocommerce-pdf-invoices.php:260
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
 
-#: admin/classes/wpi-general-settings.php:34
+#: admin/classes/wpi-general-settings.php:74
 msgid "General Settings"
 msgstr "Algemene Opties"
 
-#: admin/classes/wpi-general-settings.php:35
+#: admin/classes/wpi-general-settings.php:75
 msgid "Attach to Email"
 msgstr "Voeg toe aan Email"
 
-#: admin/classes/wpi-general-settings.php:39
+#: admin/classes/wpi-general-settings.php:79
 msgid "Processing order"
 msgstr "Bestelling wordt verwerkt"
 
-#: admin/classes/wpi-general-settings.php:43
+#: admin/classes/wpi-general-settings.php:83
 msgid "Completed order"
 msgstr "Bestelling voltooid"
 
-#: admin/classes/wpi-general-settings.php:47
+#: admin/classes/wpi-general-settings.php:87
 msgid "Customer invoice"
 msgstr "Klant factuur"
 
-#: admin/classes/wpi-general-settings.php:51
+#: admin/classes/wpi-general-settings.php:91
 msgid "Attach to New order Email"
 msgstr "Voeg toe aan New order Email"
 
-#: admin/classes/wpi-general-settings.php:52
+#: admin/classes/wpi-general-settings.php:92
 msgid "Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive"
 msgstr "Verzend automatisch naar Google Drive, Egnyte, Dropbox of OneDrive"
 
-#: admin/classes/wpi-general-settings.php:53
+#: admin/classes/wpi-general-settings.php:93
 msgid "Email It In account"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:80
+#: admin/classes/wpi-general-settings.php:133
 msgid "For bookkeeping purposes."
 msgstr "Voor boekhoudkundige doeleinden."
 
-#: admin/classes/wpi-general-settings.php:87
+#: admin/classes/wpi-general-settings.php:146
 #, php-format
-msgid "Signup at %s and enter your account beyond."
-msgstr "Meld je aan op %s en vul je account onderstaand in."
+msgid "Signup at %s and enter your account below."
+msgstr "Meld je aan op %s en geef je account onderstaand in."
 
-#: admin/classes/wpi-general-settings.php:95
+#: admin/classes/wpi-general-settings.php:159
 #, php-format
 msgid "Enter your %s account."
 msgstr "Het %s account."
 
-#: admin/classes/wpi-general-settings.php:110
+#: admin/classes/wpi-general-settings.php:182
 msgid "Invalid type of Email."
 msgstr "Ongeldig type Email."
 
-#: admin/classes/wpi-general-settings.php:121
-#: admin/classes/wpi-general-settings.php:132
-#: admin/classes/wpi-template-settings.php:435
+#: admin/classes/wpi-general-settings.php:193
+#: admin/classes/wpi-general-settings.php:204
+#: admin/classes/wpi-template-settings.php:594
 msgid "Please don't try to change the values."
 msgstr "Probeer de waardes niet te wijzigen a.u.b."
 
-#: admin/classes/wpi-general-settings.php:143
+#: admin/classes/wpi-general-settings.php:215
 msgid "Invalid Email address."
 msgstr "Ongeldig Emailadres."
 
-#: admin/classes/wpi-settings.php:49
+#: admin/classes/wpi-settings.php:92
 msgid "Allowed tags: "
 msgstr "Toegestane tags: "
 
-#: admin/classes/wpi-template-settings.php:66
+#: admin/classes/wpi-template-settings.php:108
 msgid "Template Settings"
 msgstr "Template Opties"
 
-#: admin/classes/wpi-template-settings.php:68
+#: admin/classes/wpi-template-settings.php:110
 msgid "Color theme"
 msgstr "Kleur thema"
 
-#: admin/classes/wpi-template-settings.php:69
+#: admin/classes/wpi-template-settings.php:111
 msgid "Company name"
 msgstr "Bedrijfsnaam"
 
-#: admin/classes/wpi-template-settings.php:70
+#: admin/classes/wpi-template-settings.php:112
 msgid "Company logo"
 msgstr "Bedrijfslogo"
 
-#: admin/classes/wpi-template-settings.php:71
+#: admin/classes/wpi-template-settings.php:113
 msgid "Intro text"
 msgstr "Introtekst"
 
-#: admin/classes/wpi-template-settings.php:72
+#: admin/classes/wpi-template-settings.php:114
 msgid "Company address"
 msgstr "Bedrijfsadres"
 
-#: admin/classes/wpi-template-settings.php:73
+#: admin/classes/wpi-template-settings.php:115
 msgid "Company details"
 msgstr "Algemene bedrijfsgegevens"
 
-#: admin/classes/wpi-template-settings.php:74
+#: admin/classes/wpi-template-settings.php:116
 msgid "Terms & conditions, policies etc."
 msgstr "Algemene voorwaarden"
 
-#: admin/classes/wpi-template-settings.php:75
+#: admin/classes/wpi-template-settings.php:117
 msgid "Next invoice number"
 msgstr "Eerstvolgende factuurnummer"
 
-#: admin/classes/wpi-template-settings.php:76
+#: admin/classes/wpi-template-settings.php:118
 msgid "Number of digits"
 msgstr "Aantal cijfers"
 
-#: admin/classes/wpi-template-settings.php:77
+#: admin/classes/wpi-template-settings.php:119
 msgid "Invoice number prefix"
 msgstr "Factuurnummer voorvoegsel"
 
-#: admin/classes/wpi-template-settings.php:78
+#: admin/classes/wpi-template-settings.php:120
 msgid "Invoice number suffix"
 msgstr "Factuurnummer achtervoegsel"
 
-#: admin/classes/wpi-template-settings.php:79
+#: admin/classes/wpi-template-settings.php:121
 msgid "Invoice number format"
 msgstr "Factuurnummer format"
 
-#: admin/classes/wpi-template-settings.php:80
+#: admin/classes/wpi-template-settings.php:122
 msgid "Reset on 1st January"
 msgstr "Reset op 1 januari"
 
-#: admin/classes/wpi-template-settings.php:81
+#: admin/classes/wpi-template-settings.php:123
 msgid "Invoice date format"
 msgstr "Factuur datumnotatie"
 
-#: admin/classes/wpi-template-settings.php:82
+#: admin/classes/wpi-template-settings.php:124
 msgid "Show SKU"
 msgstr "Toon SKU"
 
-#: admin/classes/wpi-template-settings.php:83
+#: admin/classes/wpi-template-settings.php:125
 msgid "Show discount"
 msgstr "Toon korting"
 
-#: admin/classes/wpi-template-settings.php:84
+#: admin/classes/wpi-template-settings.php:126
 msgid "Show subtotal"
 msgstr "Toon subtotaal"
 
-#: admin/classes/wpi-template-settings.php:85
+#: admin/classes/wpi-template-settings.php:127
 msgid "Show tax"
 msgstr "Toon BTW"
 
-#: admin/classes/wpi-template-settings.php:86
+#: admin/classes/wpi-template-settings.php:128
 msgid "Show shipping"
 msgstr "Toon verzendkosten"
 
-#: admin/classes/wpi-template-settings.php:87
+#: admin/classes/wpi-template-settings.php:129
 msgid "Show customer notes"
 msgstr "Toon notities klant"
 
-#: admin/classes/wpi-template-settings.php:112
+#: admin/classes/wpi-template-settings.php:167
 msgid "Color theme of the invoice."
 msgstr "Kleurthema van de factuur."
 
-#: admin/classes/wpi-template-settings.php:126
+#: admin/classes/wpi-template-settings.php:190
 msgid ""
 "Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png."
 msgstr ""
 "Upload een afbeelding van maximaal 200Kb en zorg dat het een jpeg, jpg of "
 "png is."
 
-#: admin/classes/wpi-template-settings.php:134
+#: admin/classes/wpi-template-settings.php:201
 msgid "Remove logo"
 msgstr "Verwijder logo"
 
-#: admin/classes/wpi-template-settings.php:229
+#: admin/classes/wpi-template-settings.php:344
 msgid "Invoice number to use for next invoice."
 msgstr "Factuurnummer te gebruiken voor de volgende factuur."
 
-#: admin/classes/wpi-template-settings.php:241
+#: admin/classes/wpi-template-settings.php:360
 msgid "Number of zero digits."
 msgstr "Aantal nullen."
 
-#: admin/classes/wpi-template-settings.php:250
+#: admin/classes/wpi-template-settings.php:374
 msgid "Prefix text for the invoice number. Not required."
 msgstr "Voorvoegsel van het factuurnummer is niet verplicht."
 
-#: admin/classes/wpi-template-settings.php:259
+#: admin/classes/wpi-template-settings.php:388
 msgid "Suffix text for the invoice number. Not required."
 msgstr "Achtervoegsel van het factuurnummer is niet verplicht."
 
-#: admin/classes/wpi-template-settings.php:268
+#: admin/classes/wpi-template-settings.php:402
 msgid ""
 "Use [prefix], [suffix] and [number] as placeholders. [number] is required."
 msgstr ""
 "Gebruik [prefix], [suffix] en [number] als aanduidingen. [number] is "
 "verplicht."
 
-#: admin/classes/wpi-template-settings.php:278
+#: admin/classes/wpi-template-settings.php:416
 msgid "Reset on the first of January."
 msgstr "Reset op de eerste van januari."
 
-#: admin/classes/wpi-template-settings.php:287
+#: admin/classes/wpi-template-settings.php:430
 #, php-format
 msgid "%sFormat%s of the date. Examples: %s or %s."
 msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s."
 
-#: admin/classes/wpi-template-settings.php:317
+#: admin/classes/wpi-template-settings.php:476
 msgid "Invalid template."
 msgstr "Ongeldige template."
 
-#: admin/classes/wpi-template-settings.php:330
+#: admin/classes/wpi-template-settings.php:489
 msgid "Invalid color theme code."
 msgstr "Ongeldige kleurcode."
 
-#: admin/classes/wpi-template-settings.php:341
+#: admin/classes/wpi-template-settings.php:500
 msgid "Invalid company name."
 msgstr "Ongeldige bedsrijfsnaam."
 
-#: admin/classes/wpi-template-settings.php:359
+#: admin/classes/wpi-template-settings.php:518
 msgid "Invalid input into one of the textarea's."
 msgstr "Ongeldige invoer in een van de textarea's."
 
-#: admin/classes/wpi-template-settings.php:370
+#: admin/classes/wpi-template-settings.php:529
 msgid "Invalid (next) invoice number."
 msgstr "Ongeldig (eerstvolgend) factuurnummer."
 
-#: admin/classes/wpi-template-settings.php:388
+#: admin/classes/wpi-template-settings.php:547
 msgid "Invalid invoice number digits."
 msgstr "Ongeldige factuurnummer cijfers."
 
-#: admin/classes/wpi-template-settings.php:404
+#: admin/classes/wpi-template-settings.php:563
 msgid "The [number] placeholder is required as invoice number format."
 msgstr "De aanduiding [number] is vereist."
 
-#: admin/classes/wpi-template-settings.php:411
+#: admin/classes/wpi-template-settings.php:570
 msgid "Invalid invoice number format."
 msgstr "Ongeldig factuurnummer format."
 
-#: admin/classes/wpi-template-settings.php:445
+#: admin/classes/wpi-template-settings.php:604
 msgid "Invalid date format."
 msgstr "Ongeldige datumnotatie."
 
-#: admin/classes/wpi-template-settings.php:469
+#: admin/classes/wpi-template-settings.php:632
 msgid "File is invalid and contains either '..' or './'."
 msgstr "Bestand is niet valide en bevat ofwel '..' of './'."
 
-#: admin/classes/wpi-template-settings.php:476
+#: admin/classes/wpi-template-settings.php:639
 msgid "File is invalid and contains ':' after the first character."
 msgstr "Bestand is niet valide en bevat ':' na het eerste teken."
 
-#: admin/classes/wpi-template-settings.php:485
+#: admin/classes/wpi-template-settings.php:648
 msgid "Please upload image with extension jpg, jpeg or png."
 msgstr "Gelieve te uploaden een afbeelding met extensie jpg, jpeg of png."
 
-#: includes/classes/wpi-invoice.php:250
+#: includes/classes/wpi-invoice.php:327
 msgid "Customer note"
 msgstr "Opmerking klant"
 
@@ -323,6 +323,9 @@ msgstr "Subtotaal"
 #: includes/views/templates/invoice-micro.php:233
 msgid "Tax"
 msgstr "BTW"
+
+#~ msgid "Signup at %s and enter your account beyond."
+#~ msgstr "Meld je aan op %s en vul je account onderstaand in."
 
 #~ msgid "%sFormat%s of the date. Examples: %s or %s"
 #~ msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s"

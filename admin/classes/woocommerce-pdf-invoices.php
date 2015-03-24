@@ -329,6 +329,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                 $this->show_invoice_button('View invoice', $post->ID, 'view', 'View', ['class="invoice-btn"'] );
                 $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', ['class="invoice-btn"', 'onclick="return confirm(\'Are you sure to delete the invoice?\')"'] );
             } else {
+                $invoice->delete_all_post_meta();
                 $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create', ['class="invoice-btn"'] );
             }
 		}

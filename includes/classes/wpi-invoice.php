@@ -188,7 +188,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
         /**
          * When an invoice gets generated again then the post meta needs to get deleted.
          */
-        private function delete_all_post_meta() {
+        public function delete_all_post_meta() {
             delete_post_meta( $this->order->id, '_bewpi_invoice_number' );
             delete_post_meta( $this->order->id, '_bewpi_formatted_invoice_number' );
             delete_post_meta( $this->order->id, '_bewpi_invoice_date' );

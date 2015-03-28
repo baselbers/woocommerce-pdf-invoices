@@ -14,13 +14,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * All general user settings
          * @var array
          */
-		public $general_settings = array();
+		public $general_settings;
 
         /**
          * All template user settings
          * @var array
          */
-		public $template_settings = array();
+		public $template_settings;
 
         /**
          * Constant options key
@@ -217,10 +217,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return string
          */
 		function add_recipient_to_email_headers($headers, $status) {
-			if( $status == $this->general_settings->settings['email_type'] ) {
-				if( $this->general_settings->settings['email_it_in']
-					&& $this->general_settings->settings['email_it_in_account'] != "" ) {
-					$email_it_in_account = $this->general_settings->settings['email_it_in_account'];
+            $general_settings = (array) $this->general_settings->settings;
+			if( $status == $general_settings['email_type'] ) {
+				if( $general_settings['email_it_in']
+					&& $general_settings['email_it_in_account'] != "" ) {
+					$email_it_in_account = $general_settings['email_it_in_account'];
 					$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
 				}
 			}
@@ -235,8 +236,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return array
          */
 		function attach_invoice_to_email( $attachments, $status, $order ) {
-			if( $status == $this->general_settings->settings['email_type']
-				|| $this->general_settings->settings['new_order'] && $status == "new_order" ) {
+            $general_settings = $this->general_settings->settings;
+			if( $status == $general_settings['email_type']
+				|| $general_settings['new_order'] && $status == "new_order" ) {
 
                 $invoice = new WPI_Invoice($order, $this->textdomain);
 
@@ -273,7 +275,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function woocommerce_order_page_action_view_invoice( $order ) {
             $invoice = new WPI_Invoice(new WC_Order($order->id), $this->textdomain);
             if( $invoice->exists() ) {
-                $this->show_invoice_button('View invoice', $order->id, 'view', '', ['class="button tips wpi-admin-order-create-invoice-btn"'] );
+                $this->show_invoice_button('View invoice', $order->id, 'view', '', array('class="button tips wpi-admin-order-create-invoice-btn"') );
             }
 		}
 
@@ -304,7 +306,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $btn_title
          * @param array $arr
          */
-        private function show_invoice_button($title, $order_id, $wpi_action, $btn_title, $arr = []) {
+        private function show_invoice_button($title, $order_id, $wpi_action, $btn_title, $arr = array()) {
             $title = __( $title, $this->textdomain );
             $href = admin_url() . 'post.php?post=' . $order_id . '&action=edit&wpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
             $btn_title = __( $btn_title, $this->textdomain );
@@ -314,7 +316,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                 $attr .= $str . ' ';
             }
 
-            echo '<a title="' . $title . '" href="' . $href . '" ' . $attr . '><button type="button" class="button grant_access">' . $btn_title . '</button></a>';
+            $btn = '<a title="' . $title . '" href="' . $href . '" ' . $attr . '><button type="button" class="button grant_access">' . $btn_title . '</button></a>';
+            echo $btn;
         }
 
         /**
@@ -326,11 +329,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info($invoice->get_formatted_date(), $invoice->get_formatted_invoice_number());
-                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View', ['class="invoice-btn"'] );
-                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', ['class="invoice-btn"', 'onclick="return confirm(\'Are you sure to delete the invoice?\')"'] );
+                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View', array('class="invoice-btn"') );
+                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', array('class="invoice-btn"', 'onclick="return confirm(\'Are you sure to delete the invoice?\')"' ) );
             } else {
                 $invoice->delete_all_post_meta();
-                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create', ['class="invoice-btn"'] );
+                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create', array('class="invoice-btn"') );
             }
 		}
 	}

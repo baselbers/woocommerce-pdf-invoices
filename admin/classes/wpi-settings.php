@@ -21,7 +21,7 @@ if ( ! class_exists( 'WPI_Settings' ) ) {
          * For <textarea>.
          * @var array
          */
-        private $allowed_tags = ['<b>', '<i>', '<br>', '<br/>'];
+        private $allowed_tags = array('<b>', '<i>', '<br>', '<br/>');
 
         /**
          * Validates an email.

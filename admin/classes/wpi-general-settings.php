@@ -173,47 +173,56 @@ if ( ! class_exists( 'WPI_General_Settings' ) ) {
             $output = array();
 
             // Validate email type
-            if ($this->is_valid_str($input['email_type'])) {
-                $output['email_type'] = $input['email_type'];
-            } else {
-                add_settings_error(
-                    esc_attr($this->settings_key),
-                    'invalid-email-type',
-                    __('Invalid type of Email.', $this->textdomain)
-                );
+
+            if ( isset( $input['email_type'] ) ) {
+                if ($this->is_valid_str($input['email_type'])) {
+                    $output['email_type'] = $input['email_type'];
+                } else {
+                    add_settings_error(
+                        esc_attr($this->settings_key),
+                        'invalid-email-type',
+                        __('Invalid type of Email.', $this->textdomain)
+                    );
+                }
             }
 
             // Validate new order email
-            if ($this->is_valid_int($input['new_order'])) {
-                $output['new_order'] = $input['new_order'];
-            } else {
-                add_settings_error(
-                    esc_attr($this->settings_key),
-                    'invalid-new-order-email-value',
-                    __('Please don\'t try to change the values.', $this->textdomain)
-                );
+            if ( isset( $input['new_order'] ) ) {
+                if ($this->is_valid_int($input['new_order'])) {
+                    $output['new_order'] = $input['new_order'];
+                } else {
+                    add_settings_error(
+                        esc_attr($this->settings_key),
+                        'invalid-new-order-email-value',
+                        __('Please don\'t try to change the values.', $this->textdomain)
+                    );
+                }
             }
 
             // Validate new order email
-            if ($this->validate_checkbox($input['email_it_in'])) {
-                $output['email_it_in'] = $input['email_it_in'];
-            } else {
-                add_settings_error(
-                    esc_attr($this->settings_key),
-                    'invalid-email-it-in-value',
-                    __('Please don\'t try to change the values.', $this->textdomain)
-                );
+            if ( isset( $input['email_it_in'] ) ) {
+                if( $this->validate_checkbox($input['email_it_in']) ) {
+                    $output['email_it_in'] = $input['email_it_in'];
+                } else {
+                    add_settings_error(
+                        esc_attr($this->settings_key),
+                        'invalid-email-it-in-value',
+                        __('Please don\'t try to change the values.', $this->textdomain)
+                    );
+                }
             }
 
             // Validate Email
-            if (is_email(sanitize_email($input['email_it_in_account']))) {
-                $output['email_it_in_account'] = $input['email_it_in_account'];
-            } else {
-                add_settings_error(
-                    esc_attr($this->settings_key),
-                    'invalid-email',
-                    __('Invalid Email address.', $this->textdomain)
-                );
+            if( isset( $input['email_it_in_account'] ) && $input['email_it_in_account'] != "" ) {
+                if (is_email(sanitize_email($input['email_it_in_account']))) {
+                    $output['email_it_in_account'] = $input['email_it_in_account'];
+                } else {
+                    add_settings_error(
+                        esc_attr($this->settings_key),
+                        'invalid-email',
+                        __('Invalid Email address.', $this->textdomain)
+                    );
+                }
             }
 
             return $output;

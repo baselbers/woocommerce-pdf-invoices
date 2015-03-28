@@ -11,9 +11,8 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
      */
     class WPI_Invoice {
 
-        /**
+        /*
          * WooCommerce order
-         * @var string
          */
         private $order;
 
@@ -70,7 +69,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * @param string $order
          * @param $textdomain
          */
-        public function __construct($order = '', $textdomain) {
+        public function __construct($order, $textdomain) {
             $this->order = $order;
             $this->textdomain = $textdomain;
             $this->general_settings = (array)get_option('general_settings');
@@ -83,7 +82,12 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Gets all the existing invoice data from database or creates new invoice number.
          */
         private function init() {
-            $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true);
+            if ($this->template_settings['invoice_number_type'] == 'sequential_number') {
+                $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true);
+            } else {
+                $this->number = $this->order->id;
+            }
+
             $this->formatted_number = get_post_meta($this->order->id, '_bewpi_formatted_invoice_number', true);
             $this->date = get_post_meta($this->order->id, '_bewpi_invoice_date', true);
         }
@@ -98,7 +102,8 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
                 $last_year = $this->template_settings['last_invoiced_year'];
 
                 if ( !empty( $last_year ) && is_numeric($last_year)) {
-                    $current_year = getdate()['year'];
+                    $date = getdate();
+                    $current_year = $date['year'];
                     if ($last_year < $current_year) {
                         // Set new year as last invoiced year and reset invoice number
                         return 1;
@@ -207,55 +212,60 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
                 // Get the up following invoice number
                 $next_invoice_number = $this->get_next_invoice_number($last_invoice_number);
 
-                // Create new invoice number and insert into database.
-                $invoice_number_created = $this->create_invoice_number($next_invoice_number);
+                if ($this->template_settings['invoice_number_type'] == 'sequential_number') {
 
-                if( $invoice_number_created ) {
-                    // Set the current year as the last invoiced.
-                    $this->template_settings['last_invoiced_year'] = getdate()['year'];
+                    // Create new invoice number and insert into database.
+                    $this->create_invoice_number($next_invoice_number);
 
                     // Get the new invoice number from db.
                     $this->number = $this->get_invoice_number();
-                    $this->template_settings['last_invoice_number'] = $this->number;
 
-                    $this->formatted_number = $this->format_invoice_number();
+                } else {
 
-                    update_option('template_settings', $this->template_settings);
+                    $this->number = $this->order->id;
 
-                    $this->date = $this->create_formatted_date();
-
-                    // Go generate
-                    set_time_limit(0);
-                    include WPI_DIR . "lib/mpdf/mpdf.php";
-
-                    $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
-                    $mpdf->useOnlyCoreFonts = true;    // false is default
-                    $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
-                    $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
-                    $mpdf->showWatermarkText = false;
-                    $mpdf->SetDisplayMode('fullpage');
-                    $mpdf->useSubstitutions = false;
-
-                    ob_start();
-
-                    require_once $this->get_template();
-
-                    $html = ob_get_contents();
-
-                    ob_end_clean();
-
-                    $footer = $this->get_footer();
-
-                    $mpdf->SetHTMLFooter($footer);
-
-                    $mpdf->WriteHTML($html);
-
-                    $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
-
-                    $mpdf->Output($file, $dest);
-
-                    return $file;
                 }
+
+                $this->template_settings['last_invoice_number'] = $this->number;
+
+                $this->formatted_number = $this->format_invoice_number();
+
+                update_option('template_settings', $this->template_settings);
+
+                $this->date = $this->create_formatted_date();
+
+                // Go generate
+                set_time_limit(0);
+                include WPI_DIR . "lib/mpdf/mpdf.php";
+
+                $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
+                $mpdf->useOnlyCoreFonts = true;    // false is default
+                $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
+                $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
+                $mpdf->showWatermarkText = false;
+                $mpdf->SetDisplayMode('fullpage');
+                $mpdf->useSubstitutions = false;
+
+                ob_start();
+
+                require_once $this->get_template();
+
+                $html = ob_get_contents();
+
+                ob_end_clean();
+
+                $footer = $this->get_footer();
+
+                $mpdf->SetHTMLFooter($footer);
+
+                $mpdf->WriteHTML($html);
+
+                $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
+
+                $mpdf->Output($file, $dest);
+
+                return $file;
+
             } else {
                 die('Invoice already exists.');
             }
@@ -321,10 +331,13 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
                 <tbody>
                 <tr>
                     <td class="border" colspan="2">
-                        <?php echo $this->template_settings['terms']; ?><br/>
-                        <?php if (count($this->order->get_customer_order_notes()) > 0) { ?>
+                        <?php echo $this->template_settings['terms']; ?>
+                        <br/>
+                        <?php
+                        $customer_order_notes = $this->order->get_customer_order_notes();
+                        if ( count( $customer_order_notes ) > 0 ) { ?>
                             <p>
-                                <strong><?php _e('Customer note', $this->textdomain); ?> </strong><?php echo $this->order->get_customer_order_notes()[0]->comment_content; ?>
+                                <strong><?php _e('Customer note', $this->textdomain); ?> </strong><?php echo $customer_order_notes[0]->comment_content; ?>
                             </p>
                         <?php } ?>
                     </td>
@@ -404,7 +417,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * @return string
          */
         private function get_template() {
-            return WPI_TEMPLATES_DIR . $this->template_settings['template_filename'];
+            return WPI_TEMPLATES_DIR . $this->template_settings['template'];
         }
 
         /**

@@ -1,17 +1,17 @@
 === Plugin Name ===
-Contributors: Bas Elbers
+Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 2.0.0
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple plugin to generate a customized PDF invoice based upon a WooCommerce order and automatically attaches it to the WooCommerce email type of your choice.
+Simple plugin to generate a customized PDF invoice based upon an order and automatically attaches it to the email type of your choice.
 
 == Description ==
-This plugin simply generates a customized PDF Invoice based upon a WooCommerce order and automatically attaches it to the email type of your choice.
+This plugin simply generates a customized PDF Invoice based upon a WooCommerce order and automatically attaches it to the email type of your choice. Now sending invoices to your Google Drive, Egnyte, Dropbox or OneDrive and it's all FREE!
 
 = FEATURES =
 - Attach PDF invoice to email type of your choice
@@ -66,6 +66,19 @@ The manual installation method involves downloading our plugin and uploading it 
 3. Activate the plugin from the Plugins menu within the WordPress admin.
 
 == Changelog ==
+
+= 2.0.3 - March 27, 2015 =
+
+- Fixed: Suffix and company logo disappearing
+
+= 2.0.2 - March 26, 2015 =
+
+- Fixed: PHP 5.3+ compatibility
+
+= 2.0.1 - March 26, 2015 =
+
+- Fixed: Validation errors
+- Fixed: Parse error '['
 
 = 2.0.0 - March 23, 2015 =
 

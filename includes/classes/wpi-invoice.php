@@ -69,7 +69,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * @param string $order
          * @param $textdomain
          */
-        public function __construct($order, $textdomain) {
+        public function __construct($order, $textdomain = 'be-woocommerce-pdf-invoices') {
             $this->order = $order;
             $this->textdomain = $textdomain;
             $this->general_settings = (array)get_option('general_settings');
@@ -350,7 +350,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
                     </td>
                     <td class="payment">
                         <p>
-                            <strong>Payment</strong> via <?php echo $this->order->payment_method_title; ?>
+                            <?php printf( __( '%sPayment%s via', $this->textdomain ), '<b>', '</b>' ); ?>  <?php echo $this->order->payment_method_title; ?>
                         </p>
                     </td>
                 </tr>

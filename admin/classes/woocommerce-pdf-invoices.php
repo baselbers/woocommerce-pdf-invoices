@@ -56,6 +56,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$this->template_settings = $template_settings;
 
             /**
+             * Set textdomain.
+             */
+            add_action( 'init', array( &$this, 'init_load_textdomain' ) );
+
+            /**
              * Plugin actions to create, view or delete invoice.
              */
             add_action( 'init', array( &$this, 'init_plugin_actions' ) );
@@ -64,11 +69,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
              * Initialize all the ajax calls.
              */
             //add_action( 'init', array( &$this, 'init_ajax_calls' ) );
-
-            /**
-             * Set textdomain.
-             */
-			add_action( 'init', array( &$this, 'init_load_textdomain' ) );
 
             /**
              * Delete invoices from tmp folder.

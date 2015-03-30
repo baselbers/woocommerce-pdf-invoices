@@ -156,7 +156,7 @@
                 <h1 class="title"><?php _e( 'Invoice', $this->textdomain ); ?></h1>
                 <span class="number"># <?php echo $this->get_formatted_invoice_number(); ?></span><br/>
                 <span class="date"><?php echo $this->get_formatted_date(); ?></span>
-            </td>
+            </td>woocommerce-order-items
             <td class="total-amount" bgcolor="<?php echo $this->template_settings['color_theme']; ?>">
 					<span>
 					<h1 class="amount"><?php echo wc_price( $this->order->get_total() ); ?></h1>

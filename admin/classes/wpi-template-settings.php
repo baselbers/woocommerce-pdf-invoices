@@ -256,8 +256,8 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
         public function invoice_number_type_option() {
             ?>
             <select id="invoice-number-type-option" name="<?php echo $this->settings_key; ?>[invoice_number_type]">
-                <option value="woocommerce_order_number"   <?php selected($this->settings['invoice_number_type'], 'woocommerce_order_number'); ?>>WooCommerce order number</option>
-                <option value="sequential_number"   <?php selected($this->settings['invoice_number_type'], 'sequential_number'); ?>>Sequential number</option>
+                <option value="woocommerce_order_number"   <?php selected($this->settings['invoice_number_type'], 'woocommerce_order_number'); ?>><?php _e( 'WooCommerce order number', $this->textdomain ); ?></option>
+                <option value="sequential_number"   <?php selected($this->settings['invoice_number_type'], 'sequential_number'); ?>><?php _e( 'Sequential number', $this->textdomain ); ?></option>
             </select>
         <?php
         }
@@ -540,6 +540,18 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
                     'invalid_textarea_value',
                     __('Invalid input into one of the textarea\'s.', $this->textdomain)
                 );
+            }
+
+            if( isset( $input['invoice_number_type'] ) ) {
+                if ($this->is_valid_str($input['invoice_number_type'])) {
+                    $output['invoice_number_type'] = $input['invoice_number_type'];
+                } else {
+                    add_settings_error(
+                        esc_attr($this->settings_key),
+                        'invalid-invoice-number-type',
+                        __('Invalid type of invoice number.', $this->textdomain)
+                    );
+                }
             }
 
             // Validate next invoice number

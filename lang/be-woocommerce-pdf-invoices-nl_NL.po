@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-03-30 16:10+0100\n"
-"PO-Revision-Date: 2015-03-30 16:11+0100\n"
+"POT-Creation-Date: 2015-03-30 18:25+0100\n"
+"PO-Revision-Date: 2015-03-30 18:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -35,6 +35,42 @@ msgstr "Facturen"
 #: admin/classes/woocommerce-pdf-invoices.php:262
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
+
+#: admin/classes/woocommerce-pdf-invoices.php:290
+msgid "Invoiced on:"
+msgstr "Gefactureerd op:"
+
+#: admin/classes/woocommerce-pdf-invoices.php:294
+msgid "Invoice number:"
+msgstr "Factuurnummer:"
+
+#: admin/classes/woocommerce-pdf-invoices.php:332
+msgid "View invoice"
+msgstr "Toon factuur"
+
+#: admin/classes/woocommerce-pdf-invoices.php:332
+msgid "View"
+msgstr "Bekijk"
+
+#: admin/classes/woocommerce-pdf-invoices.php:333
+msgid "Cancel invoice"
+msgstr "Factuur annuleren"
+
+#: admin/classes/woocommerce-pdf-invoices.php:333
+msgid "Cancel"
+msgstr "Annuleer"
+
+#: admin/classes/woocommerce-pdf-invoices.php:333
+msgid "Are you sure to delete the invoice?"
+msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
+
+#: admin/classes/woocommerce-pdf-invoices.php:335
+msgid "Create invoice"
+msgstr "Maak factuur"
+
+#: admin/classes/woocommerce-pdf-invoices.php:335
+msgid "Create"
+msgstr "Aanmaken"
 
 #: admin/classes/wpi-general-settings.php:74
 msgid "General Settings"
@@ -88,7 +124,7 @@ msgstr "Ongeldig type Email."
 
 #: admin/classes/wpi-general-settings.php:197
 #: admin/classes/wpi-general-settings.php:210
-#: admin/classes/wpi-template-settings.php:630
+#: admin/classes/wpi-template-settings.php:642
 msgid "Please don't try to change the values."
 msgstr "Probeer de waardes niet te wijzigen a.u.b."
 
@@ -203,6 +239,14 @@ msgstr ""
 msgid "Remove logo"
 msgstr "Verwijder logo"
 
+#: admin/classes/wpi-template-settings.php:259
+msgid "WooCommerce order number"
+msgstr "WooCommerce ordernummer"
+
+#: admin/classes/wpi-template-settings.php:260
+msgid "Sequential number"
+msgstr "Volgnummer"
+
 #: admin/classes/wpi-template-settings.php:352
 msgid "Invoice number to use for next invoice."
 msgstr "Factuurnummer te gebruiken voor de volgende factuur."
@@ -251,43 +295,47 @@ msgstr "Ongeldige bedsrijfsnaam."
 msgid "Invalid input into one of the textarea's."
 msgstr "Ongeldige invoer in een van de textarea's."
 
-#: admin/classes/wpi-template-settings.php:553
+#: admin/classes/wpi-template-settings.php:552
+msgid "Invalid type of invoice number."
+msgstr "Ongeldig type factuurnummer."
+
+#: admin/classes/wpi-template-settings.php:565
 msgid "Invalid (next) invoice number."
 msgstr "Ongeldig (eerstvolgend) factuurnummer."
 
-#: admin/classes/wpi-template-settings.php:574
+#: admin/classes/wpi-template-settings.php:586
 msgid "Invalid invoice number digits."
 msgstr "Ongeldige factuurnummer cijfers."
 
-#: admin/classes/wpi-template-settings.php:596
+#: admin/classes/wpi-template-settings.php:608
 msgid "The [number] placeholder is required as invoice number format."
 msgstr "De aanduiding [number] is vereist."
 
-#: admin/classes/wpi-template-settings.php:603
+#: admin/classes/wpi-template-settings.php:615
 msgid "Invalid invoice number format."
 msgstr "Ongeldig factuurnummer format."
 
-#: admin/classes/wpi-template-settings.php:641
+#: admin/classes/wpi-template-settings.php:653
 msgid "Invalid date format."
 msgstr "Ongeldige datumnotatie."
 
-#: admin/classes/wpi-template-settings.php:670
+#: admin/classes/wpi-template-settings.php:682
 msgid "File is invalid and contains either '..' or './'."
 msgstr "Bestand is niet valide en bevat ofwel '..' of './'."
 
-#: admin/classes/wpi-template-settings.php:677
+#: admin/classes/wpi-template-settings.php:689
 msgid "File is invalid and contains ':' after the first character."
 msgstr "Bestand is niet valide en bevat ':' na het eerste teken."
 
-#: admin/classes/wpi-template-settings.php:686
+#: admin/classes/wpi-template-settings.php:698
 msgid "Please upload image with extension jpg, jpeg or png."
 msgstr "Gelieve te uploaden een afbeelding met extensie jpg, jpeg of png."
 
-#: includes/classes/wpi-invoice.php:340
+#: includes/classes/wpi-invoice.php:194
 msgid "Customer note"
 msgstr "Opmerking klant"
 
-#: includes/classes/wpi-invoice.php:353
+#: includes/classes/wpi-invoice.php:207
 #, php-format
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s met"
@@ -341,9 +389,6 @@ msgstr "BTW"
 
 #~ msgid "Show invoice"
 #~ msgstr "Toon factuur"
-
-#~ msgid "Create invoice"
-#~ msgstr "Maak factuur"
 
 #~ msgid "%sFormat%s of the date."
 #~ msgstr "%sFormat%s van de datum."

@@ -9,71 +9,49 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
      * Makes the invoice.
      * Class WPI_Invoice
      */
-    class WPI_Invoice {
+    class WPI_Invoice extends WPI_Document{
 
         /*
          * WooCommerce order
          */
-        private $order;
-
-        /**
-         * Textdomain from the plugin.
-         * @var
-         */
-        private $textdomain;
-
-        /**
-         * All settings from general tab.
-         * @var array
-         */
-        private $general_settings;
-
-        /**
-         * All settings from template tab.
-         * @var array
-         */
-        private $template_settings;
+        public $order;
 
         /**
          * Invoice number
          * @var
          */
-        private $number;
+        protected $number;
 
         /**
          * Formatted invoice number with prefix and/or suffix
          * @var
          */
-        private $formatted_number;
+        protected $formatted_number;
 
         /**
          * Invoice number database meta key
          * @var string
          */
-        private $invoice_number_meta_key = '_bewpi_invoice_number';
-
-        /**
-         * Path to invoice in tmp dir.
-         * @var
-         */
-        private $file;
+        protected $invoice_number_meta_key = '_bewpi_invoice_number';
 
         /**
          * Creation date.
          * @var
          */
-        private $date;
+        protected $date;
 
         /**
          * Initialize invoice with WooCommerce order and plugin textdomain.
          * @param string $order
          * @param $textdomain
          */
-        public function __construct($order, $textdomain = 'be-woocommerce-pdf-invoices') {
-            $this->order = $order;
-            $this->textdomain = $textdomain;
-            $this->general_settings = (array)get_option('general_settings');
-            $this->template_settings = (array)get_option('template_settings');
+        public function __construct( $order ) {
+
+            parent::__construct( $order );
+
+            // Init if the invoice already exists.
+            if( get_post_meta( $this->order->id, '_bewpi_invoice_date', true ) === '' )
+                return;
 
             $this->init();
         }
@@ -82,21 +60,18 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Gets all the existing invoice data from database or creates new invoice number.
          */
         private function init() {
-            if ($this->template_settings['invoice_number_type'] == 'sequential_number') {
-                $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true);
-            } else {
-                $this->number = $this->order->id;
-            }
-
+            ( $this->template_settings['invoice_number_type'] === 'sequential_number' )
+                ? $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true)
+                : $this->number = $this->order->id;
             $this->formatted_number = get_post_meta($this->order->id, '_bewpi_formatted_invoice_number', true);
-            $this->date = get_post_meta($this->order->id, '_bewpi_invoice_date', true);
+            $this->date = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
 
         /**
          * Gets next invoice number based on the user input.
          * @param $order_id
          */
-        function get_next_invoice_number($last_invoice_number) {
+        protected function get_next_invoice_number( $last_invoice_number ) {
             // Check if it has been the first of january.
             if ($this->template_settings['reset_invoice_number']) {
                 $last_year = $this->template_settings['last_invoiced_year'];
@@ -126,7 +101,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Create invoice date
          * @return bool|string
          */
-        public function create_formatted_date() {
+        protected function create_formatted_date() {
             $date_format = $this->template_settings['invoice_date_format'];
             //$date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
             //$date = date( $date_format );
@@ -149,7 +124,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * @param $order_id
          * @param $number
          */
-        function create_invoice_number($next_number) {
+        protected function create_invoice_number($next_number) {
             global $wpdb;
 
             // attempt the query up to 3 times for a much higher success rate if it fails (due to Deadlock)
@@ -175,7 +150,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Format the invoice number with prefix and/or suffix.
          * @return mixed
          */
-        private function format_invoice_number() {
+        protected function format_invoice_number() {
             $invoice_number_format = $this->template_settings['invoice_format'];
             $digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
             $this->number = sprintf($digit_str, $this->number);
@@ -193,138 +168,17 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
         /**
          * When an invoice gets generated again then the post meta needs to get deleted.
          */
-        public function delete_all_post_meta() {
+        protected function delete_all_post_meta() {
             delete_post_meta( $this->order->id, '_bewpi_invoice_number' );
             delete_post_meta( $this->order->id, '_bewpi_formatted_invoice_number' );
             delete_post_meta( $this->order->id, '_bewpi_invoice_date' );
         }
 
         /**
-         * Generates the invoice with MPDF lib.
-         * @param $dest
-         * @return string
-         */
-        public function generate($dest) {
-            if( !$this->exists() ) {
-
-                $last_invoice_number = $this->template_settings['last_invoice_number'];
-
-                // Get the up following invoice number
-                $next_invoice_number = $this->get_next_invoice_number($last_invoice_number);
-
-                if ($this->template_settings['invoice_number_type'] == 'sequential_number') {
-
-                    // Create new invoice number and insert into database.
-                    $this->create_invoice_number($next_invoice_number);
-
-                    // Get the new invoice number from db.
-                    $this->number = $this->get_invoice_number();
-
-                } else {
-
-                    $this->number = $this->order->id;
-
-                }
-
-                $this->template_settings['last_invoice_number'] = $this->number;
-
-                $this->formatted_number = $this->format_invoice_number();
-
-                update_option('template_settings', $this->template_settings);
-
-                $this->date = $this->create_formatted_date();
-
-                // Go generate
-                set_time_limit(0);
-                include WPI_DIR . "lib/mpdf/mpdf.php";
-
-                $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
-                $mpdf->useOnlyCoreFonts = true;    // false is default
-                $mpdf->SetTitle(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] . " - Invoice" : "Invoice");
-                $mpdf->SetAuthor(($this->template_settings['company_name'] != "") ? $this->template_settings['company_name'] : "");
-                $mpdf->showWatermarkText = false;
-                $mpdf->SetDisplayMode('fullpage');
-                $mpdf->useSubstitutions = false;
-
-                ob_start();
-
-                require_once $this->get_template();
-
-                $html = ob_get_contents();
-
-                ob_end_clean();
-
-                $footer = $this->get_footer();
-
-                $mpdf->SetHTMLFooter($footer);
-
-                $mpdf->WriteHTML($html);
-
-                $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
-
-                $mpdf->Output($file, $dest);
-
-                return $file;
-
-            } else {
-                die('Invoice already exists.');
-            }
-        }
-
-        /**
-         * Get the invoice if exist and show.
-         * @param $download
-         */
-        public function view_invoice($download) {
-            if ($this->exists()) {
-                $file = WPI_TMP_DIR . $this->formatted_number . ".pdf";
-                $filename = $this->formatted_number . ".pdf";
-
-                if ($download) {
-                    header('Content-type: application / pdf');
-                    header('Content-Disposition: attachment; filename="' . $filename . '"');
-                    header('Content-Transfer-Encoding: binary');
-                    header('Content-Length: ' . filesize($file));
-                    header('Accept-Ranges: bytes');
-                } else {
-                    header('Content-type: application/pdf');
-                    header('Content-Disposition: inline; filename="' . $filename . '"');
-                    header('Content-Transfer-Encoding: binary');
-                    header('Accept-Ranges: bytes');
-                }
-
-                @readfile($file);
-                exit;
-
-            } else {
-                die('No invoice found.');
-            }
-        }
-
-        /**
-         * Delete invoice from tmp dir.
-         */
-        public function delete() {
-            if ($this->exists()) {
-                unlink($this->file);
-                $this->delete_all_post_meta();
-            }
-        }
-
-        /**
-         * Checks if the invoice exists.
-         * @return bool
-         */
-        public function exists() {
-            $this->file = WPI_TMP_DIR . $this->get_formatted_invoice_number() . ".pdf";
-            return file_exists($this->file);
-        }
-
-        /**
          * Returns MPDF footer.
          * @return string
          */
-        function get_footer() {
+        protected function get_footer() {
             ob_start(); ?>
 
             <table class="foot">
@@ -369,7 +223,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * @param $order_id
          * @return mixed
          */
-        function get_invoice_number() {
+        public function get_invoice_number() {
             global $wpdb;
 
             $results = $wpdb->get_results(
@@ -410,22 +264,6 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          */
         public function get_formatted_order_year() {
             return date("Y", strtotime($this->order->order_date));
-        }
-
-        /**
-         * Gets the template from template dir.
-         * @return string
-         */
-        private function get_template() {
-            return WPI_TEMPLATES_DIR . $this->template_settings['template'];
-        }
-
-        /**
-         * Gets the file path.
-         * @return mixed
-         */
-        public function get_file() {
-            return $this->file;
         }
 
         /**

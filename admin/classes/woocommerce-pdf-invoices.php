@@ -287,11 +287,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         private function show_invoice_number_info($date, $number) {
             echo '<table class="invoice-info" width="100%">
                 <tr>
-                    <td>Invoiced on:</td>
+                    <td>' . __('Invoiced on:', $this->textdomain ) . '</td>
                     <td align="right"><b>' . $date . '</b></td>
                 </tr>
                 <tr>
-                    <td>Invoice number:</td>
+                    <td>' . __('Invoice number:', $this->textdomain ) . '</td>
                     <td align="right"><b>' . $number . '</b></td>
                 </tr>
             </table>';
@@ -329,11 +329,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info($invoice->get_formatted_date(), $invoice->get_formatted_invoice_number());
-                $this->show_invoice_button('View invoice', $post->ID, 'view', 'View', array('class="invoice-btn"') );
-                $this->show_invoice_button('Cancel invoice', $post->ID, 'cancel', 'Cancel', array('class="invoice-btn"', 'onclick="return confirm(\'Are you sure to delete the invoice?\')"' ) );
+                $this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array('class="invoice-btn"') );
+                $this->show_invoice_button( __( 'Cancel invoice', $this->textdomain ), $post->ID, 'cancel', __( 'Cancel', $this->textdomain ), array('class="invoice-btn"', 'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', $this->textdomain ) . '\')"' ) );
             } else {
-                $invoice->delete_all_post_meta();
-                $this->show_invoice_button('Create invoice', $post->ID, 'create', 'Create', array('class="invoice-btn"') );
+                $this->show_invoice_button( __( 'Create invoice', $this->textdomain ), $post->ID, 'create', __( 'Create', $this->textdomain ), array('class="invoice-btn"') );
             }
 		}
 	}

@@ -1,0 +1,59 @@
+.be_woocommerce_pdf_invoices_settings_form select,
+.be_woocommerce_pdf_invoices_settings_form input[type="text"],
+.be_woocommerce_pdf_invoices_settings_form textarea {
+    width: 348px;
+}
+#company-logo-wrapper {
+    margin-top: 10px;
+    position: relative;
+    width: 300px;
+    padding: 21px 21px 0 0;
+}
+#company-logo {
+    position: relative;
+    width: inherit;
+}
+#company-logo-wrapper:hover #delete{
+    display: block;
+}
+#delete{
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: none;
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+.wpi-admin-order-create-invoice-btn {
+    background-image: url(../img/invoice.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    text-indent: -9999px;
+    position: relative;
+    padding: 0 !important;
+    height: 2em !important;
+    width: 2em;
+}
+.wpi-admin-order-create-invoice-btn button {
+    display: none;
+}
+.notes {
+    display: inline;
+    font-style: italic;
+}
+.block {
+    display: block;
+}
+#color-picker {
+    height: 28px;
+}
+.foot {
+    font-size: 12px;
+}
+.invoice-info {
+    margin-bottom: 10px;
+}
+.invoice-btn {
+    margin-right: 3px;
+}

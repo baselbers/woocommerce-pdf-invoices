@@ -83,169 +83,19 @@ starting at 1, as they appear in the .ttc file e.g.
 */
 
 $this->fontdata = array(
+    "dejavusanscondensed" => array(
+        'R' => "DejaVuSansCondensed.ttf",
+        'B' => "DejaVuSansCondensed-Bold.ttf",
+        'I' => "DejaVuSansCondensed-Oblique.ttf",
+        'BI' => "DejaVuSansCondensed-BoldOblique.ttf",
+        'useOTL' => 0xFF,
+        'useKashida' => 75,
+    ),
 	"opensans" => array(
 		'R' => "OpenSans-Regular.ttf",
 		'B' => "OpenSans-Bold.ttf",
 		'I' => "OpenSans-Italic.ttf",
-		),
-
-
-/* OCR-B font for Barcodes */
-	"ocrb" => array(
-		'R' => "ocrb10.ttf",
-		),
-
-
-
-/* Miscellaneous language font(s) */
-	"estrangeloedessa" => array(	/* Syriac */
-		'R' => "SyrCOMEdessa.otf",
-		'useOTL' => 0xFF,
-		),
-
-	"kaputaunicode" => array(	/* Sinhala  */
-		'R' => "kaputaunicode.ttf",
-		'useOTL' => 0xFF,
-		),
-
-	"abyssinicasil" => array(		/* Ethiopic */
-		'R' => "Abyssinica_SIL.ttf",
-		'useOTL' => 0xFF,
-		),
-	"aboriginalsans" => array(		/* Cherokee and Canadian */
-		'R' => "AboriginalSansREGULAR.ttf",
-		),
-	"jomolhari" => array(	/* Tibetan */
-		'R' => "Jomolhari.ttf",
-		'useOTL' => 0xFF,
-		),
-	"sundaneseunicode" => array(	/* Sundanese */
-		'R' => "SundaneseUnicode-1.0.5.ttf",
-		'useOTL' => 0xFF,
-		),
-	"taiheritagepro" => array(	/* Tai Viet */
-		'R' => "TaiHeritagePro.ttf",
-		),
-	"aegean" => array(
-		'R' => "Aegean.otf",
-		'useOTL' => 0xFF,
-		),
-	"aegyptus" => array(
-		'R' => "Aegyptus.otf",
-		'useOTL' => 0xFF,
-		),
-	"akkadian" => array(		/* Cuneiform */
-		'R' => "Akkadian.otf",
-		'useOTL' => 0xFF,
-		),
-	"quivira" => array(
-		'R' => "Quivira.otf",
-		'useOTL' => 0xFF,
-		),
-	"eeyekunicode" => array(	/* Meetei Mayek */
-		'R' => "Eeyek.ttf",
-		),
-	"lannaalif" => array(		/* Tai Tham */
-		'R' => "lannaalif-v1-03.ttf",
-		'useOTL' => 0xFF,
-		),
-	"daibannasilbook" => array(	/* New Tai Lue */
-		'R' => "DBSILBR.ttf",
-		),
-	"garuda" => array(	/* Thai */
-		'R' => "Garuda.ttf",
-		'B' => "Garuda-Bold.ttf",
-		'I' => "Garuda-Oblique.ttf",
-		'BI' => "Garuda-BoldOblique.ttf",
-		'useOTL' => 0xFF,
-		),
-	"khmeros" => array(	/* Khmer */
-		'R' => "KhmerOS.ttf",
-		'useOTL' => 0xFF,
-		),
-	"dhyana" => array(	/* Lao fonts */
-		'R' => "Dhyana-Regular.ttf",
-		'B' => "Dhyana-Bold.ttf",
-		'useOTL' => 0xFF,
-		),
-
-	"tharlon" => array(	/* Myanmar / Burmese */
-		'R' => "Tharlon-Regular.ttf",
-		'useOTL' => 0xFF,
-		),
-	"padaukbook" => array(	/* Myanmar / Burmese */
-		'R' => "Padauk-book.ttf",
-		'useOTL' => 0xFF,
-		),
-	"zawgyi-one" => array(	/* Myanmar / Burmese */
-		'R' => "ZawgyiOne.ttf",
-		'useOTL' => 0xFF,
-		),
-	"ayar" => array(	/* Myanmar / Burmese */
-		'R' => "ayar.ttf",
-		'useOTL' => 0xFF,
-		),
-
-	"taameydavidclm" => array(	/* Hebrew with full Niqud and Cantillation */
-		'R' => "TaameyDavidCLM-Medium.ttf",
-		'useOTL' => 0xFF,
-		),
-
-
-/* SMP */
-	"mph2bdamase" => array(
-		'R' => "damase_v.2.ttf",
-		),
-
-
-/* Indic */
-	"lohitkannada" => array(
-		'R' => "Lohit-Kannada.ttf",
-		'useOTL' => 0xFF,
-		),
-	"pothana2000" => array(
-		'R' => "Pothana2000.ttf",
-		'useOTL' => 0xFF,
-		),
-
-
-
-/* Arabic fonts */
-	"xbriyaz" => array(
-		'R' => "XB Riyaz.ttf",
-		'B' => "XB RiyazBd.ttf",
-		'I' => "XB RiyazIt.ttf",
-		'BI' => "XB RiyazBdIt.ttf",
-		'useOTL' => 0xFF,
-		'useKashida' => 75,
-		),
-	"lateef" => array(	/* Sindhi, Pashto and Urdu */
-		'R' => "LateefRegOT.ttf",
-		'useOTL' => 0xFF,
-		'useKashida' => 75,
-		),
-	"kfgqpcuthmantahanaskh" => array(	/* KFGQPC Uthman Taha Naskh - Koranic */
-		'R' => "Uthman.otf",
-		'useOTL' => 0xFF,
-		'useKashida' => 75,
-		),
-
-
-
-
-/* CJK fonts */
-	"sun-exta" => array(
-		'R' => "Sun-ExtA.ttf",
-		'sip-ext' => 'sun-extb',		/* SIP=Plane2 Unicode (extension B) */
-		),
-	"sun-extb" => array(
-		'R' => "Sun-ExtB.ttf",
-		),
-	"unbatang" => array(	/* Korean */
-		'R' => "UnBatang_0613.ttf",
-		),
-
-
+	),
 );
 
 

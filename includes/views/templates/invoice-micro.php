@@ -156,10 +156,10 @@
                 <h1 class="title"><?php _e( 'Invoice', $this->textdomain ); ?></h1>
                 <span class="number"># <?php echo $this->get_formatted_invoice_number(); ?></span><br/>
                 <span class="date"><?php echo $this->get_formatted_date(); ?></span>
-            </td>woocommerce-order-items
+            </td>
             <td class="total-amount" bgcolor="<?php echo $this->template_settings['color_theme']; ?>">
 					<span>
-					<h1 class="amount"><?php echo wc_price( $this->order->get_total() ); ?></h1>
+					<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
 					<p class="thanks">
                         <?php echo $this->template_settings['intro_text']; ?>
                     </p>
@@ -193,8 +193,12 @@
                     <td><?php echo $product->get_sku(); ?></td>
                 <?php } ?>
                 <td><?php echo $item['qty']; ?></td>
-                <td><?php echo wc_price( $product->get_price_excluding_tax() ); ?></td>
-                <td class="align-right"><?php echo wc_price( $product->get_price_excluding_tax( $item['qty'] ) ); ?></td>
+                <td>
+                    <?php echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+                </td>
+                <td class="align-right">
+                    <?php echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) ); ?>
+                </td>
             </tr>
         <?php } ?>
         <!-- Space -->
@@ -207,7 +211,7 @@
             <tr class="discount after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Discount', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_discount() ); ?></td>
+                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Shipping -->
@@ -215,7 +219,7 @@
             <tr class="shipping after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Shipping', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_shipping() ); ?></td>
+                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Subtotal -->
@@ -223,7 +227,7 @@
             <tr class="subtotal after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_subtotal() ); ?></td>
+                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Tax -->
@@ -231,7 +235,7 @@
             <tr class="tax">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Tax', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_tax() ); ?></td>
+                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_tax(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Total -->
@@ -239,7 +243,7 @@
             <td colspan="<?php echo $colspan; ?>"></td>
             <td class="total" width="25%"><?php _e( 'Total', $this->textdomain ); ?></td>
             <td class="grand-total align-right" width="25%">
-                <?php echo wc_price( $this->order->get_total() ) ?>
+                <?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?>
             </td>
         </tr>
         <?php /*<tr>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-03-31 23:50+0100\n"
-"PO-Revision-Date: 2015-03-31 23:50+0100\n"
+"POT-Creation-Date: 2015-03-30 18:25+0100\n"
+"PO-Revision-Date: 2015-03-30 18:26+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -331,67 +331,14 @@ msgstr "Bestand is niet valide en bevat ':' na het eerste teken."
 msgid "Please upload image with extension jpg, jpeg or png."
 msgstr "Gelieve te uploaden een afbeelding met extensie jpg, jpeg of png."
 
-#: includes/classes/wpi-invoice.php:196
+#: includes/classes/wpi-invoice.php:194
 msgid "Customer note"
 msgstr "Opmerking klant"
 
-#: includes/classes/wpi-invoice.php:209
+#: includes/classes/wpi-invoice.php:207
 #, php-format
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s met"
-
-#: includes/classes/wpi-invoice.php:282
-msgid "Item"
-msgstr "Product"
-
-#: includes/classes/wpi-invoice.php:286
-#: includes/views/templates/invoice-micro.php:178
-msgid "SKU"
-msgstr "Productcode"
-
-#: includes/classes/wpi-invoice.php:290
-msgid "Price"
-msgstr "Prijs"
-
-#: includes/classes/wpi-invoice.php:294
-#: includes/views/templates/invoice-micro.php:182
-msgid "Quantity"
-msgstr "Aantal"
-
-#: includes/classes/wpi-invoice.php:298 includes/classes/wpi-invoice.php:326
-#: includes/views/templates/invoice-micro.php:233
-msgid "Tax"
-msgstr "BTW"
-
-#: includes/classes/wpi-invoice.php:302 includes/classes/wpi-invoice.php:331
-#: includes/views/templates/invoice-micro.php:184
-#: includes/views/templates/invoice-micro.php:240
-msgid "Total"
-msgstr "Totaal"
-
-#: includes/classes/wpi-invoice.php:311
-#: includes/views/templates/invoice-micro.php:209
-msgid "Discount"
-msgstr "Korting"
-
-#: includes/classes/wpi-invoice.php:316
-#: includes/views/templates/invoice-micro.php:217
-msgid "Shipping"
-msgstr "Verzending"
-
-#: includes/classes/wpi-invoice.php:321
-#: includes/views/templates/invoice-micro.php:225
-msgid "Subtotal"
-msgstr "Subtotaal"
-
-#: includes/classes/wpi-invoice.php:338
-msgid "Refunded"
-msgstr "Terugbetaald"
-
-#: includes/views/templates/invoice-host.php:97
-#, php-format
-msgid "Tax %s"
-msgstr "BTW %s"
 
 #: includes/views/templates/invoice-micro.php:156
 msgid "Invoice"
@@ -401,9 +348,38 @@ msgstr "Factuur"
 msgid "Description"
 msgstr "﻿Beschrijving"
 
+#: includes/views/templates/invoice-micro.php:178
+msgid "SKU"
+msgstr "Productcode"
+
+#: includes/views/templates/invoice-micro.php:182
+msgid "Quantity"
+msgstr "Aantal"
+
 #: includes/views/templates/invoice-micro.php:183
 msgid "Unit price"
 msgstr "Prijs per stuk"
+
+#: includes/views/templates/invoice-micro.php:184
+#: includes/views/templates/invoice-micro.php:240
+msgid "Total"
+msgstr "Totaal"
+
+#: includes/views/templates/invoice-micro.php:209
+msgid "Discount"
+msgstr "Korting"
+
+#: includes/views/templates/invoice-micro.php:217
+msgid "Shipping"
+msgstr "Verzending"
+
+#: includes/views/templates/invoice-micro.php:225
+msgid "Subtotal"
+msgstr "Subtotaal"
+
+#: includes/views/templates/invoice-micro.php:233
+msgid "Tax"
+msgstr "BTW"
 
 #~ msgid "Signup at %s and enter your account beyond."
 #~ msgstr "Meld je aan op %s en vul je account onderstaand in."

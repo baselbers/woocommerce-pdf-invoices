@@ -40,8 +40,6 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          */
         protected $date;
 
-
-
         /**
          * Initialize invoice with WooCommerce order and plugin textdomain.
          * @param string $order
@@ -221,22 +219,6 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
         }
 
         /**
-         * Prints the company logo
-         */
-        public function get_company_logo() {
-            $company_logo_url = $this->template_settings['company_logo'];
-            echo '<img id="company-logo" src="' . $company_logo_url . '" />';
-        }
-
-        /**
-         * Prints the company name
-         */
-        public function get_company_name() {
-            $company_name = $this->template_settings['company_name'];
-            echo '<h1 id="company-name">' . $company_name . '</h1>';
-        }
-
-        /**
          * Get's the invoice number from db.
          * @param $order_id
          * @return mixed
@@ -264,7 +246,7 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Getter for formatted invoice number.
          * @return mixed
          */
-        public function get_formatted_number() {
+        public function get_formatted_invoice_number() {
             return $this->formatted_number;
         }
 
@@ -274,86 +256,6 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          */
         public function get_formatted_date() {
             return $this->date;
-        }
-
-        public function get_item_table_headers() {
-            return array(
-                'item' => array(
-                    'title' => __( 'Item', $this->textdomain ),
-                    'show' => true
-                ),
-                'sku' => array(
-                    'title' => __( 'SKU', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_sku']
-                ),
-                'price' => array(
-                    'title' => __( 'Price', $this->textdomain ),
-                    'show' => true
-                ),
-                'qty' => array(
-                    'title' => __( 'Quantity', $this->textdomain ),
-                    'show' => true
-                ),
-                'tax' => array(
-                    'title' => __( 'Tax', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_tax']
-                ),
-                'total' => array(
-                    'title' => __( 'Total', $this->textdomain ),
-                    'show' => true
-                )
-            );
-        }
-
-        public function get_item_table_footers() {
-            return array(
-                'discount' => array(
-                    'title' => __( 'Discount', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_discount'],
-                    'amount' => $this->order->get_total_discount()
-                ),
-                'shipping' => array(
-                    'title' => __( 'Shipping', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_shipping'],
-                    'amount' => $this->order->get_total_shipping()
-                ),
-                'subtotal' => array(
-                    'title' => __( 'Subtotal', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_subtotal'],
-                    'amount' => $this->order->get_subtotal()
-                ),
-                'tax' => array(
-                    'title' => __( 'Tax', $this->textdomain ),
-                    'show' => (bool)$this->template_settings['show_tax'],
-                    'amount' => $this->order->get_total_tax()
-                ),
-                'total' => array(
-                    'title' => __( 'Total', $this->textdomain ),
-                    'show' => true,
-                    'amount' => ( $this->order->get_total_refunded() > 0 )
-                        ? '<del>' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>'
-                        : $this->order->get_formatted_order_total()
-                ),
-                'refund' => array(
-                    'title' => __( 'Refunded', $this->textdomain ),
-                    'show' => ( $this->order->get_total_refunded() > 0 ),
-                    'amount' => '-' . $this->order->get_total_refunded()
-                )
-            );
-        }
-
-        public function get_colspan() {
-            $item_table_headers = $this->get_item_table_headers();
-            $total_showed_header_cells = 1; // One empty header cell for the thumb.
-            $tfoot_cells = 2;
-
-            foreach( $item_table_headers as $th ) {
-                if( $th['show'] ) {
-                    $total_showed_header_cells++;
-                }
-            }
-
-            return ( $total_showed_header_cells - $tfoot_cells );
         }
 
         /**

@@ -16,19 +16,19 @@ if ( ! class_exists( 'WPI_Document' ) ) {
          * Textdomain from the plugin.
          * @var
          */
-        public $textdomain = 'be-woocommerce-pdf-invoices';
+        protected $textdomain = 'be-woocommerce-pdf-invoices';
 
         /**
          * All settings from general tab.
          * @var array
          */
-        public $general_settings;
+        protected $general_settings;
 
         /**
          * All settings from template tab.
          * @var array
          */
-        public $template_settings;
+        protected $template_settings;
 
         /**
          * Path to invoice in tmp dir.
@@ -168,7 +168,7 @@ if ( ! class_exists( 'WPI_Document' ) ) {
          * @return bool
          */
         public function exists() {
-            $this->file = WPI_TMP_DIR . $this->get_formatted_number() . ".pdf";
+            $this->file = WPI_TMP_DIR . $this->get_formatted_invoice_number() . ".pdf";
             return file_exists($this->file);
         }
 

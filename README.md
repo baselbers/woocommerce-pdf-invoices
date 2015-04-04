@@ -1,1 +1,0 @@
-# woocommerce-pdf-invoices-pro

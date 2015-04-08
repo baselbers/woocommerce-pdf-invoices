@@ -328,7 +328,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             $invoice = new WPI_Invoice(new WC_Order($post->ID), $this->textdomain);
 
             if( $invoice->exists() ) {
-                $this->show_invoice_number_info($invoice->get_formatted_date(), $invoice->get_formatted_invoice_number());
+                $this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_invoice_number() );
                 $this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array('class="invoice-btn"') );
                 $this->show_invoice_button( __( 'Cancel invoice', $this->textdomain ), $post->ID, 'cancel', __( 'Cancel', $this->textdomain ), array('class="invoice-btn"', 'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', $this->textdomain ) . '\')"' ) );
             } else {

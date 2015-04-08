@@ -84,7 +84,7 @@ if ( ! class_exists( 'WPI_Document' ) ) {
 
                 update_option('template_settings', $this->template_settings);
 
-                $this->date = $this->create_formatted_date();
+                $this->date = $this->get_formatted_invoice_date( true );
 
                 // Go generate
                 set_time_limit(0);

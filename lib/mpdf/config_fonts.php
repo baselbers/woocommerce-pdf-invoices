@@ -96,6 +96,11 @@ $this->fontdata = array(
 		'B' => "OpenSans-Bold.ttf",
 		'I' => "OpenSans-Italic.ttf",
 	),
+	"lato" => array(
+		'R' => "Lato-Regular.ttf",
+		'B' => "Lato-Bold.ttf",
+		'I' => "Lato-Italic.ttf",
+	),
 );
 
 

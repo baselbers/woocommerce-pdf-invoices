@@ -1,6 +1,9 @@
 <html>
 <head>
     <style>
+        div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4 {
+            /*border: 1px solid black;*/
+        }
         h1.company-logo {
             font-size: 30px;
         }
@@ -15,6 +18,9 @@
         }
         table.products th {
             border-bottom: 2px solid #A5A5A5;
+        }
+        table.products td{
+            vertical-align: top;
         }
         table.products td, table.products th {
             padding: 5px;
@@ -42,14 +48,14 @@
         .align-left { text-align: left; }
         .align-right { text-align: right; }
         .company {
-            width: 60%;
-            vertical-align: middle;
             margin-bottom: 40px;
-            display: inline-block;
+        }
+        .company .logo {
+            text-align: left;
         }
         .company .info {
-            padding-left: 30px;
             text-align: left;
+            vertical-align: middle;
         }
         .two-column {
             margin-bottom: 40px;
@@ -76,7 +82,7 @@
         .number {
             font-size: 16px;
         }
-        .date, .thanks {
+        .small-font {
             font-size: 12px;
         }
         .total-amount p {
@@ -88,6 +94,10 @@
         }
         .total-amount, .total-amount h1 {
             color: white;
+        }
+        div.item-attribute {
+            font-size: 12px;
+            margin-top: 10px;
         }
         .invoice {
             margin-bottom: 20px;
@@ -123,12 +133,12 @@
 </head>
 <body>
 <div id="container">
-    <table class="company">
+    <table class="company two-column">
         <tbody>
         <tr>
             <td class="logo">
-                <?php if( $this->template_settings['company_logo'] != "" ) { ?>
-                    <img class="company-logo" src="<?php echo $this->template_settings['company_logo']; ?>" alt="Company logo"/>
+                <?php if( !empty( $this->template_settings['company_logo'] ) ) { ?>
+                    <img class="company-logo" src="<?php echo $this->template_settings['company_logo']; ?>"/>
                 <?php } else { ?>
                     <h1 class="company-logo"><?php echo $this->template_settings['company_name']; ?></h1>
                 <?php } ?>
@@ -142,9 +152,13 @@
     <table class="two-column customer">
         <tbody>
         <tr>
-            <td></td>
-            <td class="address">
+            <td>
+                <b>Invoice to</b><br/>
                 <?php echo $this->order->get_formatted_billing_address(); ?>
+            </td>
+            <td class="address">
+                <b>Ship to</b><br/>
+                <?php echo $this->order->get_formatted_shipping_address(); ?>
             </td>
         </tr>
         </tbody>
@@ -154,16 +168,16 @@
         <tr>
             <td class="invoice-details">
                 <h1 class="title"><?php _e( 'Invoice', $this->textdomain ); ?></h1>
-                <span class="number"># <?php echo $this->get_formatted_invoice_number(); ?></span><br/>
-                <span class="date"><?php echo $this->get_formatted_date(); ?></span>
+                <span class="number"><?php echo $this->get_formatted_invoice_number(); ?></span><br/>
+                <span class="small-font"><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
+                <span class="small-font"><?php printf( __( 'Order Number %s', $this->textdomain ), $this->order->get_order_number() ); ?></span><br/>
+                <span class="small-font"><?php printf( __( 'Order Date %s', $this->textdomain ), $this->get_formatted_order_date() ); ?></span><br/>
             </td>
             <td class="total-amount" bgcolor="<?php echo $this->template_settings['color_theme']; ?>">
-					<span>
+				<span>
 					<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
-					<p class="thanks">
-                        <?php echo $this->template_settings['intro_text']; ?>
-                    </p>
-					</span>
+					<p class="small-font"><?php echo $this->template_settings['intro_text']; ?></p>
+				</span>
             </td>
         </tr>
         </tbody>
@@ -185,10 +199,50 @@
         </tr>
         </thead>
         <tbody>
-        <?php foreach( $this->order->get_items( 'line_item' ) as $item ) {
+        <?php foreach( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
             $product = wc_get_product( $item['product_id'] ); ?>
             <tr class="product">
-                <td><?php echo $product->get_title(); ?></td>
+                <td>
+                    <?php echo $product->get_title(); ?>
+                    <?php
+                    global $wpdb;
+
+                    if ( $metadata = $this->order->has_meta( $item_id ) ) {
+                        foreach ( $metadata as $meta ) {
+
+                            // Skip hidden core fields
+                            if ( in_array( $meta['meta_key'], apply_filters( 'woocommerce_hidden_order_itemmeta', array(
+                                '_qty',
+                                '_tax_class',
+                                '_product_id',
+                                '_variation_id',
+                                '_line_subtotal',
+                                '_line_subtotal_tax',
+                                '_line_total',
+                                '_line_tax',
+                            ) ) ) ) {
+                                continue;
+                            }
+
+                            // Skip serialised meta
+                            if ( is_serialized( $meta['meta_value'] ) ) {
+                                continue;
+                            }
+
+                            // Get attribute data
+                            if ( taxonomy_exists( wc_sanitize_taxonomy_name( $meta['meta_key'] ) ) ) {
+                                $term               = get_term_by( 'slug', $meta['meta_value'], wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
+                                $meta['meta_key']   = wc_attribute_label( wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
+                                $meta['meta_value'] = isset( $term->name ) ? $term->name : $meta['meta_value'];
+                            } else {
+                                $meta['meta_key']   = apply_filters( 'woocommerce_attribute_label', wc_attribute_label( $meta['meta_key'], $_product ), $meta['meta_key'] );
+                            }
+
+                            echo '<div class="item-attribute"><span style="font-weight: bold;">' . wp_kses_post( rawurldecode( $meta['meta_key'] ) ) . ': </span>' . wp_kses_post( rawurldecode( $meta['meta_value'] ) ) . '</div>';
+                        }
+                    }
+                    ?>
+                </td>
                 <?php if( $this->template_settings['show_sku'] ) { ?>
                     <td><?php echo $product->get_sku(); ?></td>
                 <?php } ?>

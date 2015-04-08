@@ -4,43 +4,40 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 2.0.6
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple plugin to generate a customized PDF invoice based upon an order and automatically attaches it to the email type of your choice.
+Automatically or manually create and send PDF Invoices for WooCommerce orders and connect with Dropbox, Google Drive, OneDrive or Egnyte.
 
 == Description ==
-This plugin simply generates a customized PDF Invoice based upon a WooCommerce order and automatically attaches it to the email type of your choice. Now sending invoices to your Google Drive, Egnyte, Dropbox or OneDrive and it's all FREE!
+This WooCommerce plugin creates customizable PDF invoices for WooCommerce orders with the ability to setup an invoice number with a specific format. Attach the PDF invoice to the WooCommerce email type of your choice and try out sending invoices automatically to Dropbox, Google Drive, OneDrive or Egnyte. It's simply awesome!
 
-= FEATURES =
-- Attach PDF invoice to email type of your choice
-- Attach PDF invoice to the New Order email
-- Connection with many cloud storages like Google Drive, Egnyte, Dropbox or OneDrive
-- Choose your template
-- Sequential invoice numbers
-- Choose different invoice number formats
-- Choose next invoice number
-- Choose the number of zero digits for your invoice number
-- Make use of a prefix and/or a suffix for your invoice number
-- Choose your date format
-- Upload and show your company logo
-- Add your company address
-- Add additional company information
-- Add refunds policies, conditions etc.
-- Choose to show customer notes
-- Choose to show SKU
-- Translation ready
+= Main features =
+- Automatic PDF invoice generation and attachment
+- Attach PDF invoice to WooCommerce email type of your choice
+- Attach PDF invoice to New Order WooCommerce email
+- Connect with Google Drive, Egnyte, Dropbox or OneDrive
+- Many PDF invoice template customization options
+- Sequential invoice number system
+- Customize invoice number format
+- Manually (re)create or delete PDF invoice
+- Resend PDF invoices to customer
+- Without annoying advertisements
 
-== Frequently Asked Questions ==
+Install the plugin and try out all the features, it will simply be awesome.
 
-= Can I make a request for some particular functionality? =
+= Support =
 
-Of course you can! Please open a support thread and I will try to answer as soon as possible. Please don't hesitate to contact me for questions.
+Support can take place on the [forum page](https://wordpress.org/support/plugin/woocommerce-pdf-invoices), where we will try to respond as soon as possible.
 
-= How do I get your plugin in my own language? =
+= Contributing =
 
-Well, please send me a request by Email or add a support thread and I will make a new language file for you.
+If you want to add code to the source code, report an issue or request an enhancement, feel free to use [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices).
+
+= Translating =
+
+Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices) or send the translation files directly to baselbers@hotmail.com.
 
 == Screenshots ==
 
@@ -66,6 +63,16 @@ The manual installation method involves downloading our plugin and uploading it 
 3. Activate the plugin from the Plugins menu within the WordPress admin.
 
 == Changelog ==
+
+= 2.1.0 - April 8, 2015 =
+
+- Added: Variable products attributes on template
+- Added: Shipping address on template
+- Added: Order number and order date on template
+- Added: Option to add the year to the invoice number
+- Added: Option to change order date format
+- Fixed: Header CSS on template
+- Improved: Dutch language file
 
 = 2.0.6 - April 3, 2015 =
 

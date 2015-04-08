@@ -101,20 +101,37 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          * Create invoice date
          * @return bool|string
          */
-        protected function create_formatted_date() {
+        public function get_formatted_invoice_date( $add_post_meta = false ) {
             $date_format = $this->template_settings['invoice_date_format'];
             //$date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
             //$date = date( $date_format );
 
             if ($date_format != "") {
                 //$formatted_date = $date->format($date_format);
-                $formatted_date = date($date_format);
+                $this->date = date($date_format);
             } else {
                 //$formatted_date = $date->format($date, "d-m-Y");
-                $formatted_date = date('d-m-Y');
+                $this->date = date('d-m-Y');
             }
 
-            add_post_meta($this->order->id, '_bewpi_invoice_date', $formatted_date);
+            if( $add_post_meta )
+                add_post_meta($this->order->id, '_bewpi_invoice_date', $this->date);
+
+            return $this->date;
+        }
+
+        /*
+         * Format the order date and return
+         */
+        public function get_formatted_order_date() {
+            $order_date = $date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
+
+            if ( !empty ( $this->template_settings['order_date_format'] ) ) {
+                $date_format = $this->template_settings['order_date_format'];
+                $formatted_date = $order_date->format($date_format);
+            } else {
+                $formatted_date = $order_date->format($order_date, "d-m-Y");
+            }
 
             return $formatted_date;
         }
@@ -154,11 +171,13 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
             $invoice_number_format = $this->template_settings['invoice_format'];
             $digit_str = "%0" . $this->template_settings['invoice_number_digits'] . "s";
             $this->number = sprintf($digit_str, $this->number);
+            $year = date('Y');
+            $y = date('y');
 
             $invoice_number_format = str_replace(
-                array('[prefix]', '[suffix]', '[number]'),
-                array($this->template_settings['invoice_prefix'], $this->template_settings['invoice_suffix'], $this->number),
-                $invoice_number_format);
+                array( '[prefix]', '[suffix]', '[number]', '[Y]', '[y]' ),
+                array( $this->template_settings['invoice_prefix'], $this->template_settings['invoice_suffix'], $this->number, $year, $y ),
+                $invoice_number_format );
 
             add_post_meta($this->order->id, '_bewpi_formatted_invoice_number', $invoice_number_format);
 
@@ -248,14 +267,6 @@ if ( ! class_exists( 'WPI_Invoice' ) ) {
          */
         public function get_formatted_invoice_number() {
             return $this->formatted_number;
-        }
-
-        /**
-         * Getter for formatted date.
-         * @return mixed
-         */
-        public function get_formatted_date() {
-            return $this->date;
         }
 
         /**

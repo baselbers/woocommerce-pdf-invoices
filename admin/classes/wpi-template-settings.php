@@ -29,20 +29,21 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
             'company_address' => '',
             'company_details' => '',
             'terms' => '',
-            'show_discount' => 0,
-            'show_subtotal' => 0,
-            'show_tax' => 0,
-            'show_shipping' => 0,
-            'show_customer_notes' => 0,
+            'show_discount' => 1,
+            'show_subtotal' => 1,
+            'show_tax' => 1,
+            'show_shipping' => 1,
+            'show_customer_notes' => 1,
             'show_sku' => 0,
             'invoice_number_type' => 'woocommerce_order_number',
             'next_invoice_number' => 1,
             'invoice_number_digits' => 3,
             'invoice_prefix' => '',
             'invoice_suffix' => '',
-            'invoice_format' => '[prefix]-[number]-[suffix]',
+            'invoice_format' => '[number]',
             'reset_invoice_number' => 0,
-            'invoice_date_format' => 'F jS Y',
+            'invoice_date_format' => 'd-m-Y',
+            'order_date_format' => 'd-m-Y',
             'last_invoiced_year' => '',
             'last_invoice_number' => 1
         );
@@ -117,6 +118,7 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
             add_settings_field('invoice_format', __('Invoice number format', $this->textdomain), array(&$this, 'invoice_format_option'), $this->settings_key, 'section_template');
             add_settings_field('reset_invoice_number', __('Reset on 1st January', $this->textdomain), array(&$this, 'reset_invoice_number_option'), $this->settings_key, 'section_template');
             add_settings_field('invoice_date_format', __('Invoice date format', $this->textdomain), array(&$this, 'invoice_date_format_option'), $this->settings_key, 'section_template');
+            add_settings_field('order_date_format', __('Order date format', $this->textdomain), array(&$this, 'order_date_format_option'), $this->settings_key, 'section_template');
             add_settings_field('show_sku', __('Show SKU', $this->textdomain), array(&$this, 'show_sku_option'), $this->settings_key, 'section_template');
             add_settings_field('show_discount', __('Show discount', $this->textdomain), array(&$this, 'show_discount_option'), $this->settings_key, 'section_template');
             add_settings_field('show_subtotal', __('Show subtotal', $this->textdomain), array(&$this, 'show_subtotal_option'), $this->settings_key, 'section_template');
@@ -407,7 +409,7 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
                    name="<?php echo $this->settings_key; ?>[invoice_format]"
                    value="<?php echo $this->settings['invoice_format']; ?>"/>
             <div
-                class="notes"><?php _e('Use [prefix], [suffix] and [number] as placeholders. [number] is required.', $this->textdomain); ?></div>
+                class="notes"><?php printf( __( 'Available placeholder are %s %s %s %s and %s. %s is required.', $this->textdomain ), '[prefix]', '[suffix]', '[number]', '[Y]', '[y]', '[number]' ); ?></div>
         <?php
         }
 
@@ -436,6 +438,20 @@ if ( ! class_exists( 'WPI_Template_Settings' ) ) {
                    value="<?php echo $this->settings['invoice_date_format']; ?>"/>
             <div
                 class="notes"><?php printf(__('%sFormat%s of the date. Examples: %s or %s.', $this->textdomain), '<a href="http://php.net/manual/en/datetime.formats.date.php">', '</a>', '"m.d.y"', '"F jS Y"'); ?></div>
+        <?php
+        }
+
+        /**
+         *
+         */
+        public function order_date_format_option()
+        {
+            ?>
+            <input type="text"
+                   name="<?php echo $this->settings_key; ?>[order_date_format]"
+                   value="<?php echo $this->settings['order_date_format']; ?>"/>
+            <div
+                class="notes"><?php printf(__('Order date %sformat%s. Examples: %s or %s.', $this->textdomain), '<a href="http://php.net/manual/en/datetime.formats.date.php">', '</a>', '"m.d.y"', '"F jS Y"'); ?></div>
         <?php
         }
 

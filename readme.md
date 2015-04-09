@@ -12,7 +12,7 @@ Use the [issue tracker](https://github.com/baselbers/woocommerce-pdf-invoices/is
 
 ## Translating
 
-For adding your translation files, [fork](https://github.com/piffpaffpuff/woocommerce-pdf-invoices/fork) the code, add your translation and send a pull request. Read the [WordPress Codex](http://codex.wordpress.org/Translating_WordPress) to learn how to translate a plugin.
+For adding your translation files the code, add your translation and send a pull request. Read the [WordPress Codex](http://codex.wordpress.org/Translating_WordPress) to learn how to translate a plugin.
 
 ## Tip
 

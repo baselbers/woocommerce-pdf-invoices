@@ -37,7 +37,7 @@ If you want to add code to the source code, report an issue or request an enhanc
 
 = Translating =
 
-Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices) or send the translation files directly to baselbers@hotmail.com.
+Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices#translating).
 
 == Screenshots ==
 

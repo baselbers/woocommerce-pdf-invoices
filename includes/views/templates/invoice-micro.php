@@ -153,11 +153,11 @@
         <tbody>
         <tr>
             <td>
-                <b>Invoice to</b><br/>
+                <b><? _e( 'Invoice to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_billing_address(); ?>
             </td>
             <td class="address">
-                <b>Ship to</b><br/>
+                <b><? _e( 'Ship to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_shipping_address(); ?>
             </td>
         </tr>

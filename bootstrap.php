@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version           2.1.0
+ * @version           2.2.0
  * @package           WooCommerce PDF Invoices
  * @author            baaaaas
  *
@@ -18,24 +18,42 @@
  * Domain Path:       /lang
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
+if ( ! defined( 'ABSPATH' ) )
     die( 'Access denied.' );
-}
 
-define( 'WPI_NAME', 'WooCommerce PDF Invoices' );
-define( 'WPI_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WPI_URL', plugins_url( '', __FILE__ ) );
-define( 'WPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . 'includes/views/templates/' );
-define( 'WPI_TMP_DIR', plugin_dir_path( __FILE__ ) . 'tmp/' );
-define( 'WPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
+if( !defined( 'BEWPI_VERSION' ) )
+	define( 'BEWPI_VERSION', '2.2.1' );
 
-require_once( WPI_DIR . 'admin/classes/woocommerce-pdf-invoices.php' );
-require_once( WPI_DIR . 'admin/classes/wpi-settings.php' );
-require_once( WPI_DIR . 'admin/classes/wpi-general-settings.php' );
-require_once( WPI_DIR . 'admin/classes/wpi-template-settings.php' );
-require_once( WPI_DIR . 'includes/classes/wpi-document.php' );
-require_once( WPI_DIR . 'includes/classes/wpi-invoice.php' );
+if( !defined( 'BEWPI_URL' ) )
+    define( 'BEWPI_URL', plugins_url( '', __FILE__ ) . '/' );
+
+if( !defined( 'BEWPI_DIR' ) )
+	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) . '/' );
+
+if( !defined( 'BEWPI_TEMPLATES_DIR' ) )
+    define( 'BEWPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . '/includes/views/templates/' );
+
+if( !defined( 'BEWPI_LANG_DIR' ) )
+    define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang/' );
+
+$wp_upload_dir = wp_upload_dir();
+
+if ( !defined( 'BEWPI_INVOICES_DIR' ) )
+    define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
+
+if ( !defined( 'BEWPI_LIB_DIR' ) )
+	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
+
+require_once( BEWPI_DIR . 'admin/classes/be-woocommerce-pdf-invoices.php' );
+require_once( BEWPI_DIR . 'admin/classes/bewpi-settings.php' );
+require_once( BEWPI_DIR . 'admin/classes/bewpi-general-settings.php' );
+require_once( BEWPI_DIR . 'admin/classes/bewpi-template-settings.php' );
+require_once( BEWPI_DIR . 'includes/classes/bewpi-document.php' );
+require_once( BEWPI_DIR . 'includes/classes/bewpi-invoice.php' );
 
 if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
-    new BE_WooCommerce_PDF_Invoices(new WPI_General_Settings(), new WPI_Template_Settings());
+	new BE_WooCommerce_PDF_Invoices(
+		new BEWPI_General_Settings(),
+		new BEWPI_Template_Settings()
+	);
 }

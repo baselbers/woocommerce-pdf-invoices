@@ -187,14 +187,16 @@
         <tr>
             <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
             <?php
+            $colspan = $this->get_colspan();
             if( $this->template_settings['show_sku'] ) {
-                $colspan = 3;
                 echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
-            } else {
-                $colspan = 2; }
+            }
             ?>
             <th class="align-left"><?php _e( 'Quantity', $this->textdomain ); ?></th>
             <th class="align-left"><?php _e( 'Unit price', $this->textdomain ); ?></th>
+	        <?php if ( $this->template_settings['show_tax'] ) {
+		        echo '<th class="align-left">' . __( "Tax", $this->textdomain ) . '</th>';
+	        } ?>
             <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
         </tr>
         </thead>
@@ -243,15 +245,34 @@
                     }
                     ?>
                 </td>
-                <?php if( $this->template_settings['show_sku'] ) { ?>
-                    <td><?php echo $product->get_sku(); ?></td>
-                <?php } ?>
-                <td><?php echo $item['qty']; ?></td>
+	                <?php if( $this->template_settings['show_sku'] ) echo '<td>' . $product->get_sku() . '</td>'; ?>
                 <td>
-                    <?php echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+	                <?php echo $item['qty']; ?>
                 </td>
+                <td>
+	                <?php echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+                </td>
+	            <?php
+	            if ( empty( $legacy_order ) && wc_tax_enabled() && $this->template_settings['show_tax'] ) :
+		            $line_tax_data = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
+		            $tax_data      = maybe_unserialize( $line_tax_data );
+
+		            foreach ( $this->order->get_taxes() as $tax_item ) :
+			            $tax_item_id       = $tax_item['rate_id'];
+			            $tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
+			            $tax_item_subtotal = isset( $tax_data['subtotal'][ $tax_item_id ] ) ? $tax_data['subtotal'][ $tax_item_id ] : '';
+			            ?>
+
+			            <td class="item-tax">
+				            <?php echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+			            </td>
+
+		                <?php
+		            endforeach;
+	            endif;
+	            ?>
                 <td class="align-right">
-                    <?php echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) ); ?>
+	                <?php echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) ); ?>
                 </td>
             </tr>
         <?php } ?>
@@ -285,12 +306,16 @@
             </tr>
         <?php } ?>
         <!-- Tax -->
-        <?php if( $this->template_settings['show_tax'] ) { ?>
-            <tr class="tax">
-                <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%"><?php _e( 'Tax', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_tax(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
-            </tr>
+        <?php if( $this->template_settings['show_tax'] && wc_tax_enabled() ) {
+	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>
+		        <tr>
+			        <td colspan="<?php echo $colspan; ?>"></td>
+			        <td width="25%">
+				        <?php printf( __( 'Tax %s', true, $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
+			        </td>
+			        <td width="25%" class="align-right"><?php echo $tax->formatted_amount; ?></td>
+		        </tr>
+	        <?php endforeach; ?>
         <?php } ?>
         <!-- Total -->
         <tr>

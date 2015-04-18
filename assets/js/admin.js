@@ -1,9 +1,9 @@
 var Settings = {};
 
 Settings.removeCompanyLogo = function () {
-    var elem = document.getElementById('company-logo-wrapper');
+    var elem = document.getElementById('bewpi-company-logo-wrapper');
     elem.parentNode.removeChild(elem);
-    document.getElementById('company-logo-value').value = '';
+    document.getElementById('bewpi-company-logo-value').value = '';
 };
 
 Settings.previewInvoice = function (data) {
@@ -17,4 +17,9 @@ Settings.previewInvoice = function (data) {
     xhr.onloadend = function () {
         // done
     };
+};
+
+Settings.enableDisableNextInvoiceNumbering = function (elem) {
+    var nextInvoiceNumberInput = document.getElementById('bewpi-next-invoice-number');
+    ( elem.checked ) ? nextInvoiceNumberInput.disabled = false : nextInvoiceNumberInput.disabled = true;
 };

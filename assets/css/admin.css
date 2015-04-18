@@ -3,26 +3,30 @@
 .be_woocommerce_pdf_invoices_settings_form textarea {
     width: 348px;
 }
-#company-logo-wrapper {
+.be_woocommerce_pdf_invoices_settings_form input[type="number"],
+#bewpi-color-theme {
+    width: 70px;
+}
+#bewpi-company-logo-wrapper {
     margin-top: 10px;
     position: relative;
-    width: 300px;
+    display: inline-block;
     padding: 21px 21px 0 0;
 }
-#company-logo {
+#bewpi-company-logo {
     position: relative;
     width: inherit;
 }
-#company-logo-wrapper:hover #delete{
+#bewpi-company-logo-wrapper:hover #bewpi-company-logo-delete{
     display: block;
 }
-#delete{
+#bewpi-company-logo-delete{
     position: absolute;
     top: 0;
     right: 0;
     display: none;
-    height: 30px;
-    width: 30px;
+    height: 25px;
+    width: 25px;
     cursor: pointer;
 }
 .wpi-admin-order-create-invoice-btn {
@@ -56,4 +60,24 @@
 }
 .invoice-btn {
     margin-right: 3px;
+}
+#footer-left #footer-thankyou {
+    font-style: normal !important;
+}
+.bewpi-visible-columns-option-title,
+.bewpi-reset-counter-option-title,
+.bewpi-reset-counter-yearly-option-title,
+.bewpi-customer-notes-option-title,
+.bewpi-new-order-option-title,
+.bewpi-email-it-in-option-title {
+    display: inline-block;
+}
+.bewpi-visible-columns-option-title,
+.bewpi-customer-notes-option-title {
+    /*font-weight: bold;*/
+}
+.bewpi-notes {
+    font-size: 13px;
+    font-style: italic;
+    margin-top: 3px;
 }

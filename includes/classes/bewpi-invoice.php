@@ -47,9 +47,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    protected $footer;
 
         /**
-         * Initialize invoice with WooCommerce order and plugin textdomain.
+         * Initialize invoice with WooCommerce order
          * @param string $order
-         * @param $textdomain
          */
         public function __construct( $order_id ) {
             parent::__construct();
@@ -69,7 +68,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         private function init() {
 	        $this->number               = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
 	        $this->year                 = get_post_meta( $this->order->id, '_bewpi_invoice_year', true );
-	        $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->formatted_number . '.pdf';
+	        $this->file                 = $this->formatted_number . '.pdf';
+	        $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->file;
 	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
 
@@ -124,7 +124,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         }
 
         /**
-         * Returns MPDF footer.
+         * The footer for the invoice.
          * @return string
          */
         protected function get_footer() {
@@ -166,13 +166,21 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             return $html;
         }
 
+	    /**
+	     * Calculates the number of cols
+	     * @return int
+	     */
 	    public function get_colspan() {
 		    $colspan = 2;
 		    if ( $this->template_options['bewpi_show_sku'] ) $colspan ++;
-		    if ( $this->template_options['bewpi_show_tax'] ) $colspan ++;
+		    if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) $colspan ++;
 		    return $colspan;
 	    }
 
+	    /**
+	     * Reset invoice number counter if user did check the checkbox.
+	     * @return bool
+	     */
 	    private function reset_counter() {
 		    // Check if the user resetted the invoice counter and set the number.
 		    if ( $this->template_options['bewpi_reset_counter'] ) {
@@ -185,6 +193,10 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    return false;
 	    }
 
+	    /**
+	     * Reset the invoice number counter if user did check the checkbox.
+	     * @return bool
+	     */
 	    private function new_year_reset() {
 		    if ( $this->template_options['bewpi_reset_counter_yearly'] ) {
 			    $last_year = ( isset( $this->template_options['bewpi_last_invoiced_year'] ) ) ? $this->template_options['bewpi_last_invoiced_year'] : '';
@@ -202,6 +214,11 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    return false;
 	    }
 
+	    /**
+	     * Generates and saves the invoice to the uploads folder.
+	     * @param $dest
+	     * @return string
+	     */
 	    public function save( $dest ) {
 		    if ( $this->exists() ) die( 'Invoice already exists. First delete invoice.' );
 
@@ -232,11 +249,18 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    return $this->filename;
 	    }
 
+	    /**
+	     * View or download the invoice.
+	     * @param $download
+	     */
 	    public function view( $download ) {
 		    if ( !$this->exists() ) die( 'No invoice found. First create invoice.' );
 		    parent::view( $download );
 	    }
 
+	    /**
+	     * Delete all invoice data from database and the file.
+	     */
 	    public function delete() {
 		    delete_post_meta( $this->order->id, '_bewpi_invoice_number' );
 		    delete_post_meta( $this->order->id, '_bewpi_formatted_invoice_number' );
@@ -245,6 +269,20 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 
 		    if ( $this->exists() )
 		        parent::delete();
+	    }
+
+	    /**
+	     * @param $order_status
+	     * Customer is only allowed to download invoice if the status of the order matches the email type option.
+	     * @return bool
+	     */
+	    public function is_download_allowed( $order_status ) {
+		    $allowed = false;
+		    if ( $this->general_options['bewpi_email_type'] === "customer_processing_order"
+		        && $order_status === "wc-processing" || $order_status === "wc-completed" ) {
+			    $allowed = true;
+		    }
+		    return $allowed;
 	    }
     }
 }

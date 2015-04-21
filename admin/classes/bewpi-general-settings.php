@@ -47,6 +47,10 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	        update_option( $this->settings_key, $options );
         }
 
+	    /**
+	     * Get all default values from the settings array.
+	     * @return array
+	     */
 	    private function get_defaults() {
 		    $defaults = array();
 		    foreach ( $this->the_settings() as $setting ) :
@@ -68,6 +72,10 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	        $this->add_settings_fields();
         }
 
+	    /**
+	     * Settings array
+	     * @return array
+	     */
 	    private function the_settings() {
 		    $settings = array(
 			    // General section
@@ -136,6 +144,9 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		    return $settings;
 	    }
 
+	    /**
+	     * Adds all the different settings sections
+	     */
 	    private function add_settings_sections() {
 		    add_settings_section(
 			    'email',
@@ -154,6 +165,9 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	    public function email_desc_callback() { }
 	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', $this->textdomain ), '<a href="https://emailitin.com">Email It In</a>' ); }
 
+	    /**
+	     * Adds settings fields
+	     */
 	    private function add_settings_fields() {
 		    $the_settings = $this->the_settings();
 		    foreach ( $the_settings as $setting ) :
@@ -168,6 +182,18 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		    endforeach;
 	    }
 
+	    /**
+	     * Show all settings notices.
+	     */
+	    public function show_settings_notices() {
+		    settings_errors( $this->settings_key );
+	    }
+
+	    /**
+	     * Validates all settings
+	     * @param $input
+	     * @return mixed|void
+	     */
 	    public function validate_input( $input ) {
 		    $output = array();
 		    foreach ( $input as $key => $value ) :
@@ -184,12 +210,5 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 
 		    return apply_filters( 'validate_input', $output, $input );
 	    }
-
-        /**
-         * Show all settings notices.
-         */
-        public function show_settings_notices() {
-            settings_errors( $this->settings_key );
-        }
     }
 }

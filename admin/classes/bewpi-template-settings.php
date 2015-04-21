@@ -48,6 +48,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	        update_option( $this->settings_key, $options );
         }
 
+	    /**
+	     * Gets all default settings values from the settings array.
+	     * @return array
+	     */
 	    private function get_defaults() {
 		    $defaults = array();
 		    foreach ( $this->the_settings() as $setting ) :
@@ -69,6 +73,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	        $this->add_settings_fields();
         }
 
+	    /**
+	     * The settings array.
+	     * @return array
+	     */
 	    private function the_settings() {
 		    $settings = array(
 			    // General section
@@ -376,6 +384,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    return $settings;
 	    }
 
+	    /**
+	     * Adds all the different settings sections.
+	     */
 	    private function add_settings_sections() {
 		    add_settings_section(
 			    'general',
@@ -415,6 +426,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	    public function footer_desc_callback() { _e( 'The footer will be visible on every page. ' . $this->get_allowed_tags_str(), $this->textdomain ); }
 	    public function visible_columns_desc_callback() { _e( 'Enable or disable the columns.', $this->textdomain ); }
 
+	    /**
+	     * Adds all settings fields.
+	     */
 	    private function add_settings_fields() {
 		    $the_settings = $this->the_settings();
 		    foreach ( $the_settings as $setting ) :
@@ -429,6 +443,18 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    endforeach;
 	    }
 
+	    /**
+	     * Show all settings notices.
+	     */
+	    public function show_settings_notices() {
+		    settings_errors( $this->settings_key );
+	    }
+
+	    /**
+	     * @param $input
+	     * Validate all settings
+	     * @return mixed|void
+	     */
 	    public function validate_input( $input ) {
 		    $output = array();
 		    foreach( $input as $key => $value ) :
@@ -439,10 +465,45 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    endforeach;
 
 		    // File upload -- Company logo
-		    $output = $this->upload_file( $input );
+		    $output['bewpi_company_logo'] = $input['bewpi_company_logo'];
+		    if ( isset( $_FILES['bewpi_company_logo'] ) && $_FILES['bewpi_company_logo']['error'] == 0 ) {
+			    $file = $_FILES['bewpi_company_logo'];
+			    if ( $file['size'] <= 200000 ) {
+				    $override = array( 'test_form' => false );
+				    $company_logo = wp_handle_upload( $file, $override );
+				    $validate_file_code = validate_file( $company_logo['url'] );
+				    if ( $validate_file_code === 0 ) {
+					    $output['bewpi_company_logo'] = $company_logo['url'];
+				    } else {
+					    switch ( $validate_file_code ) {
+						    case 1:
+							    add_settings_error(
+								    esc_attr( $this->settings_key ),
+								    'file-invalid-2',
+								    __( 'File is invalid and contains either \'..\' or \'./\'.', $this->textdomain )
+							    );
+							    break;
+						    case 2:
+							    add_settings_error(
+								    esc_attr( $this->settings_key ),
+								    'file-invalid-3',
+								    __( 'File is invalid and contains \':\' after the first character.', $this->textdomain )
+							    );
+							    break;
+					    }
+				    }
+			    } else {
+				    add_settings_error(
+					    esc_attr( $this->settings_key ),
+					    'file-invalid-1',
+					    __( 'File should be less then 2MB.', $this->textdomain )
+				    );
+			    }
+		    } else if ( isset( $_POST['bewpi_company_logo'] ) && !empty( $_POST['bewpi_company_logo'] ) ) {
+			    $output['bewpi_company_logo'] = $_POST['bewpi_company_logo'];
+		    }
 
 		    // Invoice number
-		    // $output['bewpi_reset_counter'] = 0;
 		    if ( !isset( $input['bewpi_next_invoice_number'] ) ) {
 			    // Reset the next invoice number so it's visible in the disabled input field.
 			    $options = get_option( $this->settings_key );
@@ -452,53 +513,5 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    // Return the array processing any additional functions filtered by this action
 		    return apply_filters( 'validate_input', $output, $input );
 	    }
-
-	    public function upload_file( $input ) {
-		    if ( $_FILES['bewpi_company_logo']['error'] == 0 ) {
-			    $file = $_FILES['bewpi_company_logo'];
-			    if ( $file['size'] <= 200000 ) {
-				    $override = array( 'test_form' => false );
-				    $company_logo = wp_handle_upload( $file, $override );
-				    $validate_file_code = validate_file( $company_logo['url'] );
-				    if ( $validate_file_code == 0 ) {
-					    $input['bewpi_company_logo'] = $company_logo['url'];
-				    } else {
-					    switch ( $validate_file_code ) {
-						    case 1:
-							    add_settings_error(
-								    esc_attr( $input['settings_key'] ),
-								    'file-invalid-1',
-								    __( 'File is invalid and contains either \'..\' or \'./\'.', $this->textdomain )
-							    );
-							    break;
-						    case 2:
-							    add_settings_error(
-								    esc_attr( $input['settings_key'] ),
-								    'file-invalid-2',
-								    __( 'File is invalid and contains \':\' after the first character.', $this->textdomain )
-							    );
-							    break;
-					    }
-				    }
-			    } else {
-				    add_settings_error(
-					    esc_attr( $input['settings_key'] ),
-					    'file-invalid-3',
-					    __( 'Please upload image with extension jpg, jpeg or png.', $this->textdomain )
-				    );
-			    }
-		    } else if ( !empty( $_POST['bewpi_company_logo'] ) ) {
-			    $input['bewpi_company_logo'] = $_POST['bewpi_company_logo'];
-		    }
-
-		    return $input;
-	    }
-
-        /**
-         * Show all settings notices.
-         */
-        public function show_settings_notices() {
-            settings_errors( $this->settings_key );
-        }
     }
 }

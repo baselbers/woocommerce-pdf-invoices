@@ -56,6 +56,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
              * Attach invoice to a specific WooCommerce email
              */
 			add_filter( 'woocommerce_email_attachments', array( &$this, 'attach_invoice_to_email' ), 99, 3 );
+
+			/**
+			 * AJAX calls to download invoice
+			 */
+			add_action( 'wp_ajax_bewpi_download_invoice', array( &$this, 'bewpi_download_invoice' ) );
+			add_action( 'wp_ajax_nopriv_bewpi_download_invoice', array( &$this, 'bewpi_download_invoice' ) );
 		}
 
 		/**
@@ -63,10 +69,19 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function init() {
 
+			/**
+			 * Init invoice actions to view, delete or save invoice.
+			 */
 			$this->invoice_actions();
 
+			/**
+			 * Loads the global textdomain for the plugin.
+			 */
 			$this->load_textdomain();
 
+			/**
+			 * Creates invoices folder in the uploads dir.
+			 */
 			$this->create_invoices_dir();
 
 			/**
@@ -89,14 +104,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 */
 			add_action( 'add_meta_boxes', array( &$this, 'add_meta_box_to_order_page' ) );
 
+			/**
+			 * Adds a download link for the pdf invoice on the my account page
+			 */
+			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_download_pdf_action' ), 10, 2 );
 		}
 
         /**
          * Callback to sniff for specific plugin actions to view, create or delete invoice.
          */
         private function invoice_actions() {
-            if( isset( $_GET['wpi_action'] ) && isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) && isset( $_GET['nonce'] ) ) {
-                $action = $_GET['wpi_action'];
+            if( isset( $_GET['bewpi_action'] ) && isset( $_GET['post'] ) && is_numeric( $_GET['post'] ) && isset( $_GET['nonce'] ) ) {
+                $action = $_GET['bewpi_action'];
                 $order_id = $_GET['post'];
                 $nonce = $_REQUEST["nonce"];
 
@@ -106,9 +125,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                     die( 'Invalid order ID' );
                 } else {
 
-                    $invoice = new BEWPI_Invoice( $order_id, $this->textdomain );
+                    $invoice = new BEWPI_Invoice( $order_id );
 
-                    switch( $_GET['wpi_action'] ) {
+                    switch( $_GET['bewpi_action'] ) {
                         case "view":
                             $invoice->view( true );
                             break;
@@ -184,6 +203,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			?>
 			<script type="text/javascript">
 				window.onload = function () {
+					// Change footer text into rate text for WPI.
 					document.getElementById("footer-thankyou").innerHTML = "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a href='https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform'>★★★★★</a> rating. A huge thank you in advance!";
 					document.getElementById("footer-upgrade").innerHTML = "Version <?php echo BEWPI_VERSION; ?>";
 				};
@@ -231,7 +251,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				|| $general_options['bewpi_new_order']
 				   && $status == "new_order" ) :
 
-				$invoice = new BEWPI_Invoice( $order->id, $this->textdomain );
+				$invoice = new BEWPI_Invoice( $order->id );
 
 				if ( !$invoice->exists() ) :
 					$filename = $invoice->save( "F" );
@@ -264,7 +284,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $order
          */
 		public function woocommerce_order_page_action_view_invoice( $order ) {
-            $invoice = new BEWPI_Invoice( $order->id, $this->textdomain );
+            $invoice = new BEWPI_Invoice( $order->id );
             if( $invoice->exists() )
                 $this->show_invoice_button( 'View invoice', $order->id, 'view', '', array('class="button tips wpi-admin-order-create-invoice-btn"') );
 		}
@@ -298,7 +318,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          */
         private function show_invoice_button( $title, $order_id, $wpi_action, $btn_title, $arr = array() ) {
             $title = __( $title, $this->textdomain );
-            $href = admin_url() . 'post.php?post=' . $order_id . '&action=edit&wpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
+            $href = admin_url() . 'post.php?post=' . $order_id . '&action=edit&bewpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
             $btn_title = __( $btn_title, $this->textdomain );
 
             $attr = '';
@@ -315,7 +335,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $post
          */
 		public function woocommerce_order_details_page_meta_box_create_invoice( $post ) {
-            $invoice = new BEWPI_Invoice( $post->ID, $this->textdomain );
+            $invoice = new BEWPI_Invoice( $post->ID );
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
@@ -324,6 +344,41 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             } else {
                 $this->show_invoice_button( __( 'Create invoice', $this->textdomain ), $post->ID, 'create', __( 'Create', $this->textdomain ), array('class="invoice-btn"') );
             }
+		}
+
+		/**
+		 * AJAX action to download invoice
+		 */
+		public function bewpi_download_invoice() {
+			if( isset( $_GET['action'] ) && isset( $_GET['order_id'] ) && isset( $_GET['nonce'] ) ) {
+				$action = $_GET['action'];
+				$order_id = $_GET['order_id'];
+				$nonce = $_REQUEST["nonce"];
+
+				if ( !wp_verify_nonce( $nonce, $action ) ) {
+					die( 'Invalid request' );
+				} else if ( empty( $order_id ) ) {
+					die( 'Invalid order ID' );
+				} else {
+					$invoice = new BEWPI_Invoice( $order_id );
+					$invoice->view( true );
+				}
+			}
+		}
+
+		/**
+		 * Display download link on My Account page
+		 */
+		public function add_my_account_download_pdf_action( $actions, $order ) {
+			$invoice = new BEWPI_Invoice( $order->id );
+			if ( $invoice->exists() && $invoice->is_download_allowed( $order->post_status ) ) {
+				$url = admin_url( 'admin-ajax.php?action=bewpi_download_invoice&order_id=' . $order->id . '&nonce=' . wp_create_nonce( 'bewpi_download_invoice' ) );
+				$actions['invoice'] = array(
+					'url'  => $url,
+					'name' => __( 'Download invoice (PDF)', $this->textdomain )
+				);
+			}
+			return $actions;
 		}
 	}
 }

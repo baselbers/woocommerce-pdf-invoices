@@ -64,6 +64,16 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Changelog ==
 
+= 2.2.0 - April 8, 2015 =
+
+- Added: Download invoice button on My account page
+- Added: Norwegian language files
+- Added: Settings sections into settings pages
+- Added: Checkbox to reset invoice number counter
+- Fixed: Updating plugin removed all invoices -- Invoices into uploads dir
+- Fixed: Order number format
+- Improved: Code -- Refactored
+
 = 2.1.0 - April 8, 2015 =
 
 - Added: Variable products attributes on template

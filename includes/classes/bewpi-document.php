@@ -14,28 +14,40 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
         protected $textdomain = 'be-woocommerce-pdf-invoices';
 
         /**
-         * All settings from general tab.
+         * All options from general tab.
          * @var array
          */
         protected $general_options;
 
         /**
-         * All settings from template tab.
+         * All options from template tab.
          * @var array
          */
         protected $template_options;
 
+	    /**
+	     * Name of the file.
+	     * @var
+	     */
+	    protected $file;
+
         /**
-         * Path to invoice in tmp dir.
+         * Full path to document.
          * @var
          */
         protected $filename;
 
+	    /**
+	     * Title of the document.
+	     * @var string
+	     */
 	    protected $title;
 
+	    /**
+	     * Author of the document.
+	     * @var
+	     */
 	    protected $author;
-
-	    protected $file;
 
         /**
          * @param $order
@@ -88,7 +100,6 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
 		        header('Content-Transfer-Encoding: binary');
 		        header('Accept-Ranges: bytes');
 	        }
-
 	        @readfile( $this->filename );
 	        exit;
         }

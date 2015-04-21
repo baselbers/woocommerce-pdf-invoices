@@ -194,7 +194,7 @@
             ?>
             <th class="align-left"><?php _e( 'Quantity', $this->textdomain ); ?></th>
             <th class="align-left"><?php _e( 'Unit price', $this->textdomain ); ?></th>
-	        <?php if ( $this->template_options['bewpi_show_tax'] ) {
+	        <?php if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
 		        echo '<th class="align-left">' . __( "Tax", $this->textdomain ) . '</th>';
 	        } ?>
             <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>

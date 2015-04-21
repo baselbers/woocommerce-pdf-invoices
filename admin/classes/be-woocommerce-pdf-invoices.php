@@ -155,7 +155,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Creates invoices dir in uploads folder
          */
         private function create_invoices_dir() {
-            wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' );
+            if ( !wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' ) )
+		        copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date( 'Y' ) . '/.htaccess' );
+		        copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date( 'Y' ) . '/index.php' );
         }
 
         /**

@@ -120,10 +120,10 @@
             border: 1px solid white;
         }
         .number, .grand-total {
-            color: <?php echo $this->template_settings['color_theme']; ?>;
+            color: <?php echo $this->template_options['bewpi_color_theme']; ?>;
         }
         .foot td.border {
-            border-bottom: 8px solid <?php echo $this->template_settings['color_theme']; ?>;
+            border-bottom: 8px solid <?php echo $this->template_options['bewpi_color_theme']; ?>;
         }
         /* End change colors */
         .space td {
@@ -137,14 +137,14 @@
         <tbody>
         <tr>
             <td class="logo">
-                <?php if( !empty( $this->template_settings['company_logo'] ) ) { ?>
-                    <img class="company-logo" src="<?php echo $this->template_settings['company_logo']; ?>"/>
+                <?php if( !empty( $this->template_options['bewpi_company_logo'] ) ) { ?>
+                    <img class="company-logo" src="<?php echo $this->template_options['bewpi_company_logo']; ?>"/>
                 <?php } else { ?>
-                    <h1 class="company-logo"><?php echo $this->template_settings['company_name']; ?></h1>
+                    <h1 class="company-logo"><?php echo $this->template_options['bewpi_company_name']; ?></h1>
                 <?php } ?>
             </td>
             <td class="info">
-                <?php echo nl2br( $this->template_settings['company_address'] ); ?>
+                <?php echo nl2br( $this->template_options['bewpi_company_address'] ); ?>
             </td>
         </tr>
         </tbody>
@@ -153,11 +153,11 @@
         <tbody>
         <tr>
             <td>
-                <b><? _e( 'Invoice to', $this->textdomain ); ?></b><br/>
+                <b><?php _e( 'Invoice to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_billing_address(); ?>
             </td>
             <td class="address">
-                <b><? _e( 'Ship to', $this->textdomain ); ?></b><br/>
+                <b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_shipping_address(); ?>
             </td>
         </tr>
@@ -168,15 +168,15 @@
         <tr>
             <td class="invoice-details">
                 <h1 class="title"><?php _e( 'Invoice', $this->textdomain ); ?></h1>
-                <span class="number"><?php echo $this->get_formatted_invoice_number(); ?></span><br/>
+                <span class="number"><?php echo $this->get_formatted_number(); ?></span><br/>
                 <span class="small-font"><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
                 <span class="small-font"><?php printf( __( 'Order Number %s', $this->textdomain ), $this->order->get_order_number() ); ?></span><br/>
                 <span class="small-font"><?php printf( __( 'Order Date %s', $this->textdomain ), $this->get_formatted_order_date() ); ?></span><br/>
             </td>
-            <td class="total-amount" bgcolor="<?php echo $this->template_settings['color_theme']; ?>">
+            <td class="total-amount" bgcolor="<?php echo $this->template_options['bewpi_color_theme']; ?>">
 				<span>
 					<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
-					<p class="small-font"><?php echo $this->template_settings['intro_text']; ?></p>
+					<p class="small-font"><?php echo $this->template_options['bewpi_intro_text']; ?></p>
 				</span>
             </td>
         </tr>
@@ -188,13 +188,13 @@
             <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
             <?php
             $colspan = $this->get_colspan();
-            if( $this->template_settings['show_sku'] ) {
+            if( $this->template_options['bewpi_show_sku'] ) {
                 echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
             }
             ?>
             <th class="align-left"><?php _e( 'Quantity', $this->textdomain ); ?></th>
             <th class="align-left"><?php _e( 'Unit price', $this->textdomain ); ?></th>
-	        <?php if ( $this->template_settings['show_tax'] ) {
+	        <?php if ( $this->template_options['bewpi_show_tax'] ) {
 		        echo '<th class="align-left">' . __( "Tax", $this->textdomain ) . '</th>';
 	        } ?>
             <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
@@ -245,7 +245,7 @@
                     }
                     ?>
                 </td>
-	                <?php if( $this->template_settings['show_sku'] ) echo '<td>' . $product->get_sku() . '</td>'; ?>
+	                <?php if( $this->template_options['bewpi_show_sku'] ) echo '<td>' . $product->get_sku() . '</td>'; ?>
                 <td>
 	                <?php echo $item['qty']; ?>
                 </td>
@@ -253,7 +253,7 @@
 	                <?php echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
                 </td>
 	            <?php
-	            if ( empty( $legacy_order ) && wc_tax_enabled() && $this->template_settings['show_tax'] ) :
+	            if ( empty( $legacy_order ) && wc_tax_enabled() && $this->template_options['bewpi_show_tax'] ) :
 		            $line_tax_data = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
 		            $tax_data      = maybe_unserialize( $line_tax_data );
 
@@ -282,7 +282,7 @@
             <td colspan="2"></td>
         </tr>
         <!-- Discount -->
-        <?php if( $this->template_settings['show_discount'] && $this->order->get_total_discount != 0 ) { ?>
+        <?php if( $this->template_options['bewpi_show_discount'] && $this->order->get_total_discount != 0 ) { ?>
             <tr class="discount after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Discount', $this->textdomain ); ?></td>
@@ -290,7 +290,7 @@
             </tr>
         <?php } ?>
         <!-- Shipping -->
-        <?php if( $this->template_settings['show_shipping'] ) { ?>
+        <?php if( $this->template_options['bewpi_show_shipping'] ) { ?>
             <tr class="shipping after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Shipping', $this->textdomain ); ?></td>
@@ -298,7 +298,7 @@
             </tr>
         <?php } ?>
         <!-- Subtotal -->
-        <?php if( $this->template_settings['show_subtotal'] ) { ?>
+        <?php if( $this->template_options['bewpi_show_subtotal'] ) { ?>
             <tr class="subtotal after-products">
                 <td colspan="<?php echo $colspan; ?>"></td>
                 <td width="25%"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
@@ -306,7 +306,7 @@
             </tr>
         <?php } ?>
         <!-- Tax -->
-        <?php if( $this->template_settings['show_tax'] && wc_tax_enabled() ) {
+        <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
 	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>
 		        <tr>
 			        <td colspan="<?php echo $colspan; ?>"></td>

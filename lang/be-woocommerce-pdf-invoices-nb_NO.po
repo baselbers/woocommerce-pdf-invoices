@@ -1,0 +1,370 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce PDF Invoices\n"
+"POT-Creation-Date: 2015-03-30 15:38+0100\n"
+"PO-Revision-Date: 2015-04-09 12:59+0100\n"
+"Last-Translator: Mosaika.fr <bonjour@mosaika.fr>\n"
+"Language-Team: Anders Sorensen <anders@zorensen.no>\n"
+"Language: nb_NO\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.5\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: admin/classes/woocommerce-pdf-invoices.php:152
+msgid "General"
+msgstr "Generelt"
+
+#: admin/classes/woocommerce-pdf-invoices.php:153
+#: admin/classes/wpi-template-settings.php:104
+msgid "Template"
+msgstr "Mal"
+
+#: admin/classes/woocommerce-pdf-invoices.php:167
+msgid "Invoices"
+msgstr "Fakturaer"
+
+#: admin/classes/woocommerce-pdf-invoices.php:262
+msgid "PDF Invoice"
+msgstr "PDF Faktura"
+
+#: admin/classes/wpi-general-settings.php:74
+msgid "General Settings"
+msgstr "Generelle innstillinger"
+
+#: admin/classes/wpi-general-settings.php:75
+msgid "Attach to Email"
+msgstr "Legg ved e-post"
+
+#: admin/classes/wpi-general-settings.php:79
+msgid "Processing order"
+msgstr "Behandler bestilling"
+
+#: admin/classes/wpi-general-settings.php:83
+msgid "Completed order"
+msgstr "Fullført bestilling"
+
+#: admin/classes/wpi-general-settings.php:87
+msgid "Customer invoice"
+msgstr "Kundefaktura"
+
+#: admin/classes/wpi-general-settings.php:91
+msgid "Attach to New order Email"
+msgstr "Legg til ny bestilling e-post"
+
+#: admin/classes/wpi-general-settings.php:92
+msgid "Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive"
+msgstr ""
+"Send automatisk faktura til Google Drive, Egnyte, Dropbox eller OneDrive"
+
+#: admin/classes/wpi-general-settings.php:93
+msgid "Email It In account"
+msgstr "Email It In konto"
+
+#: admin/classes/wpi-general-settings.php:133
+msgid "For bookkeeping purposes."
+msgstr "For regnskapsmessige årsaker."
+
+#: admin/classes/wpi-general-settings.php:146
+#, php-format
+msgid "Signup at %s and enter your account below."
+msgstr "Registrer deg på %s og skriv inn kontoen din under."
+
+#: admin/classes/wpi-general-settings.php:159
+#, php-format
+msgid "Enter your %s account."
+msgstr "Skriv inn din %s konto."
+
+#: admin/classes/wpi-general-settings.php:184
+msgid "Invalid type of Email."
+msgstr "Ugyldig e-post."
+
+#: admin/classes/wpi-general-settings.php:197
+#: admin/classes/wpi-general-settings.php:210
+#: admin/classes/wpi-template-settings.php:630
+msgid "Please don't try to change the values."
+msgstr "Vennligst ikke endre disse verdiene."
+
+#: admin/classes/wpi-general-settings.php:223
+msgid "Invalid Email address."
+msgstr "Ugyldig e-post adresse."
+
+#: admin/classes/wpi-settings.php:92
+msgid "Allowed tags: "
+msgstr "Tillatte koder: "
+
+#: admin/classes/wpi-template-settings.php:103
+msgid "Template Settings"
+msgstr "Malinnstillinger"
+
+#: admin/classes/wpi-template-settings.php:105
+msgid "Color theme"
+msgstr "Fargetema"
+
+#: admin/classes/wpi-template-settings.php:106
+msgid "Company name"
+msgstr "Firmanavn"
+
+#: admin/classes/wpi-template-settings.php:107
+msgid "Company logo"
+msgstr "Firmalogo"
+
+#: admin/classes/wpi-template-settings.php:108
+msgid "Intro text"
+msgstr "Introtekst"
+
+#: admin/classes/wpi-template-settings.php:109
+msgid "Company address"
+msgstr "Firmaadresse"
+
+#: admin/classes/wpi-template-settings.php:110
+msgid "Company details"
+msgstr "Firmadetaljer"
+
+#: admin/classes/wpi-template-settings.php:111
+msgid "Terms & conditions, policies etc."
+msgstr "Betingelser, vilkår etc."
+
+#: admin/classes/wpi-template-settings.php:112
+msgid "Invoice number type"
+msgstr "Fakturanummer -type"
+
+#: admin/classes/wpi-template-settings.php:113
+msgid "Next invoice number"
+msgstr "Neste fakturanummer"
+
+#: admin/classes/wpi-template-settings.php:114
+msgid "Number of digits"
+msgstr "Ugyldig fakturanummer tall."
+
+#: admin/classes/wpi-template-settings.php:115
+msgid "Invoice number prefix"
+msgstr "Fakturanummer prefiks"
+
+#: admin/classes/wpi-template-settings.php:116
+msgid "Invoice number suffix"
+msgstr "Fakturanummer suffiks"
+
+#: admin/classes/wpi-template-settings.php:117
+msgid "Invoice number format"
+msgstr "Fakturanummer -format"
+
+#: admin/classes/wpi-template-settings.php:118
+msgid "Reset on 1st January"
+msgstr "Tilbakestill 1. Januar"
+
+#: admin/classes/wpi-template-settings.php:119
+msgid "Invoice date format"
+msgstr "Faktura datoformat"
+
+#: admin/classes/wpi-template-settings.php:120
+msgid "Show SKU"
+msgstr "Vis SKU"
+
+#: admin/classes/wpi-template-settings.php:121
+msgid "Show discount"
+msgstr "Vis rabatt"
+
+#: admin/classes/wpi-template-settings.php:122
+msgid "Show subtotal"
+msgstr "Vis subtotal"
+
+#: admin/classes/wpi-template-settings.php:123
+msgid "Show tax"
+msgstr "Vis MVA"
+
+#: admin/classes/wpi-template-settings.php:124
+msgid "Show shipping"
+msgstr "Vis frakt"
+
+#: admin/classes/wpi-template-settings.php:125
+msgid "Show customer notes"
+msgstr "Vis kundenotat"
+
+#: admin/classes/wpi-template-settings.php:163
+msgid "Color theme of the invoice."
+msgstr "Fargetema på faktura"
+
+#: admin/classes/wpi-template-settings.php:186
+msgid ""
+"Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png."
+msgstr ""
+"Vennligst last opp et bilde mindre enn 200kb og være sikker på at det er er "
+"jpeg, jpg eller png."
+
+#: admin/classes/wpi-template-settings.php:197
+msgid "Remove logo"
+msgstr "Fjern logo"
+
+#: admin/classes/wpi-template-settings.php:352
+msgid "Invoice number to use for next invoice."
+msgstr "Fakturanummer å bruke for neste faktura"
+
+#: admin/classes/wpi-template-settings.php:368
+msgid "Number of zero digits."
+msgstr "Antall nullsiffer."
+
+#: admin/classes/wpi-template-settings.php:382
+msgid "Prefix text for the invoice number. Not required."
+msgstr "Prefiks tekst for fakturanummer. Ikke obligatorisk."
+
+#: admin/classes/wpi-template-settings.php:396
+msgid "Suffix text for the invoice number. Not required."
+msgstr "Suffiks tekst for fakturanummer. Ikke obligatorisk."
+
+#: admin/classes/wpi-template-settings.php:410
+msgid ""
+"Use [prefix], [suffix] and [number] as placeholders. [number] is required."
+msgstr ""
+"Bruk [prefix], [suffix] og [number] som plassholdere. [number] er "
+"obligatorisk."
+
+#: admin/classes/wpi-template-settings.php:424
+msgid "Reset on the first of January."
+msgstr "Tilbakestill 1. Januar."
+
+#: admin/classes/wpi-template-settings.php:438
+#, php-format
+msgid "%sFormat%s of the date. Examples: %s or %s."
+msgstr "%sFormat%s på dato. Eksempler: %s eller %s."
+
+#: admin/classes/wpi-template-settings.php:485
+msgid "Invalid template."
+msgstr "Ugyldig mal."
+
+#: admin/classes/wpi-template-settings.php:500
+msgid "Invalid color theme code."
+msgstr "Ugyldig fargetema -kode."
+
+#: admin/classes/wpi-template-settings.php:513
+msgid "Invalid company name."
+msgstr "Ugyldig firmanavn."
+
+#: admin/classes/wpi-template-settings.php:541
+msgid "Invalid input into one of the textarea's."
+msgstr "Ugyldig verdi i en av tekstområdene."
+
+#: admin/classes/wpi-template-settings.php:553
+msgid "Invalid (next) invoice number."
+msgstr "Ugyldig (neste) fakturanummer."
+
+#: admin/classes/wpi-template-settings.php:574
+msgid "Invalid invoice number digits."
+msgstr "Ugyldig fakturanummer tall."
+
+#: admin/classes/wpi-template-settings.php:596
+msgid "The [number] placeholder is required as invoice number format."
+msgstr "[number] plassholder er obligatorisk som fakturanummer -format."
+
+#: admin/classes/wpi-template-settings.php:603
+msgid "Invalid invoice number format."
+msgstr "Ugyldig fakturanummer -format."
+
+#: admin/classes/wpi-template-settings.php:641
+msgid "Invalid date format."
+msgstr "Ugyldig datoformat."
+
+#: admin/classes/wpi-template-settings.php:670
+msgid "File is invalid and contains either '..' or './'."
+msgstr "Filen er ugyldig og inneholder '..' eller './'."
+
+#: admin/classes/wpi-template-settings.php:677
+msgid "File is invalid and contains ':' after the first character."
+msgstr "Filen er ugyldig og inneholder ':' etter første bokstav."
+
+#: admin/classes/wpi-template-settings.php:686
+msgid "Please upload image with extension jpg, jpeg or png."
+msgstr "Vennligst last opp bilde i .jpg, .jpeg eller .png -format."
+
+#: includes/classes/wpi-invoice.php:340
+msgid "Customer note"
+msgstr "Kundenotat: "
+
+#: includes/views/templates/invoice-micro.php:156
+msgid "Invoice"
+msgstr "Faktura"
+
+#: includes/views/templates/invoice-micro.php:174
+msgid "Description"
+msgstr "Produkt"
+
+#: includes/views/templates/invoice-micro.php:178
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/views/templates/invoice-micro.php:182
+msgid "Quantity"
+msgstr "Ant"
+
+#: includes/views/templates/invoice-micro.php:183
+msgid "Unit price"
+msgstr "Pris"
+
+#: includes/views/templates/invoice-micro.php:184
+#: includes/views/templates/invoice-micro.php:240
+msgid "Total"
+msgstr "Total"
+
+#: includes/views/templates/invoice-micro.php:209
+msgid "Discount"
+msgstr "Rabatt"
+
+#: includes/views/templates/invoice-micro.php:217
+msgid "Shipping"
+msgstr "Frakt"
+
+#: includes/views/templates/invoice-micro.php:225
+msgid "Subtotal"
+msgstr "Subtotal"
+
+#: includes/views/templates/invoice-micro.php:233
+msgid "Tax"
+msgstr "MVA"
+
+#~ msgid "Signup at %s and enter your account beyond."
+#~ msgstr "Meld je aan op %s en vul je account onderstaand in."
+
+#~ msgid "%sFormat%s of the date. Examples: %s or %s"
+#~ msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s"
+
+#~ msgid "Show invoice"
+#~ msgstr "Toon factuur"
+
+#~ msgid "Create invoice"
+#~ msgstr "Maak factuur"
+
+#~ msgid "%sFormat%s of the date."
+#~ msgstr "%sFormat%s van de datum."
+
+#~ msgid "Use [prefix], [suffix] and [number] as placeholders."
+#~ msgstr "Gebruik [suffix], [prefix] en [number] als aanduidingen."
+
+#~ msgid "Choose the color witch fits your company."
+#~ msgstr "Kies uw bedrijfskleur."
+
+#~ msgid ""
+#~ "Choose the format for the invoice number. Use [prefix], [suffix] and "
+#~ "[number] as placeholders."
+#~ msgstr ""
+#~ "Kies het formaat voor het factuurnummer. Gebruik [prefix], [suffix] en "
+#~ "[number] als aanduidingen."
+
+#~ msgid "Text to greet, congratulate or thank the customer. "
+#~ msgstr "Tekst om de klant te groeten, te feliciteren of te bedanken. "
+
+#~ msgid "Some text"
+#~ msgstr "De vertaling werkt!!!!"
+
+#~ msgid "Text to greet, congratulate or thank the customer."
+#~ msgstr "Tekst om de klant te begroeten, te bedanken of te feliciteren."
+
+#~ msgid "Start all over on the first of January."
+#~ msgstr "Opnieuw beginnen op de eerste van januari."

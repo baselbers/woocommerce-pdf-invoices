@@ -34,9 +34,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
              * Displays all messages registered to 'template_settings'
              */
             add_action( 'admin_notices', array( &$this, 'show_settings_notices' ) );
-
-	        var_dump( get_option( $this->settings_key ) );
-	        var_dump( get_option( 'bewpi_general_settings' ) );
         }
 
         /**
@@ -45,6 +42,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
         public function load_settings() {
 			$defaults = $this->get_defaults();
 	        $defaults['bewpi_settings_key'] = $this->settings_key;
+	        $defaults['bewpi_last_invoice_number'] = 1;
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );
 	        update_option( $this->settings_key, $options );
@@ -66,7 +64,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	        register_setting(
 		        $this->settings_key,
 		        $this->settings_key,
-		        array( &$this, 'validate' )
+		        array( &$this, 'validate_input' )
 	        );
 	        $this->add_settings_fields();
         }
@@ -296,7 +294,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'invoice_number',
 				    'type' => 'text',
 				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<b>[prefix]</b>', '<b>[suffix]</b>', '<b>[number]</b>', '<b>[Y]</b>', '<b>[y]</b>', '<br/>', '<b>', '</b>', '<b>[number]</b>' ),
-				    'default' => '[number][Y]',
+				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'
 		            )
@@ -311,7 +309,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'type' => 'checkbox',
 				    'desc' => 'Reset on 1st of january',
 				    'class' => 'bewpi-reset-counter-yearly-option-title',
-				    'default' => 0
+				    'default' => 1
 			    ),
 			    // Visible columns section
 			    array(
@@ -336,7 +334,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'type' => 'checkbox',
 				    'desc' => 'Discount',
 				    'class' => 'bewpi-visible-columns-option-title',
-				    'default' => 0
+				    'default' => 1
 			    ),
 			    array(
 				    'id' => 'bewpi-show-subtotal',
@@ -372,7 +370,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'type' => 'checkbox',
 				    'desc' => 'Shipping',
 				    'class' => 'bewpi-visible-columns-option-title',
-				    'default' => 0
+				    'default' => 1
 			    )
 		    );
 		    return $settings;
@@ -431,7 +429,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    endforeach;
 	    }
 
-	    public function validate( $input ) {
+	    public function validate_input( $input ) {
 		    $output = array();
 		    foreach( $input as $key => $value ) :
 			    if( isset( $input[$key] ) ) :
@@ -444,7 +442,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    $output = $this->upload_file( $input );
 
 		    // Invoice number
-		    $output['bewpi_reset_counter'] = 0;
+		    // $output['bewpi_reset_counter'] = 0;
 		    if ( !isset( $input['bewpi_next_invoice_number'] ) ) {
 			    // Reset the next invoice number so it's visible in the disabled input field.
 			    $options = get_option( $this->settings_key );

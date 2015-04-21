@@ -52,8 +52,5 @@ require_once( BEWPI_DIR . 'includes/classes/bewpi-document.php' );
 require_once( BEWPI_DIR . 'includes/classes/bewpi-invoice.php' );
 
 if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
-	new BE_WooCommerce_PDF_Invoices(
-		new BEWPI_General_Settings(),
-		new BEWPI_Template_Settings()
-	);
+	new BE_WooCommerce_PDF_Invoices();
 }

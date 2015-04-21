@@ -63,7 +63,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	        register_setting(
 		        $this->settings_key,
 		        $this->settings_key,
-		        array( &$this, 'validate' )
+		        array( &$this, 'validate_input' )
 	        );
 	        $this->add_settings_fields();
         }
@@ -170,27 +170,18 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 
 	    public function validate_input( $input ) {
 		    $output = array();
-		    foreach( $input as $key => $value ) :
-			    if( isset( $input[$key] ) ) :
+		    foreach ( $input as $key => $value ) :
+			    if ( isset( $input[$key] ) ) :
 				    // Strip all HTML and PHP tags and properly handle quoted strings
 				    $output[$key] = stripslashes( $input[ $key ] );
 			    endif;
 		    endforeach;
 
-		    // Validate Email
-		    if( isset( $input['email_it_in_account'] ) && $input['email_it_in_account'] != "" ) {
-			    if ( is_email( sanitize_email( $input['email_it_in_account'] ) ) ) {
-				    $output['email_it_in_account'] = $input['email_it_in_account'];
-			    } else {
-				    add_settings_error(
-					    esc_attr($this->settings_key),
-					    'invalid-email',
-					    __('Invalid Email address.', $this->textdomain)
-				    );
-			    }
-		    }
+		    // Sanitize Email
+		    if ( isset( $input['email_it_in_account'] ) ) :
+			    $output['email_it_in_account'] = sanitize_email( $input['email_it_in_account'] );
+		    endif;
 
-		    // Return the array processing any additional functions filtered by this action
 		    return apply_filters( 'validate_input', $output, $input );
 	    }
 

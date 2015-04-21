@@ -34,6 +34,16 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          */
         protected $date;
 
+	    /**
+	     * Creation year
+	     * @var
+	     */
+	    protected $year;
+
+	    /**
+	     * Invoice footer
+	     * @var string
+	     */
 	    protected $footer;
 
         /**
@@ -42,8 +52,10 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          * @param $textdomain
          */
         public function __construct( $order_id ) {
-            parent::__construct( $order_id );
-	        $this->order                = wc_get_order( $order_id );
+            parent::__construct();
+	        $this->order = wc_get_order( $order_id );
+	        $this->template_filename    = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_filename'];
+	        $this->footer               = $this->get_footer();
 	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
 
 	        // Check if the invoice already exists.
@@ -55,112 +67,18 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          * Gets all the existing invoice data from database or creates new invoice number.
          */
         private function init() {
-
-            if ( $this->template_options['bewpi_invoice_number_type'] === 'sequential_number' ) :
-                $this->number           = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
-            else :
-	            $this->number           = $this->order->id;
-            endif;
-
-            $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
-	        $this->footer               = $this->get_footer();
+	        $this->number               = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
+	        $this->year                 = get_post_meta( $this->order->id, '_bewpi_invoice_year', true );
+	        $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->formatted_number . '.pdf';
+	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
-
-	    public function save() {
-
-		    // Delete all data from db
-		    $this->delete_all_post_meta();
-
-		    if ( $this->template_options['bewpi_invoice_number_type'] === "sequential_number" ) :
-			    if ( !$this->reset_counter() && !$this->new_year_reset() ) :
-				    // User resetted counter
-				    $last_invoice_number = $this->template_options['bewpi_last_invoice_number'];
-
-				    if ( $this->insert_invoice_number( $last_invoice_number ) ) :
-					    // Get the latest invoice number from db
-					    $this->number = $this->get_invoice_number();
-				    endif;
-
-			    endif;
-
-			    // Set new last invoice number
-			    $this->template_options['last_invoice_number'] = $this->number;
-			    update_option( 'bewpi_template_options', $this->template_options );
-
-		    else :
-
-			    $this->number = $this->order->get_order_number();
-
-		    endif;
-
-		    // Format invoice number
-		    $this->number = $this->get_formatted_number( true );
-
-		    $this->generate( "F", $this );
-	    }
-
-	    private function reset_counter() {
-		    // Check if the user resetted the invoice counter and set the number.
-		    if ( $this->template_options['bewpi_reset_counter'] ) {
-			    if ( $this->template_options['bewpi_next_invoice_number'] > 0 ) {
-				    $this->number = $this->template_options['bewpi_next_invoice_number'];
-				    return true;
-			    }
-		    }
-		    return false;
-        }
-
-	    private function new_year_reset() {
-		    if ( $this->template_options['bewpi_reset_counter_yearly'] ) {
-			    $last_year = $this->template_options['bewpi_last_invoiced_year'];
-
-			    if ( !empty( $last_year ) && is_numeric( $last_year ) ) {
-				    $date = getdate();
-				    $current_year = $date['year'];
-				    if ($last_year < $current_year) {
-					    // Set new year as last invoiced year and reset invoice number
-					    $this->number = 1;
-					    return true;
-				    }
-			    }
-		    }
-		    return false;
-	    }
-
-	    /**
-	     * Creates new invoice number with SQL MAX CAST.
-	     * @param $order_id
-	     * @param $number
-	     */
-	    protected function insert_invoice_number( $next_number ) {
-		    global $wpdb;
-		    // attempt the query up to 3 times for a much higher success rate if it fails (due to Deadlock)
-		    $success = false;
-		    for ($i = 0; $i < 3 && !$success; $i++) {
-			    // this seems to me like the safest way to avoid order number clashes
-			    $query = $wpdb->prepare(
-				    "
-                    INSERT INTO {$wpdb->postmeta} (post_id, meta_key, meta_value)
-                    SELECT %d, %s, IF( MAX( CAST( meta_value as UNSIGNED ) ) IS NULL, %d, MAX( CAST( meta_value as UNSIGNED ) ) + 1 )
-                    FROM {$wpdb->postmeta}
-                    WHERE meta_key = %s
-                	",
-				    $this->order->id,
-				    $this->invoice_number_meta_key,
-				    $next_number,
-				    $this->invoice_number_meta_key
-			    );
-			    $success = $wpdb->query( $query );
-		    }
-		    return $success;
-	    }
 
 	    /**
 	     * Format the invoice number with prefix and/or suffix.
 	     * @return mixed
 	     */
-	    protected function get_formatted_number( $insert = false ) {
-		    $invoice_number_format = $this->template_options['bewpi_invoice_format'];
+	    public function get_formatted_number( $insert = false ) {
+		    $invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
 		    // Format number with the number of digits
 		    $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
 		    $digitized_invoice_number = sprintf( $digit_str, $this->number );
@@ -216,7 +134,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
                 <tbody>
                 <tr>
                     <td class="border" colspan="2">
-                        <?php echo $this->template_options['terms']; ?>
+                        <?php echo $this->template_options['bewpi_terms']; ?>
                         <br/>
                         <?php
                         $customer_order_notes = $this->order->get_customer_order_notes();
@@ -230,7 +148,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
                 <tr>
                     <td class="company-details">
                         <p>
-                            <?php echo nl2br($this->template_options['company_details']); ?>
+                            <?php echo nl2br($this->template_options['bewpi_company_details']); ?>
                         </p>
                     </td>
                     <td class="payment">
@@ -243,52 +161,90 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             </table>
 
             <?php $html = ob_get_contents();
-
             ob_end_clean();
 
             return $html;
         }
 
-        /**
-         * Get's the invoice number from db.
-         * @param $order_id
-         * @return mixed
-         */
-        public function get_invoice_number() {
-            global $wpdb;
-
-            $results = $wpdb->get_results(
-                $wpdb->prepare(
-                    "
-                    SELECT meta_value
-                    FROM $wpdb->postmeta
-                    WHERE post_id = %d
-                    AND meta_key = %s
-                    ", $this->order->id, '_bewpi_invoice_number'
-                )
-            );
-
-            if ( count( $results ) == 1 ) {
-	            return $results[0]->meta_value;
-            } else {
-	            return "";
-            }
-        }
-
 	    public function get_colspan() {
 		    $colspan = 2;
-		    if ( $this->template_options['show_sku'] ) $colspan ++;
-		    if ( $this->template_options['show_sku'] ) $colspan ++;
+		    if ( $this->template_options['bewpi_show_sku'] ) $colspan ++;
+		    if ( $this->template_options['bewpi_show_tax'] ) $colspan ++;
 		    return $colspan;
 	    }
 
-	    /**
-	     * When an invoice gets generated again then the post meta needs to get deleted.
-	     */
-	    protected function delete_all_post_meta() {
+	    private function reset_counter() {
+		    // Check if the user resetted the invoice counter and set the number.
+		    if ( $this->template_options['bewpi_reset_counter'] ) {
+			    if ( $this->template_options['bewpi_next_invoice_number'] > 0 ) {
+				    $this->number = $this->template_options['bewpi_next_invoice_number'];
+				    $this->template_options['bewpi_reset_counter'] = 0;
+				    return true;
+			    }
+		    }
+		    return false;
+	    }
+
+	    private function new_year_reset() {
+		    if ( $this->template_options['bewpi_reset_counter_yearly'] ) {
+			    $last_year = ( isset( $this->template_options['bewpi_last_invoiced_year'] ) ) ? $this->template_options['bewpi_last_invoiced_year'] : '';
+
+			    if ( !empty( $last_year ) && is_numeric( $last_year ) ) {
+				    $date = getdate();
+				    $current_year = $date['year'];
+				    if ($last_year < $current_year) {
+					    // Set new year as last invoiced year and reset invoice number
+					    $this->number = 1;
+					    return true;
+				    }
+			    }
+		    }
+		    return false;
+	    }
+
+	    public function save( $dest ) {
+		    if ( $this->exists() ) die( 'Invoice already exists. First delete invoice.' );
+
+		    // If the invoice is manually deleted from dir, delete data from database.
+		    $this->delete();
+
+		    if ( $this->template_options['bewpi_invoice_number_type'] === "sequential_number" ) :
+			    if ( !$this->reset_counter() && !$this->new_year_reset() ) :
+				    $this->number = $this->template_options['bewpi_last_invoice_number'] + 1;
+			    endif;
+		    else :
+			    $this->number = $this->order->get_order_number();
+		    endif;
+
+		    $this->formatted_number     = $this->get_formatted_number( true );
+		    $this->year                 = date( 'Y' );
+		    $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->formatted_number . '.pdf';
+
+		    add_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
+		    add_post_meta( $this->order->id, '_bewpi_invoice_year', $this->year );
+
+		    $this->template_options['bewpi_last_invoice_number']    = $this->number;
+		    $this->template_options['bewpi_last_invoiced_year']     = $this->year;
+		    update_option( 'bewpi_template_settings', $this->template_options );
+
+		    parent::generate( $dest, $this );
+
+		    return $this->filename;
+	    }
+
+	    public function view( $download ) {
+		    if ( !$this->exists() ) die( 'No invoice found. First create invoice.' );
+		    parent::view( $download );
+	    }
+
+	    public function delete() {
 		    delete_post_meta( $this->order->id, '_bewpi_invoice_number' );
 		    delete_post_meta( $this->order->id, '_bewpi_formatted_invoice_number' );
 		    delete_post_meta( $this->order->id, '_bewpi_invoice_date' );
+		    delete_post_meta( $this->order->id, '_bewpi_invoice_year' );
+
+		    if ( $this->exists() )
+		        parent::delete();
 	    }
     }
 }

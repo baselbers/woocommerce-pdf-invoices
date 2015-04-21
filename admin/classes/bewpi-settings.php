@@ -100,7 +100,7 @@ if ( ! class_exists( 'BEWPI_Settings' ) ) {
 			    <?php
 			    foreach ( $args['options'] as $option ) :
 				    ?>
-				    <option value="<?php echo $option['value']; ?>" <?php selected( $options[$args['value']], $option['value'] ); ?>><?php echo $option['name']; ?></option>
+				    <option value="<?php echo $option['value']; ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo $option['name']; ?></option>
 			    <?php
 			    endforeach;
 			    ?>

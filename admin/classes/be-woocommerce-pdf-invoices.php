@@ -11,18 +11,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	class BE_WooCommerce_PDF_Invoices {
 
         /**
-         * All general user settings
-         * @var array
-         */
-		public $general_settings;
-
-        /**
-         * All template user settings
-         * @var array
-         */
-		public $template_settings;
-
-        /**
          * Constant options key
          * @var string
          */
@@ -49,11 +37,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $general_settings
          * @param $template_settings
          */
-		public function __construct($general_settings, $template_settings) {
+		public function __construct() {
 
-			$this->general_settings = $general_settings;
-
-			$this->template_settings = $template_settings;
+			new BEWPI_General_Settings();
+			new BEWPI_Template_Settings();
 
 			/*
 			 * Initialize WooCommerce PDF Invoices
@@ -113,25 +100,23 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                 $order_id = $_GET['post'];
                 $nonce = $_REQUEST["nonce"];
 
-                if (!wp_verify_nonce($nonce, $action)) {
+                if ( !wp_verify_nonce( $nonce, $action ) ) {
                     die( 'Invalid request' );
-                } else if( empty($order_id) ) {
-                    die( 'Invalid order ID');
+                } else if ( empty( $order_id ) ) {
+                    die( 'Invalid order ID' );
                 } else {
 
-                    $invoice = new BEWPI_Invoice(
-	                    new WC_Order($order_id), $this->textdomain
-                    );
+                    $invoice = new BEWPI_Invoice( $order_id, $this->textdomain );
 
                     switch( $_GET['wpi_action'] ) {
                         case "view":
-                            $invoice->view_invoice( true );
+                            $invoice->view( true );
                             break;
                         case "cancel":
                             $invoice->delete();
                             break;
                         case "create":
-                            $invoice->generate( "F" );
+                            $invoice->save( "F" );
                             break;
                     }
                 }
@@ -153,13 +138,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         private function create_invoices_dir() {
             wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' );
         }
-
-        /**
-         * Delete pdf invoices from the tmp folder.
-         */
-		/*public function delete_pdf_invoices() {
-			array_map('unlink', glob( BEWPI_INVOICES_DIR . "*.pdf"));
-		}*/
 
         /**
          * Adds submenu to WooCommerce menu.
@@ -230,13 +208,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return string
          */
 		function add_recipient_to_email_headers($headers, $status) {
-            $general_settings = (array) $this->general_settings->settings;
-			if( $status == $general_settings['email_type'] ) {
-				if( $general_settings['email_it_in']
-					&& $general_settings['email_it_in_account'] != "" ) {
-					$email_it_in_account = $general_settings['email_it_in_account'];
+            $general_options = get_option( 'bewpi_general_settings' );
+			if ( $status == $general_options['bewpi_email_type']
+			    && $general_options['bewpi_email_it_in']
+				&& !empty( $general_options['bewpi_email_it_in_account'] ) ) {
+					$email_it_in_account = $general_options['bewpi_email_it_in_account'];
 					$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
-				}
 			}
 			return $headers;
 		}
@@ -249,20 +226,21 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return array
          */
 		function attach_invoice_to_email( $attachments, $status, $order ) {
-            $general_settings = $this->general_settings->settings;
-			if( $status == $general_settings['email_type']
-				|| $general_settings['new_order'] && $status == "new_order" ) {
+            $general_options = get_option( 'bewpi_general_settings' );
+			if ( $status == $general_options['bewpi_email_type']
+				|| $general_options['bewpi_new_order']
+				   && $status == "new_order" ) :
 
-                $invoice = new BEWPI_Invoice($order, $this->textdomain);
+				$invoice = new BEWPI_Invoice( $order->id, $this->textdomain );
 
-                if( $invoice->exists() ) {
-                    $path_to_pdf = BEWPI_INVOICES_DIR . $invoice->get_formatted_invoice_number() . ".pdf";
-                } else {
-                    $path_to_pdf = $invoice->generate("F");
-                }
+				if ( !$invoice->exists() ) :
+					$filename = $invoice->save( "F" );
+				else :
+					$filename = $invoice->get_filename();
+				endif;
 
-                $attachments[] = $path_to_pdf;
-			}
+				$attachments[] = $filename;
+			endif;
 			return $attachments;
 		}
 
@@ -286,10 +264,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $order
          */
 		public function woocommerce_order_page_action_view_invoice( $order ) {
-            $invoice = new BEWPI_Invoice(new WC_Order($order->id), $this->textdomain);
-            if( $invoice->exists() ) {
-                $this->show_invoice_button('View invoice', $order->id, 'view', '', array('class="button tips wpi-admin-order-create-invoice-btn"') );
-            }
+            $invoice = new BEWPI_Invoice( $order->id, $this->textdomain );
+            if( $invoice->exists() )
+                $this->show_invoice_button( 'View invoice', $order->id, 'view', '', array('class="button tips wpi-admin-order-create-invoice-btn"') );
 		}
 
         /**
@@ -319,7 +296,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $btn_title
          * @param array $arr
          */
-        private function show_invoice_button($title, $order_id, $wpi_action, $btn_title, $arr = array()) {
+        private function show_invoice_button( $title, $order_id, $wpi_action, $btn_title, $arr = array() ) {
             $title = __( $title, $this->textdomain );
             $href = admin_url() . 'post.php?post=' . $order_id . '&action=edit&wpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce($wpi_action);
             $btn_title = __( $btn_title, $this->textdomain );
@@ -338,7 +315,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $post
          */
 		public function woocommerce_order_details_page_meta_box_create_invoice( $post ) {
-            $invoice = new BEWPI_Invoice(new WC_Order($post->ID), $this->textdomain);
+            $invoice = new BEWPI_Invoice( $post->ID, $this->textdomain );
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );

@@ -8,11 +8,6 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
     class BEWPI_Document{
 
         /**
-         * @var
-         */
-        protected $order;
-
-        /**
          * Textdomain from the plugin.
          * @var
          */
@@ -34,19 +29,20 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
          * Path to invoice in tmp dir.
          * @var
          */
-        protected $file;
+        protected $filename;
 
 	    protected $title;
 
 	    protected $author;
 
+	    protected $file;
+
         /**
          * @param $order
          */
-        public function __construct( $order_id ) {
-            $this->order                = wc_get_order( $order_id );
-            $this->general_options      = (array) get_option( 'bewpi_general_settings' );
-            $this->template_options     = (array) get_option( 'bewpi_template_settings' );
+        public function __construct() {
+            $this->general_options      = get_option( 'bewpi_general_settings' );
+            $this->template_options     = get_option( 'bewpi_template_settings' );
 	        $this->title                = $this->template_options['bewpi_company_name'] . " - Invoice";
 	        $this->author               = $this->template_options['bewpi_company_name'];
         }
@@ -56,12 +52,9 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
          * @param $dest
          * @return string
          */
-        public function generate( $dest, $document ) {
-            if ( $this->exists() ) die( 'Invoice already exists.' );
-
-	        // Go generate
+        protected function generate( $dest, $document ) {
 	        set_time_limit(0);
-	        include BEWPI_LIB_DIR . "mpdf/mpdf.php";
+	        include BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 	        $mpdf = new mPDF('', 'A4', 0, '', 17, 17, 20, 50, 0, 0, '');
 	        $mpdf->useOnlyCoreFonts = true;    // false is default
 	        $mpdf->SetTitle( $this->title );
@@ -70,54 +63,41 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
 	        $mpdf->SetDisplayMode('fullpage');
 	        $mpdf->useSubstitutions = false;
 	        ob_start();
-		        require_once $this->get_template();
+		        require_once $document->template_filename;
 	        $html = ob_get_contents();
 	        ob_end_clean();
 	        $mpdf->SetHTMLFooter( $document->footer );
 	        $mpdf->WriteHTML( $html );
-	        $file = BEWPI_INVOICES_DIR . $document->formatted_number . ".pdf";
-	        $mpdf->Output( $file, $dest );
-	        return $file;
+	        $mpdf->Output( $document->filename, $dest );
         }
 
         /**
          * Get the invoice if exist and show.
          * @param $download
          */
-        public function view_invoice($download) {
-            if ($this->exists()) {
-                $file = BEWPI_INVOICES_DIR . $this->formatted_number . ".pdf";
-                $filename = $this->formatted_number . ".pdf";
+        public function view( $download ) {
+            if ( $download ) {
+		        header('Content-type: application / pdf');
+		        header('Content-Disposition: attachment; filename="' . $this->file . '"');
+		        header('Content-Transfer-Encoding: binary');
+		        header('Content-Length: ' . filesize( $this->filename ));
+		        header('Accept-Ranges: bytes');
+	        } else {
+		        header('Content-type: application/pdf');
+		        header('Content-Disposition: inline; filename="' . $this->file . '"');
+		        header('Content-Transfer-Encoding: binary');
+		        header('Accept-Ranges: bytes');
+	        }
 
-                if ($download) {
-                    header('Content-type: application / pdf');
-                    header('Content-Disposition: attachment; filename="' . $filename . '"');
-                    header('Content-Transfer-Encoding: binary');
-                    header('Content-Length: ' . filesize($file));
-                    header('Accept-Ranges: bytes');
-                } else {
-                    header('Content-type: application/pdf');
-                    header('Content-Disposition: inline; filename="' . $filename . '"');
-                    header('Content-Transfer-Encoding: binary');
-                    header('Accept-Ranges: bytes');
-                }
-
-                @readfile($file);
-                exit;
-
-            } else {
-                die('No invoice found.');
-            }
+	        @readfile( $this->filename );
+	        exit;
         }
 
         /**
          * Delete invoice from tmp dir.
          */
         public function delete() {
-            if ($this->exists()) {
-                unlink($this->file);
-            }
-            $this->delete_all_post_meta();
+	        return unlink( $this->filename );
         }
 
         /**
@@ -125,24 +105,15 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
          * @return bool
          */
         public function exists() {
-            $this->file = BEWPI_TEMPLATES_DIR . $this->get_formatted_invoice_number() . ".pdf";
-            return file_exists($this->file);
+            return file_exists( $this->filename );
         }
 
         /**
          * Gets the file path.
          * @return mixed
          */
-        public function get_file() {
-            return $this->file;
-        }
-
-        /**
-         * Gets the template from template dir.
-         * @return string
-         */
-        private function get_template() {
-            return BEWPI_TEMPLATES_DIR . $this->template_settings['template_filename'];
+        public function get_filename() {
+            return $this->filename;
         }
     }
 }

@@ -333,18 +333,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'default' => 0
 			    ),
 			    array(
-				    'id' => 'bewpi-show-discount',
-				    'name' => $this->prefix . 'show_discount',
-				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'visible_columns',
-				    'type' => 'checkbox',
-				    'desc' => 'Discount',
-				    'class' => 'bewpi-visible-columns-option-title',
-				    'default' => 1
-			    ),
-			    array(
 				    'id' => 'bewpi-show-subtotal',
 				    'name' => $this->prefix . 'show_subtotal',
 				    'title' => '',
@@ -365,6 +353,18 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => 'Tax',
+				    'class' => 'bewpi-visible-columns-option-title',
+				    'default' => 1
+			    ),
+			    array(
+				    'id' => 'bewpi-show-discount',
+				    'name' => $this->prefix . 'show_discount',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'visible_columns',
+				    'type' => 'checkbox',
+				    'desc' => 'Discount',
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 1
 			    ),
@@ -456,7 +456,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	     * @return mixed|void
 	     */
 	    public function validate_input( $input ) {
-		    $output = array();
+		    $output             = array();
+            $template_options   = get_option( $this->settings_key );
+            $the_settings       = $this->the_settings();
+
+            // Uncheck checkboxes
+            foreach ( $the_settings as $setting ) :
+                if ( $setting['type'] === 'checkbox' && ! isset( $input[ $setting['name'] ] ) ) :
+                    // Checkbox is unchecked
+                    $output[ $setting['name'] ] = 0;
+                endif;
+            endforeach;
+
+            // Strip strings
 		    foreach( $input as $key => $value ) :
 			    if( isset( $input[$key] ) ) :
 				    // Strip all HTML and PHP tags and properly handle quoted strings
@@ -465,7 +477,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    endforeach;
 
 		    // File upload -- Company logo
-		    $output['bewpi_company_logo'] = $input['bewpi_company_logo'];
+            if ( isset( $input['bewpi_company_logo'] ) )
+                $output['bewpi_company_logo'] = $input['bewpi_company_logo'];
+
 		    if ( isset( $_FILES['bewpi_company_logo'] ) && $_FILES['bewpi_company_logo']['error'] == 0 ) {
 			    $file = $_FILES['bewpi_company_logo'];
 			    if ( $file['size'] <= 200000 ) {
@@ -506,9 +520,13 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    // Invoice number
 		    if ( !isset( $input['bewpi_next_invoice_number'] ) ) {
 			    // Reset the next invoice number so it's visible in the disabled input field.
-			    $options = get_option( $this->settings_key );
-			    $output['bewpi_next_invoice_number'] = $options['bewpi_next_invoice_number'];
+			    $output['bewpi_next_invoice_number'] = $template_options['bewpi_next_invoice_number'];
 		    }
+
+            // We don't want to loose the invoice counter value
+            if ( ! empty( $template_options['bewpi_last_invoice_number'] ) ) {
+                $output['bewpi_last_invoice_number'] = $template_options['bewpi_last_invoice_number'];
+            }
 
 		    // Return the array processing any additional functions filtered by this action
 		    return apply_filters( 'validate_input', $output, $input );

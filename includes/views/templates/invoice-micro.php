@@ -25,14 +25,15 @@
         table.products td, table.products th {
             padding: 5px;
         }
-        tr.product td {
+        tr.product-row td {
             border-bottom: 1px solid #CECECE;
         }
         td.total, td.grand-total {
             border-top: 4px solid #8D8D8D;
+            padding-bottom: 0; margin-bottom: 0;
         }
         td.grand-total {
-            font-size: 16px;
+            font-size: 16px !important;
         }
         table, tbody, h1 {
             margin: 0;
@@ -119,8 +120,14 @@
         .foot td {
             border: 1px solid white;
         }
+        .refunded {
+            color: #a00 !important;
+        }
         .number, .grand-total {
             color: <?php echo $this->template_options['bewpi_color_theme']; ?>;
+        }
+        .total-without-refund {
+            color: #757575 !important;
         }
         .foot td.border {
             border-bottom: 8px solid <?php echo $this->template_options['bewpi_color_theme']; ?>;
@@ -128,6 +135,28 @@
         /* End change colors */
         .space td {
             padding-bottom: 50px;
+        }
+        <?php
+        // Create css for outlining the product cells.
+        $righter_product_row_tds_css = "";
+          for ( $td = $this->colspan['left'] + 1; $td <= $this->number_of_columns; $td++ ) {
+            if ( $td !== $this->number_of_columns ) {
+                $righter_product_row_tds_css .= "tr.product-row td:nth-child(" . $td . "),";
+            } else {
+                $righter_product_row_tds_css .= "tr.product-row td:nth-child(" . $td . ")";
+                $righter_product_row_tds_css .= "{ width: " . ( 50 / $this->colspan['right'] ) . "%; }";
+            }
+          }
+          echo $righter_product_row_tds_css;
+        ?>
+        tr.product-row td:nth-child(1) { /* Description td */
+            width: <?php echo $this->desc_cell_width; ?>;
+        }
+        table.products {
+            table-layout: fixed;
+        }
+        table.products td {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -152,11 +181,11 @@
     <table class="two-column customer">
         <tbody>
         <tr>
-            <td>
+            <td class="address small-font">
                 <b><?php _e( 'Invoice to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_billing_address(); ?>
             </td>
-            <td class="address">
+            <td class="address small-font">
                 <b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
                 <?php echo $this->order->get_formatted_shipping_address(); ?>
             </td>
@@ -182,28 +211,40 @@
         </tr>
         </tbody>
     </table>
-    <table class="products">
+    <table class="products small-font">
         <thead>
-        <tr>
+        <tr class="table-headers">
             <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
             <?php
-            $colspan = $this->get_colspan();
             if( $this->template_options['bewpi_show_sku'] ) {
                 echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
             }
             ?>
-            <th class="align-left"><?php _e( 'Quantity', $this->textdomain ); ?></th>
-            <th class="align-left"><?php _e( 'Unit price', $this->textdomain ); ?></th>
-	        <?php if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
-		        echo '<th class="align-left">' . __( "Tax", $this->textdomain ) . '</th>';
-	        } ?>
+	        <th class="align-left"><?php _e( 'Cost', $this->textdomain ); ?></th>
+            <th class="align-left"><?php _e( 'Qty', $this->textdomain ); ?></th>
+
+	        <!-- Tax -->
+	        <?php
+	        $order_taxes    = $this->order->get_taxes();
+	        if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
+		        foreach ( $order_taxes as $tax_id => $tax_item ) :
+			        $column_label   = ! empty( $tax_item['label'] ) ? $tax_item['label'] : __( 'VAT', $this->textdomain );
+			        ?>
+			        <th class="align-left">
+				        <?php echo esc_attr( $column_label ); ?>
+			        </th>
+		        <?php
+		        endforeach;
+	        endif;
+	        ?>
+
             <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
         </tr>
         </thead>
         <tbody>
         <?php foreach( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
             $product = wc_get_product( $item['product_id'] ); ?>
-            <tr class="product">
+            <tr class="product-row">
                 <td>
                     <?php echo $product->get_title(); ?>
                     <?php
@@ -245,12 +286,30 @@
                     }
                     ?>
                 </td>
-	                <?php if( $this->template_options['bewpi_show_sku'] ) echo '<td>' . $product->get_sku() . '</td>'; ?>
-                <td>
-	                <?php echo $item['qty']; ?>
-                </td>
-                <td>
-	                <?php echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+	                <?php
+                    if ( $this->template_options['bewpi_show_sku'] ) :
+                        echo '<td>';
+                        echo ( $product->get_sku() != '' ) ? $product->get_sku() : '-';
+                        echo '</td>';
+                    endif;
+                    ?>
+	            <td>
+		            <?php
+		            if ( isset( $item['line_total'] ) ) {
+			            if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] != $item['line_total'] ) {
+				            echo '<del>' . wc_price( $this->order->get_item_subtotal( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+			            }
+			            echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) );
+		            }
+		            ?>
+	            </td>
+	            <td>
+		            <?php
+		            echo $item['qty'];
+
+		            if ( $refunded_qty = $this->order->get_qty_refunded_for_item( $item_id ) )
+			            echo '<br/><small class="refunded">-' . $refunded_qty . '</small>';
+		            ?>
                 </td>
 	            <?php
 	            if ( empty( $legacy_order ) && wc_tax_enabled() && $this->template_options['bewpi_show_tax'] ) :
@@ -264,74 +323,98 @@
 			            ?>
 
 			            <td class="item-tax">
-				            <?php echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) ); ?>
+				            <?php
+				            if ( '' != $tax_item_total ) {
+					            if ( isset( $tax_item_subtotal ) && $tax_item_subtotal != $tax_item_total ) {
+						            echo '<del>' . wc_price( wc_round_tax_total( $tax_item_subtotal ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+					            }
+
+					            echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) );
+				            } else {
+					            echo '&ndash;';
+				            }
+
+				            if ( $refunded = $this->order->get_tax_refunded_for_item( $item_id, $tax_item_id ) ) {
+					            echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+				            }
+				            ?>
 			            </td>
 
 		                <?php
 		            endforeach;
 	            endif;
 	            ?>
-                <td class="align-right">
-	                <?php echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) ); ?>
+                <td class="align-right item-total" width="">
+	                <?php
+	                if ( isset( $item['line_total'] ) ) {
+		                if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] != $item['line_total'] ) {
+			                echo '<del>' . wc_price( $item['line_subtotal'], array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+		                }
+		                echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) );
+	                }
+
+	                if ( $refunded = $this->order->get_total_refunded_for_item( $item_id ) ) {
+		                echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+	                }
+	                ?>
                 </td>
             </tr>
         <?php } ?>
         <!-- Space -->
         <tr class="space">
-            <td colspan="<?php echo $colspan; ?>"></td>
-            <td colspan="2"></td>
+	        <td colspan="<?php echo $this->number_of_columns; ?>"></td>
         </tr>
+        <!-- Table footers -->
         <!-- Discount -->
-        <?php if( $this->template_options['bewpi_show_discount'] && $this->order->get_total_discount != 0 ) { ?>
+        <?php if( $this->template_options['bewpi_show_discount'] ) { ?>
             <tr class="discount after-products">
-                <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%"><?php _e( 'Discount', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+                <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+                <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Discount', $this->textdomain ); ?></td>
+                <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Shipping -->
         <?php if( $this->template_options['bewpi_show_shipping'] ) { ?>
             <tr class="shipping after-products">
-                <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%"><?php _e( 'Shipping', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+                <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+                <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
+                <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Subtotal -->
         <?php if( $this->template_options['bewpi_show_subtotal'] ) { ?>
             <tr class="subtotal after-products">
-                <td colspan="<?php echo $colspan; ?>"></td>
-                <td width="25%"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
-                <td width="25%" class="align-right"><?php echo wc_price( $this->order->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+                <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+                <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
+                <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
         <!-- Tax -->
         <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
 	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>
-		        <tr>
-			        <td colspan="<?php echo $colspan; ?>"></td>
-			        <td width="25%">
-				        <?php printf( __( 'Tax %s', true, $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
+		        <tr class="after-products">
+                    <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+			        <td colspan="<?php echo $this->colspan['right_left']; ?>">
+				        <?php printf( __( 'VAT %s', true, $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
 			        </td>
-			        <td width="25%" class="align-right"><?php echo $tax->formatted_amount; ?></td>
+			        <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo $tax->formatted_amount; ?></td>
 		        </tr>
 	        <?php endforeach; ?>
         <?php } ?>
         <!-- Total -->
-        <tr>
-            <td colspan="<?php echo $colspan; ?>"></td>
-            <td class="total" width="25%"><?php _e( 'Total', $this->textdomain ); ?></td>
-            <td class="grand-total align-right" width="25%">
-                <?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?>
-            </td>
+        <tr class="after-products">
+            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', $this->textdomain ); ?></td>
+            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right"><?php echo $this->get_total(); ?></td>
         </tr>
-        <?php /*<tr>
-            <td colspan="<?php echo $colspan; ?>"></td>
-            <td class="refunded" width="25%"><?php _e( 'Refunded', $this->textdomain ); ?></td>
-            <td class="refunded-total align-right" width="25%">
-                <?php echo wc_price( $this->order->get_total_refunded() ) ?>
-            </td>
-        </tr> */?>
+        <!-- Refunded -->
+        <?php if ( $this->order->get_total_refunded() > 0 ) { ?>
+        <tr class="after-products">
+            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="refunded"><?php _e( 'Refunded', $this->textdomain ); ?></td>
+            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->order->get_total_refunded() ) ?></td>
+        </tr>
+        <?php } ?>
         </tbody>
     </table>
 </div>

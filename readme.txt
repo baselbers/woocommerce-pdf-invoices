@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.1.1
-Stable tag: 2.1.0
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,9 +70,13 @@ The manual installation method involves downloading our plugin and uploading it 
 - Added: Norwegian language files
 - Added: Settings sections into settings pages
 - Added: Checkbox to reset invoice number counter
+- Added: Refunds on invoice template
+- Added: Item tax and different total taxes on invoice template
 - Fixed: Updating plugin removed all invoices -- Invoices into uploads dir
-- Fixed: Order number format
+- Fixed: Order number not formatted
+- Fixed: Invoice not viewable and removable in IE on Order details page
 - Improved: Code -- Refactored
+- Improved: Dutch language file
 
 = 2.1.0 - April 8, 2015 =
 

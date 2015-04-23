@@ -59,7 +59,7 @@
     margin-bottom: 10px;
 }
 .invoice-btn {
-    margin-right: 3px;
+    margin-right: 3px !important;
 }
 #footer-left #footer-thankyou {
     font-style: normal !important;

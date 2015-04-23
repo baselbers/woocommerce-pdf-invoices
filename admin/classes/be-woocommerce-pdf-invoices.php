@@ -328,7 +328,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
                 $attr .= $str . ' ';
             }
 
-            $btn = '<a title="' . $title . '" href="' . $href . '" ' . $attr . '><button type="button" class="button grant_access">' . $btn_title . '</button></a>';
+            $btn = '<a title="' . $title . '" href="' . $href . '" ' . $attr . '>' . $btn_title .'</a>';
             echo $btn;
         }
 
@@ -341,10 +341,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
             if( $invoice->exists() ) {
                 $this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
-                $this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array('class="invoice-btn"') );
-                $this->show_invoice_button( __( 'Cancel invoice', $this->textdomain ), $post->ID, 'cancel', __( 'Cancel', $this->textdomain ), array('class="invoice-btn"', 'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', $this->textdomain ) . '\')"' ) );
+                $this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array('class="invoice-btn button grant_access"') );
+                $this->show_invoice_button( __( 'Cancel invoice', $this->textdomain ), $post->ID, 'cancel', __( 'Cancel', $this->textdomain ), array('class="invoice-btn button grant_access"', 'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', $this->textdomain ) . '\')"' ) );
             } else {
-                $this->show_invoice_button( __( 'Create invoice', $this->textdomain ), $post->ID, 'create', __( 'Create', $this->textdomain ), array('class="invoice-btn"') );
+                $this->show_invoice_button( __( 'Create invoice', $this->textdomain ), $post->ID, 'create', __( 'Create', $this->textdomain ), array('class="invoice-btn button grant_access"') );
             }
 		}
 

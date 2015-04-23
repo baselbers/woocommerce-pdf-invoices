@@ -11,32 +11,32 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
      */
     class BEWPI_Invoice extends BEWPI_Document{
 
-        /*
-         * WooCommerce order
+        /**
+         * @var WC_Order
          */
         public $order;
 
         /**
          * Invoice number
-         * @var
+         * @var integer
          */
         protected $number;
 
         /**
          * Formatted invoice number with prefix and/or suffix
-         * @var
+         * @var string
          */
         protected $formatted_number;
 
         /**
          * Creation date.
-         * @var
+         * @var datetime
          */
         protected $date;
 
 	    /**
 	     * Creation year
-	     * @var
+	     * @var datetime
 	     */
 	    protected $year;
 
@@ -45,6 +45,24 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	     * @var string
 	     */
 	    protected $footer;
+
+        /**
+         * Number of columns for the products table
+         * @var integer
+         */
+        protected $number_of_columns;
+
+        /**
+         * Colspan data for product table cells
+         * @var array
+         */
+        protected $colspan;
+
+        /**
+         * Width of the description cell of the product table
+         * @var string
+         */
+        protected $desc_cell_width;
 
         /**
          * Initialize invoice with WooCommerce order
@@ -58,7 +76,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
 
 	        // Check if the invoice already exists.
-	        if( !empty( $this->formatted_number ) )
+	        if( ! empty( $this->formatted_number ) )
 		        $this->init();
         }
 
@@ -130,32 +148,25 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         protected function get_footer() {
             ob_start(); ?>
 
-            <table class="foot">
+            <table class="foot small-font">
                 <tbody>
                 <tr>
                     <td class="border" colspan="2">
-                        <?php echo $this->template_options['bewpi_terms']; ?>
-                        <br/>
+                        <?php echo $this->template_options['bewpi_terms']; ?><br/>
                         <?php
-                        $customer_order_notes = $this->order->get_customer_order_notes();
-                        if ( count( $customer_order_notes ) > 0 ) { ?>
-                            <p>
-                                <strong><?php _e('Customer note', $this->textdomain); ?> </strong><?php echo $customer_order_notes[0]->comment_content; ?>
-                            </p>
-                        <?php } ?>
+                        if ( $this->template_options['bewpi_show_customer_notes'] && $this->order->post->post_excerpt != "" ) :
+                            echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . '</strong> ' . $this->order->post->post_excerpt . '</p>';
+                            /*$customer_order_notes = $this->order->get_customer_order_notes();
+                            if ( count( $customer_order_notes ) > 0 ) {
+                                echo '<p><strong>' . __('Customer note', $this->textdomain) . '</strong>' . $customer_order_notes[0]->comment_content . '</p>';
+                            }*/
+                        endif;
+                        ?>
                     </td>
                 </tr>
                 <tr>
-                    <td class="company-details">
-                        <p>
-                            <?php echo nl2br($this->template_options['bewpi_company_details']); ?>
-                        </p>
-                    </td>
-                    <td class="payment">
-                        <p>
-                            <?php printf( __( '%sPayment%s via', $this->textdomain ), '<b>', '</b>' ); ?>  <?php echo $this->order->payment_method_title; ?>
-                        </p>
-                    </td>
+                    <td class="company-details"><p><?php echo nl2br( $this->template_options['bewpi_company_details'] ); ?></p></td>
+                    <td class="payment"><p><?php printf( __( '%sPayment%s via', $this->textdomain ), '<b>', '</b>' ); ?>  <?php echo $this->order->payment_method_title; ?></p></td>
                 </tr>
                 </tbody>
             </table>
@@ -166,14 +177,46 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             return $html;
         }
 
-	    /**
-	     * Calculates the number of cols
-	     * @return int
-	     */
+        /**
+         * Number of table columns that will be displayed
+         * @return int
+         */
+	    public function get_number_of_columns() {
+	        $number_of_columns = 4;
+		    if ( $this->template_options['bewpi_show_sku'] ) $number_of_columns++;
+		    $order_taxes    = $this->order->get_taxes();
+		    if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
+			    foreach ( $order_taxes as $tax_id => $tax_item ) :
+				    $number_of_columns++;
+			    endforeach;
+		    endif;
+		    return $number_of_columns;
+        }
+
+        /**
+         * Calculates colspan for table footer cells
+         * @return array
+         */
 	    public function get_colspan() {
-		    $colspan = 2;
-		    if ( $this->template_options['bewpi_show_sku'] ) $colspan ++;
-		    if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) $colspan ++;
+	        $colspan = array();
+		    $number_of_columns = $this->get_number_of_columns();
+            $number_of_left_half_columns = 3;
+            $this->desc_cell_width = '30%';
+
+		    // The product table will be split into 2 where on the right 5 columns are the max
+            if ( $number_of_columns <= 4 ) :
+                $number_of_left_half_columns = 1;
+                $this->desc_cell_width = '50%';
+		    elseif ( $number_of_columns <= 6 ) :
+			    $number_of_left_half_columns = 2;
+                $this->desc_cell_width = '37.50%';
+		    endif;
+
+		    $colspan['left'] = $number_of_left_half_columns;
+		    $colspan['right'] = $number_of_columns - $number_of_left_half_columns;
+		    $colspan['right_left'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_DOWN );
+		    $colspan['right_right'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_UP );
+
 		    return $colspan;
 	    }
 
@@ -233,6 +276,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 			    $this->number = $this->order->get_order_number();
 		    endif;
 
+            $this->number_of_columns    = $this->get_number_of_columns();
+            $this->colspan              = $this->get_colspan();
 		    $this->formatted_number     = $this->get_formatted_number( true );
 		    $this->year                 = date( 'Y' );
 		    $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->formatted_number . '.pdf';
@@ -283,6 +328,17 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 			    $allowed = true;
 		    }
 		    return $allowed;
+	    }
+
+	    public function get_total() {
+		    $total = "";
+		    if ( $this->order->get_total_refunded() > 0 ) :
+			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
+			    $total = '<del class="total-without-refund">' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
+		    else :
+			    $total = $this->order->get_formatted_order_total();
+		    endif;
+		    return $total;
 	    }
     }
 }

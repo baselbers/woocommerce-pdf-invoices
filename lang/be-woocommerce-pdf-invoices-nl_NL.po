@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-04-23 23:33+0100\n"
-"PO-Revision-Date: 2015-04-23 23:46+0100\n"
+"POT-Creation-Date: 2015-04-24 16:05+0100\n"
+"PO-Revision-Date: 2015-04-24 16:05+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -28,52 +28,52 @@ msgstr "Algemeen"
 msgid "Template"
 msgstr ""
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:169
 #: admin/classes/be-woocommerce-pdf-invoices.php:170
+#: admin/classes/be-woocommerce-pdf-invoices.php:171
 msgid "Invoices"
 msgstr "Facturen"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:275
+#: admin/classes/be-woocommerce-pdf-invoices.php:276
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:302
+#: admin/classes/be-woocommerce-pdf-invoices.php:303
 msgid "Invoiced on:"
 msgstr "Gefactureerd op:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:306
+#: admin/classes/be-woocommerce-pdf-invoices.php:307
 msgid "Invoice number:"
 msgstr "Factuurnummer:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:344
+#: admin/classes/be-woocommerce-pdf-invoices.php:345
 msgid "View invoice"
 msgstr "Toon factuur"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:344
+#: admin/classes/be-woocommerce-pdf-invoices.php:345
 msgid "View"
 msgstr "Bekijk"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:346
 msgid "Cancel invoice"
 msgstr "Factuur annuleren"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:346
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:346
 msgid "Are you sure to delete the invoice?"
 msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:347
+#: admin/classes/be-woocommerce-pdf-invoices.php:348
 msgid "Create invoice"
 msgstr "Maak factuur"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:347
+#: admin/classes/be-woocommerce-pdf-invoices.php:348
 msgid "Create"
 msgstr "Aanmaken"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:380
+#: admin/classes/be-woocommerce-pdf-invoices.php:381
 msgid "Download invoice (PDF)"
 msgstr "Download factuur (PDF)"
 
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Feel free to use "
 msgstr "Gebruik"
 
-#: admin/classes/bewpi-settings.php:153
+#: admin/classes/bewpi-settings.php:157
 msgid "Remove logo"
 msgstr "Verwijder logo"
 
@@ -285,71 +285,71 @@ msgstr "Opmerking klant"
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s met"
 
-#: includes/views/templates/invoice-micro.php:185
+#: includes/views/templates/invoice-micro.php:188
 msgid "Invoice to"
 msgstr "Facturatie aan"
 
-#: includes/views/templates/invoice-micro.php:189
+#: includes/views/templates/invoice-micro.php:192
 msgid "Ship to"
 msgstr "Verzend naar"
 
-#: includes/views/templates/invoice-micro.php:199
+#: includes/views/templates/invoice-micro.php:202
 msgid "Invoice"
 msgstr "Factuur"
 
-#: includes/views/templates/invoice-micro.php:202
+#: includes/views/templates/invoice-micro.php:205
 #, php-format
 msgid "Order Number %s"
 msgstr "Bestelnummer %s"
 
-#: includes/views/templates/invoice-micro.php:203
+#: includes/views/templates/invoice-micro.php:206
 #, php-format
 msgid "Order Date %s"
 msgstr "Besteldatum:  %s"
 
-#: includes/views/templates/invoice-micro.php:217
+#: includes/views/templates/invoice-micro.php:220
 msgid "Description"
 msgstr "﻿Beschrijving"
 
-#: includes/views/templates/invoice-micro.php:220
+#: includes/views/templates/invoice-micro.php:223
 msgid "SKU"
 msgstr "Productcode"
 
-#: includes/views/templates/invoice-micro.php:223
+#: includes/views/templates/invoice-micro.php:226
 msgid "Cost"
 msgstr "Kosten"
 
-#: includes/views/templates/invoice-micro.php:224
+#: includes/views/templates/invoice-micro.php:227
 msgid "Qty"
 msgstr "Aantal"
 
-#: includes/views/templates/invoice-micro.php:231
+#: includes/views/templates/invoice-micro.php:234
 msgid "VAT"
 msgstr "BTW"
 
-#: includes/views/templates/invoice-micro.php:241
-#: includes/views/templates/invoice-micro.php:407
+#: includes/views/templates/invoice-micro.php:244
+#: includes/views/templates/invoice-micro.php:413
 msgid "Total"
 msgstr "Totaal"
 
-#: includes/views/templates/invoice-micro.php:372
+#: includes/views/templates/invoice-micro.php:378
 msgid "Discount"
 msgstr "Korting"
 
-#: includes/views/templates/invoice-micro.php:380
+#: includes/views/templates/invoice-micro.php:386
 msgid "Shipping"
 msgstr "Verzending"
 
-#: includes/views/templates/invoice-micro.php:388
+#: includes/views/templates/invoice-micro.php:394
 msgid "Subtotal"
 msgstr "Subtotaal"
 
-#: includes/views/templates/invoice-micro.php:398
+#: includes/views/templates/invoice-micro.php:404
 #, php-format
 msgid "VAT %s"
 msgstr "BTW %s"
 
-#: includes/views/templates/invoice-micro.php:414
+#: includes/views/templates/invoice-micro.php:420
 msgid "Refunded"
 msgstr "Terugbetaald"
 

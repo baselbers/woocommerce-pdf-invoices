@@ -3,7 +3,7 @@ Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
-Tested up to: 4.1.1
+Tested up to: 4.2
 Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -16,13 +16,14 @@ This WooCommerce plugin creates customizable PDF invoices for WooCommerce orders
 = Main features =
 - Automatic PDF invoice generation and attachment
 - Attach PDF invoice to WooCommerce email type of your choice
-- Attach PDF invoice to New Order WooCommerce email
 - Connect with Google Drive, Egnyte, Dropbox or OneDrive
-- Many PDF invoice template customization options
-- Sequential invoice number system
-- Customize invoice number format
-- Manually (re)create or delete PDF invoice
+- Many PDF invoice template customization options like changing color
+- WooCommerce order numbering or built-in sequential invoice numbering
+- Many invoice and date format customization options
+- Advanced items table with refunds, discounts, different item tax rates columns and more
+- Manually create or delete PDF invoice
 - Resend PDF invoices to customer
+- Let customers download invoice from there account
 - Without annoying advertisements
 
 Install the plugin and try out all the features, it will simply be awesome.
@@ -43,10 +44,11 @@ Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pd
 
 1. General settings
 2. Template settings
-3. View or Cancel the invoice from the order page.
-4. Create a new invoice from the order page.
-5. View the invoice from the shop order page.
-6. Nice and clean invoice template with the ability to change the color.
+3. View or Cancel invoice from the order page.
+4. Create new invoice from the order page.
+5. View invoice from the shop order page.
+6. Download invoice from account.
+6. Nice and clean template with refunds, different tax rates, the ability to change the color and more!
 
 == Installation ==
 
@@ -75,7 +77,7 @@ The manual installation method involves downloading our plugin and uploading it 
 - Fixed: Updating plugin removed all invoices -- Invoices into uploads dir
 - Fixed: Order number not formatted
 - Fixed: Invoice not viewable and removable in IE on Order details page
-- Improved: Code -- Refactored
+- Improved: Completely refactored code
 - Improved: Dutch language file
 
 = 2.1.0 - April 8, 2015 =

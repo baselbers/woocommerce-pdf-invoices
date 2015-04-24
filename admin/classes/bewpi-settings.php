@@ -126,7 +126,11 @@ if ( ! class_exists( 'BEWPI_Settings' ) ) {
 			        endif;
 			        ?>
 			    />
-		    <div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
+            <?php if ( $args['type'] === "checkbox" ) { ?>
+		        <label class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
+                <?php } else { ?>
+                <div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
+            <?php } ?>
 	    <?php
 	    }
 

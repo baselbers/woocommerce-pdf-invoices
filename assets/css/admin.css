@@ -13,9 +13,9 @@
     display: inline-block;
     padding: 21px 21px 0 0;
 }
-#bewpi-company-logo {
+#bewpi-company-logo-image {
     position: relative;
-    width: inherit;
+    max-height: 150px;
 }
 #bewpi-company-logo-wrapper:hover #bewpi-company-logo-delete{
     display: block;
@@ -70,7 +70,7 @@
 .bewpi-customer-notes-option-title,
 .bewpi-new-order-option-title,
 .bewpi-email-it-in-option-title {
-    display: inline-block;
+    /*display: inline-block;*/
 }
 .bewpi-visible-columns-option-title,
 .bewpi-customer-notes-option-title {

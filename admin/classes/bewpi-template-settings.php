@@ -200,7 +200,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'footer',
 				    'type' => 'checkbox',
-				    'desc' => 'Show customer notes',
+				    'desc' => __( 'Show customer notes', $this->textdomain ),
 				    'class' => 'bewpi-customer-notes-option-title',
 				    'default' => 1
 			    ),
@@ -315,7 +315,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
-				    'desc' => 'Reset on 1st of january',
+				    'desc' => __( 'Reset on 1st of january', $this->textdomain ),
 				    'class' => 'bewpi-reset-counter-yearly-option-title',
 				    'default' => 1
 			    ),
@@ -328,7 +328,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => 'SKU',
+				    'desc' => __( 'SKU', $this->textdomain ),
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 0
 			    ),
@@ -340,7 +340,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => 'Subtotal',
+				    'desc' => __( 'Subtotal', $this->textdomain ),
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 1
 			    ),
@@ -352,7 +352,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => 'Tax',
+				    'desc' => __( 'Tax', $this->textdomain ),
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 1
 			    ),
@@ -364,7 +364,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => 'Discount',
+				    'desc' => __( 'Discount', $this->textdomain ),
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 1
 			    ),
@@ -376,7 +376,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => 'Shipping',
+				    'desc' => __( 'Shipping', $this->textdomain ),
 				    'class' => 'bewpi-visible-columns-option-title',
 				    'default' => 1
 			    )

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-04-24 16:05+0100\n"
-"PO-Revision-Date: 2015-04-24 16:05+0100\n"
+"POT-Creation-Date: 2015-04-25 09:02+0100\n"
+"PO-Revision-Date: 2015-04-25 09:02+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -285,71 +285,71 @@ msgstr "Opmerking klant"
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s met"
 
-#: includes/views/templates/invoice-micro.php:188
+#: includes/views/templates/invoice-micro.php:185
 msgid "Invoice to"
 msgstr "Facturatie aan"
 
-#: includes/views/templates/invoice-micro.php:192
+#: includes/views/templates/invoice-micro.php:189
 msgid "Ship to"
 msgstr "Verzend naar"
 
-#: includes/views/templates/invoice-micro.php:202
+#: includes/views/templates/invoice-micro.php:199
 msgid "Invoice"
 msgstr "Factuur"
 
-#: includes/views/templates/invoice-micro.php:205
+#: includes/views/templates/invoice-micro.php:202
 #, php-format
 msgid "Order Number %s"
 msgstr "Bestelnummer %s"
 
-#: includes/views/templates/invoice-micro.php:206
+#: includes/views/templates/invoice-micro.php:203
 #, php-format
 msgid "Order Date %s"
 msgstr "Besteldatum:  %s"
 
-#: includes/views/templates/invoice-micro.php:220
+#: includes/views/templates/invoice-micro.php:217
 msgid "Description"
 msgstr "﻿Beschrijving"
 
-#: includes/views/templates/invoice-micro.php:223
+#: includes/views/templates/invoice-micro.php:220
 msgid "SKU"
 msgstr "Productcode"
 
-#: includes/views/templates/invoice-micro.php:226
+#: includes/views/templates/invoice-micro.php:223
 msgid "Cost"
 msgstr "Kosten"
 
-#: includes/views/templates/invoice-micro.php:227
+#: includes/views/templates/invoice-micro.php:224
 msgid "Qty"
 msgstr "Aantal"
 
-#: includes/views/templates/invoice-micro.php:234
+#: includes/views/templates/invoice-micro.php:231
 msgid "VAT"
 msgstr "BTW"
 
-#: includes/views/templates/invoice-micro.php:244
-#: includes/views/templates/invoice-micro.php:413
+#: includes/views/templates/invoice-micro.php:241
+#: includes/views/templates/invoice-micro.php:407
 msgid "Total"
 msgstr "Totaal"
 
-#: includes/views/templates/invoice-micro.php:378
+#: includes/views/templates/invoice-micro.php:372
 msgid "Discount"
 msgstr "Korting"
 
-#: includes/views/templates/invoice-micro.php:386
+#: includes/views/templates/invoice-micro.php:380
 msgid "Shipping"
 msgstr "Verzending"
 
-#: includes/views/templates/invoice-micro.php:394
+#: includes/views/templates/invoice-micro.php:388
 msgid "Subtotal"
 msgstr "Subtotaal"
 
-#: includes/views/templates/invoice-micro.php:404
+#: includes/views/templates/invoice-micro.php:398
 #, php-format
 msgid "VAT %s"
 msgstr "BTW %s"
 
-#: includes/views/templates/invoice-micro.php:420
+#: includes/views/templates/invoice-micro.php:414
 msgid "Refunded"
 msgstr "Terugbetaald"
 

@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,7 +66,15 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Changelog ==
 
-= 2.2.0 - April 8, 2015 =
+= 2.2.1 - April 25, 2015 =
+
+- Added: Support for multiple languages like Chinese, Greek, Latin etc.
+- Fixed: Invoice translation
+- Fixed: Language files translatable
+- Fixed: wc_tax_enabled function support due to WooCommerce 2.2 and lower
+- Improved: French language files
+
+= 2.2.0 - April 24, 2015 =
 
 - Added: Download invoice button on My account page
 - Added: Norwegian language files

@@ -44,6 +44,7 @@ if ( !defined( 'BEWPI_INVOICES_DIR' ) )
 if ( !defined( 'BEWPI_LIB_DIR' ) )
 	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
 
+require_once( BEWPI_DIR . 'functions.php' );
 require_once( BEWPI_DIR . 'admin/classes/be-woocommerce-pdf-invoices.php' );
 require_once( BEWPI_DIR . 'admin/classes/bewpi-settings.php' );
 require_once( BEWPI_DIR . 'admin/classes/bewpi-general-settings.php' );

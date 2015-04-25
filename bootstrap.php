@@ -34,7 +34,7 @@ if( !defined( 'BEWPI_TEMPLATES_DIR' ) )
     define( 'BEWPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . '/includes/views/templates/' );
 
 if( !defined( 'BEWPI_LANG_DIR' ) )
-    define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang/' );
+    define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
 
 $wp_upload_dir = wp_upload_dir();
 

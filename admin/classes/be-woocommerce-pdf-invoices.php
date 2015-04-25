@@ -48,6 +48,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'init', array( &$this, 'init' ) );
 
             /**
+             * Load plugin textdomain
+             */
+            add_action( 'plugins_loaded', array( &$this, 'load_textdomain' ) );
+
+            /**
              * Adds the Email It In email as an extra recipient
              */
 			add_filter( 'woocommerce_email_headers', array( &$this, 'add_recipient_to_email_headers' ), 10, 2 );
@@ -73,11 +78,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 * Init invoice actions to view, delete or save invoice.
 			 */
 			$this->invoice_actions();
-
-			/**
-			 * Loads the global textdomain for the plugin.
-			 */
-			$this->load_textdomain();
 
 			/**
 			 * Creates invoices folder in the uploads dir.
@@ -145,7 +145,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         /**
          * Loads the textdomain and localizes the plugin options tabs.
          */
-		private function load_textdomain() {
+		public function load_textdomain() {
 			load_plugin_textdomain( $this->textdomain, false, BEWPI_LANG_DIR );
 			$this->settings_tabs['bewpi_general_settings'] = __( 'General', $this->textdomain );
 			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', $this->textdomain );

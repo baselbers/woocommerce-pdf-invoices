@@ -166,7 +166,7 @@
         <tbody>
         <tr>
             <td class="logo">
-                <?php if( !empty( $this->template_options['bewpi_company_logo'] ) ) { ?>
+                <?php if ( !empty( $this->template_options['bewpi_company_logo'] ) ) { ?>
                     <img class="company-logo" src="<?php echo $this->template_options['bewpi_company_logo']; ?>"/>
                 <?php } else { ?>
                     <h1 class="company-logo"><?php echo $this->template_options['bewpi_company_name']; ?></h1>

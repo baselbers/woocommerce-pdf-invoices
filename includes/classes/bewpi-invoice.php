@@ -87,7 +87,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	        $this->number               = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
 	        $this->year                 = get_post_meta( $this->order->id, '_bewpi_invoice_year', true );
 	        $this->file                 = $this->formatted_number . '.pdf';
-	        $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->file;
+	        $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->file;
 	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
 
@@ -117,8 +117,9 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    }
 
         /**
-         * Create invoice date
-         * @return bool|string
+         * Format date
+         * @param bool $insert
+         * @return bool|datetime|string
          */
         public function get_formatted_invoice_date( $insert = false ) {
             $date_format = $this->template_options['bewpi_date_format'];
@@ -147,7 +148,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          */
         protected function get_footer() {
             ob_start(); ?>
-
             <table class="foot small-font">
                 <tbody>
                 <tr>
@@ -170,10 +170,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
                 </tr>
                 </tbody>
             </table>
-
             <?php $html = ob_get_contents();
             ob_end_clean();
-
             return $html;
         }
 
@@ -280,7 +278,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             $this->colspan              = $this->get_colspan();
 		    $this->formatted_number     = $this->get_formatted_number( true );
 		    $this->year                 = date( 'Y' );
-		    $this->filename             = BEWPI_INVOICES_DIR . $this->year . '/' . $this->formatted_number . '.pdf';
+		    $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
 
 		    add_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
 		    add_post_meta( $this->order->id, '_bewpi_invoice_year', $this->year );

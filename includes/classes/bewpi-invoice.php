@@ -123,7 +123,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          */
         public function get_formatted_invoice_date( $insert = false ) {
             $date_format = $this->template_options['bewpi_date_format'];
-	        ( !empty( $date_format ) ) ? $this->date = date( $date_format ) : $this->date = date('d-m-Y');
+	        ( !empty( $date_format ) ) ? $this->date = date_i18n( $date_format, date( $date_format ) ) : $this->date = date_i18n( "d-m-Y", date( 'd-m-Y' ) );
             if( $insert ) add_post_meta($this->order->id, '_bewpi_invoice_date', $this->date);
             return $this->date;
         }
@@ -132,14 +132,16 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          * Format the order date and return
          */
         public function get_formatted_order_date() {
-            $order_date = $date = DateTime::createFromFormat('Y-m-d H:i:s', $this->order->order_date);
-            if ( !empty ( $this->template_options['bewpi_date_format'] ) ) {
+            $order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $this->order->order_date );
+            if ( ! empty ( $this->template_options['bewpi_date_format'] ) ) {
                 $date_format = $this->template_options['bewpi_date_format'];
-                $formatted_date = $order_date->format($date_format);
+                $formatted_date = $order_date->format( $date_format );
+                return date_i18n( $date_format, $formatted_date );
+
             } else {
-                $formatted_date = $order_date->format($order_date, "d-m-Y");
+                $formatted_date = $order_date->format( $order_date, "d-m-Y" );
+                return date_i18n( "d-m-Y", $formatted_date );
             }
-            return $formatted_date;
         }
 
         /**
@@ -155,11 +157,13 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
                         <?php echo $this->template_options['bewpi_terms']; ?><br/>
                         <?php
                         if ( $this->template_options['bewpi_show_customer_notes'] && $this->order->post->post_excerpt != "" ) :
+                            // Note added by customer.
                             echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . '</strong> ' . $this->order->post->post_excerpt . '</p>';
-                            /*$customer_order_notes = $this->order->get_customer_order_notes();
+                            // Notes added administrator on order details page.
+                            $customer_order_notes = $this->order->get_customer_order_notes();
                             if ( count( $customer_order_notes ) > 0 ) {
                                 echo '<p><strong>' . __('Customer note', $this->textdomain) . '</strong>' . $customer_order_notes[0]->comment_content . '</p>';
-                            }*/
+                            }
                         endif;
                         ?>
                     </td>

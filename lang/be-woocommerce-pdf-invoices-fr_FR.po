@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-04-25 09:02+0100\n"
-"PO-Revision-Date: 2015-04-25 09:02+0100\n"
+"POT-Creation-Date: 2015-04-28 14:01+0100\n"
+"PO-Revision-Date: 2015-04-28 14:01+0100\n"
 "Last-Translator: Mosaika.fr <bonjour@mosaika.fr>\n"
 "Language-Team: Pierre SAIKALI <pierre@mosaika.fr>\n"
 "Language: fr_FR\n"
@@ -19,63 +19,72 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:150
+#: admin/classes/be-woocommerce-pdf-invoices.php:184
 msgid "General"
 msgstr "Général"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:151
+#: admin/classes/be-woocommerce-pdf-invoices.php:185
 #: admin/classes/bewpi-template-settings.php:86
 msgid "Template"
 msgstr "Template"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:170
-#: admin/classes/be-woocommerce-pdf-invoices.php:171
+#: admin/classes/be-woocommerce-pdf-invoices.php:204
+#: admin/classes/be-woocommerce-pdf-invoices.php:205
 msgid "Invoices"
 msgstr "Factures"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:276
+#: admin/classes/be-woocommerce-pdf-invoices.php:310
 msgid "PDF Invoice"
 msgstr "Facture PDF"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:303
+#: admin/classes/be-woocommerce-pdf-invoices.php:337
 msgid "Invoiced on:"
 msgstr "Facturés sur"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:307
+#: admin/classes/be-woocommerce-pdf-invoices.php:341
 msgid "Invoice number:"
 msgstr "Numéro de facture"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:379
 msgid "View invoice"
 msgstr " Voir la facture"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:379
 msgid "View"
 msgstr "Voir"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:346
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Cancel invoice"
 msgstr "Annuler la facture"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:346
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Cancel"
 msgstr "Annuler"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:346
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Are you sure to delete the invoice?"
 msgstr "Êtes-vous certain de vouloir supprimer la facture? "
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:348
+#: admin/classes/be-woocommerce-pdf-invoices.php:382
 msgid "Create invoice"
 msgstr "Créer une facture"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:348
+#: admin/classes/be-woocommerce-pdf-invoices.php:382
 msgid "Create"
 msgstr "créer"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:381
+#: admin/classes/be-woocommerce-pdf-invoices.php:415
 msgid "Download invoice (PDF)"
 msgstr "Télécharger la facture (PDF)"
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:492
+#, php-format
+msgid ""
+"Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+"Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you "
+"in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
+"a> - <a href='%s'>No, already done it!</a>"
+msgstr ""
 
 #: admin/classes/bewpi-general-settings.php:85
 msgid "Attach to Email"
@@ -172,6 +181,10 @@ msgstr "Texte d'introduction"
 msgid "Terms & conditions, policies etc."
 msgstr "Termes et conditions, mentions légales, etc..."
 
+#: admin/classes/bewpi-template-settings.php:203
+msgid "Show customer notes"
+msgstr "Montrer les notes du client"
+
 #: admin/classes/bewpi-template-settings.php:211
 msgid "Type"
 msgstr "Type"
@@ -224,6 +237,34 @@ msgid ""
 msgstr ""
 "N'hésitez pas à utiliser les espaces réservés %s %s %s %s et %s. %s %sNote:"
 "%s %s estrequis."
+
+#: admin/classes/bewpi-template-settings.php:318
+msgid "Reset on 1st of january"
+msgstr "Réinitialiser le 1er janvier"
+
+#: admin/classes/bewpi-template-settings.php:331
+#: includes/views/templates/invoice-micro.php:220
+msgid "SKU"
+msgstr "UGS"
+
+#: admin/classes/bewpi-template-settings.php:343
+#: includes/views/templates/invoice-micro.php:388
+msgid "Subtotal"
+msgstr "Sous-total"
+
+#: admin/classes/bewpi-template-settings.php:355
+msgid "Tax"
+msgstr "TVA"
+
+#: admin/classes/bewpi-template-settings.php:367
+#: includes/views/templates/invoice-micro.php:372
+msgid "Discount"
+msgstr "Réduction"
+
+#: admin/classes/bewpi-template-settings.php:379
+#: includes/views/templates/invoice-micro.php:380
+msgid "Shipping"
+msgstr "Livraison"
 
 #: admin/classes/bewpi-template-settings.php:393
 msgid "General Options"
@@ -312,10 +353,6 @@ msgstr "Date de commande %s"
 msgid "Description"
 msgstr "Description"
 
-#: includes/views/templates/invoice-micro.php:220
-msgid "SKU"
-msgstr "UGS"
-
 #: includes/views/templates/invoice-micro.php:223
 msgid "Cost"
 msgstr "Coût"
@@ -325,6 +362,7 @@ msgid "Qty"
 msgstr "Qté"
 
 #: includes/views/templates/invoice-micro.php:231
+#: includes/views/templates/invoice-micro.php:398
 msgid "VAT"
 msgstr "TVA"
 
@@ -333,41 +371,21 @@ msgstr "TVA"
 msgid "Total"
 msgstr "Total"
 
-#: includes/views/templates/invoice-micro.php:372
-msgid "Discount"
-msgstr "Réduction"
-
-#: includes/views/templates/invoice-micro.php:380
-msgid "Shipping"
-msgstr "Livraison"
-
-#: includes/views/templates/invoice-micro.php:388
-msgid "Subtotal"
-msgstr "Sous-total"
-
-#: includes/views/templates/invoice-micro.php:398
-#, php-format
-msgid "VAT %s"
-msgstr "TVA %s"
-
 #: includes/views/templates/invoice-micro.php:414
 msgid "Refunded"
 msgstr "Remboursement"
 
+#~ msgid "VAT %s"
+#~ msgstr "TVA %s"
+
 #~ msgid "Feel free to use"
 #~ msgstr "N'hésitez pas à l'utiliser"
-
-#~ msgid "Show customer notes"
-#~ msgstr "Montrer les notes du client"
 
 #~ msgid "Quantity"
 #~ msgstr "Qté"
 
 #~ msgid "Unit price"
 #~ msgstr "Prix unitaire"
-
-#~ msgid "Tax"
-#~ msgstr "TVA"
 
 #~ msgid "Signup at %s and enter your account beyond."
 #~ msgstr "Inscription à %s et entrez votre compte."

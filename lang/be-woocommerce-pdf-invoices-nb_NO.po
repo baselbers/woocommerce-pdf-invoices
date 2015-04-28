@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-04-23 23:33+0100\n"
-"PO-Revision-Date: 2015-04-25 16:31+0100\n"
+"POT-Creation-Date: 2015-04-28 14:01+0100\n"
+"PO-Revision-Date: 2015-04-28 14:01+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.4\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -19,63 +19,72 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:150
+#: admin/classes/be-woocommerce-pdf-invoices.php:184
 msgid "General"
 msgstr "Generelt"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:151
+#: admin/classes/be-woocommerce-pdf-invoices.php:185
 #: admin/classes/bewpi-template-settings.php:86
 msgid "Template"
 msgstr "Mal"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:169
-#: admin/classes/be-woocommerce-pdf-invoices.php:170
+#: admin/classes/be-woocommerce-pdf-invoices.php:204
+#: admin/classes/be-woocommerce-pdf-invoices.php:205
 msgid "Invoices"
 msgstr "Fakturaer"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:275
+#: admin/classes/be-woocommerce-pdf-invoices.php:310
 msgid "PDF Invoice"
 msgstr "PDF Faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:302
+#: admin/classes/be-woocommerce-pdf-invoices.php:337
 msgid "Invoiced on:"
 msgstr "Sendt:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:306
+#: admin/classes/be-woocommerce-pdf-invoices.php:341
 msgid "Invoice number:"
 msgstr "Fakturanummer:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:344
+#: admin/classes/be-woocommerce-pdf-invoices.php:379
 msgid "View invoice"
 msgstr "Vis faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:344
+#: admin/classes/be-woocommerce-pdf-invoices.php:379
 msgid "View"
 msgstr "Vis"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Cancel invoice"
 msgstr "Slett faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Cancel"
 msgstr "Slett"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:345
+#: admin/classes/be-woocommerce-pdf-invoices.php:380
 msgid "Are you sure to delete the invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:347
+#: admin/classes/be-woocommerce-pdf-invoices.php:382
 msgid "Create invoice"
 msgstr "Opprett faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:347
+#: admin/classes/be-woocommerce-pdf-invoices.php:382
 msgid "Create"
 msgstr "Opprett"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:380
+#: admin/classes/be-woocommerce-pdf-invoices.php:415
 msgid "Download invoice (PDF)"
 msgstr "Last ned faktura (PDF)"
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:492
+#, php-format
+msgid ""
+"Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+"Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you "
+"in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
+"a> - <a href='%s'>No, already done it!</a>"
+msgstr ""
 
 #: admin/classes/bewpi-general-settings.php:85
 msgid "Attach to Email"
@@ -131,7 +140,7 @@ msgstr ""
 msgid "Feel free to use "
 msgstr "Du kan også bruke "
 
-#: admin/classes/bewpi-settings.php:153
+#: admin/classes/bewpi-settings.php:157
 msgid "Remove logo"
 msgstr "Fjern logo"
 
@@ -171,6 +180,10 @@ msgstr "Introduksjonstekst"
 #: admin/classes/bewpi-template-settings.php:187
 msgid "Terms & conditions, policies etc."
 msgstr "Betingelser, vilkår etc."
+
+#: admin/classes/bewpi-template-settings.php:203
+msgid "Show customer notes"
+msgstr "Toon notities klant"
 
 #: admin/classes/bewpi-template-settings.php:211
 msgid "Type"
@@ -223,6 +236,34 @@ msgid ""
 msgstr ""
 "Du kan også bruke plassholderne %s %s %s %s og %s. %s %sMerk:%s %s er "
 "obligatorisk."
+
+#: admin/classes/bewpi-template-settings.php:318
+msgid "Reset on 1st of january"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:331
+#: includes/views/templates/invoice-micro.php:220
+msgid "SKU"
+msgstr "SKU"
+
+#: admin/classes/bewpi-template-settings.php:343
+#: includes/views/templates/invoice-micro.php:388
+msgid "Subtotal"
+msgstr "Delsum"
+
+#: admin/classes/bewpi-template-settings.php:355
+msgid "Tax"
+msgstr "BTW"
+
+#: admin/classes/bewpi-template-settings.php:367
+#: includes/views/templates/invoice-micro.php:372
+msgid "Discount"
+msgstr "Rabatt"
+
+#: admin/classes/bewpi-template-settings.php:379
+#: includes/views/templates/invoice-micro.php:380
+msgid "Shipping"
+msgstr "Frakt"
 
 #: admin/classes/bewpi-template-settings.php:393
 msgid "General Options"
@@ -311,10 +352,6 @@ msgstr "Bestillingsdato: %s"
 msgid "Description"
 msgstr "Produkt"
 
-#: includes/views/templates/invoice-micro.php:220
-msgid "SKU"
-msgstr "SKU"
-
 #: includes/views/templates/invoice-micro.php:223
 msgid "Cost"
 msgstr "Pris"
@@ -324,6 +361,7 @@ msgid "Qty"
 msgstr "Ant"
 
 #: includes/views/templates/invoice-micro.php:231
+#: includes/views/templates/invoice-micro.php:398
 msgid "VAT"
 msgstr "MVA"
 
@@ -332,26 +370,12 @@ msgstr "MVA"
 msgid "Total"
 msgstr "Totalt"
 
-#: includes/views/templates/invoice-micro.php:372
-msgid "Discount"
-msgstr "Rabatt"
-
-#: includes/views/templates/invoice-micro.php:380
-msgid "Shipping"
-msgstr "Frakt"
-
-#: includes/views/templates/invoice-micro.php:388
-msgid "Subtotal"
-msgstr "Delsum"
-
-#: includes/views/templates/invoice-micro.php:398
-#, php-format
-msgid "VAT %s"
-msgstr "MVA %s"
-
 #: includes/views/templates/invoice-micro.php:414
 msgid "Refunded"
 msgstr "Refundert"
+
+#~ msgid "VAT %s"
+#~ msgstr "MVA %s"
 
 #~ msgid "General Settings"
 #~ msgstr "Algemene Opties"
@@ -426,9 +450,6 @@ msgstr "Refundert"
 #~ msgid "Show shipping"
 #~ msgstr "Toon verzendkosten"
 
-#~ msgid "Show customer notes"
-#~ msgstr "Toon notities klant"
-
 #~ msgid "Color theme of the invoice."
 #~ msgstr "Kleurthema van de factuur."
 
@@ -501,9 +522,6 @@ msgstr "Refundert"
 
 #~ msgid "Unit price"
 #~ msgstr "Prijs per stuk"
-
-#~ msgid "Tax"
-#~ msgstr "BTW"
 
 #~ msgid ""
 #~ "Use [prefix], [suffix] and [number] as placeholders. [number] is required."

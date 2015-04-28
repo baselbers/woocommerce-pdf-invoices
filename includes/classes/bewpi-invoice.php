@@ -123,7 +123,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          */
         public function get_formatted_invoice_date( $insert = false ) {
             $date_format = $this->template_options['bewpi_date_format'];
-	        ( !empty( $date_format ) ) ? $this->date = date_i18n( $date_format, date( $date_format ) ) : $this->date = date_i18n( "d-m-Y", date( 'd-m-Y' ) );
+	        ( !empty( $date_format ) ) ? $this->date = date_i18n( $date_format, strtotime( date( $date_format ) ) ) : $this->date = date_i18n( "d-m-Y", strtotime( date( 'd-m-Y' ) ) );
             if( $insert ) add_post_meta($this->order->id, '_bewpi_invoice_date', $this->date);
             return $this->date;
         }
@@ -136,11 +136,11 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             if ( ! empty ( $this->template_options['bewpi_date_format'] ) ) {
                 $date_format = $this->template_options['bewpi_date_format'];
                 $formatted_date = $order_date->format( $date_format );
-                return date_i18n( $date_format, $formatted_date );
+                return date_i18n( $date_format, strtotime( $formatted_date ) );
 
             } else {
                 $formatted_date = $order_date->format( $order_date, "d-m-Y" );
-                return date_i18n( "d-m-Y", $formatted_date );
+                return date_i18n( "d-m-Y", strtotime( $formatted_date ) );
             }
         }
 

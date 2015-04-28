@@ -395,7 +395,7 @@
 		        <tr class="after-products">
                     <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 			        <td colspan="<?php echo $this->colspan['right_left']; ?>">
-				        <?php printf( __( 'VAT', $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
+				        <?php printf( __( 'VAT %s', $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
 			        </td>
 			        <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo $tax->formatted_amount; ?></td>
 		        </tr>

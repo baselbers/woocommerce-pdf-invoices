@@ -34,10 +34,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         const OPTION_INSTALL_DATE     = 'bewpi-install-date';
         const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
 
-        public static function plugin_activation() {
-            self::insert_install_date();
-        }
-
         /**
          * Initialize plugin and register actions and filters.
          *
@@ -46,23 +42,43 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          */
 		public function __construct() {
 
-			new BEWPI_General_Settings();
-			new BEWPI_Template_Settings();
-
-			/*
-			 * Initialize WooCommerce PDF Invoices
-			 */
-			add_action( 'init', array( &$this, 'init' ) );
+            new BEWPI_General_Settings();
+            new BEWPI_Template_Settings();
 
             /**
-             * Load plugin textdomain
+             * Review admin notice
              */
-            add_action( 'plugins_loaded', array( &$this, 'load_textdomain' ) );
+            register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
+
+            /**
+             * Initialize plugin
+             */
+            add_action( 'init', array( &$this, 'init' ) );
+
+            /**
+             * Adds Invoices submenu to WooCommerce menu.
+             */
+            add_action( 'admin_menu', array( &$this, 'add_woocommerce_submenu_page' ) );
+
+            /**
+             * Enqueue admin scripts
+             */
+            add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+
+            /**
+             * Add actions to overview order page.
+             */
+            add_action( 'woocommerce_admin_order_actions_end', array( &$this, 'woocommerce_order_page_action_view_invoice' ) );
+
+            /**
+             * Adds a meta box to the order details page.
+             */
+            add_action( 'add_meta_boxes', array( &$this, 'add_meta_box_to_order_page' ) );
 
             /**
              * Adds the Email It In email as an extra recipient
              */
-			add_filter( 'woocommerce_email_headers', array( &$this, 'add_recipient_to_email_headers' ), 10, 2 );
+			add_filter( 'woocommerce_email_headers', array( &$this, 'add_email_it_in_account_to_email_headers' ), 10, 2 );
 
             /**
              * Attach invoice to a specific WooCommerce email
@@ -74,52 +90,31 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 */
 			add_action( 'wp_ajax_bewpi_download_invoice', array( &$this, 'bewpi_download_invoice' ) );
 			add_action( 'wp_ajax_nopriv_bewpi_download_invoice', array( &$this, 'bewpi_download_invoice' ) );
+
+            /**
+             * Adds a download link for the pdf invoice on the my account page
+             */
+            add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_download_pdf_action' ), 10, 2 );
+
 		}
 
-		/**
-		 * Some preps
-		 */
-		public function init() {
+        public function init() {
+
+            $this->load_textdomain();
+
+            $this->create_invoices_dir();
+
+            $this->invoice_actions();
 
             $this->init_review_admin_notice();
 
-			/**
-			 * Init invoice actions to view, delete or save invoice.
-			 */
-			$this->invoice_actions();
+        }
 
-			/**
-			 * Creates invoices folder in the uploads dir.
-			 */
-			$this->create_invoices_dir();
+        public static function plugin_activation() {
+            self::insert_install_date();
+        }
 
-			/**
-			 * Adds Invoices submenu to WooCommerce menu.
-			 */
-			add_action( 'admin_menu', array( &$this, 'add_woocommerce_submenu_page' ) );
-
-			/**
-			 * Enqueue admin scripts
-			 */
-			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
-
-			/**
-			 * Add actions to overview order page.
-			 */
-			add_action( 'woocommerce_admin_order_actions_end', array( &$this, 'woocommerce_order_page_action_view_invoice' ) );
-
-			/**
-			 * Adds a meta box to the order details page.
-			 */
-			add_action( 'add_meta_boxes', array( &$this, 'add_meta_box_to_order_page' ) );
-
-			/**
-			 * Adds a download link for the pdf invoice on the my account page
-			 */
-			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_download_pdf_action' ), 10, 2 );
-		}
-
-        private function init_review_admin_notice() {
+        public function init_review_admin_notice() {
             // Check if user is an administrator
             if ( ! current_user_can( 'manage_options' ) ) {
                 return false;
@@ -134,8 +129,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
                 // Get installation date
                 $datetime_install = $this->get_install_date();
-                $datetime_past    = new DateTime( '-10 days' );
-                //$datetime_past    = new DateTime( '-10 second' );
+                //$datetime_past    = new DateTime( '-10 days' );
+                $datetime_past    = new DateTime( '-10 second' );
 
                 if ( $datetime_past >= $datetime_install ) {
                     // 10 or more days ago, show admin notice
@@ -194,7 +189,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Creates invoices dir in uploads folder
          */
         private function create_invoices_dir() {
-            //if ( !wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' ) )
+            //if ( !wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' ) ) htaccess doesn't copies...
             wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' );
             copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date( 'Y' ) . '/.htaccess' );
             copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date( 'Y' ) . '/index.php' );
@@ -269,7 +264,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @param $status
          * @return string
          */
-		function add_recipient_to_email_headers($headers, $status) {
+		function add_email_it_in_account_to_email_headers( $headers, $status ) {
             $general_options = get_option( 'bewpi_general_settings' );
 			if ( $status == $general_options['bewpi_email_type']
 			    && $general_options['bewpi_email_it_in']
@@ -423,6 +418,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			return $actions;
 		}
 
+        /**
+         * @return string
+         */
         private static function insert_install_date() {
             $datetime_now = new DateTime();
             $date_string  = $datetime_now->format( 'Y-m-d' );
@@ -431,6 +429,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             return $date_string;
         }
 
+        /**
+         * @return DateTime
+         */
         private function get_install_date() {
             $date_string = get_site_option( self::OPTION_INSTALL_DATE, '' );
             if ( $date_string == '' ) {
@@ -441,12 +442,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             return new DateTime( $date_string );
         }
 
+        /**
+         * @return mixed
+         */
         private function get_admin_querystring_array() {
             parse_str( $_SERVER['QUERY_STRING'], $params );
 
             return $params;
         }
 
+        /**
+         *
+         */
         public function catch_hide_notice() {
             if ( isset( $_GET[self::OPTION_ADMIN_NOTICE_KEY] ) && current_user_can( 'install_plugins' ) ) {
                 // Add user meta
@@ -473,6 +480,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             }
         }
 
+        /**
+         * Ask admin to review plugin.
+         */
         public function display_admin_notice() {
 
             $query_params = $this->get_admin_querystring_array();

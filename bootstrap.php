@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version           2.2.1
+ * @version           2.2.2
  * @package           WooCommerce PDF Invoices
  * @author            baaaaas
  *
@@ -9,7 +9,7 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:
  * Description:       Automatically or manually create and send PDF Invoices for WooCommerce orders and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.2.1
+ * Version:           2.2.2
  * Author:            baaaaas
  * Author URI:
  * License:           GPL-2.0+
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) )
     die( 'Access denied.' );
 
 if( !defined( 'BEWPI_VERSION' ) )
-	define( 'BEWPI_VERSION', '2.2.1' );
+	define( 'BEWPI_VERSION', '2.2.2' );
 
 if( !defined( 'BEWPI_URL' ) )
     define( 'BEWPI_URL', plugins_url( '', __FILE__ ) . '/' );
@@ -53,6 +53,7 @@ require_once( BEWPI_DIR . 'includes/classes/bewpi-invoice.php' );
 require_once( BEWPI_DIR . 'admin/classes/be-woocommerce-pdf-invoices.php' );
 
 if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
-    add_action( 'plugins_loaded', create_function( '', 'new BE_WooCommerce_PDF_Invoices();' ) );
-    register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
+    new BE_WooCommerce_PDF_Invoices();
+    //add_action( 'plugins_loaded', create_function( '', 'new BE_WooCommerce_PDF_Invoices();' ) );
+    //register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
 }

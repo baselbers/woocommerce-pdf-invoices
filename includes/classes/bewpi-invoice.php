@@ -40,8 +40,26 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	     */
 	    protected $year;
 
+        /**
+         * Template header html
+         * @var string
+         */
+        protected $header;
+
+        /**
+         * Template body html
+         * @var string
+         */
+        protected $body;
+
+        /**
+         * Template CSS
+         * @var string
+         */
+        protected $css;
+
 	    /**
-	     * Invoice footer
+	     * Template footer html
 	     * @var string
 	     */
 	    protected $footer;
@@ -65,18 +83,21 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         protected $desc_cell_width;
 
         /**
+         * @var string
+         */
+        protected $template_folder;
+
+        /**
          * Initialize invoice with WooCommerce order
          * @param string $order
          */
         public function __construct( $order_id ) {
             parent::__construct();
-	        $this->order = wc_get_order( $order_id );
-	        $this->template_filename    = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_filename'];
-	        $this->footer               = $this->get_footer();
+	        $this->order                = wc_get_order( $order_id );
 	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
 
 	        // Check if the invoice already exists.
-	        if( ! empty( $this->formatted_number ) )
+	        if( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && $_GET['bewpi_action'] !== 'cancel' )
 		        $this->init();
         }
 
@@ -89,6 +110,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	        $this->file                 = $this->formatted_number . '.pdf';
 	        $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->file;
 	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
+            $this->template_folder      = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_name'];
         }
 
 	    /**
@@ -145,41 +167,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         }
 
         /**
-         * The footer for the invoice.
-         * @return string
-         */
-        protected function get_footer() {
-            ob_start(); ?>
-            <table class="foot small-font">
-                <tbody>
-                <tr>
-                    <td class="border" colspan="2">
-                        <?php echo $this->template_options['bewpi_terms']; ?><br/>
-                        <?php
-                        if ( $this->template_options['bewpi_show_customer_notes'] && $this->order->post->post_excerpt != "" ) :
-                            // Note added by customer.
-                            echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . '</strong> ' . $this->order->post->post_excerpt . '</p>';
-                            // Notes added administrator on order details page.
-                            $customer_order_notes = $this->order->get_customer_order_notes();
-                            if ( count( $customer_order_notes ) > 0 ) {
-                                echo '<p><strong>' . __('Customer note', $this->textdomain) . '</strong>' . $customer_order_notes[0]->comment_content . '</p>';
-                            }
-                        endif;
-                        ?>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="company-details"><p><?php echo nl2br( $this->template_options['bewpi_company_details'] ); ?></p></td>
-                    <td class="payment"><p><?php printf( __( '%sPayment%s via', $this->textdomain ), '<b>', '</b>' ); ?>  <?php echo $this->order->payment_method_title; ?></p></td>
-                </tr>
-                </tbody>
-            </table>
-            <?php $html = ob_get_contents();
-            ob_end_clean();
-            return $html;
-        }
-
-        /**
          * Number of table columns that will be displayed
          * @return int
          */
@@ -203,15 +190,15 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	        $colspan = array();
 		    $number_of_columns = $this->get_number_of_columns();
             $number_of_left_half_columns = 3;
-            $this->desc_cell_width = '30%';
+            $this->desc_cell_width = '28%';
 
 		    // The product table will be split into 2 where on the right 5 columns are the max
             if ( $number_of_columns <= 4 ) :
                 $number_of_left_half_columns = 1;
-                $this->desc_cell_width = '50%';
+                $this->desc_cell_width = '48%';
 		    elseif ( $number_of_columns <= 6 ) :
 			    $number_of_left_half_columns = 2;
-                $this->desc_cell_width = '37.50%';
+                $this->desc_cell_width = '35.50%';
 		    endif;
 
 		    $colspan['left'] = $number_of_left_half_columns;
@@ -283,6 +270,11 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    $this->formatted_number     = $this->get_formatted_number( true );
 		    $this->year                 = date( 'Y' );
 		    $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
+            // Template
+            $this->css                  = $this->get_css();
+            $this->header               = $this->get_header();
+            $this->body                 = $this->get_body();
+            $this->footer               = $this->get_footer();
 
 		    add_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
 		    add_post_meta( $this->order->id, '_bewpi_invoice_year', $this->year );
@@ -332,8 +324,12 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    return $allowed;
 	    }
 
+        /**
+         * Get the total amount with or without refunds
+         * @return string
+         */
 	    public function get_total() {
-		    $total = "";
+		    $total = '';
 		    if ( $this->order->get_total_refunded() > 0 ) :
 			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
 			    $total = '<del class="total-without-refund">' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
@@ -342,5 +338,52 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    endif;
 		    return $total;
 	    }
+
+        /**
+         * Get the header html
+         * @return string
+         */
+        protected function get_header_html() {
+            $filename = $this->template_folder . '/header.php';
+            ob_start();
+            require_once $filename;
+            $html = ob_get_contents();
+            ob_end_clean();
+            return $html;
+        }
+
+        /**
+         * Get the footer as html
+         * @return string
+         */
+        protected function get_footer_html() {
+            $filename = $this->template_folder . '/footer.php';
+            ob_start();
+            require_once $filename;
+            $html = ob_get_contents();
+            ob_end_clean();
+            return $html;
+        }
+
+        /**
+         * Get the template CSS
+         * @return string
+         */
+        protected function get_css() {
+            return '<style>' . file_get_contents( $this->template_folder . '/style.css' ) . '</style>';
+        }
+
+        /**
+         * Get the body with the products table html
+         * @return string
+         */
+        protected function get_body_html() {
+            $filename = $this->template_folder . '/body.php';
+            ob_start();
+            require_once $filename;
+            $html = ob_get_contents();
+            ob_end_clean();
+            return $html;
+        }
     }
 }

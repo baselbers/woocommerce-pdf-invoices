@@ -66,20 +66,18 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
          */
         protected function generate( $dest, $document ) {
 	        set_time_limit(0);
-	        include BEWPI_LIB_DIR . 'mpdf/mpdf.php';
-	        $mpdf = new mPDF('', 'A4', 0, 'opensans', 17, 17, 20, 50, 0, 0, '');
+            $mpdf_filename = BEWPI_LIB_DIR . 'mpdf/mpdf.php';
+	        include $mpdf_filename;
+	        $mpdf = new mPDF('', 'A4', 0, 'opensans', 17, 17, 150, 50, 20, 0, '');
 	        $mpdf->useOnlyCoreFonts = false;    // false is default
 	        $mpdf->SetTitle( $this->title );
 	        $mpdf->SetAuthor( $this->author );
 	        $mpdf->showWatermarkText = false;
 	        $mpdf->SetDisplayMode('fullpage');
 	        $mpdf->useSubstitutions = true;
-	        ob_start();
-		        require_once $document->template_filename;
-	        $html = ob_get_contents();
-	        ob_end_clean();
+            $mpdf->SetHTMLHeader( $document->header );
 	        $mpdf->SetHTMLFooter( $document->footer );
-	        $mpdf->WriteHTML( $html );
+	        $mpdf->WriteHTML( $document->css . $document->body );
 	        $mpdf->Output( $document->filename, $dest );
         }
 

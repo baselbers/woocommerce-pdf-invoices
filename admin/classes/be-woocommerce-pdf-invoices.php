@@ -31,7 +31,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          */
 		private $textdomain = 'be-woocommerce-pdf-invoices';
 
+        /**
+         * Install date constant for admin notice
+         */
         const OPTION_INSTALL_DATE     = 'bewpi-install-date';
+
+        /**
+         * Admin notice key constant
+         */
         const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
 
         /**
@@ -98,6 +105,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		}
 
+        /**
+         * Initialize...
+         */
         public function init() {
 
             $this->load_textdomain();
@@ -110,10 +120,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
         }
 
+        /**
+         * Get installation date on activation
+         */
         public static function plugin_activation() {
             self::insert_install_date();
         }
 
+        /**
+         * Check if we should show the admin notice
+         * @return bool|void
+         */
         public function init_review_admin_notice() {
             // Check if user is an administrator
             if ( ! current_user_can( 'manage_options' ) ) {
@@ -430,6 +447,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         }
 
         /**
+         * Get the installation date of the plugin
          * @return DateTime
          */
         private function get_install_date() {
@@ -452,7 +470,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         }
 
         /**
-         *
+         * Callback to hide the admin notice.
          */
         public function catch_hide_notice() {
             if ( isset( $_GET[self::OPTION_ADMIN_NOTICE_KEY] ) && current_user_can( 'install_plugins' ) ) {

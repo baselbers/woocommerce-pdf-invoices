@@ -81,8 +81,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    $settings = array(
 			    // General section
 			    array(
-				    'id' => 'bewpi-template-filename',
-				    'name' => $this->prefix . 'template_filename',
+				    'id' => 'bewpi-template-name',
+				    'name' => $this->prefix . 'template_name',
 				    'title' => __( 'Template', $this->textdomain ),
 				    'callback' => array( &$this, 'select_callback' ),
 				    'page' => $this->settings_key,
@@ -93,10 +93,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					    array(
 						    'id' => 1,
 						    'name' => 'Micro',
-						    'value' => 'invoice-micro.php'
+						    'value' => 'micro'
 					    )
 				    ),
-				    'default' => 'invoice-micro.php'
+				    'default' => 'micro'
 			    ),
 			    array(
 				    'id' => 'bewpi-color-theme',
@@ -518,7 +518,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    }
 
 		    // Invoice number
-		    if ( !isset( $input['bewpi_next_invoice_number'] ) ) {
+		    if ( ! isset( $input['bewpi_next_invoice_number'] ) ) {
 			    // Reset the next invoice number so it's visible in the disabled input field.
 			    $output['bewpi_next_invoice_number'] = $template_options['bewpi_next_invoice_number'];
 		    }

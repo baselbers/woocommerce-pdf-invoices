@@ -476,7 +476,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             if ( isset( $_GET[self::OPTION_ADMIN_NOTICE_KEY] ) && current_user_can( 'install_plugins' ) ) {
                 // Add user meta
                 global $current_user;
-                add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
+                //add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
+                update_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1' );
 
                 // Build redirect URL
                 $query_params = $this->get_admin_querystring_array();

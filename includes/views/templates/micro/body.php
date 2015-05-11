@@ -33,10 +33,11 @@
 	        $order_taxes    = $this->order->get_taxes();
 	        if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
 		        foreach ( $order_taxes as $tax_id => $tax_item ) :
-			        $column_label   = ! empty( $tax_item['label'] ) ? $tax_item['label'] : __( 'VAT', $this->textdomain );
+                    $tax_label = __( 'VAT', $this->textdomain );
+			        $column_label = ! empty( $tax_item['label'] ) ? $tax_item['label'] : $tax_label;
 			        ?>
 			        <th class="align-left">
-				        <?php echo esc_attr( $column_label ); ?>
+				        <?php echo $column_label; ?>
 			        </th>
 		        <?php
 		        endforeach;
@@ -200,7 +201,7 @@
 		        <tr class="after-products">
                     <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 			        <td colspan="<?php echo $this->colspan['right_left']; ?>">
-				        <?php printf( __( 'VAT %s', $this->textdomain ), WC_Tax::get_rate_percent( $tax->rate_id ) ); ?>
+				        <?php echo __( 'VAT', $this->textdomain ) . ' ' . WC_Tax::get_rate_percent( $tax->rate_id ); ?>
 			        </td>
 			        <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo $tax->formatted_amount; ?></td>
 		        </tr>

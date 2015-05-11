@@ -268,13 +268,13 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             $this->number_of_columns    = $this->get_number_of_columns();
             $this->colspan              = $this->get_colspan();
 		    $this->formatted_number     = $this->get_formatted_number( true );
-		    $this->year                 = date( 'Y' );
+		    $this->year                 = (string) date( 'Y' );
 		    $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
             // Template
             $this->css                  = $this->get_css();
-            $this->header               = $this->get_header();
-            $this->body                 = $this->get_body();
-            $this->footer               = $this->get_footer();
+            $this->header               = $this->get_header_html();
+            $this->body                 = $this->get_body_html();
+            $this->footer               = $this->get_footer_html();
 
 		    add_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
 		    add_post_meta( $this->order->id, '_bewpi_invoice_year', $this->year );
@@ -329,6 +329,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          * @return string
          */
 	    public function get_total() {
+            global $woocommerce;
+
 		    $total = '';
 		    if ( $this->order->get_total_refunded() > 0 ) :
 			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();

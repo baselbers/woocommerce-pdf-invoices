@@ -95,6 +95,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             parent::__construct();
 	        $this->order                = wc_get_order( $order_id );
 	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
+            $this->template_folder      = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_name'];
 
 	        // Check if the invoice already exists.
 	        if( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && $_GET['bewpi_action'] !== 'cancel' )
@@ -110,7 +111,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	        $this->file                 = $this->formatted_number . '.pdf';
 	        $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->file;
 	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
-            $this->template_folder      = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_name'];
         }
 
 	    /**

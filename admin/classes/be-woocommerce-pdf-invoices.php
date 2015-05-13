@@ -307,7 +307,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				$invoice = new BEWPI_Invoice( $order->id );
 
-				if ( !$invoice->exists() ) :
+				if ( ! $invoice->exists() ) :
 					$filename = $invoice->save( "F" );
 				else :
 					$filename = $invoice->get_filename();

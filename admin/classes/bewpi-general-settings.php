@@ -41,7 +41,6 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
          */
         public function load_settings() {
 			$defaults = $this->get_defaults();
-	        $defaults['bewpi_settings_key'] = $this->settings_key;
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );
 	        update_option( $this->settings_key, $options );

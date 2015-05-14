@@ -41,7 +41,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
          */
         public function load_settings() {
 			$defaults = $this->get_defaults();
-	        $defaults['bewpi_settings_key'] = $this->settings_key;
 	        $defaults['bewpi_last_invoice_number'] = 1;
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );

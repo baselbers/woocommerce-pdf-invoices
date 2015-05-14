@@ -281,7 +281,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 
 		    $this->template_options['bewpi_last_invoice_number']    = $this->number;
 		    $this->template_options['bewpi_last_invoiced_year']     = $this->year;
-		    update_option( 'bewpi_template_settings', $this->template_options );
+            delete_option( 'bewpi_template_settings' );
+		    add_option( 'bewpi_template_settings', $this->template_options );
 
 		    parent::generate( $dest, $this );
 

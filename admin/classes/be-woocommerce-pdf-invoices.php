@@ -197,7 +197,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Loads the textdomain and localizes the plugin options tabs.
          */
 		public function load_textdomain() {
-			load_plugin_textdomain( $this->textdomain, false, BEWPI_LANG_DIR );
+            $lang_dir = (string)BEWPI_LANG_DIR;
+			load_plugin_textdomain( $this->textdomain, false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
 			$this->settings_tabs['bewpi_general_settings'] = __( 'General', $this->textdomain );
 			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', $this->textdomain );
 		}

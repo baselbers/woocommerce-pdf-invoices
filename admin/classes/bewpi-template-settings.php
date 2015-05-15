@@ -300,7 +300,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<b>[prefix]</b>', '<b>[suffix]</b>', '<b>[number]</b>', '<b>[Y]</b>', '<b>[y]</b>', '<br/>', '<b>', '</b>', '<b>[number]</b>' ),
+				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<b>[prefix]</b>', '<b>[suffix]</b>', '<b>[number]</b>', '<b>[m]</b>', '<b>[Y]</b>', '<b>[y]</b>', '<br/>', '<b>', '</b>', '<b>[number]</b>' ),
 				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'

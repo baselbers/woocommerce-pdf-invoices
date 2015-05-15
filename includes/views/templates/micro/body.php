@@ -195,6 +195,26 @@
                 <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
             </tr>
         <?php } ?>
+        <!-- Fees -->
+        <?php
+        $line_items_fee      = $this->order->get_items( 'fee' );
+        //if ( count( $line_items_fee ) > 0 ) :
+        foreach ( $line_items_fee as $item_id => $item ) :
+            ?>
+            <tr class="after-products">
+                <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+                <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php echo ! empty( $item['name'] ) ? esc_html( $item['name'] ) : __( 'Fee', 'woocommerce' ); ?></td>
+                <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right">
+                    <?php
+                    echo ( isset( $item['line_total'] ) ) ? wc_price( wc_round_tax_total( $item['line_total'] ) ) : '';
+
+                    if ( $refunded = $this->order->get_total_refunded_for_item( $item_id, 'fee' ) ) {
+                        echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+                    }
+                    ?>
+                </td>
+            </tr>
+        <?php endforeach; ?>
         <!-- Tax -->
         <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
 	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>

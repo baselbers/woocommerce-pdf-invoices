@@ -118,18 +118,19 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	     * @return mixed
 	     */
 	    public function get_formatted_number( $insert = false ) {
-		    $invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
-		    // Format number with the number of digits
-		    $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
-		    $digitized_invoice_number = sprintf( $digit_str, $this->number );
-		    $year = date('Y');
-		    $y = date('y');
+            $invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
+            // Format number with the number of digits
+            $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
+            $digitized_invoice_number = sprintf( $digit_str, $this->number );
+            $year = date('Y');
+            $y = date('y');
+            $m = date('m');
 
-		    // Format invoice number
-		    $formatted_invoice_number = str_replace(
-			    array( '[prefix]', '[suffix]', '[number]', '[Y]', '[y]' ),
-			    array( $this->template_options['bewpi_invoice_number_prefix'], $this->template_options['bewpi_invoice_number_suffix'], $digitized_invoice_number, $year, $y ),
-			    $invoice_number_format );
+            // Format invoice number
+            $formatted_invoice_number = str_replace(
+                array( '[prefix]', '[suffix]', '[number]', '[Y]', '[y]' , '[m]' ),
+                array( $this->template_options['bewpi_invoice_number_prefix'], $this->template_options['bewpi_invoice_number_suffix'], $digitized_invoice_number, (string)$year, (string)$y, (string)$m ),
+                $invoice_number_format );
 
 		    // Insert formatted invoicenumber into db
 		    if ( $insert )
@@ -268,7 +269,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             $this->number_of_columns    = $this->get_number_of_columns();
             $this->colspan              = $this->get_colspan();
 		    $this->formatted_number     = $this->get_formatted_number( true );
-		    $this->year                 = (string) date( 'Y' );
+		    $this->year                 = date( 'Y' );
 		    $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
             // Template
             $this->css                  = $this->get_css();
@@ -330,8 +331,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          * @return string
          */
 	    public function get_total() {
-            global $woocommerce;
-
 		    $total = '';
 		    if ( $this->order->get_total_refunded() > 0 ) :
 			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();

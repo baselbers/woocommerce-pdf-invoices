@@ -1,16 +1,8 @@
 <table class="company two-column">
     <tbody>
     <tr>
-        <td class="logo">
-            <?php if ( !empty( $this->template_options['bewpi_company_logo'] ) ) { ?>
-                <img class="company-logo" src="<?php echo $this->template_options['bewpi_company_logo']; ?>"/>
-            <?php } else { ?>
-                <h1 class="company-logo"><?php echo $this->template_options['bewpi_company_name']; ?></h1>
-            <?php } ?>
-        </td>
-        <td class="info">
-            <?php echo nl2br( $this->template_options['bewpi_company_address'] ); ?>
-        </td>
+        <td class="logo"><?php $this->get_company_logo_html(); ?></td>
+        <td class="info"><?php echo nl2br( $this->template_options['bewpi_company_address'] ); ?></td>
     </tr>
     </tbody>
 </table>

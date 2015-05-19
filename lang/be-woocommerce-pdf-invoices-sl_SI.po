@@ -1,324 +1,382 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-03-24 21:18+0100\n"
-"PO-Revision-Date: 2015-03-27 11:34+0100\n"
+"POT-Creation-Date: 2015-05-15 15:13+0100\n"
+"PO-Revision-Date: 2015-05-15 15:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.7.3\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
 "esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
 "_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/classes/woocommerce-pdf-invoices.php:152
+#: admin/classes/be-woocommerce-pdf-invoices.php:202
 msgid "General"
 msgstr ""
 
-#: admin/classes/woocommerce-pdf-invoices.php:153
-#: admin/classes/wpi-template-settings.php:109
+#: admin/classes/be-woocommerce-pdf-invoices.php:203
+#: admin/classes/bewpi-template-settings.php:85
 msgid "Template"
 msgstr ""
 
-#: admin/classes/woocommerce-pdf-invoices.php:167
+#: admin/classes/be-woocommerce-pdf-invoices.php:222
+#: admin/classes/be-woocommerce-pdf-invoices.php:223
 msgid "Invoices"
 msgstr "Računi"
 
-#: admin/classes/woocommerce-pdf-invoices.php:260
+#: admin/classes/be-woocommerce-pdf-invoices.php:328
 msgid "PDF Invoice"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:74
-msgid "General Settings"
+#: admin/classes/be-woocommerce-pdf-invoices.php:355
+msgid "Invoiced on:"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:75
+#: admin/classes/be-woocommerce-pdf-invoices.php:359
+msgid "Invoice number:"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:397
+msgid "View invoice"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:397
+msgid "View"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:398
+msgid "Cancel invoice"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:398
+msgid "Cancel"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:398
+msgid "Are you sure to delete the invoice?"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:400
+msgid "Create invoice"
+msgstr "Maak factuur"
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:400
+msgid "Create"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:433
+msgid "Download invoice (PDF)"
+msgstr ""
+
+#: admin/classes/be-woocommerce-pdf-invoices.php:512
+#, php-format
+msgid ""
+"Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+"Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you "
+"in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
+"a> - <a href='%s'>No, already done it!</a>"
+msgstr ""
+
+#: admin/classes/bewpi-general-settings.php:84
 msgid "Attach to Email"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:79
+#: admin/classes/bewpi-general-settings.php:92
 msgid "Processing order"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:83
+#: admin/classes/bewpi-general-settings.php:96
 msgid "Completed order"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:87
+#: admin/classes/bewpi-general-settings.php:100
 msgid "Customer invoice"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:91
+#: admin/classes/bewpi-general-settings.php:114
 msgid "Attach to New order Email"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:92
-msgid "Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive"
+#: admin/classes/bewpi-general-settings.php:126
+msgid "Enable Email It In"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:93
+#: admin/classes/bewpi-general-settings.php:134
 msgid "Email It In account"
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:133
-msgid "For bookkeeping purposes."
-msgstr ""
-
-#: admin/classes/wpi-general-settings.php:146
+#: admin/classes/bewpi-general-settings.php:139
 #, php-format
-msgid "Signup at %s and enter your account below."
+msgid "Get your account from your Email It In %suser account%s."
 msgstr ""
 
-#: admin/classes/wpi-general-settings.php:159
+#: admin/classes/bewpi-general-settings.php:152
+msgid "Email Options"
+msgstr ""
+
+#: admin/classes/bewpi-general-settings.php:158
+msgid "Cloud Storage Options"
+msgstr ""
+
+#: admin/classes/bewpi-general-settings.php:165
 #, php-format
-msgid "Enter your %s account."
-msgstr ""
-
-#: admin/classes/wpi-general-settings.php:182
-msgid "Invalid type of Email."
-msgstr ""
-
-#: admin/classes/wpi-general-settings.php:193
-#: admin/classes/wpi-general-settings.php:204
-#: admin/classes/wpi-template-settings.php:594
-msgid "Please don't try to change the values."
-msgstr ""
-
-#: admin/classes/wpi-general-settings.php:215
-msgid "Invalid Email address."
-msgstr ""
-
-#: admin/classes/wpi-settings.php:92
-msgid "Allowed tags: "
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:108
-msgid "Template Settings"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:110
-msgid "Color theme"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:111
-msgid "Company name"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:112
-msgid "Company logo"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:113
-msgid "Intro text"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:114
-msgid "Company address"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:115
-msgid "Company details"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:116
-msgid "Terms & conditions, policies etc."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:117
-msgid "Next invoice number"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:118
-msgid "Number of digits"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:119
-msgid "Invoice number prefix"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:120
-msgid "Invoice number suffix"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:121
-msgid "Invoice number format"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:122
-msgid "Reset on 1st January"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:123
-msgid "Invoice date format"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:124
-msgid "Show SKU"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:125
-msgid "Show discount"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:126
-msgid "Show subtotal"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:127
-msgid "Show tax"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:128
-msgid "Show shipping"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:129
-msgid "Show customer notes"
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:167
-msgid "Color theme of the invoice."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:190
 msgid ""
-"Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png."
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:201
+#: admin/classes/bewpi-settings.php:89
+msgid "Feel free to use "
+msgstr ""
+
+#: admin/classes/bewpi-settings.php:157
 msgid "Remove logo"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:344
-msgid "Invoice number to use for next invoice."
+#: admin/classes/bewpi-template-settings.php:103
+msgid "Color theme"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:360
-msgid "Number of zero digits."
+#: admin/classes/bewpi-template-settings.php:114
+msgid "Date format"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:374
-msgid "Prefix text for the invoice number. Not required."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:388
-msgid "Suffix text for the invoice number. Not required."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:402
-msgid ""
-"Use [prefix], [suffix] and [number] as placeholders. [number] is required."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:416
-msgid "Reset on the first of January."
-msgstr ""
-
-#: admin/classes/wpi-template-settings.php:430
+#: admin/classes/bewpi-template-settings.php:119
 #, php-format
-msgid "%sFormat%s of the date. Examples: %s or %s."
+msgid "%sFormat%s of invoice date and order date."
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:476
-msgid "Invalid template."
+#: admin/classes/bewpi-template-settings.php:130
+msgid "Company name"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:489
-msgid "Invalid color theme code."
+#: admin/classes/bewpi-template-settings.php:141
+msgid "Company logo"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:500
-msgid "Invalid company name."
+#: admin/classes/bewpi-template-settings.php:152
+msgid "Company address"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:518
-msgid "Invalid input into one of the textarea's."
+#: admin/classes/bewpi-template-settings.php:163
+msgid "Company details"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:529
-msgid "Invalid (next) invoice number."
+#: admin/classes/bewpi-template-settings.php:174
+msgid "Intro text"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:547
-msgid "Invalid invoice number digits."
+#: admin/classes/bewpi-template-settings.php:186
+msgid "Terms & conditions, policies etc."
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:563
-msgid "The [number] placeholder is required as invoice number format."
+#: admin/classes/bewpi-template-settings.php:202
+msgid "Show customer notes"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:570
-msgid "Invalid invoice number format."
+#: admin/classes/bewpi-template-settings.php:210
+msgid "Type"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:604
-msgid "Invalid date format."
+#: admin/classes/bewpi-template-settings.php:218
+msgid "WooCommerce order number"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:632
-msgid "File is invalid and contains either '..' or './'."
+#: admin/classes/bewpi-template-settings.php:222
+msgid "Sequential number"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:639
-msgid "File is invalid and contains ':' after the first character."
+#: admin/classes/bewpi-template-settings.php:246
+msgid "Next"
 msgstr ""
 
-#: admin/classes/wpi-template-settings.php:648
-msgid "Please upload image with extension jpg, jpeg or png."
+#: admin/classes/bewpi-template-settings.php:251
+#, php-format
+msgid ""
+"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
+"Only available with sequential numbering type and you need to check the "
+"checkbox to actually reset the value."
 msgstr ""
 
-#: includes/classes/wpi-invoice.php:327
-msgid "Customer note"
-msgstr "Komentar kupca"
+#: admin/classes/bewpi-template-settings.php:260
+msgid "Digits"
+msgstr ""
 
-#: includes/views/templates/invoice-micro.php:156
-msgid "Invoice"
-msgstr "Račun"
+#: admin/classes/bewpi-template-settings.php:276
+msgid "[prefix]"
+msgstr ""
 
-#: includes/views/templates/invoice-micro.php:174
-msgid "Description"
-msgstr "Opis"
+#: admin/classes/bewpi-template-settings.php:287
+msgid "[suffix]"
+msgstr ""
 
-#: includes/views/templates/invoice-micro.php:178
+#: admin/classes/bewpi-template-settings.php:298
+msgid "Format"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:303
+#, php-format
+msgid ""
+"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
+"required."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:317
+msgid "Reset on 1st of january"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:330
+#: includes/views/templates/micro/body.php:25
 msgid "SKU"
 msgstr "Koda"
 
-#: includes/views/templates/invoice-micro.php:182
-msgid "Quantity"
-msgstr "Količina"
-
-#: includes/views/templates/invoice-micro.php:183
-msgid "Unit price"
-msgstr "Cena za kos"
-
-#: includes/views/templates/invoice-micro.php:184
-#: includes/views/templates/invoice-micro.php:240
-msgid "Total"
-msgstr "Skupaj"
-
-#: includes/views/templates/invoice-micro.php:209
-msgid "Discount"
-msgstr "Popust"
-
-#: includes/views/templates/invoice-micro.php:217
-msgid "Shipping"
-msgstr "Poštnina"
-
-#: includes/views/templates/invoice-micro.php:225
+#: admin/classes/bewpi-template-settings.php:342
+#: includes/views/templates/micro/body.php:194
 msgid "Subtotal"
 msgstr "Skupaj"
 
-#: includes/views/templates/invoice-micro.php:233
+#: admin/classes/bewpi-template-settings.php:354
 msgid "Tax"
 msgstr "DDV"
+
+#: admin/classes/bewpi-template-settings.php:366
+#: includes/views/templates/micro/body.php:178
+msgid "Discount"
+msgstr "Popust"
+
+#: admin/classes/bewpi-template-settings.php:378
+#: includes/views/templates/micro/body.php:186
+msgid "Shipping"
+msgstr "Poštnina"
+
+#: admin/classes/bewpi-template-settings.php:392
+msgid "General Options"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:398
+msgid "Invoice Number Options"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:404
+msgid "Header Options"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:410
+msgid "Footer Options"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:416
+msgid "Visible Columns"
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:422
+msgid "These are the general template options."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:423
+msgid "These are the invoice number options."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:424
+msgid "The header will be visible on every page. "
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:425
+msgid "The footer will be visible on every page. "
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:426
+msgid "Enable or disable the columns."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:496
+msgid "File is invalid and contains either '..' or './'."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:503
+msgid "File is invalid and contains ':' after the first character."
+msgstr ""
+
+#: admin/classes/bewpi-template-settings.php:512
+msgid "File should be less then 2MB."
+msgstr ""
+
+#: includes/views/templates/micro/body.php:22
+msgid "Description"
+msgstr "Opis"
+
+#: includes/views/templates/micro/body.php:28
+msgid "Cost"
+msgstr ""
+
+#: includes/views/templates/micro/body.php:29
+msgid "Qty"
+msgstr ""
+
+#: includes/views/templates/micro/body.php:36
+#: includes/views/templates/micro/body.php:224
+msgid "VAT"
+msgstr ""
+
+#: includes/views/templates/micro/body.php:47
+#: includes/views/templates/micro/body.php:233
+msgid "Total"
+msgstr "Skupaj"
+
+#: includes/views/templates/micro/body.php:206
+msgid "Fee"
+msgstr ""
+
+#: includes/views/templates/micro/body.php:240
+msgid "Refunded"
+msgstr ""
+
+#: includes/views/templates/micro/footer.php:9
+#: includes/views/templates/micro/footer.php:13
+msgid "Customer note"
+msgstr "Komentar kupca"
+
+#: includes/views/templates/micro/footer.php:21
+#, php-format
+msgid "%sPayment%s via"
+msgstr ""
+
+#: includes/views/templates/micro/header.php:13
+msgid "Invoice to"
+msgstr ""
+
+#: includes/views/templates/micro/header.php:17
+msgid "Ship to"
+msgstr ""
+
+#: includes/views/templates/micro/header.php:27
+msgid "Invoice"
+msgstr "Račun"
+
+#: includes/views/templates/micro/header.php:30
+#, php-format
+msgid "Order Number %s"
+msgstr ""
+
+#: includes/views/templates/micro/header.php:31
+#, php-format
+msgid "Order Date %s"
+msgstr ""
+
+#~ msgid "Quantity"
+#~ msgstr "Količina"
+
+#~ msgid "Unit price"
+#~ msgstr "Cena za kos"
 
 #~ msgid "Signup at %s and enter your account beyond."
 #~ msgstr "Meld je aan op %s en vul je account onderstaand in."
@@ -328,9 +386,6 @@ msgstr "DDV"
 
 #~ msgid "Show invoice"
 #~ msgstr "Toon factuur"
-
-#~ msgid "Create invoice"
-#~ msgstr "Maak factuur"
 
 #~ msgid "%sFormat%s of the date."
 #~ msgstr "%sFormat%s van de datum."

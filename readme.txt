@@ -3,53 +3,52 @@ Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
-Tested up to: 4.1.1
-Stable tag: 2.0.6
+Tested up to: 4.2
+Stable tag: 2.2.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Simple plugin to generate a customized PDF invoice based upon an order and automatically attaches it to the email type of your choice.
+Automatically or manually create and send PDF Invoices for WooCommerce orders and connect with Dropbox, Google Drive, OneDrive or Egnyte.
 
 == Description ==
-This plugin simply generates a customized PDF Invoice based upon a WooCommerce order and automatically attaches it to the email type of your choice. Now sending invoices to your Google Drive, Egnyte, Dropbox or OneDrive and it's all FREE!
+This WooCommerce plugin creates customizable PDF invoices for WooCommerce orders with the ability to setup an invoice number with a specific format. Attach the PDF invoice to the WooCommerce email type of your choice and try out sending invoices automatically to Dropbox, Google Drive, OneDrive or Egnyte. It's simply awesome!
 
-= FEATURES =
-- Attach PDF invoice to email type of your choice
-- Attach PDF invoice to the New Order email
-- Connection with many cloud storages like Google Drive, Egnyte, Dropbox or OneDrive
-- Choose your template
-- Sequential invoice numbers
-- Choose different invoice number formats
-- Choose next invoice number
-- Choose the number of zero digits for your invoice number
-- Make use of a prefix and/or a suffix for your invoice number
-- Choose your date format
-- Upload and show your company logo
-- Add your company address
-- Add additional company information
-- Add refunds policies, conditions etc.
-- Choose to show customer notes
-- Choose to show SKU
-- Translation ready
+= Main features =
+- Automatic PDF invoice generation and attachment
+- Attach PDF invoice to WooCommerce email type of your choice
+- Connect with Google Drive, Egnyte, Dropbox or OneDrive
+- Many PDF invoice template customization options like changing color
+- WooCommerce order numbering or built-in sequential invoice numbering
+- Many invoice and date format customization options
+- Advanced items table with refunds, discounts, different item tax rates columns and more
+- Manually create or delete PDF invoice
+- Resend PDF invoices to customer
+- Let customers download invoice from there account
+- Without annoying advertisements
 
-== Frequently Asked Questions ==
+Install the plugin and try out all the features, it will simply be awesome.
 
-= Can I make a request for some particular functionality? =
+= Support =
 
-Of course you can! Please open a support thread and I will try to answer as soon as possible. Please don't hesitate to contact me for questions.
+Support can take place on the [forum page](https://wordpress.org/support/plugin/woocommerce-pdf-invoices), where we will try to respond as soon as possible.
 
-= How do I get your plugin in my own language? =
+= Contributing =
 
-Well, please send me a request by Email or add a support thread and I will make a new language file for you.
+If you want to add code to the source code, report an issue or request an enhancement, feel free to use [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices).
+
+= Translating =
+
+Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices#translating).
 
 == Screenshots ==
 
 1. General settings
 2. Template settings
-3. View or Cancel the invoice from the order page.
-4. Create a new invoice from the order page.
-5. View the invoice from the shop order page.
-6. Nice and clean invoice template with the ability to change the color.
+3. View or Cancel invoice from the order page.
+4. Create new invoice from the order page.
+5. View invoice from the shop order page.
+6. Download invoice from account.
+6. Nice and clean template with refunds, different tax rates, the ability to change the color and more!
 
 == Installation ==
 
@@ -66,6 +65,76 @@ The manual installation method involves downloading our plugin and uploading it 
 3. Activate the plugin from the Plugins menu within the WordPress admin.
 
 == Changelog ==
+
+= 2.2.8 - May 15, 2015 =
+
+- Fixed: BEWPI_TEMPLATES_DIR not defined
+
+= 2.2.7 - May 15, 2015 =
+
+- Added: Filter to change path to textdomain
+- Added: Fees on invoice
+- Added: Option to add month to invoice number format
+- Fixed: Image not always showing on invoice
+
+= 2.2.6 - May 14, 2015 =
+
+- Fixed: Sequential invoice numbering
+
+= 2.2.5 - May 13, 2015 =
+
+- Fixed: Invoice not generated with order
+
+= 2.2.4 - May 11, 2015 =
+
+- Fixed: Admin notice
+- Fixed: VAT translation
+- Improved: Invoice header repeating on every page
+- Improved: Template into separate files
+
+= 2.2.3 - April 28, 2015 =
+
+- Added: Customer notes added via order details page
+- Fixed: Invoice not translated
+- Fixed: Date not translated
+- Updated: Language files
+
+= 2.2.2 - April 25, 2015 =
+
+- Added: Admin notices
+- Improved: Translations
+
+= 2.2.1 - April 25, 2015 =
+
+- Added: Support for multiple languages like Chinese, Greek, Latin etc.
+- Fixed: Invoice translation
+- Fixed: Language files translatable
+- Fixed: wc_tax_enabled function support due to WooCommerce 2.2 and lower
+- Improved: French language files
+
+= 2.2.0 - April 24, 2015 =
+
+- Added: Download invoice button on My account page
+- Added: Norwegian language files
+- Added: Settings sections into settings pages
+- Added: Checkbox to reset invoice number counter
+- Added: Refunds on invoice template
+- Added: Item tax and different total taxes on invoice template
+- Fixed: Updating plugin removed all invoices -- Invoices into uploads dir
+- Fixed: Order number not formatted
+- Fixed: Invoice not viewable and removable in IE on Order details page
+- Improved: Completely refactored code
+- Improved: Dutch language file
+
+= 2.1.0 - April 8, 2015 =
+
+- Added: Variable products attributes on template
+- Added: Shipping address on template
+- Added: Order number and order date on template
+- Added: Option to add the year to the invoice number
+- Added: Option to change order date format
+- Fixed: Header CSS on template
+- Improved: Dutch language file
 
 = 2.0.6 - April 3, 2015 =
 

@@ -14,7 +14,7 @@
 // More than 1 font can be specified but each will add to the processing time of the script
 
 // $this->backupSubsFont = array('dejavusanscondensed','arialunicodems','sun-exta');	// this will recognise most scripts
-$this->backupSubsFont = array('dejavusanscondensed','freeserif');
+$this->backupSubsFont = array('simsun','garuda');
 
 // Optionally set a font (name as defined below in $this->fontdata) to use for CJK characters
 // in Plane 2 Unicode (> U+20000) when using useSubstitutions. 
@@ -85,17 +85,28 @@ starting at 1, as they appear in the .ttc file e.g.
 $this->fontdata = array(
     "dejavusanscondensed" => array(
         'R' => "DejaVuSansCondensed.ttf",
-        'B' => "DejaVuSansCondensed-Bold.ttf",
-        'I' => "DejaVuSansCondensed-Oblique.ttf",
-        'BI' => "DejaVuSansCondensed-BoldOblique.ttf",
         'useOTL' => 0xFF,
         'useKashida' => 75,
     ),
-	"opensans" => array(
-		'R' => "OpenSans-Regular.ttf",
-		'B' => "OpenSans-Bold.ttf",
-		'I' => "OpenSans-Italic.ttf",
-	),
+    "garuda" => array(
+        'R' => "Garuda.ttf",
+    ),
+    "simsun" => array(
+        'R' => "SimSun.ttf",
+    ),
+    "opensans" => array(
+        'R' => "OpenSans-Regular.ttf",
+        'B' => "OpenSans-Bold.ttf",
+        'I' => "OpenSans-Italic.ttf",
+    ),
+    // "lato" => array(
+    // 	'R' => "Lato-Regular.ttf",
+    // 	'B' => "Lato-Bold.ttf",
+    // 	'I' => "Lato-Italic.ttf",
+    // ),
+    // "freeserif" => array(
+    // 	'R' => "FreeSerif.ttf",
+    // ),
 );
 
 

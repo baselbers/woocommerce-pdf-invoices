@@ -198,7 +198,6 @@
         <!-- Fees -->
         <?php
         $line_items_fee      = $this->order->get_items( 'fee' );
-        //if ( count( $line_items_fee ) > 0 ) :
         foreach ( $line_items_fee as $item_id => $item ) :
             ?>
             <tr class="after-products">

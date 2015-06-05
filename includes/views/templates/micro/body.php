@@ -172,7 +172,7 @@
         </tr>
         <!-- Table footers -->
         <!-- Discount -->
-        <?php if( $this->template_options['bewpi_show_discount'] ) { ?>
+        <?php if( $this->template_options['bewpi_show_discount'] && $this->order->get_total_discount() !== 0.00 ) { ?>
             <tr class="discount after-products">
                 <td colspan="<?php echo $this->colspan['left']; ?>"></td>
                 <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Discount', $this->textdomain ); ?></td>

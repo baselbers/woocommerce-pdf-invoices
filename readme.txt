@@ -66,7 +66,7 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Changelog ==
 
-= 2.2.8 - June 22, 2015 =
+= 2.2.9 - June 22, 2015 =
 
 - Added: Client billing phone number
 - Added: Option to display including tax

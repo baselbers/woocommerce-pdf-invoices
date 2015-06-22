@@ -226,17 +226,18 @@
             </tr>
         <?php endforeach; ?>
         <!-- Tax -->
-        <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
+        <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) :
 	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>
 		        <tr class="after-products">
                     <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 			        <td colspan="<?php echo $this->colspan['right_left']; ?>">
-				        <?php echo __( 'VAT', $this->textdomain ) . ' ' . WC_Tax::get_rate_percent( $tax->rate_id ); ?>
+				        <?php //echo __( 'VAT', $this->textdomain ) . ' ' . WC_Tax::get_rate_percent( $tax->rate_id ); ?>
+				        <?php echo $tax->label; ?>
 			        </td>
 			        <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo $tax->formatted_amount; ?></td>
 		        </tr>
 	        <?php endforeach; ?>
-        <?php } ?>
+        <?php endif; ?>
         <!-- Total -->
         <tr class="after-products">
             <td colspan="<?php echo $this->colspan['left']; ?>"></td>

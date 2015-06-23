@@ -342,6 +342,14 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    }
 
         /**
+         * Get the subtotal without discount and shipping, but including tax.
+         * @return mixed|void
+         */
+        public function get_subtotal_incl_tax() {
+            return $this->order->get_subtotal() + $this->order->get_total_tax();
+        }
+
+        /**
          * Get the header html
          * @return string
          */

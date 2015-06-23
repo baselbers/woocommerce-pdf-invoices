@@ -153,10 +153,13 @@
                 <td class="align-right item-total" width="">
 	                <?php
 	                if ( isset( $item['line_total'] ) ) {
+                        $incl_tax = (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ];
+
 		                if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] != $item['line_total'] ) {
-			                echo '<del>' . wc_price( $item['line_subtotal'], array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+			                echo '<del>' . wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
 		                }
-		                echo wc_price( $item['line_total'], array( 'currency' => $this->order->get_order_currency() ) );
+
+                        echo wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) );
 	                }
 
 	                if ( $refunded = $this->order->get_total_refunded_for_item( $item_id ) ) {
@@ -171,8 +174,16 @@
 	        <td colspan="<?php echo $this->number_of_columns; ?>"></td>
         </tr>
         <!-- Table footers -->
+        <!-- Subtotal -->
+        <?php if( $this->template_options['bewpi_show_subtotal'] && (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ] ) { ?>
+            <tr class="subtotal after-products">
+                <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+                <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
+                <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal_incl_tax(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+            </tr>
+        <?php } ?>
         <!-- Discount -->
-        <?php if( $this->template_options['bewpi_show_discount'] ) { ?>
+        <?php if( $this->template_options['bewpi_show_discount'] && $this->order->get_total_discount() !== 0.00 ) { ?>
             <tr class="discount after-products">
                 <td colspan="<?php echo $this->colspan['left']; ?>"></td>
                 <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Discount', $this->textdomain ); ?></td>
@@ -188,7 +199,7 @@
             </tr>
         <?php } ?>
         <!-- Subtotal -->
-        <?php if( $this->template_options['bewpi_show_subtotal'] ) { ?>
+        <?php if( $this->template_options['bewpi_show_subtotal'] && ! (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ] ) { ?>
             <tr class="subtotal after-products">
                 <td colspan="<?php echo $this->colspan['left']; ?>"></td>
                 <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
@@ -215,17 +226,18 @@
             </tr>
         <?php endforeach; ?>
         <!-- Tax -->
-        <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) {
+        <?php if( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() ) :
 	        foreach ( $this->order->get_tax_totals() as $code => $tax ) : ?>
 		        <tr class="after-products">
                     <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 			        <td colspan="<?php echo $this->colspan['right_left']; ?>">
-				        <?php echo __( 'VAT', $this->textdomain ) . ' ' . WC_Tax::get_rate_percent( $tax->rate_id ); ?>
+				        <?php //echo __( 'VAT', $this->textdomain ) . ' ' . WC_Tax::get_rate_percent( $tax->rate_id ); ?>
+				        <?php echo $tax->label; ?>
 			        </td>
 			        <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo $tax->formatted_amount; ?></td>
 		        </tr>
 	        <?php endforeach; ?>
-        <?php } ?>
+        <?php endif; ?>
         <!-- Total -->
         <tr class="after-products">
             <td colspan="<?php echo $this->colspan['left']; ?>"></td>

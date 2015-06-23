@@ -430,7 +430,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$url = admin_url( 'admin-ajax.php?action=bewpi_download_invoice&order_id=' . $order->id . '&nonce=' . wp_create_nonce( 'bewpi_download_invoice' ) );
 				$actions['invoice'] = array(
 					'url'  => $url,
-					'name' => __( 'Download invoice (PDF)', $this->textdomain )
+					'name' => sprintf( __( 'Invoice %s (PDF)', $this->textdomain ), $invoice->get_formatted_number() )
 				);
 			}
 			return $actions;

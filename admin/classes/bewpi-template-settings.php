@@ -123,6 +123,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					    'required'
 				    )
 			    ),
+                array(
+                    'id' => 'bewpi-display-prices-incl-tax',
+                    'name' => $this->prefix . 'display_prices_incl_tax',
+                    'title' => '',
+                    'callback' => array( &$this, 'input_callback' ),
+                    'page' => $this->settings_key,
+                    'section' => 'general',
+                    'type' => 'checkbox',
+                    'desc' => __( 'Display prices including tax', $this->textdomain )
+                        . "<br/><div class='bewpi-notes'>" . __( 'Subtotal will be including tax and excluding discount and shipping.', $this->textdomain ) . "</div>",
+                    'class' => 'bewpi-display-prices-incl-tax-option-title',
+                    'default' => 0
+                ),
 			    // Header section
 		        array(
 			        'id' =>  'bewpi-company-name',

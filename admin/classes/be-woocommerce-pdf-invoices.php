@@ -109,15 +109,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * Initialize...
          */
         public function init() {
-
             $this->load_textdomain();
-
             $this->create_invoices_dir();
-
             $this->invoice_actions();
-
             $this->init_review_admin_notice();
-
         }
 
         /**

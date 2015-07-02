@@ -66,9 +66,25 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
          */
         protected function generate( $dest, $document ) {
 	        set_time_limit(0);
-            $mpdf_filename = BEWPI_LIB_DIR . 'mpdf/mpdf.php';
+
+	        $mpdf_filename = BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 	        include $mpdf_filename;
-	        $mpdf = new mPDF('', 'A4', 0, 'opensans', 17, 17, 150, 50, 20, 0, '');
+
+	        $mpdf_options = $this->get_mpdf_options();
+	        $mpdf = new mPDF(
+		        $mpdf_options['mode'],               // mode
+		        $mpdf_options['format'],             // format
+		        $mpdf_options['default_font_size'],  // default_font_size
+		        $mpdf_options['default_font'],       // default_font
+		        $mpdf_options['margin_left'],        // margin_left
+		        $mpdf_options['margin_right'],       // margin_right
+		        $mpdf_options['margin_top'],         // margin_top
+		        $mpdf_options['margin_bottom'],      // margin_bottom
+		        $mpdf_options['margin_header'],      // margin_header
+		        $mpdf_options['margin_footer'],      // margin_footer
+		        $mpdf_options['orientation']         // orientation
+	        );
+
 	        $mpdf->useOnlyCoreFonts = false;    // false is default
 	        $mpdf->SetTitle( $this->title );
 	        $mpdf->SetAuthor( $this->author );
@@ -124,5 +140,21 @@ if ( ! class_exists( 'BEWPI_Document' ) ) {
         public function get_filename() {
             return $this->filename;
         }
+
+	    private function get_mpdf_options() {
+		    return apply_filters( 'bewpi_mpdf_options', array(
+			    'mode' => '',
+			    'format' => '',
+			    'default_font_size' => 0,
+			    'default_font' => 'opensans',
+			    'margin_left' => 17,
+			    'margin_right' => 17,
+			    'margin_top' => 150,
+			    'margin_bottom' => 50,
+			    'margin_header' => 20,
+			    'margin_footer' => 0,
+			    'orientation' => 'P'
+		    ));
+	    }
     }
 }

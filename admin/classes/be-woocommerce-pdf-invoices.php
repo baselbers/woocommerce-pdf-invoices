@@ -283,13 +283,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
          * @return string
          */
 		function add_email_it_in_account_to_email_headers( $headers, $status ) {
-            $general_options = get_option( 'bewpi_general_settings' );
-			if ( $status == $general_options['bewpi_email_type']
-			    && $general_options['bewpi_email_it_in']
-				&& !empty( $general_options['bewpi_email_it_in_account'] ) ) {
-					$email_it_in_account = $general_options['bewpi_email_it_in_account'];
-					$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
-			}
+            $general_options        = get_option( 'bewpi_general_settings' );
+			$email_it_in_account    = $general_options['bewpi_email_it_in_account'];
+
+			if ( $status !== $general_options['bewpi_email_type'] )
+				return $headers;
+
+			if ( ! (bool)$general_options['bewpi_email_it_in'] || empty( $email_it_in_account ) )
+				return $headers;
+
+			$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
+
 			return $headers;
 		}
 

@@ -8,7 +8,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
     /**
      * Implements the template settings.
      */
-    class BEWPI_Template_Settings extends BEWPI_Settings {
+    class BEWPI_Template_Settings extends BEWPI_Abstract_Setting {
 
         /**
          * Constant template settings key

@@ -3,18 +3,23 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-if ( ! class_exists( 'BEWPI_Invoice' ) ) {
+if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
     /**
      * Makes the invoice.
      * Class BEWPI_Invoice
      */
-    class BEWPI_Invoice extends BEWPI_Document{
+    class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 
         /**
          * @var WC_Order
          */
         public $order;
+
+        /**
+         * @var array
+         */
+        public $orders = array();
 
         /**
          * Invoice number
@@ -41,34 +46,10 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    protected $year;
 
         /**
-         * Template header html
-         * @var string
-         */
-        protected $header;
-
-        /**
-         * Template body html
-         * @var string
-         */
-        protected $body;
-
-        /**
-         * Template CSS
-         * @var string
-         */
-        protected $css;
-
-	    /**
-	     * Template footer html
-	     * @var string
-	     */
-	    protected $footer;
-
-        /**
          * Number of columns for the products table
          * @var integer
          */
-        protected $number_of_columns;
+        public $columns_count;
 
         /**
          * Colspan data for product table cells
@@ -82,20 +63,29 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
          */
         protected $desc_cell_width;
 
-        /**
-         * @var string
-         */
-        protected $template_folder;
+	    /**
+	     * Name of the template
+	     * @var string
+	     */
+	    protected $template_name;
+
+	    /**
+	     * Type of invoice
+	     * @var string
+	     */
+	    protected $type;
 
         /**
          * Initialize invoice with WooCommerce order
          * @param string $order
          */
-        public function __construct( $order_id ) {
-            parent::__construct();
-	        $this->order                = wc_get_order( $order_id );
+        public function __construct( $order_id, $type, $taxes_count = 0 ) {
+	        parent::__construct();
+			$this->order                = wc_get_order( $order_id );
+	        $this->type                 = $type;
+	        $this->columns_count        = $this->get_columns_count( $taxes_count );
 	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
-            $this->template_folder      = BEWPI_TEMPLATES_DIR . $this->template_options['bewpi_template_name'];
+	        $this->template_name        = $this->template_options["bewpi_template_name"];
 
 	        // Check if the invoice already exists.
 	        if( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && $_GET['bewpi_action'] !== 'cancel' )
@@ -108,8 +98,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
         private function init() {
 	        $this->number               = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
 	        $this->year                 = get_post_meta( $this->order->id, '_bewpi_invoice_year', true );
-	        $this->file                 = $this->formatted_number . '.pdf';
-	        $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->file;
+	        $this->filename             = $this->formatted_number . '.pdf';
+	        $this->full_path            = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->filename;
 	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
 
@@ -167,49 +157,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
             }
         }
 
-        /**
-         * Number of table columns that will be displayed
-         * @return int
-         */
-	    public function get_number_of_columns() {
-	        $number_of_columns = 4;
-		    if ( $this->template_options['bewpi_show_sku'] ) $number_of_columns++;
-		    $order_taxes    = $this->order->get_taxes();
-		    if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
-			    foreach ( $order_taxes as $tax_id => $tax_item ) :
-				    $number_of_columns++;
-			    endforeach;
-		    endif;
-		    return $number_of_columns;
-        }
-
-        /**
-         * Calculates colspan for table footer cells
-         * @return array
-         */
-	    public function get_colspan() {
-	        $colspan = array();
-		    $number_of_columns = $this->get_number_of_columns();
-            $number_of_left_half_columns = 3;
-            $this->desc_cell_width = '28%';
-
-		    // The product table will be split into 2 where on the right 5 columns are the max
-            if ( $number_of_columns <= 4 ) :
-                $number_of_left_half_columns = 1;
-                $this->desc_cell_width = '48%';
-		    elseif ( $number_of_columns <= 6 ) :
-			    $number_of_left_half_columns = 2;
-                $this->desc_cell_width = '35.50%';
-		    endif;
-
-		    $colspan['left'] = $number_of_left_half_columns;
-		    $colspan['right'] = $number_of_columns - $number_of_left_half_columns;
-		    $colspan['right_left'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_DOWN );
-		    $colspan['right_right'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_UP );
-
-		    return $colspan;
-	    }
-
 	    /**
 	     * Reset invoice number counter if user did check the checkbox.
 	     * @return bool
@@ -247,45 +194,65 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    return false;
 	    }
 
+        /**
+         * Get all html from html files and store as vars
+         */
+        private function output_template_files_to_buffer( $html_template_files ) {
+	        $html_sections = array();
+
+	        foreach ( $html_template_files as $section => $full_path ) {
+		        if ( $section === 'style' ) {
+			        $html = $this->output_style_to_buffer( $full_path );
+		        } else {
+			        $html = $this->output_to_buffer( $full_path );
+		        }
+		        $html_sections[$section] = $html;
+	        }
+
+	        if ( $this->type === 'global' )
+	            wp_delete_post( $this->order->id );
+
+	        return $html_sections;
+        }
+
 	    /**
 	     * Generates and saves the invoice to the uploads folder.
 	     * @param $dest
 	     * @return string
 	     */
-	    public function save( $dest ) {
-		    if ( $this->exists() ) die( 'Invoice already exists. First delete invoice.' );
+	    protected function save( $dest, $html_templates ) {
+		    if ( $this->exists() )
+			    die( 'Invoice already exists. First delete invoice.' );
 
 		    // If the invoice is manually deleted from dir, delete data from database.
 		    $this->delete();
 
-		    if ( $this->template_options['bewpi_invoice_number_type'] === "sequential_number" ) :
-			    if ( !$this->reset_counter() && !$this->new_year_reset() ) :
+		    if ( $this->template_options['bewpi_invoice_number_type'] === "sequential_number" ) {
+			    if ( ! $this->reset_counter() && ! $this->new_year_reset() ) {
 				    $this->number = $this->template_options['bewpi_last_invoice_number'] + 1;
-			    endif;
-		    else :
+			    }
+		    } else {
 			    $this->number = $this->order->get_order_number();
-		    endif;
+		    }
 
-            $this->number_of_columns    = $this->get_number_of_columns();
             $this->colspan              = $this->get_colspan();
 		    $this->formatted_number     = $this->get_formatted_number( true );
 		    $this->year                 = date( 'Y' );
-		    $this->filename             = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
-            // Template
-            $this->css                  = $this->get_css();
-            $this->header               = $this->get_header_html();
-            $this->body                 = $this->get_body_html();
-            $this->footer               = $this->get_footer_html();
+		    $this->filename             = $this->formatted_number . '.pdf';
+		    $this->full_path            = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->formatted_number . '.pdf';
 
 		    add_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
 		    add_post_meta( $this->order->id, '_bewpi_invoice_year', $this->year );
 
 		    $this->template_options['bewpi_last_invoice_number']    = $this->number;
 		    $this->template_options['bewpi_last_invoiced_year']     = $this->year;
+
             delete_option( 'bewpi_template_settings' );
 		    add_option( 'bewpi_template_settings', $this->template_options );
 
-		    parent::generate( $dest, $this );
+		    $html_sections = $this->output_template_files_to_buffer( $html_templates );
+
+		    parent::generate( $html_sections, $dest );
 
 		    return $this->filename;
 	    }
@@ -295,7 +262,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	     * @param $download
 	     */
 	    public function view( $download ) {
-		    if ( !$this->exists() ) die( 'No invoice found. First create invoice.' );
+		    if ( ! $this->exists() ) die( 'No invoice found. First create invoice.' );
 		    parent::view( $download );
 	    }
 
@@ -327,76 +294,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    }
 
         /**
-         * Get the total amount with or without refunds
-         * @return string
-         */
-	    public function get_total() {
-		    $total = '';
-		    if ( $this->order->get_total_refunded() > 0 ) :
-			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
-			    $total = '<del class="total-without-refund">' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
-		    else :
-			    $total = $this->order->get_formatted_order_total();
-		    endif;
-		    return $total;
-	    }
-
-        /**
-         * Get the subtotal without discount and shipping, but including tax.
-         * @return mixed|void
-         */
-        public function get_subtotal_incl_tax() {
-            return $this->order->get_subtotal() + $this->order->get_total_tax();
-        }
-
-        /**
-         * Get the header html
-         * @return string
-         */
-        protected function get_header_html() {
-            $filename = $this->template_folder . '/header.php';
-            ob_start();
-            require_once $filename;
-            $html = ob_get_contents();
-            ob_end_clean();
-            return $html;
-        }
-
-        /**
-         * Get the footer as html
-         * @return string
-         */
-        protected function get_footer_html() {
-            $filename = $this->template_folder . '/footer.php';
-            ob_start();
-            require_once $filename;
-            $html = ob_get_contents();
-            ob_end_clean();
-            return $html;
-        }
-
-        /**
-         * Get the template CSS
-         * @return string
-         */
-        protected function get_css() {
-            return '<style>' . file_get_contents( $this->template_folder . '/style.css' ) . '</style>';
-        }
-
-        /**
-         * Get the body with the products table html
-         * @return string
-         */
-        protected function get_body_html() {
-            $filename = $this->template_folder . '/body.php';
-            ob_start();
-            require_once $filename;
-            $html = ob_get_contents();
-            ob_end_clean();
-            return $html;
-        }
-
-        /**
          * Display company name if logo is not found.
          * Convert image to base64 due to incompatibility of subdomains with MPDF
          */
@@ -409,5 +306,78 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
                 echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             endif;
         }
+
+	    private function output_to_buffer( $full_path ) {
+		    ob_start();
+		    require_once $full_path;
+		    $output = ob_get_contents();
+		    ob_end_clean();
+		    return $output;
+	    }
+
+	    private function output_style_to_buffer( $full_path ) {
+		    return '<style>' . file_get_contents( $full_path ) . '</style>';
+	    }
+
+	    public function outlining_columns_html() {
+		    ?>
+		    <style>
+			    <?php
+				// Create css for outlining the product cells.
+				$righter_product_row_tds_css = "";
+				for ( $td = $this->colspan['left'] + 1; $td <= $this->columns_count; $td++ ) {
+					if ( $td !== $this->columns_count ) {
+						$righter_product_row_tds_css .= "tr.product-row td:nth-child(" . $td . "),";
+					} else {
+						  $righter_product_row_tds_css .= "tr.product-row td:nth-child(" . $td . ")";
+						  $righter_product_row_tds_css .= "{ width: " . ( 50 / $this->colspan['right'] ) . "%; }";
+			        }
+				}
+				echo $righter_product_row_tds_css;
+				?>
+			    tr.product-row td:nth-child(1) {
+				    width: <?php echo $this->desc_cell_width; ?>;
+			    }
+		    </style>
+			<?php
+	    }
+
+	    private function get_columns_count( $taxes_count ) {
+		    $columns_count = 4;
+
+		    if ( $this->template_options['bewpi_show_sku'] )
+			    $columns_count ++;
+
+		    if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) )
+			    $columns_count += $taxes_count;
+
+		    return $columns_count;
+	    }
+
+	    /**
+	     * Calculates colspan for table footer cells
+	     * @return array
+	     */
+	    public function get_colspan() {
+		    $colspan = array();
+		    $number_of_left_half_columns = 3;
+		    $this->desc_cell_width = '30%';
+
+		    // The product table will be split into 2 where on the right 5 columns are the max
+		    if ( $this->columns_count <= 4 ) :
+			    $number_of_left_half_columns = 1;
+			    $this->desc_cell_width = '48%';
+		    elseif ( $this->columns_count <= 6 ) :
+			    $number_of_left_half_columns = 2;
+			    $this->desc_cell_width = '35.50%';
+		    endif;
+
+		    $colspan['left'] = $number_of_left_half_columns;
+		    $colspan['right'] = $this->columns_count - $number_of_left_half_columns;
+		    $colspan['right_left'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_DOWN );
+		    $colspan['right_right'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_UP );
+
+		    return $colspan;
+	    }
     }
 }

@@ -57,7 +57,11 @@ require_once( BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-ge
 require_once( BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-template.php' );
 // require invoice classes
 require_once( BEWPI_DIR . 'includes/class-bewpi-invoice.php' );
-require_once( BEWPI_DIR . 'includes/class-bewpi-invoice-global.php' );
+// woocommerce pdf invoices pro
+if ( file_exists( BEWPI_DIR . 'includes/class-bewpipro-invoice-global.php' ) ) {
+	require_once( BEWPI_DIR . 'includes/class-bewpipro-invoice-global.php' );
+}
+
 // require main class
 require_once( BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php' );
 

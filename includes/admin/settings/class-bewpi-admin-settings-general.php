@@ -130,7 +130,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			    // Header section
 		        array(
 			        'id' =>  'bewpi-email-it-in-account',
-			        'name' => $this->prefix . 'email-it-in-account',
+			        'name' => $this->prefix . 'email_it_in_account',
 				    'title' => __( 'Email It In account', $this->textdomain ),
 				    'callback' => array( &$this, 'input_callback' ),
 				    'page' => $this->settings_key,

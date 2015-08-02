@@ -115,9 +115,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'add_my_account_download_pdf_action'
 			), 10, 2 );
 
-			add_action( 'admin_footer-edit.php', array( &$this, 'add_custom_order_bulk_action' ) );
-
-			add_action( 'load-edit.php', array( &$this, 'load_bulk_actions' ) );
+			// generate global invoices --only pro version
+			if ( class_exists( 'BEWPIPRO_Invoice_Global' ) ) {
+				add_action( 'admin_footer-edit.php', array( &$this, 'add_custom_order_bulk_action' ) );
+				add_action( 'load-edit.php', array( &$this, 'load_bulk_actions' ) );
+			}
 
 		}
 
@@ -125,15 +127,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Initialize...
 		 */
 		public function init() {
-
 			$this->load_textdomain();
-
 			$this->create_invoices_dir();
-
 			$this->invoice_actions();
-
 			$this->init_review_admin_notice();
-
 		}
 
 		/**
@@ -300,12 +297,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		function add_email_it_in_account_to_email_headers( $headers, $status ) {
-			$general_options = get_option( 'bewpi_general_settings' );
+			$general_options        = get_option( 'bewpi_general_settings' );
+			$email_it_in_account    = $general_options['bewpi_email_it_in_account'];
 
-			if ( $status == $general_options['bewpi_email_type'] && $general_options['bewpi_email_it_in'] && ! empty( $general_options['bewpi_email_it_in_account'] ) ) {
-				$email_it_in_account = $general_options['bewpi_email_it_in_account'];
-				$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
-			}
+			if ( $status !== $general_options['bewpi_email_type'] )
+				return $headers;
+
+			if ( ! (bool)$general_options['bewpi_email_it_in'] || empty( $email_it_in_account ) )
+				return $headers;
+
+			$headers .= 'BCC: <' . $email_it_in_account . '>' . "\r\n";
 
 			return $headers;
 		}
@@ -352,9 +353,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function woocommerce_order_page_action_view_invoice( $order ) {
 			$invoice = new BEWPI_Invoice( $order->id );
-			if ( $invoice->exists() ) {
+			if ( $invoice->exists() )
 				$this->show_invoice_button( 'View invoice', $order->id, 'view', '', array( 'class="button tips wpi-admin-order-create-invoice-btn"' ) );
-			}
 		}
 
 		/**
@@ -584,7 +584,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				switch ( $action ) {
 					case 'generate_global_invoice':
 
-						$global_invoice = new BEWPI_Global_Invoice( $post_ids );
+						$global_invoice = new BEWPIPRO_Invoice_Global( $post_ids );
 						$global_invoice->save( "D" );
 
 						$sendback = add_query_arg( array( 'ids' => join( ',', $post_ids ) ), $sendback );

@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) )  exit; // Exit if accessed directly
 
 if ( ! class_exists( 'BEWPI_Global_Invoice' ) ) {
 
-	class BEWPI_Global_Invoice extends BEWPI_Abstract_Invoice {
+	class BEWPIPRO_Invoice_Global extends BEWPI_Abstract_Invoice {
 
 		public $orders = array();
 

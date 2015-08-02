@@ -1,7 +1,5 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 
@@ -11,12 +9,16 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
      */
     class BEWPI_Invoice extends BEWPI_Abstract_Invoice {
 
+	    public $order;
+
 	    protected $type = "simple";
 
 	    private $template_dir_name;
 
 	    public function __construct( $order_id ) {
-		    parent::__construct( $order_id, $this->type );
+		    $this->order = wc_get_order( $order_id );
+		    $taxes_count = count( $this->order->get_taxes() );
+		    parent::__construct( $order_id, $this->type, $taxes_count );
 	    }
 
 	    /**

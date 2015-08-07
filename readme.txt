@@ -69,6 +69,8 @@ The manual installation method involves downloading our plugin and uploading it 
 = 2.3.0 - August 8, 2015 =
 
 - Added: Ability to add custom templates
+- Fixed: Deleted line item total displaying line item total including refunds
+- Fixed: Header total displaying total excluding refunds
 - Improved: Code by refactoring classes and architecture
 
 = 2.2.9 - June 22, 2015 =

@@ -139,7 +139,7 @@
                             $incl_tax = (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ];
 
                             if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] != $item['line_total'] ) {
-                                echo '<del>' . wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+                                echo '<del>' . wc_price( $this->order->get_line_subtotal( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
                             }
 
                             echo wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) );

@@ -33,7 +33,7 @@
         </td>
         <td class="total-amount" bgcolor="<?php echo $this->template_options['bewpi_color_theme']; ?>">
 				<span>
-					<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
+					<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
 					<p class="small-font"><?php echo $this->template_options['bewpi_intro_text']; ?></p>
 				</span>
         </td>

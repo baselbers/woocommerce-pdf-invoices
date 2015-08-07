@@ -128,7 +128,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function init() {
 			$this->load_textdomain();
-			$this->create_invoices_dir();
+			$this->create_bewpi_dirs();
 			$this->invoice_actions();
 			$this->init_review_admin_notice();
 		}
@@ -221,11 +221,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Creates invoices dir in uploads folder
 		 */
-		private function create_invoices_dir() {
-			//if ( !wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' ) ) htaccess doesn't copy...
+		private function create_bewpi_dirs() {
+			// bewpi-invoices
 			wp_mkdir_p( BEWPI_INVOICES_DIR . date( 'Y' ) . '/' );
 			copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date( 'Y' ) . '/.htaccess' );
 			copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date( 'Y' ) . '/index.php' );
+
+			// bewpi-templates/global
+			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'global/' );
+			// bewpi-templares/simple
+			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
 		}
 
 		/**

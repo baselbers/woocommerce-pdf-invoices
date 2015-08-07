@@ -75,6 +75,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     */
 	    protected $type;
 
+	    /**
+	     * Dir of the template
+	     * @var string
+	     */
+	    protected $template_dir_name;
+
         /**
          * Initialize invoice with WooCommerce order
          * @param string $order
@@ -209,6 +215,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		        $html_sections[$section] = $html;
 	        }
 
+	        // don't need an order for the global invoice
 	        if ( $this->type === 'global' )
 	            wp_delete_post( $this->order->id );
 
@@ -378,6 +385,23 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    $colspan['right_right'] = round( ( $colspan['right'] / 2 ), 0, PHP_ROUND_HALF_UP );
 
 		    return $colspan;
+	    }
+
+	    /**
+	     * Determine if the template is a custom or standard
+	     * @param $template_name
+	     * @return string
+	     */
+	    protected function get_template_dir( $template_name ) {
+		    $custom_template_dir = BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+		    if ( file_exists( $custom_template_dir ) )
+		         return $custom_template_dir;
+
+		    $template_dir = BEWPI_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+		    if ( file_exists( $template_dir ) )
+			    return $template_dir;
+
+		    return '';
 	    }
     }
 }

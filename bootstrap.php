@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @version           2.2.9
+ * @version           2.3.0
  * @package           WooCommerce PDF Invoices PRO
  * @author            baaaaas
  *
@@ -9,7 +9,7 @@
  * Plugin Name:       WooCommerce PDF Invoices PRO
  * Plugin URI:
  * Description:       Automatically or manually create and send PDF Invoices for WooCommerce orders and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.2.9
+ * Version:           2.3.0
  * Author:            baaaaas
  * Author URI:
  * License:           GPL-2.0+
@@ -22,7 +22,7 @@ if ( ! defined( 'ABSPATH' ) )
     die( 'Access denied.' );
 
 if ( ! defined( 'BEWPI_VERSION' ) )
-	define( 'BEWPI_VERSION', '2.2.9' );
+	define( 'BEWPI_VERSION', '2.3.0' );
 
 if ( ! defined( 'BEWPI_URL' ) )
     define( 'BEWPI_URL', plugins_url( '', __FILE__ ) . '/' );
@@ -42,6 +42,11 @@ if ( ! defined( 'BEWPI_TEMPLATES_INVOICES_DIR' ) )
 if ( ! defined( 'BEWPI_INVOICES_DIR' ) ) {
 	$wp_upload_dir = wp_upload_dir();
 	define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
+}
+
+if ( ! defined( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR' ) ) {
+	$wp_upload_dir = wp_upload_dir();
+	define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices/' );
 }
 
 if ( ! defined( 'BEWPI_LIB_DIR' ) )

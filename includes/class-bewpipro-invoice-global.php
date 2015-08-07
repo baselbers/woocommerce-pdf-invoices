@@ -19,8 +19,6 @@ if ( ! class_exists( 'BEWPI_Global_Invoice' ) ) {
 
 		protected $type = 'global';
 
-		private $template_dir_name;
-
 		private $fees = array();
 
 		public function __construct( $orders_ids ) {
@@ -125,14 +123,14 @@ if ( ! class_exists( 'BEWPI_Global_Invoice' ) ) {
 		}
 
 		public function save( $dest, $html_templates = array() ) {
-			$template_name = apply_filters( 'bewpi_invoice_template_name', $this->template_name, $this->type );
-			$this->template_dir_name    = BEWPI_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+			//$template_name = apply_filters( 'bewpi_global_invoice_template_name', $this->template_name );
+			$template_dir_name = $this->get_template_dir( $this->template_name );
 
 			$html_templates     = array(
-				"header"    => $this->template_dir_name . 'header.php',
-				"footer"    => $this->template_dir_name . 'footer.php',
-				"body"      => $this->template_dir_name . 'body.php',
-				"style"     => $this->template_dir_name . 'style.css'
+				"header"    => $template_dir_name . 'header.php',
+				"footer"    => $template_dir_name . 'footer.php',
+				"body"      => $template_dir_name . 'body.php',
+				"style"     => $template_dir_name . 'style.css'
 			);
 
 			parent::save( $dest, $html_templates );

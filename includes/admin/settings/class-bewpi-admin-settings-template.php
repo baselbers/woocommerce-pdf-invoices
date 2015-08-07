@@ -77,6 +77,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	     * @return array
 	     */
 	    private function the_settings() {
+		    $templates = $this->get_templates();
+
 		    $settings = array(
 			    // General section
 			    array(
@@ -88,14 +90,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'general',
 				    'type' => 'text',
 				    'desc' => '',
-				    'options' => array(
-					    array(
-						    'id' => 1,
-						    'name' => 'Micro',
-						    'value' => 'micro'
-					    )
-				    ),
-				    'default' => 'micro'
+				    'options' => $templates,
+				    'default' => $templates[0]['value']
 			    ),
 			    array(
 				    'id' => 'bewpi-color-theme',
@@ -542,6 +538,26 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 		    // Return the array processing any additional functions filtered by this action
 		    return apply_filters( 'validate_input', $output, $input );
+	    }
+
+	    private function get_templates() {
+		    $templates = array();
+
+		    $template_folder_names = scandir( BEWPI_TEMPLATES_INVOICES_DIR . 'simple/' );
+		    $custom_templates_folder_names = scandir( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
+		    $template_folder_names = array_merge( $template_folder_names, $custom_templates_folder_names );
+
+		    foreach( $template_folder_names as $i => $template_name ) {
+			    if( $template_name !== '..' && $template_name !== '.' ) {
+				    $templates[] = array(
+					    'id'    => $i,
+					    'name'  => ucfirst( $template_name ),
+					    'value' => $template_name
+				    );
+			    }
+		    }
+
+		    return $templates;
 	    }
     }
 }

@@ -1,15 +1,13 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
-}
+if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-if ( ! class_exists( 'BEWPI_Settings' ) ) {
+if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 
     /**
      * Abstract class with validation functions to validate all the template and general settings.
      * Class BEWPI_Settings
      */
-    abstract class BEWPI_Settings {
+    abstract class BEWPI_Abstract_Setting {
 
         /**
          * The textdomain
@@ -154,7 +152,7 @@ if ( ! class_exists( 'BEWPI_Settings' ) ) {
 			    ?>
 			    <div id="<?php echo $args['id'] . '-wrapper'; ?>">
 				    <img id="<?php echo $args['id'] . '-image'; ?>" src="<?php echo esc_attr( $options[$args['name']] ); ?>" />
-				    <img id="<?php echo $args['id'] . '-delete'; ?>" src="<?php echo BEWPI_URL . '/assets/img/delete-icon.png'; ?>" onclick="Settings.removeCompanyLogo()" title="<?php _e( 'Remove logo', $this->textdomain ); ?>"/>
+				    <img id="<?php echo $args['id'] . '-delete'; ?>" src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>" onclick="Settings.removeCompanyLogo()" title="<?php _e( 'Remove logo', $this->textdomain ); ?>"/>
 			    </div>
 		    <?php
 		    endif;

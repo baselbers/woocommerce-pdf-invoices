@@ -1,0 +1,136 @@
+div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4, span, p {
+    /*border: 1px solid black;*/
+}
+h1.company-logo {
+    font-size: 30px;
+}
+img.company-logo {
+    max-height: 150px;
+}
+table {
+    border-collapse: collapse;
+    font-size: 14px;
+    width: 100%;
+    color: #757575;
+}
+table.products th {
+    border-bottom: 2px solid #A5A5A5;
+}
+table.products td{
+    vertical-align: top;
+}
+table.products td, table.products th {
+    padding: 5px;
+}
+tr.product-row td {
+    border-bottom: 1px solid #CECECE;
+}
+td.total, td.grand-total {
+    border-top: 4px solid #8D8D8D;
+    padding-bottom: 0; margin-bottom: 0;
+}
+td.grand-total {
+    font-size: 16px !important;
+}
+table, tbody, h1 {
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    font-size: 36px;
+}
+span {
+    display: block;
+    width: 100%;
+}
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+.company {
+    margin-bottom: 40px;
+}
+.company .logo {
+    text-align: left;
+}
+.company .info {
+    text-align: left;
+    vertical-align: middle;
+}
+.two-column {
+    margin-bottom: 40px;
+    width: 100%;
+}
+.two-column td {
+    text-align: left;
+    vertical-align: top;
+    width: 50%;
+}
+.invoice-head {
+    margin-bottom: 20px;
+    margin-right: -64px;
+}
+.invoice-head td {
+    text-align: left;
+}
+.invoice-head .title {
+    color: #525252;
+}
+td.invoice-details {
+    vertical-align: top;
+}
+.number {
+    font-size: 16px;
+}
+.small-font {
+    font-size: 12px;
+}
+.total-amount p {
+    margin: 0; padding: 0;
+}
+.total-amount {
+    padding: 20px 20px 30px 20px;
+    width: 54%;
+}
+.total-amount, .total-amount h1 {
+    color: white;
+}
+div.item-attribute {
+    font-size: 12px;
+    margin-top: 10px;
+}
+.invoice {
+    margin-bottom: 20px;
+}
+.foot {
+    margin: 0 -64px;
+    font-size: 12px;
+}
+.foot td.border {
+    padding: 20px 40px;
+    width: 100%;
+    text-align: center;
+}
+td.company-details, td.payment {
+    padding: 20px 40px 20px 40px;
+    text-align: center;
+    vertical-align: top;
+    width: 50%;
+}
+.foot td {
+    border: 1px solid white;
+}
+.refunded {
+    color: #a00 !important;
+}
+.total-without-refund {
+    color: #757575 !important;
+}
+.space td {
+    padding-bottom: 35px;
+}
+table.products td {
+    overflow: hidden;
+}
+table.customer-notes {
+    margin-top: 30px;
+    text-align: center;
+}

@@ -7,7 +7,7 @@
             if ( $this->template_options['bewpi_show_customer_notes'] && $this->order->post->post_excerpt != "" ) :
                 // Note added by customer.
                 echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . '</strong> ' . $this->order->post->post_excerpt . '</p>';
-                // Notes added administrator on order details page.
+                // Notes added by administrator on order details page.
                 $customer_order_notes = $this->order->get_customer_order_notes();
                 if ( count( $customer_order_notes ) > 0 ) {
                     echo '<p><strong>' . __('Customer note', $this->textdomain) . '</strong>' . $customer_order_notes[0]->comment_content . '</p>';

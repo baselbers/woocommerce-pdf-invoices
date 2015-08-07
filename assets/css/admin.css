@@ -30,7 +30,7 @@
     cursor: pointer;
 }
 .wpi-admin-order-create-invoice-btn {
-    background-image: url(../img/invoice.png) !important;
+    background-image: url(../images/invoice-icon.png) !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
     text-indent: -9999px;

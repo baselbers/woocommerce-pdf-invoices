@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.2.10
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,13 @@ The manual installation method involves downloading our plugin and uploading it 
 3. Activate the plugin from the Plugins menu within the WordPress admin.
 
 == Changelog ==
+
+= 2.3.0 - August 8, 2015 =
+
+- Added: Ability to add custom templates
+- Fixed: Deleted line item total displaying line item total including refunds
+- Fixed: Header total displaying total excluding refunds
+- Improved: Code by refactoring classes and architecture
 
 = 2.2.10 - July 3, 2015 =
 

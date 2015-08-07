@@ -73,6 +73,7 @@ To easily get started, copy the default template files (including folder) called
 
 = 2.3.0 - August 8, 2015 =
 
+- Added: Payment status paid or unpaid on invoice
 - Added: Ability to add custom templates
 - Fixed: Deleted line item total displaying line item total including refunds
 - Fixed: Header total displaying total excluding refunds

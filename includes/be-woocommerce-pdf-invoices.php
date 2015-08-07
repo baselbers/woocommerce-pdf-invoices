@@ -331,11 +331,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( $status == $general_options['bewpi_email_type'] || $general_options['bewpi_new_order'] && $status == "new_order" ) {
 				$invoice = new BEWPI_Invoice( $order->id );
 				if ( ! $invoice->exists() ) {
-					$filename = $invoice->save( "F" );
+					$full_path = $invoice->save( "F" );
 				} else {
-					$filename = $invoice->get_filename();
+					$full_path = $invoice->get_full_path();
 				}
-				$attachments[] = $filename;
+				$attachments[] = $full_path;
 			}
 
 			return $attachments;

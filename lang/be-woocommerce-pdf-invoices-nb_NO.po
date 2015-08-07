@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-05-15 15:13+0100\n"
-"PO-Revision-Date: 2015-05-15 15:13+0100\n"
+"POT-Creation-Date: 2015-08-07 17:28+0100\n"
+"PO-Revision-Date: 2015-08-07 17:28+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -19,65 +19,314 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:202
-msgid "General"
-msgstr "Generelt"
+#: includes/abstracts/abstract-bewpi-setting.php:87
+msgid "Feel free to use "
+msgstr "Du kan også bruke "
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:203
-#: admin/classes/bewpi-template-settings.php:85
+#: includes/abstracts/abstract-bewpi-setting.php:155
+msgid "Remove logo"
+msgstr "Fjern logo"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:84
+msgid "Attach to Email"
+msgstr "Legg ved e-post"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:92
+msgid "Processing order"
+msgstr "Behandler ordre"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:96
+msgid "Completed order"
+msgstr "Fullført ordre"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:100
+msgid "Customer invoice"
+msgstr "Kundefaktura"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:114
+msgid "Attach to New order Email"
+msgstr "Legg til ny bestilling e-post"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:126
+msgid "Enable Email It In"
+msgstr "Aktiver dette epostvarselet"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:134
+msgid "Email It In account"
+msgstr "Email It In konto"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:139
+#, php-format
+msgid "Get your account from your Email It In %suser account%s."
+msgstr "Få din konto fra din Email It In %suser account%s."
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:152
+msgid "Email Options"
+msgstr "E-post alternativer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:158
+msgid "Cloud Storage Options"
+msgstr "Skylagringsalternativer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:165
+#, php-format
+msgid ""
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
+msgstr ""
+"Registrer deg på %s for å sende fakturaene til din DropBox, OneDrive, Google "
+"Drive eller Egnyte og skriv inn kontoen din under."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:87
+#: includes/be-woocommerce-pdf-invoices.php:218
 msgid "Template"
 msgstr "Mal"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:222
-#: admin/classes/be-woocommerce-pdf-invoices.php:223
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:99
+msgid "Color theme"
+msgstr "Fargetema"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:110
+msgid "Date format"
+msgstr "Datoformat"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:115
+#, php-format
+msgid "%sFormat%s of invoice date and order date."
+msgstr "%sFormat%s til fakturadato og ordredato."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:130
+msgid "Display prices including tax"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
+msgid "Subtotal will be including tax and excluding discount and shipping."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:139
+msgid "Company name"
+msgstr "Firmanavn"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:150
+msgid "Company logo"
+msgstr "Firmalogo"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:161
+msgid "Company address"
+msgstr "Firmaadresse"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:172
+msgid "Company details"
+msgstr "Firmadetaljer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:183
+msgid "Intro text"
+msgstr "Introduksjonstekst"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:195
+msgid "Terms & conditions, policies etc."
+msgstr "Betingelser, vilkår etc."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:211
+msgid "Show customer notes"
+msgstr "Vis kundenotat"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:219
+msgid "Type"
+msgstr "Type"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:227
+msgid "WooCommerce order number"
+msgstr "WooCommerce bestillingsnummer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:231
+msgid "Sequential number"
+msgstr "Sekvensielt nummer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:245
+msgid "Reset invoice counter"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:255
+msgid "Next"
+msgstr "Neste"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:260
+#, php-format
+msgid ""
+"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
+"Only available with sequential numbering type and you need to check the "
+"checkbox to actually reset the value."
+msgstr ""
+"TIlbakestill fakturatelleren og start med neste fakturanummer. %s %sMerk:%s "
+"Kun tilgjengelig med sekvensielle nummer og du må huke av boksen for å "
+"faktisk tilbakestille verdien."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:269
+msgid "Digits"
+msgstr "Tegn"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:285
+msgid "[prefix]"
+msgstr "[prefix]"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:296
+msgid "[suffix]"
+msgstr "[suffix]"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:307
+msgid "Format"
+msgstr "Format"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:312
+#, php-format
+msgid ""
+"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
+"required."
+msgstr ""
+"Bruk en av disse kortkodene; %s %s %s %s %s og %s. %s %sMerk:%s %s er "
+"obligatorisk."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:326
+msgid "Reset on 1st of january"
+msgstr "Tilbakestill 1. Januar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:339
+#: includes/templates/invoices/global/micro/body.php:10
+#: includes/templates/invoices/simple/micro/body.php:8
+msgid "SKU"
+msgstr "Prod.Nr."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:351
+#: includes/templates/invoices/global/micro/body.php:184
+#: includes/templates/invoices/global/micro/body.php:208
+#: includes/templates/invoices/simple/micro/body.php:164
+#: includes/templates/invoices/simple/micro/body.php:188
+msgid "Subtotal"
+msgstr "Delsum"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:363
+msgid "Tax"
+msgstr "MVA"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:375
+#: includes/templates/invoices/global/micro/body.php:192
+#: includes/templates/invoices/simple/micro/body.php:172
+msgid "Discount"
+msgstr "Rabatt"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:387
+#: includes/templates/invoices/global/micro/body.php:200
+#: includes/templates/invoices/simple/micro/body.php:180
+msgid "Shipping"
+msgstr "Frakt"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:401
+msgid "General Options"
+msgstr "Generelle valg"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:407
+msgid "Invoice Number Options"
+msgstr "Alternativer for fakturanummer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:413
+msgid "Header Options"
+msgstr "Overskriftsvalg"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:419
+msgid "Footer Options"
+msgstr "Footer valg"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:425
+msgid "Visible Columns"
+msgstr "Synlige kolonner"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:431
+msgid "These are the general template options."
+msgstr "Dette er de generelle alternativene for malen."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:432
+msgid "These are the invoice number options."
+msgstr "Dette er alternativene for fakturanummer."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:433
+msgid "The header will be visible on every page. "
+msgstr "Overskriften vil være synlig på alle sider. "
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:434
+msgid "The footer will be visible on every page. "
+msgstr "Footeren vil være synlig på alle sider. "
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:435
+msgid "Enable or disable the columns."
+msgstr "Aktiver eller deaktiver kolonnene."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:505
+msgid "File is invalid and contains either '..' or './'."
+msgstr "Filen er ugyldig og inneholder enten '...' eller './'."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:512
+msgid "File is invalid and contains ':' after the first character."
+msgstr "Filen er ugyldig og inneholder ':' etter den første bokstaven."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:521
+msgid "File should be less then 2MB."
+msgstr "Filen bør være under 2 megabyte."
+
+#: includes/be-woocommerce-pdf-invoices.php:217
+msgid "General"
+msgstr "Generelt"
+
+#: includes/be-woocommerce-pdf-invoices.php:240
 msgid "Invoices"
 msgstr "PDF Faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:328
+#: includes/be-woocommerce-pdf-invoices.php:348
 msgid "PDF Invoice"
 msgstr "PDF Faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:355
+#: includes/be-woocommerce-pdf-invoices.php:374
 msgid "Invoiced on:"
 msgstr "Sendt:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:359
+#: includes/be-woocommerce-pdf-invoices.php:378
 msgid "Invoice number:"
 msgstr "Fakturanummer:"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:397
+#: includes/be-woocommerce-pdf-invoices.php:416
 msgid "View invoice"
 msgstr "Vis faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:397
+#: includes/be-woocommerce-pdf-invoices.php:416
 msgid "View"
 msgstr "Vis"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:398
+#: includes/be-woocommerce-pdf-invoices.php:417
 msgid "Cancel invoice"
 msgstr "Slett faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:398
+#: includes/be-woocommerce-pdf-invoices.php:417
 msgid "Cancel"
 msgstr "Slett"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:398
+#: includes/be-woocommerce-pdf-invoices.php:419
 msgid "Are you sure to delete the invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:400
+#: includes/be-woocommerce-pdf-invoices.php:422
 msgid "Create invoice"
 msgstr "Opprett faktura"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:400
+#: includes/be-woocommerce-pdf-invoices.php:422
 msgid "Create"
 msgstr "Opprett"
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:433
-msgid "Download invoice (PDF)"
-msgstr "Last ned faktura (PDF)"
+#: includes/be-woocommerce-pdf-invoices.php:455
+#, php-format
+msgid "Invoice %s (PDF)"
+msgstr ""
 
-#: admin/classes/be-woocommerce-pdf-invoices.php:512
+#: includes/be-woocommerce-pdf-invoices.php:534
 #, php-format
 msgid ""
 "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
@@ -90,296 +339,106 @@ msgstr ""
 "Tusen takk for støtten din! <br /> <a href='%s' target='_blank'>Ja, jeg skal "
 "gjøre det med en gang!!</a> - <a href='%s'>Jeg har allerede gjort det!</a>"
 
-#: admin/classes/bewpi-general-settings.php:84
-msgid "Attach to Email"
-msgstr "Legg ved e-post"
-
-#: admin/classes/bewpi-general-settings.php:92
-msgid "Processing order"
-msgstr "Behandler ordre"
-
-#: admin/classes/bewpi-general-settings.php:96
-msgid "Completed order"
-msgstr "Fullført ordre"
-
-#: admin/classes/bewpi-general-settings.php:100
-msgid "Customer invoice"
-msgstr "Kundefaktura"
-
-#: admin/classes/bewpi-general-settings.php:114
-msgid "Attach to New order Email"
-msgstr "Legg til ny bestilling e-post"
-
-#: admin/classes/bewpi-general-settings.php:126
-msgid "Enable Email It In"
-msgstr "Aktiver dette epostvarselet"
-
-#: admin/classes/bewpi-general-settings.php:134
-msgid "Email It In account"
-msgstr "Email It In konto"
-
-#: admin/classes/bewpi-general-settings.php:139
-#, php-format
-msgid "Get your account from your Email It In %suser account%s."
-msgstr "Få din konto fra din Email It In %suser account%s."
-
-#: admin/classes/bewpi-general-settings.php:152
-msgid "Email Options"
-msgstr "E-post alternativer"
-
-#: admin/classes/bewpi-general-settings.php:158
-msgid "Cloud Storage Options"
-msgstr "Skylagringsalternativer"
-
-#: admin/classes/bewpi-general-settings.php:165
-#, php-format
-msgid ""
-"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
-"Egnyte and enter your account below."
-msgstr ""
-"Registrer deg på %s for å sende fakturaene til din DropBox, OneDrive, Google "
-"Drive eller Egnyte og skriv inn kontoen din under."
-
-#: admin/classes/bewpi-settings.php:89
-msgid "Feel free to use "
-msgstr "Du kan også bruke "
-
-#: admin/classes/bewpi-settings.php:157
-msgid "Remove logo"
-msgstr "Fjern logo"
-
-#: admin/classes/bewpi-template-settings.php:103
-msgid "Color theme"
-msgstr "Fargetema"
-
-#: admin/classes/bewpi-template-settings.php:114
-msgid "Date format"
-msgstr "Datoformat"
-
-#: admin/classes/bewpi-template-settings.php:119
-#, php-format
-msgid "%sFormat%s of invoice date and order date."
-msgstr "%sFormat%s til fakturadato og ordredato."
-
-#: admin/classes/bewpi-template-settings.php:130
-msgid "Company name"
-msgstr "Firmanavn"
-
-#: admin/classes/bewpi-template-settings.php:141
-msgid "Company logo"
-msgstr "Firmalogo"
-
-#: admin/classes/bewpi-template-settings.php:152
-msgid "Company address"
-msgstr "Firmaadresse"
-
-#: admin/classes/bewpi-template-settings.php:163
-msgid "Company details"
-msgstr "Firmadetaljer"
-
-#: admin/classes/bewpi-template-settings.php:174
-msgid "Intro text"
-msgstr "Introduksjonstekst"
-
-#: admin/classes/bewpi-template-settings.php:186
-msgid "Terms & conditions, policies etc."
-msgstr "Betingelser, vilkår etc."
-
-#: admin/classes/bewpi-template-settings.php:202
-msgid "Show customer notes"
-msgstr "Vis kundenotat"
-
-#: admin/classes/bewpi-template-settings.php:210
-msgid "Type"
-msgstr "Type"
-
-#: admin/classes/bewpi-template-settings.php:218
-msgid "WooCommerce order number"
-msgstr "WooCommerce bestillingsnummer"
-
-#: admin/classes/bewpi-template-settings.php:222
-msgid "Sequential number"
-msgstr "Sekvensielt nummer"
-
-#: admin/classes/bewpi-template-settings.php:246
-msgid "Next"
-msgstr "Neste"
-
-#: admin/classes/bewpi-template-settings.php:251
-#, php-format
-msgid ""
-"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
-"Only available with sequential numbering type and you need to check the "
-"checkbox to actually reset the value."
-msgstr ""
-"TIlbakestill fakturatelleren og start med neste fakturanummer. %s %sMerk:%s "
-"Kun tilgjengelig med sekvensielle nummer og du må huke av boksen for å "
-"faktisk tilbakestille verdien."
-
-#: admin/classes/bewpi-template-settings.php:260
-msgid "Digits"
-msgstr "Tegn"
-
-#: admin/classes/bewpi-template-settings.php:276
-msgid "[prefix]"
-msgstr "[prefix]"
-
-#: admin/classes/bewpi-template-settings.php:287
-msgid "[suffix]"
-msgstr "[suffix]"
-
-#: admin/classes/bewpi-template-settings.php:298
-msgid "Format"
-msgstr "Format"
-
-#: admin/classes/bewpi-template-settings.php:303
-#, php-format
-msgid ""
-"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
-"required."
+#: includes/be-woocommerce-pdf-invoices.php:545
+msgid "Generate global invoice"
 msgstr ""
 
-#: admin/classes/bewpi-template-settings.php:317
-msgid "Reset on 1st of january"
-msgstr "Tilbakestill 1. Januar"
+#: includes/class-bewpi-invoice.php:61
+msgid "PAID"
+msgstr ""
 
-#: admin/classes/bewpi-template-settings.php:330
-#: includes/views/templates/micro/body.php:25
-msgid "SKU"
-msgstr "Prod.Nr."
+#: includes/class-bewpi-invoice.php:63
+msgid "UNPAID"
+msgstr ""
 
-#: admin/classes/bewpi-template-settings.php:342
-#: includes/views/templates/micro/body.php:194
-msgid "Subtotal"
-msgstr "Delsum"
-
-#: admin/classes/bewpi-template-settings.php:354
-msgid "Tax"
-msgstr "MVA"
-
-#: admin/classes/bewpi-template-settings.php:366
-#: includes/views/templates/micro/body.php:178
-msgid "Discount"
-msgstr "Rabatt"
-
-#: admin/classes/bewpi-template-settings.php:378
-#: includes/views/templates/micro/body.php:186
-msgid "Shipping"
-msgstr "Frakt"
-
-#: admin/classes/bewpi-template-settings.php:392
-msgid "General Options"
-msgstr "Generelle valg"
-
-#: admin/classes/bewpi-template-settings.php:398
-msgid "Invoice Number Options"
-msgstr "Alternativer for fakturanummer"
-
-#: admin/classes/bewpi-template-settings.php:404
-msgid "Header Options"
-msgstr "Overskriftsvalg"
-
-#: admin/classes/bewpi-template-settings.php:410
-msgid "Footer Options"
-msgstr "Footer valg"
-
-#: admin/classes/bewpi-template-settings.php:416
-msgid "Visible Columns"
-msgstr "Synlige kolonner"
-
-#: admin/classes/bewpi-template-settings.php:422
-msgid "These are the general template options."
-msgstr "Dette er de generelle alternativene for malen."
-
-#: admin/classes/bewpi-template-settings.php:423
-msgid "These are the invoice number options."
-msgstr "Dette er alternativene for fakturanummer."
-
-#: admin/classes/bewpi-template-settings.php:424
-msgid "The header will be visible on every page. "
-msgstr "Overskriften vil være synlig på alle sider. "
-
-#: admin/classes/bewpi-template-settings.php:425
-msgid "The footer will be visible on every page. "
-msgstr "Footeren vil være synlig på alle sider. "
-
-#: admin/classes/bewpi-template-settings.php:426
-msgid "Enable or disable the columns."
-msgstr "Aktiver eller deaktiver kolonnene."
-
-#: admin/classes/bewpi-template-settings.php:496
-msgid "File is invalid and contains either '..' or './'."
-msgstr "Filen er ugyldig og inneholder enten '...' eller './'."
-
-#: admin/classes/bewpi-template-settings.php:503
-msgid "File is invalid and contains ':' after the first character."
-msgstr "Filen er ugyldig og inneholder ':' etter den første bokstaven."
-
-#: admin/classes/bewpi-template-settings.php:512
-msgid "File should be less then 2MB."
-msgstr "Filen bør være under 2 megabyte."
-
-#: includes/views/templates/micro/body.php:22
+#: includes/templates/invoices/global/micro/body.php:6
+#: includes/templates/invoices/simple/micro/body.php:5
 msgid "Description"
 msgstr "Produkt"
 
-#: includes/views/templates/micro/body.php:28
+#: includes/templates/invoices/global/micro/body.php:14
+#: includes/templates/invoices/simple/micro/body.php:11
 msgid "Cost"
 msgstr "Pris"
 
-#: includes/views/templates/micro/body.php:29
+#: includes/templates/invoices/global/micro/body.php:16
+#: includes/templates/invoices/simple/micro/body.php:12
 msgid "Qty"
 msgstr "Ant"
 
-#: includes/views/templates/micro/body.php:36
-#: includes/views/templates/micro/body.php:224
+#: includes/templates/invoices/global/micro/body.php:22
+#: includes/templates/invoices/simple/micro/body.php:19
 msgid "VAT"
 msgstr "MVA"
 
-#: includes/views/templates/micro/body.php:47
-#: includes/views/templates/micro/body.php:233
+#: includes/templates/invoices/global/micro/body.php:33
+#: includes/templates/invoices/global/micro/body.php:244
+#: includes/templates/invoices/simple/micro/body.php:30
+#: includes/templates/invoices/simple/micro/body.php:224
 msgid "Total"
 msgstr "Totalt"
 
-#: includes/views/templates/micro/body.php:206
-msgid "Fee"
+#: includes/templates/invoices/global/micro/body.php:41
+#, php-format
+msgid "Order #%d - %s"
 msgstr ""
 
-#: includes/views/templates/micro/body.php:240
+#: includes/templates/invoices/global/micro/body.php:219
+#: includes/templates/invoices/simple/micro/body.php:199
+msgid "Fee"
+msgstr "Avgift"
+
+#: includes/templates/invoices/global/micro/body.php:251
+#: includes/templates/invoices/simple/micro/body.php:231
 msgid "Refunded"
 msgstr "Refundert"
 
-#: includes/views/templates/micro/footer.php:9
-#: includes/views/templates/micro/footer.php:13
+#: includes/templates/invoices/global/micro/header.php:13
+#: includes/templates/invoices/simple/micro/header.php:13
+msgid "Invoice to"
+msgstr "Kunde"
+
+#: includes/templates/invoices/global/micro/header.php:18
+#: includes/templates/invoices/simple/micro/header.php:18
+msgid "Ship to"
+msgstr "Leveringsadresse"
+
+#: includes/templates/invoices/global/micro/header.php:28
+msgid "Global Invoice"
+msgstr ""
+
+#: includes/templates/invoices/simple/micro/footer.php:9
+#: includes/templates/invoices/simple/micro/footer.php:13
 msgid "Customer note"
 msgstr "Kundenotat"
 
-#: includes/views/templates/micro/footer.php:21
+#: includes/templates/invoices/simple/micro/footer.php:21
 #, php-format
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s med"
 
-#: includes/views/templates/micro/header.php:13
-msgid "Invoice to"
-msgstr "Kunde"
-
-#: includes/views/templates/micro/header.php:17
-msgid "Ship to"
-msgstr "Leveringsadresse"
-
-#: includes/views/templates/micro/header.php:27
+#: includes/templates/invoices/simple/micro/header.php:28
 msgid "Invoice"
 msgstr "Faktura"
 
-#: includes/views/templates/micro/header.php:30
+#: includes/templates/invoices/simple/micro/header.php:31
 #, php-format
-msgid "Order Number %s"
-msgstr "Bestillingsnummer: %s"
+msgid "Order Number: %s"
+msgstr ""
 
-#: includes/views/templates/micro/header.php:31
+#: includes/templates/invoices/simple/micro/header.php:32
 #, php-format
-msgid "Order Date %s"
-msgstr "Bestillingsdato: %s"
+msgid "Order Date: %s"
+msgstr ""
+
+#~ msgid "Order Number %s"
+#~ msgstr "Bestillingsnummer: %s"
+
+#~ msgid "Order Date %s"
+#~ msgstr "Bestillingsdato: %s"
+
+#~ msgid "Download invoice (PDF)"
+#~ msgstr "Last ned faktura (PDF)"
 
 #~ msgid ""
 #~ "Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is "

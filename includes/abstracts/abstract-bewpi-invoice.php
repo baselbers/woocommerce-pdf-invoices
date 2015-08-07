@@ -261,7 +261,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		    parent::generate( $html_sections, $dest );
 
-		    return $this->filename;
+		    return $this->full_path;
 	    }
 
 	    /**
@@ -402,6 +402,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			    return $template_dir;
 
 		    return '';
+	    }
+
+	    public function get_full_path() {
+		    return $this->full_path;
 	    }
     }
 }

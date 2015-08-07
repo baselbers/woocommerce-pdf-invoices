@@ -159,7 +159,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			    'margin_right' => 17,
 			    'margin_top' => 150,
 			    'margin_bottom' => 50,
-			    'margin_header' => 20,
+			    'margin_header' => 17,
 			    'margin_footer' => 0,
 			    'orientation' => 'P'
 		    ));

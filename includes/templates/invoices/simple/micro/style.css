@@ -42,6 +42,10 @@ table, tbody, h1 {
 h1 {
     font-size: 36px;
 }
+span.payment-status {
+    font-size: 14px;
+    font-weight: normal;
+}
 span {
     display: block;
     width: 100%;

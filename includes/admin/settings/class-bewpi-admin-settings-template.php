@@ -242,7 +242,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
-				    'desc' => 'Reset invoice counter',
+				    'desc' => __( 'Reset invoice counter', $this->textdomain ),
 				    'class' => 'bewpi-reset-counter-option-title',
 				    'default' => 0,
 				    'attrs' => array(

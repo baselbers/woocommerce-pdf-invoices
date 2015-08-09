@@ -7,9 +7,6 @@ h1.company-logo {
 img.company-logo {
     max-height: 150px;
 }
-.logo {
-    background-image: url( "http://ninja.adsoft-solutions.com/wp-content/uploads/2015/05/logo-invoice.png" );
-}
 table {
     border-collapse: collapse;
     font-size: 14px;

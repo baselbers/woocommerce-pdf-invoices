@@ -122,7 +122,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		        header('Content-type: application / pdf');
 		        header('Content-Disposition: attachment; filename="' . $this->filename . '"');
 		        header('Content-Transfer-Encoding: binary');
-		        header('Content-Length: ' . filesize( $this->filename ));
+		        header('Content-Length: ' . filesize( $this->full_path ));
 		        header('Accept-Ranges: bytes');
 	        } else {
 		        header('Content-type: application/pdf');

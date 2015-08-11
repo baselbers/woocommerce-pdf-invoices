@@ -55,13 +55,5 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 
 		    return $this->full_path;
 	    }
-
-	    public function get_payment_status() {
-		    if ( $this->order->get_status() === "completed" || $this->order->get_status() === "refunded"  ) {
-			    return __( 'PAID', $this->textdomain );
-		    } else {
-			    return __( 'UNPAID', $this->textdomain );
-		    }
-	    }
     }
 }

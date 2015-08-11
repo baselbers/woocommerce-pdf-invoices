@@ -112,7 +112,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'section' => 'email',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Attach to New order Email', $this->textdomain ),
-				    'class' => 'bewpi-new-order-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0
 			    ),
 			    array(
@@ -124,7 +124,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'section' => 'cloud_storage',
 				    'type' => 'checkbox',
 					'desc' => __( 'Enable Email It In', $this->textdomain ),
-				    'class' => 'bewpi-email-it-in-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 		            'default' => 0
 			    ),
 			    // Header section

@@ -129,9 +129,22 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
                     'type' => 'checkbox',
                     'desc' => __( 'Display prices including tax', $this->textdomain )
                         . "<br/><div class='bewpi-notes'>" . __( 'Subtotal will be including tax and excluding discount and shipping.', $this->textdomain ) . "</div>",
-                    'class' => 'bewpi-display-prices-incl-tax-option-title',
+                    'class' => 'bewpi-checkbox-option-title',
                     'default' => 0
                 ),
+			    array(
+				    'id' => 'bewpi-show-payment-status',
+				    'name' => $this->prefix . 'show_payment_status',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'general',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Mark invoice as paid', $this->textdomain )
+				              . "<br/><div class='bewpi-notes'>" . __( 'Invoice will be watermarked when order has been paid.', $this->textdomain ) . "</div>",
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 0
+			    ),
 			    // Header section
 		        array(
 			        'id' =>  'bewpi-company-name',
@@ -209,7 +222,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'footer',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Show customer notes', $this->textdomain ),
-				    'class' => 'bewpi-customer-notes-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
 			    // Invoice number section
@@ -243,7 +256,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Reset invoice counter', $this->textdomain ),
-				    'class' => 'bewpi-reset-counter-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0,
 				    'attrs' => array(
 					    'onchange="Settings.enableDisableNextInvoiceNumbering(this)"'
@@ -324,7 +337,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Reset on 1st of january', $this->textdomain ),
-				    'class' => 'bewpi-reset-counter-yearly-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
 			    // Visible columns section
@@ -337,7 +350,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => __( 'SKU', $this->textdomain ),
-				    'class' => 'bewpi-visible-columns-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0
 			    ),
 			    array(
@@ -349,7 +362,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Subtotal', $this->textdomain ),
-				    'class' => 'bewpi-visible-columns-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
 			    array(
@@ -361,7 +374,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Tax', $this->textdomain ),
-				    'class' => 'bewpi-visible-columns-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
 			    array(
@@ -373,7 +386,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Discount', $this->textdomain ),
-				    'class' => 'bewpi-visible-columns-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
 			    array(
@@ -385,7 +398,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Shipping', $this->textdomain ),
-				    'class' => 'bewpi-visible-columns-option-title',
+				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    )
 		    );

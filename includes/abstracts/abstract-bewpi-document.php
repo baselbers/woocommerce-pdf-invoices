@@ -5,10 +5,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
     abstract class BEWPI_Abstract_Document {
 
+	    /**
+	     * @var string
+	     */
 	    protected $filename;
 
+	    /**
+	     * @var string
+	     */
 	    protected $full_path;
 
+	    /**
+	     * @var string
+	     */
 	    protected $textdomain = 'be-woocommerce-pdf-invoices';
 
         /**
@@ -24,46 +33,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
         protected $template_options;
 
 	    /**
-	     * @var string
-	     */
-	    protected $header_filename = '';
-
-	    /**
-	     * @var string
-	     */
-        protected $footer_filename = '';
-
-	    /**
-	     * @var
-	     */
-        protected $body_filename;
-
-	    /**
-	     * @var
-	     */
-        protected $style_filename;
-
-	    /**
-	     * @var string
-	     */
-	    protected $header_html = '';
-
-	    /**
-	     * @var string
-	     */
-	    protected $footer_html = '';
-
-	    /**
-	     * @var
-	     */
-	    protected $body_html;
-
-	    /**
-	     * @var
-	     */
-	    protected $style_html;
-
-	    /**
          * @param $order
          */
         public function __construct() {
@@ -76,7 +45,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          * @param $dest
          * @return string
          */
-        protected function generate( $html_sections, $dest ) {
+        protected function generate( $html_sections, $dest, $paid ) {
 	        set_time_limit(0);
             $mpdf_filename = BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 	        include $mpdf_filename;
@@ -95,7 +64,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		        $mpdf_options['orientation']         // orientation
 	        );
 	        $mpdf->useOnlyCoreFonts = false;    // false is default
-	        $mpdf->showWatermarkText = false;
+
+	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
+		        $mpdf->SetWatermarkText( __( 'Paid', $this->textdomain ) );
+		        $mpdf->showWatermarkText = true;
+	        }
+
 	        $mpdf->SetDisplayMode( 'fullpage' );
 	        $mpdf->useSubstitutions = true;
 

@@ -257,11 +257,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             delete_option( 'bewpi_template_settings' );
 		    add_option( 'bewpi_template_settings', $this->template_options );
 
-		    $html_sections = $this->output_template_files_to_buffer( $html_templates );
+		    $html_sections  = $this->output_template_files_to_buffer( $html_templates );
+		    $paid           = $this->is_paid();
 
-		    parent::generate( $html_sections, $dest );
+		    parent::generate( $html_sections, $dest, $paid );
 
 		    return $this->full_path;
+	    }
+
+	    /**
+	     * Checks if order is paid
+	     * @return bool
+	     */
+	    public function is_paid() {
+		    return ( in_array( $this->order->get_status(), array( 'pending', 'on-hold', 'auto-draft' ) ) ) ? false : true;
 	    }
 
 	    /**

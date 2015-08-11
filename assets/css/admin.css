@@ -64,17 +64,8 @@
 #footer-left #footer-thankyou {
     font-style: normal !important;
 }
-.bewpi-visible-columns-option-title,
-.bewpi-reset-counter-option-title,
-.bewpi-reset-counter-yearly-option-title,
-.bewpi-customer-notes-option-title,
-.bewpi-new-order-option-title,
-.bewpi-email-it-in-option-title {
-    /*display: inline-block;*/
-}
-.bewpi-visible-columns-option-title,
-.bewpi-customer-notes-option-title {
-    /*font-weight: bold;*/
+.bewpi-checkbox-option-title, .bewpi-notes {
+    cursor: default;
 }
 .bewpi-notes {
     font-size: 13px;

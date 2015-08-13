@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.3.2
+Stable tag: 2.3.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,6 +70,11 @@ The manual installation method involves downloading our plugin and uploading it 
 To easily get started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/simple/micro` to `uploads/bewpi-templates/simple` and rename the template folder `micro` to a template name you like. This way the plugin will detect the template and makes it available to select it within the template settings tab. Now go ahead en start making some changes to the template files! :)
 
 == Changelog ==
+
+= 2.3.3 - August 13, 2015 =
+
+- Improved: Check if allow_url_fopen is enabled for image conversion to base64
+- Improved: Norwegian language file thanks to Anders Sørensen :)
 
 = 2.3.2 - August 12, 2015 =
 

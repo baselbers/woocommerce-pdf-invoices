@@ -316,8 +316,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         public function get_company_logo_html() {
             if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) :
                 $image_url = $this->template_options['bewpi_company_logo'];
-                $image_base64 = image_to_base64( $image_url );
-                echo '<img class="company-logo" src="' . $image_base64 . '"/>';
+
+	            if( ini_get( 'allow_url_fopen' ) ) {
+		            $image_url = image_to_base64( $image_url );
+	            }
+
+                echo '<img class="company-logo" src="' . $image_url . '"/>';
             else :
                 echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             endif;

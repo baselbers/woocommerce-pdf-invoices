@@ -73,5 +73,9 @@ if ( file_exists( BEWPI_DIR . 'includes/class-bewpipro-invoice-global.php' ) )
 // require main class
 require_once( BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php' );
 
-if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) )
-    $GLOBALS['bewpi'] = new BE_WooCommerce_PDF_Invoices();
+if ( class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
+	$GLOBALS['bewpi'] = new BE_WooCommerce_PDF_Invoices();
+
+	register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
+	register_deactivation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_deactivation' ) );
+}

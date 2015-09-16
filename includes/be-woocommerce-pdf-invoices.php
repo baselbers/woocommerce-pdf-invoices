@@ -35,15 +35,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		public $template_options = array();
 
-		/**
-		 * Install date constant for admin notice
-		 */
 		const OPTION_INSTALL_DATE = 'bewpi-install-date';
 
-		/**
-		 * Admin notice key constant
-		 */
 		const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
+
+		const OPTION_ADMIN_ACTIVATION_NOTICE_KEY = 'bewpi-hide-activation-notice';
 
 		/**
 		 * Initialize plugin and register actions and filters.
@@ -56,14 +52,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			new BEWPI_Template_Settings();
 
 			/**
-			 * Review admin notice
-			 */
-			register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
-
-			/**
 			 * Initialize plugin
 			 */
 			add_action( 'init', array( &$this, 'init' ) );
+
+			/**
+			 * Check if user dismissed the notice
+			 */
+			add_action( 'admin_init', array( &$this, 'plugin_activation_notice_catch_hide' ) );
 
 			/**
 			 * Adds Invoices submenu to WooCommerce menu.
@@ -120,7 +116,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				add_action( 'admin_footer-edit.php', array( &$this, 'add_custom_order_bulk_action' ) );
 				add_action( 'load-edit.php', array( &$this, 'load_bulk_actions' ) );
 			}
-
 		}
 
 		/**
@@ -131,6 +126,35 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$this->create_bewpi_dirs();
 			$this->invoice_actions();
 			$this->init_review_admin_notice();
+
+			add_action( 'admin_notices', array( $this, 'display_activation_admin_notice' ) );
+		}
+
+		public function display_activation_admin_notice() {
+			global $pagenow;
+			if ( $pagenow != 'plugins.php' )
+				return;
+
+			global $current_user;
+			$user_id = $current_user->ID;
+			if ( ! get_user_meta( $user_id, 'bewpi_hide_activation_notice', true ) ) {
+				?>
+				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
+					<p>
+						<?php _e( 'Setup up your <strong>WooCommerce PDF Invoices</strong> by going to the <a href="' . admin_url() . 'admin.php?page=bewpi-invoices">settings page</a>.' ); ?>
+					</p>
+					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
+				</div>
+			<?php
+			}
+		}
+
+		public function plugin_activation_notice_catch_hide() {
+			global $current_user;
+            $user_id = $current_user->ID;
+			if ( isset($_GET['bewpi_hide_activation_notice']) && '0' == $_GET['bewpi_hide_activation_notice'] ) {
+				update_user_meta( $user_id, 'bewpi_hide_activation_notice', '1' );
+			}
 		}
 
 		/**
@@ -138,6 +162,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public static function plugin_activation() {
 			self::insert_install_date();
+		}
+
+		public static function plugin_deactivation() {
+			global $current_user;
+			$user_id = $current_user->ID;
+			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
 		}
 
 		/**
@@ -531,7 +561,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
 
 			echo '<div class="updated"><p>';
-			printf( __( "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>" ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
+			printf( __( "Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time! A huge thank you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>" ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
 			echo "</p></div>";
 		}
 

@@ -182,7 +182,7 @@
 	            <tr class="subtotal after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
-		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal( true ), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
             <!-- Discount -->

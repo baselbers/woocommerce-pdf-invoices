@@ -127,8 +127,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
                     'page' => $this->settings_key,
                     'section' => 'general',
                     'type' => 'checkbox',
-                    'desc' => __( 'Display prices including tax', $this->textdomain )
-                        . "<br/><div class='bewpi-notes'>" . __( 'Subtotal will be including tax and excluding discount and shipping.', $this->textdomain ) . "</div>",
+                    'desc' => __( 'Display prices including tax', $this->textdomain ),
                     'class' => 'bewpi-checkbox-option-title',
                     'default' => 0
                 ),
@@ -165,7 +164,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'file',
-				    'desc' => '',
+			        'desc' => __( '<b>Note</b>: If your logo doesn\'t show up, try to enable <code>allow_url_fopen</code>.', $this->textdomain ),
 				    'default' => ''
 			    ),
 			    array(
@@ -322,7 +321,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<b>[prefix]</b>', '<b>[suffix]</b>', '<b>[number]</b>', '<b>[m]</b>', '<b>[Y]</b>', '<b>[y]</b>', '<br/>', '<b>', '</b>', '<b>[number]</b>' ),
+				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<br/>', '<b>', '</b>', '<code>[number]</code>' ),
 				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'

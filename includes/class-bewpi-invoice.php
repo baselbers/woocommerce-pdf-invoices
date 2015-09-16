@@ -28,16 +28,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
 			     return $total              = '<del class="total-without-refund">' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
 		    } else {
-			    return $total              = $this->order->get_formatted_order_total();
+			    return $total               = $this->order->get_formatted_order_total();
 		    }
-	    }
-
-	    /**
-	     * Get the subtotal without discount and shipping, but including tax.
-	     * @return mixed|void
-	     */
-	    public function get_subtotal_incl_tax() {
-		    return $this->order->get_subtotal() + $this->order->get_total_tax();
 	    }
 
 	    public function save( $dest, $html_templates = array() ) {

@@ -86,7 +86,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
         protected function get_allowed_tags_str() {
             ( count( $this->allowed_tags ) > 0 ) ? $str = __('Feel free to use ', $this->textdomain) : $str = '';
             foreach ($this->allowed_tags as $i => $tag) {
-                ($i == count($this->allowed_tags) - 1) ? $str .= sprintf('<b>%s</b>.', htmlspecialchars( $tag ) ) : $str .= sprintf('<b>%s</b> ', htmlspecialchars( $tag ) );
+                ($i == count($this->allowed_tags) - 1) ? $str .= sprintf('<code>%s</code>.', htmlspecialchars( $tag ) ) : $str .= sprintf('<code>%s</code> ', htmlspecialchars( $tag ) );
             }
             return $str;
         }

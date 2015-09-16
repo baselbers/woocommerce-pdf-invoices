@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.3.3
+Stable tag: 2.3.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,9 +67,41 @@ The manual installation method involves downloading our plugin and uploading it 
 == Frequently Asked Questions ==
 
 = How to add your custom template? =
-To easily get started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/simple/micro` to `uploads/bewpi-templates/simple` and rename the template folder `micro` to a template name you like. This way the plugin will detect the template and makes it available to select it within the template settings tab. Now go ahead en start making some changes to the template files! :)
+To easily get started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/invoices/simple/micro` to `uploads/bewpi-templates/invoices/simple` and rename the template folder `micro` to a template name you like. This way the plugin will detect the template and makes it available to select it within the template settings tab. Now go ahead en start making some changes to the template files! :)
+
+= How to add a fee to the invoice? =
+To add a fee to your invoice, simply add the following action to your themes `function.php`.
+
+`add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
+function add_woocommerce_fee() {
+    global $woocommerce;
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    $amount = 5;
+    $woocommerce->cart->add_fee( 'FEE_NAME', $amount, true, 'standard' );
+}`
+
+= How to hide order item meta? =
+`add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
+function add_hidden_order_items( $order_items ) {
+    $order_items[] = '_subscription_interval';
+    $order_items[] = '_subscription_length';
+    // end so on...
+
+    return $order_items;
+}`
 
 == Changelog ==
+
+= 2.3.4 - August 16, 2015 =
+
+- Fixed: Subtotal not displaying including tax
+- Fixed: Plugin activation and deactivation hooks
+- Fixed: Logo not always showing
+- Improved: Settings markup
+- Improved: Admin notices
 
 = 2.3.3 - August 13, 2015 =
 

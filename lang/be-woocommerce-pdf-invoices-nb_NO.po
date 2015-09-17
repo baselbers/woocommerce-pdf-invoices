@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-08-13 22:41+0100\n"
-"PO-Revision-Date: 2015-08-13 22:41+0100\n"
+"POT-Creation-Date: 2015-09-17 23:42+0100\n"
+"PO-Revision-Date: 2015-09-17 23:42+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -82,7 +82,7 @@ msgstr ""
 "Drive eller Egnyte og skriv inn kontoen din under."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:87
-#: includes/be-woocommerce-pdf-invoices.php:218
+#: includes/be-woocommerce-pdf-invoices.php:214
 msgid "Template"
 msgstr "Mal"
 
@@ -103,67 +103,77 @@ msgstr "%sFormat%s til fakturadato og ordredato."
 msgid "Display prices including tax"
 msgstr "Vis priser inkludert mva."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
-msgid "Subtotal will be including tax and excluding discount and shipping."
-msgstr "Delsummen vil være inkludert mva, men ekskludert rabatt og frakt."
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:142
+msgid "Shipping taxable"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:143
+msgid "Enable to display subtotal including shipping."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:155
 msgid "Mark invoice as paid"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:144
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:156
 msgid "Invoice will be watermarked when order has been paid."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:152
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:164
 msgid "Company name"
 msgstr "Firmanavn"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:163
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:175
 msgid "Company logo"
 msgstr "Firmalogo"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:174
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:180
+msgid ""
+"<b>Note</b>: If your logo doesn't show up, try to enable "
+"<code>allow_url_fopen</code>."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:186
 msgid "Company address"
 msgstr "Firmaadresse"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:185
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:197
 msgid "Company details"
 msgstr "Firmadetaljer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:196
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:208
 msgid "Intro text"
 msgstr "Introduksjonstekst"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:208
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:220
 msgid "Terms & conditions, policies etc."
 msgstr "Betingelser, vilkår etc."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:224
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:236
 msgid "Show customer notes"
 msgstr "Vis kundenotat"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:232
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:244
 msgid "Type"
 msgstr "Type"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:240
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:252
 msgid "WooCommerce order number"
 msgstr "WooCommerce bestillingsnummer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:244
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:256
 msgid "Sequential number"
 msgstr "Sekvensielt nummer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:258
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:270
 msgid "Reset invoice counter"
 msgstr "Tilbakestill fakturateller"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:268
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:280
 msgid "Next"
 msgstr "Neste"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:273
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:285
 #, php-format
 msgid ""
 "Reset the invoice counter and start with next invoice number. %s %sNote:%s "
@@ -174,23 +184,23 @@ msgstr ""
 "Kun tilgjengelig med sekvensielle nummer og du må huke av boksen for å "
 "faktisk tilbakestille verdien."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:282
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:294
 msgid "Digits"
 msgstr "Tegn"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:298
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:310
 msgid "[prefix]"
 msgstr "[prefix]"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:309
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:321
 msgid "[suffix]"
 msgstr "[suffix]"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:320
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:332
 msgid "Format"
 msgstr "Format"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:325
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:337
 #, php-format
 msgid ""
 "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
@@ -199,159 +209,162 @@ msgstr ""
 "Bruk en av disse kortkodene; %s %s %s %s %s og %s. %s %sMerk:%s %s er "
 "obligatorisk."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:339
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:351
 msgid "Reset on 1st of january"
 msgstr "Tilbakestill 1. Januar"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:352
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:364
 #: includes/templates/invoices/global/micro/body.php:10
 #: includes/templates/invoices/simple/micro/body.php:8
 msgid "SKU"
 msgstr "Prod.Nr."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:364
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:376
 #: includes/templates/invoices/global/micro/body.php:184
 #: includes/templates/invoices/global/micro/body.php:208
-#: includes/templates/invoices/simple/micro/body.php:164
-#: includes/templates/invoices/simple/micro/body.php:188
+#: includes/templates/invoices/simple/micro/body.php:180
 msgid "Subtotal"
 msgstr "Delsum"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:376
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:388
 msgid "Tax"
 msgstr "MVA"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:388
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:400
 #: includes/templates/invoices/global/micro/body.php:192
-#: includes/templates/invoices/simple/micro/body.php:172
+#: includes/templates/invoices/simple/micro/body.php:164
 msgid "Discount"
 msgstr "Rabatt"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:400
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:412
 #: includes/templates/invoices/global/micro/body.php:200
-#: includes/templates/invoices/simple/micro/body.php:180
+#: includes/templates/invoices/simple/micro/body.php:172
+#: includes/templates/invoices/simple/micro/body.php:188
 msgid "Shipping"
 msgstr "Frakt"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:414
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:426
 msgid "General Options"
 msgstr "Generelle valg"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:420
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:432
 msgid "Invoice Number Options"
 msgstr "Alternativer for fakturanummer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:426
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 msgid "Header Options"
 msgstr "Overskriftsvalg"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:432
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:444
 msgid "Footer Options"
 msgstr "Footer valg"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:438
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:450
 msgid "Visible Columns"
 msgstr "Synlige kolonner"
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:444
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:456
 msgid "These are the general template options."
 msgstr "Dette er de generelle alternativene for malen."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:445
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:457
 msgid "These are the invoice number options."
 msgstr "Dette er alternativene for fakturanummer."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:446
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:458
 msgid "The header will be visible on every page. "
 msgstr "Overskriften vil være synlig på alle sider. "
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:447
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:459
 msgid "The footer will be visible on every page. "
 msgstr "Footeren vil være synlig på alle sider. "
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:448
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:460
 msgid "Enable or disable the columns."
 msgstr "Aktiver eller deaktiver kolonnene."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:518
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:530
 msgid "File is invalid and contains either '..' or './'."
 msgstr "Filen er ugyldig og inneholder enten '...' eller './'."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:525
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:537
 msgid "File is invalid and contains ':' after the first character."
 msgstr "Filen er ugyldig og inneholder ':' etter den første bokstaven."
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:534
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:546
 msgid "File should be less then 2MB."
 msgstr "Filen bør være under 2 megabyte."
 
-#: includes/be-woocommerce-pdf-invoices.php:217
+#: includes/be-woocommerce-pdf-invoices.php:144
+msgid ""
+"Setup up your <strong>WooCommerce PDF Invoices</strong> by going to the <a "
+"href=\""
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:213
 msgid "General"
 msgstr "Generelt"
 
-#: includes/be-woocommerce-pdf-invoices.php:240
+#: includes/be-woocommerce-pdf-invoices.php:236
 msgid "Invoices"
 msgstr "PDF Faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:348
+#: includes/be-woocommerce-pdf-invoices.php:344
 msgid "PDF Invoice"
 msgstr "PDF Faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:374
+#: includes/be-woocommerce-pdf-invoices.php:370
 msgid "Invoiced on:"
 msgstr "Sendt:"
 
-#: includes/be-woocommerce-pdf-invoices.php:378
+#: includes/be-woocommerce-pdf-invoices.php:374
 msgid "Invoice number:"
 msgstr "Fakturanummer:"
 
-#: includes/be-woocommerce-pdf-invoices.php:416
+#: includes/be-woocommerce-pdf-invoices.php:412
 msgid "View invoice"
 msgstr "Vis faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:416
+#: includes/be-woocommerce-pdf-invoices.php:412
 msgid "View"
 msgstr "Vis"
 
-#: includes/be-woocommerce-pdf-invoices.php:417
+#: includes/be-woocommerce-pdf-invoices.php:413
 msgid "Cancel invoice"
 msgstr "Slett faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:417
+#: includes/be-woocommerce-pdf-invoices.php:413
 msgid "Cancel"
 msgstr "Slett"
 
-#: includes/be-woocommerce-pdf-invoices.php:419
+#: includes/be-woocommerce-pdf-invoices.php:415
 msgid "Are you sure to delete the invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
 
-#: includes/be-woocommerce-pdf-invoices.php:422
+#: includes/be-woocommerce-pdf-invoices.php:418
 msgid "Create invoice"
 msgstr "Opprett faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:422
+#: includes/be-woocommerce-pdf-invoices.php:418
 msgid "Create"
 msgstr "Opprett"
 
-#: includes/be-woocommerce-pdf-invoices.php:455
+#: includes/be-woocommerce-pdf-invoices.php:451
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Faktura %s (PDF)"
 
-#: includes/be-woocommerce-pdf-invoices.php:534
+#: includes/be-woocommerce-pdf-invoices.php:565
 #, php-format
 msgid ""
-"Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
-"Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you "
-"in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
-"a> - <a href='%s'>No, already done it!</a>"
+"Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some "
+"time now. We really need your ★★★★★ rating. It will support future "
+"development big-time! A huge thank you in advance! <br /> <a href='%s' "
+"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
+"done it!</a>"
 msgstr ""
-"Takk for at du har benyttet <b>WooCommerce PDF Invoices</b> en liten stund "
-"allerede. Vennligst vis oss din støtte ved å vurdere utvidelsen med ★★★★★. "
-"Tusen takk for støtten din! <br /> <a href='%s' target='_blank'>Ja, jeg skal "
-"gjøre det med en gang!!</a> - <a href='%s'>Jeg har allerede gjort det!</a>"
 
-#: includes/be-woocommerce-pdf-invoices.php:545
+#: includes/be-woocommerce-pdf-invoices.php:576
 msgid "Generate global invoice"
 msgstr "Opprett global faktura"
 
@@ -434,6 +447,21 @@ msgstr "Ordrenummer: %s"
 #, php-format
 msgid "Order Date: %s"
 msgstr "Ordre dato: %s"
+
+#~ msgid "Subtotal will be including tax and excluding discount and shipping."
+#~ msgstr "Delsummen vil være inkludert mva, men ekskludert rabatt og frakt."
+
+#~ msgid ""
+#~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "Please show us your appreciation by leaving a ★★★★★ rating. A huge thank "
+#~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
+#~ "away!</a> - <a href='%s'>No, already done it!</a>"
+#~ msgstr ""
+#~ "Takk for at du har benyttet <b>WooCommerce PDF Invoices</b> en liten "
+#~ "stund allerede. Vennligst vis oss din støtte ved å vurdere utvidelsen med "
+#~ "★★★★★. Tusen takk for støtten din! <br /> <a href='%s' "
+#~ "target='_blank'>Ja, jeg skal gjøre det med en gang!!</a> - <a "
+#~ "href='%s'>Jeg har allerede gjort det!</a>"
 
 #~ msgid "PAID"
 #~ msgstr "BETALT"

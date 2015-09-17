@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.2
-Stable tag: 2.3.4
+Stable tag: 2.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -70,7 +70,7 @@ The manual installation method involves downloading our plugin and uploading it 
 To easily get started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/invoices/simple/micro` to `uploads/bewpi-templates/invoices/simple` and rename the template folder `micro` to a template name you like. This way the plugin will detect the template and makes it available to select it within the template settings tab. Now go ahead en start making some changes to the template files! :)
 
 = How to add a fee to the invoice? =
-To add a fee to your invoice, simply add the following action to your themes `function.php`.
+To add a fee to your invoice, simply add the following action to your themes `functions.php`.
 
 `add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
 function add_woocommerce_fee() {
@@ -84,6 +84,8 @@ function add_woocommerce_fee() {
 }`
 
 = How to hide order item meta? =
+To hide order item meta from the invoice, simply add the following filter to your themes `functions.php`.
+
 `add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
 function add_hidden_order_items( $order_items ) {
     $order_items[] = '_subscription_interval';
@@ -95,7 +97,11 @@ function add_hidden_order_items( $order_items ) {
 
 == Changelog ==
 
-= 2.3.4 - August 16, 2015 =
+= 2.3.5 - September 17, 2015 =
+
+- Added: Option to display subtotal including or excluding shipping
+
+= 2.3.4 - September 16, 2015 =
 
 - Fixed: Subtotal not displaying including tax
 - Fixed: Plugin activation and deactivation hooks

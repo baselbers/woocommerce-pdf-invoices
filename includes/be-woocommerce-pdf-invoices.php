@@ -171,40 +171,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Check if we should show the admin notice
-		 * @return bool|void
-		 */
-		public function init_review_admin_notice() {
-			// Check if user is an administrator
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return false;
-			}
-
-			// Admin notice hide catch
-			add_action( 'admin_init', array( &$this, 'catch_hide_notice' ) );
-
-			$current_user = wp_get_current_user();
-			$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
-
-			if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
-				// Get installation date
-				$datetime_install = $this->get_install_date();
-				$datetime_past    = new DateTime( '-10 days' );
-				//$datetime_past    = new DateTime( '-10 second' );
-
-				if ( $datetime_past >= $datetime_install ) {
-					// 10 or more days ago, show admin notice
-					add_action( 'admin_notices', array( &$this, 'display_admin_notice' ) );
-				}
-			}
-
-			// Don't add admin bar option in admin panel
-			if ( is_admin() ) {
-				return;
-			}
-		}
-
-		/**
 		 * Callback to sniff for specific plugin actions to view, create or delete invoice.
 		 */
 		private function invoice_actions() {
@@ -489,13 +455,48 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			return $actions;
 		}
 
+
+		/**
+		 * Check if we should show the admin notice
+		 * @return bool|void
+		 */
+		public function init_review_admin_notice() {
+			// Check if user is an administrator
+			if ( ! current_user_can( 'manage_options' ) ) {
+				return false;
+			}
+
+			// Admin notice hide catch
+			add_action( 'admin_init', array( &$this, 'catch_hide_notice' ) );
+
+			$current_user = wp_get_current_user();
+			$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
+
+			if ( current_user_can( 'install_plugins' ) && $hide_notice == '0' ) {
+				// Get installation date
+				$datetime_install = $this->get_install_date();
+				$datetime_past    = new DateTime( '-10 days' );
+				//$datetime_past    = new DateTime( '-10 second' );
+
+				if ( $datetime_past >= $datetime_install ) {
+					// 10 or more days ago, show admin notice
+					add_action( 'admin_notices', array( &$this, 'display_admin_notice' ) );
+				}
+			}
+
+			// Don't add admin bar option in admin panel
+			if ( is_admin() ) {
+				return;
+			}
+		}
+
 		/**
 		 * @return string
 		 */
 		private static function insert_install_date() {
 			$datetime_now = new DateTime();
 			$date_string  = $datetime_now->format( 'Y-m-d' );
-			add_site_option( self::OPTION_INSTALL_DATE, $date_string, '', 'no' );
+			update_site_option( self::OPTION_INSTALL_DATE, $date_string, '', 'no' );
 
 			return $date_string;
 		}

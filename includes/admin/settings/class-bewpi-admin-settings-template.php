@@ -132,6 +132,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
                     'default' => 0
                 ),
 			    array(
+				    'id' => 'bewpi-shipping-taxable',
+				    'name' => $this->prefix . 'shipping_taxable',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'general',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Shipping taxable', $this->textdomain )
+				              . "<br/><div class='bewpi-notes'>" . __( 'Enable to display subtotal including shipping.', $this->textdomain ) . "</div>",
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 0
+			    ),
+			    array(
 				    'id' => 'bewpi-show-payment-status',
 				    'name' => $this->prefix . 'show_payment_status',
 				    'title' => '',

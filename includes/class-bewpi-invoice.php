@@ -32,6 +32,17 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    }
 	    }
 
+	    public function get_subtotal() {
+		    $subtotal = $this->order->get_subtotal();
+
+			if ( (bool)$this->template_options["bewpi_shipping_taxable"] )
+				$subtotal += $this->order->get_total_shipping();
+
+		    $subtotal -= $this->order->get_total_discount( true );
+
+		    return $subtotal;
+	    }
+
 	    public function save( $dest, $html_templates = array() ) {
 		    //$template_name = apply_filters( 'bewpi_invoice_template_name', $this->template_name );
 		    $template_dir_name = $this->get_template_dir( $this->template_name );

@@ -215,10 +215,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		        $html_sections[$section] = $html;
 	        }
 
-	        // don't need an order for the global invoice
-	        if ( $this->type === 'global' )
-	            wp_delete_post( $this->order->id );
-
 	        return $html_sections;
         }
 
@@ -259,6 +255,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		    $html_sections  = $this->output_template_files_to_buffer( $html_templates );
 		    $paid           = $this->is_paid();
+
+	        do_action( 'bewpi_before_document_generation', array( 'type' => $this->type, 'order_id' => $this->order->id ) );
 
 		    parent::generate( $html_sections, $dest, $paid );
 

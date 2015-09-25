@@ -10,36 +10,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
 
-		/**
-		 * Constant options key
-		 * @var string
-		 */
-		private $options_key = 'bewpi-invoices';
-
-		/**
-		 * All the settings tabs for the settings page.
-		 * @var array
-		 */
-		private $settings_tabs = array(
-			'bewpi_general_settings'  => 'General',
-			'bewpi_template_settings' => 'Template'
-		);
-
-		/**
-		 * Default textdomain.
-		 * @var string
-		 */
-		public $textdomain = 'be-woocommerce-pdf-invoices';
-
-		public $general_options = array();
-
-		public $template_options = array();
-
 		const OPTION_INSTALL_DATE = 'bewpi-install-date';
-
 		const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
-
 		const OPTION_ADMIN_ACTIVATION_NOTICE_KEY = 'bewpi-hide-activation-notice';
+
+		private $options_key = 'bewpi-invoices';
+		public $settings_tabs = array();
+		public $textdomain = 'be-woocommerce-pdf-invoices';
+		public $general_options = array();
+		public $template_options = array();
 
 		/**
 		 * Initialize plugin and register actions and filters.
@@ -51,15 +30,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			new BEWPI_General_Settings();
 			new BEWPI_Template_Settings();
 
+			do_action( 'bewpi_after_init_settings' );
+
 			/**
 			 * Initialize plugin
 			 */
 			add_action( 'init', array( &$this, 'init' ) );
 
 			/**
-			 * Check if user dismissed the notice
+			 *
 			 */
-			add_action( 'admin_init', array( &$this, 'plugin_activation_notice_catch_hide' ) );
+			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
 			/**
 			 * Adds Invoices submenu to WooCommerce menu.
@@ -110,24 +91,34 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				&$this,
 				'add_my_account_download_pdf_action'
 			), 10, 2 );
-
-			// generate global invoices --only pro version
-			if ( class_exists( 'BEWPIPRO_Invoice_Global' ) ) {
-				add_action( 'admin_footer-edit.php', array( &$this, 'add_custom_order_bulk_action' ) );
-				add_action( 'load-edit.php', array( &$this, 'load_bulk_actions' ) );
-			}
 		}
 
-		/**
-		 * Initialize...
-		 */
 		public function init() {
 			$this->load_textdomain();
+			$this->init_settings_tabs();
 			$this->create_bewpi_dirs();
 			$this->invoice_actions();
-			$this->init_review_admin_notice();
 
 			add_action( 'admin_notices', array( $this, 'display_activation_admin_notice' ) );
+		}
+
+		public function admin_init() {
+			// catch dismiss activation notice
+			$this->plugin_activation_notice_catch_hide();
+
+			// don't show review notice if pro version is activated
+			if ( ! is_plugin_active( 'woocommerce-pdf-invoices-pro/bootstrap.php' ) )
+				$this->init_review_admin_notice();
+		}
+
+		public static function plugin_activation() {
+			self::insert_install_date();
+		}
+
+		public static function plugin_deactivation() {
+			global $current_user;
+			$user_id = $current_user->ID;
+			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
 		}
 
 		public function display_activation_admin_notice() {
@@ -155,19 +146,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( isset($_GET['bewpi_hide_activation_notice']) && '0' == $_GET['bewpi_hide_activation_notice'] ) {
 				update_user_meta( $user_id, 'bewpi_hide_activation_notice', '1' );
 			}
-		}
-
-		/**
-		 * Get installation date on activation
-		 */
-		public static function plugin_activation() {
-			self::insert_install_date();
-		}
-
-		public static function plugin_deactivation() {
-			global $current_user;
-			$user_id = $current_user->ID;
-			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
 		}
 
 		/**
@@ -210,8 +188,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function load_textdomain() {
 			$lang_dir = (string) BEWPI_LANG_DIR;
 			load_plugin_textdomain( $this->textdomain, false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
+		}
+
+		public function init_settings_tabs() {
 			$this->settings_tabs['bewpi_general_settings']  = __( 'General', $this->textdomain );
 			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', $this->textdomain );
+
+			$this->settings_tabs = apply_filters( 'bewpi_settings_tabs', $this->settings_tabs );
 		}
 
 		/**
@@ -223,10 +206,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date( 'Y' ) . '/.htaccess' );
 			copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date( 'Y' ) . '/index.php' );
 
-			// bewpi-templates/global
-			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'global/' );
-			// bewpi-templares/simple
 			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
+
+			do_action( 'mk_custom_template_invoices_dir' );
 		}
 
 		/**
@@ -243,9 +225,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Admin scripts
 		 */
 		public function admin_enqueue_scripts() {
-			wp_enqueue_script( 'admin_settings_script', BEWPI_URL . '/assets/js/admin.js' );
-			wp_register_style( 'admin_settings_css', BEWPI_URL . '/assets/css/admin.css', false, '1.0.0' );
-			wp_enqueue_style( 'admin_settings_css' );
+			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . '/assets/js/admin.js' );
+			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . '/assets/css/admin.css', false, '1.0.0' );
+			wp_enqueue_style( 'bewpi_admin_settings_css' );
 		}
 
 		/**
@@ -564,88 +546,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			echo '<div class="updated"><p>';
 			printf( __( "Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time! A huge thank you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>" ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
 			echo "</p></div>";
-		}
-
-		public function add_custom_order_bulk_action() {
-			global $post_type;
-
-			if ( $post_type == 'shop_order' ) {
-				?>
-				<script type="text/javascript">
-					jQuery(document).ready(function () {
-						jQuery('<option>').val('generate_global_invoice').text('<?php _e( 'Generate global invoice' )?>').appendTo("select[name='action']");
-					});
-				</script>
-			<?php
-			}
-		}
-
-		public function load_bulk_actions() {
-			global $typenow;
-			$post_type = $typenow;
-
-			// Are we on order page?
-			if ( $post_type == 'shop_order' ) {
-
-				// Get the action
-				$wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
-				$action        = $wp_list_table->current_action();
-
-				$allowed_actions = array( "generate_global_invoice" );
-				if ( ! in_array( $action, $allowed_actions ) ) {
-					return;
-				}
-
-				// Security check
-				check_admin_referer( 'bulk-posts' );
-
-				// Make sure ids are submitted. Depending on the resource type, this may be 'media' or 'ids'
-				if ( isset( $_REQUEST['post'] ) ) {
-					$post_ids = array_map( 'intval', $_REQUEST['post'] );
-				}
-
-				if ( empty( $post_ids ) ) {
-					return;
-				}
-
-				// this is based on wp-admin/edit.php
-				$sendback = remove_query_arg( array( 'generated', 'untrashed', 'deleted', 'ids' ), wp_get_referer() );
-				if ( ! $sendback ) {
-					$sendback = admin_url( "edit.php?post_type=$post_type" );
-				}
-
-				$pagenum  = $wp_list_table->get_pagenum();
-				$sendback = add_query_arg( 'paged', $pagenum, $sendback );
-
-				switch ( $action ) {
-					case 'generate_global_invoice':
-
-						$global_invoice = new BEWPIPRO_Invoice_Global( $post_ids );
-						$global_invoice->save( "D" );
-
-						$sendback = add_query_arg( array( 'ids' => join( ',', $post_ids ) ), $sendback );
-						break;
-
-					default:
-						return;
-				}
-
-				$sendback = remove_query_arg( array(
-					'action',
-					'action2',
-					'tags_input',
-					'post_author',
-					'comment_status',
-					'ping_status',
-					'_status',
-					'post',
-					'bulk_edit',
-					'post_view'
-				), $sendback );
-
-				wp_redirect( $sendback );
-				exit();
-			}
 		}
 	}
 }

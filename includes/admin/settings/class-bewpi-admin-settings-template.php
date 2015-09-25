@@ -334,7 +334,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required.', $this->textdomain ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<br/>', '<b>', '</b>', '<code>[number]</code>' ),
+				    'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required and slashes aren\'t supported yet.', $this->textdomain ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<br/>', '<b>', '</b>', '<code>[number]</code>' ),
 				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'
@@ -515,7 +515,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 		    if ( isset( $_FILES['bewpi_company_logo'] ) && $_FILES['bewpi_company_logo']['error'] == 0 ) {
 			    $file = $_FILES['bewpi_company_logo'];
-			    if ( $file['size'] <= 200000 ) {
+			    if ( $file['size'] <= 2000000 ) {
 				    $override = array( 'test_form' => false );
 				    $company_logo = wp_handle_upload( $file, $override );
 				    $validate_file_code = validate_file( $company_logo['url'] );

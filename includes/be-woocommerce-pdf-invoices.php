@@ -289,7 +289,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 								<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', $this->textdomain ); ?>" required>
 								<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 								<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
-								<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+								<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 								<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', $this->textdomain ); ?></div>
 							</div>
 						</form>

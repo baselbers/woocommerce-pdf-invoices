@@ -215,10 +215,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		        $html_sections[$section] = $html;
 	        }
 
-	        // don't need an order for the global invoice
-	        if ( $this->type === 'global' )
-	            wp_delete_post( $this->order->id );
-
 	        return $html_sections;
         }
 
@@ -259,6 +255,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		    $html_sections  = $this->output_template_files_to_buffer( $html_templates );
 		    $paid           = $this->is_paid();
+
+	        do_action( 'bewpi_before_document_generation', array( 'type' => $this->type, 'order_id' => $this->order->id ) );
 
 		    parent::generate( $html_sections, $dest, $paid );
 
@@ -317,6 +315,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) :
                 $image_url = $this->template_options['bewpi_company_logo'];
 
+	            // get the relative path due to slow generation of invoice. Not fully tested yet.
+	            //$image_url = '..' . str_replace( get_site_url(), '', $image_url );
+
+	            // not needed anymore if we use the relative path fix.
 	            if( ini_get( 'allow_url_fopen' ) ) {
 		            $image_url = image_to_base64( $image_url );
 	            }

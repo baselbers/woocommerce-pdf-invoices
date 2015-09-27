@@ -10,36 +10,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
 
-		/**
-		 * Constant options key
-		 * @var string
-		 */
-		private $options_key = 'bewpi-invoices';
-
-		/**
-		 * All the settings tabs for the settings page.
-		 * @var array
-		 */
-		private $settings_tabs = array(
-			'bewpi_general_settings'  => 'General',
-			'bewpi_template_settings' => 'Template'
-		);
-
-		/**
-		 * Default textdomain.
-		 * @var string
-		 */
-		public $textdomain = 'be-woocommerce-pdf-invoices';
-
-		public $general_options = array();
-
-		public $template_options = array();
-
 		const OPTION_INSTALL_DATE = 'bewpi-install-date';
-
 		const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
-
 		const OPTION_ADMIN_ACTIVATION_NOTICE_KEY = 'bewpi-hide-activation-notice';
+
+		private $options_key = 'bewpi-invoices';
+		public $settings_tabs = array();
+		public $textdomain = 'be-woocommerce-pdf-invoices';
+		public $general_options = array();
+		public $template_options = array();
 
 		/**
 		 * Initialize plugin and register actions and filters.
@@ -51,15 +30,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			new BEWPI_General_Settings();
 			new BEWPI_Template_Settings();
 
+			do_action( 'bewpi_after_init_settings' );
+
 			/**
 			 * Initialize plugin
 			 */
 			add_action( 'init', array( &$this, 'init' ) );
 
-			/**
-			 * Check if user dismissed the notice
-			 */
-			add_action( 'admin_init', array( &$this, 'plugin_activation_notice_catch_hide' ) );
+			add_action( 'admin_init', array( $this, 'admin_init' ) );
+
+			add_action( 'admin_init', array( &$this, 'catch_hide_notice' ) );
 
 			/**
 			 * Adds Invoices submenu to WooCommerce menu.
@@ -110,24 +90,38 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				&$this,
 				'add_my_account_download_pdf_action'
 			), 10, 2 );
-
-			// generate global invoices --only pro version
-			if ( class_exists( 'BEWPIPRO_Invoice_Global' ) ) {
-				add_action( 'admin_footer-edit.php', array( &$this, 'add_custom_order_bulk_action' ) );
-				add_action( 'load-edit.php', array( &$this, 'load_bulk_actions' ) );
-			}
 		}
 
-		/**
-		 * Initialize...
-		 */
 		public function init() {
 			$this->load_textdomain();
+			$this->init_settings_tabs();
 			$this->create_bewpi_dirs();
 			$this->invoice_actions();
-			$this->init_review_admin_notice();
 
 			add_action( 'admin_notices', array( $this, 'display_activation_admin_notice' ) );
+		}
+
+		public function admin_init() {
+			$this->plugin_activation_notice_catch_hide();
+			$this->init_review_admin_notice();
+
+			add_filter( 'plugin_action_links_woocommerce-pdf-invoices/bootstrap.php', array( $this, 'your_plugin_action_links' ) );
+		}
+
+		public static function plugin_activation() {
+			self::insert_install_date();
+		}
+
+		function your_plugin_action_links( $links ) {
+			return array_merge( array(
+				'<a href="' . admin_url( 'admin.php?page=bewpi-invoices' ) . '">' . __( 'Settings' ) . '</a>',
+				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium' ) . '</a>'), $links );
+		}
+
+		public static function plugin_deactivation() {
+			global $current_user;
+			$user_id = $current_user->ID;
+			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
 		}
 
 		public function display_activation_admin_notice() {
@@ -141,7 +135,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				?>
 				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
 					<p>
-						<?php _e( 'Setup up your <strong>WooCommerce PDF Invoices</strong> by going to the <a href="' . admin_url() . 'admin.php?page=bewpi-invoices">settings page</a>.' ); ?>
+						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
 					</p>
 					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
 				</div>
@@ -155,19 +149,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( isset($_GET['bewpi_hide_activation_notice']) && '0' == $_GET['bewpi_hide_activation_notice'] ) {
 				update_user_meta( $user_id, 'bewpi_hide_activation_notice', '1' );
 			}
-		}
-
-		/**
-		 * Get installation date on activation
-		 */
-		public static function plugin_activation() {
-			self::insert_install_date();
-		}
-
-		public static function plugin_deactivation() {
-			global $current_user;
-			$user_id = $current_user->ID;
-			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
 		}
 
 		/**
@@ -210,8 +191,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function load_textdomain() {
 			$lang_dir = (string) BEWPI_LANG_DIR;
 			load_plugin_textdomain( $this->textdomain, false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
+		}
+
+		public function init_settings_tabs() {
 			$this->settings_tabs['bewpi_general_settings']  = __( 'General', $this->textdomain );
 			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', $this->textdomain );
+
+			$this->settings_tabs = apply_filters( 'bewpi_settings_tabs', $this->settings_tabs );
 		}
 
 		/**
@@ -223,10 +209,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date( 'Y' ) . '/.htaccess' );
 			copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date( 'Y' ) . '/index.php' );
 
-			// bewpi-templates/global
-			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'global/' );
-			// bewpi-templares/simple
 			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
+
+			do_action( 'mk_custom_template_invoices_dir' );
 		}
 
 		/**
@@ -243,9 +228,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Admin scripts
 		 */
 		public function admin_enqueue_scripts() {
-			wp_enqueue_script( 'admin_settings_script', BEWPI_URL . '/assets/js/admin.js' );
-			wp_register_style( 'admin_settings_css', BEWPI_URL . '/assets/css/admin.css', false, '1.0.0' );
-			wp_enqueue_style( 'admin_settings_css' );
+			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . '/assets/js/admin.js' );
+			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . '/assets/css/admin.css', false, '1.0.0' );
+			wp_enqueue_style( 'bewpi_admin_settings_css' );
 		}
 
 		/**
@@ -285,6 +270,74 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					<?php do_settings_sections( $tab ); ?>
 					<?php submit_button(); ?>
 				</form>
+				<aside class="bewpi_sidebar premium">
+					<h3><?php _e( 'Invoicing on Steroids', $this->textdomain ); ?></h3>
+					<p><?php _e( 'We\'re working on a more powerful version of this invoicing plugin. Be the first to know when we\'re ready to launch and receive a unique one-time discount!', $this->textdomain ); ?></p>
+					<!-- Begin MailChimp Signup Form -->
+					<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+					<style type="text/css">
+						#mc_embed_signup{background: #222; clear:left;}
+						#mc-embedded-subscribe:hover { background-color: #4ca55e !important; }
+						#mc_embed_signup input.button { margin: 0 !important; }
+						/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
+						   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+					</style>
+					<div id="mc_embed_signup">
+						<form action="//wcpdfinvoices.us11.list-manage.com/subscribe/post?u=f270649bc41a9687a38a8977f&amp;id=395e1e319a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0">
+							<div id="mc_embed_signup_scroll">
+								<?php $user_email = get_the_author_meta( 'user_email', get_current_user_id() ) ?>
+								<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', $this->textdomain ); ?>" required>
+								<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+								<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
+								<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+								<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', $this->textdomain ); ?></div>
+							</div>
+						</form>
+					</div>
+
+					<!--End mc_embed_signup-->
+				</aside>
+				<aside class="bewpi_sidebar about">
+					<h3><?php _e( 'About', $this->textdomain ); ?></h3>
+					<p><?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , $this->textdomain ); ?></p>
+					<?php _e( '<b>Version</b>: ' . BEWPI_VERSION, $this->textdomain ); ?>
+					<br/>
+					<?php _e( '<b>Author</b>: <a href="https://github.com/baselbers">Bas Elbers</a>', $this->textdomain ); ?>
+				</aside>
+				<aside class="bewpi_sidebar support">
+					<h3><?php _e( 'Support', $this->textdomain ); ?></h3>
+					<p><?php _e( 'We will never ask for donations, but to garantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', $this->textdomain ); ?></p>
+					<!-- Github star -->
+					<div class="github btn">
+						<iframe src="https://ghbtns.com/github-btn.html?user=baselbers&repo=woocommerce-pdf-invoices&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+					</div>
+					<!-- FB share -->
+					<div class="btn">
+						<div id="fb-root"></div>
+						<script>(function(d, s, id) {
+								var js, fjs = d.getElementsByTagName(s)[0];
+								if (d.getElementById(id)) return;
+								js = d.createElement(s); js.id = id;
+								js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.4&appId=483906578380615";
+								fjs.parentNode.insertBefore(js, fjs);
+							}(document, 'script', 'facebook-jssdk'));</script>
+						<div class="fb-share-button" data-href="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-layout="button_count"></div>
+					</div>
+					<!-- Tweet -->
+					<div class="twitter btn">
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!">Tweet</a>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					</div>
+				</aside>
+				<aside class="bewpi_sidebar need-help">
+					<h3><?php _e( 'Need Help?', $this->textdomain ); ?></h3>
+					<ul>
+						<li><a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/faq/"><?php _e( 'Frequently Asked Questions', $this->textdomain ); ?> </a></li>
+						<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Support forum', $this->textdomain ); ?></a></li>
+						<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Request a feature', $this->textdomain ); ?></a></li>
+						<li><a href="mailto:baselbers@hotmail.com"><?php _e( 'Email us', $this->textdomain ); ?></a></li>
+					</ul>
+				</aside>
 			</div>
 		<?php
 		}
@@ -466,9 +519,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return false;
 			}
 
-			// Admin notice hide catch
-			add_action( 'admin_init', array( &$this, 'catch_hide_notice' ) );
-
 			$current_user = wp_get_current_user();
 			$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
 
@@ -562,90 +612,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
 
 			echo '<div class="updated"><p>';
-			printf( __( "Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time! A huge thank you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>" ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
+			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>" ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
 			echo "</p></div>";
-		}
-
-		public function add_custom_order_bulk_action() {
-			global $post_type;
-
-			if ( $post_type == 'shop_order' ) {
-				?>
-				<script type="text/javascript">
-					jQuery(document).ready(function () {
-						jQuery('<option>').val('generate_global_invoice').text('<?php _e( 'Generate global invoice' )?>').appendTo("select[name='action']");
-					});
-				</script>
-			<?php
-			}
-		}
-
-		public function load_bulk_actions() {
-			global $typenow;
-			$post_type = $typenow;
-
-			// Are we on order page?
-			if ( $post_type == 'shop_order' ) {
-
-				// Get the action
-				$wp_list_table = _get_list_table( 'WP_Posts_List_Table' );
-				$action        = $wp_list_table->current_action();
-
-				$allowed_actions = array( "generate_global_invoice" );
-				if ( ! in_array( $action, $allowed_actions ) ) {
-					return;
-				}
-
-				// Security check
-				check_admin_referer( 'bulk-posts' );
-
-				// Make sure ids are submitted. Depending on the resource type, this may be 'media' or 'ids'
-				if ( isset( $_REQUEST['post'] ) ) {
-					$post_ids = array_map( 'intval', $_REQUEST['post'] );
-				}
-
-				if ( empty( $post_ids ) ) {
-					return;
-				}
-
-				// this is based on wp-admin/edit.php
-				$sendback = remove_query_arg( array( 'generated', 'untrashed', 'deleted', 'ids' ), wp_get_referer() );
-				if ( ! $sendback ) {
-					$sendback = admin_url( "edit.php?post_type=$post_type" );
-				}
-
-				$pagenum  = $wp_list_table->get_pagenum();
-				$sendback = add_query_arg( 'paged', $pagenum, $sendback );
-
-				switch ( $action ) {
-					case 'generate_global_invoice':
-
-						$global_invoice = new BEWPIPRO_Invoice_Global( $post_ids );
-						$global_invoice->save( "D" );
-
-						$sendback = add_query_arg( array( 'ids' => join( ',', $post_ids ) ), $sendback );
-						break;
-
-					default:
-						return;
-				}
-
-				$sendback = remove_query_arg( array(
-					'action',
-					'action2',
-					'tags_input',
-					'post_author',
-					'comment_status',
-					'ping_status',
-					'_status',
-					'post',
-					'bulk_edit',
-					'post_view'
-				), $sendback );
-
-				wp_redirect( $sendback );
-				exit();
-			}
 		}
 	}
 }

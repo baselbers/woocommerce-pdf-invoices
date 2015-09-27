@@ -81,6 +81,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 	        $mpdf->WriteHTML( $html_sections['style'] . $html_sections['body'] );
 
+	        $mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
+
 	        $mpdf->Output(
 		        ( $dest === 'F' ) ? $this->full_path : $this->filename,
 		        $dest

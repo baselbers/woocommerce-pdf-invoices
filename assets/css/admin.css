@@ -1,3 +1,36 @@
+form.be_woocommerce_pdf_invoices_settings_form {
+    width: 75%;
+    display: block;
+    float: left;
+}
+.bewpi_sidebar {
+    width: 25%;
+    box-sizing: border-box;
+    display: block;
+    float: right;
+    clear: right;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 0 20px 20px;
+    margin-top: 20px;
+}
+.bewpi_sidebar.premium h3 {
+    color: white;
+}
+.bewpi_sidebar.premium {
+    background: #222;
+    color: #ccc;
+}
+.bewpi_sidebar.support .btn {
+    margin: 10px 10px 10px 0;
+}
+.bewpi_sidebar.support .github.btn {
+    margin-bottom: -3px !important;
+    margin-top: 20px;
+}
+.bewpi_sidebar.support .twitter.btn {
+    margin-bottom: 0 !important;
+}
 .be_woocommerce_pdf_invoices_settings_form select,
 .be_woocommerce_pdf_invoices_settings_form input[type="text"],
 .be_woocommerce_pdf_invoices_settings_form textarea {
@@ -74,4 +107,17 @@
 }
 #bewpi-plugin-activated-notice button.notice-dismiss {
     display: none;
+}
+#mc_embed_signup form {
+    margin: 0 !important;
+    padding: 0;
+}
+#mc_embed_signup input[type="text"] {
+    width: 100%;
+}
+
+@media screen and (max-width: 790px) {
+    .bewpi_sidebar {
+        display: none;
+    }
 }

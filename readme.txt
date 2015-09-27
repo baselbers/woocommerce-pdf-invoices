@@ -8,25 +8,29 @@ Stable tag: 2.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically or manually create and send PDF Invoices for WooCommerce orders and connect with Dropbox, Google Drive, OneDrive or Egnyte.
+Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
 
 == Description ==
-This WooCommerce plugin creates customizable PDF invoices for WooCommerce orders with the ability to setup an invoice number with a specific format. Attach the PDF invoice to the WooCommerce email type of your choice and try out sending invoices automatically to Dropbox, Google Drive, OneDrive or Egnyte. It's simply awesome!
+*Invoicing can be time consuming. Well, not anymore! WooCommerce PDF Invoices automates the invoicing process by generating and sending it to your customers.*
+
+This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce email type of your choice and sends invoices to your customers and Dropbox, Google Drive, OneDrive or Egnyte. The clean and customizable template will definitely suit your needs.
 
 = Main features =
 - Automatic PDF invoice generation and attachment
+- Manually create or delete PDF invoice
 - Attach PDF invoice to WooCommerce email type of your choice
 - Connect with Google Drive, Egnyte, Dropbox or OneDrive
-- Many PDF invoice template customization options like changing color
+- Clean PDF Invoice template with with many customization options
 - WooCommerce order numbering or built-in sequential invoice numbering
 - Many invoice and date format customization options
 - Advanced items table with refunds, discounts, different item tax rates columns and more
-- Manually create or delete PDF invoice
 - Resend PDF invoices to customer
-- Let customers download invoice from there account
-- Without annoying advertisements
+- Download invoice from customer account
+- Mark invoices as paid
 
-Install the plugin and try out all the features, it will simply be awesome.
+> **Invoicing on Steriods**<br /><br />
+> We're working on a more powerful version of this invoicing plugin. Be the first to know when we're ready to launch and receive a unique one-time discount!<br/><br/>
+> [Read more about WooCommerce PDF Invoices Premium.](http://wcpdfinvoices.com)
 
 = Support =
 
@@ -97,9 +101,14 @@ function add_hidden_order_items( $order_items ) {
 
 == Changelog ==
 
-= 2.3.5 - September 17, 2015 =
+= 2.3.5 - September 27, 2015 =
 
+- Added: POT file
 - Added: Option to display subtotal including or excluding shipping
+- Added: Settings sidebars with information
+- Added: Many hooks for interacting with your own code
+- Fixed: File upload size to 2MB
+- Fixed: Admin notifications not always showing
 
 = 2.3.4 - September 16, 2015 =
 

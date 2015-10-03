@@ -43,7 +43,9 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			$defaults = $this->get_defaults();
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );
-	        update_option( $this->settings_key, $options );
+	        // update doesn't always work?
+	        delete_option( $this->settings_key, $options );
+	        add_option( $this->settings_key, $options );
         }
 
 	    /**

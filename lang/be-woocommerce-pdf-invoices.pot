@@ -2,16 +2,20 @@
 # This file is distributed under the same license as the WooCommerce PDF Invoices package.
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce PDF Invoices 2.3.4\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-pdf-"
-"invoices\n"
+"Project-Id-Version: WooCommerce PDF Invoices 2.3.6\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woocommerce-pdf-invoices\n"
 "POT-Creation-Date: 2015-09-27 18:52:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-10-03 17:11+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language-Team: WooCommerce PDF Invoices <info@wcpdfinvoices.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: en\n"
+"X-Generator: Poedit 1.7.3\n"
+"X-Poedit-Basepath: C:\\wamp\\www\\wordpress\\wp-content\\plugins\\woocommerce-pdf-"
+"invoices\n"
 
 #: includes/abstracts/abstract-bewpi-document.php:69
 msgid "Paid"
@@ -67,8 +71,8 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:165
 msgid ""
-"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
-"Egnyte and enter your account below."
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and "
+"enter your account below."
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:87
@@ -110,8 +114,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:167
 msgid ""
-"<b>Note</b>: If your logo doesn't show up, try to enable "
-"<code>allow_url_fopen</code>."
+"<b>Note</b>: If your logo doesn't show up, try to enable <code>allow_url_fopen</code>."
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:173
@@ -156,9 +159,9 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:272
 msgid ""
-"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
-"Only available with sequential numbering type and you need to check the "
-"checkbox to actually reset the value."
+"Reset the invoice counter and start with next invoice number. %s %sNote:%s Only "
+"available with sequential numbering type and you need to check the checkbox to actually "
+"reset the value."
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:281
@@ -179,8 +182,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:324
 msgid ""
-"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
-"required."
+"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required."
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:338
@@ -315,11 +317,10 @@ msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:564
 msgid ""
-"Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some "
-"time now. We really need your ★★★★★ rating. It will support future "
-"development big-time! A huge thank you in advance! <br /> <a href='%s' "
-"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
-"done it!</a>"
+"Fantastic! You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
+"really need your ★★★★★ rating. It will support future development big-time! A huge "
+"thank you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
+"a> - <a href='%s'>No, already done it!</a>"
 msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:575
@@ -408,8 +409,8 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid ""
-"Automatically or manually create and send PDF Invoices for WooCommerce "
-"orders and connect with Dropbox, Google Drive, OneDrive or Egnyte."
+"Automatically or manually create and send PDF Invoices for WooCommerce orders and "
+"connect with Dropbox, Google Drive, OneDrive or Egnyte."
 msgstr ""
 
 #. Author of the plugin/theme

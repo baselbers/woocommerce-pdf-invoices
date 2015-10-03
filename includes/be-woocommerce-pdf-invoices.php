@@ -14,6 +14,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
 		const OPTION_ADMIN_ACTIVATION_NOTICE_KEY = 'bewpi-hide-activation-notice';
 
+		private $lang_code = 'en-US';
 		private $options_key = 'bewpi-invoices';
 		public $settings_tabs = array();
 		public $textdomain = 'be-woocommerce-pdf-invoices';
@@ -27,6 +28,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param $template_settings
 		 */
 		public function __construct() {
+			$this->lang_code = get_bloginfo( "language" );
 			new BEWPI_General_Settings();
 			new BEWPI_Template_Settings();
 
@@ -257,8 +259,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			<script type="text/javascript">
 				window.onload = function () {
 					// Change footer text into rate text for WPI.
-					document.getElementById("footer-thankyou").innerHTML = "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a href='https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform'>★★★★★</a> rating. A huge thank you in advance!";
-					document.getElementById("footer-upgrade").innerHTML = "Version <?php echo BEWPI_VERSION; ?>";
+					document.getElementById("footer-thankyou").innerHTML = "<?php printf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a %s★★★★★%s rating. A huge thank you in advance!', $this->textdomain ), '<a href=\'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\'>', '</a>' ); ?>";
+					document.getElementById("footer-upgrade").innerHTML = "<?php printf( __( 'Version %s', $this->textdomain ), BEWPI_VERSION ); ?>";
 				};
 			</script>
 			<div class="wrap">
@@ -318,14 +320,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 								var js, fjs = d.getElementsByTagName(s)[0];
 								if (d.getElementById(id)) return;
 								js = d.createElement(s); js.id = id;
-								js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.4&appId=483906578380615";
+								js.src = "//connect.facebook.net/<?php echo $this->lang_code; ?>/sdk.js#xfbml=1&version=v2.4&appId=483906578380615";
 								fjs.parentNode.insertBefore(js, fjs);
 							}(document, 'script', 'facebook-jssdk'));</script>
 						<div class="fb-share-button" data-href="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-layout="button_count"></div>
 					</div>
 					<!-- Tweet -->
 					<div class="twitter btn">
-						<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!">Tweet</a>
+						<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="<?php _e( 'Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!', $this->textdomain ); ?>">Tweet</a>
 						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 					</div>
 				</aside>

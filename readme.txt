@@ -104,6 +104,7 @@ function add_hidden_order_items( $order_items ) {
 = 2.3.6 - Oktober 3, 2015 =
 
 - Fixed: Errors while activating plugin due to missing custom template dirs
+- Improved: Translations
 
 = 2.3.5 - September 27, 2015 =
 

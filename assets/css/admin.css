@@ -2,6 +2,8 @@ form.be_woocommerce_pdf_invoices_settings_form {
     width: 75%;
     display: block;
     float: left;
+    padding-right: 40px;
+    box-sizing: border-box;
 }
 .bewpi_sidebar {
     width: 25%;

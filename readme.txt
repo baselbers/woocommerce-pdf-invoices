@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.5
+Stable tag: 2.3.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,7 +29,7 @@ This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce e
 - Mark invoices as paid
 
 > **Invoicing on Steriods**<br /><br />
-> We're working on a more powerful version of this invoicing plugin. Be the first to know when we're ready to launch and receive a unique one-time discount!<br/><br/>
+> We're working on a more powerful version of this invoicing plugin. Be the first to know when we're ready to launch and receive a unique one-time discount!<br /><br />
 > [Read more about WooCommerce PDF Invoices Premium.](http://wcpdfinvoices.com)
 
 = Support =
@@ -100,6 +100,10 @@ function add_hidden_order_items( $order_items ) {
 }`
 
 == Changelog ==
+
+= 2.3.6 - Oktober 3, 2015 =
+
+- Fixed: Errors while activating plugin due to missing custom template dirs
 
 = 2.3.5 - September 27, 2015 =
 

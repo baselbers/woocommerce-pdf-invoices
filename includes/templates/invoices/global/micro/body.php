@@ -177,14 +177,6 @@
 	            <td colspan="<?php echo $this->columns_count; ?>"></td>
             </tr>
             <!-- Table footers -->
-            <!-- Subtotal -->
-            <?php if( $this->template_options['bewpi_show_subtotal'] && (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ] ) { ?>
-	            <tr class="subtotal after-products">
-		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
-		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
-	            </tr>
-            <?php } ?>
             <!-- Discount -->
             <?php if( $this->template_options['bewpi_show_discount'] && $this->get_total_discount() !== 0 ) { ?>
 	            <tr class="discount after-products">
@@ -193,20 +185,28 @@
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
-            <!-- Shipping -->
-            <?php if( $this->template_options['bewpi_show_shipping'] ) { ?>
+            <!-- Shipping taxable -->
+            <?php if( $this->template_options['bewpi_show_shipping'] && (bool)$this->template_options["bewpi_shipping_taxable"] ) { ?>
 	            <tr class="shipping after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
-		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping( false ), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
             <!-- Subtotal -->
-            <?php if( $this->template_options['bewpi_show_subtotal'] && ! (bool)$this->template_options[ 'bewpi_display_prices_incl_tax' ] ) { ?>
+            <?php if( $this->template_options['bewpi_show_subtotal'] ) { ?>
 	            <tr class="subtotal after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+	            </tr>
+            <?php } ?>
+            <!-- Shipping not taxable -->
+            <?php if( $this->template_options['bewpi_show_shipping'] && ! (bool)$this->template_options["bewpi_shipping_taxable"] ) { ?>
+	            <tr class="shipping after-products">
+		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
             <!-- Fees -->

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-10-03 19:33+0100\n"
-"PO-Revision-Date: 2015-10-03 19:33+0100\n"
+"POT-Creation-Date: 2015-10-06 08:27+0100\n"
+"PO-Revision-Date: 2015-10-06 08:27+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-document.php:69
 msgid "Paid"
-msgstr ""
+msgstr "Betalt"
 
 #: includes/abstracts/abstract-bewpi-setting.php:87
 msgid "Feel free to use "
@@ -114,16 +114,17 @@ msgid "Shipping taxable"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:146
+#, fuzzy
 msgid "Enable to display subtotal including shipping."
-msgstr ""
+msgstr "Enable to display subtotal including shipping."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:158
 msgid "Mark invoice as paid"
-msgstr ""
+msgstr "Marker faktura som betalt"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:159
 msgid "Invoice will be watermarked when order has been paid."
-msgstr ""
+msgstr "Fakturaen vil få et vannmerke når ordren har blitt betalt."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:167
 msgid "Company name"
@@ -138,6 +139,8 @@ msgid ""
 "<b>Note</b>: If your logo doesn't show up, try to enable "
 "<code>allow_url_fopen</code>."
 msgstr ""
+"<b>NB</b>: Om logoen din ikke vises, forsøk å aktivere "
+"<code>allow_url_fopen</code>."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:189
 msgid "Company address"
@@ -212,6 +215,8 @@ msgid ""
 "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
 "required and slashes aren't supported."
 msgstr ""
+"Bruk en av disse kortkodene; %s %s %s %s %s og %s. %s %sMerk:%s %s er "
+"obligatorisk."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:354
 msgid "Reset on 1st of january"
@@ -219,14 +224,13 @@ msgstr "Tilbakestill 1. Januar"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:367
 #: includes/templates/invoices/global/micro/body.php:10
-#: includes/templates/invoices/simple/micro/body.php:8
+#: includes/templates/invoices/simple/micro/body.php:10
 msgid "SKU"
 msgstr "Prod.Nr."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:379
-#: includes/templates/invoices/global/micro/body.php:184
-#: includes/templates/invoices/global/micro/body.php:208
-#: includes/templates/invoices/simple/micro/body.php:180
+#: includes/templates/invoices/global/micro/body.php:200
+#: includes/templates/invoices/simple/micro/body.php:184
 msgid "Subtotal"
 msgstr "Delsum"
 
@@ -235,15 +239,16 @@ msgid "Tax"
 msgstr "MVA"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:403
-#: includes/templates/invoices/global/micro/body.php:192
-#: includes/templates/invoices/simple/micro/body.php:164
+#: includes/templates/invoices/global/micro/body.php:184
+#: includes/templates/invoices/simple/micro/body.php:168
 msgid "Discount"
 msgstr "Rabatt"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:415
-#: includes/templates/invoices/global/micro/body.php:200
-#: includes/templates/invoices/simple/micro/body.php:172
-#: includes/templates/invoices/simple/micro/body.php:188
+#: includes/templates/invoices/global/micro/body.php:192
+#: includes/templates/invoices/global/micro/body.php:208
+#: includes/templates/invoices/simple/micro/body.php:176
+#: includes/templates/invoices/simple/micro/body.php:192
 msgid "Shipping"
 msgstr "Frakt"
 
@@ -475,29 +480,29 @@ msgid ""
 msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:6
-#: includes/templates/invoices/simple/micro/body.php:5
+#: includes/templates/invoices/simple/micro/body.php:6
 msgid "Description"
 msgstr "Produkt"
 
 #: includes/templates/invoices/global/micro/body.php:14
-#: includes/templates/invoices/simple/micro/body.php:11
+#: includes/templates/invoices/simple/micro/body.php:14
 msgid "Cost"
 msgstr "Pris"
 
 #: includes/templates/invoices/global/micro/body.php:16
-#: includes/templates/invoices/simple/micro/body.php:12
+#: includes/templates/invoices/simple/micro/body.php:16
 msgid "Qty"
 msgstr "Ant"
 
 #: includes/templates/invoices/global/micro/body.php:22
-#: includes/templates/invoices/simple/micro/body.php:19
+#: includes/templates/invoices/simple/micro/body.php:22
 msgid "VAT"
 msgstr "MVA"
 
 #: includes/templates/invoices/global/micro/body.php:33
 #: includes/templates/invoices/global/micro/body.php:244
-#: includes/templates/invoices/simple/micro/body.php:30
-#: includes/templates/invoices/simple/micro/body.php:224
+#: includes/templates/invoices/simple/micro/body.php:33
+#: includes/templates/invoices/simple/micro/body.php:228
 msgid "Total"
 msgstr "Totalt"
 
@@ -507,12 +512,12 @@ msgid "Order #%d - %s"
 msgstr "Ordre #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:219
-#: includes/templates/invoices/simple/micro/body.php:199
+#: includes/templates/invoices/simple/micro/body.php:203
 msgid "Fee"
 msgstr "Avgift"
 
 #: includes/templates/invoices/global/micro/body.php:251
-#: includes/templates/invoices/simple/micro/body.php:231
+#: includes/templates/invoices/simple/micro/body.php:235
 msgid "Refunded"
 msgstr "Refundert"
 
@@ -520,6 +525,12 @@ msgstr "Refundert"
 #: includes/templates/invoices/simple/micro/header.php:13
 msgid "Invoice to"
 msgstr "Kunde"
+
+#: includes/templates/invoices/global/micro/header.php:15
+#: includes/templates/invoices/simple/micro/header.php:15
+#, php-format
+msgid "Phone: %s"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/header.php:18
 #: includes/templates/invoices/simple/micro/header.php:18
@@ -539,11 +550,6 @@ msgstr "Kundenotat"
 #, php-format
 msgid "%sPayment%s via"
 msgstr "%sBetalt%s med"
-
-#: includes/templates/invoices/simple/micro/header.php:15
-#, php-format
-msgid "Phone: %s"
-msgstr ""
 
 #: includes/templates/invoices/simple/micro/header.php:28
 msgid "Invoice"

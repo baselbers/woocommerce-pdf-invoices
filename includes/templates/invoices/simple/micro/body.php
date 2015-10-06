@@ -2,15 +2,18 @@
 <table class="products small-font">
         <thead>
         <tr class="table-headers">
+	        <!-- Description -->
             <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
+	        <!-- SKU -->
             <?php
             if( $this->template_options['bewpi_show_sku'] ) {
                 echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
             }
             ?>
+	        <!-- Cost -->
 	        <th class="align-left"><?php _e( 'Cost', $this->textdomain ); ?></th>
-            <th class="align-left"><?php _e( 'Qty', $this->textdomain ); ?></th>
-
+	        <!-- Qty -->
+	        <th class="align-left"><?php _e( 'Qty', $this->textdomain ); ?></th>
 	        <!-- Tax -->
 	        <?php
 	        $order_taxes    = $this->order->get_taxes();
@@ -26,10 +29,11 @@
 		        endforeach;
 	        endif;
 	        ?>
-
+			<!-- Total -->
             <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
         </tr>
         </thead>
+		<!-- Products -->
         <tbody>
             <?php foreach( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
                 $product = wc_get_product( $item['product_id'] ); ?>

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-10-03 19:33+0100\n"
-"PO-Revision-Date: 2015-10-03 19:33+0100\n"
+"POT-Creation-Date: 2015-10-06 08:27+0100\n"
+"PO-Revision-Date: 2015-10-06 08:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -225,14 +225,13 @@ msgstr "Reset op 1 januari"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:367
 #: includes/templates/invoices/global/micro/body.php:10
-#: includes/templates/invoices/simple/micro/body.php:8
+#: includes/templates/invoices/simple/micro/body.php:10
 msgid "SKU"
 msgstr "Productcode"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:379
-#: includes/templates/invoices/global/micro/body.php:184
-#: includes/templates/invoices/global/micro/body.php:208
-#: includes/templates/invoices/simple/micro/body.php:180
+#: includes/templates/invoices/global/micro/body.php:200
+#: includes/templates/invoices/simple/micro/body.php:184
 msgid "Subtotal"
 msgstr "Subtotaal"
 
@@ -241,15 +240,16 @@ msgid "Tax"
 msgstr "BTW"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:403
-#: includes/templates/invoices/global/micro/body.php:192
-#: includes/templates/invoices/simple/micro/body.php:164
+#: includes/templates/invoices/global/micro/body.php:184
+#: includes/templates/invoices/simple/micro/body.php:168
 msgid "Discount"
 msgstr "Korting"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:415
-#: includes/templates/invoices/global/micro/body.php:200
-#: includes/templates/invoices/simple/micro/body.php:172
-#: includes/templates/invoices/simple/micro/body.php:188
+#: includes/templates/invoices/global/micro/body.php:192
+#: includes/templates/invoices/global/micro/body.php:208
+#: includes/templates/invoices/simple/micro/body.php:176
+#: includes/templates/invoices/simple/micro/body.php:192
 msgid "Shipping"
 msgstr "Verzending"
 
@@ -493,29 +493,29 @@ msgid ""
 msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:6
-#: includes/templates/invoices/simple/micro/body.php:5
+#: includes/templates/invoices/simple/micro/body.php:6
 msgid "Description"
 msgstr "﻿Beschrijving"
 
 #: includes/templates/invoices/global/micro/body.php:14
-#: includes/templates/invoices/simple/micro/body.php:11
+#: includes/templates/invoices/simple/micro/body.php:14
 msgid "Cost"
 msgstr "Kosten"
 
 #: includes/templates/invoices/global/micro/body.php:16
-#: includes/templates/invoices/simple/micro/body.php:12
+#: includes/templates/invoices/simple/micro/body.php:16
 msgid "Qty"
 msgstr "Aantal"
 
 #: includes/templates/invoices/global/micro/body.php:22
-#: includes/templates/invoices/simple/micro/body.php:19
+#: includes/templates/invoices/simple/micro/body.php:22
 msgid "VAT"
 msgstr "BTW"
 
 #: includes/templates/invoices/global/micro/body.php:33
 #: includes/templates/invoices/global/micro/body.php:244
-#: includes/templates/invoices/simple/micro/body.php:30
-#: includes/templates/invoices/simple/micro/body.php:224
+#: includes/templates/invoices/simple/micro/body.php:33
+#: includes/templates/invoices/simple/micro/body.php:228
 msgid "Total"
 msgstr "Totaal"
 
@@ -525,12 +525,12 @@ msgid "Order #%d - %s"
 msgstr "Bestelling #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:219
-#: includes/templates/invoices/simple/micro/body.php:199
+#: includes/templates/invoices/simple/micro/body.php:203
 msgid "Fee"
 msgstr "Handelingskosten"
 
 #: includes/templates/invoices/global/micro/body.php:251
-#: includes/templates/invoices/simple/micro/body.php:231
+#: includes/templates/invoices/simple/micro/body.php:235
 msgid "Refunded"
 msgstr "Terugbetaald"
 
@@ -538,6 +538,12 @@ msgstr "Terugbetaald"
 #: includes/templates/invoices/simple/micro/header.php:13
 msgid "Invoice to"
 msgstr "Facturatie aan"
+
+#: includes/templates/invoices/global/micro/header.php:15
+#: includes/templates/invoices/simple/micro/header.php:15
+#, php-format
+msgid "Phone: %s"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/header.php:18
 #: includes/templates/invoices/simple/micro/header.php:18
@@ -557,11 +563,6 @@ msgstr "Opmerking klant"
 #, php-format
 msgid "%sPayment%s via"
 msgstr "%sBetaling%s via"
-
-#: includes/templates/invoices/simple/micro/header.php:15
-#, php-format
-msgid "Phone: %s"
-msgstr ""
 
 #: includes/templates/invoices/simple/micro/header.php:28
 msgid "Invoice"

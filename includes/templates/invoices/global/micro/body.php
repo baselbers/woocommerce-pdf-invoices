@@ -20,7 +20,7 @@
 	        if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
 		        foreach ( $order_taxes as $tax_id => $tax_item ) :
                     $tax_label = __( 'VAT', $this->textdomain );
-			        $column_label = ! empty( $tax_item['label'] ) ? $tax_item['label'] : $tax_label;
+			        $column_label = ! empty( $tax_item->label ) ? $tax_item->label : $tax_label;
 			        ?>
 			        <th class="align-left">
 				        <?php echo $column_label; ?>
@@ -120,7 +120,7 @@
 	                        $tax_data      = maybe_unserialize( $line_tax_data );
 
 	                        foreach ( $this->get_taxes() as $tax_item ) :
-	                            $tax_item_id       = $tax_item['rate_id'];
+	                            $tax_item_id       = $tax_item->rate_id;
 	                            $tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
 	                            $tax_item_subtotal = isset( $tax_data['subtotal'][ $tax_item_id ] ) ? $tax_data['subtotal'][ $tax_item_id ] : '';
 	                            ?>
@@ -190,7 +190,7 @@
 	            <tr class="shipping after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
-		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping( false ), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
             <!-- Subtotal -->
@@ -233,8 +233,8 @@
 	            foreach ( $this->get_taxes() as $tax ) : ?>
 		            <tr class="after-products">
 			            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-			            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php echo $tax['label']; ?></td>
-			            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $tax['tax_amount'], array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php echo $tax->label; ?></td>
+			            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $tax->amount, array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 		            </tr>
 	            <?php endforeach; ?>
             <?php endif; ?>

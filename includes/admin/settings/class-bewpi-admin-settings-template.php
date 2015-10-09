@@ -44,9 +44,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	        $defaults['bewpi_last_invoice_number'] = 1;
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );
-	        // update doesn't work
-	        delete_option( $this->settings_key, $options );
-	        add_option( $this->settings_key, $options );
+
+	        //update_option( $this->settings_key, serialize( $options ) ); todo
+	        update_option( $this->settings_key, $options );
         }
 
 	    /**

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-10-06 19:16+0100\n"
-"PO-Revision-Date: 2015-10-06 19:16+0100\n"
+"POT-Creation-Date: 2015-10-10 14:10+0100\n"
+"PO-Revision-Date: 2015-10-10 14:10+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -23,11 +23,11 @@ msgstr ""
 msgid "Paid"
 msgstr "Betaald"
 
-#: includes/abstracts/abstract-bewpi-setting.php:87
+#: includes/abstracts/abstract-bewpi-setting.php:96
 msgid "Feel free to use "
 msgstr "Gebruik"
 
-#: includes/abstracts/abstract-bewpi-setting.php:155
+#: includes/abstracts/abstract-bewpi-setting.php:176
 msgid "Remove logo"
 msgstr "Verwijder logo"
 
@@ -341,11 +341,11 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:276
+#: includes/be-woocommerce-pdf-invoices.php:287
 msgid "Invoicing on Steroids"
 msgstr "Facturen op Steroïde"
 
-#: includes/be-woocommerce-pdf-invoices.php:277
+#: includes/be-woocommerce-pdf-invoices.php:288
 msgid ""
 "We're working on a more powerful version of this invoicing plugin. Be the "
 "first to know when we're ready to launch and receive a unique one-time "
@@ -355,23 +355,23 @@ msgstr ""
 "meer te weten krijgt over de lancering en verkrijg een unieke eenmalige "
 "korting!"
 
-#: includes/be-woocommerce-pdf-invoices.php:291
+#: includes/be-woocommerce-pdf-invoices.php:302
 msgid "Your email address"
 msgstr "Jouw Emailadres"
 
-#: includes/be-woocommerce-pdf-invoices.php:294
+#: includes/be-woocommerce-pdf-invoices.php:305
 msgid "Signup"
 msgstr "Inschrijven"
 
-#: includes/be-woocommerce-pdf-invoices.php:295
+#: includes/be-woocommerce-pdf-invoices.php:306
 msgid "No spam, ever. Unsubscribe at any time"
 msgstr "Geen spam, ooit. Uitschrijven wanneer gewenst."
 
-#: includes/be-woocommerce-pdf-invoices.php:303
+#: includes/be-woocommerce-pdf-invoices.php:314
 msgid "About"
 msgstr "Over"
 
-#: includes/be-woocommerce-pdf-invoices.php:304
+#: includes/be-woocommerce-pdf-invoices.php:315
 msgid ""
 "This plugin is an open source project wich aims to fill the invoicing gap of "
 "<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
@@ -379,19 +379,19 @@ msgstr ""
 "Deze plugin is een opensource project met als doel, het facturen gat van "
 "WooCommerce op te vullen."
 
-#: includes/be-woocommerce-pdf-invoices.php:305
+#: includes/be-woocommerce-pdf-invoices.php:316
 msgid "<b>Version</b>: "
 msgstr "<b>Versie</b>:"
 
-#: includes/be-woocommerce-pdf-invoices.php:307
+#: includes/be-woocommerce-pdf-invoices.php:318
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 msgstr "<b>Auteur</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 
-#: includes/be-woocommerce-pdf-invoices.php:310
+#: includes/be-woocommerce-pdf-invoices.php:321
 msgid "Support"
 msgstr "Ondersteuning"
 
-#: includes/be-woocommerce-pdf-invoices.php:311
+#: includes/be-woocommerce-pdf-invoices.php:322
 msgid ""
 "We will never ask for donations, but to garantee future development, we do "
 "need your support. Please show us your appreciation by leaving a <a href="
@@ -406,77 +406,77 @@ msgstr ""
 "<a href=\"https://wordpress.org/plugins/woocommerce-pdf-invoices/\">works</"
 "a>."
 
-#: includes/be-woocommerce-pdf-invoices.php:330
+#: includes/be-woocommerce-pdf-invoices.php:341
 msgid ""
 "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:335
+#: includes/be-woocommerce-pdf-invoices.php:346
 msgid "Need Help?"
 msgstr "Hulp Nodig?"
 
-#: includes/be-woocommerce-pdf-invoices.php:337
+#: includes/be-woocommerce-pdf-invoices.php:348
 msgid "Frequently Asked Questions"
 msgstr "Veel gestelde vragen"
 
-#: includes/be-woocommerce-pdf-invoices.php:338
+#: includes/be-woocommerce-pdf-invoices.php:349
 msgid "Support forum"
 msgstr "Support Forum"
 
-#: includes/be-woocommerce-pdf-invoices.php:339
+#: includes/be-woocommerce-pdf-invoices.php:350
 msgid "Request a feature"
 msgstr "Verzoek een nieuwe functionaliteit"
 
-#: includes/be-woocommerce-pdf-invoices.php:340
+#: includes/be-woocommerce-pdf-invoices.php:351
 msgid "Email us"
 msgstr "Email ons"
 
-#: includes/be-woocommerce-pdf-invoices.php:399
+#: includes/be-woocommerce-pdf-invoices.php:409
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:425
+#: includes/be-woocommerce-pdf-invoices.php:435
 msgid "Invoiced on:"
 msgstr "Gefactureerd op:"
 
-#: includes/be-woocommerce-pdf-invoices.php:429
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Invoice number:"
 msgstr "Factuurnummer:"
 
-#: includes/be-woocommerce-pdf-invoices.php:467
+#: includes/be-woocommerce-pdf-invoices.php:477
 msgid "View invoice"
 msgstr "Toon factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:467
+#: includes/be-woocommerce-pdf-invoices.php:477
 msgid "View"
 msgstr "Bekijk"
 
-#: includes/be-woocommerce-pdf-invoices.php:468
+#: includes/be-woocommerce-pdf-invoices.php:478
 msgid "Cancel invoice"
 msgstr "Factuur annuleren"
 
-#: includes/be-woocommerce-pdf-invoices.php:468
+#: includes/be-woocommerce-pdf-invoices.php:478
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: includes/be-woocommerce-pdf-invoices.php:470
+#: includes/be-woocommerce-pdf-invoices.php:480
 msgid "Are you sure to delete the invoice?"
 msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
 
-#: includes/be-woocommerce-pdf-invoices.php:473
+#: includes/be-woocommerce-pdf-invoices.php:483
 msgid "Create invoice"
 msgstr "Maak factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:473
+#: includes/be-woocommerce-pdf-invoices.php:483
 msgid "Create"
 msgstr "Aanmaken"
 
-#: includes/be-woocommerce-pdf-invoices.php:506
+#: includes/be-woocommerce-pdf-invoices.php:516
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Factuur %s (PDF)"
 
-#: includes/be-woocommerce-pdf-invoices.php:617
+#: includes/be-woocommerce-pdf-invoices.php:627
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "

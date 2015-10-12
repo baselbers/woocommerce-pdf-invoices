@@ -26,7 +26,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    public function get_total() {
 		    if ( $this->order->get_total_refunded() > 0 ) {
 			    $total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
-			     return $total              = '<del class="total-without-refund">' . strip_tags( $this->order->get_formatted_order_total() ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
+			     return $total              = '<del class="total-without-refund">' . wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_order_currency() ) ) . '</ins>';
 		    } else {
 			    return $total               = $this->order->get_formatted_order_total();
 		    }

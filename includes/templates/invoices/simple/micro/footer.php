@@ -4,13 +4,15 @@
         <td class="border" colspan="2" style="border-bottom: 8px solid <?php echo $this->template_options['bewpi_color_theme']; ?>;">
             <?php echo $this->template_options['bewpi_terms']; ?><br/>
             <?php
-            if ( $this->template_options['bewpi_show_customer_notes'] && $this->order->post->post_excerpt != "" ) :
+            if ( $this->template_options['bewpi_show_customer_notes'] ) :
                 // Note added by customer.
-                echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . '</strong> ' . $this->order->post->post_excerpt . '</p>';
+	            if ( $this->order->post->post_excerpt != "" ) {
+                    echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . ' </strong> ' . $this->order->post->post_excerpt . '</p>';
+                }
                 // Notes added by administrator on order details page.
                 $customer_order_notes = $this->order->get_customer_order_notes();
                 if ( count( $customer_order_notes ) > 0 ) {
-                    echo '<p><strong>' . __('Customer note', $this->textdomain) . '</strong>' . $customer_order_notes[0]->comment_content . '</p>';
+                    echo '<p><strong>' . __('Customer note', $this->textdomain) . ' </strong>' . $customer_order_notes[0]->comment_content . '</p>';
                 }
             endif;
             ?>

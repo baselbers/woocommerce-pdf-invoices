@@ -123,7 +123,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public static function plugin_deactivation() {
 			global $current_user;
 			$user_id = $current_user->ID;
-			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '0' );
+			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '' );
 		}
 
 		public function display_activation_admin_notice() {
@@ -534,11 +534,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$current_user = wp_get_current_user();
 			$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
 
-			if ( current_user_can( 'install_plugins' ) && $hide_notice == '0' ) {
+			if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
 				// Get installation date
 				$datetime_install = $this->get_install_date();
-				$datetime_past    = new DateTime( '-10 days' );
-				//$datetime_past    = new DateTime( '-10 second' );
+				//$datetime_past    = new DateTime( '-10 days' );
+				$datetime_past    = new DateTime( '-10 second' );
 
 				if ( $datetime_past >= $datetime_install ) {
 					// 10 or more days ago, show admin notice

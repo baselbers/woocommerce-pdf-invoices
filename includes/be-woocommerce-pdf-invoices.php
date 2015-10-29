@@ -284,32 +284,43 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function options_page_sidebar_html() {
 			?>
 			<aside class="bewpi_sidebar premium">
-			<h3><?php _e( 'Invoicing on Steroids', $this->textdomain ); ?></h3>
-			<p><?php _e( 'We\'re working on a more powerful version of this invoicing plugin. Be the first to know when we\'re ready to launch and receive a unique one-time discount!', $this->textdomain ); ?></p>
-			<!-- Begin MailChimp Signup Form -->
-			<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
-			<style type="text/css">
-				#mc_embed_signup{background: #222; clear:left;}
-				#mc-embedded-subscribe:hover { background-color: #4ca55e !important; }
-				#mc_embed_signup input.button { margin: 0 !important; }
-				/* Add your own MailChimp form style overrides in your site stylesheet or in this style block.
-				   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-			</style>
-			<div id="mc_embed_signup">
-				<form action="//wcpdfinvoices.us11.list-manage.com/subscribe/post?u=f270649bc41a9687a38a8977f&amp;id=395e1e319a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0">
-					<div id="mc_embed_signup_scroll">
-						<?php $user_email = get_the_author_meta( 'user_email', get_current_user_id() ) ?>
-						<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', $this->textdomain ); ?>" required>
-						<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-						<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
-						<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-						<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', $this->textdomain ); ?></div>
-					</div>
-				</form>
-			</div>
-
-			<!--End mc_embed_signup-->
+				<h3><?php _e( 'WooCommerce PDF Invoices Premium', $this->textdomain ); ?></h3>
+				<p>
+					<?php _e( 'This plugin offers a premium version wich comes with the following features:', $this->textdomain ); ?><br/>
+					- <?php _e( 'Bill periodically by generating and sending global invoices.', $this->textdomain ); ?><br/>
+					- <?php _e( 'Add additional PDF\'s to customer invoices.', $this->textdomain ); ?><br/>
+					- <?php _e( 'Send customer invoices directly to suppliers and others.', $this->textdomain ); ?><br/>
+				</p>
+				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com"><?php _e ( 'Learn more', $this->textdomain ); ?></a>
 			</aside>
+
+			<aside class="bewpi_sidebar premium">
+				<h3><?php _e( 'Stay up-to-date', $this->textdomain ); ?></h3>
+				<!-- Begin MailChimp Signup Form -->
+				<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
+				<style type="text/css">
+					#mc_embed_signup{background: #222; clear:left;}
+					#mc-embedded-subscribe:hover { background-color: #4ca55e !important; }
+					#mc_embed_signup input.button { margin: 0 !important; }
+				</style>
+				<p>
+				<?php _e( 'We\'re constantly developing new features, stay up-to-date by subscribing to our newsletter.', $this->textdomain ); ?>
+				</p>
+				<div id="mc_embed_signup">
+					<form action="//wcpdfinvoices.us11.list-manage.com/subscribe/post?u=f270649bc41a9687a38a8977f&amp;id=395e1e319a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0">
+						<div id="mc_embed_signup_scroll">
+							<?php $user_email = get_the_author_meta( 'user_email', get_current_user_id() ) ?>
+							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', $this->textdomain ); ?>" required>
+							<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+							<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
+							<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+							<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', $this->textdomain ); ?></div>
+						</div>
+					</form>
+				</div>
+				<!--End mc_embed_signup-->
+			</aside>
+
 			<aside class="bewpi_sidebar about">
 				<h3><?php _e( 'About', $this->textdomain ); ?></h3>
 				<p><?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , $this->textdomain ); ?></p>

@@ -28,9 +28,12 @@ This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce e
 - Download invoice from customer account
 - Mark invoices as paid
 
-> **Invoicing on Steriods**<br /><br />
-> We're working on a more powerful version of this invoicing plugin. Be the first to know when we're ready to launch and receive a unique one-time discount!<br /><br />
-> [Read more about WooCommerce PDF Invoices Premium.](http://wcpdfinvoices.com)
+> **WooCommerce PDF Invoices Premium**<br /><br />
+> This plugin offers a premium version wich comes with the following features:<br /><br />
+> - Periodically bill by generating and sending global invoices.<br />
+> - Add additional PDF's to customer invoices.<br />
+> - Send customer invoices directly to suppliers and others.<br /><br />
+> [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
 
 = Support =
 

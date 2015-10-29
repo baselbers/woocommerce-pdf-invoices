@@ -117,6 +117,20 @@ form.be_woocommerce_pdf_invoices_settings_form {
 #mc_embed_signup input[type="text"] {
     width: 100%;
 }
+.bewpi-learn-more {
+    padding: 10px 0;
+    background-color: #F48C2D;
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}
+.bewpi-learn-more:hover {
+    background-color: #EE7600;
+    color: white;
+}
 
 @media screen and (max-width: 790px) {
     .bewpi_sidebar {

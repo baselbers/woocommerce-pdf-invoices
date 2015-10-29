@@ -299,8 +299,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				<!-- Begin MailChimp Signup Form -->
 				<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 				<style type="text/css">
-					#mc_embed_signup{background: #222; clear:left;}
-					#mc-embedded-subscribe:hover { background-color: #4ca55e !important; }
+					#mc_embed_signup{background: #F48C2D; clear:left;}
+					#mc-embedded-subscribe:hover { background-color: #EE7600 !important; }
 					#mc_embed_signup input.button { margin: 0 !important; }
 				</style>
 				<p>

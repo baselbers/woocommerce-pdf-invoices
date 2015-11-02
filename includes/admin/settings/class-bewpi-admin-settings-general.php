@@ -101,6 +101,10 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					    array(
 						    'name' => __( 'Customer invoice', $this->textdomain ),
 						    'value' => 'customer_invoice'
+					    ),
+					    array(
+						    'name' => __( 'Do not attach', $this->textdomain ),
+						    'value' => ''
 					    )
 				    ),
 				    'default' => 'customer_invoice'
@@ -142,7 +146,8 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			        'default' => ''
 		        )
 		    );
-		    return $settings;
+
+		    return apply_filters( 'bewpi_general_settings', $settings );
 	    }
 
 	    /**

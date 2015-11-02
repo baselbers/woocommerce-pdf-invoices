@@ -291,7 +291,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					- <?php _e( 'Add additional PDF\'s to customer invoices.', $this->textdomain ); ?><br/>
 					- <?php _e( 'Send customer invoices directly to suppliers and others.', $this->textdomain ); ?><br/>
 				</p>
-				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com"><?php _e ( 'Learn more', $this->textdomain ); ?></a>
+				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', $this->textdomain ); ?></a>
 			</aside>
 
 			<aside class="bewpi_sidebar premium">
@@ -299,7 +299,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				<!-- Begin MailChimp Signup Form -->
 				<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 				<style type="text/css">
-					#mc_embed_signup{background: #F48C2D; clear:left;}
+					#mc_embed_signup{background: #222; clear:left;}
 					#mc-embedded-subscribe:hover { background-color: #EE7600 !important; }
 					#mc_embed_signup input.button { margin: 0 !important; }
 				</style>
@@ -313,7 +313,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', $this->textdomain ); ?>" required>
 							<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 							<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
-							<div class="clear"><input style="width: 100%; background-color: #5dc372; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+							<div class="clear"><input style="width: 100%; background-color: #F48C2D; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', $this->textdomain ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
 							<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', $this->textdomain ); ?></div>
 						</div>
 					</form>
@@ -400,13 +400,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		function attach_invoice_to_email( $attachments, $status, $order ) {
 			$general_options = get_option( 'bewpi_general_settings' );
 
-			if ( $status == $general_options['bewpi_email_type'] || $general_options['bewpi_new_order'] && $status == "new_order" ) {
+			if ( $status == $general_options[ 'bewpi_email_type'] || $general_options['bewpi_new_order'] && $status == "new_order" ) {
 				$invoice = new BEWPI_Invoice( $order->id );
-				if ( ! $invoice->exists() ) {
-					$full_path = $invoice->save( "F" );
-				} else {
-					$full_path = $invoice->get_full_path();
-				}
+				// create new invoice if doesn't exists, else get the full path from it..
+				$full_path = ( ! $invoice->exists() ) ? $invoice->save( "F" ) : $invoice->get_full_path();
 				$attachments[] = $full_path;
 			}
 

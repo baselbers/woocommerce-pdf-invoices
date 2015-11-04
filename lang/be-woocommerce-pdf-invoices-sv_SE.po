@@ -1,0 +1,641 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce PDF Invoices\n"
+"POT-Creation-Date: 2015-08-13 22:41+0100\n"
+"PO-Revision-Date: 2015-10-23 13:52+0200\n"
+"Last-Translator: Mikael Akerlund <mikael.akerlund@sponsorhjalpen.se>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/abstracts/abstract-bewpi-document.php:69
+msgid "Paid"
+msgstr "Betald"
+
+#: includes/abstracts/abstract-bewpi-setting.php:87
+msgid "Feel free to use "
+msgstr "Känn dig fri att använda"
+
+#: includes/abstracts/abstract-bewpi-setting.php:155
+msgid "Remove logo"
+msgstr "Ta bort logo"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:84
+msgid "Attach to Email"
+msgstr "Fäst i e-post"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:92
+msgid "Processing order"
+msgstr "Pågående order"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:96
+msgid "Completed order"
+msgstr "Genomförd beställning"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:100
+msgid "Customer invoice"
+msgstr "Kundfaktura"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:114
+msgid "Attach to New order Email"
+msgstr "Fäst på Ny order E-post"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:126
+msgid "Enable Email It In"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:134
+msgid "Email It In account"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:139
+#, php-format
+msgid "Get your account from your Email It In %suser account%s."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:152
+msgid "Email Options"
+msgstr "E-post inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:158
+msgid "Cloud Storage Options"
+msgstr "Moln lagring inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:165
+#, php-format
+msgid ""
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:87
+#: includes/be-woocommerce-pdf-invoices.php:218
+msgid "Template"
+msgstr "Mall"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:99
+msgid "Color theme"
+msgstr "Färg tema"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:110
+msgid "Date format"
+msgstr "Datum format"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:115
+#, php-format
+msgid "%sFormat%s of invoice date and order date."
+msgstr "%sFormat%s på fakturadatum och orderdatum."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:130
+msgid "Display prices including tax"
+msgstr "Visa pris inklusive moms"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
+msgid "Subtotal will be including tax and excluding discount and shipping."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:143
+msgid "Mark invoice as paid"
+msgstr "Markera som betald"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:144
+msgid "Invoice will be watermarked when order has been paid."
+msgstr "Faktura kommer att  få en vattenstämpel när beställning har betalats."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:152
+msgid "Company name"
+msgstr "Företagsnamn"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:163
+msgid "Company logo"
+msgstr "Företagslogi"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:174
+msgid "Company address"
+msgstr "Företagsadress"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:185
+msgid "Company details"
+msgstr "Företags detaljer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:196
+msgid "Intro text"
+msgstr "Intro text"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:208
+msgid "Terms & conditions, policies etc."
+msgstr "Regler och villkor, politik etc."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:224
+msgid "Show customer notes"
+msgstr "Visa kund anteckningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:232
+msgid "Type"
+msgstr "Typ"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:240
+msgid "WooCommerce order number"
+msgstr "WooCommerce order nummer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:244
+msgid "Sequential number"
+msgstr "Löpnummer"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:258
+msgid "Reset invoice counter"
+msgstr "Återställ faktura räknare"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:268
+msgid "Next"
+msgstr "Nästa"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:273
+#, php-format
+msgid ""
+"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
+"Only available with sequential numbering type and you need to check the "
+"checkbox to actually reset the value."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:282
+msgid "Digits"
+msgstr "Siffror"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:298
+msgid "[prefix]"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:309
+msgid "[suffix]"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:320
+msgid "Format"
+msgstr "Format"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:325
+#, php-format
+msgid ""
+"Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is "
+"required."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:339
+msgid "Reset on 1st of january"
+msgstr "Återställ den första januari"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:352
+#: includes/templates/invoices/global/micro/body.php:10
+#: includes/templates/invoices/simple/micro/body.php:8
+msgid "SKU"
+msgstr "SKU"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:364
+#: includes/templates/invoices/global/micro/body.php:184
+#: includes/templates/invoices/global/micro/body.php:208
+#: includes/templates/invoices/simple/micro/body.php:164
+#: includes/templates/invoices/simple/micro/body.php:188
+msgid "Subtotal"
+msgstr "Delsumma"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:376
+msgid "Tax"
+msgstr "Moms"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:388
+#: includes/templates/invoices/global/micro/body.php:192
+#: includes/templates/invoices/simple/micro/body.php:172
+msgid "Discount"
+msgstr "Rabatt"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:400
+#: includes/templates/invoices/global/micro/body.php:200
+#: includes/templates/invoices/simple/micro/body.php:180
+msgid "Shipping"
+msgstr "Frakt"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:414
+msgid "General Options"
+msgstr "Allmänt inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:420
+msgid "Invoice Number Options"
+msgstr "Fakturanummer inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:426
+msgid "Header Options"
+msgstr "Heder inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:432
+msgid "Footer Options"
+msgstr "Footer inställningar"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:438
+msgid "Visible Columns"
+msgstr "Synliga kolumner "
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:444
+msgid "These are the general template options."
+msgstr "Detta är de generella mallalternativ."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:445
+msgid "These are the invoice number options."
+msgstr "Dessa är fakturanummer alternativ."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:446
+msgid "The header will be visible on every page. "
+msgstr "Hedern kommer visas på alla sidor."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:447
+msgid "The footer will be visible on every page. "
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:448
+msgid "Enable or disable the columns."
+msgstr "Aktivera eller avaktivera kolumner."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:518
+msgid "File is invalid and contains either '..' or './'."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:525
+msgid "File is invalid and contains ':' after the first character."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:534
+msgid "File should be less then 2MB."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:217
+msgid "General"
+msgstr "Allmänt"
+
+#: includes/be-woocommerce-pdf-invoices.php:240
+msgid "Invoices"
+msgstr "Faktura"
+
+#: includes/be-woocommerce-pdf-invoices.php:348
+msgid "PDF Invoice"
+msgstr "PDF Faktura"
+
+#: includes/be-woocommerce-pdf-invoices.php:374
+msgid "Invoiced on:"
+msgstr "Fakturerad"
+
+#: includes/be-woocommerce-pdf-invoices.php:378
+msgid "Invoice number:"
+msgstr "Fakturanummer"
+
+#: includes/be-woocommerce-pdf-invoices.php:416
+msgid "View invoice"
+msgstr "Visa Faktura"
+
+#: includes/be-woocommerce-pdf-invoices.php:416
+msgid "View"
+msgstr "Visa"
+
+#: includes/be-woocommerce-pdf-invoices.php:417
+msgid "Cancel invoice"
+msgstr "Avbryt Faktura"
+
+#: includes/be-woocommerce-pdf-invoices.php:417
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: includes/be-woocommerce-pdf-invoices.php:419
+msgid "Are you sure to delete the invoice?"
+msgstr "Är du säker på att du vill radera fakturan?"
+
+#: includes/be-woocommerce-pdf-invoices.php:422
+msgid "Create invoice"
+msgstr "Skapa faktura"
+
+#: includes/be-woocommerce-pdf-invoices.php:422
+msgid "Create"
+msgstr "Skapa"
+
+#: includes/be-woocommerce-pdf-invoices.php:455
+#, php-format
+msgid "Invoice %s (PDF)"
+msgstr "Faktura %s (PDF)"
+
+#: includes/be-woocommerce-pdf-invoices.php:534
+#, php-format
+msgid ""
+"Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+"Please show us your appreciation by leaving a ★★★★★ rating. A huge thank you "
+"in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</"
+"a> - <a href='%s'>No, already done it!</a>"
+msgstr ""
+"Tack för att du använder <b> WooCommerce PDF Fakturor </ b>. Vänligen visa "
+"oss din uppskattning genom att lämna en ★★★★★ betyg. Ett stort tack på "
+"förhand! <br /> <a href='%s' target='_blank'> Ja, kommer att göra det direkt "
+"</a> -! <a href='%s'> Nej, redan gjort det </a>"
+
+#: includes/be-woocommerce-pdf-invoices.php:545
+msgid "Generate global invoice"
+msgstr ""
+
+#: includes/templates/invoices/global/micro/body.php:6
+#: includes/templates/invoices/simple/micro/body.php:5
+msgid "Description"
+msgstr "Beskrivning"
+
+#: includes/templates/invoices/global/micro/body.php:14
+#: includes/templates/invoices/simple/micro/body.php:11
+msgid "Cost"
+msgstr "Pris"
+
+#: includes/templates/invoices/global/micro/body.php:16
+#: includes/templates/invoices/simple/micro/body.php:12
+msgid "Qty"
+msgstr "Antal"
+
+#: includes/templates/invoices/global/micro/body.php:22
+#: includes/templates/invoices/simple/micro/body.php:19
+msgid "VAT"
+msgstr "Moms"
+
+#: includes/templates/invoices/global/micro/body.php:33
+#: includes/templates/invoices/global/micro/body.php:244
+#: includes/templates/invoices/simple/micro/body.php:30
+#: includes/templates/invoices/simple/micro/body.php:224
+msgid "Total"
+msgstr "Total"
+
+#: includes/templates/invoices/global/micro/body.php:41
+#, php-format
+msgid "Order #%d - %s"
+msgstr "Order #%d - %s"
+
+#: includes/templates/invoices/global/micro/body.php:219
+#: includes/templates/invoices/simple/micro/body.php:199
+msgid "Fee"
+msgstr "Avgift"
+
+#: includes/templates/invoices/global/micro/body.php:251
+#: includes/templates/invoices/simple/micro/body.php:231
+msgid "Refunded"
+msgstr "Betalas"
+
+#: includes/templates/invoices/global/micro/header.php:13
+#: includes/templates/invoices/simple/micro/header.php:13
+msgid "Invoice to"
+msgstr "Faktureringsinformation"
+
+#: includes/templates/invoices/global/micro/header.php:18
+#: includes/templates/invoices/simple/micro/header.php:18
+msgid "Ship to"
+msgstr "Leveransadress"
+
+#: includes/templates/invoices/global/micro/header.php:28
+msgid "Global Invoice"
+msgstr ""
+
+#: includes/templates/invoices/simple/micro/footer.php:9
+#: includes/templates/invoices/simple/micro/footer.php:13
+msgid "Customer note"
+msgstr "Kund anteckning"
+
+#: includes/templates/invoices/simple/micro/footer.php:21
+#, php-format
+msgid "%sPayment%s via"
+msgstr "%sBetalning%s via"
+
+#: includes/templates/invoices/simple/micro/header.php:28
+msgid "Invoice"
+msgstr "Faktura"
+
+#: includes/templates/invoices/simple/micro/header.php:31
+#, php-format
+msgid "Order Number: %s"
+msgstr "Ordernummer: %s"
+
+#: includes/templates/invoices/simple/micro/header.php:32
+#, php-format
+msgid "Order Date: %s"
+msgstr "Orderdatum: %s"
+
+msgid "PAID"
+msgstr "BETALD"
+
+msgid "UNPAID"
+msgstr "OBETALD"
+
+msgid "Order Number %s"
+msgstr "Ordernummer: %s"
+
+msgid "Order Date %s"
+msgstr "Orderdatum: %s"
+
+msgid "Download invoice (PDF)"
+msgstr "Ladda ner faktura (PDF)"
+
+msgid ""
+"Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is "
+"required."
+msgstr ""
+"Du kan også bruke plassholderne %s %s %s %s og %s. %s %sMerk:%s %s er "
+"obligatorisk."
+
+msgid "VAT %s"
+msgstr "MOMS %s"
+
+msgid "General Settings"
+msgstr "Allmänna inställningar"
+
+msgid "Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive"
+msgstr ""
+"Skicka automatiskt faktura till Google Drive, Egnyte, Dropbox eller OneDrive"
+
+msgid "For bookkeeping purposes."
+msgstr "För bokföringsändamål."
+
+msgid "Signup at %s and enter your account below."
+msgstr "Registrera dig på %s och ange ditt konto nedan."
+
+msgid "Enter your %s account."
+msgstr "Ange ditt %s konto."
+
+msgid "Invalid type of Email."
+msgstr "Ogiltig e-postadress"
+
+msgid "Please don't try to change the values."
+msgstr "Vänligen ändra inte dessa värden."
+
+msgid "Invalid Email address."
+msgstr "Ogiltig e-postadress"
+
+msgid "Allowed tags: "
+msgstr "tillåtna taggar: "
+
+msgid "Template Settings"
+msgstr "Mall inställningar"
+
+msgid "Invoice number type"
+msgstr "Fakturanummer typ"
+
+msgid "Next invoice number"
+msgstr "Nästa faktura nummer"
+
+msgid "Number of digits"
+msgstr "Antal siffror"
+
+msgid "Invoice number prefix"
+msgstr "Fakturanummer prefix"
+
+msgid "Invoice number suffix"
+msgstr "Fakturanummer suffixet"
+
+msgid "Invoice number format"
+msgstr "Fakturanummer format"
+
+msgid "Reset on 1st January"
+msgstr "Återställ den 1 januari"
+
+msgid "Invoice date format"
+msgstr "Fakturadatumformat"
+
+msgid "Order date format"
+msgstr "Order datum format"
+
+msgid "Show SKU"
+msgstr "Visa SKU"
+
+msgid "Show discount"
+msgstr "Visa rabatt"
+
+msgid "Show subtotal"
+msgstr "Visa delsumma"
+
+msgid "Show tax"
+msgstr "Visa moms"
+
+msgid "Show shipping"
+msgstr "Visa frakt"
+
+msgid "Color theme of the invoice."
+msgstr "Färgtema på fakturan"
+
+msgid ""
+"Please upload an image less then 200Kb and make sure it's a jpeg, jpg or png."
+msgstr ""
+"Vänligen ladda upp en bild mindre än 200KB i formaten jpeg, jpg or png."
+
+msgid "Invoice number to use for next invoice."
+msgstr "Fakturanummer som ska användas för nästa faktura."
+
+msgid "Number of zero digits."
+msgstr "Antal nollor"
+
+msgid "Prefix text for the invoice number. Not required."
+msgstr "Prefix text för fakturanummer. Inte nödvändig."
+
+msgid "Suffix text for the invoice number. Not required."
+msgstr "Suffix text för fakturanummer. Inte nödvändig."
+
+msgid "Available placeholder are %s %s %s %s and %s. %s is required."
+msgstr "Tillgängliga platshållare är %s %s %s %s och %s. %s krävs."
+
+msgid "Reset on the first of January."
+msgstr "Återställ den första januari."
+
+msgid "%sFormat%s of the date. Examples: %s or %s."
+msgstr "%sFormat%s av datum. Exempel: %s eller %s."
+
+msgid "Order date %sformat%s. Examples: %s or %s."
+msgstr "Orderdatum %sformat%s. Exempel: %s eller %s."
+
+msgid "Invalid template."
+msgstr "Ogiltig mall"
+
+msgid "Invalid color theme code."
+msgstr "Ogiltig färg kod"
+
+msgid "Invalid company name."
+msgstr "Ogiltigt företagsnamn"
+
+msgid "Invalid input into one of the textarea's."
+msgstr "Ogiltig värde i ett utav textområdena."
+
+msgid "Invalid type of invoice number."
+msgstr "Ogiltig typ av fakturanummer."
+
+msgid "Invalid (next) invoice number."
+msgstr "Ogiltigt (nästa) fakturanummer."
+
+msgid "Invalid invoice number digits."
+msgstr "Ogiltiga fakturanummer siffror."
+
+msgid "The [number] placeholder is required as invoice number format."
+msgstr ""
+
+msgid "Invalid invoice number format."
+msgstr "Ogiltigt fakturanummer format."
+
+msgid "Invalid date format."
+msgstr "Ogiltigt datumformat."
+
+msgid "Please upload image with extension jpg, jpeg or png."
+msgstr "Ladda upp bild med förlängning jpg, jpeg eller png."
+
+msgid "Quantity"
+msgstr "Antal"
+
+msgid "Unit price"
+msgstr "Pris per styck"
+
+msgid ""
+"Use [prefix], [suffix] and [number] as placeholders. [number] is required."
+msgstr ""
+"Använd [prefix], [suffix] och [number] som platshållare. [number] är "
+"obiligatoriskt."
+
+msgid "Signup at %s and enter your account beyond."
+msgstr "Registrera på %s och ange ditt konto utanför."
+
+msgid "%sFormat%s of the date. Examples: %s or %s"
+msgstr "%sformat%s av datum. Exempel: %s eller %s"
+
+msgid "Show invoice"
+msgstr "Visa faktura"
+
+msgid "%sFormat%s of the date."
+msgstr "%sFormat%s av datum."
+
+msgid "Use [prefix], [suffix] and [number] as placeholders."
+msgstr "Använd [suffix], [prefix] och [number] som platshållare."
+
+msgid "Choose the color witch fits your company."
+msgstr "Välj den färg som passar ditt företag."
+
+msgid ""
+"Choose the format for the invoice number. Use [prefix], [suffix] and "
+"[number] as placeholders."
+msgstr ""
+"Välj format för fakturanummer. Använd [prefix], [suffix] och [nummer] som "
+"indikationer."
+
+msgid "Text to greet, congratulate or thank the customer. "
+msgstr "Text att hälsa, gratulera eller tacka kunden."
+
+msgid "Some text"
+msgstr "viss text"
+
+msgid "Text to greet, congratulate or thank the customer."
+msgstr "Text att hälsa, gratulera eller tacka kunden."
+
+msgid "Start all over on the first of January."
+msgstr "Börja om på den första januari."

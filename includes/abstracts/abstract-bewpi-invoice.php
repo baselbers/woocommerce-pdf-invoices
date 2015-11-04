@@ -225,15 +225,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     */
 	    protected function save( $dest, $html_templates ) {
 		    if ( $this->exists() )
-			    die( 'Invoice already exists. First delete invoice.' );
+			    wp_die( __( 'Invoice already exists, first delete invoice.', $this->textdomain ) );
 
 		    // If the invoice is manually deleted from dir, delete data from database.
 		    $this->delete();
 
 		    if ( $this->template_options['bewpi_invoice_number_type'] === "sequential_number" ) {
-			    if ( ! $this->reset_counter() && ! $this->new_year_reset() ) {
+			    if ( ! $this->reset_counter() && ! $this->new_year_reset() )
 				    $this->number = $this->template_options['bewpi_last_invoice_number'] + 1;
-			    }
 		    } else {
 			    $this->number = $this->order->get_order_number();
 		    }
@@ -276,7 +275,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     * @param $download
 	     */
 	    public function view( $download ) {
-		    if ( ! $this->exists() ) die( 'No invoice found. First create invoice.' );
+		    if ( ! $this->exists() ) wp_die( __( 'Invoice not found, first create invoice.', $this->textdomain ) );
 		    parent::view( $download );
 	    }
 

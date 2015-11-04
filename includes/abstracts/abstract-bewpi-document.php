@@ -114,6 +114,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          * Delete invoice from tmp dir.
          */
         public function delete() {
+	        // decrement last invoice number
+	        $this->template_options[ 'bewpi_last_invoice_number' ] -= 1;
+	        update_option( 'bewpi_template_settings', $this->template_options );
+
 	        return unlink( $this->full_path );
         }
 

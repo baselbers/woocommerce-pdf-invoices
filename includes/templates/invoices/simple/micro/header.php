@@ -18,8 +18,10 @@
             <?php printf( __( 'Phone: %s', $this->textdomain ), $this->order->billing_phone ); ?>
         </td>
         <td class="address small-font">
-            <b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
-            <?php echo $this->order->get_formatted_shipping_address(); ?>
+	        <?php if ( $this->order->get_formatted_shipping_address() != "" ) { ?>
+	            <b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
+	            <?php echo $this->order->get_formatted_shipping_address(); ?>
+	        <?php } ?>
         </td>
     </tr>
     </tbody>

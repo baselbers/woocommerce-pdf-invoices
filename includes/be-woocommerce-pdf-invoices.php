@@ -117,13 +117,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		function add_plugin_action_links( $links ) {
 			return array_merge( array(
 				'<a href="' . admin_url( 'admin.php?page=bewpi-invoices' ) . '">' . __( 'Settings' ) . '</a>',
-				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium' ) . '</a>'), $links );
-		}
-
-		public static function plugin_deactivation() {
-			global $current_user;
-			$user_id = $current_user->ID;
-			update_user_meta( $user_id, 'bewpi_hide_activation_notice', '' );
+				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium' ) . '</a>'
+			), $links );
 		}
 
 		public function display_activation_admin_notice() {

@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.10
+Stable tag: 2.3.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,12 @@ function add_hidden_order_items( $order_items ) {
 }`
 
 == Changelog ==
+
+= 2.3.11 - November 6, 2015 =
+
+- Added: Do not attach option to email options
+- Improved: Shipping address not showing if empty
+- Fixed: Invoice numbering gaps while cancelling invoice
 
 = 2.3.10 - October 29, 2015 =
 

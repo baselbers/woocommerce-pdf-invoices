@@ -107,6 +107,7 @@ function add_hidden_order_items( $order_items ) {
 = 2.3.11 - November 6, 2015 =
 
 - Added: Do not attach option to email options
+- Added: Swedish language files
 - Improved: Shipping address not showing if empty
 - Fixed: Invoice numbering gaps while cancelling invoice
 

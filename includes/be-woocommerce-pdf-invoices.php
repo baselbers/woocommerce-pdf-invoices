@@ -169,7 +169,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				switch ( $_GET['bewpi_action'] ) {
 					case "view":
-						$invoice->view( true );
+						$invoice->view();
 						break;
 					case "cancel":
 						$invoice->delete();
@@ -423,7 +423,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function woocommerce_order_page_action_view_invoice( $order ) {
 			$invoice = new BEWPI_Invoice( $order->id );
 			if ( $invoice->exists() )
-				$this->show_invoice_button( 'View invoice', $order->id, 'view', '', array( 'class="button tips wpi-admin-order-create-invoice-btn"' ) );
+				$this->show_invoice_button( 'View invoice', $order->id, 'view', '', array( 'class="button tips wpi-admin-order-create-invoice-btn"', 'target="_blank"' ) );
 		}
 
 		/**
@@ -477,7 +477,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			if ( $invoice->exists() ) {
 				$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
-				$this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array( 'class="invoice-btn button grant_access"' ) );
+				$this->show_invoice_button( __( 'View invoice', $this->textdomain ), $post->ID, 'view', __( 'View', $this->textdomain ), array( 'class="invoice-btn button grant_access"', 'target="_blank"' ) );
 				$this->show_invoice_button( __( 'Cancel invoice', $this->textdomain ), $post->ID, 'cancel', __( 'Cancel', $this->textdomain ), array(
 					'class="invoice-btn button grant_access"',
 					'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', $this->textdomain ) . '\')"'
@@ -503,7 +503,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					die( 'Invalid order ID' );
 
 				$invoice = new BEWPI_Invoice( $order_id );
-				$invoice->view( true );
+				$invoice->view();
 			}
 		}
 

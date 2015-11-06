@@ -136,7 +136,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			    <?php
 			    if ( isset ( $args['attrs'] ) ) :
 				    foreach ( $args['attrs'] as $attr ) :
-					    echo $attr;
+					    echo $attr . ' ';
 				    endforeach;
 			    endif;
 			    ?>

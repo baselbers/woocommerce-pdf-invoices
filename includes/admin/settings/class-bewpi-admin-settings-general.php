@@ -81,6 +81,27 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		    $settings = array(
 			    // General section
 			    array(
+				    'id' => 'bewpi-view-pdf',
+				    'name' => $this->prefix . 'view_pdf',
+				    'title' => __( 'View PDF', $this->textdomain ),
+				    'callback' => array( &$this, 'select_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'email',
+				    'type' => 'text',
+				    'desc' => '',
+				    'options' => array(
+					    array(
+						    'name' => __( 'Download', $this->textdomain ),
+						    'value' => 'download'
+					    ),
+					    array(
+						    'name' => __( 'Open in new browser tab/window', $this->textdomain ),
+						    'value' => 'browser'
+					    )
+				    ),
+				    'default' => 'download'
+			    ),
+			    array(
 				    'id' => 'bewpi-email-type',
 				    'name' => $this->prefix . 'email_type',
 				    'title' => __( 'Attach to Email', $this->textdomain ),

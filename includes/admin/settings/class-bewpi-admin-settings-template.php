@@ -41,7 +41,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
          */
         public function load_settings() {
 			$defaults = $this->get_defaults();
-	        $defaults['bewpi_last_invoice_number'] = 1;
 	        $options = (array) get_option( $this->settings_key );
 	        $options = array_merge( $defaults, $options );
 
@@ -260,7 +259,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 						    'value' => 'sequential_number'
 					    )
 				    ),
-				    'default' => 'woocommerce_order_number'
+				    'default' => 'sequential_number'
 			    ),
 			    array(
 				    'id' => 'bewpi-reset-counter',
@@ -285,10 +284,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'number',
-				    'desc' => sprintf( __( 'Reset the invoice counter and start with next invoice number. %s %sNote:%s Only available with sequential numbering type and you need to check the checkbox to actually reset the value.', $this->textdomain ), '<br/>', '<b>', '</b>' ),
-				    'default' => '',
+				    'desc' => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering and value will be editable by selecting checkbox. First delete invoices if value needs to be lower then maximum existing invoice number.', $this->textdomain ),
+				    'default' => 1,
 				    'attrs' => array(
-					    'disabled'
+					    'disabled',
+					    'min="1"'
 				    )
 			    ),
 			    array(
@@ -558,11 +558,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			    // Reset the next invoice number so it's visible in the disabled input field.
 			    $output['bewpi_next_invoice_number'] = $template_options['bewpi_next_invoice_number'];
 		    }
-
-            // We don't want to loose the invoice counter value
-            if ( ! empty( $template_options['bewpi_last_invoice_number'] ) ) {
-                $output['bewpi_last_invoice_number'] = $template_options['bewpi_last_invoice_number'];
-            }
 
 		    // Return the array processing any additional functions filtered by this action
 		    return apply_filters( 'validate_input', $output, $input );

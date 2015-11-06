@@ -93,18 +93,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          * Get the invoice if exist and show.
          * @param $download
          */
-        public function view( $download ) {
-            if ( $download ) {
-		        header('Content-type: application / pdf');
-		        header('Content-Disposition: attachment; filename="' . $this->filename . '"');
-		        header('Content-Transfer-Encoding: binary');
-		        header('Content-Length: ' . filesize( $this->full_path ));
-		        header('Accept-Ranges: bytes');
+        public function view() {
+            if ( $this->general_options[ 'bewpi_view_pdf' ] === 'browser' ) {
+	            header( 'Content-type: application/pdf' );
+	            header( 'Content-Disposition: inline; filename = "' . $this->filename . '"' );
+	            header( 'Content-Transfer-Encoding: binary' );
+	            header( 'Content-Length: ' . filesize( $this->full_path ) );
+	            header( 'Accept-Ranges: bytes' );
 	        } else {
-		        header('Content-type: application/pdf');
-		        header('Content-Disposition: inline; filename="' . $this->filename . '"');
-		        header('Content-Transfer-Encoding: binary');
-		        header('Accept-Ranges: bytes');
+	            header('Content-type: application / pdf');
+	            header('Content-Disposition: attachment; filename="' . $this->filename . '"');
+	            header('Content-Transfer-Encoding: binary');
+	            header('Content-Length: ' . filesize( $this->full_path ));
+	            header('Accept-Ranges: bytes');
 	        }
 	        @readfile( $this->full_path );
 	        exit;
@@ -114,10 +115,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          * Delete invoice from tmp dir.
          */
         public function delete() {
-	        // decrement last invoice number
-	        $this->template_options[ 'bewpi_last_invoice_number' ] -= 1;
-	        update_option( 'bewpi_template_settings', $this->template_options );
-
 	        return unlink( $this->full_path );
         }
 

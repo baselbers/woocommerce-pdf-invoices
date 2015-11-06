@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-06 00:35+0100\n"
+"POT-Creation-Date: 2015-11-06 23:53+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgid "General"
 msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:195
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:89
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:88
 msgid "Template"
 msgstr ""
 
@@ -225,12 +225,24 @@ msgstr ""
 msgid "Paid"
 msgstr ""
 
-#: includes/abstracts/abstract-bewpi-invoice.php:228
-msgid "Invoice already exists, first delete invoice."
+#: includes/abstracts/abstract-bewpi-invoice.php:248
+#, php-format
+msgid ""
+"Could not create invoice. In order to reset invoice number with %d, delete "
+"all invoices with invoice number %s and greater."
 msgstr ""
 
-#: includes/abstracts/abstract-bewpi-invoice.php:278
-msgid "Invoice not found, first create invoice."
+#: includes/abstracts/abstract-bewpi-invoice.php:253
+#, php-format
+msgid ""
+"Could not create invoice. Invoice with invoice number %s already exists. "
+"First delete invoice and try again."
+msgstr ""
+
+#: includes/abstracts/abstract-bewpi-invoice.php:292
+#, php-format
+msgid ""
+"Invoice with invoice number %s not found. First create invoice and try again."
 msgstr ""
 
 #: includes/abstracts/abstract-bewpi-setting.php:96
@@ -242,156 +254,168 @@ msgid "Remove logo"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
-msgid "Attach to Email"
+msgid "View PDF"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:94
-msgid "Processing order"
+msgid "Download"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:98
+msgid "Open in new browser tab/window"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:107
+msgid "Attach to Email"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:115
+msgid "Processing order"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:119
 msgid "Completed order"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:102
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:123
 msgid "Customer invoice"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:106
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:127
 msgid "Do not attach"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:120
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:141
 msgid "Attach to New order Email"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:132
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:153
 msgid "Enable Email It In"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:140
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:161
 msgid "Email It In account"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:145
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:166
 #, php-format
 msgid "Get your account from your Email It In %suser account%s."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:159
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:180
 msgid "Email Options"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:165
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:186
 msgid "Cloud Storage Options"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:172
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:193
 #, php-format
 msgid ""
 "Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
 "Egnyte and enter your account below."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:101
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:100
 msgid "Color theme"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:112
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:111
 msgid "Date format"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:117
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:116
 #, php-format
 msgid "%sFormat%s of invoice date and order date."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:132
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
 msgid "Display prices including tax"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:133
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:132
 msgid ""
 "Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
 "still be excluding tax, so disable it within the visible columns section."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:145
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:144
 msgid "Shipping taxable"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:146
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:145
 msgid "Enable to display subtotal including shipping."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:158
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:157
 msgid "Mark invoice as paid"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:159
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:158
 msgid "Invoice will be watermarked when order has been paid."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:167
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:166
 msgid "Company name"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:178
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:177
 msgid "Company logo"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:183
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:182
 msgid ""
 "<b>Note</b>: If your logo doesn't show up, try to enable "
 "<code>allow_url_fopen</code>."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:189
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:188
 msgid "Company address"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:200
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:199
 msgid "Company details"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:211
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:210
 msgid "Intro text"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:223
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:222
 msgid "Terms & conditions, policies etc."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:239
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:238
 msgid "Show customer notes"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:247
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:246
 msgid "Type"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:255
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:254
 msgid "WooCommerce order number"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:259
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:258
 msgid "Sequential number"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:273
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:272
 msgid "Reset invoice counter"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:283
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:282
 msgid "Next"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:288
-#, php-format
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:287
 msgid ""
-"Reset the invoice counter and start with next invoice number. %s %sNote:%s "
-"Only available with sequential numbering type and you need to check the "
-"checkbox to actually reset the value."
+"Reset the invoice counter and start counting from given invoice number.<br/"
+"><b>Note:</b> Only available for Sequential numbering and value will be "
+"editable by selecting checkbox. First delete invoices if value needs to be "
+"lower then maximum existing invoice number."
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:297

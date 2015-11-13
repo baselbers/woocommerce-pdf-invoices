@@ -15,7 +15,7 @@
         <td class="address small-font">
             <b><?php _e( 'Invoice to', $this->textdomain ); ?></b><br/>
             <?php echo $this->order->get_formatted_billing_address(); ?><br/>
-            <?php printf( __( 'Phone: %s', $this->textdomain ), $this->order->billing_phone ); ?>
+            <?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', $this->textdomain ), $this->order->billing_phone ); ?>
         </td>
         <td class="address small-font">
 	        <?php if ( $this->order->get_formatted_shipping_address() != "" ) { ?>

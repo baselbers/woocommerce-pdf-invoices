@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.11
+Stable tag: 2.3.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,7 +102,31 @@ function add_hidden_order_items( $order_items ) {
     return $order_items;
 }`
 
+= How to change PDF margins/options? =
+To change the options of the PDF, use below example.
+
+`function custom_bewpi_mpdf_options( $options ) {
+ 	$options['mode'] = '';
+ 	$options['format'] = '';
+ 	$options['default_font_size'] = 0;
+ 	$options['default_font'] = 'opensans';
+ 	$options['margin_left'] = 14;
+ 	$options['margin_right'] = 14;
+ 	$options['margin_top'] = 14;
+ 	$options['margin_bottom'] = 0;
+ 	$options['margin_header'] = 14;
+ 	$options['margin_footer'] = 6;
+ 	$options['orientation'] = 'P';
+ 	return $options;
+ }
+ add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );`
+
 == Changelog ==
+
+= 2.3.12 - November 23, 2015 =
+
+- Improved: Micro template
+- Fixed: Header and footer repeating with too much content/text
 
 = 2.3.11 - November 6, 2015 =
 

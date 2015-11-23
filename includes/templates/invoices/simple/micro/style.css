@@ -2,10 +2,10 @@ div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4 {
     /*border: 1px solid black;*/
 }
 h1.company-logo {
-    font-size: 30px;
+    color: black;
 }
 img.company-logo {
-    max-height: 150px;
+    max-height: 100%;
 }
 table {
     border-collapse: collapse;
@@ -21,6 +21,9 @@ table.products td{
 }
 table.products td, table.products th {
     padding: 5px;
+}
+#terms-notes {
+    margin-top: 30px;
 }
 tr.product-row td {
     border-bottom: 1px solid #CECECE;
@@ -47,15 +50,15 @@ span {
     display: block;
     width: 100%;
 }
+.nowrap {
+    white-space: nowrap;
+}
 .align-left { text-align: left; }
 .align-right { text-align: right; }
 .company {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
 }
-.company .logo {
-    text-align: left;
-}
-.company .info {
+.company .info, .company .logo {
     text-align: left;
     vertical-align: middle;
 }
@@ -69,7 +72,7 @@ span {
     width: 50%;
 }
 .invoice-head {
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     margin-right: -64px;
 }
 .invoice-head td {
@@ -85,7 +88,7 @@ td.invoice-details {
     font-size: 16px;
 }
 .small-font {
-    font-size: 12px;
+    font-size: 14px;
 }
 .total-amount p {
     margin: 0; padding: 0;
@@ -113,13 +116,14 @@ div.item-attribute {
     text-align: center;
 }
 td.company-details, td.payment {
-    padding: 20px 40px 40px 40px;
+    padding: 20px 40px 0;
     text-align: center;
     vertical-align: top;
     width: 50%;
 }
 .foot td {
     border: 1px solid white;
+    font-size: 12px;
 }
 .refunded {
     color: #a00 !important;
@@ -129,11 +133,12 @@ td.company-details, td.payment {
 }
 /* End change colors */
 .space td {
-    padding-bottom: 50px;
-}
-table.products {
-    /*table-layout: fixed;*/
+    padding-bottom: 30px;
 }
 table.products td {
     overflow: hidden;
+}
+.total-amount p {
+    font-weight: bold;
+    font-size: 16px;
 }

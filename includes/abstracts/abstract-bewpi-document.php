@@ -72,6 +72,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 	        $mpdf->SetDisplayMode( 'fullpage' );
 	        $mpdf->useSubstitutions = true;
+	        $mpdf->setAutoTopMargin = 'stretch';
+	        $mpdf->setAutoBottomMargin = 'stretch';
+	        $mpdf->autoMarginPadding = 10;
 
 	        if ( ! empty ( $html_sections['header'] ) )
 		        $mpdf->SetHTMLHeader( $html_sections['header'] );
@@ -132,12 +135,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			    'format' => '',
 			    'default_font_size' => 0,
 			    'default_font' => 'opensans',
-			    'margin_left' => 17,
-			    'margin_right' => 17,
-			    'margin_top' => 150,
-			    'margin_bottom' => 50,
-			    'margin_header' => 17,
-			    'margin_footer' => 0,
+			    'margin_left' => 14,
+			    'margin_right' => 14,
+			    'margin_top' => 14,
+			    'margin_bottom' => 0,
+			    'margin_header' => 14,
+			    'margin_footer' => 6,
 			    'orientation' => 'P'
 		    ));
 	    }

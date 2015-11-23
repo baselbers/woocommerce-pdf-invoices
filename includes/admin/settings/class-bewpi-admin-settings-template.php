@@ -103,7 +103,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'section' => 'general',
 				    'type' => 'color',
 				    'desc' => '',
-				    'default' => '#11B0E7'
+				    'default' => '#000000'
 			    ),
 			    array(
 				    'id' => 'bewpi-date-format',
@@ -115,7 +115,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'type' => 'text',
 				    'desc' => sprintf( __( '%sFormat%s of invoice date and order date.', $this->textdomain ),
 					    '<a href="http://php.net/manual/en/datetime.formats.date.php">', '</a>' ), // F jS Y or d.m.y or d-m-Y
-				    'default' => 'd-m-Y',
+				    'default' => 'F j, Y',
 				    'attrs' => array(
 					    'required'
 				    )
@@ -190,7 +190,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
-				    'desc' => '',
+				    'desc' => __( 'Displayed in upper-right corner near logo.', $this->textdomain ),
 				    'default' => ''
 			    ),
 			    array(
@@ -201,31 +201,20 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
-				    'desc' => '',
+				    'desc' => __( 'Displayed below company address.', $this->textdomain ),
 				    'default' => ''
 			    ),
+			    // Body
 			    array(
 				    'id' => 'bewpi-intro-text',
 				    'name' => $this->prefix . 'intro_text',
-				    'title' => __( 'Intro text', $this->textdomain ),
+				    'title' => __( 'Thank you text', $this->textdomain ),
 				    'callback' => array( &$this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
-				    'desc' => '',
-				    'default' => ''
-			    ),
-			    // Footer section
-			    array(
-				    'id' => 'bewpi-terms',
-				    'name' => $this->prefix . 'terms',
-				    'title' => __( 'Terms & conditions, policies etc.', $this->textdomain ),
-				    'callback' => array( &$this, 'textarea_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'footer',
-				    'type' => 'text',
-				    'desc' => '',
-				    'default' => ''
+				    'desc' => __( 'Displayed in big colored bar directly after invoice total.', $this->textdomain ),
+				    'default' => __( 'Thank you for your purchase!', $this->textdomain )
 			    ),
 			    array(
 				    'id' => 'bewpi-show-customer-notes',
@@ -233,11 +222,45 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'title' => '',
 				    'callback' => array( &$this, 'input_callback' ),
 				    'page' => $this->settings_key,
-				    'section' => 'footer',
+				    'section' => 'body',
 				    'type' => 'checkbox',
 				    'desc' => __( 'Show customer notes', $this->textdomain ),
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
+			    ),
+			    array(
+				    'id' => 'bewpi-terms',
+				    'name' => $this->prefix . 'terms',
+				    'title' => __( 'Terms & conditions, policies etc.', $this->textdomain ),
+				    'callback' => array( &$this, 'textarea_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'body',
+				    'type' => 'text',
+				    'desc' => sprintf( __( 'Displayed below customer notes and above footer. Want to attach additional pages to the invoice? Take a look at the <a href="%s">Premium</a> plugin.', $this->textdomain ), 'http://wcpdfinvoices.com' ),
+				    'default' => __( 'Items will be shipped within 2 days.', $this->textdomain )
+			    ),
+			    // Footer
+			    array(
+				    'id' => 'bewpi-left-footer-column',
+				    'name' => $this->prefix . 'left_footer_column',
+				    'title' => __( 'Left footer column.', $this->textdomain ),
+				    'callback' => array( &$this, 'textarea_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'footer',
+				    'type' => 'text',
+				    'desc' => '',
+				    'default' => sprintf( __( '<b>Payment method</b> %s', $this->textdomain ), '[payment_method]' )
+			    ),
+			    array(
+				    'id' => 'bewpi-right-footer-column',
+				    'name' => $this->prefix . 'right_footer_column',
+				    'title' => __( 'Right footer column.', $this->textdomain ),
+				    'callback' => array( &$this, 'textarea_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'footer',
+				    'type' => 'text',
+				    'desc' => __( 'Leave empty to show page numbering.', $this->textdomain ),
+				    'default' => ''
 			    ),
 			    // Invoice number section
 			    array(
@@ -284,7 +307,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'number',
-				    'desc' => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering and value will be editable by selecting checkbox. First delete invoices if value needs to be lower then maximum existing invoice number.', $this->textdomain ),
+				    'desc' => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering and value will be editable by selecting checkbox. Next number needs to be lower then highest existing invoice number or delete invoices first.', $this->textdomain ),
 				    'default' => 1,
 				    'attrs' => array(
 					    'disabled',
@@ -337,7 +360,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-					'desc' => sprintf( __( 'Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s is required and slashes aren\'t supported.', $this->textdomain ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<br/>', '<b>', '</b>', '<code>[number]</code>' ),
+					'desc' => sprintf( __( 'Allowed placeholders: %s %s %s %s %s %s.<br/>%sNote:%s %s is required and slashes aren\'t supported.', $this->textdomain ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<b>', '</b>', '<code>[number]</code>' ),
 				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'
@@ -388,7 +411,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
-				    'desc' => __( 'Tax', $this->textdomain ),
+				    'desc' => __( 'Tax (item)', $this->textdomain ),
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 0
+			    ),
+			    array(
+				    'id' => 'bewpi-show-tax-row',
+				    'name' => $this->prefix . 'show_tax_total',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'visible_columns',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Tax (total)', $this->textdomain ),
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
@@ -443,6 +478,12 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			    $this->settings_key
 		    );
 		    add_settings_section(
+			    'body',
+			    __( 'Body Options', $this->textdomain ),
+			    array( &$this, 'body_desc_callback' ),
+			    $this->settings_key
+		    );
+		    add_settings_section(
 			    'footer',
 			    __( 'Footer Options', $this->textdomain ),
 			    array( &$this, 'footer_desc_callback' ),
@@ -459,7 +500,12 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	    public function general_desc_callback() { _e( 'These are the general template options.', $this->textdomain ); }
 	    public function invoice_number_desc_callback() { _e( 'These are the invoice number options.', $this->textdomain ); }
 	    public function header_desc_callback() { _e( 'The header will be visible on every page. ' . $this->get_allowed_tags_str(), $this->textdomain ); }
-	    public function footer_desc_callback() { _e( 'The footer will be visible on every page. ' . $this->get_allowed_tags_str(), $this->textdomain ); }
+	    public function body_desc_callback() { }
+
+	    public function footer_desc_callback() {
+		    echo __( 'The footer will be visible on every page.', $this->textdomain ) . '<br/>' . $this->get_allowed_tags_str() . '<br/>' . __( '<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the order payment method.', $this->textdomain );
+	    }
+
 	    public function visible_columns_desc_callback() { _e( 'Enable or disable the columns.', $this->textdomain ); }
 
 	    /**

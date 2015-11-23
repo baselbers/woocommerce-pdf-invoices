@@ -128,7 +128,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 						    'value' => ''
 					    )
 				    ),
-				    'default' => 'customer_invoice'
+				    'default' => 'customer_completed_order'
 			    ),
 			    array(
 				    'id' => 'bewpi-new-order',

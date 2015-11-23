@@ -1,26 +1,24 @@
-<table class="foot small-font">
-    <tbody>
+<table class="foot border" style="border-top: 4px solid <?php echo $this->template_options['bewpi_color_theme']; ?>;">
     <tr>
-        <td class="border" colspan="2" style="border-bottom: 8px solid <?php echo $this->template_options['bewpi_color_theme']; ?>;">
-            <?php echo $this->template_options['bewpi_terms']; ?><br/>
-            <?php
-            if ( $this->template_options['bewpi_show_customer_notes'] ) :
-                // Note added by customer.
-	            if ( $this->order->post->post_excerpt != "" ) {
-                    echo '<p><strong>' . __( 'Customer note', $this->textdomain ) . ' </strong> ' . $this->order->post->post_excerpt . '</p>';
-                }
-                // Notes added by administrator on order details page.
-                $customer_order_notes = $this->order->get_customer_order_notes();
-                if ( count( $customer_order_notes ) > 0 ) {
-                    echo '<p><strong>' . __('Customer note', $this->textdomain) . ' </strong>' . $customer_order_notes[0]->comment_content . '</p>';
-                }
-            endif;
-            ?>
+        <td class="company-details">
+	        <p>
+		        <?php echo nl2br( str_replace( '[payment_method]',
+			        $this->order->payment_method_title,
+			        $this->template_options[ 'bewpi_left_footer_column' ] ) ); ?>
+	        </p>
+        </td>
+        <td class="payment">
+	        <p>
+		        <?php
+		        if ( $this->template_options[ 'bewpi_right_footer_column' ] !== "" ) {
+			        echo nl2br( str_replace( '[payment_method]',
+				        $this->order->payment_method_title,
+				        $this->template_options['bewpi_left_footer_column'] ) );
+		        } else {
+			        printf( __( '%s of %s', $this->textdomain ), '{PAGENO}', '{nbpg}' );
+		        }
+		        ?>
+	        </p>
         </td>
     </tr>
-    <tr>
-        <td class="company-details"><p><?php echo nl2br( $this->template_options['bewpi_company_details'] ); ?></p></td>
-        <td class="payment"><p><?php printf( __( '%sPayment%s via', $this->textdomain ), '<b>', '</b>' ); ?>  <?php echo $this->order->payment_method_title; ?></p></td>
-    </tr>
-    </tbody>
 </table>

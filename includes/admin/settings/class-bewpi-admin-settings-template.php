@@ -179,7 +179,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'file',
-			        'desc' => __( '<b>Note</b>: If your logo doesn\'t show up, try to enable <code>allow_url_fopen</code>.', $this->textdomain ),
+			        'desc' => '',
 				    'default' => ''
 			    ),
 			    array(

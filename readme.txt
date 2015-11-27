@@ -125,7 +125,8 @@ To change the options of the PDF, use below example.
 
 = 2.3.12 - November 23, 2015 =
 
-- Improved: Micro template
+- Improved: Micro and global (premium) template
+- Improved: Code in order to disable allow_url_fopen
 - Fixed: Header and footer repeating with too much content/text
 
 = 2.3.11 - November 6, 2015 =

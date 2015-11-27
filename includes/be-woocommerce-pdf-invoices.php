@@ -285,6 +285,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					- <?php _e( 'Bill periodically by generating and sending global invoices.', $this->textdomain ); ?><br/>
 					- <?php _e( 'Add additional PDF\'s to customer invoices.', $this->textdomain ); ?><br/>
 					- <?php _e( 'Send customer invoices directly to suppliers and others.', $this->textdomain ); ?><br/>
+					- <?php _e( 'Send customer invoices directly to suppliers and others.', $this->textdomain ); ?><br/>
 				</p>
 				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', $this->textdomain ); ?></a>
 			</aside>

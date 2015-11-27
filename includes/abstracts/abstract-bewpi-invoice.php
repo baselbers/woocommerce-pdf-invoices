@@ -150,13 +150,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         /*
          * Format the order date and return
          */
-        public function get_formatted_order_date() {
-            $order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $this->order->order_date );
+        public function get_formatted_order_date( $order_id = 0 ) {
+	        if ( $order_id  != 0 ) {
+		        // format date for global invoice
+		        $order = wc_get_order( $order_id );
+		        $order_date = $order->order_date;
+	        } else {
+		        $order_date = $this->order->order_date;
+	        }
+
+            $order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $order_date );
             if ( ! empty ( $this->template_options['bewpi_date_format'] ) ) {
                 $date_format = $this->template_options['bewpi_date_format'];
                 $formatted_date = $order_date->format( $date_format );
                 return date_i18n( $date_format, strtotime( $formatted_date ) );
-
             } else {
                 $formatted_date = $order_date->format( $order_date, "d-m-Y" );
                 return date_i18n( "d-m-Y", strtotime( $formatted_date ) );
@@ -337,9 +344,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	            //$image_url = '..' . str_replace( get_site_url(), '', $image_url );
 
 	            // not needed anymore if we use the relative path fix.
-	            if( ini_get( 'allow_url_fopen' ) ) {
-		            $image_url = image_to_base64( $image_url );
-	            }
+	            //if( ini_get( 'allow_url_fopen' ) ) {
+
+	            //}
+
+	            $image_url = image_to_base64( $image_url );
 
                 echo '<img class="company-logo" src="' . $image_url . '"/>';
             else :

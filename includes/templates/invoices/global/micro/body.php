@@ -1,3 +1,37 @@
+<table class="two-column customer">
+	<tbody>
+	<tr>
+		<td class="address small-font">
+			<b><?php _e( 'Invoice to', $this->textdomain ); ?></b><br/>
+			<?php echo $this->order->get_formatted_billing_address(); ?><br/>
+			<?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', $this->textdomain ), $this->order->billing_phone ); ?>
+		</td>
+		<td class="address small-font">
+			<?php if ( $this->order->get_formatted_shipping_address() != "" ) { ?>
+				<b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
+				<?php echo $this->order->get_formatted_shipping_address(); ?>
+			<?php } ?>
+		</td>
+	</tr>
+	</tbody>
+</table>
+<table class="invoice-head">
+	<tbody>
+	<tr>
+		<td class="invoice-details">
+			<h1 class="title"><?php _e( 'Global Invoice', $this->textdomain ); ?></h1>
+			<span class="number" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
+			<span class="small-font"><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
+		</td>
+		<td class="total-amount" bgcolor="<?php echo $this->template_options['bewpi_color_theme']; ?>">
+				<span>
+					<h1 class="amount"><?php echo wc_price( $this->get_total_after_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
+					<p class="small-font"><?php echo $this->template_options['bewpi_intro_text']; ?></p>
+				</span>
+		</td>
+	</tr>
+	</tbody>
+</table>
 <?php echo $this->outlining_columns_html(); ?>
 <table class="products small-font">
         <thead>
@@ -38,7 +72,7 @@
             <?php foreach ( $this->orders as $order ) :
                 $order = wc_get_order( $order->id ); ?>
 	            <tr>
-	                <td><strong><?php printf( __( 'Order #%d - %s', $this->textdomain ), $order->get_order_number(), $this->get_formatted_order_date() ); ?></strong></td>
+	                <td><strong><?php printf( __( 'Order #%d - %s', $this->textdomain ), $order->get_order_number(), $this->get_formatted_order_date( $order->id ) ); ?></strong></td>
 	            </tr>
                 <?php foreach( $order->get_items( 'line_item' ) as $item_id => $item ) :
                     $product = wc_get_product( $item['product_id'] ); ?>
@@ -176,6 +210,8 @@
             <tr class="space">
 	            <td colspan="<?php echo $this->columns_count; ?>"></td>
             </tr>
+            </tbody>
+			<tfoot>
             <!-- Table footers -->
             <!-- Discount -->
             <?php if( $this->template_options['bewpi_show_discount'] && $this->get_total_discount() !== 0 ) { ?>
@@ -252,5 +288,13 @@
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
-        </tbody>
+		</tfoot>
 	</table>
+<table id="terms-notes">
+	<!-- Notes & terms -->
+	<tr>
+		<td class="border" colspan="3">
+			<?php echo nl2br( $this->template_options['bewpi_terms'] ); ?>
+		</td>
+	</tr>
+</table>

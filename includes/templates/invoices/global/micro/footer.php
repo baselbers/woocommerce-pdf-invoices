@@ -10,7 +10,7 @@
 			<p>
 				<?php
 				if ( $this->template_options[ 'bewpi_right_footer_column' ] !== "" ) {
-					echo nl2br( $this->template_options['bewpi_left_footer_column'] );
+					echo nl2br( $this->template_options['bewpi_right_footer_column'] );
 				} else {
 					printf( __( '%s of %s', $this->textdomain ), '{PAGENO}', '{nbpg}' );
 				}

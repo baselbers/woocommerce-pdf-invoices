@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.12
+Stable tag: 2.3.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -123,7 +123,13 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.3.12 - November 23, 2015 =
+= 2.3.13 - November 28, 2015 =
+
+- Improved: Changed file_get_contents to wp_get_remote
+- Fixed: Logo not always showing
+- Fixed: Footer column (typo in code)
+
+= 2.3.12 - November 28, 2015 =
 
 - Improved: Micro and global (premium) template
 - Improved: Code in order to disable allow_url_fopen

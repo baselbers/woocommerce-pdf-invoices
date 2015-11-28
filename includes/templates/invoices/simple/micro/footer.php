@@ -13,7 +13,7 @@
 		        if ( $this->template_options[ 'bewpi_right_footer_column' ] !== "" ) {
 			        echo nl2br( str_replace( '[payment_method]',
 				        $this->order->payment_method_title,
-				        $this->template_options['bewpi_left_footer_column'] ) );
+				        $this->template_options['bewpi_right_footer_column'] ) );
 		        } else {
 			        printf( __( '%s of %s', $this->textdomain ), '{PAGENO}', '{nbpg}' );
 		        }

@@ -341,14 +341,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
                 $image_url = $this->template_options['bewpi_company_logo'];
 
 	            // get the relative path due to slow generation of invoice. Not fully tested yet.
-	            //$image_url = '..' . str_replace( get_site_url(), '', $image_url );
-
-	            // not needed anymore if we use the relative path fix.
-	            //if( ini_get( 'allow_url_fopen' ) ) {
-
-	            //}
-
-	            $image_url = image_to_base64( $image_url );
+	            $image_url = '..' . str_replace( get_site_url(), '', $image_url );
+	            //$image_url = image_to_base64( $image_url );
 
                 echo '<img class="company-logo" src="' . $image_url . '"/>';
             else :

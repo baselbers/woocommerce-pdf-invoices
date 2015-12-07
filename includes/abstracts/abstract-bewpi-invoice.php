@@ -252,12 +252,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    if ( $this->exists() ) {
 			    if ( $this->counter_reset ) {
 				    // user used invoice number reset, but invoice already exists with this invoice number
-				    wp_die( sprintf( __( 'Could not create invoice. In order to reset invoice number with %d, delete all invoices with invoice number %s and greater.', $this->textdomain ), (int)$this->template_options[ 'bewpi_next_invoice_number' ], $this->formatted_number ),
+				    wp_die( sprintf( __( 'Could not create invoice. In order to reset invoice number with %d, delete all invoices with invoice number %s and greater.', 'be-woocommerce-pdf-invoices' ), (int)$this->template_options[ 'bewpi_next_invoice_number' ], $this->formatted_number ),
 					    '',
 					    array( 'response' => 200, 'back_link' => true )
 				    );
 			    } else {
-				    wp_die( sprintf( __( 'Could not create invoice. Invoice with invoice number %s already exists. First delete invoice and try again.', $this->textdomain ), $this->formatted_number ),
+				    wp_die( sprintf( __( 'Could not create invoice. Invoice with invoice number %s already exists. First delete invoice and try again.', 'be-woocommerce-pdf-invoices' ), $this->formatted_number ),
 					    '',
 					    array( 'response' => 200, 'back_link' => true )
 				    );
@@ -296,7 +296,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     */
 	    public function view() {
 		    if ( ! $this->exists() )
-		        wp_die( sprintf( __( 'Invoice with invoice number %s not found. First create invoice and try again.', $this->textdomain ), $this->formatted_number ),
+		        wp_die( sprintf( __( 'Invoice with invoice number %s not found. First create invoice and try again.', 'be-woocommerce-pdf-invoices' ), $this->formatted_number ),
 			        '',
 			        array( 'response' => 200, 'back_link' => true )
 		        );

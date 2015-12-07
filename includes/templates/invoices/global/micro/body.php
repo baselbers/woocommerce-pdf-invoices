@@ -2,13 +2,13 @@
 	<tbody>
 	<tr>
 		<td class="address small-font">
-			<b><?php _e( 'Invoice to', $this->textdomain ); ?></b><br/>
+			<b><?php _e( 'Invoice to', 'be-woocommerce-pdf-invoices' ); ?></b><br/>
 			<?php echo $this->order->get_formatted_billing_address(); ?><br/>
-			<?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', $this->textdomain ), $this->order->billing_phone ); ?>
+			<?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', 'be-woocommerce-pdf-invoices' ), $this->order->billing_phone ); ?>
 		</td>
 		<td class="address small-font">
 			<?php if ( $this->order->get_formatted_shipping_address() != "" ) { ?>
-				<b><?php _e( 'Ship to', $this->textdomain ); ?></b><br/>
+				<b><?php _e( 'Ship to', 'be-woocommerce-pdf-invoices' ); ?></b><br/>
 				<?php echo $this->order->get_formatted_shipping_address(); ?>
 			<?php } ?>
 		</td>
@@ -19,7 +19,7 @@
 	<tbody>
 	<tr>
 		<td class="invoice-details">
-			<h1 class="title"><?php _e( 'Global Invoice', $this->textdomain ); ?></h1>
+			<h1 class="title"><?php _e( 'Global Invoice', 'be-woocommerce-pdf-invoices' ); ?></h1>
 			<span class="number" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
 			<span class="small-font"><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
 		</td>
@@ -37,23 +37,23 @@
         <thead>
         <tr class="table-headers">
 			<!-- Description -->
-            <th class="align-left"><?php _e( 'Description', $this->textdomain ); ?></th>
+            <th class="align-left"><?php _e( 'Description', 'be-woocommerce-pdf-invoices' ); ?></th>
 			<!-- SKU -->
 	        <?php
             if( $this->template_options['bewpi_show_sku'] ) {
-                echo '<th class="align-left">' . __( "SKU", $this->textdomain ) . '</th>';
+                echo '<th class="align-left">' . __( "SKU", 'be-woocommerce-pdf-invoices') . '</th>';
             }
             ?>
 			<!-- Cost -->
-	        <th class="align-left"><?php _e( 'Cost', $this->textdomain ); ?></th>
+	        <th class="align-left"><?php _e( 'Cost', 'be-woocommerce-pdf-invoices' ); ?></th>
 			<!-- Qty -->
-            <th class="align-left"><?php _e( 'Qty', $this->textdomain ); ?></th>
+            <th class="align-left"><?php _e( 'Qty', 'be-woocommerce-pdf-invoices' ); ?></th>
 	        <!-- Tax -->
 	        <?php
 	        $order_taxes = $this->get_taxes();
 	        if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) && ! empty( $order_taxes ) ) :
 		        foreach ( $order_taxes as $tax_id => $tax_item ) :
-                    $tax_label = __( 'VAT', $this->textdomain );
+                    $tax_label = __( 'VAT', 'be-woocommerce-pdf-invoices' );
 			        $column_label = ! empty( $tax_item->label ) ? $tax_item->label : $tax_label;
 			        ?>
 			        <th class="align-left">
@@ -64,7 +64,7 @@
 	        endif;
 	        ?>
 	        <!-- Total -->
-            <th class="align-right"><?php _e( 'Total', $this->textdomain ); ?></th>
+            <th class="align-right"><?php _e( 'Total', 'be-woocommerce-pdf-invoices' ); ?></th>
         </tr>
         </thead>
 		<!-- Products -->
@@ -72,7 +72,7 @@
             <?php foreach ( $this->orders as $order ) :
                 $order = wc_get_order( $order->id ); ?>
 	            <tr>
-	                <td><strong><?php printf( __( 'Order #%d - %s', $this->textdomain ), $order->get_order_number(), $this->get_formatted_order_date( $order->id ) ); ?></strong></td>
+	                <td><strong><?php printf( __( 'Order #%d - %s', 'be-woocommerce-pdf-invoices' ), $order->get_order_number(), $this->get_formatted_order_date( $order->id ) ); ?></strong></td>
 	            </tr>
                 <?php foreach( $order->get_items( 'line_item' ) as $item_id => $item ) :
                     $product = wc_get_product( $item['product_id'] ); ?>
@@ -217,7 +217,7 @@
             <?php if( $this->template_options['bewpi_show_discount'] && $this->get_total_discount() !== 0 ) { ?>
 	            <tr class="discount after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Discount', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Discount', 'be-woocommerce-pdf-invoices' ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
@@ -225,7 +225,7 @@
             <?php if( $this->template_options['bewpi_show_shipping'] && (bool)$this->template_options["bewpi_shipping_taxable"] ) { ?>
 	            <tr class="shipping after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', 'be-woocommerce-pdf-invoices' ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
@@ -233,7 +233,7 @@
             <?php if( $this->template_options['bewpi_show_subtotal'] ) { ?>
 	            <tr class="subtotal after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', 'be-woocommerce-pdf-invoices' ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
@@ -241,7 +241,7 @@
             <?php if( $this->template_options['bewpi_show_shipping'] && ! (bool)$this->template_options["bewpi_shipping_taxable"] ) { ?>
 	            <tr class="shipping after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Shipping', 'be-woocommerce-pdf-invoices' ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>
@@ -277,14 +277,14 @@
             <!-- Total -->
             <tr class="after-products">
 	            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-	            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', $this->textdomain ); ?></td>
+	            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', 'be-woocommerce-pdf-invoices' ); ?></td>
 	            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_total(); ?></td>
             </tr>
             <!-- Refunded -->
             <?php if ( $this->get_total_refunded() > 0 ) { ?>
 	            <tr class="after-products">
 		            <td colspan="<?php echo $this->colspan['left']; ?>"></td>
-		            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="refunded"><?php _e( 'Refunded', $this->textdomain ); ?></td>
+		            <td colspan="<?php echo $this->colspan['right_left']; ?>" class="refunded"><?php _e( 'Refunded', 'be-woocommerce-pdf-invoices' ); ?></td>
 		            <td colspan="<?php echo $this->colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	            </tr>
             <?php } ?>

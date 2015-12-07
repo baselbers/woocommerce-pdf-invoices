@@ -15,11 +15,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	     */
 	    protected $full_path;
 
-	    /**
-	     * @var string
-	     */
-	    protected $textdomain = 'be-woocommerce-pdf-invoices';
-
         /**
          * All options from general tab.
          * @var array
@@ -66,7 +61,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->useOnlyCoreFonts = false;    // false is default
 
 	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
-		        $mpdf->SetWatermarkText( __( 'Paid', $this->textdomain ) );
+		        $mpdf->SetWatermarkText( __( 'Paid', 'be-woocommerce-pdf-invoices' ) );
 		        $mpdf->showWatermarkText = true;
 	        }
 

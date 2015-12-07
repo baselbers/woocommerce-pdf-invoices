@@ -10,12 +10,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
     abstract class BEWPI_Abstract_Setting {
 
 	    /**
-	     * The textdomain
-	     * @var string
-	     */
-	    public $textdomain = 'be-woocommerce-pdf-invoices';
-
-	    /**
 	     * Options and settings prefix
 	     * @var string
 	     */
@@ -93,7 +87,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     * @return string|void
 	     */
 	    protected function get_allowed_tags_str() {
-		    ( count( $this->allowed_tags ) > 0 ) ? $str = __( 'Allowed HTML tags: ', $this->textdomain ) : $str = '';
+		    ( count( $this->allowed_tags ) > 0 ) ? $str = __( 'Allowed HTML tags: ', 'be-woocommerce-pdf-invoices' ) : $str = '';
 		    foreach ( $this->allowed_tags as $i => $tag ) {
 			    ( $i == count( $this->allowed_tags ) - 1 ) ? $str .= sprintf( '<code>%s</code>.', htmlspecialchars( $tag ) ) : $str .= sprintf( '<code>%s</code> ', htmlspecialchars( $tag ) );
 		    }
@@ -173,7 +167,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 				    <img id="<?php echo $args['id'] . '-delete'; ?>"
 				         src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
 				         onclick="Settings.removeCompanyLogo()"
-				         title="<?php _e( 'Remove logo', $this->textdomain ); ?>"/>
+				         title="<?php _e( 'Remove logo', 'be-woocommerce-pdf-invoices' ); ?>"/>
 			    </div>
 		    <?php
 		    endif;

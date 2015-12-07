@@ -31,3 +31,17 @@ function get_orders_from_previous_month() {
 
 	return $orders;
 }
+
+function get_orders_by_customer( $user_id ) {
+	$orders = get_posts( array(
+		'numberposts'   => -1,
+		'meta_key'      => '_customer_user',
+		'meta_value'    => $user_id,
+		'post_type'     => wc_get_order_types(),
+		'post_status'   => array_keys( wc_get_order_statuses() ),
+		'orderby'       => 'post_date',
+		'order'         => 'ASC'
+	) );
+
+	return $orders;
+}

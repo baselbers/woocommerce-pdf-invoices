@@ -83,7 +83,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			    array(
 				    'id' => 'bewpi-view-pdf',
 				    'name' => $this->prefix . 'view_pdf',
-				    'title' => __( 'View PDF', $this->textdomain ),
+				    'title' => __( 'View PDF', 'be-woocommerce-pdf-invoices' ),
 				    'callback' => array( &$this, 'select_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'email',
@@ -91,11 +91,11 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'desc' => '',
 				    'options' => array(
 					    array(
-						    'name' => __( 'Download', $this->textdomain ),
+						    'name' => __( 'Download', 'be-woocommerce-pdf-invoices' ),
 						    'value' => 'download'
 					    ),
 					    array(
-						    'name' => __( 'Open in new browser tab/window', $this->textdomain ),
+						    'name' => __( 'Open in new browser tab/window', 'be-woocommerce-pdf-invoices' ),
 						    'value' => 'browser'
 					    )
 				    ),
@@ -104,7 +104,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			    array(
 				    'id' => 'bewpi-email-type',
 				    'name' => $this->prefix . 'email_type',
-				    'title' => __( 'Attach to Email', $this->textdomain ),
+				    'title' => __( 'Attach to Email', 'be-woocommerce-pdf-invoices' ),
 				    'callback' => array( &$this, 'select_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'email',
@@ -112,19 +112,19 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'desc' => '',
 				    'options' => array(
 					    array(
-						    'name' => __( 'Processing order', $this->textdomain ),
+						    'name' => __( 'Processing order', 'be-woocommerce-pdf-invoices' ),
 						    'value' => 'customer_processing_order'
 					    ),
 					    array(
-						    'name' => __( 'Completed order', $this->textdomain ),
+						    'name' => __( 'Completed order', 'be-woocommerce-pdf-invoices' ),
 						    'value' => 'customer_completed_order'
 					    ),
 					    array(
-						    'name' => __( 'Customer invoice', $this->textdomain ),
+						    'name' => __( 'Customer invoice', 'be-woocommerce-pdf-invoices' ),
 						    'value' => 'customer_invoice'
 					    ),
 					    array(
-						    'name' => __( 'Do not attach', $this->textdomain ),
+						    'name' => __( 'Do not attach', 'be-woocommerce-pdf-invoices' ),
 						    'value' => ''
 					    )
 				    ),
@@ -138,7 +138,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'email',
 				    'type' => 'checkbox',
-				    'desc' => __( 'Attach to New order Email', $this->textdomain ),
+				    'desc' => __( 'Attach to New order Email', 'be-woocommerce-pdf-invoices' ),
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0
 			    ),
@@ -150,7 +150,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'cloud_storage',
 				    'type' => 'checkbox',
-					'desc' => __( 'Enable Email It In', $this->textdomain ),
+					'desc' => __( 'Enable Email It In', 'be-woocommerce-pdf-invoices' ),
 				    'class' => 'bewpi-checkbox-option-title',
 		            'default' => 0
 			    ),
@@ -158,12 +158,12 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		        array(
 			        'id' =>  'bewpi-email-it-in-account',
 			        'name' => $this->prefix . 'email_it_in_account',
-				    'title' => __( 'Email It In account', $this->textdomain ),
+				    'title' => __( 'Email It In account', 'be-woocommerce-pdf-invoices' ),
 				    'callback' => array( &$this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'cloud_storage',
 				    'type' => 'text',
-					'desc' => sprintf( __( 'Get your account from your Email It In %suser account%s.', $this->textdomain ), '<a href="https://www.emailitin.com/user_account">', '</a>' ),
+					'desc' => sprintf( __( 'Get your account from your Email It In %suser account%s.', 'be-woocommerce-pdf-invoices' ), '<a href="https://www.emailitin.com/user_account">', '</a>' ),
 			        'default' => ''
 		        )
 		    );
@@ -177,20 +177,20 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	    private function add_settings_sections() {
 		    add_settings_section(
 			    'email',
-			    __( 'Email Options', $this->textdomain ),
+			    __( 'Email Options', 'be-woocommerce-pdf-invoices' ),
 			    array( &$this, 'email_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'cloud_storage',
-			    __( 'Cloud Storage Options', $this->textdomain ),
+			    __( 'Cloud Storage Options', 'be-woocommerce-pdf-invoices' ),
 			    array( &$this, 'cloud_storage_desc_callback' ),
 			    $this->settings_key
 		    );
 	    }
 
 	    public function email_desc_callback() { }
-	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', $this->textdomain ), '<a href="https://emailitin.com">Email It In</a>' ); }
+	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'be-woocommerce-pdf-invoices' ), '<a href="https://emailitin.com">Email It In</a>' ); }
 
 	    /**
 	     * Adds settings fields

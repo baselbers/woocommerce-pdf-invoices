@@ -87,12 +87,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     * @return string|void
 	     */
 	    protected function get_allowed_tags_str() {
-		    ( count( $this->allowed_tags ) > 0 ) ? $str = __( 'Allowed HTML tags: ', 'be-woocommerce-pdf-invoices' ) : $str = '';
-		    foreach ( $this->allowed_tags as $i => $tag ) {
-			    ( $i == count( $this->allowed_tags ) - 1 ) ? $str .= sprintf( '<code>%s</code>.', htmlspecialchars( $tag ) ) : $str .= sprintf( '<code>%s</code> ', htmlspecialchars( $tag ) );
+
+		    if( empty( $this->allowed_tags ) ) {
+			    return '';
 		    }
 
-		    return $str;
+		    $encoded_tags = array_map( 'htmlspecialchars', $this->allowed_tags );
+		    $tags_string = '<code>' . join( '</code>, <code>', $encoded_tags ) . '</code>';
+
+			return __( 'Allowed HTML tags: ', 'be-woocommerce-pdf-invoices' ) . $tags_string . '.';
 	    }
 
 	    public function select_callback( $args ) {

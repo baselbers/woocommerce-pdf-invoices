@@ -103,7 +103,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$this->init_settings_tabs();
 			$this->create_bewpi_dirs();
 			$this->invoice_actions();
-			$this->global_invoice_actions();
 
 			add_action( 'admin_notices', array( $this, 'display_activation_admin_notice' ) );
 		}
@@ -117,6 +116,25 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		public static function plugin_activation() {
 			self::insert_install_date();
+		}
+
+		public function display_activation_admin_notice() {
+			global $pagenow;
+			if ( $pagenow != 'plugins.php' )
+				return;
+
+			global $current_user;
+			$user_id = $current_user->ID;
+			if ( ! get_user_meta( $user_id, 'bewpi_hide_activation_notice', true ) ) {
+				?>
+				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
+					<p>
+						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.', 'be-woocommerce-pdf-invoices' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
+					</p>
+					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
+				</div>
+			<?php
+			}
 		}
 
 		function add_plugin_action_links( $links ) {
@@ -146,47 +164,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				// example: Download (PDF) Invoice [formatted_invoice_number]
 				echo '<a href="' . $url . '" alt="' . $title . '">' . $title . '</a>';
-			}
-		}
-
-		public function bewpi_generate_global_invoice_func( $atts ) {
-			//$current_user_id    = get_current_user_id();
-			$title              = $atts[ 'title' ];
-			$order_ids          = array();
-
-			if ( $invoice->exists() && $invoice->is_download_allowed( $order->post_status ) ) {
-				$url = admin_url( 'admin-ajax.php?action=bewpi_create_global_invoice&user_id=' . $order->id . '&nonce=' . wp_create_nonce( 'bewpi_download_invoice' ) );
-
-				$tags = array (
-					'{formatted_invoice_number}'    => $invoice->get_formatted_number(),
-					'{order_number}'                => $order->id,
-					'{formatted_invoice_date}'      => $invoice->get_formatted_invoice_date(),
-					'{formatted_order_date}'        => $invoice->get_formatted_order_date()
-				);
-				foreach ( $tags as $key => $value )
-					$title = str_replace( $key, $value, $title );
-
-				// example: Download (PDF) Invoice [formatted_invoice_number]
-				echo '<a href="' . $url . '" alt="' . $title . '">' . $title . '</a>';
-			}
-		}
-
-		public function display_activation_admin_notice() {
-			global $pagenow;
-			if ( $pagenow != 'plugins.php' )
-				return;
-
-			global $current_user;
-			$user_id = $current_user->ID;
-			if ( ! get_user_meta( $user_id, 'bewpi_hide_activation_notice', true ) ) {
-				?>
-				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
-					<p>
-						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.', 'be-woocommerce-pdf-invoices' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
-					</p>
-					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
-				</div>
-			<?php
 			}
 		}
 
@@ -229,29 +206,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 						break;
 				}
 
-			}
-		}
-
-		private function global_invoice_actions() {
-			if ( isset( $_GET['bewpi_action'] ) && isset( $_GET['user_id'] ) && is_numeric( $_GET['user_id'] ) && isset( $_GET['nonce'] ) ) {
-				$action   = $_GET['bewpi_action'];
-				$user_id  = $_GET['user_id'];
-				$nonce    = $_REQUEST['nonce'];
-
-				if ( ! wp_verify_nonce( $nonce, $action ) )
-					wp_die( __( 'Invalid request', 'be-woocommerce-pdf-invoices' ) );
-
-				if ( $action === 'create_global_invoice' ) {
-
-					$orders             = get_orders_by_customer( $user_id );
-					$order_ids          = array();
-
-					foreach ( $orders as $order )
-						$order_ids[] = $order->id;
-
-					$invoice = new BEWPIPREMIUM_Invoice_Global( $order_ids );
-					$invoice->save( "F" );
-				}
 			}
 		}
 
@@ -358,7 +312,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					- <?php _e( 'Bill periodically by generating and sending global invoices.', 'be-woocommerce-pdf-invoices' ); ?><br/>
 					- <?php _e( 'Add additional PDF\'s to customer invoices.', 'be-woocommerce-pdf-invoices' ); ?><br/>
 					- <?php _e( 'Send customer invoices directly to suppliers and others.', 'be-woocommerce-pdf-invoices' ); ?><br/>
-					- <?php printf( __( 'Integration of <a href="%s">WooCommerce Subscriptions</a> plugin emails.', 'be-woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
+					- <?php printf( __( 'Compatible with <a href="%s">WooCommerce Subscriptions</a> plugin emails.', 'be-woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
 				</p>
 				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', 'be-woocommerce-pdf-invoices' ); ?></a>
 			</aside>

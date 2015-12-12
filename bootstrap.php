@@ -47,5 +47,4 @@ add_action( 'plugins_loaded', 'bewpi_plugins_loaded', 11 );
 if ( is_admin() ) {
 	require_once( dirname( __FILE__ ) . '/includes/be-woocommerce-pdf-invoices.php' );
 	register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
-	register_deactivation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_deactivation' ) );
 }

@@ -32,7 +32,8 @@ This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce e
 > This plugin offers a premium version wich comes with the following features:<br /><br />
 > - Periodically bill by generating and sending global invoices.<br />
 > - Add additional PDF's to customer invoices.<br />
-> - Send customer invoices directly to suppliers and others.<br /><br />
+> - Send customer invoices directly to suppliers and others.<br />
+> - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
 > [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
 
 = Support =
@@ -123,9 +124,10 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.3.14 - December 7, 2015 =
+= 2.3.14 - December 11, 2015 =
 
-- Improved: No variable used as textdomain
+- Fixed: Fatal errors due to Wordpress 4.4
+- Improved: Replaced textdomain variable by strongly typed string (properly prepared for translations)
 
 = 2.3.13 - November 28, 2015 =
 

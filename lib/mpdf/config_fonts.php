@@ -82,7 +82,7 @@ starting at 1, as they appear in the .ttc file e.g.
 		),
 */
 
-$this->fontdata = array(
+$this->fontdata = apply_filters( 'bewpi_ttffonts', array(
     "dejavusanscondensed" => array(
         'R' => "DejaVuSansCondensed.ttf",
         'useOTL' => 0xFF,
@@ -105,15 +105,7 @@ $this->fontdata = array(
     "amiri" => array(
 	    'R' => "Amiri.ttf"
     )
-    // "lato" => array(
-    // 	'R' => "Lato-Regular.ttf",
-    // 	'B' => "Lato-Bold.ttf",
-    // 	'I' => "Lato-Italic.ttf",
-    // ),
-    // "freeserif" => array(
-    // 	'R' => "FreeSerif.ttf",
-    // ),
-);
+));
 
 
 // Add fonts to this array if they contain characters in the SIP or SMP Unicode planes

@@ -124,9 +124,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             // Format number with the number of digits
             $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
             $digitized_invoice_number = sprintf( $digit_str, $this->number );
-            $year = date('Y');
-            $y = date('y');
-            $m = date('m');
+            $year = date_i18n( 'Y' );
+            $y = date_i18n( 'y' );
+            $m = date_i18n( 'm' );
 
             // Format invoice number
             $formatted_invoice_number = str_replace(
@@ -143,8 +143,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * @return bool|datetime|string
          */
         public function get_formatted_invoice_date() {
-            $date_format = $this->template_options['bewpi_date_format'];
-            return ( !empty( $date_format ) ) ? date_i18n( $date_format, strtotime( date( $date_format ) ) ) : date_i18n( "d-m-Y", strtotime( date( 'd-m-Y' ) ) );
+            $date_format = $this->template_options[ 'bewpi_date_format' ];
+            return ( !empty( $date_format ) ) ? date_i18n( $date_format, current_time( 'timestamp' ) ) : date_i18n( "d-m-Y", current_time( 'timestamp' ) );
         }
 
         /*
@@ -160,12 +160,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	        }
 
             $order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $order_date );
-            if ( ! empty ( $this->template_options['bewpi_date_format'] ) ) {
-                $date_format = $this->template_options['bewpi_date_format'];
+            if ( ! empty ( $this->template_options[ 'bewpi_date_format' ] ) ) {
+                $date_format = $this->template_options[ 'bewpi_date_format' ];
                 $formatted_date = $order_date->format( $date_format );
                 return date_i18n( $date_format, strtotime( $formatted_date ) );
             } else {
-                $formatted_date = $order_date->format( $order_date, "d-m-Y" );
+                $formatted_date = $order_date->format( 'd-m-Y' );
                 return date_i18n( "d-m-Y", strtotime( $formatted_date ) );
             }
         }
@@ -211,13 +211,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			    $query = $wpdb->prepare(
 				    "
 					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
-					FROM wp_postmeta pm1 INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
+					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 			        WHERE pm1.meta_key = '%s'
 			            AND pm1.meta_value = %d
 			            AND pm2.meta_key = '%s';
 			        ",
 				    "_bewpi_invoice_year",
-				    (int) date( 'Y' ),
+				    (int) date_i18n( 'Y', current_time( 'timestamp' ) ),
 				    "_bewpi_invoice_number"
 			    );
 		    } else {
@@ -225,7 +225,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			    $query = $wpdb->prepare(
 				    "
 					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
-					FROM wp_postmeta pm1 INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
+					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 			        WHERE pm1.meta_key = '%s' AND pm2.meta_key = '%s';
 			        ",
 				    "_bewpi_invoice_year",
@@ -245,7 +245,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    $this->number               = $this->get_next_invoice_number();
 		    $this->formatted_number     = $this->get_formatted_number();
 		    $this->filename             = $this->formatted_number . '.pdf';
-		    $this->year                 = date( 'Y' );
+		    $this->year                 = date_i18n( 'Y', current_time( 'timestamp' ) );
 		    $this->full_path            = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->filename;
 
 		    // check if invoice doesn't already exists in invoice dir

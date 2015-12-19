@@ -81,27 +81,6 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		    $settings = array(
 			    // General section
 			    array(
-				    'id' => 'bewpi-view-pdf',
-				    'name' => $this->prefix . 'view_pdf',
-				    'title' => __( 'View PDF', 'be-woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'select_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'email',
-				    'type' => 'text',
-				    'desc' => '',
-				    'options' => array(
-					    array(
-						    'name' => __( 'Download', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'download'
-					    ),
-					    array(
-						    'name' => __( 'Open in new browser tab/window', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'browser'
-					    )
-				    ),
-				    'default' => 'download'
-			    ),
-			    array(
 				    'id' => 'bewpi-email-type',
 				    'name' => $this->prefix . 'email_type',
 				    'title' => __( 'Attach to Email', 'be-woocommerce-pdf-invoices' ),
@@ -143,6 +122,40 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'default' => 0
 			    ),
 			    array(
+				    'id' => 'bewpi-view-pdf',
+				    'name' => $this->prefix . 'view_pdf',
+				    'title' => __( 'View PDF', 'be-woocommerce-pdf-invoices' ),
+				    'callback' => array( &$this, 'select_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'download',
+				    'type' => 'text',
+				    'desc' => '',
+				    'options' => array(
+					    array(
+						    'name' => __( 'Download', 'be-woocommerce-pdf-invoices' ),
+						    'value' => 'download'
+					    ),
+					    array(
+						    'name' => __( 'Open in new browser tab/window', 'be-woocommerce-pdf-invoices' ),
+						    'value' => 'browser'
+					    )
+				    ),
+				    'default' => 'download'
+			    ),
+			    array(
+				    'id' => 'bewpi-download-invoice-account',
+				    'name' => $this->prefix . 'download_invoice_account',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'download',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Enable download from account', 'be-woocommerce-pdf-invoices' )
+			                    . __( '<br/><div class="bewpi-notes">Let customers download invoice from account page.</div>', 'be-woocommerce-pdf-invoices' ),
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 1
+			    ),
+			    array(
 				    'id' => 'bewpi-email-it-in',
 				    'name' => $this->prefix . 'email_it_in',
 				    'title' => '',
@@ -182,6 +195,12 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			    $this->settings_key
 		    );
 		    add_settings_section(
+			    'download',
+			    __( 'Download Options', 'be-woocommerce-pdf-invoices' ),
+			    array( &$this, 'download_desc_callback' ),
+			    $this->settings_key
+		    );
+		    add_settings_section(
 			    'cloud_storage',
 			    __( 'Cloud Storage Options', 'be-woocommerce-pdf-invoices' ),
 			    array( &$this, 'cloud_storage_desc_callback' ),
@@ -190,6 +209,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	    }
 
 	    public function email_desc_callback() { }
+	    public function download_desc_callback() {}
 	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'be-woocommerce-pdf-invoices' ), '<a href="https://emailitin.com">Email It In</a>' ); }
 
 	    /**
@@ -222,18 +242,23 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	     * @return mixed|void
 	     */
 	    public function validate_input( $input ) {
-		    $output = array();
-		    foreach ( $input as $key => $value ) :
-			    if ( isset( $input[$key] ) ) :
-				    // Strip all HTML and PHP tags and properly handle quoted strings
-				    $output[$key] = stripslashes( $input[ $key ] );
-			    endif;
-		    endforeach;
+		    $output             = array();
+		    $the_settings       = $this->the_settings();
+
+		    foreach ( $input as $key => $value ) {
+			    if ( isset( $input[$key] ) )
+				    $output[$key] = stripslashes( $input[ $key ] ); // Strip all HTML and PHP tags and properly handle quoted strings
+		    }
+
+		    // Uncheck checkboxes
+		    foreach ( $the_settings as $setting ) {
+			    if ( $setting[ 'type' ] === 'checkbox' && ! isset( $input[ $setting[ 'name' ] ] ) )
+				    $output[ $setting['name'] ] = 0;
+		    }
 
 		    // Sanitize Email
-		    if ( isset( $input['email_it_in_account'] ) ) :
+		    if ( isset( $input['email_it_in_account'] ) )
 			    $output['email_it_in_account'] = sanitize_email( $input['email_it_in_account'] );
-		    endif;
 
 		    return apply_filters( 'validate_input', $output, $input );
 	    }

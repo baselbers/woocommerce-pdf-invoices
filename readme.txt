@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.14
+Stable tag: 2.3.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -122,7 +122,23 @@ To change the options of the PDF, use below example.
  }
  add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );`
 
+ = How to display invoice download button on specific template files? =
+ Let customers download there invoices from specific specific template pages by using below shortcode.
+
+ `echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]' );`
+
+ To use shortcode in WordPress editor:
+
+ `[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
+
 == Changelog ==
+
+= 2.3.15 - December 18, 2015 =
+
+- Added: Shortcode for downloading invoices
+- Added: Option to enable/disable download button on account page
+- Fixed: Invoice number always 1 due to no wp table prefix in query
+- Fixed: Date localization and timestamps
 
 = 2.3.14 - December 11, 2015 =
 

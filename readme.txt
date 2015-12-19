@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.5
 Tested up to: 4.3.1
-Stable tag: 2.3.15
+Stable tag: 2.3.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -132,6 +132,10 @@ To change the options of the PDF, use below example.
  `[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
 
 == Changelog ==
+
+= 2.3.16 - December 19, 2016 =
+
+- Fixed: Permission for customers and admins to view invoices.
 
 = 2.3.15 - December 18, 2015 =
 

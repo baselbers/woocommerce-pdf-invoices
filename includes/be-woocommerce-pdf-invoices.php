@@ -184,8 +184,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				if ( empty( $order_id ) )
 					wp_die( __( 'Invalid order ID', 'be-woocommerce-pdf-invoices' ) );
 
-				$is_customer_order = get_post_meta( $order_id, '_customer_user', true );
-				if ( ! is_admin() || get_current_user_id() != $is_customer_order )
+				$user = wp_get_current_user();
+				$allowed_roles = array( 'editor', 'administrator', 'author' );
+				$customer_user_id = get_post_meta( $order_id, '_customer_user', true );
+				if (  ! array_intersect( $allowed_roles, $user->roles ) && get_current_user_id() != $customer_user_id  )
 					wp_die( __( 'Access denied', 'be-woocommerce-pdf-invoices' ) );
 
 				$invoice = new BEWPI_Invoice( $order_id );

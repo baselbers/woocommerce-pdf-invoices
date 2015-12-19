@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-12-12 23:37+0100\n"
-"PO-Revision-Date: 2015-12-12 23:37+0100\n"
+"POT-Creation-Date: 2015-12-19 12:37+0100\n"
+"PO-Revision-Date: 2015-12-19 12:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -43,72 +43,86 @@ msgid ""
 "Invoice with invoice number %s not found. First create invoice and try again."
 msgstr ""
 
-#: includes/abstracts/abstract-bewpi-setting.php:90
+#: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
 msgstr ""
 
-#: includes/abstracts/abstract-bewpi-setting.php:170
+#: includes/abstracts/abstract-bewpi-setting.php:173
 msgid "Remove logo"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
-msgid "View PDF"
-msgstr ""
-
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:94
-msgid "Download"
-msgstr ""
-
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:98
-msgid "Open in new browser tab/window"
-msgstr ""
-
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:107
 msgid "Attach to Email"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:115
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:94
 msgid "Processing order"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:119
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:98
 msgid "Completed order"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:123
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:102
 msgid "Customer invoice"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:127
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:106
 msgid "Do not attach"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:141
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:120
 msgid "Attach to New order Email"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:153
-msgid "Enable Email It In"
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:127
+msgid "View PDF"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:161
-msgid "Email It In account"
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:135
+msgid "Download"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:139
+msgid "Open in new browser tab/window"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:153
+msgid "Enable download from account"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:154
+msgid ""
+"<br/><div class=\"bewpi-notes\">Let customers download invoice from account "
+"page.</div>"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:166
+msgid "Enable Email It In"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:174
+msgid "Email It In account"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:179
 #, php-format
 msgid "Get your account from your Email It In %suser account%s."
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:180
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:193
 msgid "Email Options"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:186
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:199
+msgid "Download Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:205
 msgid "Cloud Storage Options"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:193
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:213
 #, php-format
 msgid ""
 "Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
@@ -116,7 +130,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:88
-#: includes/be-woocommerce-pdf-invoices.php:222
+#: includes/be-woocommerce-pdf-invoices.php:219
 msgid "Template"
 msgstr ""
 
@@ -382,117 +396,129 @@ msgstr ""
 msgid "File should be less then 2MB."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:132
+#: includes/be-woocommerce-pdf-invoices.php:126
 #, php-format
 msgid ""
 "Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
 "PDF Invoices</strong></a>."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:142
+#: includes/be-woocommerce-pdf-invoices.php:136
 msgid "Settings"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:143
+#: includes/be-woocommerce-pdf-invoices.php:137
 msgid "Premium"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:221
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:185
+msgid "Invalid order ID"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:191
+msgid "Access denied"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:218
 msgid "General"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:245
+#: includes/be-woocommerce-pdf-invoices.php:242
 msgid "Invoices"
 msgstr "Računi"
 
-#: includes/be-woocommerce-pdf-invoices.php:284
+#: includes/be-woocommerce-pdf-invoices.php:281
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
 "%s★★★★★%s rating. A huge thank you in advance!"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:285
+#: includes/be-woocommerce-pdf-invoices.php:282
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:309
+#: includes/be-woocommerce-pdf-invoices.php:306
 msgid "WooCommerce PDF Invoices Premium"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:311
+#: includes/be-woocommerce-pdf-invoices.php:308
 msgid ""
 "This plugin offers a premium version which comes with the following features:"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:312
+#: includes/be-woocommerce-pdf-invoices.php:309
 msgid "Bill periodically by generating and sending global invoices."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:313
+#: includes/be-woocommerce-pdf-invoices.php:310
 msgid "Add additional PDF's to customer invoices."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:314
+#: includes/be-woocommerce-pdf-invoices.php:311
 msgid "Send customer invoices directly to suppliers and others."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:315
+#: includes/be-woocommerce-pdf-invoices.php:312
 #, php-format
 msgid ""
 "Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:317
+#: includes/be-woocommerce-pdf-invoices.php:314
 msgid "Learn more"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:321
+#: includes/be-woocommerce-pdf-invoices.php:318
 msgid "Stay up-to-date"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:330
+#: includes/be-woocommerce-pdf-invoices.php:327
 msgid ""
 "We're constantly developing new features, stay up-to-date by subscribing to "
 "our newsletter."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:336
+#: includes/be-woocommerce-pdf-invoices.php:333
 msgid "Your email address"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:339
+#: includes/be-woocommerce-pdf-invoices.php:336
 msgid "Signup"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:340
+#: includes/be-woocommerce-pdf-invoices.php:337
 msgid "No spam, ever. Unsubscribe at any time"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:348
+#: includes/be-woocommerce-pdf-invoices.php:345
 msgid "About"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:349
+#: includes/be-woocommerce-pdf-invoices.php:346
 msgid ""
 "This plugin is an open source project wich aims to fill the invoicing gap of "
 "<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:350
+#: includes/be-woocommerce-pdf-invoices.php:347
 msgid "<b>Version</b>: "
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:352
+#: includes/be-woocommerce-pdf-invoices.php:349
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:355
+#: includes/be-woocommerce-pdf-invoices.php:352
 msgid "Support"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:356
+#: includes/be-woocommerce-pdf-invoices.php:353
 msgid ""
 "We will never ask for donations, but to garantee future development, we do "
 "need your support. Please show us your appreciation by leaving a <a href="
@@ -501,77 +527,77 @@ msgid ""
 "org/plugins/woocommerce-pdf-invoices/\">works</a>."
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:375
+#: includes/be-woocommerce-pdf-invoices.php:372
 msgid ""
 "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:380
+#: includes/be-woocommerce-pdf-invoices.php:377
 msgid "Need Help?"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:382
+#: includes/be-woocommerce-pdf-invoices.php:379
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:383
+#: includes/be-woocommerce-pdf-invoices.php:380
 msgid "Support forum"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:384
+#: includes/be-woocommerce-pdf-invoices.php:381
 msgid "Request a feature"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:385
+#: includes/be-woocommerce-pdf-invoices.php:382
 msgid "Email us"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:440
+#: includes/be-woocommerce-pdf-invoices.php:437
 msgid "PDF Invoice"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:466
+#: includes/be-woocommerce-pdf-invoices.php:463
 msgid "Invoiced on:"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:470
+#: includes/be-woocommerce-pdf-invoices.php:467
 msgid "Invoice number:"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:508
+#: includes/be-woocommerce-pdf-invoices.php:505
 msgid "View invoice"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:508
+#: includes/be-woocommerce-pdf-invoices.php:505
 msgid "View"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:509
+#: includes/be-woocommerce-pdf-invoices.php:506
 msgid "Cancel invoice"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:509
+#: includes/be-woocommerce-pdf-invoices.php:506
 msgid "Cancel"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:511
+#: includes/be-woocommerce-pdf-invoices.php:508
 msgid "Are you sure to delete the invoice?"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:514
+#: includes/be-woocommerce-pdf-invoices.php:511
 msgid "Create invoice"
 msgstr "Maak factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:514
+#: includes/be-woocommerce-pdf-invoices.php:511
 msgid "Create"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:547
+#: includes/be-woocommerce-pdf-invoices.php:534
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:658
+#: includes/be-woocommerce-pdf-invoices.php:644
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "

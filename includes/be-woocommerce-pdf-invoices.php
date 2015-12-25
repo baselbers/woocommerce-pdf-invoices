@@ -554,8 +554,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
 				// Get installation date
 				$datetime_install = $this->get_install_date();
-				//$datetime_past    = new DateTime( '-10 days' );
-				$datetime_past    = new DateTime( '-10 second' );
+				$datetime_past    = new DateTime( '-10 days' );
+				//$datetime_past    = new DateTime( '-10 second' );
 
 				if ( $datetime_past >= $datetime_install ) {
 					// 10 or more days ago, show admin notice

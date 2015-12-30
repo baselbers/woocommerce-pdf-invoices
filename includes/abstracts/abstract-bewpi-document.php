@@ -72,8 +72,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->setAutoTopMargin = 'stretch';
 	        $mpdf->setAutoBottomMargin = 'stretch';
 	        $mpdf->autoMarginPadding = 10;
-	        $mpdf->debug = true;
-	        $mpdf->showImageErrors = true;
+	        //$mpdf->debug = true;
+	        //$mpdf->showImageErrors = true;
 
 	        if ( ! empty ( $html_sections['header'] ) )
 		        $mpdf->SetHTMLHeader( $html_sections['header'] );

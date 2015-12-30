@@ -95,7 +95,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		    $encoded_tags = array_map( 'htmlspecialchars', $this->allowed_tags );
 		    $tags_string = '<code>' . join( '</code>, <code>', $encoded_tags ) . '</code>';
 
-			return __( 'Allowed HTML tags: ', 'be-woocommerce-pdf-invoices' ) . $tags_string . '.';
+			return __( 'Allowed HTML tags: ', 'woocommerce-pdf-invoices' ) . $tags_string . '.';
 	    }
 
 	    public function select_callback( $args ) {
@@ -170,7 +170,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 				    <img id="<?php echo $args['id'] . '-delete'; ?>"
 				         src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
 				         onclick="Settings.removeCompanyLogo()"
-				         title="<?php _e( 'Remove logo', 'be-woocommerce-pdf-invoices' ); ?>"/>
+				         title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>"/>
 			    </div>
 		    <?php
 		    endif;

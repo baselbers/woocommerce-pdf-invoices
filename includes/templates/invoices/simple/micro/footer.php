@@ -15,7 +15,7 @@
 				        $this->order->payment_method_title,
 				        $this->template_options['bewpi_right_footer_column'] ) );
 		        } else {
-			        printf( __( '%s of %s', 'be-woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' );
+			        printf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' );
 		        }
 		        ?>
 	        </p>

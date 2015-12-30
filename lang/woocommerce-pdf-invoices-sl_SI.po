@@ -1,273 +1,27 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-25 09:22+0200\n"
-"PO-Revision-Date: 2015-12-25 12:45+0200\n"
+"Project-Id-Version: WooCommerce PDF Invoices\n"
+"POT-Creation-Date: 2015-12-30 21:26+0100\n"
+"PO-Revision-Date: 2015-12-30 21:26+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.6\n"
-"Last-Translator: \n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
-"Language: ro\n"
-
-#: includes/be-woocommerce-pdf-invoices.php:126
-#, php-format
-msgid ""
-"Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
-"PDF Invoices</strong></a>."
-msgstr ""
-"Să incepem <a href=\"%s\">configurarea <strong>WooCommerce Facturi PDF</"
-"strong></a>."
-
-#: includes/be-woocommerce-pdf-invoices.php:136
-msgid "Settings"
-msgstr "Setări"
-
-#: includes/be-woocommerce-pdf-invoices.php:137
-msgid "Premium"
-msgstr "Premium"
-
-#: includes/be-woocommerce-pdf-invoices.php:182
-msgid "Invalid request"
-msgstr "Cerere invalidă"
-
-#: includes/be-woocommerce-pdf-invoices.php:185
-msgid "Invalid order ID"
-msgstr "Număr de ordin invalid"
-
-#: includes/be-woocommerce-pdf-invoices.php:191
-msgid "Access denied"
-msgstr "Acces interzis"
-
-#: includes/be-woocommerce-pdf-invoices.php:218
-msgid "General"
-msgstr "General"
-
-#: includes/be-woocommerce-pdf-invoices.php:219
-#: includes/admin/settings/class-bewpi-admin-settings-template.php:88
-msgid "Template"
-msgstr "Template"
-
-#: includes/be-woocommerce-pdf-invoices.php:242
-msgid "Invoices"
-msgstr "Facturi PDF"
-
-#: includes/be-woocommerce-pdf-invoices.php:281
-#, php-format
-msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
-"%s★★★★★%s rating. A huge thank you in advance!"
-msgstr ""
-"Dacă vă place <strong>WooCommerce Facturi PDF</strong> vă rugam să ne lăsați "
-"un rating %s★★★★★%s. Mulțumiri in avans!"
-
-#: includes/be-woocommerce-pdf-invoices.php:282
-#, php-format
-msgid "Version %s"
-msgstr "Versiunea %s"
-
-#: includes/be-woocommerce-pdf-invoices.php:306
-msgid "WooCommerce PDF Invoices Premium"
-msgstr "WooCommerce Facturi PDF Premium"
-
-#: includes/be-woocommerce-pdf-invoices.php:308
-msgid ""
-"This plugin offers a premium version which comes with the following features:"
-msgstr ""
-"Acest plugin oferă o versiune premium care vine cu următoarele facilitați:"
-
-#: includes/be-woocommerce-pdf-invoices.php:309
-msgid "Bill periodically by generating and sending global invoices."
-msgstr "Facturează periodic generând și trimițând facturi globale."
-
-#: includes/be-woocommerce-pdf-invoices.php:310
-msgid "Add additional PDF's to customer invoices."
-msgstr "Adaugă facturi PDF adiționale la facturi client."
-
-#: includes/be-woocommerce-pdf-invoices.php:311
-msgid "Send customer invoices directly to suppliers and others."
-msgstr "Trimite facturi client direct la furnizori și terțe părți."
-
-#: includes/be-woocommerce-pdf-invoices.php:312
-#, php-format
-msgid ""
-"Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
-msgstr ""
-"Compatibil cu emailurile pentru pluginul <a href=\"%s\">WooCommerce "
-"Subscriptions</a>."
-
-#: includes/be-woocommerce-pdf-invoices.php:314
-msgid "Learn more"
-msgstr "Află mai multe"
-
-#: includes/be-woocommerce-pdf-invoices.php:318
-msgid "Stay up-to-date"
-msgstr "Află ultimele noutăți"
-
-#: includes/be-woocommerce-pdf-invoices.php:327
-msgid ""
-"We're constantly developing new features, stay up-to-date by subscribing to "
-"our newsletter."
-msgstr ""
-"Dezvoltăm noi opțiuni, aflați ultimele noutăți abonându-vă la newsletter."
-
-#: includes/be-woocommerce-pdf-invoices.php:333
-msgid "Your email address"
-msgstr "Adresa dvs. email"
-
-#: includes/be-woocommerce-pdf-invoices.php:336
-msgid "Signup"
-msgstr "Abonare"
-
-#: includes/be-woocommerce-pdf-invoices.php:337
-msgid "No spam, ever. Unsubscribe at any time"
-msgstr "Niciodată spam. Anulare subscriere oricând."
-
-#: includes/be-woocommerce-pdf-invoices.php:345
-msgid "About"
-msgstr "Despre"
-
-#: includes/be-woocommerce-pdf-invoices.php:346
-msgid ""
-"This plugin is an open source project wich aims to fill the invoicing gap of "
-"<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
-msgstr ""
-"Acest plugin este un proiect care vrea să acopere gaura facturărilor PDF a "
-"<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
-
-#: includes/be-woocommerce-pdf-invoices.php:347
-msgid "<b>Version</b>: "
-msgstr "Versiunea"
-
-#: includes/be-woocommerce-pdf-invoices.php:349
-msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
-msgstr "<b>Autor</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
-
-#: includes/be-woocommerce-pdf-invoices.php:352
-msgid "Support"
-msgstr "Suport"
-
-#: includes/be-woocommerce-pdf-invoices.php:353
-msgid ""
-"We will never ask for donations, but to garantee future development, we do "
-"need your support. Please show us your appreciation by leaving a <a href="
-"\"https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?"
-"rate=5#postform\">★★★★★</a> rating and vote for <a href=\"https://wordpress."
-"org/plugins/woocommerce-pdf-invoices/\">works</a>."
-msgstr ""
-"Nu vom cere niciodată donații însă garantăm dezvoltare in viitor, avem deci "
-"nevoie de suportul dvs. Văa rugăm să vă arătați aprecierea lăsând un "
-"calificativ <a href=\"https://wordpress.org/support/view/plugin-reviews/"
-"woocommerce-pdf-invoices?rate=5#postform\">★★★★★</a> și votând pentru <a "
-"href=\"https://wordpress.org/plugins/woocommerce-pdf-invoices/\">munca "
-"noastră</a>."
-
-#: includes/be-woocommerce-pdf-invoices.php:372
-msgid ""
-"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
-msgstr ""
-"Verificați acest nemaipomenit plugin gratuit WooCommerce Facturi PDF pentru "
-"WordPress!"
-
-#: includes/be-woocommerce-pdf-invoices.php:377
-msgid "Need Help?"
-msgstr "Aveți nevoie de ajutor ?"
-
-#: includes/be-woocommerce-pdf-invoices.php:379
-msgid "Frequently Asked Questions"
-msgstr "Întrebări frecvente"
-
-#: includes/be-woocommerce-pdf-invoices.php:380
-msgid "Support forum"
-msgstr "Forum de suport"
-
-#: includes/be-woocommerce-pdf-invoices.php:381
-msgid "Request a feature"
-msgstr "Cere o nouă opțiune"
-
-#: includes/be-woocommerce-pdf-invoices.php:382
-msgid "Email us"
-msgstr "Trimite-ne un email"
-
-#: includes/be-woocommerce-pdf-invoices.php:437
-msgid "PDF Invoice"
-msgstr "Factură PDF"
-
-#: includes/be-woocommerce-pdf-invoices.php:463
-msgid "Invoiced on:"
-msgstr "Facturat pe data:"
-
-#: includes/be-woocommerce-pdf-invoices.php:467
-msgid "Invoice number:"
-msgstr "Număr factură"
-
-#: includes/be-woocommerce-pdf-invoices.php:505
-msgid "View invoice"
-msgstr "Vezi factura"
-
-#: includes/be-woocommerce-pdf-invoices.php:505
-msgid "View"
-msgstr "Vizualizare"
-
-#: includes/be-woocommerce-pdf-invoices.php:506
-msgid "Cancel invoice"
-msgstr "Anulare factură"
-
-#: includes/be-woocommerce-pdf-invoices.php:506
-msgid "Cancel"
-msgstr "Anulare"
-
-#: includes/be-woocommerce-pdf-invoices.php:508
-msgid "Are you sure to delete the invoice?"
-msgstr "Ești sigur că vrei să ștergi factura ?"
-
-#: includes/be-woocommerce-pdf-invoices.php:511
-msgid "Create invoice"
-msgstr "Crează factură"
-
-#: includes/be-woocommerce-pdf-invoices.php:511
-msgid "Create"
-msgstr "Crează"
-
-#: includes/be-woocommerce-pdf-invoices.php:534
-#, php-format
-msgid "Invoice %s (PDF)"
-msgstr "Factura %s (PDF)"
-
-#: includes/be-woocommerce-pdf-invoices.php:644
-#, php-format
-msgid ""
-"You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
-"really need your ★★★★★ rating. It will support future development big-time. "
-"A huge thanks in advance and keep up the good work! <br /> <a href='%s' "
-"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
-"done it!</a>"
-msgstr ""
-"Lucrați cu <b>WooCommerce Facturi PDF</b> de ceva timp. Chiar avem nevoie de "
-"un vot ★★★★★ . Ne va ajuta pentru dezvoltări viitoare foarte mult. Vă "
-"mulțumim în avans! <br /> <a href='%s' target='_blank'>Da, o voi face "
-"imediat!</a> - <a href='%s'>Nu, am facut-o deja!</a>"
-
-#: includes/class-bewpi-invoice.php:48
-msgid ""
-"Whoops, no template found. Please select a template on the Template settings "
-"page first."
-msgstr ""
-"Ups, nu am găsit nici un template. Vă rugăm selectați un template din setări "
-"mai întai."
+"X-Generator: Poedit 1.7.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: includes/abstracts/abstract-bewpi-document.php:64
 msgid "Paid"
-msgstr "Plătit"
+msgstr ""
 
 #: includes/abstracts/abstract-bewpi-invoice.php:255
 #, php-format
@@ -323,19 +77,19 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:127
 msgid "View PDF"
-msgstr "Vezi PDF"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:135
 msgid "Download"
-msgstr "Descarcă"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:139
 msgid "Open in new browser tab/window"
-msgstr "Deschide în tab/fereastră nouă a browser-ului."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:153
 msgid "Enable download from account"
-msgstr "Activeaza descărcarea din cont"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:154
 msgid ""
@@ -345,28 +99,28 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:166
 msgid "Enable Email It In"
-msgstr "Activează trimiterea de email"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:174
 msgid "Email It In account"
-msgstr "Cont pentru email"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:179
 #, php-format
 msgid "Get your account from your Email It In %suser account%s."
-msgstr "Luați contul email din %suser account%s."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:193
 msgid "Email Options"
-msgstr "Opțiuni email"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:199
 msgid "Download Options"
-msgstr "Opțiuni descărcare"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:205
 msgid "Cloud Storage Options"
-msgstr "Opțiuni Storage Cloud"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:213
 #, php-format
@@ -375,13 +129,18 @@ msgid ""
 "Egnyte and enter your account below."
 msgstr ""
 
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:88
+#: includes/be-woocommerce-pdf-invoices.php:219
+msgid "Template"
+msgstr ""
+
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:100
 msgid "Color theme"
-msgstr "Temă culori"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:111
 msgid "Date format"
-msgstr "Format dată"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:116
 #, php-format
@@ -390,7 +149,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:131
 msgid "Display prices including tax"
-msgstr "Afișează prețuti incluzând taxele"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:132
 msgid ""
@@ -400,63 +159,63 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:144
 msgid "Shipping taxable"
-msgstr "Livrare taxablă"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:145
 msgid "Enable to display subtotal including shipping."
-msgstr "Activează afișsarea subtotalului inclusiv taxa de livrare."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:157
 msgid "Mark invoice as paid"
-msgstr "Marchează factura PDF ca fiind plătită (watermark)"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:158
 msgid "Invoice will be watermarked when order has been paid."
-msgstr "Factura va fi marcata cu watermark când ordinul va fi plătit."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:166
 msgid "Company name"
-msgstr "Numele companiei"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:177
 msgid "Company logo"
-msgstr "Logo-ul companiei"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:188
 msgid "Company address"
-msgstr "Adresa companiei"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:193
 msgid "Displayed in upper-right corner near logo."
-msgstr "Afișează în colțul dreapta-sus lângă logo."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:199
 msgid "Company details"
-msgstr "Detalii companie"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:204
 msgid "Displayed below company address."
-msgstr "Afișează sub adresa companiei."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:211
 msgid "Thank you text"
-msgstr "Text de mulțumire"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:216
 msgid "Displayed in big colored bar directly after invoice total."
-msgstr "Afișat în bară mare colorata după total factură."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:217
 msgid "Thank you for your purchase!"
-msgstr "Vă multumim pentru cumpărăturile efectuate!"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:227
 msgid "Show customer notes"
-msgstr "Arată notițe client"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:234
 msgid "Terms & conditions, policies etc."
-msgstr "Termei și condițtii, politici, etc."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:239
 #, php-format
@@ -467,44 +226,44 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:240
 msgid "Items will be shipped within 2 days."
-msgstr "Produsele vor fi livrate în 2 zile."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:246
 msgid "Left footer column."
-msgstr "Coloană bară jos stânga."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:252
 #, php-format
 msgid "<b>Payment method</b> %s"
-msgstr "<b>Metodă plată</b> %s"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:257
 msgid "Right footer column."
-msgstr "Coloană bară jos dreapta."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:262
 msgid "Leave empty to show page numbering."
-msgstr "Lăsați gol pentru a afișa numărătoarea paginii."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:269
 msgid "Type"
-msgstr "Tip"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:277
 msgid "WooCommerce order number"
-msgstr "Număr de ordin WooCommerce"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:281
 msgid "Sequential number"
-msgstr "Număr secvențial."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:295
 msgid "Reset invoice counter"
-msgstr "Reset număratoare facturi."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:305
 msgid "Next"
-msgstr "Urmatorul"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:310
 msgid ""
@@ -516,7 +275,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:320
 msgid "Digits"
-msgstr "Cifre"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:336
 msgid "[prefix]"
@@ -528,7 +287,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:358
 msgid "Format"
-msgstr "Formatare"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:363
 #, php-format
@@ -539,65 +298,65 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:377
 msgid "Reset on 1st of january"
-msgstr "Reset pe 1 Ianuarie"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
 #: includes/templates/invoices/simple/micro/body.php:46
 msgid "SKU"
-msgstr "Cod produs (SKU)"
+msgstr "Koda"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
-#: includes/templates/invoices/simple/micro/body.php:222
+#: includes/templates/invoices/simple/micro/body.php:99
 msgid "Subtotal"
-msgstr "Subtotal"
+msgstr "Skupaj"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:414
 msgid "Tax (item)"
-msgstr "Taxe (produs)"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:426
 msgid "Tax (total)"
-msgstr "Taxe (total)"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
-#: includes/templates/invoices/simple/micro/body.php:206
+#: includes/templates/invoices/simple/micro/body.php:83
 msgid "Discount"
-msgstr "Reducere"
+msgstr "Popust"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:450
 #: includes/templates/invoices/global/micro/body.php:228
 #: includes/templates/invoices/global/micro/body.php:244
-#: includes/templates/invoices/simple/micro/body.php:214
-#: includes/templates/invoices/simple/micro/body.php:230
+#: includes/templates/invoices/simple/micro/body.php:91
+#: includes/templates/invoices/simple/micro/body.php:107
 msgid "Shipping"
-msgstr "Costuri de livrare"
+msgstr "Poštnina"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:464
 msgid "General Options"
-msgstr "Opțiuni generale"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:470
 msgid "Invoice Number Options"
-msgstr "Opțiune Număr Factură"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:476
 msgid "Header Options"
-msgstr "Opțiuni header"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:482
 msgid "Body Options"
-msgstr "Opțiuni corp"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:488
 msgid "Footer Options"
-msgstr "Opțtiuni footer"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:494
 msgid "Visible Columns"
-msgstr "Coloane vizibile"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:500
 msgid "These are the general template options."
@@ -637,89 +396,352 @@ msgstr ""
 msgid "File should be less then 2MB."
 msgstr ""
 
+#: includes/be-woocommerce-pdf-invoices.php:126
+#, php-format
+msgid ""
+"Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
+"PDF Invoices</strong></a>."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:136
+msgid "Settings"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:137
+msgid "Premium"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:185
+msgid "Invalid order ID"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:191
+msgid "Access denied"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:218
+msgid "General"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:242
+msgid "Invoices"
+msgstr "Računi"
+
+#: includes/be-woocommerce-pdf-invoices.php:281
+#, php-format
+msgid ""
+"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+"%s★★★★★%s rating. A huge thank you in advance!"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:282
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:306
+msgid "WooCommerce PDF Invoices Premium"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:308
+msgid ""
+"This plugin offers a premium version which comes with the following features:"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:309
+msgid "Bill periodically by generating and sending global invoices."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:310
+msgid "Add additional PDF's to customer invoices."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:311
+msgid "Send customer invoices directly to suppliers and others."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:312
+#, php-format
+msgid ""
+"Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:314
+msgid "Learn more"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:318
+msgid "Stay up-to-date"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:327
+msgid ""
+"We're constantly developing new features, stay up-to-date by subscribing to "
+"our newsletter."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:333
+msgid "Your email address"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:336
+msgid "Signup"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:337
+msgid "No spam, ever. Unsubscribe at any time"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:345
+msgid "About"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:346
+msgid ""
+"This plugin is an open source project wich aims to fill the invoicing gap of "
+"<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:347
+msgid "<b>Version</b>: "
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:349
+msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:352
+msgid "Support"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:353
+msgid ""
+"We will never ask for donations, but to garantee future development, we do "
+"need your support. Please show us your appreciation by leaving a <a href="
+"\"https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?"
+"rate=5#postform\">★★★★★</a> rating and vote for <a href=\"https://wordpress."
+"org/plugins/woocommerce-pdf-invoices/\">works</a>."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:372
+msgid ""
+"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:377
+msgid "Need Help?"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:379
+msgid "Frequently Asked Questions"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:380
+msgid "Support forum"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:381
+msgid "Request a feature"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:382
+msgid "Email us"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:437
+msgid "PDF Invoice"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:463
+msgid "Invoiced on:"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:467
+msgid "Invoice number:"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:505
+msgid "View invoice"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:505
+msgid "View"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:506
+msgid "Cancel invoice"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:506
+msgid "Cancel"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:508
+msgid "Are you sure to delete the invoice?"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:511
+msgid "Create invoice"
+msgstr "Maak factuur"
+
+#: includes/be-woocommerce-pdf-invoices.php:511
+msgid "Create"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:534
+#, php-format
+msgid "Invoice %s (PDF)"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:644
+#, php-format
+msgid ""
+"You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
+"really need your ★★★★★ rating. It will support future development big-time. "
+"A huge thanks in advance and keep up the good work! <br /> <a href='%s' "
+"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
+"done it!</a>"
+msgstr ""
+
+#: includes/class-bewpi-invoice.php:48
+msgid ""
+"Whoops, no template found. Please select a template on the Template settings "
+"page first."
+msgstr ""
+
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
 msgid "Invoice to"
-msgstr "Factură către"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
-msgstr "Telefon: %s"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
 msgid "Ship to"
-msgstr "Livrează către"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
-msgstr "Factură globală"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:40
 #: includes/templates/invoices/simple/micro/body.php:42
 msgid "Description"
-msgstr "Descriere"
+msgstr "Opis"
 
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:50
 msgid "Cost"
-msgstr "Preț"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:52
 msgid "Qty"
-msgstr "Cantitate"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:58
 msgid "VAT"
-msgstr "TVA"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:67
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:69
-#: includes/templates/invoices/simple/micro/body.php:266
+#: includes/templates/invoices/simple/micro/body.php:143
 msgid "Total"
-msgstr "Total"
+msgstr "Skupaj"
 
 #: includes/templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
-msgstr "Ordin #%d - %s"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:255
-#: includes/templates/invoices/simple/micro/body.php:241
+#: includes/templates/invoices/simple/micro/body.php:118
 msgid "Fee"
-msgstr "Taxe"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:287
-#: includes/templates/invoices/simple/micro/body.php:273
+#: includes/templates/invoices/simple/micro/body.php:150
 msgid "Refunded"
-msgstr "Returnat"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
 #, php-format
 msgid "%s of %s"
-msgstr "%s din %s"
+msgstr ""
 
 #: includes/templates/invoices/simple/micro/body.php:22
 msgid "Invoice"
-msgstr "Factură"
+msgstr "Račun"
 
 #: includes/templates/invoices/simple/micro/body.php:25
 #, php-format
 msgid "Order Number: %s"
-msgstr "Număr ordin: %s"
+msgstr ""
 
 #: includes/templates/invoices/simple/micro/body.php:26
 #, php-format
 msgid "Order Date: %s"
-msgstr "Dată ordin: %s"
+msgstr ""
 
 #: includes/templates/invoices/simple/micro/body.php:288
 #: includes/templates/invoices/simple/micro/body.php:293
 msgid "Customer note"
-msgstr "Notă client"
+msgstr "Komentar kupca"
+
+#~ msgid "Tax"
+#~ msgstr "DDV"
+
+#~ msgid "Quantity"
+#~ msgstr "Količina"
+
+#~ msgid "Unit price"
+#~ msgstr "Cena za kos"
+
+#~ msgid "Signup at %s and enter your account beyond."
+#~ msgstr "Meld je aan op %s en vul je account onderstaand in."
+
+#~ msgid "%sFormat%s of the date. Examples: %s or %s"
+#~ msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s"
+
+#~ msgid "Show invoice"
+#~ msgstr "Toon factuur"
+
+#~ msgid "%sFormat%s of the date."
+#~ msgstr "%sFormat%s van de datum."
+
+#~ msgid "Use [prefix], [suffix] and [number] as placeholders."
+#~ msgstr "Gebruik [suffix], [prefix] en [number] als aanduidingen."
+
+#~ msgid "Choose the color witch fits your company."
+#~ msgstr "Kies uw bedrijfskleur."
+
+#~ msgid ""
+#~ "Choose the format for the invoice number. Use [prefix], [suffix] and "
+#~ "[number] as placeholders."
+#~ msgstr ""
+#~ "Kies het formaat voor het factuurnummer. Gebruik [prefix], [suffix] en "
+#~ "[number] als aanduidingen."
+
+#~ msgid "Text to greet, congratulate or thank the customer. "
+#~ msgstr "Tekst om de klant te groeten, te feliciteren of te bedanken. "
+
+#~ msgid "Some text"
+#~ msgstr "De vertaling werkt!!!!"
+
+#~ msgid "Text to greet, congratulate or thank the customer."
+#~ msgstr "Tekst om de klant te begroeten, te bedanken of te feliciteren."
+
+#~ msgid "Start all over on the first of January."
+#~ msgstr "Opnieuw beginnen op de eerste van januari."

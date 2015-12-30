@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-25 14:27+0100\n"
+"POT-Creation-Date: 2015-12-30 21:15+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -523,7 +523,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
-#: includes/templates/invoices/simple/micro/body.php:222
+#: includes/templates/invoices/simple/micro/body.php:99
 msgid "Subtotal"
 msgstr ""
 
@@ -537,15 +537,15 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
-#: includes/templates/invoices/simple/micro/body.php:206
+#: includes/templates/invoices/simple/micro/body.php:83
 msgid "Discount"
 msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:450
 #: includes/templates/invoices/global/micro/body.php:228
 #: includes/templates/invoices/global/micro/body.php:244
-#: includes/templates/invoices/simple/micro/body.php:214
-#: includes/templates/invoices/simple/micro/body.php:230
+#: includes/templates/invoices/simple/micro/body.php:91
+#: includes/templates/invoices/simple/micro/body.php:107
 msgid "Shipping"
 msgstr ""
 
@@ -654,7 +654,7 @@ msgstr ""
 #: includes/templates/invoices/global/micro/body.php:67
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:69
-#: includes/templates/invoices/simple/micro/body.php:266
+#: includes/templates/invoices/simple/micro/body.php:143
 msgid "Total"
 msgstr ""
 
@@ -664,12 +664,12 @@ msgid "Order #%d - %s"
 msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:255
-#: includes/templates/invoices/simple/micro/body.php:241
+#: includes/templates/invoices/simple/micro/body.php:118
 msgid "Fee"
 msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:287
-#: includes/templates/invoices/simple/micro/body.php:273
+#: includes/templates/invoices/simple/micro/body.php:150
 msgid "Refunded"
 msgstr ""
 

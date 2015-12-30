@@ -3,12 +3,13 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
  * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.3.19
+ * Version:           2.3.20
  * Author:            Bas Elbers
  * Author URI:        http://wcpdfinvoices.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       be-woocommerce-pdf-invoices
+ * Text Domain:       woocommerce-pdf-invoices
+ * Domain Path:       /lang
  */
 
 function bewpi_plugins_loaded() {
@@ -18,7 +19,7 @@ function bewpi_plugins_loaded() {
 
 	$wp_upload_dir = wp_upload_dir();
 
-	define( 'BEWPI_VERSION', '2.3.19' );
+	define( 'BEWPI_VERSION', '2.3.20' );
 	define( 'BEWPI_URL', plugins_url( '', __FILE__ ) . '/' );
 	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) . '/' );
 	define( 'BEWPI_TEMPLATES_DIR', plugin_dir_path( __FILE__ ) . 'includes/templates/' );

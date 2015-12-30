@@ -61,7 +61,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->useOnlyCoreFonts = false;    // false is default
 
 	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
-		        $mpdf->SetWatermarkText( __( 'Paid', 'be-woocommerce-pdf-invoices' ) );
+		        $mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 		        $mpdf->showWatermarkText = true;
 	        }
 
@@ -72,6 +72,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->setAutoTopMargin = 'stretch';
 	        $mpdf->setAutoBottomMargin = 'stretch';
 	        $mpdf->autoMarginPadding = 10;
+	        $mpdf->debug = true;
+	        $mpdf->showImageErrors = true;
 
 	        if ( ! empty ( $html_sections['header'] ) )
 		        $mpdf->SetHTMLHeader( $html_sections['header'] );

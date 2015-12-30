@@ -123,7 +123,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				?>
 				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
 					<p>
-						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.', 'be-woocommerce-pdf-invoices' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
+						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.', 'woocommerce-pdf-invoices' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
 					</p>
 					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
 				</div>
@@ -133,8 +133,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 		function add_plugin_action_links( $links ) {
 			return array_merge( array(
-				'<a href="' . admin_url( 'admin.php?page=bewpi-invoices' ) . '">' . __( 'Settings', 'be-woocommerce-pdf-invoices' ) . '</a>',
-				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium', 'be-woocommerce-pdf-invoices' ) . '</a>'
+				'<a href="' . admin_url( 'admin.php?page=bewpi-invoices' ) . '">' . __( 'Settings', 'woocommerce-pdf-invoices' ) . '</a>',
+				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium', 'woocommerce-pdf-invoices' ) . '</a>'
 			), $links );
 		}
 
@@ -179,16 +179,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$nonce    = $_REQUEST['nonce'];
 
 				if ( ! wp_verify_nonce( $nonce, $action ) )
-					wp_die( __( 'Invalid request', 'be-woocommerce-pdf-invoices' ) );
+					wp_die( __( 'Invalid request', 'woocommerce-pdf-invoices' ) );
 
 				if ( empty( $order_id ) )
-					wp_die( __( 'Invalid order ID', 'be-woocommerce-pdf-invoices' ) );
+					wp_die( __( 'Invalid order ID', 'woocommerce-pdf-invoices' ) );
 
 				$user = wp_get_current_user();
 				$allowed_roles = array( 'administrator', 'shop_manager' );
 				$customer_user_id = get_post_meta( $order_id, '_customer_user', true );
 				if (  ! array_intersect( $allowed_roles, $user->roles ) && get_current_user_id() != $customer_user_id  )
-					wp_die( __( 'Access denied', 'be-woocommerce-pdf-invoices' ) );
+					wp_die( __( 'Access denied', 'woocommerce-pdf-invoices' ) );
 
 				$invoice = new BEWPI_Invoice( $order_id );
 				switch ( $_GET['bewpi_action'] ) {
@@ -211,12 +211,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function load_textdomain() {
 			$lang_dir = (string) BEWPI_LANG_DIR;
-			load_plugin_textdomain( 'be-woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
+			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
 		}
 
 		public function init_settings_tabs() {
-			$this->settings_tabs['bewpi_general_settings']  = __( 'General', 'be-woocommerce-pdf-invoices' );
-			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', 'be-woocommerce-pdf-invoices' );
+			$this->settings_tabs['bewpi_general_settings']  = __( 'General', 'woocommerce-pdf-invoices' );
+			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', 'woocommerce-pdf-invoices' );
 
 			$this->settings_tabs = apply_filters( 'bewpi_settings_tabs', $this->settings_tabs );
 		}
@@ -239,7 +239,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Adds submenu to WooCommerce menu.
 		 */
 		public function add_woocommerce_submenu_page() {
-			add_submenu_page( 'woocommerce', __( 'Invoices', 'be-woocommerce-pdf-invoices' ), __( 'Invoices', 'be-woocommerce-pdf-invoices' ), 'manage_options', $this->options_key, array(
+			add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), 'manage_options', $this->options_key, array(
 				&$this,
 				'options_page'
 			) );
@@ -278,8 +278,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			<script type="text/javascript">
 				window.onload = function () {
 					// Change footer text into rate text for WPI.
-					document.getElementById("footer-thankyou").innerHTML = "<?php printf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a %s★★★★★%s rating. A huge thank you in advance!', 'be-woocommerce-pdf-invoices' ), '<a href=\'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\'>', '</a>' ); ?>";
-					document.getElementById("footer-upgrade").innerHTML = "<?php printf( __( 'Version %s', 'be-woocommerce-pdf-invoices' ), BEWPI_VERSION ); ?>";
+					document.getElementById("footer-thankyou").innerHTML = "<?php printf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a %s★★★★★%s rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), '<a href=\'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\'>', '</a>' ); ?>";
+					document.getElementById("footer-upgrade").innerHTML = "<?php printf( __( 'Version %s', 'woocommerce-pdf-invoices' ), BEWPI_VERSION ); ?>";
 				};
 			</script>
 			<div class="wrap">
@@ -303,19 +303,19 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function options_page_sidebar_html() {
 			?>
 			<aside class="bewpi_sidebar premium">
-				<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'be-woocommerce-pdf-invoices' ); ?></h3>
+				<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'woocommerce-pdf-invoices' ); ?></h3>
 				<p>
-					<?php _e( 'This plugin offers a premium version which comes with the following features:', 'be-woocommerce-pdf-invoices' ); ?><br/>
-					- <?php _e( 'Bill periodically by generating and sending global invoices.', 'be-woocommerce-pdf-invoices' ); ?><br/>
-					- <?php _e( 'Add additional PDF\'s to customer invoices.', 'be-woocommerce-pdf-invoices' ); ?><br/>
-					- <?php _e( 'Send customer invoices directly to suppliers and others.', 'be-woocommerce-pdf-invoices' ); ?><br/>
-					- <?php printf( __( 'Compatible with <a href="%s">WooCommerce Subscriptions</a> plugin emails.', 'be-woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
+					<?php _e( 'This plugin offers a premium version which comes with the following features:', 'woocommerce-pdf-invoices' ); ?><br/>
+					- <?php _e( 'Bill periodically by generating and sending global invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
+					- <?php _e( 'Add additional PDF\'s to customer invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
+					- <?php _e( 'Send customer invoices directly to suppliers and others.', 'woocommerce-pdf-invoices' ); ?><br/>
+					- <?php printf( __( 'Compatible with <a href="%s">WooCommerce Subscriptions</a> plugin emails.', 'woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
 				</p>
-				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', 'be-woocommerce-pdf-invoices' ); ?></a>
+				<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', 'woocommerce-pdf-invoices' ); ?></a>
 			</aside>
 
 			<aside class="bewpi_sidebar premium">
-				<h3><?php _e( 'Stay up-to-date', 'be-woocommerce-pdf-invoices' ); ?></h3>
+				<h3><?php _e( 'Stay up-to-date', 'woocommerce-pdf-invoices' ); ?></h3>
 				<!-- Begin MailChimp Signup Form -->
 				<link href="//cdn-images.mailchimp.com/embedcode/slim-081711.css" rel="stylesheet" type="text/css">
 				<style type="text/css">
@@ -324,17 +324,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					#mc_embed_signup input.button { margin: 0 !important; }
 				</style>
 				<p>
-				<?php _e( 'We\'re constantly developing new features, stay up-to-date by subscribing to our newsletter.', 'be-woocommerce-pdf-invoices' ); ?>
+				<?php _e( 'We\'re constantly developing new features, stay up-to-date by subscribing to our newsletter.', 'woocommerce-pdf-invoices' ); ?>
 				</p>
 				<div id="mc_embed_signup">
 					<form action="//wcpdfinvoices.us11.list-manage.com/subscribe/post?u=f270649bc41a9687a38a8977f&amp;id=395e1e319a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0">
 						<div id="mc_embed_signup_scroll">
 							<?php $user_email = get_the_author_meta( 'user_email', get_current_user_id() ) ?>
-							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', 'be-woocommerce-pdf-invoices' ); ?>" required>
+							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', 'woocommerce-pdf-invoices' ); ?>" required>
 							<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 							<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
-							<div class="clear"><input style="width: 100%; background-color: #F48C2D; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', 'be-woocommerce-pdf-invoices' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-							<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', 'be-woocommerce-pdf-invoices' ); ?></div>
+							<div class="clear"><input style="width: 100%; background-color: #F48C2D; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', 'woocommerce-pdf-invoices' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+							<div style="font-size: 11px; text-align: center; margin-top: 1px !important;"><?php _e( 'No spam, ever. Unsubscribe at any time', 'woocommerce-pdf-invoices' ); ?></div>
 						</div>
 					</form>
 				</div>
@@ -342,15 +342,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			</aside>
 
 			<aside class="bewpi_sidebar about">
-				<h3><?php _e( 'About', 'be-woocommerce-pdf-invoices' ); ?></h3>
-				<p><?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'be-woocommerce-pdf-invoices' ); ?></p>
-				<?php _e( '<b>Version</b>: ' . BEWPI_VERSION, 'be-woocommerce-pdf-invoices' ); ?>
+				<h3><?php _e( 'About', 'woocommerce-pdf-invoices' ); ?></h3>
+				<p><?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'woocommerce-pdf-invoices' ); ?></p>
+				<?php _e( '<b>Version</b>: ' . BEWPI_VERSION, 'woocommerce-pdf-invoices' ); ?>
 				<br/>
-				<?php _e( '<b>Author</b>: <a href="https://github.com/baselbers">Bas Elbers</a>', 'be-woocommerce-pdf-invoices' ); ?>
+				<?php _e( '<b>Author</b>: <a href="https://github.com/baselbers">Bas Elbers</a>', 'woocommerce-pdf-invoices' ); ?>
 			</aside>
 			<aside class="bewpi_sidebar support">
-				<h3><?php _e( 'Support', 'be-woocommerce-pdf-invoices' ); ?></h3>
-				<p><?php _e( 'We will never ask for donations, but to garantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', 'be-woocommerce-pdf-invoices' ); ?></p>
+				<h3><?php _e( 'Support', 'woocommerce-pdf-invoices' ); ?></h3>
+				<p><?php _e( 'We will never ask for donations, but to garantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', 'woocommerce-pdf-invoices' ); ?></p>
 				<!-- Github star -->
 				<div class="github btn">
 					<iframe src="https://ghbtns.com/github-btn.html?user=baselbers&repo=woocommerce-pdf-invoices&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
@@ -369,17 +369,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				</div>
 				<!-- Tweet -->
 				<div class="twitter btn">
-					<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="<?php _e( 'Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!', 'be-woocommerce-pdf-invoices' ); ?>">Tweet</a>
+					<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="<?php _e( 'Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!', 'woocommerce-pdf-invoices' ); ?>">Tweet</a>
 					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				</div>
 			</aside>
 			<aside class="bewpi_sidebar need-help">
-				<h3><?php _e( 'Need Help?', 'be-woocommerce-pdf-invoices' ); ?></h3>
+				<h3><?php _e( 'Need Help?', 'woocommerce-pdf-invoices' ); ?></h3>
 				<ul>
-					<li><a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/faq/"><?php _e( 'Frequently Asked Questions', 'be-woocommerce-pdf-invoices' ); ?> </a></li>
-					<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Support forum', 'be-woocommerce-pdf-invoices' ); ?></a></li>
-					<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Request a feature', 'be-woocommerce-pdf-invoices' ); ?></a></li>
-					<li><a href="mailto:baselbers@hotmail.com"><?php _e( 'Email us', 'be-woocommerce-pdf-invoices' ); ?></a></li>
+					<li><a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/faq/"><?php _e( 'Frequently Asked Questions', 'woocommerce-pdf-invoices' ); ?> </a></li>
+					<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Support forum', 'woocommerce-pdf-invoices' ); ?></a></li>
+					<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Request a feature', 'woocommerce-pdf-invoices' ); ?></a></li>
+					<li><a href="mailto:baselbers@hotmail.com"><?php _e( 'Email us', 'woocommerce-pdf-invoices' ); ?></a></li>
 				</ul>
 			</aside>
 		<?php
@@ -434,7 +434,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Adds a box to the main column on the Post and Page edit screens.
 		 */
 		function add_meta_box_to_order_page() {
-			add_meta_box( 'order_page_create_invoice', __( 'PDF Invoice', 'be-woocommerce-pdf-invoices' ), array(
+			add_meta_box( 'order_page_create_invoice', __( 'PDF Invoice', 'woocommerce-pdf-invoices' ), array(
 				&$this,
 				'woocommerce_order_details_page_meta_box_create_invoice'
 			), 'shop_order', 'side', 'high' );
@@ -460,11 +460,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function show_invoice_number_info( $date, $number ) {
 			echo '<table class="invoice-info" width="100%">
                 <tr>
-                    <td>' . __( 'Invoiced on:', 'be-woocommerce-pdf-invoices' ) . '</td>
+                    <td>' . __( 'Invoiced on:', 'woocommerce-pdf-invoices' ) . '</td>
                     <td align="right"><b>' . $date . '</b></td>
                 </tr>
                 <tr>
-                    <td>' . __( 'Invoice number:', 'be-woocommerce-pdf-invoices' ) . '</td>
+                    <td>' . __( 'Invoice number:', 'woocommerce-pdf-invoices' ) . '</td>
                     <td align="right"><b>' . $number . '</b></td>
                 </tr>
             </table>';
@@ -480,9 +480,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param array $arr
 		 */
 		private function show_invoice_button( $title, $order_id, $wpi_action, $btn_title, $arr = array() ) {
-			$title      = __( $title, 'be-woocommerce-pdf-invoices');
+			$title      = __( $title, 'woocommerce-pdf-invoices');
 			$href       = admin_url() . 'post.php?post=' . $order_id . '&action=edit&bewpi_action=' . $wpi_action . '&nonce=' . wp_create_nonce( $wpi_action );
-			$btn_title  = __( $btn_title, 'be-woocommerce-pdf-invoices');
+			$btn_title  = __( $btn_title, 'woocommerce-pdf-invoices');
 			$attr       = '';
 
 			foreach ( $arr as $str ) {
@@ -502,13 +502,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			if ( $invoice->exists() ) {
 				$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
-				$this->show_invoice_button( __( 'View invoice', 'be-woocommerce-pdf-invoices'), $post->ID, 'view', __( 'View', 'be-woocommerce-pdf-invoices'), array( 'class="invoice-btn button grant_access"', 'target="_blank"' ) );
-				$this->show_invoice_button( __( 'Cancel invoice', 'be-woocommerce-pdf-invoices'), $post->ID, 'cancel', __( 'Cancel', 'be-woocommerce-pdf-invoices' ), array(
+				$this->show_invoice_button( __( 'View invoice', 'woocommerce-pdf-invoices'), $post->ID, 'view', __( 'View', 'woocommerce-pdf-invoices'), array( 'class="invoice-btn button grant_access"', 'target="_blank"' ) );
+				$this->show_invoice_button( __( 'Cancel invoice', 'woocommerce-pdf-invoices'), $post->ID, 'cancel', __( 'Cancel', 'woocommerce-pdf-invoices' ), array(
 					'class="invoice-btn button grant_access"',
-					'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', 'be-woocommerce-pdf-invoices') . '\')"'
+					'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', 'woocommerce-pdf-invoices') . '\')"'
 				) );
 			} else {
-				$this->show_invoice_button( __( 'Create invoice', 'be-woocommerce-pdf-invoices'), $post->ID, 'create', __( 'Create', 'be-woocommerce-pdf-invoices'), array( 'class="invoice-btn button grant_access"' ) );
+				$this->show_invoice_button( __( 'Create invoice', 'woocommerce-pdf-invoices'), $post->ID, 'create', __( 'Create', 'woocommerce-pdf-invoices'), array( 'class="invoice-btn button grant_access"' ) );
 			}
 		}
 
@@ -531,7 +531,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
 			$actions[ 'invoice' ] = array(
 				'url'  => $url,
-				'name' => sprintf( __( 'Invoice %s (PDF)', 'be-woocommerce-pdf-invoices' ), $invoice->get_formatted_number() )
+				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() )
 			);
 
 			return $actions;
@@ -641,7 +641,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
 
 			echo '<div class="updated"><p>';
-			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>", 'be-woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
+			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>", 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
 			echo "</p></div>";
 		}
 	}

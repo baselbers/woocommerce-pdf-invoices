@@ -252,12 +252,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    if ( $this->exists() ) {
 			    if ( $this->counter_reset ) {
 				    // user used invoice number reset, but invoice already exists with this invoice number
-				    wp_die( sprintf( __( 'Could not create invoice. In order to reset invoice number with %d, delete all invoices with invoice number %s and greater.', 'be-woocommerce-pdf-invoices' ), (int)$this->template_options[ 'bewpi_next_invoice_number' ], $this->formatted_number ),
+				    wp_die( sprintf( __( 'Could not create invoice. In order to reset invoice number with %d, delete all invoices with invoice number %s and greater.', 'woocommerce-pdf-invoices' ), (int)$this->template_options[ 'bewpi_next_invoice_number' ], $this->formatted_number ),
 					    '',
 					    array( 'response' => 200, 'back_link' => true )
 				    );
 			    } else {
-				    wp_die( sprintf( __( 'Could not create invoice. Invoice with invoice number %s already exists. First delete invoice and try again.', 'be-woocommerce-pdf-invoices' ), $this->formatted_number ),
+				    wp_die( sprintf( __( 'Could not create invoice. Invoice with invoice number %s already exists. First delete invoice and try again.', 'woocommerce-pdf-invoices' ), $this->formatted_number ),
 					    '',
 					    array( 'response' => 200, 'back_link' => true )
 				    );
@@ -296,7 +296,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     */
 	    public function view() {
 		    if ( ! $this->exists() )
-		        wp_die( sprintf( __( 'Invoice with invoice number %s not found. First create invoice and try again.', 'be-woocommerce-pdf-invoices' ), $this->formatted_number ),
+		        wp_die( sprintf( __( 'Invoice with invoice number %s not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ), $this->formatted_number ),
 			        '',
 			        array( 'response' => 200, 'back_link' => true )
 		        );
@@ -337,15 +337,17 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * Convert image to base64 due to incompatibility of subdomains with MPDF
          */
         public function get_company_logo_html() {
-            if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) :
-                $image_url = $this->template_options['bewpi_company_logo'];
+            if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) {
+	            $image_url = $this->template_options['bewpi_company_logo'];
+
 	            // get the relative path due to slow generation of invoice. Not fully tested yet.
 	            //$image_url = '..' . str_replace( get_site_url(), '', $image_url );
+
 	            $image_url = image_to_base64( $image_url );
-                echo '<img class="company-logo" src="' . $image_url . '"/>';
-            else :
-                echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
-            endif;
+	            echo '<img class="company-logo" src="' . $image_url . '"/>';
+            } else {
+	            echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
+            }
         }
 
 	    private function output_to_buffer( $full_path ) {

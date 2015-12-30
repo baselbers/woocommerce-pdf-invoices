@@ -2,9 +2,9 @@
 Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
-Requires at least: 3.5
-Tested up to: 4.3.1
-Stable tag: 2.3.17
+Requires at least: 3.8
+Tested up to: 4.4
+Stable tag: 2.3.18
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,13 +133,17 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.3.17 - December 25, 2016 =
+= 2.3.18 - December 30, 2015 =
+
+- Fixed Syriac, Arabic, Indic, Hebrew (and more) fonts integration.
+
+= 2.3.17 - December 25, 2015 =
 
 - Added: Romanian language files
 - Fixed: Shop managers access to view invoices.
 - Fixed: Rating notice showing while activating plugin
 
-= 2.3.16 - December 19, 2016 =
+= 2.3.16 - December 19, 2015 =
 
 - Fixed: Permission for customers and admins to view invoices.
 

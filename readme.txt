@@ -135,7 +135,8 @@ To change the options of the PDF, use below example.
 
 = 2.3.18 - December 30, 2015 =
 
-- Fixed Syriac, Arabic, Indic, Hebrew (and more) fonts integration.
+- Fixed: Syriac, Arabic, Indic, Hebrew (and more) fonts integration.
+- Improved: Number of zero digits for invoice number up to 20.
 
 = 2.3.17 - December 25, 2015 =
 

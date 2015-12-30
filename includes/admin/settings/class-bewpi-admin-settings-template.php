@@ -326,7 +326,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'default' => 3,
 				    'attrs' => array(
 					    'min="3"',
-					    'max="6"',
+					    'max="20"',
 					    'required'
 				    )
 			    ),

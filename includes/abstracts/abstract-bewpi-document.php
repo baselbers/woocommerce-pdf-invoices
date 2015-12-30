@@ -66,7 +66,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        }
 
 	        $mpdf->SetDisplayMode( 'fullpage' );
-	        $mpdf->useSubstitutions = true;
+	        //$mpdf->useSubstitutions = true;
+	        $mpdf->autoScriptToLang = true;
+	        $mpdf->autoLangToFont = true;
 	        $mpdf->setAutoTopMargin = 'stretch';
 	        $mpdf->setAutoBottomMargin = 'stretch';
 	        $mpdf->autoMarginPadding = 10;

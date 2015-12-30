@@ -13,15 +13,17 @@
 // only works using subsets (otherwise would add very large file)
 // More than 1 font can be specified but each will add to the processing time of the script
 
-// $this->backupSubsFont = array('dejavusanscondensed','arialunicodems','sun-exta');	// this will recognise most scripts
-$this->backupSubsFont = array('simsun','garuda','rupeeforadian','amiri');
+//$this->backupSubsFont = array('dejavusanscondensed','arialunicodems','sun-exta');	// this will recognise most scripts
+$this->backupSubsFont = array('dejavusanscondensed');
+//$this->backupSubsFont = array('simsun','garuda','rupeeforadian','amiri','dejavusanscondensed');
 
 // Optionally set a font (name as defined below in $this->fontdata) to use for CJK characters
 // in Plane 2 Unicode (> U+20000) when using useSubstitutions. 
 // Use a font like hannomb or sun-extb if available
 // only works using subsets (otherwise would add very large file)
 
-$this->backupSIPFont = 'sun-extb';
+//$this->backupSIPFont = 'sun-extb';
+$this->backupSIPFont = 'simsun';
 
 
 /*
@@ -82,30 +84,52 @@ starting at 1, as they appear in the .ttc file e.g.
 		),
 */
 
-$this->fontdata = apply_filters( 'bewpi_ttffonts', array(
+$this->fontdata = array(
     "dejavusanscondensed" => array(
         'R' => "DejaVuSansCondensed.ttf",
         'useOTL' => 0xFF,
         'useKashida' => 75,
     ),
-    "garuda" => array(
-        'R' => "Garuda.ttf",
-    ),
-    "simsun" => array(
-        'R' => "SimSun.ttf",
-    ),
-    "rupeeforadian" => array(
-        'R' => "RupeeForadian.ttf",
-    ),
+    // Main font
     "opensans" => array(
         'R' => "OpenSans-Regular.ttf",
         'B' => "OpenSans-Bold.ttf",
         'I' => "OpenSans-Italic.ttf",
     ),
-    "amiri" => array(
-	    'R' => "Amiri.ttf"
-    )
-));
+    // Thai
+    "garuda" => array(
+        'R' => "Garuda.ttf",
+    ),
+    // Chinese
+    "simsun" => array(
+        'R' => "SimSun.ttf",
+    ),
+    // Arabic
+    "xbriyaz" => array(
+		'R' => "XB Riyaz.ttf",
+		'useOTL' => 0xFF,
+		'useKashida' => 75,
+	),
+	// Hebrew with full Niqud and Cantillation
+	"taameydavidclm" => array(
+		'R' => "TaameyDavidCLM-Medium.ttf",
+		'useOTL' => 0xFF,
+	),
+	// Indic
+	"lohitkannada" => array(
+		'R' => "Lohit-Kannada.ttf",
+		'useOTL' => 0xFF,
+	),
+	// Syriac
+	"estrangeloedessa" => array(
+		'R' => "SyrCOMEdessa.otf",
+		'useOTL' => 0xFF,
+	),
+	// // Korean
+	// "unbatang" => array(
+	// 	'R' => "UnBatang_0613.ttf",
+	// ),
+);
 
 
 // Add fonts to this array if they contain characters in the SIP or SMP Unicode planes

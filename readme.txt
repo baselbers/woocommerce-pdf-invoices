@@ -131,7 +131,20 @@ To change the options of the PDF, use below example.
 
  `[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
 
+ = How to change direction of invoice to RTL? =
+ To change the direction of the invoice to RTL or something else, add below filter to your themes functions.php.
+
+ `function bewpi_mpdf( $mpdf ) {
+  	$mpdf->SetDirectionality( 'rtl' );
+  	return $mpdf;
+  }
+  add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );`
+
 == Changelog ==
+
+= 2.3.21 - January 4, 2016 =
+
+- Improved: Dutch language files
 
 = 2.3.20 - December 30, 2015 =
 

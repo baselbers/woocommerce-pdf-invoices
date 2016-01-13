@@ -350,6 +350,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             }
         }
 
+	    /**
+	     * Get VAT number from WooCommerce EU VAT Number plugin
+	     * @return string
+	     */
+	    public function get_vat_number() {
+		    return get_post_meta( $this->order->id, '_vat_number', true );
+	    }
+
 	    private function output_to_buffer( $full_path ) {
 		    ob_start();
 		    require_once $full_path;

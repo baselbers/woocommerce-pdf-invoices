@@ -340,10 +340,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) {
 	            $image_url = $this->template_options['bewpi_company_logo'];
 
-	            // get the relative path due to slow generation of invoice. Not fully tested yet.
-	            //$image_url = '..' . str_replace( get_site_url(), '', $image_url );
+	            // get the relative path due to slow generation of invoice.
+	            $image_url = '..' . str_replace( get_site_url(), '', $image_url );
 
-	            $image_url = image_to_base64( $image_url );
+	            // try base64 encoding with or without relative path if MPDF gives images errors.
+	            //$image_url = image_to_base64( $image_url );
+
 	            echo '<img class="company-logo" src="' . $image_url . '"/>';
             } else {
 	            echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';

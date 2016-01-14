@@ -1,0 +1,711 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-01-12 14:18+0300\n"
+"PO-Revision-Date: 2016-01-12 19:44+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: ru_RU\n"
+
+#: includes/be-woocommerce-pdf-invoices.php:126
+#, php-format
+msgid ""
+"Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
+"PDF Invoices</strong></a>."
+msgstr ""
+"Хорошо!, тогда <a href=\"%s\">Начнем настраивать <strong>WooCommerce PDF "
+"Invoices</strong></a>."
+
+#: includes/be-woocommerce-pdf-invoices.php:136
+msgid "Settings"
+msgstr "Настройки"
+
+#: includes/be-woocommerce-pdf-invoices.php:137
+msgid "Premium"
+msgstr "Премиум-поддержка"
+
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr "Неправильный запрос"
+
+#: includes/be-woocommerce-pdf-invoices.php:185
+msgid "Invalid order ID"
+msgstr "Неправильный ID заказа"
+
+#: includes/be-woocommerce-pdf-invoices.php:191
+msgid "Access denied"
+msgstr "Доступ ограничен"
+
+#: includes/be-woocommerce-pdf-invoices.php:218
+msgid "General"
+msgstr "Основные"
+
+#: includes/be-woocommerce-pdf-invoices.php:219
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:88
+msgid "Template"
+msgstr "Шаблон"
+
+#: includes/be-woocommerce-pdf-invoices.php:242
+msgid "Invoices"
+msgstr "Накладные"
+
+#: includes/be-woocommerce-pdf-invoices.php:281
+#, php-format
+msgid ""
+"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+"%s★★★★★%s rating. A huge thank you in advance!"
+msgstr ""
+"Если вам нравится <strong>WooCommerce PDF Invoices</strong> поставьте нам "
+"%s★★★★★%s рейтинга. Огромное спасибо за ваш выбор!"
+
+#: includes/be-woocommerce-pdf-invoices.php:282
+#, php-format
+msgid "Version %s"
+msgstr "Версия %s"
+
+#: includes/be-woocommerce-pdf-invoices.php:306
+msgid "WooCommerce PDF Invoices Premium"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:308
+msgid ""
+"This plugin offers a premium version which comes with the following features:"
+msgstr "Плагин имеет коммерческую версию, которая предлагает:"
+
+#: includes/be-woocommerce-pdf-invoices.php:309
+msgid "Bill periodically by generating and sending global invoices."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:310
+msgid "Add additional PDF's to customer invoices."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:311
+msgid "Send customer invoices directly to suppliers and others."
+msgstr "Выслать накладную поставщику и другим."
+
+#: includes/be-woocommerce-pdf-invoices.php:312
+#, php-format
+msgid ""
+"Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
+msgstr "Совместимо с плагином <a href=\"%s\">WooCommerce Subscriptions</a>."
+
+#: includes/be-woocommerce-pdf-invoices.php:314
+msgid "Learn more"
+msgstr "Узнать больше"
+
+#: includes/be-woocommerce-pdf-invoices.php:318
+msgid "Stay up-to-date"
+msgstr "Проверять обновления"
+
+#: includes/be-woocommerce-pdf-invoices.php:327
+msgid ""
+"We're constantly developing new features, stay up-to-date by subscribing to "
+"our newsletter."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:333
+msgid "Your email address"
+msgstr "Ваш email адрес"
+
+#: includes/be-woocommerce-pdf-invoices.php:336
+msgid "Signup"
+msgstr "Подписаться"
+
+#: includes/be-woocommerce-pdf-invoices.php:337
+msgid "No spam, ever. Unsubscribe at any time"
+msgstr "Никакого спама. Отпишитесь в любой момент."
+
+#: includes/be-woocommerce-pdf-invoices.php:345
+msgid "About"
+msgstr "О"
+
+#: includes/be-woocommerce-pdf-invoices.php:346
+msgid ""
+"This plugin is an open source project wich aims to fill the invoicing gap of "
+"<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
+msgstr ""
+"Это плагин с открытым кодом который призван заполнить пробел в выставлении "
+"счетов <a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
+
+#: includes/be-woocommerce-pdf-invoices.php:347
+msgid "<b>Version</b>: "
+msgstr "<b>Версия</b>: "
+
+#: includes/be-woocommerce-pdf-invoices.php:349
+msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+msgstr "<b>Автор</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+
+#: includes/be-woocommerce-pdf-invoices.php:352
+msgid "Support"
+msgstr "Поддержка"
+
+#: includes/be-woocommerce-pdf-invoices.php:353
+msgid ""
+"We will never ask for donations, but to garantee future development, we do "
+"need your support. Please show us your appreciation by leaving a <a href="
+"\"https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?"
+"rate=5#postform\">★★★★★</a> rating and vote for <a href=\"https://wordpress."
+"org/plugins/woocommerce-pdf-invoices/\">works</a>."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:372
+msgid ""
+"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices.php:377
+msgid "Need Help?"
+msgstr "Нужна помощь?"
+
+#: includes/be-woocommerce-pdf-invoices.php:379
+msgid "Frequently Asked Questions"
+msgstr "Часто задаваемые вопросы"
+
+#: includes/be-woocommerce-pdf-invoices.php:380
+msgid "Support forum"
+msgstr "Форум поддержки"
+
+#: includes/be-woocommerce-pdf-invoices.php:381
+msgid "Request a feature"
+msgstr "Запросить функционал"
+
+#: includes/be-woocommerce-pdf-invoices.php:382
+msgid "Email us"
+msgstr "Напишите нам письмо:"
+
+#: includes/be-woocommerce-pdf-invoices.php:437
+msgid "PDF Invoice"
+msgstr "Накладная в PDF"
+
+#: includes/be-woocommerce-pdf-invoices.php:463
+msgid "Invoiced on:"
+msgstr "Дата накладной"
+
+#: includes/be-woocommerce-pdf-invoices.php:467
+msgid "Invoice number:"
+msgstr "Номер накладной"
+
+#: includes/be-woocommerce-pdf-invoices.php:505
+msgid "View invoice"
+msgstr "Просмотреть накладную"
+
+#: includes/be-woocommerce-pdf-invoices.php:505
+msgid "View"
+msgstr "Просмотр"
+
+#: includes/be-woocommerce-pdf-invoices.php:506
+msgid "Cancel invoice"
+msgstr "Удалить накладную"
+
+#: includes/be-woocommerce-pdf-invoices.php:506
+msgid "Cancel"
+msgstr "Отмена"
+
+#: includes/be-woocommerce-pdf-invoices.php:508
+msgid "Are you sure to delete the invoice?"
+msgstr "Вы уверены что хотите удалить накладную?"
+
+#: includes/be-woocommerce-pdf-invoices.php:511
+msgid "Create invoice"
+msgstr "Создать накладную"
+
+#: includes/be-woocommerce-pdf-invoices.php:511
+msgid "Create"
+msgstr "Создать"
+
+#: includes/be-woocommerce-pdf-invoices.php:534
+#, php-format
+msgid "Invoice %s (PDF)"
+msgstr "Накладная %s (PDF)"
+
+#: includes/be-woocommerce-pdf-invoices.php:644
+#, php-format
+msgid ""
+"You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
+"really need your ★★★★★ rating. It will support future development big-time. "
+"A huge thanks in advance and keep up the good work! <br /> <a href='%s' "
+"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
+"done it!</a>"
+msgstr ""
+
+#: includes/class-bewpi-invoice.php:48
+msgid ""
+"Whoops, no template found. Please select a template on the Template settings "
+"page first."
+msgstr ""
+
+#: includes/abstracts/abstract-bewpi-document.php:64
+msgid "Paid"
+msgstr "Оплачено"
+
+#: includes/abstracts/abstract-bewpi-invoice.php:255
+#, php-format
+msgid ""
+"Could not create invoice. In order to reset invoice number with %d, delete "
+"all invoices with invoice number %s and greater."
+msgstr ""
+"Невозможно создать накладную. Сбросте номера накладных с %d, удалите все "
+"накладные с номера %s и выше."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:260
+#, php-format
+msgid ""
+"Could not create invoice. Invoice with invoice number %s already exists. "
+"First delete invoice and try again."
+msgstr ""
+"Нельзя создать накладную. Накладная с номером %s уже существует. Сначала "
+"удалите накладную и попробуйте заново."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:299
+#, php-format
+msgid ""
+"Invoice with invoice number %s not found. First create invoice and try again."
+msgstr "Накладная с номером %s не найдена. Сначала создайте накладную."
+
+#: includes/abstracts/abstract-bewpi-setting.php:98
+msgid "Allowed HTML tags: "
+msgstr "Допустимые HTML тэги: "
+
+#: includes/abstracts/abstract-bewpi-setting.php:173
+msgid "Remove logo"
+msgstr "Удалить логотип"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:86
+msgid "Attach to Email"
+msgstr "Присоединить к письму"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:94
+msgid "Processing order"
+msgstr "Заказ в обработке"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:98
+msgid "Completed order"
+msgstr "Выполненный заказ"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:102
+msgid "Customer invoice"
+msgstr "Накладная покупателя"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:106
+msgid "Do not attach"
+msgstr "Не прикреплять"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:120
+msgid "Attach to New order Email"
+msgstr "Прикрепить к новому заказу"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:127
+msgid "View PDF"
+msgstr "Просмотреть в PDF"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:135
+msgid "Download"
+msgstr "Скачать"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:139
+msgid "Open in new browser tab/window"
+msgstr "Открыть в новом браузера вкладки / окна"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:153
+msgid "Enable download from account"
+msgstr "Включить скачать на странице \"Мой аккаунт\""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:154
+msgid ""
+"<br/><div class=\"bewpi-notes\">Let customers download invoice from account "
+"page.</div>"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:166
+msgid "Enable Email It In"
+msgstr "Включить это Email-оповещение"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:174
+msgid "Email It In account"
+msgstr "Прикрепить к e-mail"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:179
+#, php-format
+msgid "Get your account from your Email It In %suser account%s."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:193
+msgid "Email Options"
+msgstr "Параметры Email"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:199
+msgid "Download Options"
+msgstr "Свойства загрузки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:205
+msgid "Cloud Storage Options"
+msgstr "Свойства хранилища"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:213
+#, php-format
+msgid ""
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:100
+msgid "Color theme"
+msgstr "Цвет темы"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:111
+msgid "Date format"
+msgstr "Формат числа"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:116
+#, php-format
+msgid "%sFormat%s of invoice date and order date."
+msgstr "%sFormat%s даты накладной и даты заказа"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
+msgid "Display prices including tax"
+msgstr "Отображать цены включая налоги"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:132
+msgid ""
+"Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
+"still be excluding tax, so disable it within the visible columns section."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:144
+msgid "Shipping taxable"
+msgstr "Налогооблагаемый"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:145
+msgid "Enable to display subtotal including shipping."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:157
+msgid "Mark invoice as paid"
+msgstr "Отметить накладную как оплаченную"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:158
+msgid "Invoice will be watermarked when order has been paid."
+msgstr "Накладная будет отмечена посчле оплаты"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:166
+msgid "Company name"
+msgstr "Название компании"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:177
+msgid "Company logo"
+msgstr "Логотип компании"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:188
+msgid "Company address"
+msgstr "Адрес компании"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:193
+msgid "Displayed in upper-right corner near logo."
+msgstr "Показать в правом верхнем углу рядом с логотипом."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:199
+msgid "Company details"
+msgstr "Описание компании"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:204
+msgid "Displayed below company address."
+msgstr "Показать перед Адресом компании"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:211
+msgid "Thank you text"
+msgstr "Текс благодарности"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:216
+msgid "Displayed in big colored bar directly after invoice total."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:217
+msgid "Thank you for your purchase!"
+msgstr "Спасибо за ваш заказ!"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:227
+msgid "Show customer notes"
+msgstr "Показать замечания покупателя"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:234
+msgid "Terms & conditions, policies etc."
+msgstr "Условия и соглашения"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:239
+#, php-format
+msgid ""
+"Displayed below customer notes and above footer. Want to attach additional "
+"pages to the invoice? Take a look at the <a href=\"%s\">Premium</a> plugin."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:240
+msgid "Items will be shipped within 2 days."
+msgstr "Товары будут доставлены в течении 2х дней."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:246
+msgid "Left footer column."
+msgstr "Подвал левой колонки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:252
+#, php-format
+msgid "<b>Payment method</b> %s"
+msgstr "<b>Способ оплаты</b> %s"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:257
+msgid "Right footer column."
+msgstr "Подвал правой колонки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:262
+msgid "Leave empty to show page numbering."
+msgstr "Оставьте пустым для отображения номеров страниц"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:269
+msgid "Type"
+msgstr "Тип"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:277
+msgid "WooCommerce order number"
+msgstr "Номер заказа вWooCommerce"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:281
+msgid "Sequential number"
+msgstr "Порядковый номер"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:295
+msgid "Reset invoice counter"
+msgstr "Сбросить счетчик накладных"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:305
+msgid "Next"
+msgstr "Далее"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:310
+msgid ""
+"Reset the invoice counter and start counting from given invoice number.<br/"
+"><b>Note:</b> Only available for Sequential numbering and value will be "
+"editable by selecting checkbox. Next number needs to be lower then highest "
+"existing invoice number or delete invoices first."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:320
+msgid "Digits"
+msgstr "Знаков"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:336
+msgid "[prefix]"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:347
+msgid "[suffix]"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:358
+msgid "Format"
+msgstr "Формат"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:363
+#, php-format
+msgid ""
+"Allowed placeholders: %s %s %s %s %s %s.<br/>%sNote:%s %s is required and "
+"slashes aren't supported."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:377
+msgid "Reset on 1st of january"
+msgstr "Сбросить 1го января"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:390
+#: includes/templates/invoices/global/micro/body.php:44
+#: includes/templates/invoices/simple/micro/body.php:46
+msgid "SKU"
+msgstr "Артикул"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:402
+#: includes/templates/invoices/global/micro/body.php:236
+#: includes/templates/invoices/simple/micro/body.php:99
+msgid "Subtotal"
+msgstr "Подытог"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:414
+msgid "Tax (item)"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:426
+msgid "Tax (total)"
+msgstr "Итого налогов"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:438
+#: includes/templates/invoices/global/micro/body.php:220
+#: includes/templates/invoices/simple/micro/body.php:83
+msgid "Discount"
+msgstr "Скидка"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:450
+#: includes/templates/invoices/global/micro/body.php:228
+#: includes/templates/invoices/global/micro/body.php:244
+#: includes/templates/invoices/simple/micro/body.php:91
+#: includes/templates/invoices/simple/micro/body.php:107
+msgid "Shipping"
+msgstr "Доставка"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:464
+msgid "General Options"
+msgstr "Основные настройки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:470
+msgid "Invoice Number Options"
+msgstr "Это свойства номера накладной."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:476
+msgid "Header Options"
+msgstr "Свойства заголовка"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:482
+msgid "Body Options"
+msgstr "Свойства тела письма"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:488
+msgid "Footer Options"
+msgstr "Свойства подвала"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:494
+msgid "Visible Columns"
+msgstr "Видимые колонки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:500
+msgid "These are the general template options."
+msgstr "Это основные свойства шаблона."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:501
+msgid "These are the invoice number options."
+msgstr "Это свойства номера накладной."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:502
+msgid "The header will be visible on every page. "
+msgstr "Заголовок будет виден на каждой странице."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:506
+msgid "The footer will be visible on every page."
+msgstr "Подвал будет виден на каждой странице."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:506
+msgid ""
+"<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the "
+"order payment method."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:509
+msgid "Enable or disable the columns."
+msgstr "Включить или отключить колонки"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:579
+msgid "File is invalid and contains either '..' or './'."
+msgstr "Неправильный формат файла и содержит  '..' или './'."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:586
+msgid "File is invalid and contains ':' after the first character."
+msgstr "Неправильный формат файла и содержит ':' после первого символа."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:595
+msgid "File should be less then 2MB."
+msgstr "Файл должен быть меньше 2MB."
+
+#: includes/templates/invoices/global/micro/body.php:5
+#: includes/templates/invoices/simple/micro/body.php:5
+msgid "Invoice to"
+msgstr "Плательщик"
+
+#: includes/templates/invoices/global/micro/body.php:7
+#: includes/templates/invoices/simple/micro/body.php:7
+#, php-format
+msgid "Phone: %s"
+msgstr "Телефон: %s"
+
+#: includes/templates/invoices/global/micro/body.php:11
+#: includes/templates/invoices/simple/micro/body.php:11
+msgid "Ship to"
+msgstr "Доставка в"
+
+#: includes/templates/invoices/global/micro/body.php:22
+msgid "Global Invoice"
+msgstr ""
+
+#: includes/templates/invoices/global/micro/body.php:40
+#: includes/templates/invoices/simple/micro/body.php:42
+msgid "Description"
+msgstr "Описание"
+
+#: includes/templates/invoices/global/micro/body.php:48
+#: includes/templates/invoices/simple/micro/body.php:50
+msgid "Cost"
+msgstr "Цена"
+
+#: includes/templates/invoices/global/micro/body.php:50
+#: includes/templates/invoices/simple/micro/body.php:52
+msgid "Qty"
+msgstr "Кол-во"
+
+#: includes/templates/invoices/global/micro/body.php:56
+#: includes/templates/invoices/simple/micro/body.php:58
+msgid "VAT"
+msgstr "НДС"
+
+#: includes/templates/invoices/global/micro/body.php:67
+#: includes/templates/invoices/global/micro/body.php:280
+#: includes/templates/invoices/simple/micro/body.php:69
+#: includes/templates/invoices/simple/micro/body.php:143
+msgid "Total"
+msgstr "Всего:"
+
+#: includes/templates/invoices/global/micro/body.php:75
+#, php-format
+msgid "Order #%d - %s"
+msgstr "Заказ #%d - %s"
+
+#: includes/templates/invoices/global/micro/body.php:255
+#: includes/templates/invoices/simple/micro/body.php:118
+msgid "Fee"
+msgstr "Оплата"
+
+#: includes/templates/invoices/global/micro/body.php:287
+#: includes/templates/invoices/simple/micro/body.php:150
+msgid "Refunded"
+msgstr "Возвращён"
+
+#: includes/templates/invoices/global/micro/footer.php:15
+#: includes/templates/invoices/simple/micro/footer.php:18
+#, php-format
+msgid "%s of %s"
+msgstr "%s из %s"
+
+#: includes/templates/invoices/simple/micro/body.php:22
+msgid "Invoice"
+msgstr "Накладная"
+
+#: includes/templates/invoices/simple/micro/body.php:25
+#, php-format
+msgid "Order Number: %s"
+msgstr "Номер заказа: %s"
+
+#: includes/templates/invoices/simple/micro/body.php:26
+#, php-format
+msgid "Order Date: %s"
+msgstr "Дата заказа: %s"
+
+#: includes/templates/invoices/simple/micro/body.php:288
+#: includes/templates/invoices/simple/micro/body.php:293
+msgid "Customer note"
+msgstr "Замечания покупателя"

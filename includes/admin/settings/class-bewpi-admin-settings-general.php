@@ -178,7 +178,20 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				    'type' => 'text',
 					'desc' => sprintf( __( 'Get your account from your Email It In %suser account%s.', 'woocommerce-pdf-invoices' ), '<a href="https://www.emailitin.com/user_account">', '</a>' ),
 			        'default' => ''
-		        )
+		        ),
+			    array(
+				    'id' =>  'bewpi-mpdf-debug',
+				    'name' => $this->prefix . 'mpdf_debug',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'debug',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Enable mPDF debugging' )
+				                  . '<br/><div class="bewpi-notes">' . __( 'Enable mPDF debugging if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 0
+			    )
 		    );
 
 		    return apply_filters( 'bewpi_general_settings', $settings );
@@ -206,11 +219,18 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			    array( &$this, 'cloud_storage_desc_callback' ),
 			    $this->settings_key
 		    );
+		    add_settings_section(
+			    'debug',
+			    __( 'Debug Options', 'woocommerce-pdf-invoices' ),
+			    array( &$this, 'debug_desc_callback' ),
+			    $this->settings_key
+		    );
 	    }
 
 	    public function email_desc_callback() { }
 	    public function download_desc_callback() {}
 	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), '<a href="https://emailitin.com">Email It In</a>' ); }
+	    public function debug_desc_callback() {}
 
 	    /**
 	     * Adds settings fields

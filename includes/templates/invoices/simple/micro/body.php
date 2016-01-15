@@ -159,8 +159,7 @@
 		$product = wc_get_product( $item['product_id'] ); ?>
 		<tr class="product-row">
 			<td>
-				<?php echo $product->get_title(); ?>
-				<?php
+				<?php echo $product->get_title();
 				global $wpdb;
 
 				if ( $metadata = $this->order->has_meta( $item_id ) ) {

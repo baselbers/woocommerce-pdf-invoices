@@ -42,8 +42,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          */
         protected function generate( $html_sections, $dest, $paid ) {
 	        set_time_limit(0);
-            $mpdf_filename = BEWPI_LIB_DIR . 'mpdf/mpdf.php';
-	        include $mpdf_filename;
+	        include BEWPI_LIB_DIR . 'mpdf/mpdf.php';
+
 	        $mpdf_options = $this->get_mpdf_options();
 	        $mpdf = new mPDF(
 		        $mpdf_options['mode'],               // mode
@@ -58,22 +58,26 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		        $mpdf_options['margin_footer'],      // margin_footer
 		        $mpdf_options['orientation']         // orientation
 	        );
-	        $mpdf->useOnlyCoreFonts = false;    // false is default
 
+	        // show paid watermark
 	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
 		        $mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 		        $mpdf->showWatermarkText = true;
 	        }
 
+	        // debugging
+	        if ( (bool) $this->general_options[ 'bewpi_mpdf_debug' ] ) {
+		        $mpdf->debug = true;
+		        $mpdf->showImageErrors = true;
+	        }
+
 	        $mpdf->SetDisplayMode( 'fullpage' );
-	        //$mpdf->useSubstitutions = true;
 	        $mpdf->autoScriptToLang = true;
 	        $mpdf->autoLangToFont = true;
 	        $mpdf->setAutoTopMargin = 'stretch';
 	        $mpdf->setAutoBottomMargin = 'stretch';
 	        $mpdf->autoMarginPadding = 10;
-	        //$mpdf->debug = true;
-	        //$mpdf->showImageErrors = true;
+	        $mpdf->useOnlyCoreFonts = false;
 
 	        if ( ! empty ( $html_sections['header'] ) )
 		        $mpdf->SetHTMLHeader( $html_sections['header'] );
@@ -83,12 +87,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 	        $mpdf->WriteHTML( $html_sections['style'] . $html_sections['body'] );
 
-	        $mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
+	        $mpdf       = apply_filters( 'bewpi_mpdf', $mpdf );
+			$filename   = ( $dest === 'F' ) ? $this->full_path : $this->filename;
 
-	        $mpdf->Output(
-		        ( $dest === 'F' ) ? $this->full_path : $this->filename,
-		        $dest
-	        );
+	        $mpdf->Output( $filename, $dest );
         }
 
         /**

@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.3.20
+Stable tag: 2.4.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,11 +140,21 @@ To change the options of the PDF, use below example.
   }
   add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );`
 
+  = Images doesn't display on invoice? =
+  Enable mPDF debugging on General Settings tab in order to output errors. Not recommended on live site!
+
 == Changelog ==
 
-= 2.3.21 - January 4, 2016 =
+= 2.4.0 - January 15, 2016 =
 
+- Added: Purchase Order Number from WooCommerce Purchase Order Gateway
+- Added: VAT Number from WooCommerce EU VAT Number
+- Added: Russian language files
+- Added: Option to enable mPDF debugging
 - Improved: Dutch language files
+- Improved: Romain language files
+- Fixed: Company logo image only showing red placeholder - Increased performance by using relative path to image
+- Fixed: Color picker CSS conflict
 
 = 2.3.20 - December 30, 2015 =
 

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2015-12-30 21:26+0100\n"
-"PO-Revision-Date: 2015-12-30 21:26+0100\n"
+"POT-Creation-Date: 2016-01-15 22:22+0100\n"
+"PO-Revision-Date: 2016-01-15 22:22+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -48,6 +48,16 @@ msgid ""
 msgstr ""
 "Faktura med fakturanummer %s finnes ikke. Opprett denne fakturaen og forsøk "
 "igjen."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:361
+#, php-format
+msgid "VAT Number: %s"
+msgstr ""
+
+#: includes/abstracts/abstract-bewpi-invoice.php:372
+#, php-format
+msgid "Purchase Order Number: %s"
+msgstr ""
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
@@ -116,19 +126,31 @@ msgstr "Email It In konto"
 msgid "Get your account from your Email It In %suser account%s."
 msgstr "Få din konto fra din Email It In %suser account%s."
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:193
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:190
+msgid "Enable mPDF debugging"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:191
+msgid "Enable mPDF debugging if you aren't able to create an invoice."
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:206
 msgid "Email Options"
 msgstr "E-post alternativer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:199
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:212
 msgid "Download Options"
 msgstr ""
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:205
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:218
 msgid "Cloud Storage Options"
 msgstr "Skylagringsalternativer"
 
-#: includes/admin/settings/class-bewpi-admin-settings-general.php:213
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:224
+msgid "Debug Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:232
 #, php-format
 msgid ""
 "Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
@@ -322,13 +344,13 @@ msgstr "Tilbakestill 1. Januar"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
-#: includes/templates/invoices/simple/micro/body.php:46
+#: includes/templates/invoices/simple/micro/body.php:48
 msgid "SKU"
 msgstr "Prod.Nr."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
-#: includes/templates/invoices/simple/micro/body.php:99
+#: includes/templates/invoices/simple/micro/body.php:101
 msgid "Subtotal"
 msgstr "Delsum"
 
@@ -342,15 +364,15 @@ msgstr "Skatt (totalt)"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
-#: includes/templates/invoices/simple/micro/body.php:83
+#: includes/templates/invoices/simple/micro/body.php:85
 msgid "Discount"
 msgstr "Rabatt"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:450
 #: includes/templates/invoices/global/micro/body.php:228
 #: includes/templates/invoices/global/micro/body.php:244
-#: includes/templates/invoices/simple/micro/body.php:91
-#: includes/templates/invoices/simple/micro/body.php:107
+#: includes/templates/invoices/simple/micro/body.php:93
+#: includes/templates/invoices/simple/micro/body.php:109
 msgid "Shipping"
 msgstr "Frakt"
 
@@ -682,29 +704,29 @@ msgid "Global Invoice"
 msgstr "Global faktura"
 
 #: includes/templates/invoices/global/micro/body.php:40
-#: includes/templates/invoices/simple/micro/body.php:42
+#: includes/templates/invoices/simple/micro/body.php:44
 msgid "Description"
 msgstr "Produkt"
 
 #: includes/templates/invoices/global/micro/body.php:48
-#: includes/templates/invoices/simple/micro/body.php:50
+#: includes/templates/invoices/simple/micro/body.php:52
 msgid "Cost"
 msgstr "Pris"
 
 #: includes/templates/invoices/global/micro/body.php:50
-#: includes/templates/invoices/simple/micro/body.php:52
+#: includes/templates/invoices/simple/micro/body.php:54
 msgid "Qty"
 msgstr "Ant"
 
 #: includes/templates/invoices/global/micro/body.php:56
-#: includes/templates/invoices/simple/micro/body.php:58
+#: includes/templates/invoices/simple/micro/body.php:60
 msgid "VAT"
 msgstr "MVA"
 
 #: includes/templates/invoices/global/micro/body.php:67
 #: includes/templates/invoices/global/micro/body.php:280
-#: includes/templates/invoices/simple/micro/body.php:69
-#: includes/templates/invoices/simple/micro/body.php:143
+#: includes/templates/invoices/simple/micro/body.php:71
+#: includes/templates/invoices/simple/micro/body.php:145
 msgid "Total"
 msgstr "Totalt"
 
@@ -714,12 +736,12 @@ msgid "Order #%d - %s"
 msgstr "Ordre #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
-#: includes/templates/invoices/simple/micro/body.php:118
+#: includes/templates/invoices/simple/micro/body.php:120
 msgid "Fee"
 msgstr "Avgift"
 
 #: includes/templates/invoices/global/micro/body.php:287
-#: includes/templates/invoices/simple/micro/body.php:150
+#: includes/templates/invoices/simple/micro/body.php:152
 msgid "Refunded"
 msgstr "Refundert"
 
@@ -743,8 +765,8 @@ msgstr "Ordrenummer: %s"
 msgid "Order Date: %s"
 msgstr "Ordre dato: %s"
 
-#: includes/templates/invoices/simple/micro/body.php:288
-#: includes/templates/invoices/simple/micro/body.php:293
+#: includes/templates/invoices/simple/micro/body.php:289
+#: includes/templates/invoices/simple/micro/body.php:294
 msgid "Customer note"
 msgstr "Kundenotat"
 

@@ -575,8 +575,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private static function insert_install_date() {
 			$datetime_now = new DateTime();
 			$date_string  = $datetime_now->format( 'Y-m-d' );
-			update_site_option( self::OPTION_INSTALL_DATE, $date_string, '', 'no' );
-
+			update_site_option( self::OPTION_INSTALL_DATE, $date_string );
 			return $date_string;
 		}
 
@@ -586,21 +585,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		private function get_install_date() {
 			$date_string = get_site_option( self::OPTION_INSTALL_DATE, '' );
-			if ( $date_string == '' ) {
+
+			if( empty( $date_string ) ) {
 				// There is no install date, plugin was installed before version 2.2.1. Add it now.
 				$date_string = self::insert_install_date();
 			}
 
-			return new DateTime( $date_string );
-		}
-
-		/**
-		 * @return mixed
-		 */
-		private function get_admin_querystring_array() {
-			parse_str( $_SERVER['QUERY_STRING'], $params );
-
-			return $params;
+			return DateTime::createFromFormat('Y-m-d', $date_string );
 		}
 
 		/**
@@ -610,24 +601,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
 				// Add user meta
 				global $current_user;
+
 				//add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
 				update_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1' );
 
 				// Build redirect URL
-				$query_params = $this->get_admin_querystring_array();
-				unset( $query_params[ self::OPTION_ADMIN_NOTICE_KEY ] );
-				$query_string = http_build_query( $query_params );
-				if ( $query_string != '' ) {
-					$query_string = '?' . $query_string;
-				}
-
-				$redirect_url = 'http';
-				if ( isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] == 'on' ) {
-					$redirect_url .= 's';
-				}
-				$redirect_url .= '://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . $query_string;
-
-				// Redirect
+				$redirect_url = remove_query_arg( self::OPTION_ADMIN_NOTICE_KEY );
 				wp_redirect( $redirect_url );
 				exit;
 			}
@@ -637,11 +616,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Ask admin to review plugin.
 		 */
 		public function display_admin_notice() {
-			$query_params = $this->get_admin_querystring_array();
-			$query_string = '?' . http_build_query( array_merge( $query_params, array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) ) );
+			$url = add_query_arg( array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) );
 
 			echo '<div class="updated"><p>';
-			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>", 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $query_string );
+			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>", 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $url );
 			echo "</p></div>";
 		}
 	}

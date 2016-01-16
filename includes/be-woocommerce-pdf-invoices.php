@@ -153,8 +153,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					'{formatted_invoice_date}'      => $invoice->get_formatted_invoice_date(),
 					'{formatted_order_date}'        => $invoice->get_formatted_order_date()
 				);
-				foreach ( $tags as $key => $value )
-					$title = str_replace( $key, $value, $title );
+
+				$title = str_replace( array_keys( $tags ), array_values( $tags ), $title );
 
 				// example: Download (PDF) Invoice {formatted_invoice_number}
 				echo '<a href="' . $url . '" alt="' . $title . '">' . $title . '</a>';

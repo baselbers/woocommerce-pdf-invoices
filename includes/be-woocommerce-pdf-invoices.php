@@ -36,53 +36,53 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			/**
 			 * Initialize plugin
 			 */
-			add_action( 'init', array( &$this, 'init' ) );
+			add_action( 'init', array( $this, 'init' ) );
 
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
-			add_action( 'admin_init', array( &$this, 'catch_hide_notice' ) );
+			add_action( 'admin_init', array( $this, 'catch_hide_notice' ) );
 
 			/**
 			 * Adds Invoices submenu to WooCommerce menu.
 			 */
-			add_action( 'admin_menu', array( &$this, 'add_woocommerce_submenu_page' ) );
+			add_action( 'admin_menu', array( $this, 'add_woocommerce_submenu_page' ) );
 
 			/**
 			 * Enqueue admin scripts
 			 */
-			add_action( 'admin_enqueue_scripts', array( &$this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
 
 			/**
 			 * Add actions to overview order page.
 			 */
 			add_action( 'woocommerce_admin_order_actions_end', array(
-				&$this,
+				$this,
 				'woocommerce_order_page_action_view_invoice'
 			) );
 
 			/**
 			 * Adds a meta box to the order details page.
 			 */
-			add_action( 'add_meta_boxes', array( &$this, 'add_meta_box_to_order_page' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_meta_box_to_order_page' ) );
 
 			/**
 			 * Adds the Email It In email as an extra recipient
 			 */
 			add_filter( 'woocommerce_email_headers', array(
-				&$this,
+				$this,
 				'add_email_it_in_account_to_email_headers'
 			), 10, 2 );
 
 			/**
 			 * Attach invoice to a specific WooCommerce email
 			 */
-			add_filter( 'woocommerce_email_attachments', array( &$this, 'attach_invoice_to_email' ), 99, 3 );
+			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
 
 			/**
 			 * Adds a download link for the pdf invoice on the my account page
 			 */
 			add_filter( 'woocommerce_my_account_my_orders_actions', array(
-				&$this,
+				$this,
 				'add_my_account_download_pdf_action'
 			), 10, 2 );
 
@@ -157,7 +157,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$title = str_replace( $key, $value, $title );
 
 				// example: Download (PDF) Invoice {formatted_invoice_number}
-				echo '<a href="' . $url . '" alt="' . $title . '">' . $title . '</a>';
+				echo '<a href="' . esc_attr( $url ) . '" alt="' . esc_attr( $title ) . '">' . esc_html( $title ) . '</a>';
 			}
 		}
 
@@ -187,11 +187,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$user = wp_get_current_user();
 				$allowed_roles = array( 'administrator', 'shop_manager' );
 				$customer_user_id = get_post_meta( $order_id, '_customer_user', true );
-				if (  ! array_intersect( $allowed_roles, $user->roles ) && get_current_user_id() != $customer_user_id  )
+				if (  ! array_intersect( $allowed_roles, $user->roles ) && get_current_user_id() != $customer_user_id  ) {
 					wp_die( __( 'Access denied', 'woocommerce-pdf-invoices' ) );
+				}
 
 				$invoice = new BEWPI_Invoice( $order_id );
-				switch ( $_GET['bewpi_action'] ) {
+				switch ( $action ) {
 					case "view":
 						$invoice->view();
 						break;
@@ -240,7 +241,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function add_woocommerce_submenu_page() {
 			add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), 'manage_options', $this->options_key, array(
-				&$this,
+				$this,
 				'options_page'
 			) );
 		}
@@ -329,8 +330,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				<div id="mc_embed_signup">
 					<form action="//wcpdfinvoices.us11.list-manage.com/subscribe/post?u=f270649bc41a9687a38a8977f&amp;id=395e1e319a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate style="padding: 0">
 						<div id="mc_embed_signup_scroll">
-							<?php $user_email = get_the_author_meta( 'user_email', get_current_user_id() ) ?>
-							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php if( $user_email !== "" ) echo $user_email; ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', 'woocommerce-pdf-invoices' ); ?>" required>
+							<?php $user = wp_get_current_user(); ?>
+							<input style="width: 100%; border-radius: 0; margin-top: 20px; border: 1px solid #ccc;" type="email" value="<?php echo esc_attr( $user->user_email ); ?>" name="EMAIL" class="email" id="mce-EMAIL" placeholder="<?php _e( 'Your email address', 'woocommerce-pdf-invoices' ); ?>" required>
 							<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
 							<div style="position: absolute; left: -5000px;"><input type="text" name="b_f270649bc41a9687a38a8977f_395e1e319a" tabindex="-1" value=""></div>
 							<div class="clear"><input style="width: 100%; background-color: #F48C2D; border-radius: 0; height: 37px;box-shadow: none;" type="submit" value="<?php _e( 'Signup', 'woocommerce-pdf-invoices' ); ?>" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
@@ -435,7 +436,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		function add_meta_box_to_order_page() {
 			add_meta_box( 'order_page_create_invoice', __( 'PDF Invoice', 'woocommerce-pdf-invoices' ), array(
-				&$this,
+				$this,
 				'woocommerce_order_details_page_meta_box_create_invoice'
 			), 'shop_order', 'side', 'high' );
 		}
@@ -559,13 +560,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				if ( $datetime_past >= $datetime_install ) {
 					// 10 or more days ago, show admin notice
-					add_action( 'admin_notices', array( &$this, 'display_admin_notice' ) );
+					add_action( 'admin_notices', array( $this, 'display_admin_notice' ) );
 				}
-			}
-
-			// Don't add admin bar option in admin panel
-			if ( is_admin() ) {
-				return;
 			}
 		}
 

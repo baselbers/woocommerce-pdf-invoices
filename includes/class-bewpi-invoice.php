@@ -9,10 +9,21 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
      */
     class BEWPI_Invoice extends BEWPI_Abstract_Invoice {
 
+	    /**
+	     * @var WC_Order
+	     */
 	    public $order;
 
+	    /**
+	     * @var string
+	     */
 	    protected $type = "simple";
 
+	    /**
+	     * BEWPI_Invoice constructor.
+	     *
+	     * @param int $order_id
+	     */
 	    public function __construct( $order_id ) {
 		    $this->order = wc_get_order( $order_id );
 		    $taxes_count = count( $this->order->get_taxes() );

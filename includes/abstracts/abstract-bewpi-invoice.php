@@ -9,8 +9,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
      * Makes the invoice.
      * Class BEWPI_Invoice
      */
-    class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document
-    {
+    class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 
         /**
          * @var WC_Order
@@ -40,11 +39,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected $date;
 
-        /**
-         * Creation year
-         * @var datetime
-         */
-        protected $year;
+	    /**
+	     * Creation year
+	     * @var datetime
+	     */
+	    protected $year;
 
         /**
          * Number of columns for the products table
@@ -64,29 +63,29 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected $desc_cell_width;
 
-        /**
-         * Name of the template
-         * @var string
-         */
-        protected $template_name;
+	    /**
+	     * Name of the template
+	     * @var string
+	     */
+	    protected $template_name;
 
-        /**
-         * Type of invoice
-         * @var string
-         */
-        protected $type;
+	    /**
+	     * Type of invoice
+	     * @var string
+	     */
+	    protected $type;
 
-        /**
-         * Dir of the template
-         * @var string
-         */
-        protected $template_dir_name;
+	    /**
+	     * Dir of the template
+	     * @var string
+	     */
+	    protected $template_dir_name;
 
-        /**
-         * Next invoice counter reset enabling
-         * @var bool
-         */
-        protected $counter_reset = false;
+	    /**
+	     * Next invoice counter reset enabling
+	     * @var bool
+	     */
+	    protected $counter_reset = false;
 
         /***
          * BEWPI_Abstract_Invoice constructor.
@@ -94,51 +93,48 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * @param $type
          * @param int $taxes_count
          */
-        public function __construct($order_id, $type, $taxes_count = 0)
-        {
-            parent::__construct();
-            $this->order = wc_get_order($order_id);
-            $this->type = $type;
-            $this->columns_count = $this->get_columns_count($taxes_count);
-            $this->formatted_number = get_post_meta($this->order->id, '_bewpi_formatted_invoice_number', true);
-            $this->template_name = $this->template_options["bewpi_template_name"];
+        public function __construct( $order_id, $type, $taxes_count = 0 ) {
+	        parent::__construct();
+			$this->order                = wc_get_order( $order_id );
+	        $this->type                 = $type;
+	        $this->columns_count        = $this->get_columns_count( $taxes_count );
+	        $this->formatted_number     = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
+	        $this->template_name        = $this->template_options["bewpi_template_name"];
 
-            // Check if the invoice already exists.
-            if (!empty($this->formatted_number) || isset($_GET['bewpi_action']) && $_GET['bewpi_action'] !== 'cancel')
-                $this->init();
+	        // Check if the invoice already exists.
+	        if( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && $_GET['bewpi_action'] !== 'cancel' )
+		        $this->init();
         }
 
         /**
          * Gets all the existing invoice data from database or creates new invoice number.
          */
-        private function init()
-        {
-            $this->number = get_post_meta($this->order->id, '_bewpi_invoice_number', true);
-            $this->year = get_post_meta($this->order->id, '_bewpi_invoice_year', true);
-            $this->filename = $this->formatted_number . '.pdf';
-            $this->full_path = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->filename;
-            $this->date = get_post_meta($this->order->id, '_bewpi_invoice_date', true);
+        private function init() {
+	        $this->number               = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
+	        $this->year                 = get_post_meta( $this->order->id, '_bewpi_invoice_year', true );
+	        $this->filename             = $this->formatted_number . '.pdf';
+	        $this->full_path            = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->filename;
+	        $this->date                 = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
         }
 
-        /**
-         * Format the invoice number with prefix and/or suffix.
-         * @return mixed
-         */
-        public function get_formatted_number()
-        {
+	    /**
+	     * Format the invoice number with prefix and/or suffix.
+	     * @return mixed
+	     */
+	    public function get_formatted_number() {
             $invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
             // Format number with the number of digits
             $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
-            $digitized_invoice_number = sprintf($digit_str, $this->number);
-            $year = date_i18n('Y');
-            $y = date_i18n('y');
-            $m = date_i18n('m');
+            $digitized_invoice_number = sprintf( $digit_str, $this->number );
+            $year = date_i18n( 'Y' );
+            $y = date_i18n( 'y' );
+            $m = date_i18n( 'm' );
 
             // Format invoice number
             $formatted_invoice_number = str_replace(
-                array('[prefix]', '[suffix]', '[number]', '[Y]', '[y]', '[m]'),
-                array($this->template_options['bewpi_invoice_number_prefix'], $this->template_options['bewpi_invoice_number_suffix'], $digitized_invoice_number, (string)$year, (string)$y, (string)$m),
-                $invoice_number_format);
+                array( '[prefix]', '[suffix]', '[number]', '[Y]', '[y]' , '[m]' ),
+                array( $this->template_options['bewpi_invoice_number_prefix'], $this->template_options['bewpi_invoice_number_suffix'], $digitized_invoice_number, (string)$year, (string)$y, (string)$m ),
+                $invoice_number_format );
 
             return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
         }
@@ -148,33 +144,31 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * @param bool $insert
          * @return bool|datetime|string
          */
-        public function get_formatted_invoice_date()
-        {
-            $date_format = $this->template_options['bewpi_date_format'];
-            return (!empty($date_format)) ? date_i18n($date_format, current_time('timestamp')) : date_i18n("d-m-Y", current_time('timestamp'));
+        public function get_formatted_invoice_date() {
+            $date_format = $this->template_options[ 'bewpi_date_format' ];
+            return ( !empty( $date_format ) ) ? date_i18n( $date_format, current_time( 'timestamp' ) ) : date_i18n( "d-m-Y", current_time( 'timestamp' ) );
         }
 
         /*
          * Format the order date and return
          */
-        public function get_formatted_order_date($order_id = 0)
-        {
-            if ($order_id != 0) {
-                // format date for global invoice
-                $order = wc_get_order($order_id);
-                $order_date = $order->order_date;
-            } else {
-                $order_date = $this->order->order_date;
-            }
+        public function get_formatted_order_date( $order_id = 0 ) {
+	        if ( $order_id  != 0 ) {
+		        // format date for global invoice
+		        $order = wc_get_order( $order_id );
+		        $order_date = $order->order_date;
+	        } else {
+		        $order_date = $this->order->order_date;
+	        }
 
-            $order_date = DateTime::createFromFormat('Y-m-d H:i:s', $order_date);
-            if (!empty ($this->template_options['bewpi_date_format'])) {
-                $date_format = $this->template_options['bewpi_date_format'];
-                $formatted_date = $order_date->format($date_format);
-                return date_i18n($date_format, strtotime($formatted_date));
+            $order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $order_date );
+            if ( ! empty ( $this->template_options[ 'bewpi_date_format' ] ) ) {
+                $date_format = $this->template_options[ 'bewpi_date_format' ];
+                $formatted_date = $order_date->format( $date_format );
+                return date_i18n( $date_format, strtotime( $formatted_date ) );
             } else {
-                $formatted_date = $order_date->format('d-m-Y');
-                return date_i18n("d-m-Y", strtotime($formatted_date));
+                $formatted_date = $order_date->format( 'd-m-Y' );
+                return date_i18n( "d-m-Y", strtotime( $formatted_date ) );
             }
         }
 
@@ -186,10 +180,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             do_action('bewpi_before_output_template_to_buffer', array('order_id' => $this->order->id));
             $html_sections = array();
 
-            foreach ($html_template_files as $section => $full_path) {
-                $html = ($section === 'style') ? $this->output_style_to_buffer($full_path) : $this->output_to_buffer($full_path);
-                $html_sections[$section] = $html;
-            }
+	        foreach ( $html_template_files as $section => $full_path ) {
+		        $html = ( $section === 'style' )  ? $this->output_style_to_buffer( $full_path ) : $this->output_to_buffer( $full_path );
+		        $html_sections[ $section ] = $html;
+	        }
 
             do_action('bewpi_after_output_template_to_buffer');
 
@@ -276,39 +270,38 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             return (empty($last_invoice_number)) ? 1 : (int)$last_invoice_number + 1;
         }
 
-        public function get_max_invoice_number()
-        {
-            global $wpdb;
+	    public function get_max_invoice_number() {
+		    global $wpdb;
 
-            if ((bool)$this->template_options['bewpi_reset_counter_yearly']) {
-                // get all by year
-                $query = $wpdb->prepare(
-                    "
+		    if ( (bool)$this->template_options[ 'bewpi_reset_counter_yearly' ] ) {
+			    // get all by year
+			    $query = $wpdb->prepare(
+				    "
 					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
 					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 			        WHERE pm1.meta_key = '%s'
 			            AND pm1.meta_value = %d
-			            AND pm2.meta_key = '%s'
+			            AND pm2.meta_key = '%s';
 			        ",
-                    "_bewpi_invoice_year",
-                    (int)date_i18n('Y', current_time('timestamp')),
-                    "_bewpi_invoice_number"
-                );
-            } else {
-                // get all
-                $query = $wpdb->prepare(
-                    "
+				    "_bewpi_invoice_year",
+				    (int) date_i18n( 'Y', current_time( 'timestamp' ) ),
+				    "_bewpi_invoice_number"
+			    );
+		    } else {
+			    // get all
+			    $query = $wpdb->prepare(
+				    "
 					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
 					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
-			        WHERE pm1.meta_key = '%s' AND pm2.meta_key = '%s'
+			        WHERE pm1.meta_key = '%s' AND pm2.meta_key = '%s';
 			        ",
-                    "_bewpi_invoice_year",
-                    "_bewpi_invoice_number"
-                );
-            }
+				    "_bewpi_invoice_year",
+				    "_bewpi_invoice_number"
+			    );
+		    }
 
-            return $wpdb->get_var($query);
-        }
+		    return $wpdb->get_var( $query );
+	    }
 
         /**
          * Generates and saves the invoice to the uploads folder.

@@ -89,7 +89,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
         /**
          * Initialize invoice with WooCommerce order
-         * @param string $order
+         * @param string $order_id
+         * @param string $type
+         * @param int $taxes_count
          */
         public function __construct( $order_id, $type, $taxes_count = 0 ) {
 	        parent::__construct();

@@ -418,7 +418,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
                 // give the user the option to change the image (path/url) due to some errors of mPDF.
                 $image_url = apply_filters('bewpi_company_logo_url', $image_path);
 
-                echo '<img class="company-logo" src="' . $image_url . '"/>';
+	            echo '<img class="company-logo" src="' . esc_attr( $image_url ) . '"/>';
             } else {
                 echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             }

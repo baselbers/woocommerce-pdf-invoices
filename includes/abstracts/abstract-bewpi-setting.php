@@ -169,7 +169,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 				         src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"/>
 				    <img id="<?php echo $args['id'] . '-delete'; ?>"
 				         src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
-				         onclick="Settings.removeCompanyLogo()"
+				         onclick="BEWPI.Settings.removeCompanyLogo()"
 				         title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>"/>
 			    </div>
 		    <?php

@@ -28,7 +28,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
         protected $template_options;
 
 	    /**
-         * @param $order
+         * Constructor
          */
         public function __construct() {
             $this->general_options      = get_option( 'bewpi_general_settings' );
@@ -37,7 +37,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
         /**
          * Generates the invoice with MPDF lib.
-         * @param $dest
+         * @param string $dest
          * @return string
          */
         protected function generate( $html_sections, $dest, $paid ) {

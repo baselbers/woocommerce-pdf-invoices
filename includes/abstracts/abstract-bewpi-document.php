@@ -42,7 +42,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          */
         protected function generate( $html_sections, $dest, $paid ) {
 	        set_time_limit(0);
-	        include BEWPI_LIB_DIR . 'mpdf/mpdf.php';
+	        include_once BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 
 	        $mpdf_options = $this->get_mpdf_options();
 	        $mpdf = new mPDF(

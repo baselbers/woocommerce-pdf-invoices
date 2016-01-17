@@ -19,7 +19,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     * For <textarea>.
 	     * @var array
 	     */
-	    private $allowed_tags = array( '<b>', '<i>', '<br>', '<br/>' );
+	    private $allowed_tags = array( '<b>', '<strong>', '<em>', '<i>', '<br>', );
 
 	    /**
 	     * Validates an email.
@@ -46,6 +46,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	    /**
 	     * Validates an integer.
 	     *
+	     * @TODO this would return false on 0 values (which is valid integer)
+	     *
 	     * @param $int
 	     *
 	     * @return bool
@@ -63,7 +65,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     */
 	    protected function strip_str( $str ) {
 		    $str = preg_replace( "/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", '<$1$2>', $str ); // Removes the attributes in the HTML tags
-		    return strip_tags( $str, '<b><i><br><br/>' );
+		    return strip_tags( $str, join( '', $this->allowed_tags ) );
 	    }
 
 	    /**

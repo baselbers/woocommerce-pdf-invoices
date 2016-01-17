@@ -316,8 +316,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    delete_post_meta( $this->order->id, '_bewpi_invoice_year' );
 
 		    // delete file
-		    if ( $this->exists() )
-		        parent::delete();
+		    if ( $this->exists() ) {
+			    parent::delete();
+		    }
 	    }
 
 	    /**

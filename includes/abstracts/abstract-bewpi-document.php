@@ -28,7 +28,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
         protected $template_options;
 
 	    /**
-         * @param $order
+         * Constructor
          */
         public function __construct() {
             $this->general_options      = get_option( 'bewpi_general_settings' );
@@ -37,12 +37,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
         /**
          * Generates the invoice with MPDF lib.
-         * @param $dest
+         * @param string $dest
          * @return string
          */
         protected function generate( $html_sections, $dest, $paid ) {
 	        set_time_limit(0);
-	        include BEWPI_LIB_DIR . 'mpdf/mpdf.php';
+	        include_once BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 
 	        $mpdf_options = $this->get_mpdf_options();
 	        $mpdf = new mPDF(
@@ -95,7 +95,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
         /**
          * Get the invoice if exist and show.
-         * @param $download
          */
         public function view() {
             if ( $this->general_options[ 'bewpi_view_pdf' ] === 'browser' ) {

@@ -19,7 +19,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     * For <textarea>.
 	     * @var array
 	     */
-	    private $allowed_tags = array( '<b>', '<i>', '<br>', '<br/>' );
+	    private $allowed_tags = array( '<b>', '<strong>', '<em>', '<i>', '<br>', );
 
 	    /**
 	     * Validates an email.
@@ -46,6 +46,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	    /**
 	     * Validates an integer.
 	     *
+	     * @TODO this would return false on 0 values (which is valid integer)
+	     *
 	     * @param $int
 	     *
 	     * @return bool
@@ -63,7 +65,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	     */
 	    protected function strip_str( $str ) {
 		    $str = preg_replace( "/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", '<$1$2>', $str ); // Removes the attributes in the HTML tags
-		    return strip_tags( $str, '<b><i><br><br/>' );
+		    return strip_tags( $str, join( '', $this->allowed_tags ) );
 	    }
 
 	    /**
@@ -106,7 +108,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			    foreach ( $args['options'] as $option ) :
 				    ?>
 				    <option
-					    value="<?php echo $option['value']; ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo $option['name']; ?></option>
+					    value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['name'] ); ?></option>
 			    <?php
 			    endforeach;
 			    ?>
@@ -118,28 +120,26 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	    public function input_callback( $args ) {
 		    $options = get_option( $args['page'] );
 		    $class   = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+		    $is_checkbox = $args['type'] === 'checkbox';
 		    ?>
 		    <input id="<?php echo $args['id']; ?>"
 		           name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
 		           type="<?php echo $args['type']; ?>"
-		           value="<?php if ( $args['type'] === "checkbox" ) {
-			           echo 1;
-		           } else {
-			           echo $options[ $args['name'] ];
-		           } ?>"
-			    <?php if ( $args['type'] === "checkbox" ) {
+		           value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
+
+			    <?php if ( $is_checkbox ) {
 				    checked( $options[ $args['name'] ] );
-			    } ?>
-			    <?php
-			    if ( isset ( $args['attrs'] ) ) :
-				    foreach ( $args['attrs'] as $attr ) :
+			    }
+
+			    if ( isset ( $args['attrs'] ) ) {
+				    foreach ( $args['attrs'] as $attr ) {
 					    echo $attr . ' ';
-				    endforeach;
-			    endif;
+				    }
+			    }
 			    ?>
 			    />
-		    <?php if ( $args['type'] === "checkbox" ) { ?>
-			    <label class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
+		    <?php if ( $is_checkbox ) { ?>
+			    <label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
 		    <?php } else { ?>
 			    <div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
 		    <?php } ?>
@@ -158,22 +158,22 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		    <input id="<?php echo $args['id'] . '-value'; ?>"
 		           name="<?php echo $args['name']; ?>"
 		           type="hidden"
-		           value="<?php echo $options[ $args['name'] ]; ?>"
+		           value="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"
 			    />
 
 		    <?php
-		    if ( ! empty( $options[ $args['name'] ] ) ) :
+		    if ( ! empty( $options[ $args['name'] ] ) ) {
 			    ?>
 			    <div id="<?php echo $args['id'] . '-wrapper'; ?>">
 				    <img id="<?php echo $args['id'] . '-image'; ?>"
-				         src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"/>
+				         src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>" />
 				    <img id="<?php echo $args['id'] . '-delete'; ?>"
 				         src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
-				         onclick="Settings.removeCompanyLogo()"
-				         title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>"/>
+				         onclick="BEWPI.Settings.removeCompanyLogo()"
+				         title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>" />
 			    </div>
-		    <?php
-		    endif;
+			    <?php
+		    }
 	    }
 
 	    public function textarea_callback( $args ) {

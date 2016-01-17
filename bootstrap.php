@@ -29,7 +29,7 @@ function bewpi_plugins_loaded() {
 	define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
 	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
 	define( 'BEWPI_WP_REPO_URL', 'https://wordpress.org/plugins/woocommerce-pdf-invoices/' );
-	define( 'BEWPI_WEBSITE_URL', 'http//wcpdfinvoices.com' );
+	define( 'BEWPI_WEBSITE_URL', 'http://wcpdfinvoices.com' );
 
 	require_once( BEWPI_DIR . 'functions.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php' );

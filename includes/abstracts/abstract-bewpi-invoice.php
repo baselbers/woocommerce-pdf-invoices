@@ -89,7 +89,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
         /**
          * Initialize invoice with WooCommerce order
-         * @param string $order
+         * @param string $order_id
+         * @param string $type
+         * @param int $taxes_count
          */
         public function __construct( $order_id, $type, $taxes_count = 0 ) {
 	        parent::__construct();
@@ -314,8 +316,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		    delete_post_meta( $this->order->id, '_bewpi_invoice_year' );
 
 		    // delete file
-		    if ( $this->exists() )
-		        parent::delete();
+		    if ( $this->exists() ) {
+			    parent::delete();
+		    }
 	    }
 
 	    /**
@@ -346,7 +349,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	            // try base64 encoding with or without relative path if MPDF gives images errors.
 	            //$image_url = image_to_base64( $image_url );
 
-	            echo '<img class="company-logo" src="' . $image_url . '"/>';
+	            echo '<img class="company-logo" src="' . esc_attr( $image_url ) . '"/>';
             } else {
 	            echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             }

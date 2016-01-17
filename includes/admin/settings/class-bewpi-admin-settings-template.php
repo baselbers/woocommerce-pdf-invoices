@@ -23,17 +23,17 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
             /**
              * Loads all the template settings.
              */
-            add_action( 'init', array( &$this, 'load_settings' ) );
+            add_action( 'admin_init', array( $this, 'load_settings' ) );
 
             /**
              * Register all template settings.
              */
-            add_action( 'admin_init', array( &$this, 'create_settings' ) );
+            add_action( 'admin_init', array( $this, 'create_settings' ) );
 
             /**
              * Displays all messages registered to 'template_settings'
              */
-            add_action( 'admin_notices', array( &$this, 'show_settings_notices' ) );
+            add_action( 'admin_notices', array( $this, 'show_settings_notices' ) );
         }
 
         /**
@@ -53,10 +53,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	     * @return array
 	     */
 	    private function get_defaults() {
-		    $defaults = array();
-		    foreach ( $this->the_settings() as $setting ) :
-			    $defaults[ $setting['name'] ] = $setting['default'];
-		    endforeach;
+		    $defaults = wp_list_pluck( $this->the_settings(), 'default', 'name' );
 		    return $defaults;
 	    }
 
@@ -68,7 +65,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	        register_setting(
 		        $this->settings_key,
 		        $this->settings_key,
-		        array( &$this, 'validate_input' )
+		        array( $this, 'validate_input' )
 	        );
 	        $this->add_settings_fields();
         }
@@ -86,7 +83,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-template-name',
 				    'name' => $this->prefix . 'template_name',
 				    'title' => __( 'Template', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'select_callback' ),
+				    'callback' => array( $this, 'select_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'general',
 				    'type' => 'text',
@@ -98,7 +95,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-color-theme',
 				    'name' => $this->prefix . 'color_theme',
 				    'title' => __( 'Color theme', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'general',
 				    'type' => 'color',
@@ -109,7 +106,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-date-format',
 				    'name' => $this->prefix . 'date_format',
 				    'title' => __( 'Date format', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'general',
 				    'type' => 'text',
@@ -124,7 +121,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
                     'id' => 'bewpi-display-prices-incl-tax',
                     'name' => $this->prefix . 'display_prices_incl_tax',
                     'title' => '',
-                    'callback' => array( &$this, 'input_callback' ),
+                    'callback' => array( $this, 'input_callback' ),
                     'page' => $this->settings_key,
                     'section' => 'general',
                     'type' => 'checkbox',
@@ -137,7 +134,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-shipping-taxable',
 				    'name' => $this->prefix . 'shipping_taxable',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'general',
 				    'type' => 'checkbox',
@@ -150,7 +147,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-payment-status',
 				    'name' => $this->prefix . 'show_payment_status',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'general',
 				    'type' => 'checkbox',
@@ -164,7 +161,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			        'id' =>  'bewpi-company-name',
 			        'name' => $this->prefix . 'company_name',
 				    'title' => __( 'Company name', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
@@ -175,7 +172,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-company-logo',
 				    'name' => $this->prefix . 'company_logo',
 				    'title' => __( 'Company logo', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'logo_callback' ),
+				    'callback' => array( $this, 'logo_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'file',
@@ -186,7 +183,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-company-address',
 				    'name' => $this->prefix . 'company_address',
 				    'title' => __( 'Company address', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
@@ -197,7 +194,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-company-details',
 				    'name' => $this->prefix . 'company_details',
 				    'title' => __( 'Company details', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
@@ -209,7 +206,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-intro-text',
 				    'name' => $this->prefix . 'intro_text',
 				    'title' => __( 'Thank you text', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'text',
@@ -220,7 +217,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-customer-notes',
 				    'name' => $this->prefix . 'show_customer_notes',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'body',
 				    'type' => 'checkbox',
@@ -232,7 +229,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-terms',
 				    'name' => $this->prefix . 'terms',
 				    'title' => __( 'Terms & conditions, policies etc.', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'body',
 				    'type' => 'text',
@@ -244,7 +241,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-left-footer-column',
 				    'name' => $this->prefix . 'left_footer_column',
 				    'title' => __( 'Left footer column.', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'footer',
 				    'type' => 'text',
@@ -255,7 +252,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-right-footer-column',
 				    'name' => $this->prefix . 'right_footer_column',
 				    'title' => __( 'Right footer column.', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'textarea_callback' ),
+				    'callback' => array( $this, 'textarea_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'footer',
 				    'type' => 'text',
@@ -267,7 +264,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-invoice-number-type',
 				    'name' => $this->prefix . 'invoice_number_type',
 				    'title' => __( 'Type', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'select_callback' ),
+				    'callback' => array( $this, 'select_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
@@ -288,7 +285,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-reset-counter',
 				    'name' => $this->prefix . 'reset_counter',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
@@ -296,14 +293,14 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0,
 				    'attrs' => array(
-					    'onchange="Settings.enableDisableNextInvoiceNumbering(this)"'
+					    'onchange="BEWPI.Settings.enableDisableNextInvoiceNumbering(this)"'
 				    )
 			    ),
 			    array(
 				    'id' => 'bewpi-next-invoice-number',
 				    'name' => $this->prefix . 'next_invoice_number',
 				    'title' => __( 'Next', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'number',
@@ -318,7 +315,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-invoice-number-digits',
 				    'name' => $this->prefix . 'invoice_number_digits',
 				    'title' => __( 'Digits', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'number',
@@ -334,7 +331,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-invoice-number-prefix',
 				    'name' => $this->prefix . 'invoice_number_prefix',
 				    'title' => __( '[prefix]', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
@@ -345,7 +342,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-invoice-number-suffix',
 				    'name' => $this->prefix . 'invoice_number_suffix',
 				    'title' => __( '[suffix]', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
@@ -356,11 +353,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-invoice-number-format',
 				    'name' => $this->prefix . 'invoice_number_format',
 				    'title' => __( 'Format', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-					'desc' => sprintf( __( 'Allowed placeholders: %s %s %s %s %s %s.<br/>%sNote:%s %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[prefix]</code>', '<code>[suffix]</code>', '<code>[number]</code>', '<code>[m]</code>', '<code>[Y]</code>', '<code>[y]</code>', '<b>', '</b>', '<code>[number]</code>' ),
+					'desc' => sprintf( __( 'Allowed placeholders: %s.<br/><strong>Note:</strong> %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[prefix]</code> <code>[suffix]</code> <code>[number]</code> <code>[m]</code> <code>[Y]</code> <code>[y]</code>', '<code>[number]</code>' ),
 				    'default' => '[number]-[Y]',
 				    'attrs' => array(
 			            'required'
@@ -370,11 +367,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-reset-counter-yearly',
 				    'name' => $this->prefix . 'reset_counter_yearly',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'checkbox',
-				    'desc' => __( 'Reset on 1st of january', 'woocommerce-pdf-invoices' ),
+				    'desc' => sprintf( __( 'Reset on %s', 'woocommerce-pdf-invoices' ), date_i18n( 'F n', strtotime( '2015/1/1' )) ),
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 1
 			    ),
@@ -383,7 +380,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-sku',
 				    'name' => $this->prefix . 'show_sku',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -395,7 +392,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-subtotal',
 				    'name' => $this->prefix . 'show_subtotal',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -407,7 +404,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-tax',
 				    'name' => $this->prefix . 'show_tax',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -419,7 +416,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-tax-row',
 				    'name' => $this->prefix . 'show_tax_total',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -431,7 +428,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-discount',
 				    'name' => $this->prefix . 'show_discount',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -443,7 +440,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-show-shipping',
 				    'name' => $this->prefix . 'show_shipping',
 				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
+				    'callback' => array( $this, 'input_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'visible_columns',
 				    'type' => 'checkbox',
@@ -462,58 +459,70 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		    add_settings_section(
 			    'general',
 			    __( 'General Options', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'general_desc_callback' ),
+			    array( $this, 'general_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'invoice_number',
 			    __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'invoice_number_desc_callback' ),
+			    array( $this, 'invoice_number_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'header',
 			    __( 'Header Options', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'header_desc_callback' ),
+			    array( $this, 'header_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'body',
 			    __( 'Body Options', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'body_desc_callback' ),
+			    array( $this, 'body_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'footer',
 			    __( 'Footer Options', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'footer_desc_callback' ),
+			    array( $this, 'footer_desc_callback' ),
 			    $this->settings_key
 		    );
 		    add_settings_section(
 			    'visible_columns',
 			    __( 'Visible Columns', 'woocommerce-pdf-invoices' ),
-			    array( &$this, 'visible_columns_desc_callback' ),
+			    array( $this, 'visible_columns_desc_callback' ),
 			    $this->settings_key
 		    );
 	    }
 
-	    public function general_desc_callback() { _e( 'These are the general template options.', 'woocommerce-pdf-invoices' ); }
-	    public function invoice_number_desc_callback() { _e( 'These are the invoice number options.', 'woocommerce-pdf-invoices' ); }
-	    public function header_desc_callback() { _e( 'The header will be visible on every page. ' . $this->get_allowed_tags_str(), 'woocommerce-pdf-invoices' ); }
+	    public function general_desc_callback() {
+		    echo __( 'These are the general template options.', 'woocommerce-pdf-invoices' );
+	    }
+
+	    public function invoice_number_desc_callback() {
+		    echo __( 'These are the invoice number options.', 'woocommerce-pdf-invoices' );
+	    }
+
+	    public function header_desc_callback() {
+		    echo __( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' );
+		    echo $this->get_allowed_tags_str();
+	    }
+
 	    public function body_desc_callback() { }
 
 	    public function footer_desc_callback() {
 		    echo __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ) . '<br/>' . $this->get_allowed_tags_str() . '<br/>' . __( '<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the order payment method.', 'woocommerce-pdf-invoices' );
 	    }
 
-	    public function visible_columns_desc_callback() { _e( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ); }
+	    public function visible_columns_desc_callback() {
+		    echo __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' );
+	    }
 
 	    /**
 	     * Adds all settings fields.
 	     */
 	    private function add_settings_fields() {
 		    $the_settings = $this->the_settings();
-		    foreach ( $the_settings as $setting ) :
+		    foreach ( $the_settings as $setting ) {
 			    add_settings_field(
 				    $setting['name'],
 				    $setting['title'],
@@ -522,7 +531,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    $setting['section'],
 				    $setting
 			    );
-		    endforeach;
+		    }
 	    }
 
 	    /**
@@ -543,24 +552,25 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
             $the_settings       = $this->the_settings();
 
             // Uncheck checkboxes
-            foreach ( $the_settings as $setting ) :
-                if ( $setting['type'] === 'checkbox' && ! isset( $input[ $setting['name'] ] ) ) :
-                    // Checkbox is unchecked
-                    $output[ $setting['name'] ] = 0;
-                endif;
-            endforeach;
+            foreach ( $the_settings as $setting ) {
+	            if ( $setting['type'] === 'checkbox' && ! isset( $input[ $setting['name'] ] ) ) {
+		            // Checkbox is unchecked
+		            $output[ $setting['name'] ] = 0;
+	            }
+            }
 
             // Strip strings
-		    foreach( $input as $key => $value ) :
-			    if( isset( $input[$key] ) ) :
+		    foreach( $input as $key => $value ) {
+			    if ( isset( $input[ $key ] ) ) {
 				    // Strip all HTML and PHP tags and properly handle quoted strings
-				    $output[$key] = $this->strip_str( stripslashes( $input[ $key ] ) );
-			    endif;
-		    endforeach;
+				    $output[ $key ] = $this->strip_str( stripslashes( $input[ $key ] ) );
+			    }
+		    }
 
 		    // File upload -- Company logo
-            if ( isset( $input['bewpi_company_logo'] ) )
-                $output['bewpi_company_logo'] = $input['bewpi_company_logo'];
+            if ( isset( $input['bewpi_company_logo'] ) ) {
+	            $output['bewpi_company_logo'] = $input['bewpi_company_logo'];
+            }
 
 		    if ( isset( $_FILES['bewpi_company_logo'] ) && $_FILES['bewpi_company_logo']['error'] == 0 ) {
 			    $file = $_FILES['bewpi_company_logo'];
@@ -613,11 +623,13 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	    	$scanned_templates = array();
 		    $templates = array();
 
-		    if ( file_exists( BEWPI_TEMPLATES_INVOICES_DIR ) )
-		    	$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_TEMPLATES_INVOICES_DIR . 'simple/' ) );
+		    if ( file_exists( BEWPI_TEMPLATES_INVOICES_DIR ) ) {
+			    $scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_TEMPLATES_INVOICES_DIR . 'simple/' ) );
+		    }
 
-		    if ( file_exists( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR ) )
-		    	$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) );
+		    if ( file_exists( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR ) ) {
+			    $scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) );
+		    }
 
 		    foreach( $scanned_templates as $i => $template_name ) {
 			    if( $template_name !== '..' && $template_name !== '.' ) {

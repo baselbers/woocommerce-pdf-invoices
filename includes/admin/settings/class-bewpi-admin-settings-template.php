@@ -307,7 +307,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0,
 				    'attrs' => array(
-					    'onchange="Settings.enableDisableNextInvoiceNumbering(this)"'
+					    'onchange="BEWPI.Settings.enableDisableNextInvoiceNumbering(this)"'
 				    )
 			    ),
 			    array(

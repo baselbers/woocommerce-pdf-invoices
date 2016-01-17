@@ -348,7 +348,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	            // try base64 encoding with or without relative path if MPDF gives images errors.
 	            //$image_url = image_to_base64( $image_url );
 
-	            echo '<img class="company-logo" src="' . $image_url . '"/>';
+	            echo '<img class="company-logo" src="' . esc_attr( $image_url ) . '"/>';
             } else {
 	            echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             }

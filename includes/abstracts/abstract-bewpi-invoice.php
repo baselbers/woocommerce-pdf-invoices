@@ -287,7 +287,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     * @return bool
 	     */
 	    public function is_paid() {
-		    return ( in_array( $this->order->get_status(), array( 'pending', 'on-hold', 'auto-draft' ) ) ) ? false : true;
+		    if ( $this->order->payment_method_title !== 'Cash on Delivery' ) {
+			    return false;
+		    }
+
+		    return ( ! in_array( $this->order->get_status(), array( 'pending', 'on-hold', 'auto-draft' ) ) );
 	    }
 
 	    /**
@@ -346,7 +350,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	            // try base64 encoding with or without relative path if MPDF gives images errors.
 	            //$image_url = image_to_base64( $image_url );
 
-	            echo '<img class="company-logo" src="' . $image_url . '"/>';
+	            echo '<img class="company-logo" style="max-height: 250px;" src="' . $image_url . '"/>';
             } else {
 	            echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             }

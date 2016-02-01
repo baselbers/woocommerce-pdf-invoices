@@ -4,9 +4,6 @@ div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4, img {
 h1.company-logo {
     color: black;
 }
-img.company-logo {
-    max-height: 100%;
-}
 table {
     border-collapse: collapse;
     font-size: 14px;

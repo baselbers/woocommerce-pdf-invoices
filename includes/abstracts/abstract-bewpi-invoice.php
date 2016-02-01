@@ -174,12 +174,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * Get all html from html files and store as vars
          */
         private function output_template_files_to_buffer( $html_template_files ) {
+	        do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
+
 	        $html_sections = array();
 
 	        foreach ( $html_template_files as $section => $full_path ) {
 		        $html = ( $section === 'style' )  ? $this->output_style_to_buffer( $full_path ) : $this->output_to_buffer( $full_path );
 		        $html_sections[ $section ] = $html;
 	        }
+
+	        do_action( 'bewpi_after_output_template_to_buffer' );
 
 	        return $html_sections;
         }

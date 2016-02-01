@@ -1,10 +1,10 @@
-=== Plugin Name ===
+﻿=== Plugin Name ===
 Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.4.0
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -144,6 +144,14 @@ To change the options of the PDF, use below example.
   Enable mPDF debugging on General Settings tab in order to output errors. Not recommended on live site!
 
 == Changelog ==
+
+= 2.4.1 - February 1, 2016 =
+
+- Added: Lithuanian language files.
+- Improved: Settings sidebar.
+- Fixed: Don't display paid watermark when payment method is Cash on Delivery.
+- Fixed: mPDF already included error.
+- Fixed: Margin between header and address sections.
 
 = 2.4.0 - January 15, 2016 =
 

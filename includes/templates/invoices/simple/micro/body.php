@@ -1,12 +1,12 @@
 <table class="two-column customer">
 	<tbody>
 	<tr>
-		<td class="address small-font">
+		<td class="address small-font" width="50%">
 			<b><?php _e( 'Invoice to', 'woocommerce-pdf-invoices' ); ?></b><br/>
 			<?php echo $this->order->get_formatted_billing_address(); ?><br/>
 			<?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $this->order->billing_phone ); ?>
 		</td>
-		<td class="address small-font">
+		<td class="address small-font" width="50%">
 			<?php if ( $this->order->get_formatted_shipping_address() != "" ) { ?>
 				<b><?php _e( 'Ship to', 'woocommerce-pdf-invoices' ); ?></b><br/>
 				<?php echo $this->order->get_formatted_shipping_address(); ?>

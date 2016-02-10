@@ -225,11 +225,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Creates invoices dir in uploads folder
 		 */
 		private function create_bewpi_dirs() {
-			// bewpi-invoices
-			wp_mkdir_p( BEWPI_INVOICES_DIR . date_i18n( 'Y' ) . '/' );
-			copy( BEWPI_DIR . 'tmp/.htaccess', BEWPI_INVOICES_DIR . date_i18n( 'Y' ) . '/.htaccess' );
-			copy( BEWPI_DIR . 'tmp/index.php', BEWPI_INVOICES_DIR . date_i18n( 'Y' ) . '/index.php' );
+			// invoices
+			$current_year_dir = BEWPI_INVOICES_DIR . date_i18n( 'Y', current_time( 'timestamp' ) ) . "/";
 
+			wp_mkdir_p( $current_year_dir );
+
+			if ( ! file_exists ( $current_year_dir . ".htaccess" ) ) {
+				copy( BEWPI_DIR . 'tmp/.htaccess', $current_year_dir . ".htaccess" );
+			}
+
+			if ( ! file_exists( $current_year_dir . "index.php" ) ) {
+				copy( BEWPI_DIR . 'tmp/index.php', $current_year_dir . "index.php" );
+			}
+
+			// custom templates
 			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
 
 			do_action( 'mk_custom_template_invoices_dir' );
@@ -284,7 +293,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			</script>
 			<div class="wrap">
 				<?php $this->plugin_options_tabs(); ?>
-				<form class="be_woocommerce_pdf_invoices_settings_form" method="post" action="options.php"
+				<form class="bewpi-settings-form" method="post" action="options.php"
 				      enctype="multipart/form-data">
 					<?php wp_nonce_field( 'update-options' ); ?>
 					<?php settings_fields( $tab ); ?>

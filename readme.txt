@@ -145,13 +145,15 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.4.1 - February 1, 2016 =
+= 2.4.1 - February 10, 2016 =
 
-- Added: Lithuanian language files.
-- Improved: Settings sidebar.
-- Fixed: Don't display paid watermark when payment method is Cash on Delivery.
-- Fixed: mPDF already included error.
-- Fixed: Margin between header and address sections.
+- Added: Lithuanian language files
+- Added: German language files
+- Improved: Settings sidebar
+- Fixed: Don't display paid watermark when payment method is Cash on Delivery
+- Fixed: mPDF already included
+- Fixed: Margin between header and address sections
+- Fixed: Copy .htaccess and index.php files to many times into uploads folder
 
 = 2.4.0 - January 15, 2016 =
 

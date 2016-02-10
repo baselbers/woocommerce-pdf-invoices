@@ -1,16 +1,16 @@
-form.be_woocommerce_pdf_invoices_settings_form {
+form.bewpi-settings-form {
     width: 75%;
     display: block;
     float: left;
     padding-right: 40px;
     box-sizing: border-box;
 }
-.be_woocommerce_pdf_invoices_settings_form select,
-.be_woocommerce_pdf_invoices_settings_form input[type="text"],
-.be_woocommerce_pdf_invoices_settings_form textarea {
+.bewpi-settings-form select,
+.bewpi-settings-form input[type="text"],
+.bewpi-settings-form textarea {
     width: 348px;
 }
-.be_woocommerce_pdf_invoices_settings_form input[type="number"],
+.bewpi-settings-form input[type="number"],
 #bewpi-color-theme {
     width: 70px;
 }
@@ -80,7 +80,7 @@ form.be_woocommerce_pdf_invoices_settings_form {
     display: none;
 }
 /* Sidebar */
-.bewpi_sidebar {
+.bewpi-sidebar {
     width: 25%;
     box-sizing: border-box;
     display: block;
@@ -91,32 +91,32 @@ form.be_woocommerce_pdf_invoices_settings_form {
     padding: 0 20px 20px;
     margin-top: 20px;
 }
-.bewpi_sidebar.premium h3 {
+.bewpi-sidebar.premium h3 {
     color: white;
 }
-.bewpi_sidebar.premium {
+.bewpi-sidebar.premium {
     background: #222;
     color: #ccc;
 }
-.bewpi_sidebar.support .btn {
+.bewpi-sidebar.support .btn {
     margin: 10px 10px 10px 0;
 }
-.bewpi_sidebar.support .github.btn {
+.bewpi-sidebar.support .github.btn {
     margin-bottom: -3px !important;
     margin-top: 20px;
 }
-.bewpi_sidebar.support .twitter.btn {
+.bewpi-sidebar.support .twitter.btn {
     margin-bottom: 0 !important;
 }
-#mc_embed_signup {
+#bewpi-mc-embed-signup {
     background: #222;
     clear:left;
 }
-#mc_embed_signup form {
+#bewpi-mc-embed-signup form {
     margin: 0 !important;
     padding: 0;
 }
-#mc_embed_signup input[type="text"] {
+#bewpi-mc-embed-signup input[type="text"] {
     width: 100%;
 }
 .bewpi-learn-more {
@@ -133,13 +133,13 @@ form.be_woocommerce_pdf_invoices_settings_form {
     background-color: #EE7600;
     color: white;
 }
-#mc_embed_signup input.button {
+#bewpi-mc-embed-signup input.button {
     margin: 0 !important;
 }
-#mc-embedded-subscribe:hover {
+#bewpi-mc-embedded-subscribe:hover {
     background-color: #EE7600 !important;
 }
-#mc-embedded-subscribe {
+#bewpi-mc-embedded-subscribe {
     padding: 10px 0;
     background-color: #F48C2D;
     color: white;
@@ -155,7 +155,7 @@ form.be_woocommerce_pdf_invoices_settings_form {
     line-height: normal;
     border: none;
 }
-#mce-EMAIL {
+#bewpi-mce-EMAIL {
     width: 100%;
     border-radius: 0;
     margin-top: 20px;
@@ -172,7 +172,7 @@ form.be_woocommerce_pdf_invoices_settings_form {
 /* End sidebar */
 
 @media screen and (max-width: 790px) {
-    .bewpi_sidebar {
+    .bewpi-sidebar {
         display: none;
     }
 }

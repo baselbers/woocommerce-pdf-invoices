@@ -174,8 +174,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * Get all html from html files and store as vars
          */
         private function output_template_files_to_buffer( $html_template_files ) {
-	        do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
-
+			do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
 	        $html_sections = array();
 
 	        foreach ( $html_template_files as $section => $full_path ) {
@@ -183,7 +182,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		        $html_sections[ $section ] = $html;
 	        }
 
-	        do_action( 'bewpi_after_output_template_to_buffer' );
+			do_action( 'bewpi_after_output_template_to_buffer' );
 
 	        return $html_sections;
         }
@@ -239,6 +238,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		    return $wpdb->get_var( $query );
 	    }
+
+		public function sh_icl_current_language($lang){
+			return 'nl';
+		}
 
 	    /**
 	     * Generates and saves the invoice to the uploads folder.

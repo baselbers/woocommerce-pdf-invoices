@@ -3,9 +3,9 @@ msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2016-02-10 21:03+0100\n"
 "PO-Revision-Date: 2016-02-10 21:03+0100\n"
-"Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
-"Language: nb\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-document.php:64
 msgid "Paid"
-msgstr "Betalt"
+msgstr ""
 
 #: includes/abstracts/abstract-bewpi-invoice.php:262
 #, php-format
@@ -29,8 +29,6 @@ msgid ""
 "Could not create invoice. In order to reset invoice number with %d, delete "
 "all invoices with invoice number %s and greater."
 msgstr ""
-"Kunne ikke opprette faktira. For å tilbakestille fakturanummer med %d, slett "
-"alle fakturaer med fakturanummer %s og høyere."
 
 #: includes/abstracts/abstract-bewpi-invoice.php:267
 #, php-format
@@ -38,16 +36,12 @@ msgid ""
 "Could not create invoice. Invoice with invoice number %s already exists. "
 "First delete invoice and try again."
 msgstr ""
-"Kunne ikke opprette faktura. Faktura med fakturanummer %s eksisterer "
-"allerede. Først må du slette denne fakturaen før du forsøker igjen."
 
 #: includes/abstracts/abstract-bewpi-invoice.php:310
 #, php-format
 msgid ""
 "Invoice with invoice number %s not found. First create invoice and try again."
 msgstr ""
-"Faktura med fakturanummer %s finnes ikke. Opprett denne fakturaen og forsøk "
-"igjen."
 
 #: includes/abstracts/abstract-bewpi-invoice.php:372
 #, php-format
@@ -61,47 +55,47 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
-msgstr "Tillatte HTML koder: "
+msgstr ""
 
 #: includes/abstracts/abstract-bewpi-setting.php:173
 msgid "Remove logo"
-msgstr "Fjern logo"
+msgstr "Logo entfernen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
 msgid "Attach to Email"
-msgstr "Legg ved e-post"
+msgstr "An Email anhängen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:94
 msgid "Processing order"
-msgstr "Behandler ordre"
+msgstr "Bearbeiten der Bestellung"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:98
 msgid "Completed order"
-msgstr "Fullført ordre"
+msgstr "Fertiggestellte Bestellung"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:102
 msgid "Customer invoice"
-msgstr "Kundefaktura"
+msgstr "Kundenrechnung"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:106
 msgid "Do not attach"
-msgstr "Ikke legg ved"
+msgstr "Nicht anhängen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:120
 msgid "Attach to New order Email"
-msgstr "Legg til ny bestilling e-post"
+msgstr "An neue Bestell-Email anhängen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:127
 msgid "View PDF"
-msgstr "Vis PDF"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:135
 msgid "Download"
-msgstr "Last ned"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:139
 msgid "Open in new browser tab/window"
-msgstr "Åpne i ny fane/vindu"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:153
 msgid "Enable download from account"
@@ -115,16 +109,16 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:166
 msgid "Enable Email It In"
-msgstr "Aktiver dette epostvarselet"
+msgstr "Enable Email It In"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:174
 msgid "Email It In account"
-msgstr "Email It In konto"
+msgstr "Email It In account"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:179
 #, php-format
 msgid "Get your account from your Email It In %suser account%s."
-msgstr "Få din konto fra din Email It In %suser account%s."
+msgstr "Get your account from your Email It In %suser account%s."
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:190
 msgid "Enable mPDF debugging"
@@ -136,7 +130,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:206
 msgid "Email Options"
-msgstr "E-post alternativer"
+msgstr "Email Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:212
 msgid "Download Options"
@@ -144,7 +138,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:218
 msgid "Cloud Storage Options"
-msgstr "Skylagringsalternativer"
+msgstr "Cloud Storage Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:224
 msgid "Debug Options"
@@ -156,99 +150,96 @@ msgid ""
 "Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
 "Egnyte and enter your account below."
 msgstr ""
-"Registrer deg på %s for å sende fakturaene til din DropBox, OneDrive, Google "
-"Drive eller Egnyte og skriv inn kontoen din under."
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:88
 #: includes/be-woocommerce-pdf-invoices.php:219
 msgid "Template"
-msgstr "Mal"
+msgstr "Template"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:100
 msgid "Color theme"
-msgstr "Fargetema"
+msgstr "Farben Theme"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:111
 msgid "Date format"
-msgstr "Datoformat"
+msgstr "Datumsformat"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:116
 #, php-format
 msgid "%sFormat%s of invoice date and order date."
-msgstr "%sFormat%s til fakturadato og ordredato."
+msgstr "%sFormat%s von Rechnungsdatum und Bestellungsdatum."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:131
 msgid "Display prices including tax"
-msgstr "Vis priser inkludert mva."
+msgstr "Preis inklusive Mehrwertsteuer anzeigen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:132
 msgid ""
 "Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
 "still be excluding tax, so disable it within the visible columns section."
 msgstr ""
-"Linjen element totaler vil inkludere skatt. <br/><b>Merk</b>: Subtotal vil "
-"fortsatt være ekskludert skatt, så deaktiver dette innenfor de synlige "
-"konlonnene."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:144
 msgid "Shipping taxable"
-msgstr "Frakt er skattbar"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:145
 msgid "Enable to display subtotal including shipping."
-msgstr "Aktiver for å vise subtotal inkludert frakt."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:157
 msgid "Mark invoice as paid"
-msgstr "Marker faktura som betalt"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:158
 msgid "Invoice will be watermarked when order has been paid."
-msgstr "Fakturaen vil få et vannmerke når ordren har blitt betalt."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:166
 msgid "Company name"
-msgstr "Firmanavn"
+msgstr "Firmenname"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:177
 msgid "Company logo"
-msgstr "Firmalogo"
+msgstr "Firmenlogo"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:188
 msgid "Company address"
-msgstr "Firmaadresse"
+msgstr "Firmenadresse"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:193
 msgid "Displayed in upper-right corner near logo."
-msgstr "Vist øverst til høyre, nær logoen."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:199
 msgid "Company details"
-msgstr "Firmadetaljer"
+msgstr "Firmendetails"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:204
 msgid "Displayed below company address."
-msgstr "Vist under firmaadressen."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:211
 msgid "Thank you text"
-msgstr "Takk skal du ha -tekst"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:216
 msgid "Displayed in big colored bar directly after invoice total."
-msgstr "Vist i en stor farget boks rett etter fakturatotalen."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:217
 msgid "Thank you for your purchase!"
-msgstr "Tusen takk for din bestilling!"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:227
 msgid "Show customer notes"
-msgstr "Vis kundenotat"
+msgstr "Kundenkommentare anzeigen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:234
 msgid "Terms & conditions, policies etc."
-msgstr "Betingelser, vilkår etc."
+msgstr "AGB’s‚ Richtlinien etc."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:239
 #, php-format
@@ -256,29 +247,27 @@ msgid ""
 "Displayed below customer notes and above footer. Want to attach additional "
 "pages to the invoice? Take a look at the <a href=\"%s\">Premium</a> plugin."
 msgstr ""
-"Vist under kundenotat og over footer. Vil du legge til ytterligere sider til "
-"fakturaen? Ta en titt på <a href=\"%s\">Premium</a> versjonen."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:240
 msgid "Items will be shipped within 2 days."
-msgstr "Bestillingen vil bli sendt innen 2 dager."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:246
 msgid "Left footer column."
-msgstr "Venstre footer kolonne."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:252
 #, php-format
 msgid "<b>Payment method</b> %s"
-msgstr "<b>Betalingsmåte:</b> %s"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:257
 msgid "Right footer column."
-msgstr "Høyre footer kolonne."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:262
 msgid "Leave empty to show page numbering."
-msgstr "La dette feltet stå tomt for å vise sidenummer."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:269
 msgid "Type"
@@ -286,19 +275,19 @@ msgstr "Type"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:277
 msgid "WooCommerce order number"
-msgstr "WooCommerce bestillingsnummer"
+msgstr "WooCommerce Bestellungsnummer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:281
 msgid "Sequential number"
-msgstr "Sekvensielt nummer"
+msgstr "Aufeinanderfolgende nummer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:295
 msgid "Reset invoice counter"
-msgstr "Tilbakestill fakturateller"
+msgstr "Reset invoice counter"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:305
 msgid "Next"
-msgstr "Neste"
+msgstr "Weiter"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:310
 msgid ""
@@ -307,15 +296,10 @@ msgid ""
 "editable by selecting checkbox. Next number needs to be lower then highest "
 "existing invoice number or delete invoices first."
 msgstr ""
-"Tilbakestill fakturatelleren og start nummereringen fra et bestemt "
-"fakturanummer.<br><b>Merk:</b> Kun tilgjengelig for sekvensiell nummerering "
-"og verdier kan endres ved å markere ut boksen. Neste nummer må være høyere "
-"enn det høyeste nummeret som allerede eksisterer på en faktura, eller du må "
-"slette gamle fakturaer først."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:320
 msgid "Digits"
-msgstr "Tegn"
+msgstr "Ziffern"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:336
 msgid "[prefix]"
@@ -335,12 +319,10 @@ msgid ""
 "Allowed placeholders: %s %s %s %s %s %s.<br/>%sNote:%s %s is required and "
 "slashes aren't supported."
 msgstr ""
-"Tillatte plassholdere: %s %s %s %s %s %s.<br/>%sMerk:%s %s er påkrevd og "
-"skråstreker er ikke støttet."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:377
 msgid "Reset on 1st of january"
-msgstr "Tilbakestill 1. Januar"
+msgstr "Am 1. Januar zurücksetzen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
@@ -352,15 +334,15 @@ msgstr "Prod.Nr."
 #: includes/templates/invoices/global/micro/body.php:236
 #: includes/templates/invoices/simple/micro/body.php:101
 msgid "Subtotal"
-msgstr "Delsum"
+msgstr "Zwischensumme"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:414
 msgid "Tax (item)"
-msgstr "Skatt (element)"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:426
 msgid "Tax (total)"
-msgstr "Skatt (totalt)"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
@@ -374,71 +356,69 @@ msgstr "Rabatt"
 #: includes/templates/invoices/simple/micro/body.php:93
 #: includes/templates/invoices/simple/micro/body.php:109
 msgid "Shipping"
-msgstr "Frakt"
+msgstr "Lieferung"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:464
 msgid "General Options"
-msgstr "Generelle valg"
+msgstr "Allgemeine Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:470
 msgid "Invoice Number Options"
-msgstr "Alternativer for fakturanummer"
+msgstr "Rechnungsnummer Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:476
 msgid "Header Options"
-msgstr "Overskriftsvalg"
+msgstr "Header Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:482
 msgid "Body Options"
-msgstr "Hovedalternativer"
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:488
 msgid "Footer Options"
-msgstr "Footer valg"
+msgstr "Footer Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:494
 msgid "Visible Columns"
-msgstr "Synlige kolonner"
+msgstr "Sichtbare Spalten"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:500
 msgid "These are the general template options."
-msgstr "Dette er de generelle alternativene for malen."
+msgstr "Dies sind die allgemeinen template Optionen."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:501
 msgid "These are the invoice number options."
-msgstr "Dette er alternativene for fakturanummer."
+msgstr "Dies sind die Rechnungsnummer Optionen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:502
 msgid "The header will be visible on every page. "
-msgstr "Overskriften vil være synlig på alle sider. "
+msgstr "Der Header wird auf jeder Seite sichtbar sein."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:506
 msgid "The footer will be visible on every page."
-msgstr "Footeren vil vises på hver eneste side."
+msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:506
 msgid ""
 "<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the "
 "order payment method."
 msgstr ""
-"<b>Hint</b>: Bruk <code>[payment_method]</code> plassholder for å vise "
-"bestillingens betalingsmåte."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:509
 msgid "Enable or disable the columns."
-msgstr "Aktiver eller deaktiver kolonnene."
+msgstr "Aktiviere oder deaktiviere die Spalten."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:579
 msgid "File is invalid and contains either '..' or './'."
-msgstr "Filen er ugyldig og inneholder enten '...' eller './'."
+msgstr "Datei ist ungültig und enthält entweder '...' oder './'."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:586
 msgid "File is invalid and contains ':' after the first character."
-msgstr "Filen er ugyldig og inneholder ':' etter den første bokstaven."
+msgstr "Datei ist ungültig und enthält ':' nach dem ersten Buchstaben."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:595
 msgid "File should be less then 2MB."
-msgstr "Filen bør være under 2 megabyte."
+msgstr "Datei sollte kleiner als 2MB sein."
 
 #: includes/be-woocommerce-pdf-invoices.php:126
 #, php-format
@@ -446,12 +426,10 @@ msgid ""
 "Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
 "PDF Invoices</strong></a>."
 msgstr ""
-"Supert! <a href=\"%s\">La oss starte å konfigurere <strong>WooCommerce PDF "
-"Faktura</strong></a>."
 
 #: includes/be-woocommerce-pdf-invoices.php:136
 msgid "Settings"
-msgstr "Innstillinger"
+msgstr "Einstellungen"
 
 #: includes/be-woocommerce-pdf-invoices.php:137
 msgid "Premium"
@@ -459,7 +437,7 @@ msgstr "Premium"
 
 #: includes/be-woocommerce-pdf-invoices.php:182
 msgid "Invalid request"
-msgstr ""
+msgstr "Ungültige Anfrage"
 
 #: includes/be-woocommerce-pdf-invoices.php:185
 msgid "Invalid order ID"
@@ -471,11 +449,11 @@ msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:218
 msgid "General"
-msgstr "Generelt"
+msgstr "Allgemein"
 
 #: includes/be-woocommerce-pdf-invoices.php:242
 msgid "Invoices"
-msgstr "PDF Faktura"
+msgstr "Rechnungen"
 
 #: includes/be-woocommerce-pdf-invoices.php:281
 #, php-format
@@ -483,58 +461,56 @@ msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
 "%s★★★★★%s rating. A huge thank you in advance!"
 msgstr ""
-"Om du liker <strong>WooCommerce PDF Faktura</strong>, vennligst gi oss en "
-"%s★★★★★%s vurdering. På forhånd tusen takk!"
 
 #: includes/be-woocommerce-pdf-invoices.php:282
 #, php-format
 msgid "Version %s"
-msgstr "Versjon %s"
+msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:356
 msgid "PDF Invoice"
-msgstr "PDF Faktura"
+msgstr "PDF Rechnung"
 
 #: includes/be-woocommerce-pdf-invoices.php:382
 msgid "Invoiced on:"
-msgstr "Sendt:"
+msgstr "In Rechnung gestellt am:"
 
 #: includes/be-woocommerce-pdf-invoices.php:386
 msgid "Invoice number:"
-msgstr "Fakturanummer:"
+msgstr "Rechnungsnummer:"
 
 #: includes/be-woocommerce-pdf-invoices.php:424
 msgid "View invoice"
-msgstr "Vis faktura"
+msgstr "Rechnung anzeigen"
 
 #: includes/be-woocommerce-pdf-invoices.php:424
 msgid "View"
-msgstr "Vis"
+msgstr "Anzeigen"
 
 #: includes/be-woocommerce-pdf-invoices.php:425
 msgid "Cancel invoice"
-msgstr "Slett faktura"
+msgstr "Rechnung stornieren"
 
 #: includes/be-woocommerce-pdf-invoices.php:425
 msgid "Cancel"
-msgstr "Slett"
+msgstr "abbrechen"
 
 #: includes/be-woocommerce-pdf-invoices.php:427
 msgid "Are you sure to delete the invoice?"
-msgstr "Er du sikker på at du vil slette fakturaen?"
+msgstr "Bist du dir sicher, dass du die Rechnung löschen willst?"
 
 #: includes/be-woocommerce-pdf-invoices.php:430
 msgid "Create invoice"
-msgstr "Opprett faktura"
+msgstr "Rechnung erstellen"
 
 #: includes/be-woocommerce-pdf-invoices.php:430
 msgid "Create"
-msgstr "Opprett"
+msgstr "Erstellen"
 
 #: includes/be-woocommerce-pdf-invoices.php:453
 #, php-format
 msgid "Invoice %s (PDF)"
-msgstr "Faktura %s (PDF)"
+msgstr "Rechnung %s (PDF)"
 
 #: includes/be-woocommerce-pdf-invoices.php:563
 #, php-format
@@ -545,102 +521,87 @@ msgid ""
 "target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
 "done it!</a>"
 msgstr ""
-"Du har brukt <b>WooCommerce PDF Faktura</b> en stund nå. Vi trenger virkelig "
-"din ★★★★★ vurdering. Det vil virkelig støtte fremtidig utvikling. På forhånd "
-"tusen takk, og fortsett det fantastiske arbeidet! <br /> <a href='%s' "
-"target='_blank'>Ja, jeg skal gjøre det med en gang!</a> - <a href='%s'>Nei, "
-"jeg har allerede gjort det!</a>"
 
 #: includes/class-bewpi-invoice.php:48
 msgid ""
 "Whoops, no template found. Please select a template on the Template settings "
 "page first."
 msgstr ""
-"Ooops! Ingen mal ble funnet. Vennligt velg en mal under innstillinger først."
 
 #: includes/partials/settings-sidebar.php:2
 msgid "WooCommerce PDF Invoices Premium"
-msgstr "WooCommerce PDF Faktura Premium"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:4
 msgid ""
 "This plugin offers a premium version which comes with the following features:"
 msgstr ""
-"Denne utvidelsen tilbyr også en premium versjon som kommer med følgende "
-"funksjoner:"
 
 #: includes/partials/settings-sidebar.php:5
 msgid "Bill periodically by generating and sending global invoices."
-msgstr "Fakturer periodisk ved å generere og sende globale fakturaer."
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:6
 msgid "Add additional PDF's to customer invoices."
-msgstr "Legg til flere PDFer til kundefakturaer."
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:7
 msgid "Send customer invoices directly to suppliers and others."
-msgstr "Send kundefakturaer direkte til leverandører og andre."
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:8
 #, php-format
 msgid ""
 "Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
 msgstr ""
-"Kompatibel med <a href=\"%s\">WooCommerce Subscriptions</a> utvidelses e-"
-"poster."
 
 #: includes/partials/settings-sidebar.php:10
 msgid "Learn more"
-msgstr "Les mer"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:13
 msgid "Stay up-to-date"
-msgstr "Hold deg oppdatert"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:17
 msgid ""
 "We're constantly developing new features, stay up-to-date by subscribing to "
 "our newsletter."
 msgstr ""
-"Vi jobber kontinuerlig med å utvikle nye funksjoner, så hold deg oppdatert "
-"ved å melde deg på nyhetsbrevet vårt."
 
 #: includes/partials/settings-sidebar.php:23
 msgid "Your email address"
-msgstr "Din e-post adresse"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:29
 msgid "Signup"
-msgstr "Registrer"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:32
 msgid "No spam, ever. Unsubscribe at any time"
-msgstr "Ingen spam, aldri. Du kan melde deg av når som helst."
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:41
 msgid "About"
-msgstr "Om"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:43
 msgid ""
 "This plugin is an open source project wich aims to fill the invoicing gap of "
 "<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
 msgstr ""
-"Denne utvidelsen er i åpen klidekode og har som mål om å legge til "
-"funksonaliteten med fakturering som mangler i <a href=\"http://www.woothemes."
-"com/woocommerce\">WooCommerce</a>."
 
 #: includes/partials/settings-sidebar.php:45
 msgid "<b>Version</b>: "
-msgstr "<b>Versjon</b>: "
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:47
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
-msgstr "<b>Skaper</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:50
 msgid "Support"
-msgstr "Hjelp"
+msgstr "Hilfe"
 
 #: includes/partials/settings-sidebar.php:52
 msgid ""
@@ -650,176 +611,339 @@ msgid ""
 "rate=5#postform\">★★★★★</a> rating and vote for <a href=\"https://wordpress."
 "org/plugins/woocommerce-pdf-invoices/\">works</a>."
 msgstr ""
-"Vi vil aldri be om donasjoner, men for å garantere fremtidig utvikler, vi "
-"trenger hjelpen din. Vennligst vis oss din takknemlighet ved å legge igjen "
-"en <a href=\"https://wordpress.org/support/view/plugin-reviews/woocommerce-"
-"pdf-invoices?rate=5#postform\">★★★★★</a> vurdering og stem på <a href="
-"\"https://wordpress.org/plugins/woocommerce-pdf-invoices/\">arbeidet</a>."
 
 #: includes/partials/settings-sidebar.php:72
 msgid ""
 "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
 msgstr ""
-"Sjekk ut denne fantastiske og helt gratis utvidelsen WooCommerce PDF Faktura "
-"for WordPress!"
 
 #: includes/partials/settings-sidebar.php:77
 msgid "Need Help?"
-msgstr "Trenger du hjelp?"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:79
 msgid "Frequently Asked Questions"
-msgstr "Ofte stilte spørsmål"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:80
 msgid "Support forum"
-msgstr "Supportforum"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:81
 msgid "Request a feature"
-msgstr "Foreslå en ny funksjon"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:82
 msgid "Email us"
-msgstr "Send oss en e-post"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
 msgid "Invoice to"
-msgstr "Kunde"
+msgstr "Rechnung an"
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
-msgstr "Telefon: %s"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
 msgid "Ship to"
-msgstr "Leveringsadresse"
+msgstr "Lieferadresse"
 
 #: includes/templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
-msgstr "Global faktura"
+msgstr "Global Invoice"
 
 #: includes/templates/invoices/global/micro/body.php:40
 #: includes/templates/invoices/simple/micro/body.php:44
 msgid "Description"
-msgstr "Produkt"
+msgstr "Beschreibung"
 
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:52
 msgid "Cost"
-msgstr "Pris"
+msgstr "Preis"
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:54
 msgid "Qty"
-msgstr "Ant"
+msgstr "Anzahl"
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:60
 msgid "VAT"
-msgstr "MVA"
+msgstr "Mehrwertsteuer"
 
 #: includes/templates/invoices/global/micro/body.php:67
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:71
 #: includes/templates/invoices/simple/micro/body.php:145
 msgid "Total"
-msgstr "Totalt"
+msgstr "Gesamt"
 
 #: includes/templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
-msgstr "Ordre #%d - %s"
+msgstr "Bestellung #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
 msgid "Fee"
-msgstr "Avgift"
+msgstr "Gebühr"
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152
 msgid "Refunded"
-msgstr "Refundert"
+msgstr "Erstattet"
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
 #, php-format
 msgid "%s of %s"
-msgstr "%s av %s"
+msgstr ""
 
 #: includes/templates/invoices/simple/micro/body.php:22
 msgid "Invoice"
-msgstr "Faktura"
+msgstr "Rechnung"
 
 #: includes/templates/invoices/simple/micro/body.php:25
-#, php-format
+#, fuzzy, php-format
 msgid "Order Number: %s"
-msgstr "Ordrenummer: %s"
+msgstr "Bestellungsnummer:"
 
 #: includes/templates/invoices/simple/micro/body.php:26
 #, php-format
 msgid "Order Date: %s"
-msgstr "Ordre dato: %s"
+msgstr "Bestellungsdatum: %s"
 
 #: includes/templates/invoices/simple/micro/body.php:289
 #: includes/templates/invoices/simple/micro/body.php:294
 msgid "Customer note"
-msgstr "Kundenotat"
+msgstr "Kundenkommentar"
+
+#~ msgid "Purchase email"
+#~ msgstr "Käufer Email"
 
 #~ msgid ""
-#~ "<b>Note</b>: If your logo doesn't show up, try to enable "
-#~ "<code>allow_url_fopen</code>."
+#~ "Enter your email account from <a href=\"http://wcpdfinvoices.com"
+#~ "\">wcpdfinvoices.com</a>."
 #~ msgstr ""
-#~ "<b>NB</b>: Om logoen din ikke vises, forsøk å aktivere "
-#~ "<code>allow_url_fopen</code>."
+#~ "Enter your email account from <a href=\"http://wcpdfinvoices.com"
+#~ "\">wcpdfinvoices.com</a>."
+
+#~ msgid "License"
+#~ msgstr "Lizenz"
+
+#~ msgid ""
+#~ "Enter your license key from <a href=\"http://wcpdfinvoices.com"
+#~ "\">wcpdfinvoices.com</a> to receive updates."
+#~ msgstr ""
+#~ "Gib deinen Lizenzschlüssel von <a href=\"http://wcpdfinvoices.com"
+#~ "\">wcpdfinvoices.com</a> ein um Updates zu erhalten."
+
+#~ msgid "Processing Renewal Order"
+#~ msgstr "Bearbeiten der erneuerten Bestellung"
+
+#~ msgid "Completed Renewal Order"
+#~ msgstr "Erneuerte Rechnung fertiggestellt"
+
+#~ msgid "Customer Renewal Invoice"
+#~ msgstr "Erneuerte Kundenrechnung"
+
+#~ msgid "Attach to New Renewal Order Email"
+#~ msgstr "An neue erneuerte Bestell-Email anhängen"
+
+#~ msgid "PDF attachment"
+#~ msgstr "PDF-Anhang"
+
+#~ msgid "Add for example a PDF with your terms & conditions."
+#~ msgstr "Hänge ein PDF-Dokument an, wie zum Beispiel deine AGBs."
+
+#~ msgid "Suppliers"
+#~ msgstr "Lieferanten"
+
+#~ msgid ""
+#~ "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by "
+#~ "simply adding there Email It In email addresses. Email addresses need to "
+#~ "be seperated by comma's."
+#~ msgstr ""
+#~ "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by "
+#~ "simply adding there Email It In email addresses. Email addresses need to "
+#~ "be seperated by comma's."
+
+#~ msgid ""
+#~ "Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
+#~ "generate a global invoice from within there account</div>"
+#~ msgstr ""
+#~ "Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
+#~ "generate a global invoice from within there account</div>"
+
+#~ msgid "Customer generation period"
+#~ msgstr "Customer generation period"
+
+#~ msgid ""
+#~ "Should your customers have the ability to generate a global invoice by "
+#~ "month or by year?<br/><strong>Note:</strong> Customer generation should "
+#~ "be enabled."
+#~ msgstr ""
+#~ "Should your customers have the ability to generate a global invoice by "
+#~ "month or by year?<br/><strong>Note:</strong> Customer generation should "
+#~ "be enabled."
+
+#~ msgid "Month"
+#~ msgstr "Monat"
+
+#~ msgid "Year"
+#~ msgstr "Jahr"
+
+#~ msgid "Send to your Cloud Storage"
+#~ msgstr "An Cloud Storage senden"
+
+#~ msgid "Email to customer"
+#~ msgstr "Email an Kunden"
+
+#~ msgid "Email to supplier(s)"
+#~ msgstr "Email an Lieferanten"
+
+#~ msgid "Email subject"
+#~ msgstr "Email Betreff"
+
+#~ msgid "Subject for the global invoice email."
+#~ msgstr "Subject for the global invoice email."
+
+#~ msgid "Email message"
+#~ msgstr "Email Nachricht"
+
+#~ msgid "Message for the global invoice email."
+#~ msgstr "Message for the global invoice email."
+
+#~ msgid "Premium Options"
+#~ msgstr "Premium Optionen"
+
+#~ msgid "Woocommerce Subscriptions Email Options"
+#~ msgstr "Woocommerce Subscriptions Email Options"
+
+#~ msgid "Attachment Options"
+#~ msgstr "Anhangs Optionen"
+
+#~ msgid "Supplier Options"
+#~ msgstr "Lieferanten Optionen"
+
+#~ msgid "Global Invoice Options"
+#~ msgstr "Global Invoice Options"
+
+#~ msgid ""
+#~ "Attach PDF invoice to <a href=\"http://www.woothemes.com/products/"
+#~ "woocommerce-subscriptions/\">WooCommerce Subscriptions</a> email. Plugin "
+#~ "should be activated in order to work."
+#~ msgstr ""
+#~ "PDF Rechnung an <a href=\"http://www.woothemes.com/products/woocommerce-"
+#~ "subscriptions/\">WooCommerce Subscriptions</a> email anhängen. Plugin "
+#~ "sollte aktiviert sein um die Funktion zu ermöglichen."
+
+#~ msgid "Attach a PDF to the invoice."
+#~ msgstr "Ein PDF-Dokument an die Rechnung anhängen."
+
+#~ msgid "Send customer invoice automatically to your supplier(s)."
+#~ msgstr "Kunden Rechnung automatisch an Lieferanten senden."
+
+#~ msgid ""
+#~ "Generate global invoices on Orders page by selecting multiple orders and "
+#~ "applying action or let customers generate periodically from My Account "
+#~ "page."
+#~ msgstr ""
+#~ "Generate global invoices on Orders page by selecting multiple orders and "
+#~ "applying action or let customers generate periodically from My Account "
+#~ "page."
+
+#~ msgid "File to large."
+#~ msgstr "Datei zu groß."
+
+#~ msgid "Only PDF files are allowed."
+#~ msgstr "Es sind lediglich PDF-Dokumente zulässig."
+
+#~ msgid "Remove"
+#~ msgstr "Entfernen"
+
+#~ msgid "Choose"
+#~ msgstr "Auswählen"
+
+#~ msgid "Active"
+#~ msgstr "Aktiv"
+
+#~ msgid "Inactive"
+#~ msgstr "Inaktiv"
+
+#~ msgid "Something went wrong."
+#~ msgstr "Uuhps! Da ist wohl etwas schief gelaufen."
+
+#~ msgid "No orders found."
+#~ msgstr "Keine Bestellungen gefunden."
+
+#~ msgid ""
+#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
+#~ "Get the free version (%s+) and try again.</p>"
+#~ msgstr ""
+#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
+#~ "Get the free version (%s+) and try again.</p>"
+
+#~ msgid "Generate global invoice"
+#~ msgstr "Generate global invoice"
+
+#~ msgid "Please select more then one order."
+#~ msgstr "Bitte mehr als eine Bestellungen auswählen."
+
+#~ msgid "Global invoice succesfully generated! "
+#~ msgstr "Global invoice succesfully generated! "
+
+#~ msgid "Generate Global Invoice"
+#~ msgstr "Generate Global Invoice"
+
+#~ msgid "Select a month"
+#~ msgstr "Monat auswählen"
+
+#~ msgid "Select a year"
+#~ msgstr "Jahr auswählen"
+
+#~ msgid "Generate invoice"
+#~ msgstr "Rechnung generieren."
 
 #~ msgid "Feel free to use "
-#~ msgstr "Du kan også bruke "
+#~ msgstr "Feel free to use "
+
+#~ msgid "Subtotal will be including tax and excluding discount and shipping."
+#~ msgstr ""
+#~ "Zwischensumme enthält Mehrwertsteuer aber keine Rabatte oder Lieferkosten."
 
 #~ msgid "Intro text"
-#~ msgstr "Introduksjonstekst"
+#~ msgstr "Einleitungstext"
 
 #~ msgid ""
 #~ "Reset the invoice counter and start with next invoice number. %s %sNote:"
 #~ "%s Only available with sequential numbering type and you need to check "
 #~ "the checkbox to actually reset the value."
 #~ msgstr ""
-#~ "TIlbakestill fakturatelleren og start med neste fakturanummer. %s %sMerk:"
-#~ "%s Kun tilgjengelig med sekvensielle nummer og du må huke av boksen for å "
-#~ "faktisk tilbakestille verdien."
-
-#~ msgid ""
-#~ "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s "
-#~ "is required and slashes aren't supported."
-#~ msgstr ""
-#~ "Bruk en av disse kortkodene; %s %s %s %s %s og %s. %s %sMerk:%s %s er "
-#~ "obligatorisk."
-
-#~ msgid "Tax"
-#~ msgstr "MVA"
-
-#~ msgid "The footer will be visible on every page. "
-#~ msgstr "Footeren vil være synlig på alle sider. "
-
-#~ msgid "%sPayment%s via"
-#~ msgstr "%sBetalt%s med"
+#~ "Reset the invoice counter and start with next invoice number. %s %sNote:"
+#~ "%s Only available with sequential numbering type and you need to check "
+#~ "the checkbox to actually reset the value."
 
 #~ msgid ""
 #~ "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s "
 #~ "is required."
 #~ msgstr ""
-#~ "Bruk en av disse kortkodene; %s %s %s %s %s og %s. %s %sMerk:%s %s er "
-#~ "obligatorisk."
+#~ "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s "
+#~ "is required."
 
-#~ msgid "Generate global invoice"
-#~ msgstr "Opprett global faktura"
+#~ msgid "Tax"
+#~ msgstr "Steuer"
 
-#~ msgid "Subtotal will be including tax and excluding discount and shipping."
-#~ msgstr "Delsummen vil være inkludert mva, men ekskludert rabatt og frakt."
+#~ msgid "The footer will be visible on every page. "
+#~ msgstr "Der Footer wird auf jeder Seite sichtbar sein."
 
 #~ msgid ""
 #~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
@@ -827,222 +951,227 @@ msgstr "Kundenotat"
 #~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
 #~ "away!</a> - <a href='%s'>No, already done it!</a>"
 #~ msgstr ""
-#~ "Takk for at du har benyttet <b>WooCommerce PDF Invoices</b> en liten "
-#~ "stund allerede. Vennligst vis oss din støtte ved å vurdere utvidelsen med "
-#~ "★★★★★. Tusen takk for støtten din! <br /> <a href='%s' "
-#~ "target='_blank'>Ja, jeg skal gjøre det med en gang!!</a> - <a "
-#~ "href='%s'>Jeg har allerede gjort det!</a>"
+#~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "Please show us your appreciation by leaving a ★★★★★ rating. A huge thank "
+#~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
+#~ "away!</a> - <a href='%s'>No, already done it!</a>"
+
+#~ msgid "%sPayment%s via"
+#~ msgstr "Bezahlt per"
 
 #~ msgid "PAID"
-#~ msgstr "BETALT"
+#~ msgstr "BEZAHLT"
 
 #~ msgid "UNPAID"
-#~ msgstr "IKKE BETALT"
+#~ msgstr "NICHT BEZAHLT"
 
 #~ msgid "Order Number %s"
-#~ msgstr "Bestillingsnummer: %s"
+#~ msgstr "Bestellungsnummer"
 
 #~ msgid "Order Date %s"
-#~ msgstr "Bestillingsdato: %s"
+#~ msgstr "Bestellungsdatum"
 
 #~ msgid "Download invoice (PDF)"
-#~ msgstr "Last ned faktura (PDF)"
+#~ msgstr "Download Rechnung (PDF)"
 
 #~ msgid ""
 #~ "Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is "
 #~ "required."
 #~ msgstr ""
-#~ "Du kan også bruke plassholderne %s %s %s %s og %s. %s %sMerk:%s %s er "
-#~ "obligatorisk."
+#~ "Feel free to use the placeholders %s %s %s %s and %s. %s %sNote:%s %s is "
+#~ "required."
 
 #~ msgid "VAT %s"
-#~ msgstr "MVA %s"
+#~ msgstr "Mehrwertsteuer %s"
 
 #~ msgid "General Settings"
-#~ msgstr "Algemene Opties"
+#~ msgstr "Allgemeine Einstellungen"
 
 #~ msgid ""
 #~ "Automatically send invoice to Google Drive, Egnyte, Dropbox or OneDrive"
-#~ msgstr "Verzend automatisch naar Google Drive, Egnyte, Dropbox of OneDrive"
+#~ msgstr ""
+#~ "Sende Rechnung automatisch an Google Drive, Egnyte, Dropbox of OneDrive"
 
 #~ msgid "For bookkeeping purposes."
-#~ msgstr "Voor boekhoudkundige doeleinden."
+#~ msgstr "Zu Buchhaltungszwecken."
 
 #~ msgid "Signup at %s and enter your account below."
-#~ msgstr "Meld je aan op %s en geef je account onderstaand in."
+#~ msgstr "Melde dich an bei %s und gib unten deine Account ein."
 
 #~ msgid "Enter your %s account."
-#~ msgstr "Het %s account."
+#~ msgstr "Enter your %s account."
 
 #~ msgid "Invalid type of Email."
-#~ msgstr "Ongeldig type Email."
+#~ msgstr "Ungültiger Emailtyp."
 
 #~ msgid "Please don't try to change the values."
-#~ msgstr "Probeer de waardes niet te wijzigen a.u.b."
+#~ msgstr "Bitte versuche nicht die Werte zu ändern."
 
 #~ msgid "Invalid Email address."
-#~ msgstr "Ongeldig Emailadres."
+#~ msgstr "Ungültige Email-Adresse."
 
 #~ msgid "Allowed tags: "
-#~ msgstr "Toegestane tags: "
+#~ msgstr "Allowed tags: "
 
 #~ msgid "Template Settings"
-#~ msgstr "Template Opties"
+#~ msgstr "Template Einstellungen"
 
 #~ msgid "Invoice number type"
-#~ msgstr "Type factuurnummer"
+#~ msgstr "Rechnungsnummerntyp"
 
 #~ msgid "Next invoice number"
-#~ msgstr "Eerstvolgende factuurnummer"
+#~ msgstr "Nächste Rechnungsnummer"
 
 #~ msgid "Number of digits"
-#~ msgstr "Aantal cijfers"
+#~ msgstr "Anzahl der Nachkommastellen"
 
 #~ msgid "Invoice number prefix"
-#~ msgstr "Factuurnummer voorvoegsel"
+#~ msgstr "Rechnungsnummer Vorsilbe"
 
 #~ msgid "Invoice number suffix"
-#~ msgstr "Factuurnummer achtervoegsel"
+#~ msgstr "Rechnungsnummer Nachsilbe"
 
 #~ msgid "Invoice number format"
-#~ msgstr "Factuurnummer format"
+#~ msgstr "Rechnungsnummernformat"
 
 #~ msgid "Reset on 1st January"
-#~ msgstr "Reset op 1 januari"
+#~ msgstr "Am 1. Januar zurücksetzen"
 
 #~ msgid "Invoice date format"
-#~ msgstr "Factuur datumnotatie"
+#~ msgstr "Format des Rechnungsdatums"
 
 #~ msgid "Order date format"
-#~ msgstr "Notatie bestellingsdatum"
+#~ msgstr "Format des Bestellungsdatums"
 
 #~ msgid "Show SKU"
-#~ msgstr "Toon SKU"
+#~ msgstr "Zeige Sorte"
 
 #~ msgid "Show discount"
-#~ msgstr "Toon korting"
+#~ msgstr "Zeige Rabatt"
 
 #~ msgid "Show subtotal"
-#~ msgstr "Toon subtotaal"
+#~ msgstr "Zeige Zwischensumme"
 
 #~ msgid "Show tax"
-#~ msgstr "Toon BTW"
+#~ msgstr "Zeige Steuer"
 
 #~ msgid "Show shipping"
-#~ msgstr "Toon verzendkosten"
+#~ msgstr "Zeige Lieferkosten"
 
 #~ msgid "Color theme of the invoice."
-#~ msgstr "Kleurthema van de factuur."
+#~ msgstr "Farb-theme der Rechnung."
 
 #~ msgid ""
 #~ "Please upload an image less then 200Kb and make sure it's a jpeg, jpg or "
 #~ "png."
 #~ msgstr ""
-#~ "Upload een afbeelding van maximaal 200Kb en zorg dat het een jpeg, jpg of "
-#~ "png is."
+#~ "Bitte lade ein Bild kleiner als 200Kb hoch. Erlaubt sind jpeg, jpg oder "
+#~ "png -Formate."
 
 #~ msgid "Invoice number to use for next invoice."
-#~ msgstr "Factuurnummer te gebruiken voor de volgende factuur."
+#~ msgstr "Rechnungsnummer für nächste Rechnung verwenden."
 
 #~ msgid "Number of zero digits."
-#~ msgstr "Aantal nullen."
+#~ msgstr "Anzahl der Nullen."
 
 #~ msgid "Prefix text for the invoice number. Not required."
-#~ msgstr "Voorvoegsel van het factuurnummer is niet verplicht."
+#~ msgstr "Prefix text for the invoice number. Not required."
 
 #~ msgid "Suffix text for the invoice number. Not required."
-#~ msgstr "Achtervoegsel van het factuurnummer is niet verplicht."
+#~ msgstr "Suffix text for the invoice number. Not required."
 
 #~ msgid "Available placeholder are %s %s %s %s and %s. %s is required."
-#~ msgstr "Beschikbare aanduidingen zijn %s %s %s %s of %s. %s is verplicht."
+#~ msgstr ""
+#~ "Vorhandene Platzhalter sind %s %s %s %s und %s. %s ist verpflichtend."
 
 #~ msgid "Reset on the first of January."
-#~ msgstr "Reset op de eerste van januari."
+#~ msgstr "Am 1. Januar zurücksetzen"
 
 #~ msgid "%sFormat%s of the date. Examples: %s or %s."
-#~ msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s."
+#~ msgstr "%sFormat%s vom Datum. Beispiele: %s oder %s."
 
 #~ msgid "Order date %sformat%s. Examples: %s or %s."
-#~ msgstr "Notatie %sbestellingsdatum%s. Voorbeelden: %s of %s."
+#~ msgstr "Bestellungsdatum %sFormat%s. Beispiele: %s oder %s."
 
 #~ msgid "Invalid template."
-#~ msgstr "Ongeldige template."
+#~ msgstr "Ungültiges Template."
 
 #~ msgid "Invalid color theme code."
-#~ msgstr "Ongeldige kleurcode."
+#~ msgstr "Ungültiger Farb-Theme Code."
 
 #~ msgid "Invalid company name."
-#~ msgstr "Ongeldige bedsrijfsnaam."
+#~ msgstr "Ungültiger Firmenname."
 
 #~ msgid "Invalid input into one of the textarea's."
-#~ msgstr "Ongeldige invoer in een van de textarea's."
+#~ msgstr "Ungültige Eingabe in eines der Textfelder."
 
 #~ msgid "Invalid type of invoice number."
-#~ msgstr "Ongeldig type factuurnummer."
+#~ msgstr "Ungültiger Rechnungsnummern-Typ."
 
 #~ msgid "Invalid (next) invoice number."
-#~ msgstr "Ongeldig (eerstvolgend) factuurnummer."
+#~ msgstr "Ungültige (nächste) Rechnungsnummer."
 
 #~ msgid "Invalid invoice number digits."
-#~ msgstr "Ongeldige factuurnummer cijfers."
+#~ msgstr "Ungültige Rechnungsnummer-Ziffern."
 
 #~ msgid "The [number] placeholder is required as invoice number format."
-#~ msgstr "De aanduiding [number] is vereist."
+#~ msgstr ""
+#~ "Der [Nummer] Platzhalter ist als Rechnungsnummern-Format erforderlich."
 
 #~ msgid "Invalid invoice number format."
-#~ msgstr "Ongeldig factuurnummer format."
+#~ msgstr "Ungültiges Rechnungsnummern-Format."
 
 #~ msgid "Invalid date format."
-#~ msgstr "Ongeldige datumnotatie."
+#~ msgstr "Ungültiges Datums-Format."
 
 #~ msgid "Please upload image with extension jpg, jpeg or png."
-#~ msgstr "Gelieve te uploaden een afbeelding met extensie jpg, jpeg of png."
+#~ msgstr "Please upload image with extension jpg, jpeg or png."
 
 #~ msgid "Quantity"
-#~ msgstr "Aantal"
+#~ msgstr "Anzahl"
 
 #~ msgid "Unit price"
-#~ msgstr "Prijs per stuk"
+#~ msgstr "Stückpreis"
 
 #~ msgid ""
 #~ "Use [prefix], [suffix] and [number] as placeholders. [number] is required."
 #~ msgstr ""
-#~ "Gebruik [prefix], [suffix] en [number] als aanduidingen. [number] is "
-#~ "verplicht."
+#~ "Benutze [prefix], [suffix] und [number] als Platzhalter. [number] ist "
+#~ "erforderlich."
 
 #~ msgid "Signup at %s and enter your account beyond."
-#~ msgstr "Meld je aan op %s en vul je account onderstaand in."
+#~ msgstr "Signup at %s and enter your account beyond."
 
 #~ msgid "%sFormat%s of the date. Examples: %s or %s"
-#~ msgstr "%sFormat%s van de datum. Bijvoorbeeld: %s of %s"
+#~ msgstr "%sFormat%s des Datums. Beispiele: %s oder %s"
 
 #~ msgid "Show invoice"
-#~ msgstr "Toon factuur"
+#~ msgstr "Zeige Rechnung"
 
 #~ msgid "%sFormat%s of the date."
-#~ msgstr "%sFormat%s van de datum."
+#~ msgstr "%sFormat%s des Datums."
 
 #~ msgid "Use [prefix], [suffix] and [number] as placeholders."
-#~ msgstr "Gebruik [suffix], [prefix] en [number] als aanduidingen."
+#~ msgstr "Benutze [suffix], [prefix] und [number] als Platzhalter."
 
 #~ msgid "Choose the color witch fits your company."
-#~ msgstr "Kies uw bedrijfskleur."
+#~ msgstr "Wähle eine Farbe die zu deiner Firma passt."
 
 #~ msgid ""
 #~ "Choose the format for the invoice number. Use [prefix], [suffix] and "
 #~ "[number] as placeholders."
 #~ msgstr ""
-#~ "Kies het formaat voor het factuurnummer. Gebruik [prefix], [suffix] en "
-#~ "[number] als aanduidingen."
+#~ "Wähle das Format der Rechnungsnummer. Benutze [prefix], [suffix] und "
+#~ "[number] als Platzhalter."
 
 #~ msgid "Text to greet, congratulate or thank the customer. "
-#~ msgstr "Tekst om de klant te groeten, te feliciteren of te bedanken. "
+#~ msgstr "Text um Kunden zu begrüßen, gratulieren oder danken. "
 
 #~ msgid "Some text"
-#~ msgstr "De vertaling werkt!!!!"
+#~ msgstr "Etwas Text"
 
 #~ msgid "Text to greet, congratulate or thank the customer."
-#~ msgstr "Tekst om de klant te begroeten, te bedanken of te feliciteren."
+#~ msgstr "Text um Kunden zu begrüßen, gratulieren oder danken. "
 
 #~ msgid "Start all over on the first of January."
-#~ msgstr "Opnieuw beginnen op de eerste van januari."
+#~ msgstr "Am 1. Januar komplett neu beginnen."

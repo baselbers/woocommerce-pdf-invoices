@@ -82,4 +82,3 @@
 		<li><a href="mailto:baselbers@hotmail.com"><?php _e( 'Email us', 'woocommerce-pdf-invoices' ); ?></a></li>
 	</ul>
 </aside>
-<?php

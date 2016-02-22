@@ -464,15 +464,28 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	     * @return string
 	     */
 	    protected function get_template_dir( $template_name ) {
+			// check if a custom template exists.
 		    $custom_template_dir = BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
-		    if ( file_exists( $custom_template_dir ) )
-		         return $custom_template_dir;
+		    if ( file_exists( $custom_template_dir ) ) {
+				return $custom_template_dir;
+			}
 
-		    $template_dir = BEWPI_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
-		    if ( file_exists( $template_dir ) )
-			    return $template_dir;
+			// check if we need to get the global invoice template dir from the premium plugin dir.
+			if ( $this->type === 'global' ) {
+				$template_dir = BEWPIPREMIUM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+				if ( file_exists( $template_dir ) )
+					return $template_dir;
+			}
 
-		    return '';
+			// check if we need to get the simple invoice template dir from the free plugin dir.
+			if ( $this->type === 'simple' ) {
+				$template_dir = BEWPI_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+				if ( file_exists( $template_dir ) ) {
+					return $template_dir;
+				}
+			}
+
+		    return "";
 	    }
 
 	    public function get_full_path() {

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2016-02-10 21:03+0100\n"
-"PO-Revision-Date: 2016-02-10 21:03+0100\n"
+"POT-Creation-Date: 2016-02-22 20:27+0100\n"
+"PO-Revision-Date: 2016-02-22 20:30+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -68,6 +68,7 @@ msgid "Remove logo"
 msgstr "Verwijder logo"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:115
 msgid "Attach to Email"
 msgstr "Voeg toe aan Email"
 
@@ -84,6 +85,7 @@ msgid "Customer invoice"
 msgstr "Klant factuur"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:106
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:135
 msgid "Do not attach"
 msgstr "Niet bijvoegen"
 
@@ -345,12 +347,14 @@ msgstr "Reset op 1 januari"
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
 #: includes/templates/invoices/simple/micro/body.php:48
+#: templates/invoices/global/micro/body.php:44
 msgid "SKU"
 msgstr "Productcode"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
 #: includes/templates/invoices/simple/micro/body.php:101
+#: templates/invoices/global/micro/body.php:236
 msgid "Subtotal"
 msgstr "Subtotaal"
 
@@ -365,6 +369,7 @@ msgstr "BTW (totaal)"
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
 #: includes/templates/invoices/simple/micro/body.php:85
+#: templates/invoices/global/micro/body.php:220
 msgid "Discount"
 msgstr "Korting"
 
@@ -373,6 +378,8 @@ msgstr "Korting"
 #: includes/templates/invoices/global/micro/body.php:244
 #: includes/templates/invoices/simple/micro/body.php:93
 #: includes/templates/invoices/simple/micro/body.php:109
+#: templates/invoices/global/micro/body.php:228
+#: templates/invoices/global/micro/body.php:244
 msgid "Shipping"
 msgstr "Verzending"
 
@@ -440,6 +447,228 @@ msgstr "Bestand is niet valide en bevat ':' na het eerste teken."
 msgid "File should be less then 2MB."
 msgstr "Bestand moet minder dan 2MB zijn."
 
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:92
+msgid "Purchase email"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:97
+msgid ""
+"Enter your email account from <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a>."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:103
+msgid "License"
+msgstr "Licentie"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:108
+msgid ""
+"Enter your license key from <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a> to receive updates."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:123
+msgid "Processing Renewal Order"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:127
+msgid "Completed Renewal Order"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:131
+msgid "Customer Renewal Invoice"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:149
+msgid "Attach to New Renewal Order Email"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:157
+msgid "PDF attachment"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:162
+msgid "Add for example a PDF with your terms & conditions."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:168
+msgid "Suppliers"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:173
+msgid ""
+"<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by simply "
+"adding there Email It In email addresses. Email addresses need to be "
+"seperated by comma's."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:184
+msgid ""
+"Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
+"generate a global invoice from there account</div>"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:191
+msgid "Customer generation period"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:196
+msgid ""
+"Should your customers have the ability to generate a global invoice by month "
+"or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:199
+msgid "Month"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:203
+msgid "Year"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:217
+msgid "Send to your Cloud Storage"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:229
+msgid "Email to customer"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:241
+msgid "Email to supplier(s)"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:248
+msgid "Email subject"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:253
+msgid "Subject for the global invoice email."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:260
+msgid "Email message"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:265
+msgid "Message for the global invoice email."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:279
+msgid "Premium Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:285
+msgid "Woocommerce Subscriptions Email Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:291
+msgid "Attachment Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:297
+msgid "Supplier Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:303
+msgid "Global Invoice Options"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:310
+msgid ""
+"Attach PDF invoice to <a href=\"http://www.woothemes.com/products/"
+"woocommerce-subscriptions/\">WooCommerce Subscriptions</a> email. Plugin "
+"should be activated in order to work."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:311
+msgid "Attach a PDF to the invoice."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:312
+msgid "Send customer invoice automatically to your supplier(s)."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:313
+msgid ""
+"Generate global invoices on Orders page by selecting multiple orders and "
+"applying action or let customers generate periodically from My Account page."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:407
+msgid "File to large."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:410
+msgid "Only PDF files are allowed."
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:422
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:424
+msgid "Choose"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:447
+msgid "Active"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:449
+msgid "Inactive"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:89
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr "Invalide aanroep"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:98
+#: includes/be-woocommerce-pdf-invoices-premium.php:121
+msgid "Something went wrong."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:109
+#: includes/be-woocommerce-pdf-invoices-premium.php:132
+msgid "No orders found."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:169
+#: includes/be-woocommerce-pdf-invoices.php:136
+msgid "Settings"
+msgstr "Opties"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:170
+#: includes/partials/settings-sidebar.php:50
+msgid "Support"
+msgstr "Ondersteuning"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:189
+#, php-format
+msgid ""
+"<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+"requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. Get "
+"the free version (%s+) and try again.</p>"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:195
+#: includes/be-woocommerce-pdf-invoices.php:137
+msgid "Premium"
+msgstr "Premium"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:210
+msgid "Generate global invoice"
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:264
+msgid "Please select more then one order."
+msgstr ""
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:360
+msgid "Global invoice successfully generated! "
+msgstr ""
+
 #: includes/be-woocommerce-pdf-invoices.php:126
 #, php-format
 msgid ""
@@ -447,18 +676,6 @@ msgid ""
 "PDF Invoices</strong></a>."
 msgstr ""
 "<a href=\"%s\">Configureer uw <strong>WooCommerce PDF Invoices</strong></a>."
-
-#: includes/be-woocommerce-pdf-invoices.php:136
-msgid "Settings"
-msgstr "Opties"
-
-#: includes/be-woocommerce-pdf-invoices.php:137
-msgid "Premium"
-msgstr "Premium"
-
-#: includes/be-woocommerce-pdf-invoices.php:182
-msgid "Invalid request"
-msgstr "Invalide aanroep"
 
 #: includes/be-woocommerce-pdf-invoices.php:185
 msgid "Invalid order ID"
@@ -472,11 +689,11 @@ msgstr "Toegang geweigerd"
 msgid "General"
 msgstr "Algemeen"
 
-#: includes/be-woocommerce-pdf-invoices.php:242
+#: includes/be-woocommerce-pdf-invoices.php:251
 msgid "Invoices"
 msgstr "Facturen"
 
-#: includes/be-woocommerce-pdf-invoices.php:281
+#: includes/be-woocommerce-pdf-invoices.php:290
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
@@ -485,57 +702,57 @@ msgstr ""
 "Als je tevreden bent met <strong>WooCommerce PDF Invoices</strong> laat dan "
 "a.u.b. een %s★★★★★%s beoordeling achter. Alvast bedankt!"
 
-#: includes/be-woocommerce-pdf-invoices.php:282
+#: includes/be-woocommerce-pdf-invoices.php:291
 #, php-format
 msgid "Version %s"
 msgstr "Versie %s"
 
-#: includes/be-woocommerce-pdf-invoices.php:356
+#: includes/be-woocommerce-pdf-invoices.php:365
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:382
+#: includes/be-woocommerce-pdf-invoices.php:391
 msgid "Invoiced on:"
 msgstr "Gefactureerd op:"
 
-#: includes/be-woocommerce-pdf-invoices.php:386
+#: includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoice number:"
 msgstr "Factuurnummer:"
 
-#: includes/be-woocommerce-pdf-invoices.php:424
+#: includes/be-woocommerce-pdf-invoices.php:433
 msgid "View invoice"
 msgstr "Toon factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:424
+#: includes/be-woocommerce-pdf-invoices.php:433
 msgid "View"
 msgstr "Bekijk"
 
-#: includes/be-woocommerce-pdf-invoices.php:425
+#: includes/be-woocommerce-pdf-invoices.php:434
 msgid "Cancel invoice"
 msgstr "Factuur annuleren"
 
-#: includes/be-woocommerce-pdf-invoices.php:425
+#: includes/be-woocommerce-pdf-invoices.php:434
 msgid "Cancel"
 msgstr "Annuleer"
 
-#: includes/be-woocommerce-pdf-invoices.php:427
+#: includes/be-woocommerce-pdf-invoices.php:436
 msgid "Are you sure to delete the invoice?"
 msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
 
-#: includes/be-woocommerce-pdf-invoices.php:430
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Create invoice"
 msgstr "Maak factuur"
 
-#: includes/be-woocommerce-pdf-invoices.php:430
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Create"
 msgstr "Aanmaken"
 
-#: includes/be-woocommerce-pdf-invoices.php:453
+#: includes/be-woocommerce-pdf-invoices.php:462
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Factuur %s (PDF)"
 
-#: includes/be-woocommerce-pdf-invoices.php:563
+#: includes/be-woocommerce-pdf-invoices.php:572
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
@@ -557,6 +774,22 @@ msgid ""
 msgstr ""
 "Oeps, geen template gevonden. Selecteer een template op de Template Opties "
 "pagina."
+
+#: includes/partials/customer-generation.php:1
+msgid "Generate Global Invoice"
+msgstr ""
+
+#: includes/partials/customer-generation.php:11
+msgid "Select a month"
+msgstr ""
+
+#: includes/partials/customer-generation.php:24
+msgid "Select a year"
+msgstr ""
+
+#: includes/partials/customer-generation.php:38
+msgid "Generate invoice"
+msgstr ""
 
 #: includes/partials/settings-sidebar.php:2
 msgid "WooCommerce PDF Invoices Premium"
@@ -638,10 +871,6 @@ msgstr "<b>Versie</b>:"
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 msgstr "<b>Auteur</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 
-#: includes/partials/settings-sidebar.php:50
-msgid "Support"
-msgstr "Ondersteuning"
-
 #: includes/partials/settings-sidebar.php:52
 msgid ""
 "We will never ask for donations, but to garantee future development, we do "
@@ -686,41 +915,49 @@ msgstr "Email ons"
 
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
+#: templates/invoices/global/micro/body.php:5
 msgid "Invoice to"
 msgstr "Facturatie aan"
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
+#: templates/invoices/global/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
 msgstr "Tel: %s"
 
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
+#: templates/invoices/global/micro/body.php:11
 msgid "Ship to"
 msgstr "Verzend naar"
 
 #: includes/templates/invoices/global/micro/body.php:22
+#: templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
 msgstr "Globale Factuur"
 
 #: includes/templates/invoices/global/micro/body.php:40
 #: includes/templates/invoices/simple/micro/body.php:44
+#: templates/invoices/global/micro/body.php:40
 msgid "Description"
 msgstr "﻿Beschrijving"
 
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:52
+#: templates/invoices/global/micro/body.php:48
 msgid "Cost"
 msgstr "Kosten"
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:54
+#: templates/invoices/global/micro/body.php:50
 msgid "Qty"
 msgstr "Aantal"
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:60
+#: templates/invoices/global/micro/body.php:56
 msgid "VAT"
 msgstr "BTW"
 
@@ -728,26 +965,32 @@ msgstr "BTW"
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:71
 #: includes/templates/invoices/simple/micro/body.php:145
+#: templates/invoices/global/micro/body.php:67
+#: templates/invoices/global/micro/body.php:280
 msgid "Total"
 msgstr "Totaal"
 
 #: includes/templates/invoices/global/micro/body.php:75
+#: templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
 msgstr "Bestelling #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
+#: templates/invoices/global/micro/body.php:255
 msgid "Fee"
 msgstr "Handelingskosten"
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152
+#: templates/invoices/global/micro/body.php:287
 msgid "Refunded"
 msgstr "Terugbetaald"
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
+#: templates/invoices/global/micro/footer.php:15
 #, php-format
 msgid "%s of %s"
 msgstr "%s van %s"

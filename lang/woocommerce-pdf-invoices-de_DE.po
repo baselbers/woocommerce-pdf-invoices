@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2016-02-10 21:03+0100\n"
-"PO-Revision-Date: 2016-02-10 21:03+0100\n"
+"POT-Creation-Date: 2016-02-22 20:27+0100\n"
+"PO-Revision-Date: 2016-02-22 20:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -62,6 +62,7 @@ msgid "Remove logo"
 msgstr "Logo entfernen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:115
 msgid "Attach to Email"
 msgstr "An Email anhängen"
 
@@ -78,6 +79,7 @@ msgid "Customer invoice"
 msgstr "Kundenrechnung"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:106
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:135
 msgid "Do not attach"
 msgstr "Nicht anhängen"
 
@@ -327,12 +329,14 @@ msgstr "Am 1. Januar zurücksetzen"
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
 #: includes/templates/invoices/simple/micro/body.php:48
+#: templates/invoices/global/micro/body.php:44
 msgid "SKU"
 msgstr "Prod.Nr."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
 #: includes/templates/invoices/simple/micro/body.php:101
+#: templates/invoices/global/micro/body.php:236
 msgid "Subtotal"
 msgstr "Zwischensumme"
 
@@ -347,6 +351,7 @@ msgstr ""
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
 #: includes/templates/invoices/simple/micro/body.php:85
+#: templates/invoices/global/micro/body.php:220
 msgid "Discount"
 msgstr "Rabatt"
 
@@ -355,6 +360,8 @@ msgstr "Rabatt"
 #: includes/templates/invoices/global/micro/body.php:244
 #: includes/templates/invoices/simple/micro/body.php:93
 #: includes/templates/invoices/simple/micro/body.php:109
+#: templates/invoices/global/micro/body.php:228
+#: templates/invoices/global/micro/body.php:244
 msgid "Shipping"
 msgstr "Lieferung"
 
@@ -420,24 +427,251 @@ msgstr "Datei ist ungültig und enthält ':' nach dem ersten Buchstaben."
 msgid "File should be less then 2MB."
 msgstr "Datei sollte kleiner als 2MB sein."
 
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:92
+msgid "Purchase email"
+msgstr "Käufer Email"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:97
+msgid ""
+"Enter your email account from <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a>."
+msgstr ""
+"Enter your email account from <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a>."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:103
+msgid "License"
+msgstr "Lizenz"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:108
+msgid ""
+"Enter your license key from <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a> to receive updates."
+msgstr ""
+"Gib deinen Lizenzschlüssel von <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a> ein um Updates zu erhalten."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:123
+msgid "Processing Renewal Order"
+msgstr "Bearbeiten der erneuerten Bestellung"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:127
+msgid "Completed Renewal Order"
+msgstr "Erneuerte Rechnung fertiggestellt"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:131
+msgid "Customer Renewal Invoice"
+msgstr "Erneuerte Kundenrechnung"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:149
+msgid "Attach to New Renewal Order Email"
+msgstr "An neue erneuerte Bestell-Email anhängen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:157
+msgid "PDF attachment"
+msgstr "PDF-Anhang"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:162
+msgid "Add for example a PDF with your terms & conditions."
+msgstr "Hänge ein PDF-Dokument an, wie zum Beispiel deine AGBs."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:168
+msgid "Suppliers"
+msgstr "Lieferanten"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:173
+msgid ""
+"<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by simply "
+"adding there Email It In email addresses. Email addresses need to be "
+"seperated by comma's."
+msgstr ""
+"<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by simply "
+"adding there Email It In email addresses. Email addresses need to be "
+"seperated by comma's."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:184
+msgid ""
+"Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
+"generate a global invoice from there account</div>"
+msgstr ""
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:191
+msgid "Customer generation period"
+msgstr "Customer generation period"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:196
+msgid ""
+"Should your customers have the ability to generate a global invoice by month "
+"or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
+msgstr ""
+"Should your customers have the ability to generate a global invoice by month "
+"or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:199
+msgid "Month"
+msgstr "Monat"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:203
+msgid "Year"
+msgstr "Jahr"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:217
+msgid "Send to your Cloud Storage"
+msgstr "An Cloud Storage senden"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:229
+msgid "Email to customer"
+msgstr "Email an Kunden"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:241
+msgid "Email to supplier(s)"
+msgstr "Email an Lieferanten"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:248
+msgid "Email subject"
+msgstr "Email Betreff"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:253
+msgid "Subject for the global invoice email."
+msgstr "Subject for the global invoice email."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:260
+msgid "Email message"
+msgstr "Email Nachricht"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:265
+msgid "Message for the global invoice email."
+msgstr "Message for the global invoice email."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:279
+msgid "Premium Options"
+msgstr "Premium Optionen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:285
+msgid "Woocommerce Subscriptions Email Options"
+msgstr "Woocommerce Subscriptions Email Options"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:291
+msgid "Attachment Options"
+msgstr "Anhangs Optionen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:297
+msgid "Supplier Options"
+msgstr "Lieferanten Optionen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:303
+msgid "Global Invoice Options"
+msgstr "Global Invoice Options"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:310
+msgid ""
+"Attach PDF invoice to <a href=\"http://www.woothemes.com/products/"
+"woocommerce-subscriptions/\">WooCommerce Subscriptions</a> email. Plugin "
+"should be activated in order to work."
+msgstr ""
+"PDF Rechnung an <a href=\"http://www.woothemes.com/products/woocommerce-"
+"subscriptions/\">WooCommerce Subscriptions</a> email anhängen. Plugin sollte "
+"aktiviert sein um die Funktion zu ermöglichen."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:311
+msgid "Attach a PDF to the invoice."
+msgstr "Ein PDF-Dokument an die Rechnung anhängen."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:312
+msgid "Send customer invoice automatically to your supplier(s)."
+msgstr "Kunden Rechnung automatisch an Lieferanten senden."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:313
+msgid ""
+"Generate global invoices on Orders page by selecting multiple orders and "
+"applying action or let customers generate periodically from My Account page."
+msgstr ""
+"Generate global invoices on Orders page by selecting multiple orders and "
+"applying action or let customers generate periodically from My Account page."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:407
+msgid "File to large."
+msgstr "Datei zu groß."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:410
+msgid "Only PDF files are allowed."
+msgstr "Es sind lediglich PDF-Dokumente zulässig."
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:422
+msgid "Remove"
+msgstr "Entfernen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:424
+msgid "Choose"
+msgstr "Auswählen"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:447
+msgid "Active"
+msgstr "Aktiv"
+
+#: includes/admin/settings/class-bewpipremium-admin-settings.php:449
+msgid "Inactive"
+msgstr "Inaktiv"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:89
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr "Ungültige Anfrage"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:98
+#: includes/be-woocommerce-pdf-invoices-premium.php:121
+msgid "Something went wrong."
+msgstr "Uuhps! Da ist wohl etwas schief gelaufen."
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:109
+#: includes/be-woocommerce-pdf-invoices-premium.php:132
+msgid "No orders found."
+msgstr "Keine Bestellungen gefunden."
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:169
+#: includes/be-woocommerce-pdf-invoices.php:136
+msgid "Settings"
+msgstr "Einstellungen"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:170
+#: includes/partials/settings-sidebar.php:50
+msgid "Support"
+msgstr "Hilfe"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:189
+#, php-format
+msgid ""
+"<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+"requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. Get "
+"the free version (%s+) and try again.</p>"
+msgstr ""
+"<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+"requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. Get "
+"the free version (%s+) and try again.</p>"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:195
+#: includes/be-woocommerce-pdf-invoices.php:137
+msgid "Premium"
+msgstr "Premium"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:210
+msgid "Generate global invoice"
+msgstr "Generate global invoice"
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:264
+msgid "Please select more then one order."
+msgstr "Bitte mehr als eine Bestellungen auswählen."
+
+#: includes/be-woocommerce-pdf-invoices-premium.php:360
+msgid "Global invoice successfully generated! "
+msgstr ""
+
 #: includes/be-woocommerce-pdf-invoices.php:126
 #, php-format
 msgid ""
 "Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
 "PDF Invoices</strong></a>."
 msgstr ""
-
-#: includes/be-woocommerce-pdf-invoices.php:136
-msgid "Settings"
-msgstr "Einstellungen"
-
-#: includes/be-woocommerce-pdf-invoices.php:137
-msgid "Premium"
-msgstr "Premium"
-
-#: includes/be-woocommerce-pdf-invoices.php:182
-msgid "Invalid request"
-msgstr "Ungültige Anfrage"
 
 #: includes/be-woocommerce-pdf-invoices.php:185
 msgid "Invalid order ID"
@@ -451,68 +685,68 @@ msgstr ""
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/be-woocommerce-pdf-invoices.php:242
+#: includes/be-woocommerce-pdf-invoices.php:251
 msgid "Invoices"
 msgstr "Rechnungen"
 
-#: includes/be-woocommerce-pdf-invoices.php:281
+#: includes/be-woocommerce-pdf-invoices.php:290
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
 "%s★★★★★%s rating. A huge thank you in advance!"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:282
+#: includes/be-woocommerce-pdf-invoices.php:291
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: includes/be-woocommerce-pdf-invoices.php:356
+#: includes/be-woocommerce-pdf-invoices.php:365
 msgid "PDF Invoice"
 msgstr "PDF Rechnung"
 
-#: includes/be-woocommerce-pdf-invoices.php:382
+#: includes/be-woocommerce-pdf-invoices.php:391
 msgid "Invoiced on:"
 msgstr "In Rechnung gestellt am:"
 
-#: includes/be-woocommerce-pdf-invoices.php:386
+#: includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoice number:"
 msgstr "Rechnungsnummer:"
 
-#: includes/be-woocommerce-pdf-invoices.php:424
+#: includes/be-woocommerce-pdf-invoices.php:433
 msgid "View invoice"
 msgstr "Rechnung anzeigen"
 
-#: includes/be-woocommerce-pdf-invoices.php:424
+#: includes/be-woocommerce-pdf-invoices.php:433
 msgid "View"
 msgstr "Anzeigen"
 
-#: includes/be-woocommerce-pdf-invoices.php:425
+#: includes/be-woocommerce-pdf-invoices.php:434
 msgid "Cancel invoice"
 msgstr "Rechnung stornieren"
 
-#: includes/be-woocommerce-pdf-invoices.php:425
+#: includes/be-woocommerce-pdf-invoices.php:434
 msgid "Cancel"
 msgstr "abbrechen"
 
-#: includes/be-woocommerce-pdf-invoices.php:427
+#: includes/be-woocommerce-pdf-invoices.php:436
 msgid "Are you sure to delete the invoice?"
 msgstr "Bist du dir sicher, dass du die Rechnung löschen willst?"
 
-#: includes/be-woocommerce-pdf-invoices.php:430
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Create invoice"
 msgstr "Rechnung erstellen"
 
-#: includes/be-woocommerce-pdf-invoices.php:430
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Create"
 msgstr "Erstellen"
 
-#: includes/be-woocommerce-pdf-invoices.php:453
+#: includes/be-woocommerce-pdf-invoices.php:462
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Rechnung %s (PDF)"
 
-#: includes/be-woocommerce-pdf-invoices.php:563
+#: includes/be-woocommerce-pdf-invoices.php:572
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
@@ -527,6 +761,22 @@ msgid ""
 "Whoops, no template found. Please select a template on the Template settings "
 "page first."
 msgstr ""
+
+#: includes/partials/customer-generation.php:1
+msgid "Generate Global Invoice"
+msgstr "Generate Global Invoice"
+
+#: includes/partials/customer-generation.php:11
+msgid "Select a month"
+msgstr "Monat auswählen"
+
+#: includes/partials/customer-generation.php:24
+msgid "Select a year"
+msgstr "Jahr auswählen"
+
+#: includes/partials/customer-generation.php:38
+msgid "Generate invoice"
+msgstr "Rechnung generieren."
 
 #: includes/partials/settings-sidebar.php:2
 msgid "WooCommerce PDF Invoices Premium"
@@ -599,10 +849,6 @@ msgstr ""
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 msgstr ""
 
-#: includes/partials/settings-sidebar.php:50
-msgid "Support"
-msgstr "Hilfe"
-
 #: includes/partials/settings-sidebar.php:52
 msgid ""
 "We will never ask for donations, but to garantee future development, we do "
@@ -639,41 +885,49 @@ msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
+#: templates/invoices/global/micro/body.php:5
 msgid "Invoice to"
 msgstr "Rechnung an"
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
+#: templates/invoices/global/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
 msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
+#: templates/invoices/global/micro/body.php:11
 msgid "Ship to"
 msgstr "Lieferadresse"
 
 #: includes/templates/invoices/global/micro/body.php:22
+#: templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
 msgstr "Global Invoice"
 
 #: includes/templates/invoices/global/micro/body.php:40
 #: includes/templates/invoices/simple/micro/body.php:44
+#: templates/invoices/global/micro/body.php:40
 msgid "Description"
 msgstr "Beschreibung"
 
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:52
+#: templates/invoices/global/micro/body.php:48
 msgid "Cost"
 msgstr "Preis"
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:54
+#: templates/invoices/global/micro/body.php:50
 msgid "Qty"
 msgstr "Anzahl"
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:60
+#: templates/invoices/global/micro/body.php:56
 msgid "VAT"
 msgstr "Mehrwertsteuer"
 
@@ -681,26 +935,32 @@ msgstr "Mehrwertsteuer"
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:71
 #: includes/templates/invoices/simple/micro/body.php:145
+#: templates/invoices/global/micro/body.php:67
+#: templates/invoices/global/micro/body.php:280
 msgid "Total"
 msgstr "Gesamt"
 
 #: includes/templates/invoices/global/micro/body.php:75
+#: templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
 msgstr "Bestellung #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
+#: templates/invoices/global/micro/body.php:255
 msgid "Fee"
 msgstr "Gebühr"
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152
+#: templates/invoices/global/micro/body.php:287
 msgid "Refunded"
 msgstr "Erstattet"
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
+#: templates/invoices/global/micro/footer.php:15
 #, php-format
 msgid "%s of %s"
 msgstr ""
@@ -724,194 +984,15 @@ msgstr "Bestellungsdatum: %s"
 msgid "Customer note"
 msgstr "Kundenkommentar"
 
-#~ msgid "Purchase email"
-#~ msgstr "Käufer Email"
-
-#~ msgid ""
-#~ "Enter your email account from <a href=\"http://wcpdfinvoices.com"
-#~ "\">wcpdfinvoices.com</a>."
-#~ msgstr ""
-#~ "Enter your email account from <a href=\"http://wcpdfinvoices.com"
-#~ "\">wcpdfinvoices.com</a>."
-
-#~ msgid "License"
-#~ msgstr "Lizenz"
-
-#~ msgid ""
-#~ "Enter your license key from <a href=\"http://wcpdfinvoices.com"
-#~ "\">wcpdfinvoices.com</a> to receive updates."
-#~ msgstr ""
-#~ "Gib deinen Lizenzschlüssel von <a href=\"http://wcpdfinvoices.com"
-#~ "\">wcpdfinvoices.com</a> ein um Updates zu erhalten."
-
-#~ msgid "Processing Renewal Order"
-#~ msgstr "Bearbeiten der erneuerten Bestellung"
-
-#~ msgid "Completed Renewal Order"
-#~ msgstr "Erneuerte Rechnung fertiggestellt"
-
-#~ msgid "Customer Renewal Invoice"
-#~ msgstr "Erneuerte Kundenrechnung"
-
-#~ msgid "Attach to New Renewal Order Email"
-#~ msgstr "An neue erneuerte Bestell-Email anhängen"
-
-#~ msgid "PDF attachment"
-#~ msgstr "PDF-Anhang"
-
-#~ msgid "Add for example a PDF with your terms & conditions."
-#~ msgstr "Hänge ein PDF-Dokument an, wie zum Beispiel deine AGBs."
-
-#~ msgid "Suppliers"
-#~ msgstr "Lieferanten"
-
-#~ msgid ""
-#~ "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by "
-#~ "simply adding there Email It In email addresses. Email addresses need to "
-#~ "be seperated by comma's."
-#~ msgstr ""
-#~ "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by "
-#~ "simply adding there Email It In email addresses. Email addresses need to "
-#~ "be seperated by comma's."
-
 #~ msgid ""
 #~ "Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
 #~ "generate a global invoice from within there account</div>"
 #~ msgstr ""
 #~ "Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
 #~ "generate a global invoice from within there account</div>"
-
-#~ msgid "Customer generation period"
-#~ msgstr "Customer generation period"
-
-#~ msgid ""
-#~ "Should your customers have the ability to generate a global invoice by "
-#~ "month or by year?<br/><strong>Note:</strong> Customer generation should "
-#~ "be enabled."
-#~ msgstr ""
-#~ "Should your customers have the ability to generate a global invoice by "
-#~ "month or by year?<br/><strong>Note:</strong> Customer generation should "
-#~ "be enabled."
-
-#~ msgid "Month"
-#~ msgstr "Monat"
-
-#~ msgid "Year"
-#~ msgstr "Jahr"
-
-#~ msgid "Send to your Cloud Storage"
-#~ msgstr "An Cloud Storage senden"
-
-#~ msgid "Email to customer"
-#~ msgstr "Email an Kunden"
-
-#~ msgid "Email to supplier(s)"
-#~ msgstr "Email an Lieferanten"
-
-#~ msgid "Email subject"
-#~ msgstr "Email Betreff"
-
-#~ msgid "Subject for the global invoice email."
-#~ msgstr "Subject for the global invoice email."
-
-#~ msgid "Email message"
-#~ msgstr "Email Nachricht"
-
-#~ msgid "Message for the global invoice email."
-#~ msgstr "Message for the global invoice email."
-
-#~ msgid "Premium Options"
-#~ msgstr "Premium Optionen"
-
-#~ msgid "Woocommerce Subscriptions Email Options"
-#~ msgstr "Woocommerce Subscriptions Email Options"
-
-#~ msgid "Attachment Options"
-#~ msgstr "Anhangs Optionen"
-
-#~ msgid "Supplier Options"
-#~ msgstr "Lieferanten Optionen"
-
-#~ msgid "Global Invoice Options"
-#~ msgstr "Global Invoice Options"
-
-#~ msgid ""
-#~ "Attach PDF invoice to <a href=\"http://www.woothemes.com/products/"
-#~ "woocommerce-subscriptions/\">WooCommerce Subscriptions</a> email. Plugin "
-#~ "should be activated in order to work."
-#~ msgstr ""
-#~ "PDF Rechnung an <a href=\"http://www.woothemes.com/products/woocommerce-"
-#~ "subscriptions/\">WooCommerce Subscriptions</a> email anhängen. Plugin "
-#~ "sollte aktiviert sein um die Funktion zu ermöglichen."
-
-#~ msgid "Attach a PDF to the invoice."
-#~ msgstr "Ein PDF-Dokument an die Rechnung anhängen."
-
-#~ msgid "Send customer invoice automatically to your supplier(s)."
-#~ msgstr "Kunden Rechnung automatisch an Lieferanten senden."
-
-#~ msgid ""
-#~ "Generate global invoices on Orders page by selecting multiple orders and "
-#~ "applying action or let customers generate periodically from My Account "
-#~ "page."
-#~ msgstr ""
-#~ "Generate global invoices on Orders page by selecting multiple orders and "
-#~ "applying action or let customers generate periodically from My Account "
-#~ "page."
-
-#~ msgid "File to large."
-#~ msgstr "Datei zu groß."
-
-#~ msgid "Only PDF files are allowed."
-#~ msgstr "Es sind lediglich PDF-Dokumente zulässig."
-
-#~ msgid "Remove"
-#~ msgstr "Entfernen"
-
-#~ msgid "Choose"
-#~ msgstr "Auswählen"
-
-#~ msgid "Active"
-#~ msgstr "Aktiv"
-
-#~ msgid "Inactive"
-#~ msgstr "Inaktiv"
-
-#~ msgid "Something went wrong."
-#~ msgstr "Uuhps! Da ist wohl etwas schief gelaufen."
-
-#~ msgid "No orders found."
-#~ msgstr "Keine Bestellungen gefunden."
-
-#~ msgid ""
-#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
-#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
-#~ "Get the free version (%s+) and try again.</p>"
-#~ msgstr ""
-#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
-#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
-#~ "Get the free version (%s+) and try again.</p>"
-
-#~ msgid "Generate global invoice"
-#~ msgstr "Generate global invoice"
-
-#~ msgid "Please select more then one order."
-#~ msgstr "Bitte mehr als eine Bestellungen auswählen."
 
 #~ msgid "Global invoice succesfully generated! "
 #~ msgstr "Global invoice succesfully generated! "
-
-#~ msgid "Generate Global Invoice"
-#~ msgstr "Generate Global Invoice"
-
-#~ msgid "Select a month"
-#~ msgstr "Monat auswählen"
-
-#~ msgid "Select a year"
-#~ msgstr "Jahr auswählen"
-
-#~ msgid "Generate invoice"
-#~ msgstr "Rechnung generieren."
 
 #~ msgid "Feel free to use "
 #~ msgstr "Feel free to use "

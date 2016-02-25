@@ -21,7 +21,7 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-document.php:64
 msgid "Paid"
-msgstr ""
+msgstr "Bezahlt"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:262
 #, php-format
@@ -41,21 +41,21 @@ msgstr ""
 #, php-format
 msgid ""
 "Invoice with invoice number %s not found. First create invoice and try again."
-msgstr ""
+msgstr "Rechnung mit Nummer %s nicht gefunden. Erstellen sie die Rechnung zuerst und versuchen sie es ernuet"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:372
 #, php-format
 msgid "VAT Number: %s"
-msgstr ""
+msgstr "USt-IdNr.: %s"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:383
 #, php-format
 msgid "Purchase Order Number: %s"
-msgstr ""
+msgstr "Bestellnummer: %s"
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
-msgstr ""
+msgstr "Erlaube HTML Tags"
 
 #: includes/abstracts/abstract-bewpi-setting.php:173
 msgid "Remove logo"
@@ -89,15 +89,15 @@ msgstr "An neue Bestell-Email anhängen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:127
 msgid "View PDF"
-msgstr ""
+msgstr "PDF anzeigen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:135
 msgid "Download"
-msgstr ""
+msgstr "Herunterladen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:139
 msgid "Open in new browser tab/window"
-msgstr ""
+msgstr "In neuen Tab/Fenster öffnen"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:153
 msgid "Enable download from account"

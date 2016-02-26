@@ -145,6 +145,11 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
+= 2.4.2 - February 22, 2016 =
+
+- Improved: Language files
+- Deleted: Unused global invoice template and dir
+
 = 2.4.1 - February 10, 2016 =
 
 - Added: Lithuanian language files

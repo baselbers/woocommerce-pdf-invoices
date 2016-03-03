@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-22 20:27+0100\n"
-"PO-Revision-Date: 2016-02-22 20:27+0100\n"
+"POT-Creation-Date: 2016-03-03 21:18+0100\n"
+"PO-Revision-Date: 2016-03-03 21:18+0100\n"
 "Last-Translator: iduran <iduran@solucionesc2.com>\n"
 "Language-Team: \n"
 "Language: es_ES\n"
@@ -330,14 +330,12 @@ msgstr "Reiniciar el 1 de enero"
 #: ../includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: ../includes/templates/invoices/global/micro/body.php:44
 #: ../includes/templates/invoices/simple/micro/body.php:48
-#: ../templates/invoices/global/micro/body.php:44
 msgid "SKU"
 msgstr "Identificador"
 
 #: ../includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: ../includes/templates/invoices/global/micro/body.php:236
 #: ../includes/templates/invoices/simple/micro/body.php:101
-#: ../templates/invoices/global/micro/body.php:236
 msgid "Subtotal"
 msgstr "Subtotal"
 
@@ -352,7 +350,6 @@ msgstr ""
 #: ../includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: ../includes/templates/invoices/global/micro/body.php:220
 #: ../includes/templates/invoices/simple/micro/body.php:85
-#: ../templates/invoices/global/micro/body.php:220
 msgid "Discount"
 msgstr "Descuento"
 
@@ -361,8 +358,6 @@ msgstr "Descuento"
 #: ../includes/templates/invoices/global/micro/body.php:244
 #: ../includes/templates/invoices/simple/micro/body.php:93
 #: ../includes/templates/invoices/simple/micro/body.php:109
-#: ../templates/invoices/global/micro/body.php:228
-#: ../templates/invoices/global/micro/body.php:244
 msgid "Shipping"
 msgstr "Envío"
 
@@ -673,64 +668,64 @@ msgstr "General"
 msgid "Invoices"
 msgstr "Facturas"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:290
+#: ../includes/be-woocommerce-pdf-invoices.php:294
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
 "%s★★★★★%s rating. A huge thank you in advance!"
 msgstr ""
 
-#: ../includes/be-woocommerce-pdf-invoices.php:291
+#: ../includes/be-woocommerce-pdf-invoices.php:295
 #, php-format
 msgid "Version %s"
 msgstr ""
 
-#: ../includes/be-woocommerce-pdf-invoices.php:365
+#: ../includes/be-woocommerce-pdf-invoices.php:369
 msgid "PDF Invoice"
 msgstr "PDF Factura"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:391
+#: ../includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoiced on:"
 msgstr "Facturado en:"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:395
+#: ../includes/be-woocommerce-pdf-invoices.php:399
 msgid "Invoice number:"
 msgstr "Nº de factura"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:433
+#: ../includes/be-woocommerce-pdf-invoices.php:438
 msgid "View invoice"
 msgstr "Ver factura"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:433
+#: ../includes/be-woocommerce-pdf-invoices.php:438
 msgid "View"
 msgstr "Ver"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:434
+#: ../includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel invoice"
 msgstr "Cancelar factura"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:434
+#: ../includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:436
+#: ../includes/be-woocommerce-pdf-invoices.php:441
 msgid "Are you sure to delete the invoice?"
 msgstr "¿Está seguro de eliminar la factura?"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:439
+#: ../includes/be-woocommerce-pdf-invoices.php:444
 msgid "Create invoice"
 msgstr "Crear factura"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:439
+#: ../includes/be-woocommerce-pdf-invoices.php:444
 msgid "Create"
 msgstr "Crear"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:462
+#: ../includes/be-woocommerce-pdf-invoices.php:467
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Factura %s (PDF)"
 
-#: ../includes/be-woocommerce-pdf-invoices.php:572
+#: ../includes/be-woocommerce-pdf-invoices.php:577
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
@@ -740,7 +735,7 @@ msgid ""
 "done it!</a>"
 msgstr ""
 
-#: ../includes/class-bewpi-invoice.php:48
+#: ../includes/class-bewpi-invoice.php:50
 msgid ""
 "Whoops, no template found. Please select a template on the Template settings "
 "page first."
@@ -869,49 +864,41 @@ msgstr ""
 
 #: ../includes/templates/invoices/global/micro/body.php:5
 #: ../includes/templates/invoices/simple/micro/body.php:5
-#: ../templates/invoices/global/micro/body.php:5
 msgid "Invoice to"
 msgstr "Factura a"
 
 #: ../includes/templates/invoices/global/micro/body.php:7
 #: ../includes/templates/invoices/simple/micro/body.php:7
-#: ../templates/invoices/global/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
 msgstr ""
 
 #: ../includes/templates/invoices/global/micro/body.php:11
 #: ../includes/templates/invoices/simple/micro/body.php:11
-#: ../templates/invoices/global/micro/body.php:11
 msgid "Ship to"
 msgstr "Enviar a"
 
 #: ../includes/templates/invoices/global/micro/body.php:22
-#: ../templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
 msgstr ""
 
 #: ../includes/templates/invoices/global/micro/body.php:40
 #: ../includes/templates/invoices/simple/micro/body.php:44
-#: ../templates/invoices/global/micro/body.php:40
 msgid "Description"
 msgstr "Descripción"
 
 #: ../includes/templates/invoices/global/micro/body.php:48
 #: ../includes/templates/invoices/simple/micro/body.php:52
-#: ../templates/invoices/global/micro/body.php:48
 msgid "Cost"
 msgstr "Importe"
 
 #: ../includes/templates/invoices/global/micro/body.php:50
 #: ../includes/templates/invoices/simple/micro/body.php:54
-#: ../templates/invoices/global/micro/body.php:50
 msgid "Qty"
 msgstr "Cant."
 
 #: ../includes/templates/invoices/global/micro/body.php:56
 #: ../includes/templates/invoices/simple/micro/body.php:60
-#: ../templates/invoices/global/micro/body.php:56
 msgid "VAT"
 msgstr "Impuestos"
 
@@ -919,32 +906,26 @@ msgstr "Impuestos"
 #: ../includes/templates/invoices/global/micro/body.php:280
 #: ../includes/templates/invoices/simple/micro/body.php:71
 #: ../includes/templates/invoices/simple/micro/body.php:145
-#: ../templates/invoices/global/micro/body.php:67
-#: ../templates/invoices/global/micro/body.php:280
 msgid "Total"
 msgstr "Total"
 
 #: ../includes/templates/invoices/global/micro/body.php:75
-#: ../templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
 msgstr ""
 
 #: ../includes/templates/invoices/global/micro/body.php:255
 #: ../includes/templates/invoices/simple/micro/body.php:120
-#: ../templates/invoices/global/micro/body.php:255
 msgid "Fee"
 msgstr "Cuota"
 
 #: ../includes/templates/invoices/global/micro/body.php:287
 #: ../includes/templates/invoices/simple/micro/body.php:152
-#: ../templates/invoices/global/micro/body.php:287
 msgid "Refunded"
 msgstr "Rembolsado"
 
 #: ../includes/templates/invoices/global/micro/footer.php:15
 #: ../includes/templates/invoices/simple/micro/footer.php:18
-#: ../templates/invoices/global/micro/footer.php:15
 #, php-format
 msgid "%s of %s"
 msgstr ""

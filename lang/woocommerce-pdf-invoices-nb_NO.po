@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2016-02-22 20:27+0100\n"
-"PO-Revision-Date: 2016-02-22 20:27+0100\n"
+"POT-Creation-Date: 2016-03-03 21:18+0100\n"
+"PO-Revision-Date: 2016-03-03 21:18+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -347,14 +347,12 @@ msgstr "Tilbakestill 1. Januar"
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:390
 #: includes/templates/invoices/global/micro/body.php:44
 #: includes/templates/invoices/simple/micro/body.php:48
-#: templates/invoices/global/micro/body.php:44
 msgid "SKU"
 msgstr "Prod.Nr."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:402
 #: includes/templates/invoices/global/micro/body.php:236
 #: includes/templates/invoices/simple/micro/body.php:101
-#: templates/invoices/global/micro/body.php:236
 msgid "Subtotal"
 msgstr "Delsum"
 
@@ -369,7 +367,6 @@ msgstr "Skatt (totalt)"
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
 #: includes/templates/invoices/simple/micro/body.php:85
-#: templates/invoices/global/micro/body.php:220
 msgid "Discount"
 msgstr "Rabatt"
 
@@ -378,8 +375,6 @@ msgstr "Rabatt"
 #: includes/templates/invoices/global/micro/body.php:244
 #: includes/templates/invoices/simple/micro/body.php:93
 #: includes/templates/invoices/simple/micro/body.php:109
-#: templates/invoices/global/micro/body.php:228
-#: templates/invoices/global/micro/body.php:244
 msgid "Shipping"
 msgstr "Frakt"
 
@@ -694,7 +689,7 @@ msgstr "Generelt"
 msgid "Invoices"
 msgstr "PDF Faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:290
+#: includes/be-woocommerce-pdf-invoices.php:294
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
@@ -703,57 +698,57 @@ msgstr ""
 "Om du liker <strong>WooCommerce PDF Faktura</strong>, vennligst gi oss en "
 "%s★★★★★%s vurdering. På forhånd tusen takk!"
 
-#: includes/be-woocommerce-pdf-invoices.php:291
+#: includes/be-woocommerce-pdf-invoices.php:295
 #, php-format
 msgid "Version %s"
 msgstr "Versjon %s"
 
-#: includes/be-woocommerce-pdf-invoices.php:365
+#: includes/be-woocommerce-pdf-invoices.php:369
 msgid "PDF Invoice"
 msgstr "PDF Faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:391
+#: includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoiced on:"
 msgstr "Sendt:"
 
-#: includes/be-woocommerce-pdf-invoices.php:395
+#: includes/be-woocommerce-pdf-invoices.php:399
 msgid "Invoice number:"
 msgstr "Fakturanummer:"
 
-#: includes/be-woocommerce-pdf-invoices.php:433
+#: includes/be-woocommerce-pdf-invoices.php:438
 msgid "View invoice"
 msgstr "Vis faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:433
+#: includes/be-woocommerce-pdf-invoices.php:438
 msgid "View"
 msgstr "Vis"
 
-#: includes/be-woocommerce-pdf-invoices.php:434
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel invoice"
 msgstr "Slett faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:434
+#: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel"
 msgstr "Slett"
 
-#: includes/be-woocommerce-pdf-invoices.php:436
+#: includes/be-woocommerce-pdf-invoices.php:441
 msgid "Are you sure to delete the invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
 
-#: includes/be-woocommerce-pdf-invoices.php:439
+#: includes/be-woocommerce-pdf-invoices.php:444
 msgid "Create invoice"
 msgstr "Opprett faktura"
 
-#: includes/be-woocommerce-pdf-invoices.php:439
+#: includes/be-woocommerce-pdf-invoices.php:444
 msgid "Create"
 msgstr "Opprett"
 
-#: includes/be-woocommerce-pdf-invoices.php:462
+#: includes/be-woocommerce-pdf-invoices.php:467
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Faktura %s (PDF)"
 
-#: includes/be-woocommerce-pdf-invoices.php:572
+#: includes/be-woocommerce-pdf-invoices.php:577
 #, php-format
 msgid ""
 "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
@@ -768,7 +763,7 @@ msgstr ""
 "target='_blank'>Ja, jeg skal gjøre det med en gang!</a> - <a href='%s'>Nei, "
 "jeg har allerede gjort det!</a>"
 
-#: includes/class-bewpi-invoice.php:48
+#: includes/class-bewpi-invoice.php:50
 msgid ""
 "Whoops, no template found. Please select a template on the Template settings "
 "page first."
@@ -914,49 +909,41 @@ msgstr "Send oss en e-post"
 
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
-#: templates/invoices/global/micro/body.php:5
 msgid "Invoice to"
 msgstr "Kunde"
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
-#: templates/invoices/global/micro/body.php:7
 #, php-format
 msgid "Phone: %s"
 msgstr "Telefon: %s"
 
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
-#: templates/invoices/global/micro/body.php:11
 msgid "Ship to"
 msgstr "Leveringsadresse"
 
 #: includes/templates/invoices/global/micro/body.php:22
-#: templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
 msgstr "Global faktura"
 
 #: includes/templates/invoices/global/micro/body.php:40
 #: includes/templates/invoices/simple/micro/body.php:44
-#: templates/invoices/global/micro/body.php:40
 msgid "Description"
 msgstr "Produkt"
 
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:52
-#: templates/invoices/global/micro/body.php:48
 msgid "Cost"
 msgstr "Pris"
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:54
-#: templates/invoices/global/micro/body.php:50
 msgid "Qty"
 msgstr "Ant"
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:60
-#: templates/invoices/global/micro/body.php:56
 msgid "VAT"
 msgstr "MVA"
 
@@ -964,32 +951,26 @@ msgstr "MVA"
 #: includes/templates/invoices/global/micro/body.php:280
 #: includes/templates/invoices/simple/micro/body.php:71
 #: includes/templates/invoices/simple/micro/body.php:145
-#: templates/invoices/global/micro/body.php:67
-#: templates/invoices/global/micro/body.php:280
 msgid "Total"
 msgstr "Totalt"
 
 #: includes/templates/invoices/global/micro/body.php:75
-#: templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
 msgstr "Ordre #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
-#: templates/invoices/global/micro/body.php:255
 msgid "Fee"
 msgstr "Avgift"
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152
-#: templates/invoices/global/micro/body.php:287
 msgid "Refunded"
 msgstr "Refundert"
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
-#: templates/invoices/global/micro/footer.php:15
 #, php-format
 msgid "%s of %s"
 msgstr "%s av %s"

@@ -50,7 +50,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		    $template_dir_name = $this->get_template_dir( $this->template_name );
 
 		    $html_templates = array(
-			    "header"    => $template_dir_name . 'header.php',
++			    "header"    => $template_dir_name . 'header.php',
 			    "footer"    => $template_dir_name . 'footer.php',
 			    "body"      => $template_dir_name . 'body.php',
 			    "style"     => $template_dir_name . 'style.css'

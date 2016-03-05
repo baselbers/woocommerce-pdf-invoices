@@ -315,16 +315,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected function save($dest, $html_templates)
         {
+            if ($this->exists()) {
+                // delete postmeta and PDF
+                $this->delete();
+            }
+
             $this->number = $this->get_next_invoice_number();
             $this->formatted_number = $this->get_formatted_number();
             $this->filename = $this->formatted_number . '.pdf';
             $this->year = date_i18n('Y', current_time('timestamp'));
             $this->full_path = BEWPI_INVOICES_DIR . (string)$this->year . '/' . $this->filename;
-
-            // check if invoice pdf already exists
-            if ($this->exists()) {
-                parent::delete();
-            }
 
             // update invoice data in db
             update_post_meta($this->order->id, '_bewpi_formatted_invoice_number', $this->formatted_number);

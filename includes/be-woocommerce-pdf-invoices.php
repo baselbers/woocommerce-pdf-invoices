@@ -90,7 +90,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 * Shortcode to display invoice from view
 			 */
 			add_shortcode( 'bewpi-download-invoice', array( $this, 'bewpi_download_invoice_func' ) );
+
+            add_action('wp_trash_post', array( $this, 'delete_invoice' ), 10, 1);
+            add_action('before_delete_post', array( $this, 'delete_invoice' ), 10, 1);
 		}
+
+        public function delete_invoice($post_id){
+            $type = get_post_type($post_id);
+            if ( $type === 'shop_order' ) {
+                $invoice = new BEWPI_Invoice( $post_id );
+                $invoice->delete();
+            }
+        }
 
 		public function init() {
 			$this->load_textdomain();

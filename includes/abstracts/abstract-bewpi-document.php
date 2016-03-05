@@ -116,7 +116,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
         }
 
         /**
-         * Delete invoice from tmp dir.
+         * Delete PDF file
          */
         public function delete() {
 	        return unlink( $this->full_path );

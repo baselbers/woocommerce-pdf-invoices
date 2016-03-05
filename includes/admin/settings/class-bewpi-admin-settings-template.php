@@ -307,7 +307,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'number',
-				    'desc' => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering and value will be editable by selecting checkbox. Next number needs to be lower then highest existing invoice number or delete invoices first.', 'woocommerce-pdf-invoices' ),
+				    'desc' => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering. All PDF invoices will be deleted and need to be manually created again! Value will be editable by selecting checkbox.', 'woocommerce-pdf-invoices' ),
 				    'default' => 1,
 				    'attrs' => array(
 					    'disabled',

@@ -44,11 +44,11 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	    }
 
 	    public function save( $dest, $html_templates = array() ) {
-		    if ( $this->template_name == "" )
-			    wp_die( __( 'Whoops, no template found. Please select a template on the Template settings page first.', 'woocommerce-pdf-invoices' ) );
+		    if ( empty ( $this->template_name ) ) {
+				return "";
+			}
 
 		    $template_dir_name = $this->get_template_dir( $this->template_name );
-
 		    $html_templates = array(
 +			    "header"    => $template_dir_name . 'header.php',
 			    "footer"    => $template_dir_name . 'footer.php',

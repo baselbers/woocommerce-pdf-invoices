@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.4.1
+Stable tag: 2.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -145,10 +145,13 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.4.2 - February 22, 2016 =
+= 2.4.2 - March 05, 2016 =
 
+- Fixed: Paid watermark not showing
+- Fixed: Sequential invoice number reset
+- Fixed: 'SyntaxError: Unexpected token C' error
 - Improved: Language files
-- Deleted: Unused global invoice template and dir
+- Removed: Unused global invoice template and dir
 
 = 2.4.1 - February 10, 2016 =
 

@@ -350,11 +350,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         public function is_paid()
         {
-            if ($this->order->payment_method_title !== 'Cash on Delivery') {
+            $payment_methods = apply_filters('bewpi_paid_watermark_excluded_payment_methods', array('cod'), $this->order->id);
+            if (in_array($this->order->payment_method, $payment_methods)) {
                 return false;
             }
 
-            return (!in_array($this->order->get_status(), array('pending', 'on-hold', 'auto-draft')));
+            $order_statuses = apply_filters('bewpi_paid_watermark_excluded_order_statuses', array('pending', 'on-hold', 'auto-draft'), $this->order->id);
+            return (!in_array($this->order->get_status(), $order_statuses ));
         }
 
         public function view()

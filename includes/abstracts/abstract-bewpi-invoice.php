@@ -412,15 +412,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         public function get_company_logo_html()
         {
             if (!empty($this->template_options['bewpi_company_logo'])) {
-                $image_url = $this->template_options['bewpi_company_logo'];
-
                 // get the relative path due to slow generation of invoice.
-                $image_url = '..' . str_replace(get_site_url(), '', $image_url);
+                $image_path = str_replace(get_site_url(), '..', $this->template_options['bewpi_company_logo']);
+                // give the user the option to change the image (path/url) due to some errors of mPDF.
+                $image_url = apply_filters( 'bewpi_company_logo_url', $image_path );
 
-                // try base64 encoding with or without relative path if MPDF gives images errors.
-                //$image_url = image_to_base64( $image_url );
-
-                echo '<img class="company-logo" style="max-height: 250px;" src="' . $image_url . '"/>';
+                echo '<img class="company-logo" src="' . $image_url . '"/>';
             } else {
                 echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
             }
@@ -453,7 +450,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         private function output_to_buffer($full_path)
         {
             ob_start();
-            require_once $full_path;
+            require_once($full_path);
             $output = ob_get_contents();
             ob_end_clean();
             return $output;

@@ -140,13 +140,23 @@ To change the options of the PDF, use below example.
   }
   add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );`
 
-  = Images doesn't display on invoice? =
-  Enable mPDF debugging on General Settings tab in order to output errors. Not recommended on live site!
+  = Logo image shows a red cross? =
+  Add below filter to themes functions.php to base64 the image. By default the relative path is used. Also read the sticky topic on the support forum for more solutions!
+
+  `function convert_company_logo_to_base64( $company_logo_path ) {
+    $company_logo_url = str_replace( '..', get_site_url(), $company_logo_path );
+    $type   = pathinfo( $company_logo_url, PATHINFO_EXTENSION );
+    $data   = wp_remote_fopen( $company_logo_url );
+    $base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
+    return $base64;
+  }
+  add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );`
 
 == Changelog ==
 
 = 2.4.2 - March 05, 2016 =
 
+- Added: Filters to FAQ page in order to fix the company logo showing red cross. (Read sticky topic on support forum first)
 - Fixed: Paid watermark not showing
 - Fixed: Sequential invoice number reset
 - Fixed: 'SyntaxError: Unexpected token C' error

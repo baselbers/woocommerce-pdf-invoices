@@ -79,11 +79,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->autoMarginPadding = 10;
 	        $mpdf->useOnlyCoreFonts = false;
 
-	        if ( ! empty ( $html_sections['header'] ) )
-		        $mpdf->SetHTMLHeader( $html_sections['header'] );
+	        if ( ! empty ( $html_sections['header'] ) ) {
+				$mpdf->SetHTMLHeader($html_sections['header']);
+			}
 
-	        if ( ! empty( $html_sections['footer'] ) )
-		        $mpdf->SetHTMLFooter( $html_sections['footer'] );
+	        if ( ! empty( $html_sections['footer'] ) ) {
+				$mpdf->SetHTMLFooter($html_sections['footer']);
+			}
 
 	        $mpdf->WriteHTML( $html_sections['style'] . $html_sections['body'] );
 

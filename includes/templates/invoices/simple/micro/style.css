@@ -1,5 +1,5 @@
 div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4, img {
-    /*border: 1px solid black;*/
+    border: 1px solid black;
 }
 h1.company-logo {
     color: black;
@@ -9,6 +9,22 @@ table {
     font-size: 14px;
     width: 100%;
     color: #757575;
+}
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+.company .info,
+.company .logo {
+    text-align: left;
+    vertical-align: middle;
+    font-size: 14px !important;
+}
+table.two-column {
+    margin: 40px 0;
+    width: 100%;
+}
+.two-column td {
+    text-align: left;
+    vertical-align: top;
 }
 table.products th {
     border-bottom: 2px solid #A5A5A5;
@@ -49,24 +65,6 @@ span {
 }
 .nowrap {
     white-space: nowrap;
-}
-.align-left { text-align: left; }
-.align-right { text-align: right; }
-.company {
-    margin-bottom: 30px;
-}
-.company .info, .company .logo {
-    text-align: left;
-    vertical-align: middle;
-}
-.two-column {
-    margin-bottom: 40px;
-    width: 100%;
-}
-.two-column td {
-    text-align: left;
-    vertical-align: top;
-    width: 50%;
 }
 .invoice-head {
     margin-bottom: 30px;

@@ -503,7 +503,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	    public function body_desc_callback() { }
 
 	    public function footer_desc_callback() {
-		    echo __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ) . '<br/>' . $this->get_allowed_tags_str() . '<br/>' . __( '<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the order payment method.', 'woocommerce-pdf-invoices' );
+		    echo __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ) . '<br/>' . $this->get_allowed_tags_str() . '<br/>' . __( '<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the order payment method or <code>[shipping_method]</code> to display shipping method.', 'woocommerce-pdf-invoices' );
 	    }
 
 	    public function visible_columns_desc_callback() { _e( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ); }

@@ -547,5 +547,38 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         {
             return $this->full_path;
         }
+
+        public function left_footer_column_html()
+        {
+            $left_footer_column_text = $this->template_options['bewpi_left_footer_column'];
+            if (!empty($left_footer_column_text))
+            {
+                echo '<p>' . nl2br($this->replace_placeholders($left_footer_column_text)) . '</p>';
+            }
+        }
+
+        public function right_footer_column_html()
+        {
+            $right_footer_column_text = $this->template_options['bewpi_right_footer_column'];
+            if (!empty($right_footer_column_text))
+            {
+                echo '<p>' . nl2br($this->replace_placeholders($right_footer_column_text)) . '</p>';
+            } else {
+                echo '<p>' . sprintf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ) . '</p>';
+            }
+        }
+
+        private function replace_placeholders( $str ) {
+            $placeholders = apply_filters('bewpi_placeholders', array(
+                '[payment_method]' => $this->order->payment_method_title,
+                '[shipping_method]' => $this->order->get_shipping_method()
+            ), $this->order->id);
+
+            foreach ($placeholders as $placeholder => $value){
+                $str = str_replace($placeholder, $value, $str);
+            }
+
+            return $str;
+        }
     }
 }

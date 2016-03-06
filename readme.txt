@@ -156,6 +156,7 @@ To change the options of the PDF, use below example.
 
 = 2.4.2 - March 05, 2016 =
 
+- Added: '[shipping_method]' placeholder and filter to add more placeholders.
 - Added: Filters to FAQ page in order to fix the company logo showing red cross. (Read sticky topic on support forum first)
 - Fixed: Paid watermark not showing
 - Fixed: Sequential invoice number reset

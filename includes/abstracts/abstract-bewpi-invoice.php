@@ -396,13 +396,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         public function is_download_allowed($order_status)
         {
-            $allowed = false;
-            if ($this->general_options['bewpi_email_type'] === "customer_processing_order"
-                && $order_status === "wc-processing" || $order_status === "wc-completed"
-            ) {
-                $allowed = true;
+            if ($order_status === "wc-completed") {
+                return true;
             }
-            return $allowed;
+
+            // if user selected email type 'Cutomer Processing Order' download is also allowed.
+            return ($order_status === "wc-processing" && $this->general_options['bewpi_email_type'] === "customer_processing_order");
         }
 
         /**

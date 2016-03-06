@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.4.2
+Stable tag: 2.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -154,7 +154,11 @@ To change the options of the PDF, use below example.
 
 == Changelog ==
 
-= 2.4.2 - March 05, 2016 =
+= 2.4.3 - March 06, 2016 =
+
+- Removed: Borders on template due to testing layout.
+
+= 2.4.2 - March 06, 2016 =
 
 - Added: '[shipping_method]' placeholder and filter to add more placeholders.
 - Added: Filters to FAQ page in order to fix the company logo showing red cross. (Read sticky topic on support forum first)

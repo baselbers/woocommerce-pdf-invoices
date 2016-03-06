@@ -1,5 +1,5 @@
 div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4, img {
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 h1.company-logo {
     color: black;

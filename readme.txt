@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.4
-Stable tag: 2.4.3
+Stable tag: 2.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -153,6 +153,10 @@ To change the options of the PDF, use below example.
   add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );`
 
 == Changelog ==
+
+= 2.4.4 - March 11, 2016 =
+
+- Added: Filter for email attachments
 
 = 2.4.3 - March 06, 2016 =
 

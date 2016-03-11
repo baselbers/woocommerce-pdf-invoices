@@ -397,7 +397,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function woocommerce_order_page_action_view_invoice( $order ) {
 			$invoice = new BEWPI_Invoice( $order->id );
 			if ( $invoice->exists() )
-				$this->show_invoice_button( 'View invoice', $order->id, 'view', '', array( 'class="button tips wpi-admin-order-create-invoice-btn"', 'target="_blank"' ) );
+				$this->show_invoice_button( 'View invoice', $order->id, 'view', '', array( 'class="button tips bewpi-admin-order-create-invoice-btn"', 'target="_blank"' ) );
 		}
 
 		/**

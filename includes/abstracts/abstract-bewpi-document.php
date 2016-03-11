@@ -78,6 +78,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->setAutoBottomMargin = 'stretch';
 	        $mpdf->autoMarginPadding = 10;
 	        $mpdf->useOnlyCoreFonts = false;
+			$mpdf->useSubstitutions = true;
 
 	        if ( ! empty ( $html_sections['header'] ) ) {
 				$mpdf->SetHTMLHeader($html_sections['header']);

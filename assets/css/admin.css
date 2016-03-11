@@ -36,7 +36,7 @@ form.bewpi-settings-form {
     width: 25px;
     cursor: pointer;
 }
-.wpi-admin-order-create-invoice-btn {
+.bewpi-admin-order-create-invoice-btn {
     background-image: url(../images/invoice-icon.png) !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
@@ -46,7 +46,7 @@ form.bewpi-settings-form {
     height: 2em !important;
     width: 2em;
 }
-.wpi-admin-order-create-invoice-btn button {
+.bewpi-admin-order-create-invoice-btn button {
     display: none;
 }
 .notes {

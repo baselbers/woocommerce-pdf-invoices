@@ -152,11 +152,21 @@ To change the options of the PDF, use below example.
   }
   add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );`
 
+  = How to show 'Paid' watermark for BACS payment method and/or others? =
+  Add below function to your themes functions.php.
+
+  `function exclude_payment_method_for_watermark($payment_methods, $order_id){
+   	return array();
+   }
+   add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);`
+
 == Changelog ==
 
 = 2.4.4 - March 11, 2016 =
 
 - Added: Filter for email attachments
+- Fixed: Invoice action buttons on order page not showing due to conflict with other invoicing plugin
+- Fixed: Characters showing square like Rupee symbol
 
 = 2.4.3 - March 06, 2016 =
 

@@ -124,6 +124,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         public function get_formatted_number()
         {
+            // Check if the users uses a third-party numbering plugin
+            if ( $this->template_options[ 'bewpi_invoice_number_type' ] == "third_party" ) {
+                return apply_filters( 'woocommerce_invoice_number',
+                                      $this->order->id, // Default is order ID
+                                      $this->order->id );
+            }
             $invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
             // Format number with the number of digits
             $digit_str = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
@@ -252,6 +258,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
         private function get_next_invoice_number()
         {
+            // Check if the users uses a third-party numbering plugin
+            if ( $this->template_options[ 'bewpi_invoice_number_type' ] == "third_party" ) {
+                return apply_filters( 'woocommerce_generate_invoice_number',
+                                      $this->order->id, // Default is order ID
+                                      $this->order );
+            }
+
             // check if user uses the built in WooCommerce order numbers
             if ($this->template_options['bewpi_invoice_number_type'] !== "sequential_number")
                 return $this->order->get_order_number();

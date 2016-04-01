@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2016-03-04 14:25+0100\n"
-"PO-Revision-Date: 2016-03-04 14:25+0100\n"
+"PO-Revision-Date: 2016-03-09 19:36+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.5\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -52,12 +52,12 @@ msgstr ""
 #: includes/abstracts/abstract-bewpi-invoice.php:372
 #, php-format
 msgid "VAT Number: %s"
-msgstr ""
+msgstr "MVA nummber: %s"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:383
 #, php-format
 msgid "Purchase Order Number: %s"
-msgstr ""
+msgstr "Ordrenummer: %s"
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
@@ -107,13 +107,15 @@ msgstr "Åpne i ny fane/vindu"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:153
 msgid "Enable download from account"
-msgstr ""
+msgstr "Aktiver nedlastning fra konto"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:154
 msgid ""
 "<br/><div class=\"bewpi-notes\">Let customers download invoice from account "
 "page.</div>"
 msgstr ""
+"<br/><div class=\"bewpi-notes\">La kunder laste ned faktura fra kontosiden.</"
+"div>"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:166
 msgid "Enable Email It In"
@@ -130,11 +132,11 @@ msgstr "Få din konto fra din Email It In %suser account%s."
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:190
 msgid "Enable mPDF debugging"
-msgstr ""
+msgstr "Aktiver mPDF feilsøking"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:191
 msgid "Enable mPDF debugging if you aren't able to create an invoice."
-msgstr ""
+msgstr "Aktiver mPDF feilsøking om du ikke får opprettet fakturaer."
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:206
 msgid "Email Options"
@@ -142,7 +144,7 @@ msgstr "E-post alternativer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:212
 msgid "Download Options"
-msgstr ""
+msgstr "Nedlastningalternativer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:218
 msgid "Cloud Storage Options"
@@ -150,7 +152,7 @@ msgstr "Skylagringsalternativer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:224
 msgid "Debug Options"
-msgstr ""
+msgstr "Feilsøkingsalternativer"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:232
 #, php-format
@@ -444,51 +446,55 @@ msgstr "Filen bør være under 2 megabyte."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:92
 msgid "Purchase email"
-msgstr ""
+msgstr "E-post benyttet ved kjøp"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:97
 msgid ""
 "Enter your email account from <a href=\"http://wcpdfinvoices.com"
 "\">wcpdfinvoices.com</a>."
 msgstr ""
+"Skriv inn din e-post konto fra <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a>."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:103
 msgid "License"
-msgstr ""
+msgstr "Lisens"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:108
 msgid ""
 "Enter your license key from <a href=\"http://wcpdfinvoices.com"
 "\">wcpdfinvoices.com</a> to receive updates."
 msgstr ""
+"Skriv inn din lisensnøkkel fra <a href=\"http://wcpdfinvoices.com"
+"\">wcpdfinvoices.com</a> for å motta oppdateringer."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:123
 msgid "Processing Renewal Order"
-msgstr ""
+msgstr "Behandler fornyelse ordre"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:127
 msgid "Completed Renewal Order"
-msgstr ""
+msgstr "Fullført fornyelse ordre"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:131
 msgid "Customer Renewal Invoice"
-msgstr ""
+msgstr "Kundens fornyelse faktura"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:149
 msgid "Attach to New Renewal Order Email"
-msgstr ""
+msgstr "Legg til ny fornyelse ordre e-post"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:157
 msgid "PDF attachment"
-msgstr ""
+msgstr "PDF vedlegg"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:162
 msgid "Add for example a PDF with your terms & conditions."
-msgstr ""
+msgstr "Legg til for eksempel en PDF med dine betingelser."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:168
 msgid "Suppliers"
-msgstr ""
+msgstr "Leverandører"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:173
 msgid ""
@@ -496,78 +502,84 @@ msgid ""
 "adding there Email It In email addresses. Email addresses need to be "
 "seperated by comma's."
 msgstr ""
+"<b>Hint</b>: Send kundefaktura til leverandørenes skylagringer ved å enkelt "
+"legge til Email It In e-post adresser. E-post adressene må skilles med komma."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:184
 msgid ""
 "Enable customer generation<br/><div class=\"bewpi-notes\">Let customers "
 "generate a global invoice from there account</div>"
 msgstr ""
+"Aktiver kundegenerering<br/><div class=\"bewpi-notes\">La kunder generere "
+"globale fakturaer fra deres konto.</div>"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:191
 msgid "Customer generation period"
-msgstr ""
+msgstr "Kunde genereringsperiode"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:196
 msgid ""
 "Should your customers have the ability to generate a global invoice by month "
 "or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
 msgstr ""
+"Skal kundene dine ha tilgang til å opprette globale fakturaer per måned "
+"eller per år?<br/><strong>Merk:</strong> Kundegenerering bør være aktivert."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:199
 msgid "Month"
-msgstr ""
+msgstr "Måned"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:203
 msgid "Year"
-msgstr ""
+msgstr "År"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:217
 msgid "Send to your Cloud Storage"
-msgstr ""
+msgstr "Send til din skylagring"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:229
 msgid "Email to customer"
-msgstr ""
+msgstr "E-post til kunde"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:241
 msgid "Email to supplier(s)"
-msgstr ""
+msgstr "E-post til leverandør(er)"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:248
 msgid "Email subject"
-msgstr ""
+msgstr "E-post emne"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:253
 msgid "Subject for the global invoice email."
-msgstr ""
+msgstr "Emne for global faktura e-post."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:260
 msgid "Email message"
-msgstr ""
+msgstr "E-post melding"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:265
 msgid "Message for the global invoice email."
-msgstr ""
+msgstr "Melding fra e-posten med global faktura."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:279
 msgid "Premium Options"
-msgstr ""
+msgstr "Premium alternativer"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:285
 msgid "Woocommerce Subscriptions Email Options"
-msgstr ""
+msgstr "WooCommerce Abonnement E-post Alternativer"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:291
 msgid "Attachment Options"
-msgstr ""
+msgstr "Vedleggsalternativer"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:297
 msgid "Supplier Options"
-msgstr ""
+msgstr "Leverandøralternativer"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:303
 msgid "Global Invoice Options"
-msgstr ""
+msgstr "Global faktura alternativer"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:310
 msgid ""
@@ -575,59 +587,64 @@ msgid ""
 "woocommerce-subscriptions/\">WooCommerce Subscriptions</a> email. Plugin "
 "should be activated in order to work."
 msgstr ""
+"Legg ved PDF faktura til <a href=\"http://www.woothemes.com/products/"
+"woocommerce-subscriptions/\">WooCommerce Abonnement</a> e-post- Utvidelsen "
+"må være aktivert før dette fungerer."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:311
 msgid "Attach a PDF to the invoice."
-msgstr ""
+msgstr "Legg ved en PDF til fakturaen."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:312
 msgid "Send customer invoice automatically to your supplier(s)."
-msgstr ""
+msgstr "Send kundefaktura automatisk til dine leverandører."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:313
 msgid ""
 "Generate global invoices on Orders page by selecting multiple orders and "
 "applying action or let customers generate periodically from My Account page."
 msgstr ""
+"Generer globale fakturaer på ordresiden ved å velge flere ordre og utføre "
+"handlingen eller la kundene generere periodisk fra Min Konto -siden."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:407
 msgid "File to large."
-msgstr ""
+msgstr "Filen er for stor."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:410
 msgid "Only PDF files are allowed."
-msgstr ""
+msgstr "Kun PDF filer er tillatt."
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:422
 msgid "Remove"
-msgstr ""
+msgstr "Fjern"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:424
 msgid "Choose"
-msgstr ""
+msgstr "Velg"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:447
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:449
 msgid "Inactive"
-msgstr ""
+msgstr "Inaktiv"
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:89
 #: includes/be-woocommerce-pdf-invoices.php:182
 msgid "Invalid request"
-msgstr ""
+msgstr "Ugyldig forespørsel"
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:98
 #: includes/be-woocommerce-pdf-invoices-premium.php:121
 msgid "Something went wrong."
-msgstr ""
+msgstr "Noe gikk galt."
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:109
 #: includes/be-woocommerce-pdf-invoices-premium.php:132
 msgid "No orders found."
-msgstr ""
+msgstr "Ingen ordre funnet."
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:169
 #: includes/be-woocommerce-pdf-invoices.php:136
@@ -646,6 +663,9 @@ msgid ""
 "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. Get "
 "the free version (%s+) and try again.</p>"
 msgstr ""
+"<p><a href=\"%s\"><strong>WooCommerce PDF Fakturaer Premium</strong></a> "
+"krever <a href=\"%s\"><strong>WooCommerce PDF Fakturaer</strong></a>. Hent "
+"gratisversjonen (%s+) og forsøk igjen.</p>"
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:195
 #: includes/be-woocommerce-pdf-invoices.php:137
@@ -658,11 +678,11 @@ msgstr "Opprett global faktura"
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:264
 msgid "Please select more then one order."
-msgstr ""
+msgstr "Vennligst velg mer enn èn ordre."
 
 #: includes/be-woocommerce-pdf-invoices-premium.php:360
 msgid "Global invoice successfully generated! "
-msgstr ""
+msgstr "Global faktura generert! "
 
 #: includes/be-woocommerce-pdf-invoices.php:126
 #, php-format
@@ -675,11 +695,11 @@ msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:185
 msgid "Invalid order ID"
-msgstr ""
+msgstr "Ugyldig ordrenummer"
 
 #: includes/be-woocommerce-pdf-invoices.php:191
 msgid "Access denied"
-msgstr ""
+msgstr "Tilgang nektet"
 
 #: includes/be-woocommerce-pdf-invoices.php:218
 msgid "General"
@@ -772,19 +792,19 @@ msgstr ""
 
 #: includes/partials/customer-generation.php:1
 msgid "Generate Global Invoice"
-msgstr ""
+msgstr "Generer Global Faktura"
 
 #: includes/partials/customer-generation.php:11
 msgid "Select a month"
-msgstr ""
+msgstr "Velg en måned"
 
 #: includes/partials/customer-generation.php:24
 msgid "Select a year"
-msgstr ""
+msgstr "Velg et år"
 
 #: includes/partials/customer-generation.php:38
 msgid "Generate invoice"
-msgstr ""
+msgstr "Generer faktura"
 
 #: includes/partials/settings-sidebar.php:2
 msgid "WooCommerce PDF Invoices Premium"

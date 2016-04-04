@@ -308,6 +308,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             return $wpdb->get_var($query);
         }
 
+        public function icl_current_string_language($language, $name) {
+            $order_language = get_post_meta( $this->order->id, 'wpml_language', true );
+            return $order_language;
+        }
+
+
         /**
          * Generates and saves the invoice to the uploads folder.
          * @param $dest
@@ -315,6 +321,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected function save($dest, $html_templates)
         {
+            // wpml
+            $order_language = get_post_meta( $this->order->id, 'wpml_language', true );
+            $user_id = get_current_user_id();
+            $temp_language = null;
+            if (is_numeric($user_id)) {
+                $temp_language =  get_user_meta( $user_id,	'icl_admin_language_for_edit', true );
+                update_user_meta($user_id, 'icl_admin_language_for_edit', $order_language);
+                do_action('wpml_switch_language', $order_language);
+            }
+
+            $test = __( 'Invoice', 'woocommerce-pdf-invoices' );
+
             if ($this->exists()) {
                 // delete postmeta and PDF
                 $this->delete();
@@ -340,6 +358,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
             do_action('bewpi_before_document_generation', array('type' => $this->type, 'order_id' => $this->order->id));
 
             parent::generate($html_sections, $dest, $paid);
+
+            // wpml
+            if (is_numeric($user_id)) {
+                update_user_meta($user_id, 'icl_admin_language_for_edit', $temp_language);
+                do_action('wpml_switch_language', $temp_language);
+            }
 
             return $this->full_path;
         }

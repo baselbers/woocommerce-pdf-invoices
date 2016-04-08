@@ -80,7 +80,7 @@ To easily get started, copy the default template files (including folder) called
 = How to add a fee to the invoice? =
 To add a fee to your invoice, simply add the following action to your themes `functions.php`.
 
-`add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
+`
 function add_woocommerce_fee() {
     global $woocommerce;
 
@@ -89,24 +89,29 @@ function add_woocommerce_fee() {
 
     $amount = 5;
     $woocommerce->cart->add_fee( 'FEE_NAME', $amount, true, 'standard' );
-}`
+}
+add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
+`
 
 = How to hide order item meta? =
 To hide order item meta from the invoice, simply add the following filter to your themes `functions.php`.
 
-`add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
+`
 function add_hidden_order_items( $order_items ) {
     $order_items[] = '_subscription_interval';
     $order_items[] = '_subscription_length';
     // end so on...
 
     return $order_items;
-}`
+}
+add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
+`
 
 = How to change PDF margins/options? =
 To change the options of the PDF, use below example.
 
-`function custom_bewpi_mpdf_options( $options ) {
+`
+function custom_bewpi_mpdf_options( $options ) {
  	$options['mode'] = '';
  	$options['format'] = '';
  	$options['default_font_size'] = 0;
@@ -118,52 +123,73 @@ To change the options of the PDF, use below example.
  	$options['margin_header'] = 14;
  	$options['margin_footer'] = 6;
  	$options['orientation'] = 'P';
+
  	return $options;
- }
- add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );`
+}
+add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );
+`
 
- = How to display invoice download button on specific template files? =
- Let customers download there invoices from specific template pages by using below shortcode.
+= How to display invoice download button on specific template files? =
+Let customers download there invoices from specific template pages by using below shortcode.
 
- `echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]' );`
+`echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]' );`
 
- To use shortcode in WordPress editor:
+To use shortcode in WordPress editor:
 
- `[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
+`[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
 
- = How to change direction of invoice to RTL? =
- To change the direction of the invoice to RTL or something else, add below filter to your themes functions.php.
+= How to change direction of invoice to RTL? =
+To change the direction of the invoice to RTL or something else, add below filter to your themes functions.php.
 
- `function bewpi_mpdf( $mpdf ) {
-  	$mpdf->SetDirectionality( 'rtl' );
-  	return $mpdf;
-  }
-  add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );`
+`
+function bewpi_mpdf( $mpdf ) {
+    $mpdf->SetDirectionality( 'rtl' );
+    return $mpdf;
+}
+add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
+`
 
-  = Logo image shows a red cross? =
-  Add below filter to themes functions.php to base64 the image. By default the relative path is used. Also read the sticky topic on the support forum for more solutions!
+= Logo image shows a red cross? =
+Add below filter to themes functions.php to base64 the image. By default the relative path is used. Also read the sticky topic on the support forum for more solutions!
 
-  `function convert_company_logo_to_base64( $company_logo_path ) {
+`
+function convert_company_logo_to_base64( $company_logo_path ) {
     $company_logo_url = str_replace( '..', get_site_url(), $company_logo_path );
-    $type   = pathinfo( $company_logo_url, PATHINFO_EXTENSION );
-    $data   = wp_remote_fopen( $company_logo_url );
+    $type = pathinfo( $company_logo_url, PATHINFO_EXTENSION );
+    $data = wp_remote_fopen( $company_logo_url );
     $base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
     return $base64;
-  }
-  add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );`
+}
+add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );
+`
 
-  = How to show 'Paid' watermark for BACS payment method and/or others? =
-  Add below function to your themes functions.php.
+= How to show 'Paid' watermark for BACS payment method and/or others? =
+Add below function to your themes functions.php.
 
-  `function exclude_payment_method_for_watermark($payment_methods, $order_id){
-   	return array();
-   }
-   add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);`
+`
+function exclude_payment_method_for_watermark($payment_methods, $order_id){
+    return array();
+}
+add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);
+`
+
+= How to not generate invoice based on payment methods? =
+Add below filter to your themes functions.php file.
+
+`
+function exclude_payment_method_attach_invoice($payment_methods){
+    $payment_methods[] = 'cod'; // invoice will not be generated when payment method is 'Cash On Delivery'
+    return $payment_methods;
+}
+add_filter('bewpi_attach_invoice_excluded_payment_methods', 'exclude_payment_method_attach_invoice', 10, 2);
+`
 
 == Changelog ==
 
-= 2.4.5 - March 22, 2016 =
+= 2.4.5 - April 8, 2016 =
 
+- Added: Actions 'bewpi_before_invoice_content' and 'bewpi_after_invoice_content' for WPML integration
+- Added: Filter 'bewpi_attach_invoice_excluded_payment_methods' to attach invoice depending on payment methods
 - Improved: Norwegian language file
 
 = 2.4.4 - March 11, 2016 =

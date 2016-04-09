@@ -104,7 +104,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
         }
 
 		public function init() {
-			$this->load_textdomain();
 			$this->init_settings_tabs();
 			$this->create_bewpi_dirs();
 			$this->invoice_actions();
@@ -215,14 +214,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				}
 
 			}
-		}
-
-		/**
-		 * Loads the textdomain and localizes the plugin options tabs.
-		 */
-		public function load_textdomain() {
-			$lang_dir = (string) BEWPI_LANG_DIR;
-			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
 		}
 
 		public function init_settings_tabs() {

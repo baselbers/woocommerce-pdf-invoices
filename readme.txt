@@ -203,6 +203,19 @@ function bewpi_attach_invoice_excluded_payment_methods($payment_methods) {
 add_filter('bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2);
 `
 
+#### How to allow specific roles to download invoice? =
+Add the name of the role to the array. By default shop managers and administrators are allowed to download invoices.
+
+`
+function bewpi_allowed_roles_to_download_invoice($allowed_roles) {
+    // available roles: shop_manager, customer, contributor, author, editor, administrator
+    $allowed_roles[] = "editor";
+
+    return $allowed_roles;
+}
+add_filter('bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_download_invoice', 10, 2);
+`
+
 == Changelog ==
 
 = 2.4.5 - April 15, 2016 =

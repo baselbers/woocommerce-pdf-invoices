@@ -38,6 +38,8 @@ function bewpi_plugins_loaded() {
 	require_once( BEWPI_DIR . 'includes/class-bewpi-invoice.php' );
 	require_once( BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php' );
 
+    load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', BEWPI_LANG_DIR ) );
+
 	new BE_WooCommerce_PDF_Invoices();
 }
 add_action( 'plugins_loaded', 'bewpi_plugins_loaded', 10 );

@@ -88,9 +88,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected $counter_reset = false;
 
-        /**
-         * Initialize invoice with WooCommerce order
-         * @param string $order
+        /***
+         * BEWPI_Abstract_Invoice constructor.
+         * @param $order_id
+         * @param $type
+         * @param int $taxes_count
          */
         public function __construct($order_id, $type, $taxes_count = 0)
         {
@@ -315,6 +317,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         protected function save($dest, $html_templates)
         {
+            $this->general_options = get_option('bewpi_general_settings');
+            $this->template_options = get_option('bewpi_template_settings');
+
+            do_action("bewpi_before_invoice_content", $this->order->id);
+
+            $test = __('Invoice', 'woocommerce-pdf-invoices');
+
             if ($this->exists()) {
                 // delete postmeta and PDF
                 $this->delete();
@@ -341,6 +350,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
             parent::generate($html_sections, $dest, $paid);
 
+            do_action("bewpi_after_invoice_content", $this->order->id);
+
             return $this->full_path;
         }
 
@@ -350,13 +361,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         public function is_paid()
         {
-            $payment_methods = apply_filters('bewpi_paid_watermark_excluded_payment_methods', array('cod'), $this->order->id);
+            $payment_methods = apply_filters('bewpi_paid_watermark_excluded_payment_methods', array('bacs', 'cod', 'cheque'), $this->order->id);
             if (in_array($this->order->payment_method, $payment_methods)) {
                 return false;
             }
 
             $order_statuses = apply_filters('bewpi_paid_watermark_excluded_order_statuses', array('pending', 'on-hold', 'auto-draft'), $this->order->id);
-            return (!in_array($this->order->get_status(), $order_statuses ));
+            return (!in_array($this->order->get_status(), $order_statuses));
         }
 
         public function view()
@@ -414,7 +425,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
                 // get the relative path due to slow generation of invoice.
                 $image_path = str_replace(get_site_url(), '..', $this->template_options['bewpi_company_logo']);
                 // give the user the option to change the image (path/url) due to some errors of mPDF.
-                $image_url = apply_filters( 'bewpi_company_logo_url', $image_path );
+                $image_url = apply_filters('bewpi_company_logo_url', $image_path);
 
                 echo '<img class="company-logo" src="' . $image_url . '"/>';
             } else {
@@ -551,8 +562,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         public function left_footer_column_html()
         {
             $left_footer_column_text = $this->template_options['bewpi_left_footer_column'];
-            if (!empty($left_footer_column_text))
-            {
+            if (!empty($left_footer_column_text)) {
                 echo '<p>' . nl2br($this->replace_placeholders($left_footer_column_text)) . '</p>';
             }
         }
@@ -560,21 +570,21 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
         public function right_footer_column_html()
         {
             $right_footer_column_text = $this->template_options['bewpi_right_footer_column'];
-            if (!empty($right_footer_column_text))
-            {
+            if (!empty($right_footer_column_text)) {
                 echo '<p>' . nl2br($this->replace_placeholders($right_footer_column_text)) . '</p>';
             } else {
-                echo '<p>' . sprintf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ) . '</p>';
+                echo '<p>' . sprintf(__('%s of %s', 'woocommerce-pdf-invoices'), '{PAGENO}', '{nbpg}') . '</p>';
             }
         }
 
-        private function replace_placeholders( $str ) {
+        private function replace_placeholders($str)
+        {
             $placeholders = apply_filters('bewpi_placeholders', array(
                 '[payment_method]' => $this->order->payment_method_title,
                 '[shipping_method]' => $this->order->get_shipping_method()
             ), $this->order->id);
 
-            foreach ($placeholders as $placeholder => $value){
+            foreach ($placeholders as $placeholder => $value) {
                 $str = str_replace($placeholder, $value, $str);
             }
 

@@ -40,11 +40,11 @@ This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce e
 
 Support can take place on the [forum page](https://wordpress.org/support/plugin/woocommerce-pdf-invoices), where we will try to respond as soon as possible.
 
-= Contributing =
+#### Contributing
 
 If you want to add code to the source code, report an issue or request an enhancement, feel free to use [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices).
 
-= Translating =
+#### Translating
 
 Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pdf-invoices#translating).
 
@@ -60,12 +60,12 @@ Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pd
 
 == Installation ==
 
-= Automatic installation =
+#### Automatic installation
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WooCommerce, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New.
 
 In the search field type "WooCommerce PDF Invoices" and click Search Plugins. Once you've found our plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking Install Now. After clicking that link you will be asked if you're sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
 
-= Manual installation =
+#### Manual installation
 The manual installation method involves downloading our plugin and uploading it to your webserver via your favourite FTP application.
 
 1. Download the plugin file to your computer and unzip it
@@ -74,11 +74,11 @@ The manual installation method involves downloading our plugin and uploading it 
 
 == Frequently Asked Questions ==
 
-= How to add your custom template? =
-To easily get started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/invoices/simple/micro` to `uploads/bewpi-templates/invoices/simple` and rename the template folder `micro` to a template name you like. This way the plugin will detect the template and makes it available to select it within the template settings tab. Now go ahead en start making some changes to the template files! :)
+#### How to add your custom template?
+To getting started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/invoices/simple/micro` to `uploads/bewpi-templates/invoices/simple` and rename the template folder `micro`. The plugin will now detect the template and makes it available for selection within the template settings tab. Now go ahead en start making some changes to the template files! :)
 
-= How to add a fee to the invoice? =
-To add a fee to your invoice, simply add the following action to your themes `functions.php`.
+#### How to add a fee to the invoice?
+To add a fee to WooCommerce and your invoice, simply add the following action to your themes `functions.php`.
 
 `
 function add_woocommerce_fee() {
@@ -93,7 +93,7 @@ function add_woocommerce_fee() {
 add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
 `
 
-= How to hide order item meta? =
+#### How to hide order item meta? =
 To hide order item meta from the invoice, simply add the following filter to your themes `functions.php`.
 
 `
@@ -107,13 +107,13 @@ function add_hidden_order_items( $order_items ) {
 add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
 `
 
-= How to change PDF margins/options? =
-To change the options of the PDF, use below example.
+#### How to change the common PDF options? =
+To change the more common options of the PDF, use below example.
 
 `
 function custom_bewpi_mpdf_options( $options ) {
  	$options['mode'] = '';
- 	$options['format'] = '';
+ 	$options['format'] = ''; // use [format]-L or [format]-P to force orientation (A4-L will be size A4 with landscape orientation)
  	$options['default_font_size'] = 0;
  	$options['default_font'] = 'opensans';
  	$options['margin_left'] = 14;
@@ -122,35 +122,43 @@ function custom_bewpi_mpdf_options( $options ) {
  	$options['margin_bottom'] = 0;
  	$options['margin_header'] = 14;
  	$options['margin_footer'] = 6;
- 	$options['orientation'] = 'P';
+ 	$options['orientation'] = 'P'; // Also try to force with format option
 
  	return $options;
 }
 add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );
 `
 
-= How to display invoice download button on specific template files? =
-Let customers download there invoices from specific template pages by using below shortcode.
-
-`echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]' );`
-
-To use shortcode in WordPress editor:
-
-`[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="ORDER_ID"]`
-
-= How to change direction of invoice to RTL? =
-To change the direction of the invoice to RTL or something else, add below filter to your themes functions.php.
+#### How to change the more advanced PDF options?
+To fully customize the PDF, use below code. This filter gives you full control over the mPDF library. Check the mPDF [manual](https://www.dropbox.com/s/h44f7v5anvcmmvl/mpdfmanual.pdf?dl=0) for more info.
 
 `
 function bewpi_mpdf( $mpdf ) {
+    // change the direction of the invoice to RTL
     $mpdf->SetDirectionality( 'rtl' );
+
     return $mpdf;
 }
 add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
 `
 
-= Logo image shows a red cross? =
-Add below filter to themes functions.php to base64 the image. By default the relative path is used. Also read the sticky topic on the support forum for more solutions!
+#### How to display invoice download button on specific template files? =
+Add below code to any template files. Replace {ORDER_ID} with the desired ID of the order to download the invoice from.
+
+`
+echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="{ORDER_ID}"]' );
+`
+
+For use in WordPress editor:
+
+`
+[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="{ORDER_ID}"]
+`
+
+Note: Download button will only show if PDF exists and order has been completed.
+
+#### Logo image shows a red cross?
+By default the relative path is used for better performance, try to base64 the image. Also read the sticky topic on the support forum for more solutions!
 
 `
 function convert_company_logo_to_base64( $company_logo_path ) {
@@ -163,32 +171,43 @@ function convert_company_logo_to_base64( $company_logo_path ) {
 add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );
 `
 
-= How to show 'Paid' watermark for BACS payment method and/or others? =
-Add below function to your themes functions.php.
+#### How to remove 'Paid' watermark based on specific order statuses?
+By default the 'Paid' watermark won't display for 'Pending', 'On-Hold' and 'Auto-Draft' statuses.
+
+`
+function bewpi_paid_watermark_excluded_order_statuses($order_statuses, $order_id){
+    // add (short) name of order status to exclude
+    return array('pending', 'on-hold', 'auto-draft');
+}
+add_filter('bewpi_paid_watermark_excluded_order_statuses', 'bewpi_paid_watermark_excluded_order_statuses', 10, 2);
+`
+
+#### How to remove 'Paid' watermark based on specific payment methods? =
+By default 'BACS', 'Cash on Delivery' and 'Cheque' payment methods are excluded, so the invoice won't get marked as paid.
 
 `
 function exclude_payment_method_for_watermark($payment_methods, $order_id){
-    return array();
+    // add (short) name of payment method to exclude
+    return array('bacs', 'cod', 'cheque', 'paypal');
 }
 add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);
 `
 
-= How to not generate invoice based on payment methods? =
-Add below filter to your themes functions.php file.
+#### How to skip invoice generation based on specific payment methods? =
+Add the name of the payment method to the array.
 
 `
-function exclude_payment_method_attach_invoice($payment_methods){
-    $payment_methods[] = 'cod'; // invoice will not be generated when payment method is 'Cash On Delivery'
-    return $payment_methods;
+function bewpi_attach_invoice_excluded_payment_methods($payment_methods) {
+    return array('bacs', 'cod', 'cheque', 'paypal');
 }
-add_filter('bewpi_attach_invoice_excluded_payment_methods', 'exclude_payment_method_attach_invoice', 10, 2);
+add_filter('bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2);
 `
 
 == Changelog ==
 
 = 2.4.5 - April 8, 2016 =
 
-- Added: Actions 'bewpi_before_invoice_content' and 'bewpi_after_invoice_content' for WPML integration
+- Added: Actions 'bewpi_before_invoice_content' and 'bewpi_after_invoice_content' for WPML integration (WIP)
 - Added: Filter 'bewpi_attach_invoice_excluded_payment_methods' to attach invoice depending on payment methods
 - Improved: Norwegian language file
 

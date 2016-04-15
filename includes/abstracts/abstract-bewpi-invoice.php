@@ -361,7 +361,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          */
         public function is_paid()
         {
-            $payment_methods = apply_filters('bewpi_paid_watermark_excluded_payment_methods', array('cod'), $this->order->id);
+            $payment_methods = apply_filters('bewpi_paid_watermark_excluded_payment_methods', array('bacs', 'cod', 'cheque'), $this->order->id);
             if (in_array($this->order->payment_method, $payment_methods)) {
                 return false;
             }

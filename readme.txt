@@ -36,7 +36,7 @@ This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce e
 > - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
 > [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
 
-= Support =
+#### Support
 
 Support can take place on the [forum page](https://wordpress.org/support/plugin/woocommerce-pdf-invoices), where we will try to respond as soon as possible.
 
@@ -93,7 +93,7 @@ function add_woocommerce_fee() {
 add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
 `
 
-#### How to hide order item meta? =
+#### How to hide order item meta?
 To hide order item meta from the invoice, simply add the following filter to your themes `functions.php`.
 
 `
@@ -107,7 +107,7 @@ function add_hidden_order_items( $order_items ) {
 add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
 `
 
-#### How to change the common PDF options? =
+#### How to change the common PDF options?
 To change the more common options of the PDF, use below example.
 
 `
@@ -142,7 +142,7 @@ function bewpi_mpdf( $mpdf ) {
 add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
 `
 
-#### How to display invoice download button on specific template files? =
+#### How to display invoice download button on specific template files?
 Add below code to any template files. Replace {ORDER_ID} with the desired ID of the order to download the invoice from.
 
 `
@@ -182,7 +182,7 @@ function bewpi_paid_watermark_excluded_order_statuses($order_statuses, $order_id
 add_filter('bewpi_paid_watermark_excluded_order_statuses', 'bewpi_paid_watermark_excluded_order_statuses', 10, 2);
 `
 
-#### How to remove 'Paid' watermark based on specific payment methods? =
+#### How to remove 'Paid' watermark based on specific payment methods?
 By default 'BACS', 'Cash on Delivery' and 'Cheque' payment methods are excluded, so the invoice won't get marked as paid.
 
 `
@@ -193,7 +193,7 @@ function exclude_payment_method_for_watermark($payment_methods, $order_id){
 add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);
 `
 
-#### How to skip invoice generation based on specific payment methods? =
+#### How to skip invoice generation based on specific payment methods?
 Add the name of the payment method to the array.
 
 `
@@ -203,7 +203,7 @@ function bewpi_attach_invoice_excluded_payment_methods($payment_methods) {
 add_filter('bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2);
 `
 
-#### How to allow specific roles to download invoice? =
+#### How to allow specific roles to download invoice?
 Add the name of the role to the array. By default shop managers and administrators are allowed to download invoices.
 
 `

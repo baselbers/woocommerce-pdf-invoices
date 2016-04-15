@@ -63,6 +63,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
 		        $mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 		        $mpdf->showWatermarkText = true;
+				$mpdf->watermarkTextAlpha = "0.2";
+                $mpdf->watermarkImgBehind = false;
 	        }
 
 	        // debugging

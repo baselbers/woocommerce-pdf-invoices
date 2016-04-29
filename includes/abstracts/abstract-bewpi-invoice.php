@@ -322,8 +322,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
             do_action("bewpi_before_invoice_content", $this->order->id);
 
-            $test = __('Invoice', 'woocommerce-pdf-invoices');
-
             if ($this->exists()) {
                 // delete postmeta and PDF
                 $this->delete();

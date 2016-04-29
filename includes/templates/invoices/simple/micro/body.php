@@ -19,7 +19,7 @@
 	<tbody>
 	<tr>
 		<td class="invoice-details">
-			<h1 class="title"><?php _e( 'Invoice', 'woocommerce-pdf-invoices' ); ?></h1>
+			<h1 class="title"><?php echo $this->template_options['bewpi_title']; ?></h1>
 			<span class="number" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
 			<span><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
 			<span><?php printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $this->order->get_order_number() ); ?></span><br/>

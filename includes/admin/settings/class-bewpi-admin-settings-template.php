@@ -205,6 +205,17 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'default' => ''
 			    ),
 			    // Body
+                array(
+                    'id' => 'bewpi-title',
+                    'name' => $this->prefix . 'title',
+                    'title' => __( 'Title', 'woocommerce-pdf-invoices' ),
+                    'callback' => array( &$this, 'input_callback' ),
+                    'page' => $this->settings_key,
+                    'section' => 'body',
+                    'type' => 'text',
+                    'desc' => __( 'Change the name of the invoice.', 'woocommerce-pdf-invoices' ),
+                    'default' => __( 'Invoice', 'woocommerce-pdf-invoices' )
+                ),
 			    array(
 				    'id' => 'bewpi-intro-text',
 				    'name' => $this->prefix . 'intro_text',

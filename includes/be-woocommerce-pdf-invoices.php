@@ -149,10 +149,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		public function bewpi_download_invoice_func( $atts ) {
-			$order_id   = $atts[ 'order_id' ];
-			$title      = $atts[ 'title' ];
-			$order      = wc_get_order( $order_id );
-			$invoice    = new BEWPI_Invoice( $order->id );
+            if(!isset($atts["order_id"]))
+            {
+                return;
+            }
+
+            $order_id = $atts["order_id"];
+            $order = wc_get_order( $order_id );
+			$title = $atts[ 'title' ];
+			$invoice = new BEWPI_Invoice( $order->id );
 
 			if ( $invoice->exists() && $invoice->is_download_allowed( $order->post_status ) ) {
 				$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );

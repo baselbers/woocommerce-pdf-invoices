@@ -95,10 +95,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        $mpdf->Output( $filename, $dest );
         }
 
-        /**
-         * Get the invoice if exist and show.
-         * @param $download
-         */
         public function view() {
             if ( $this->general_options[ 'bewpi_view_pdf' ] === 'browser' ) {
 	            header( 'Content-type: application/pdf' );

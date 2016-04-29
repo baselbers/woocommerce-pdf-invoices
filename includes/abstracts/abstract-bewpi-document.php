@@ -27,9 +27,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          */
         protected $template_options;
 
-	    /**
-         * @param $order
-         */
         public function __construct() {
             $this->general_options      = get_option( 'bewpi_general_settings' );
             $this->template_options     = get_option( 'bewpi_template_settings' );

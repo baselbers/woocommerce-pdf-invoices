@@ -355,21 +355,30 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$attachments = apply_filters( 'bewpi_email_attachments', $attachments, $status, $order );
 
 			$general_options = get_option( 'bewpi_general_settings' );
-			if($status !== $general_options['bewpi_email_type'] || $status === 'new_order' && !$general_options['bewpi_new_order']){
-				return $attachments;
-			}
+            if($status !== $general_options["bewpi_email_type"] && (!$general_options['bewpi_new_order'] && $status === "new_order"))
+            {
+                return $attachments;
+            }
 
-			$payment_methods = apply_filters('bewpi_attach_invoice_excluded_payment_methods', array() );
-			if(in_array($order->payment_method, $payment_methods)){
+			$payment_methods = apply_filters('bewpi_attach_invoice_excluded_payment_methods', array());
+			if(in_array($order->payment_method, $payment_methods))
+            {
 				return $attachments;
 			}
 
 			$invoice = new BEWPI_Invoice( $order->id );
-			// create new invoice if doesn't exists, else get the full path..
-			$full_path = ( ! $invoice->exists() ) ? $invoice->save( "F" ) : $invoice->get_full_path();
+            if($invoice->exists())
+            {
+                $full_path = $invoice->get_full_path();
+            }
+            else
+            {
+                $full_path = $invoice->save("F");
+            }
 
 			// only add to attachments if it isn't already added.
-			if ( !in_array( $full_path, $attachments ) ) {
+			if(!in_array($full_path, $attachments))
+            {
 				$attachments[] = $full_path;
 			}
 

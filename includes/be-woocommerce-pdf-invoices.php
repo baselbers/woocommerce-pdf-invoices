@@ -20,12 +20,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public $general_options = array();
 		public $template_options = array();
 
-		/**
-		 * Initialize plugin and register actions and filters.
-		 *
-		 * @param $general_settings
-		 * @param $template_settings
-		 */
 		public function __construct() {
 			$this->lang_code = get_bloginfo( "language" );
 			new BEWPI_General_Settings();
@@ -77,6 +71,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 * Attach invoice to a specific WooCommerce email
 			 */
 			add_filter( 'woocommerce_email_attachments', array( &$this, 'attach_invoice_to_email' ), 99, 3 );
+
+            /**
+             * Attach invoice to a new order email
+             */
+            add_filter( 'woocommerce_email_attachments', array( &$this, 'attach_invoice_to_new_order_email' ), 99, 3 );
 
 			/**
 			 * Adds a download link for the pdf invoice on the my account page
@@ -347,6 +346,33 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			return $headers;
 		}
 
+        public function attach_invoice_to_new_order_email($attachments, $status, $order)
+        {
+            $general_options = get_option( 'bewpi_general_settings' );
+            if(!$general_options['bewpi_new_order'] || $status !== "new_order")
+            {
+                return $attachments;
+            }
+
+            $invoice = new BEWPI_Invoice( $order->id );
+            if($invoice->exists())
+            {
+                $full_path = $invoice->get_full_path();
+            }
+            else
+            {
+                $full_path = $invoice->save("F");
+            }
+
+            // only add to attachments if it isn't already added.
+            if(!in_array($full_path, $attachments))
+            {
+                $attachments[] = $full_path;
+            }
+
+            return $attachments;
+        }
+
 		/**
 		 * Attaches invoice to a specific WooCommerce email. Invoice will only be generated when it does not exists already.
 		 *
@@ -359,8 +385,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		function attach_invoice_to_email( $attachments, $status, $order ) {
 			$attachments = apply_filters( 'bewpi_email_attachments', $attachments, $status, $order );
 
-			$general_options = get_option( 'bewpi_general_settings' );
-            if($status !== $general_options["bewpi_email_type"] && (!$general_options['bewpi_new_order'] && $status === "new_order"))
+            $general_options = get_option( 'bewpi_general_settings' );
+            if(empty($general_options["bewpi_email_type"]) || $status !== $general_options["bewpi_email_type"])
             {
                 return $attachments;
             }

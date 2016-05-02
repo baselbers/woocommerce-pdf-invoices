@@ -5,7 +5,7 @@
 		- <?php _e( 'Bill periodically by generating and sending global invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Add additional PDF\'s to customer invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Send customer invoices directly to suppliers and others.', 'woocommerce-pdf-invoices' ); ?><br/>
-		- <?php printf( __( 'Compatible with <a href="%s">WooCommerce Subscriptions</a> plugin emails.', 'woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
+		- <?php printf( __( 'Attach invoices to <a href="%s">WooCommerce Subscriptions</a> emails.', 'woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
 	</p>
 	<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', 'woocommerce-pdf-invoices' ); ?></a>
 </aside>
@@ -49,7 +49,7 @@
 <aside class="bewpi-sidebar support">
 	<h3><?php _e( 'Support', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
-		<?php _e( 'We will never ask for donations, but to garantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', 'woocommerce-pdf-invoices' ); ?>
+		<?php _e( 'We will never ask for donations, but to guarantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', 'woocommerce-pdf-invoices' ); ?>
 	</p>
 	<!-- Github star -->
 	<div class="github btn">

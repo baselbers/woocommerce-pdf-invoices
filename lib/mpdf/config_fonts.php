@@ -13,7 +13,7 @@
 // More than 1 font can be specified but each will add to the processing time of the script
 
 // $this->backupSubsFont = array('dejavusanscondensed','arialunicodems','sun-exta');	// this will recognise most scripts
-$this->backupSubsFont = array('dejavusanscondensed', 'freeserif');
+$this->backupSubsFont = array('dejavusanscondensed');
 
 // Optionally set a font (name as defined below in $this->fontdata) to use for CJK characters
 // in Plane 2 Unicode (> U+20000) when using useSubstitutions.
@@ -81,61 +81,63 @@ $this->fonttrans = array(
  */
 
 $this->fontdata = array(
-	"dejavusanscondensed" => array(
-        'R' => "DejaVuSansCondensed.ttf",
-        'useOTL' => 0xFF,
-        'useKashida' => 75,
-    ),
-    // Main font
     "opensans" => array(
         'R' => "OpenSans-Regular.ttf",
         'B' => "OpenSans-Bold.ttf",
         'I' => "OpenSans-Italic.ttf",
     ),
-    // Thai
+	"dejavusanscondensed" => array(
+		'R' => "DejaVuSansCondensed.ttf",
+		'useOTL' => 0xFF,
+		'useKashida' => 75,
+	),
+	/* OCR-B font for Barcodes */
+	"ocrb" => array(
+		'R' => "ocrb10.ttf",
+	),   
+    /* Thai */
     "garuda" => array(
         'R' => "Garuda.ttf",
     ),
-    // Chinese
+    /* Chinese */
     "simsun" => array(
         'R' => "SimSun.ttf",
     ),
-    // Arabic
+    /* Arabic */
     "xbriyaz" => array(
 		'R' => "XB Riyaz.ttf",
 		'useOTL' => 0xFF,
 		'useKashida' => 75,
 	),
-	// Hebrew with full Niqud and Cantillation
+	/* Hebrew with full Niqud and Cantillation */
 	"taameydavidclm" => array(
 		'R' => "TaameyDavidCLM-Medium.ttf",
 		'useOTL' => 0xFF,
 	),
-	// Indic
+	/* Indic */
 	"lohitkannada" => array(
 		'R' => "Lohit-Kannada.ttf",
 		'useOTL' => 0xFF,
 	),
-	// Syriac
+	/* Syriac */
 	"estrangeloedessa" => array(
 		'R' => "SyrCOMEdessa.otf",
 		'useOTL' => 0xFF,
 	),
-	// // Korean
-	// "unbatang" => array(
-	// 	'R' => "UnBatang_0613.ttf",
-	// ),
+	/* Korean */
+	"unbatang" => array(
+		'R' => "UnBatang_0613.ttf",
+	),
+    "sun-extb" => array(
+	    'R' => "Sun-ExtB.ttf",
+    ),
 );
 
 
 // Add fonts to this array if they contain characters in the SIP or SMP Unicode planes
 // but you do not require them. This allows a more efficient form of subsetting to be used.
 $this->BMPonly = array(
-	"dejavusanscondensed",
-	"dejavusans",
-	"dejavuserifcondensed",
-	"dejavuserif",
-	"dejavusansmono",
+	"dejavusanscondensed"
 );
 
 // These next 3 arrays do two things:

@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 2.4.8
+Stable tag: 2.4.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,6 +217,10 @@ add_filter('bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_do
 `
 
 == Changelog ==
+
+= 2.4.9 - September, 2016 =
+
+- Fixed: Updated mPDF
 
 = 2.4.8 - September, 2016 =
 

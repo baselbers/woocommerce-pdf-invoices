@@ -163,7 +163,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				$tags = array (
 					'{formatted_invoice_number}'    => $invoice->get_formatted_number(),
-					'{order_number}'                => $order->id,
+					'{order_number}'                => $order->get_order_number(),
 					'{formatted_invoice_date}'      => $invoice->get_formatted_invoice_date(),
 					'{formatted_order_date}'        => $invoice->get_formatted_order_date()
 				);

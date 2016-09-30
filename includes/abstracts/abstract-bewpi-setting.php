@@ -101,7 +101,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	    public function select_callback( $args ) {
 		    $options = get_option( $args['page'] );
 		    ?>
-		    <select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
+		    <select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" <?php
+			    if ( isset ( $args['attrs'] ) ) :
+				    foreach ( $args['attrs'] as $attr ) :
+					    echo $attr . ' ';
+				    endforeach;
+			    endif;
+			    ?> >
 			    <?php
 			    foreach ( $args['options'] as $option ) :
 				    ?>

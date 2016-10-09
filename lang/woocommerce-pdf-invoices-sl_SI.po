@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2016-03-04 14:25+0100\n"
-"PO-Revision-Date: 2016-03-04 14:25+0100\n"
+"PO-Revision-Date: 2016-10-09 21:26+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.8\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-document.php:64
 msgid "Paid"
-msgstr ""
+msgstr "Plačano"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:262
 #, php-format
@@ -42,16 +42,18 @@ msgstr ""
 msgid ""
 "Invoice with invoice number %s not found. First create invoice and try again."
 msgstr ""
+"Računa številka %s ni bilo mogoče najti. Najprej kreirajte račun in nato "
+"poizkusite znova."
 
 #: includes/abstracts/abstract-bewpi-invoice.php:372
 #, php-format
 msgid "VAT Number: %s"
-msgstr ""
+msgstr "Davčna številka: %s"
 
 #: includes/abstracts/abstract-bewpi-invoice.php:383
 #, php-format
 msgid "Purchase Order Number: %s"
-msgstr ""
+msgstr "Številka naročil: %s"
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
@@ -59,12 +61,12 @@ msgstr ""
 
 #: includes/abstracts/abstract-bewpi-setting.php:173
 msgid "Remove logo"
-msgstr ""
+msgstr "Odstrani logotip"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:86
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:115
 msgid "Attach to Email"
-msgstr ""
+msgstr "Pripni k elektronski pošti"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:94
 msgid "Processing order"
@@ -76,7 +78,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:102
 msgid "Customer invoice"
-msgstr ""
+msgstr "Račun"
 
 #: includes/admin/settings/class-bewpi-admin-settings-general.php:106
 #: includes/admin/settings/class-bewpipremium-admin-settings.php:135
@@ -250,7 +252,7 @@ msgstr ""
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:240
 msgid "Items will be shipped within 2 days."
-msgstr ""
+msgstr "Naročilo bo odposlano najkasneje v dveh dneh."
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:246
 msgid "Left footer column."
@@ -259,7 +261,7 @@ msgstr ""
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:252
 #, php-format
 msgid "<b>Payment method</b> %s"
-msgstr ""
+msgstr "<b>Način plačila</b> %s"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:257
 msgid "Right footer column."
@@ -338,11 +340,11 @@ msgstr "Skupaj"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:414
 msgid "Tax (item)"
-msgstr ""
+msgstr "DDV (izdelek)"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:426
 msgid "Tax (total)"
-msgstr ""
+msgstr "DDV (skupaj)"
 
 #: includes/admin/settings/class-bewpi-admin-settings-template.php:438
 #: includes/templates/invoices/global/micro/body.php:220
@@ -679,15 +681,15 @@ msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:369
 msgid "PDF Invoice"
-msgstr ""
+msgstr "Račun PDF"
 
 #: includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoiced on:"
-msgstr ""
+msgstr "Datum fakture"
 
 #: includes/be-woocommerce-pdf-invoices.php:399
 msgid "Invoice number:"
-msgstr ""
+msgstr "Številka računa:"
 
 #: includes/be-woocommerce-pdf-invoices.php:438
 msgid "View invoice"
@@ -699,7 +701,7 @@ msgstr ""
 
 #: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel invoice"
-msgstr ""
+msgstr "Prekliči račun"
 
 #: includes/be-woocommerce-pdf-invoices.php:439
 msgid "Cancel"
@@ -720,7 +722,7 @@ msgstr ""
 #: includes/be-woocommerce-pdf-invoices.php:467
 #, php-format
 msgid "Invoice %s (PDF)"
-msgstr ""
+msgstr "Račun %s (PDF)"
 
 #: includes/be-woocommerce-pdf-invoices.php:577
 #, php-format
@@ -862,7 +864,7 @@ msgstr ""
 #: includes/templates/invoices/global/micro/body.php:5
 #: includes/templates/invoices/simple/micro/body.php:5
 msgid "Invoice to"
-msgstr ""
+msgstr "Podatki za račun"
 
 #: includes/templates/invoices/global/micro/body.php:7
 #: includes/templates/invoices/simple/micro/body.php:7
@@ -873,7 +875,7 @@ msgstr ""
 #: includes/templates/invoices/global/micro/body.php:11
 #: includes/templates/invoices/simple/micro/body.php:11
 msgid "Ship to"
-msgstr ""
+msgstr "Naslov prejemnika"
 
 #: includes/templates/invoices/global/micro/body.php:22
 msgid "Global Invoice"
@@ -887,17 +889,17 @@ msgstr "Opis"
 #: includes/templates/invoices/global/micro/body.php:48
 #: includes/templates/invoices/simple/micro/body.php:52
 msgid "Cost"
-msgstr ""
+msgstr "Cena"
 
 #: includes/templates/invoices/global/micro/body.php:50
 #: includes/templates/invoices/simple/micro/body.php:54
 msgid "Qty"
-msgstr ""
+msgstr "Količina"
 
 #: includes/templates/invoices/global/micro/body.php:56
 #: includes/templates/invoices/simple/micro/body.php:60
 msgid "VAT"
-msgstr ""
+msgstr "DDV"
 
 #: includes/templates/invoices/global/micro/body.php:67
 #: includes/templates/invoices/global/micro/body.php:280
@@ -909,23 +911,23 @@ msgstr "Skupaj"
 #: includes/templates/invoices/global/micro/body.php:75
 #, php-format
 msgid "Order #%d - %s"
-msgstr ""
+msgstr "Naročilo #%d - %s"
 
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
 msgid "Fee"
-msgstr ""
+msgstr "Pribitek"
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152
 msgid "Refunded"
-msgstr ""
+msgstr "Povračilo"
 
 #: includes/templates/invoices/global/micro/footer.php:15
 #: includes/templates/invoices/simple/micro/footer.php:18
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s od %s"
 
 #: includes/templates/invoices/simple/micro/body.php:22
 msgid "Invoice"
@@ -934,12 +936,12 @@ msgstr "Račun"
 #: includes/templates/invoices/simple/micro/body.php:25
 #, php-format
 msgid "Order Number: %s"
-msgstr ""
+msgstr "Številka naročila: %s"
 
 #: includes/templates/invoices/simple/micro/body.php:26
 #, php-format
 msgid "Order Date: %s"
-msgstr ""
+msgstr "Datum naročila: %s"
 
 #: includes/templates/invoices/simple/micro/body.php:289
 #: includes/templates/invoices/simple/micro/body.php:294

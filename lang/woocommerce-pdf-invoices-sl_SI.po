@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2016-03-04 14:25+0100\n"
-"PO-Revision-Date: 2016-10-09 21:26+0200\n"
+"PO-Revision-Date: 2016-10-09 21:53+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -42,8 +42,8 @@ msgstr ""
 msgid ""
 "Invoice with invoice number %s not found. First create invoice and try again."
 msgstr ""
-"Računa številka %s ni bilo mogoče najti. Najprej kreirajte račun in nato "
-"poizkusite znova."
+"Računa %s ni bilo mogoče najti. Najprej kreirajte račun in nato poizkusite "
+"znova."
 
 #: includes/abstracts/abstract-bewpi-invoice.php:372
 #, php-format
@@ -53,7 +53,7 @@ msgstr "Davčna številka: %s"
 #: includes/abstracts/abstract-bewpi-invoice.php:383
 #, php-format
 msgid "Purchase Order Number: %s"
-msgstr "Številka naročil: %s"
+msgstr "Številka naročila: %s"
 
 #: includes/abstracts/abstract-bewpi-setting.php:98
 msgid "Allowed HTML tags: "
@@ -685,7 +685,7 @@ msgstr "Račun PDF"
 
 #: includes/be-woocommerce-pdf-invoices.php:395
 msgid "Invoiced on:"
-msgstr "Datum fakture"
+msgstr "Datum fakture:"
 
 #: includes/be-woocommerce-pdf-invoices.php:399
 msgid "Invoice number:"
@@ -916,7 +916,7 @@ msgstr "Naročilo #%d - %s"
 #: includes/templates/invoices/global/micro/body.php:255
 #: includes/templates/invoices/simple/micro/body.php:120
 msgid "Fee"
-msgstr "Pribitek"
+msgstr ""
 
 #: includes/templates/invoices/global/micro/body.php:287
 #: includes/templates/invoices/simple/micro/body.php:152

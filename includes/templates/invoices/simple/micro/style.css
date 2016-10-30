@@ -59,10 +59,6 @@ span.payment-status {
     font-size: 14px;
     font-weight: normal;
 }
-span {
-    display: block;
-    width: 100%;
-}
 .nowrap {
     white-space: nowrap;
 }
@@ -78,6 +74,7 @@ span {
 }
 td.invoice-details {
     vertical-align: top;
+    /*line-height: 30px;*/
 }
 td.invoice-details span {
     font-size: 14px;
@@ -87,9 +84,6 @@ td.invoice-details span {
 }
 .small-font {
     font-size: 14px;
-}
-.total-amount p {
-    margin: 0; padding: 0;
 }
 .total-amount {
     padding: 20px 20px 30px 20px;

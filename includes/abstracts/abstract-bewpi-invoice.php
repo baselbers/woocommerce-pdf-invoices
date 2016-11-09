@@ -32,7 +32,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
          * Formatted invoice number with prefix and/or suffix
          * @var string
          */
-        protected $formatted_number;
+        public $formatted_number;
 
         /**
          * Creation date.
@@ -140,7 +140,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
                 array($this->template_options['bewpi_invoice_number_prefix'], $this->template_options['bewpi_invoice_number_suffix'], $digitized_invoice_number, (string)$year, (string)$y, (string)$m),
                 $invoice_number_format);
 
-            return $formatted_invoice_number;
+            return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
         }
 
         /**

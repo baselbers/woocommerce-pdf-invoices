@@ -162,7 +162,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
 
 				$tags = array (
-					'{formatted_invoice_number}'    => $invoice->get_formatted_number(),
+					'{formatted_invoice_number}'    => $invoice->formatted_number,
 					'{order_number}'                => $order->id,
 					'{formatted_invoice_date}'      => $invoice->get_formatted_invoice_date(),
 					'{formatted_order_date}'        => $invoice->get_formatted_order_date()
@@ -487,7 +487,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$invoice = new BEWPI_Invoice( $post->ID );
 
 			if ( $invoice->exists() ) {
-				$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
+				$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->formatted_number );
 				$this->show_invoice_button( __( 'View invoice', 'woocommerce-pdf-invoices'), $post->ID, 'view', __( 'View', 'woocommerce-pdf-invoices'), array( 'class="invoice-btn button grant_access"', 'target="_blank"' ) );
 				$this->show_invoice_button( __( 'Cancel invoice', 'woocommerce-pdf-invoices'), $post->ID, 'cancel', __( 'Cancel', 'woocommerce-pdf-invoices' ), array(
 					'class="invoice-btn button grant_access"',
@@ -517,7 +517,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
 			$actions[ 'invoice' ] = array(
 				'url'  => $url,
-				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() )
+				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->formatted_number )
 			);
 
 			return $actions;

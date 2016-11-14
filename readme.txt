@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 3.8
 Tested up to: 4.6
-Stable tag: 2.4.10
+Stable tag: 2.4.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,7 +216,27 @@ function bewpi_allowed_roles_to_download_invoice($allowed_roles) {
 add_filter('bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_download_invoice', 10, 2);
 `
 
+### How to alter formatted invoice number? ###
+Add following filter function to your functions.php within your theme.
+
+`
+function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_type ) {
+   if ( $invoice_type === 'global' ) {
+      // add M for global invoices
+      return 'M' . $formatted_invoice_number;
+   }
+
+   return $formatted_invoice_number;
+}
+add_filter('bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2);
+`
+
 == Changelog ==
+
+= 2.4.11 - November 14, 2016 =
+
+- Added: Filter to alter formatted invoice number.
+- Removed: Unnecessary language files and CSS.
 
 = 2.4.10 - September 23, 2016 =
 

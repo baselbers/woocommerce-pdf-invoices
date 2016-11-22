@@ -1,0 +1,766 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: WooCommerce PDF Invoices\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-28 01:43+0200\n"
+"PO-Revision-Date: 2016-02-28 03:16+0200\n"
+"Language-Team: Jüri Laur\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7\n"
+"Last-Translator: Jüri Laur <jyri@jyrilaur.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: et\n"
+
+#: includes/be-woocommerce-pdf-invoices.php:126
+#, php-format
+msgid ""
+"Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
+"PDF Invoices</strong></a>."
+msgstr ""
+"Heakene küll! <a href=\"%s\">Hakkame <strong>WooCommerce PDF Arveid</"
+"strong>seadistama</a>."
+
+#: includes/be-woocommerce-pdf-invoices.php:136
+msgid "Settings"
+msgstr "Seaded"
+
+#: includes/be-woocommerce-pdf-invoices.php:137
+msgid "Premium"
+msgstr "Premium"
+
+#: includes/be-woocommerce-pdf-invoices.php:182
+msgid "Invalid request"
+msgstr "Vigane päring"
+
+#: includes/be-woocommerce-pdf-invoices.php:185
+msgid "Invalid order ID"
+msgstr "Vigane tellimuse ID"
+
+#: includes/be-woocommerce-pdf-invoices.php:191
+msgid "Access denied"
+msgstr "Ligipääs keelatud"
+
+#: includes/be-woocommerce-pdf-invoices.php:218
+msgid "General"
+msgstr "Üldine"
+
+#: includes/be-woocommerce-pdf-invoices.php:219
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:88
+msgid "Template"
+msgstr "Kujundus"
+
+#: includes/be-woocommerce-pdf-invoices.php:251
+msgid "Invoices"
+msgstr "Arved"
+
+#: includes/be-woocommerce-pdf-invoices.php:290
+#, php-format
+msgid ""
+"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+"%s★★★★★%s rating. A huge thank you in advance!"
+msgstr ""
+"Kui sulle <strong>WooCommerce PDF Arved</strong> meeldib, siis palun jäta "
+"meile %s★★★★★%s reiting. Suured tänud juba ette!"
+
+#: includes/be-woocommerce-pdf-invoices.php:291
+#, php-format
+msgid "Version %s"
+msgstr "Versioon %s"
+
+#: includes/be-woocommerce-pdf-invoices.php:365
+msgid "PDF Invoice"
+msgstr "PDF Arve"
+
+#: includes/be-woocommerce-pdf-invoices.php:391
+msgid "Invoiced on:"
+msgstr "Arve väljastatud:"
+
+#: includes/be-woocommerce-pdf-invoices.php:395
+msgid "Invoice number:"
+msgstr "Arve number:"
+
+#: includes/be-woocommerce-pdf-invoices.php:433
+msgid "View invoice"
+msgstr "Vaata arvet"
+
+#: includes/be-woocommerce-pdf-invoices.php:433
+msgid "View"
+msgstr "Vaata"
+
+#: includes/be-woocommerce-pdf-invoices.php:434
+msgid "Cancel invoice"
+msgstr "Tühista arve"
+
+#: includes/be-woocommerce-pdf-invoices.php:434
+msgid "Cancel"
+msgstr "Tühista"
+
+#: includes/be-woocommerce-pdf-invoices.php:436
+msgid "Are you sure to delete the invoice?"
+msgstr "Oled sa kindel, et soovid arvet kustutada?"
+
+#: includes/be-woocommerce-pdf-invoices.php:439
+msgid "Create invoice"
+msgstr "Loo arve"
+
+#: includes/be-woocommerce-pdf-invoices.php:439
+msgid "Create"
+msgstr "Loo"
+
+#: includes/be-woocommerce-pdf-invoices.php:462
+#, php-format
+msgid "Invoice %s (PDF)"
+msgstr "Arve %s (PDF)"
+
+#: includes/be-woocommerce-pdf-invoices.php:572
+#, php-format
+msgid ""
+"You are working with <b>WooCommerce PDF Invoices</b> for some time now. We "
+"really need your ★★★★★ rating. It will support future development big-time. "
+"A huge thanks in advance and keep up the good work! <br /> <a href='%s' "
+"target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already "
+"done it!</a>"
+msgstr ""
+"Sa oled juba mõnda aega <b>WooCommerce PDF Arveid</b> kasutanud. Me tõesti "
+"väga vajame su ★★★★★ reitingut. Sellest oleks tuleviku arenduste loomiseks "
+"tõesti abi. Suured tänud ette! <br /> <a href='%s' target='_blank'>Jah, teen "
+"seda kohe!</a> - <a href='%s'>Ei, juba tehtud!</a>"
+
+#: includes/class-bewpi-invoice.php:48
+msgid ""
+"Whoops, no template found. Please select a template on the Template settings "
+"page first."
+msgstr ""
+"Ups, tundub, et arve kujundus on puudu. Palun vali mall Kujunduse seadete "
+"lehelt."
+
+#: includes/abstracts/abstract-bewpi-document.php:64
+msgid "Paid"
+msgstr "Makstud"
+
+#: includes/abstracts/abstract-bewpi-invoice.php:262
+#, php-format
+msgid ""
+"Could not create invoice. In order to reset invoice number with %d, delete "
+"all invoices with invoice number %s and greater."
+msgstr ""
+"Arve loomine ebaõnnestus. Et muuta arve numbriks %d, kustuta kõik arved "
+"mille number on %s ja suurem."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:267
+#, php-format
+msgid ""
+"Could not create invoice. Invoice with invoice number %s already exists. "
+"First delete invoice and try again."
+msgstr ""
+"Arve loomine ebaõnnestus. Sellise arve numbriga (%s) arve on juba olemas. "
+"Kustuta vana arve ja proovi uuesti."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:310
+#, php-format
+msgid ""
+"Invoice with invoice number %s not found. First create invoice and try again."
+msgstr "Arve numbriga %s ei ole leitav. Loo arve ja proovi uuesti."
+
+#: includes/abstracts/abstract-bewpi-invoice.php:372
+#, php-format
+msgid "VAT Number: %s"
+msgstr "KMKR nr: %s"
+
+#: includes/abstracts/abstract-bewpi-invoice.php:383
+#, php-format
+msgid "Purchase Order Number: %s"
+msgstr "Ostukorralduse number: %s"
+
+#: includes/abstracts/abstract-bewpi-setting.php:98
+msgid "Allowed HTML tags: "
+msgstr "Lubatud HTML’i tagid:"
+
+#: includes/abstracts/abstract-bewpi-setting.php:173
+msgid "Remove logo"
+msgstr "Eemalda logo"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:86
+msgid "Attach to Email"
+msgstr "Lisa e-kirja manusesse"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:94
+msgid "Processing order"
+msgstr "Töötlen tellimust"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:98
+msgid "Completed order"
+msgstr "Täidetud tellimus"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:102
+msgid "Customer invoice"
+msgstr "Kliendi arve"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:106
+msgid "Do not attach"
+msgstr "Ära lisa manusesse"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:120
+msgid "Attach to New order Email"
+msgstr "Lisa uue telimuse e-kirjale"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:127
+msgid "View PDF"
+msgstr "Vaata PDF’i"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:135
+msgid "Download"
+msgstr "Lae alla"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:139
+msgid "Open in new browser tab/window"
+msgstr "Ava uues brauseri tabis/aknas"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:153
+msgid "Enable download from account"
+msgstr "Luba kontolt allalaadimised"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:154
+msgid ""
+"<br/><div class=\"bewpi-notes\">Let customers download invoice from account "
+"page.</div>"
+msgstr ""
+"<br/><div class=\"bewpi-notes\">Luba klientidel oma konto lehelt arveid alla "
+"laadida.</div>"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:166
+msgid "Enable Email It In"
+msgstr "Luba Email It In"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:174
+msgid "Email It In account"
+msgstr "Email It In konto"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:179
+#, php-format
+msgid "Get your account from your Email It In %suser account%s."
+msgstr "Oma konto detailid leiad Email It In %slehelt%s."
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:190
+msgid "Enable mPDF debugging"
+msgstr "Luba mPDF debugimine"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:191
+msgid "Enable mPDF debugging if you aren't able to create an invoice."
+msgstr "Luba mPDF debugimine juhul kui arvete loomine ebaõnnestub."
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:206
+msgid "Email Options"
+msgstr "E-maili seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:212
+msgid "Download Options"
+msgstr "Allalaadimise seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:218
+msgid "Cloud Storage Options"
+msgstr "Pilvesalvestuse seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:224
+msgid "Debug Options"
+msgstr "Debug seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-general.php:232
+#, php-format
+msgid ""
+"Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
+"Egnyte and enter your account below."
+msgstr ""
+"Registreeril %s konto, et automaatselt saata arveid oma Dropbox’i, "
+"OneDrive’i, Google Drive’i või Egnyte’i kontodele ja sisesta oma konto siin."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:100
+msgid "Color theme"
+msgstr "Värviskeem"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:111
+msgid "Date format"
+msgstr "Kuupäeva formaat"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:116
+#, php-format
+msgid "%sFormat%s of invoice date and order date."
+msgstr "Arve ja tellimuse kuupäevade %sformaadi spikker%s"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:131
+msgid "Display prices including tax"
+msgstr "Kuva hinnad koos maksudega"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:132
+msgid ""
+"Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
+"still be excluding tax, so disable it within the visible columns section."
+msgstr ""
+"Ridade kogusummad sisaldavad makse.<br/><b>Tähelepanu</b>: Vahesummas maksud "
+"ei sisaldu, seega keela selle näitamine sektsioonis ‘Nähtavad tulbad’."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:144
+msgid "Shipping taxable"
+msgstr "Tarne maksustatav"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:145
+msgid "Enable to display subtotal including shipping."
+msgstr "Luba, et kuvada vahesummat koos tarnega."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:157
+msgid "Mark invoice as paid"
+msgstr "Märgi arve makstuks"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:158
+msgid "Invoice will be watermarked when order has been paid."
+msgstr "Arvele asetatakse vesimärk, kui arve makstud saab."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:166
+msgid "Company name"
+msgstr "Ettevõtte nimi"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:177
+msgid "Company logo"
+msgstr "Ettevõtte logo"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:188
+msgid "Company address"
+msgstr "Ettevõtte aadress"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:193
+msgid "Displayed in upper-right corner near logo."
+msgstr "Kuvatakse ülal paremas nurgas logo lähedal."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:199
+msgid "Company details"
+msgstr "Ettevõtte detailid"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:204
+msgid "Displayed below company address."
+msgstr "Kuvatakse ettevõtte aadressi all."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:211
+msgid "Thank you text"
+msgstr "Tänusõnad"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:216
+msgid "Displayed in big colored bar directly after invoice total."
+msgstr "Kuvatakse suurel värvilisel ribal peale arve kogusummat."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:217
+msgid "Thank you for your purchase!"
+msgstr "Täname tellimuse eest!"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:227
+msgid "Show customer notes"
+msgstr "Näita kliendi märkmeid."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:234
+msgid "Terms & conditions, policies etc."
+msgstr "Tellimuse müügitingimused jms."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:239
+#, php-format
+msgid ""
+"Displayed below customer notes and above footer. Want to attach additional "
+"pages to the invoice? Take a look at the <a href=\"%s\">Premium</a> plugin."
+msgstr ""
+"Kuvatakse kliendi märkmete ja jaluse vahel. Tahad arvele lisalehti? Vaata "
+"meie <a href=\"%s\">Premium</a> pluginat."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:240
+msgid "Items will be shipped within 2 days."
+msgstr "Kaup tarnitakse 2 tööpäeva jooksul."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:246
+msgid "Left footer column."
+msgstr "Vasak jaluse tulp."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:252
+#, php-format
+msgid "<b>Payment method</b> %s"
+msgstr "<b>Makseviis - </b> %s"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:257
+msgid "Right footer column."
+msgstr "Parem jaluse tulp."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:262
+msgid "Leave empty to show page numbering."
+msgstr "Leheküljenumbrite kuvamiseks jäta see väli tühjaks."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:269
+msgid "Type"
+msgstr "Tüüp"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:277
+msgid "WooCommerce order number"
+msgstr "WooCommerce tellimuse number"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:281
+msgid "Sequential number"
+msgstr "Järjestikune number"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:295
+msgid "Reset invoice counter"
+msgstr "Nulli arvete luger"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:305
+msgid "Next"
+msgstr "Järgmine"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:310
+msgid ""
+"Reset the invoice counter and start counting from given invoice number.<br/"
+"><b>Note:</b> Only available for Sequential numbering and value will be "
+"editable by selecting checkbox. Next number needs to be lower then highest "
+"existing invoice number or delete invoices first."
+msgstr ""
+"Nulli arvete luger ja jätka alates sisestatud arve numbrist.<br/"
+"><b>Tähelepanu:</b>Ainult võimalik, kui kasutusel on järjestikused arvete "
+"numbrid. Jätkamiseks tee kasti ‘Nulli arvete luger’ linnuke. Järgmine number "
+"peab olema väiksem kui suurim olemasolev arve number või esmalt kustuta "
+"eelnevad arved."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:320
+msgid "Digits"
+msgstr "Numbrid"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:336
+msgid "[prefix]"
+msgstr "[eesliide]"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:347
+msgid "[suffix]"
+msgstr "[järelliide]"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:358
+msgid "Format"
+msgstr "Formaat"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:363
+#, php-format
+msgid ""
+"Allowed placeholders: %s %s %s %s %s %s.<br/>%sNote:%s %s is required and "
+"slashes aren't supported."
+msgstr ""
+"Lubatud muutujad: %s %s %s %s %s %s.<br/>%sTähelepanu:%s %s on nõutud ja "
+"kaldjooned ei ole toetatud."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:377
+msgid "Reset on 1st of january"
+msgstr "Nulli 1. jaanuaril"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:390
+#: includes/templates/invoices/global/micro/body.php:44
+#: includes/templates/invoices/simple/micro/body.php:48
+msgid "SKU"
+msgstr "Tootekood"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:402
+#: includes/templates/invoices/global/micro/body.php:236
+#: includes/templates/invoices/simple/micro/body.php:101
+msgid "Subtotal"
+msgstr "Vahesumma"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:414
+msgid "Tax (item)"
+msgstr "Maksud (toode)"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:426
+msgid "Tax (total)"
+msgstr "Maksud (kokku)"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:438
+#: includes/templates/invoices/global/micro/body.php:220
+#: includes/templates/invoices/simple/micro/body.php:85
+msgid "Discount"
+msgstr "Allahindlus"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:450
+#: includes/templates/invoices/global/micro/body.php:228
+#: includes/templates/invoices/global/micro/body.php:244
+#: includes/templates/invoices/simple/micro/body.php:93
+#: includes/templates/invoices/simple/micro/body.php:109
+msgid "Shipping"
+msgstr "Postikulu"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:464
+msgid "General Options"
+msgstr "Üldised seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:470
+msgid "Invoice Number Options"
+msgstr "Arve numbri seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:476
+msgid "Header Options"
+msgstr "Päise seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:482
+msgid "Body Options"
+msgstr "Sisu seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:488
+msgid "Footer Options"
+msgstr "Jaluse seaded"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:494
+msgid "Visible Columns"
+msgstr "Nähtavad tulbad"
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:500
+msgid "These are the general template options."
+msgstr "Arve kujunduse seaded."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:501
+msgid "These are the invoice number options."
+msgstr "Arve numbrite seaded."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:502
+msgid "The header will be visible on every page. "
+msgstr "Päis on nähtav igal lehel."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:506
+msgid "The footer will be visible on every page."
+msgstr "Jalus on nähtav igal lehel."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:506
+msgid ""
+"<b>Hint</b>: Use <code>[payment_method]</code> placeholder to display the "
+"order payment method."
+msgstr ""
+"<b>Vihje</b>: Kasuta <code>[payment_method]</code> teksti, et kuvada "
+"kasutatud maksemeetodit."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:509
+msgid "Enable or disable the columns."
+msgstr "Luba või keela tulbad."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:579
+msgid "File is invalid and contains either '..' or './'."
+msgstr "Fail on ebasobiv ja ilmselt sisaldab '..' või ’./‘ märke."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:586
+msgid "File is invalid and contains ':' after the first character."
+msgstr "Fail on ebasobiv ja sisaldab ':' peale esimest tähte."
+
+#: includes/admin/settings/class-bewpi-admin-settings-template.php:595
+msgid "File should be less then 2MB."
+msgstr "Failisuurus peaks olema väiksem kui 2MB."
+
+#: includes/partials/settings-sidebar.php:2
+msgid "WooCommerce PDF Invoices Premium"
+msgstr "WooCommerce PDF Arved Premium"
+
+#: includes/partials/settings-sidebar.php:4
+msgid ""
+"This plugin offers a premium version which comes with the following features:"
+msgstr ""
+"See plugin pakub preemium-versiooni mis sisaldab järgnevaid funktsioone:"
+
+#: includes/partials/settings-sidebar.php:5
+msgid "Bill periodically by generating and sending global invoices."
+msgstr "Saada perioodilisi arveid - genereerides ja saates globaalseid arveid."
+
+#: includes/partials/settings-sidebar.php:6
+msgid "Add additional PDF's to customer invoices."
+msgstr "Lisa muid PDF faile kliendi arvetele."
+
+#: includes/partials/settings-sidebar.php:7
+msgid "Send customer invoices directly to suppliers and others."
+msgstr "Saada kliendi arveid otse tarnijatele ja teistele."
+
+#: includes/partials/settings-sidebar.php:8
+#, php-format
+msgid ""
+"Compatible with <a href=\"%s\">WooCommerce Subscriptions</a> plugin emails."
+msgstr ""
+"Ühildub<a href=\"%s\">WooCommerce Subscriptions</a> plugina e-kirjadega."
+
+#: includes/partials/settings-sidebar.php:10
+msgid "Learn more"
+msgstr "Loe lisaks"
+
+#: includes/partials/settings-sidebar.php:13
+msgid "Stay up-to-date"
+msgstr "Hoia ennast kursis"
+
+#: includes/partials/settings-sidebar.php:17
+msgid ""
+"We're constantly developing new features, stay up-to-date by subscribing to "
+"our newsletter."
+msgstr ""
+"Me oleme pidevalt arendamas uut funktsionaalsust. Ole meie tegemistega "
+"kursis - registreeri ennast meie uudiskirja."
+
+#: includes/partials/settings-sidebar.php:23
+msgid "Your email address"
+msgstr "Sinu e-maili aadress"
+
+#: includes/partials/settings-sidebar.php:29
+msgid "Signup"
+msgstr "Registreeri"
+
+#: includes/partials/settings-sidebar.php:32
+msgid "No spam, ever. Unsubscribe at any time"
+msgstr "Ei mingit rämpsposti. Loobu millal iganes soovid."
+
+#: includes/partials/settings-sidebar.php:41
+msgid "About"
+msgstr "Meist"
+
+#: includes/partials/settings-sidebar.php:43
+msgid ""
+"This plugin is an open source project wich aims to fill the invoicing gap of "
+"<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
+msgstr ""
+"See plugin on vabavaraline projekt mis üritab täita lünka <a href=\"http://"
+"www.woothemes.com/woocommerce\">WooCommerce</a> süsteemis."
+
+#: includes/partials/settings-sidebar.php:45
+msgid "<b>Version</b>: "
+msgstr "<b>Versioon</b>: "
+
+#: includes/partials/settings-sidebar.php:47
+msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+msgstr "<b>Autor</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
+
+#: includes/partials/settings-sidebar.php:50
+msgid "Support"
+msgstr "Abi"
+
+#: includes/partials/settings-sidebar.php:52
+msgid ""
+"We will never ask for donations, but to garantee future development, we do "
+"need your support. Please show us your appreciation by leaving a <a href="
+"\"https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?"
+"rate=5#postform\">★★★★★</a> rating and vote for <a href=\"https://wordpress."
+"org/plugins/woocommerce-pdf-invoices/\">works</a>."
+msgstr ""
+"Me ei palu annetusi, kuid,  et garanteerida arendusi ka tulevikus, siis me "
+"vajame Sinu abi. Palun võta hetk ja jäta <a href=\"https://wordpress.org/"
+"support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform"
+"\">★★★★★</a> reiting ning hääleta <a href=\"https://wordpress.org/plugins/"
+"woocommerce-pdf-invoices/\"> meie tööde </a> poolt."
+
+#: includes/partials/settings-sidebar.php:72
+msgid ""
+"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+msgstr ""
+"Proovi seda tasuta ja uskumatult head WooCommerce PDF Arve pluginat "
+"WordPressile!"
+
+#: includes/partials/settings-sidebar.php:77
+msgid "Need Help?"
+msgstr "Vajad abi?"
+
+#: includes/partials/settings-sidebar.php:79
+msgid "Frequently Asked Questions"
+msgstr "Korduma Kippuvad Küsimused"
+
+#: includes/partials/settings-sidebar.php:80
+msgid "Support forum"
+msgstr "Tugifoorum"
+
+#: includes/partials/settings-sidebar.php:81
+msgid "Request a feature"
+msgstr "Küsi lisafunktsionaalsust"
+
+#: includes/partials/settings-sidebar.php:82
+msgid "Email us"
+msgstr "Kirjuta meile"
+
+#: includes/templates/invoices/global/micro/body.php:5
+#: includes/templates/invoices/simple/micro/body.php:5
+msgid "Invoice to"
+msgstr "Arve saaja"
+
+#: includes/templates/invoices/global/micro/body.php:7
+#: includes/templates/invoices/simple/micro/body.php:7
+#, php-format
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
+#: includes/templates/invoices/global/micro/body.php:11
+#: includes/templates/invoices/simple/micro/body.php:11
+msgid "Ship to"
+msgstr "Tarne aadress"
+
+#: includes/templates/invoices/global/micro/body.php:22
+msgid "Global Invoice"
+msgstr "Globaalne arve"
+
+#: includes/templates/invoices/global/micro/body.php:40
+#: includes/templates/invoices/simple/micro/body.php:44
+msgid "Description"
+msgstr "Kirjeldus"
+
+#: includes/templates/invoices/global/micro/body.php:48
+#: includes/templates/invoices/simple/micro/body.php:52
+msgid "Cost"
+msgstr "Hind"
+
+#: includes/templates/invoices/global/micro/body.php:50
+#: includes/templates/invoices/simple/micro/body.php:54
+msgid "Qty"
+msgstr "TK"
+
+#: includes/templates/invoices/global/micro/body.php:56
+#: includes/templates/invoices/simple/micro/body.php:60
+msgid "VAT"
+msgstr "KM"
+
+#: includes/templates/invoices/global/micro/body.php:67
+#: includes/templates/invoices/global/micro/body.php:280
+#: includes/templates/invoices/simple/micro/body.php:71
+#: includes/templates/invoices/simple/micro/body.php:145
+msgid "Total"
+msgstr "Kokku"
+
+#: includes/templates/invoices/global/micro/body.php:75
+#, php-format
+msgid "Order #%d - %s"
+msgstr "Tellimus #%d - %s"
+
+#: includes/templates/invoices/global/micro/body.php:255
+#: includes/templates/invoices/simple/micro/body.php:120
+msgid "Fee"
+msgstr "Tasu"
+
+#: includes/templates/invoices/global/micro/body.php:287
+#: includes/templates/invoices/simple/micro/body.php:152
+msgid "Refunded"
+msgstr "Tagastatud"
+
+#: includes/templates/invoices/global/micro/footer.php:15
+#: includes/templates/invoices/simple/micro/footer.php:18
+#, php-format
+msgid "%s of %s"
+msgstr "Lehekülg %s /%s"
+
+#: includes/templates/invoices/simple/micro/body.php:22
+msgid "Invoice"
+msgstr "Arve"
+
+#: includes/templates/invoices/simple/micro/body.php:25
+#, php-format
+msgid "Order Number: %s"
+msgstr "Tellimuse number: %s"
+
+#: includes/templates/invoices/simple/micro/body.php:26
+#, php-format
+msgid "Order Date: %s"
+msgstr "Tellimuse kuupäev %s"
+
+#: includes/templates/invoices/simple/micro/body.php:289
+#: includes/templates/invoices/simple/micro/body.php:294
+msgid "Customer note"
+msgstr "Kliendi märkus"

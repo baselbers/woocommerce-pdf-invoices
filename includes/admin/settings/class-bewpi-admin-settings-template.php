@@ -53,10 +53,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	     * @return array
 	     */
 	    private function get_defaults() {
-		    $defaults = array();
-		    foreach ( $this->the_settings() as $setting ) :
-			    $defaults[ $setting['name'] ] = $setting['default'];
-		    endforeach;
+		    $defaults = wp_list_pluck( $this->the_settings(), 'default', 'name' );
 		    return $defaults;
 	    }
 
@@ -307,7 +304,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'class' => 'bewpi-checkbox-option-title',
 				    'default' => 0,
 				    'attrs' => array(
-					    'onchange="Settings.enableDisableNextInvoiceNumbering(this)"'
+					    'onchange="BEWPI.Settings.enableDisableNextInvoiceNumbering(this)"'
 				    )
 			    ),
 			    array(

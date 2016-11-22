@@ -293,15 +293,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * The options page..
 		 */
 		public function options_page() {
-			$tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'bewpi_general_settings';
+			$tab = isset( $_GET['tab'] ) ? (string) $_GET['tab'] : 'bewpi_general_settings';
 			?>
-			<script type="text/javascript">
-				window.onload = function () {
-					// Change footer text into rate text for WPI.
-					document.getElementById("footer-thankyou").innerHTML = "<?php printf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a %s★★★★★%s rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), '<a href=\'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\'>', '</a>' ); ?>";
-					document.getElementById("footer-upgrade").innerHTML = "<?php printf( __( 'Version %s', 'woocommerce-pdf-invoices' ), BEWPI_VERSION ); ?>";
-				};
-			</script>
 			<div class="wrap">
 				<?php $this->plugin_options_tabs(); ?>
 				<form class="bewpi-settings-form" method="post" action="options.php"
@@ -318,6 +311,27 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			</div>
 		<?php
+
+			add_filter( 'admin_footer_text', array( $this, 'plugin_review_text' ), 50 );
+			add_filter( 'update_footer', array( $this, 'plugin_version' ), 50 );
+		}
+
+		/**
+		 * @param string $text
+		 *
+		 * @return string
+		 */
+		public function plugin_review_text( $text ) {
+			return sprintf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a %s★★★★★%s rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), '<a href=\'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\'>', '</a>' );
+		}
+
+		/**
+		 * @param string $text
+		 *
+		 * @return string
+		 */
+		public function plugin_version( $text ) {
+			return sprintf( __( 'Version %s', 'woocommerce-pdf-invoices' ), BEWPI_VERSION );
 		}
 
 		private function options_page_sidebar_html() {

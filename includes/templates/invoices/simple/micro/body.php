@@ -264,6 +264,14 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 			</tr>
 		<?php endforeach; ?>
 	<?php endif; ?>
+	<!-- Zero Rate VAT -->
+	<?php if ( $this->display_zero_rated_vat() ) { ?>
+		<tr class="after-products">
+			<td colspan="<?php echo $this->colspan['left']; ?>"></td>
+			<td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'VAT 0%' ); ?></td>
+			<td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( 0, array( 'currency' => $this->order->get_order_currency() ) );  ?></td>
+		</tr>
+	<?php } ?>
 	<!-- Total -->
 	<tr class="after-products">
 		<td colspan="<?php echo $this->colspan['left']; ?>"></td>
@@ -300,4 +308,11 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 			?>
 		</td>
 	</tr>
+	<?php if ( $this->display_zero_rated_vat() ) { ?>
+		<tr>
+			<td class="border" colspan="3">
+				<?php _e( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' ); ?>
+			</td>
+		</tr>
+	<?php } ?>
 </table>

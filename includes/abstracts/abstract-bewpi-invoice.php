@@ -596,5 +596,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			return $str;
 		}
+
+		public function display_zero_rated_vat() {
+			$is_vat_valid = get_post_meta( $this->order->id, '_vat_number_is_valid', true );
+			if ( ! $is_vat_valid ) {
+				return false;
+			}
+
+			$is_tax_removed = count( $this->order->get_tax_totals() ) === 0;
+			if ( ! $is_tax_removed ) {
+				return false;
+			}
+
+			return true;
+		}
 	}
 }

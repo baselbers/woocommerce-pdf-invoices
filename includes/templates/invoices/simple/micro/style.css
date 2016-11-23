@@ -91,6 +91,7 @@ td.invoice-details span {
 }
 .total-amount, .total-amount h1 {
     color: white;
+    font-size: 14px;
 }
 div.item-attribute {
     font-size: 12px;

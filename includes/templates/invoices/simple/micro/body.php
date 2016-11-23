@@ -28,7 +28,7 @@
 			<?php $this->display_vat_number(); ?>
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $this->template_options['bewpi_color_theme']; ?>">
-			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
+			<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
 			<p><?php echo $this->template_options['bewpi_intro_text']; ?></p>
 		</td>
 	</tr>
@@ -264,7 +264,7 @@
 	<tr class="after-products">
 		<td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		<td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', 'woocommerce-pdf-invoices' ); ?></td>
-		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_total(); ?></td>
+		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	</tr>
 	<!-- Refunded -->
 	<?php if ( $this->order->get_total_refunded() > 0 ) { ?>

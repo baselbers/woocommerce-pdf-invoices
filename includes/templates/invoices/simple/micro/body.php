@@ -162,20 +162,23 @@
 				<?php echo $product->get_title();
 				global $wpdb;
 
+				$hidden_order_itemmeta = apply_filters( 'woocommerce_hidden_order_itemmeta', array(
+					'_qty',
+					'_tax_class',
+					'_product_id',
+					'_variation_id',
+					'_line_subtotal',
+					'_line_subtotal_tax',
+					'_line_total',
+					'_line_tax',
+					'_wc_cog_item_cost', '_wc_cog_item_total_cost' // "WooCommerce Cost of Goods" plugin only hides within admin.
+				) );
+
 				if ( $metadata = $this->order->has_meta( $item_id ) ) {
 					foreach ( $metadata as $meta ) {
 
 						// Skip hidden core fields
-						if ( in_array( $meta['meta_key'], apply_filters( 'woocommerce_hidden_order_itemmeta', array(
-							'_qty',
-							'_tax_class',
-							'_product_id',
-							'_variation_id',
-							'_line_subtotal',
-							'_line_subtotal_tax',
-							'_line_total',
-							'_line_tax',
-						) ) ) ) {
+						if ( in_array( $meta['meta_key'], $hidden_order_itemmeta) ) {
 							continue;
 						}
 

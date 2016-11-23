@@ -162,8 +162,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
 
 				$tags = array (
-					'{formatted_invoice_number}'    => $invoice->formatted_number,
-					'{order_number}'                => $order->id,
+					'{formatted_invoice_number}'    => $invoice->get_formatted_number(),
+					'{order_number}'                => $order->get_order_number(),
 					'{formatted_invoice_date}'      => $invoice->get_formatted_invoice_date(),
 					'{formatted_order_date}'        => $invoice->get_formatted_order_date()
 				);

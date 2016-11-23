@@ -103,6 +103,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'default' => '#000000'
 			    ),
 			    array(
+				    'id' => 'bewpi-theme-text-black',
+				    'name' => $this->prefix . 'theme_text_black',
+				    'title' => '',
+				    'callback' => array( &$this, 'input_callback' ),
+				    'page' => $this->settings_key,
+				    'section' => 'general',
+				    'type' => 'checkbox',
+				    'desc' => __( 'Display theme text in black color', 'woocommerce-pdf-invoices' )
+				              . "<br/><div class='bewpi-notes'>" . __( 'Enable if you\'ve set the color theme to white or some other light color.', 'woocommerce-pdf-invoices' ) . "</div>",
+				    'class' => 'bewpi-checkbox-option-title',
+				    'default' => 0,
+			    ),
+			    array(
 				    'id' => 'bewpi-date-format',
 				    'name' => $this->prefix . 'date_format',
 				    'title' => __( 'Date format', 'woocommerce-pdf-invoices' ),

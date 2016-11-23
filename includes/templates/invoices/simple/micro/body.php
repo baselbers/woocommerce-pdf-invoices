@@ -1,3 +1,7 @@
+<?php
+$theme_color = $this->template_options['bewpi_color_theme'];
+$is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
+?>
 <table class="two-column customer">
 	<tbody>
 	<tr>
@@ -20,14 +24,14 @@
 	<tr>
 		<td class="invoice-details">
 			<h1 class="title"><?php echo $this->template_options['bewpi_title']; ?></h1>
-			<span class="number" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
+			<span class="number" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
 			<span><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
 			<span><?php printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $this->order->get_order_number() ); ?></span><br/>
 			<span><?php printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $this->get_formatted_order_date() ); ?></span><br/>
 			<?php $this->display_purchase_order_number(); ?><br/>
 			<?php $this->display_vat_number(); ?>
 		</td>
-		<td class="total-amount" bgcolor="<?php echo $this->template_options['bewpi_color_theme']; ?>">
+		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
 			<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
 			<p><?php echo $this->template_options['bewpi_intro_text']; ?></p>
 		</td>
@@ -264,7 +268,7 @@
 	<tr class="after-products">
 		<td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		<td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', 'woocommerce-pdf-invoices' ); ?></td>
-		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo $this->template_options['bewpi_color_theme']; ?>;"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 	</tr>
 	<!-- Refunded -->
 	<?php if ( $this->order->get_total_refunded() > 0 ) { ?>

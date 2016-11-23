@@ -279,10 +279,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'page' => $this->settings_key,
 				    'section' => 'invoice_number',
 				    'type' => 'text',
-				    'desc' => '<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function(){
-    Settings.showHideInvoiceNumberOptions(document.getElementById("bewpi-invoice-number-type"));
-});</script>',
+				    'desc' => '',
 				    'options' => array(
 					    array(
 						    'name' => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
@@ -291,16 +288,9 @@ document.addEventListener("DOMContentLoaded", function(){
 					    array(
 						    'name' => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
 						    'value' => 'sequential_number'
-					    ),
-					    array(
-						    'name' => __( 'Third-Party numbering plugin', 'woocommerce-pdf-invoices' ),
-						    'value' => 'third_party',
-						),
+					    )
 				    ),
-				    'default' => 'sequential_number',
-				    'attrs' => array(
-					    'onchange="Settings.showHideInvoiceNumberOptions(this)"',
-				    )
+				    'default' => 'sequential_number'
 			    ),
 			    array(
 				    'id' => 'bewpi-reset-counter',

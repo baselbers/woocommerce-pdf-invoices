@@ -28,33 +28,6 @@
         ( elem.checked ) ? nextInvoiceNumberInput.disabled = false : nextInvoiceNumberInput.disabled = true;
     };
 
-    Settings.showHideInvoiceNumberOptions = function (elem) {
-        // The Element.closest function is new in DOM5, so to be sure, we don't use it yet
-        var closest = function(el, tag) {
-            for ( ; el && el !== document; el = el.parentNode ) {
-            if ( el.tagName.toLowerCase() === tag ) {
-                    return el;
-                }
-            }
-            return false;
-        };
-        var showHideControl = function(id, show) {
-            var e = document.getElementById(id);
-            // Also hide the whole table row
-            closest(e, 'tr').style.display = (show) ? '' : 'none';
-        };
-        if (!elem) return;
-        var val = (elem.options[elem.selectedIndex].value);
-        // Show / hide the table rows with controls that do not apply to the current invoice numbering type
-        showHideControl('bewpi-reset-counter', val == "sequential_number");
-        showHideControl('bewpi-next-invoice-number', val == "sequential_number");
-        showHideControl('bewpi-invoice-number-digits', val != "third_party");
-        showHideControl('bewpi-invoice-number-prefix', val != "third_party");
-        showHideControl('bewpi-invoice-number-suffix', val != "third_party");
-        showHideControl('bewpi-invoice-number-format', val != "third_party");
-        showHideControl('bewpi-reset-counter-yearly', val == "sequential_number");
-    };
-
     // Expose variables
     window.BEWPI = {};
     window.BEWPI.Settings = Settings;

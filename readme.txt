@@ -2,9 +2,9 @@
 Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
-Requires at least: 3.8
+Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 2.4.11
+Stable tag: 2.4.12
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,13 +225,34 @@ function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_typ
       // add M for global invoices
       return 'M' . $formatted_invoice_number;
    }
-
+Filter to alter formatted invoice number.
    return $formatted_invoice_number;
 }
 add_filter('bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2);
 `
 
 == Changelog ==
+
+= 2.4.12 - November 23, 2016 =
+
+- Added: Estonian language files.
+- Added: Option to be able to display text in black color. This fixes the invisible text problem when theme color is white or some other light color.
+- Added zero VAT when user inserts a valid VAT Number with "WooCommerce EU VAT Number" plugin, because some EU countries demand it. Also added notice at the end of the PDF stating "Zero rated for VAT as customer has supplied EU VAT number".
+- Improved: Don't pass objects by reference (this is default since PHP5).
+- Improved: Moved some HTML out of translation strings.
+- Improved: Removed some inline `IF` statements to adhere to the WordPress Code Standard.
+- Improved: Escape attributes with user submitted values.
+- Improved: Update PHPDocs for methods.
+- Improved: Use `admin_footer_text` and 'update_footer' filters instead of `window.onload` to show/modify text.
+- Improved: Use `add_query_arg` and `remove_query_arg` for building URL's.
+- Improved: Create `DateTime` from explicit form we're saving it in.
+- Improved: Remove unnecessary loop by passing arrays to `str_replace`.
+- Improved: Namespace JS object into `BEWPI` object to prevent clashes with other global `Settings` objects.
+- Improved: Use `wp_list_pluck` to build array of defaults.
+- Improved: Updated German, French and Slovenian language files.
+- Improved: Table by only showing column headers on first page and totals on last. The totals won't be cut off between pages anymore.
+- Improved: Getting total amount by simply using `$order->get_total();` method and not manually calculating with refund.
+- Fixed "WooCommerce Cost of Goods" plugin only hiding cost itemmeta in admin.
 
 = 2.4.11 - November 14, 2016 =
 

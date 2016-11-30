@@ -430,19 +430,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Display company name if logo is not found.
-		 * Convert image to base64 due to incompatibility of subdomains with MPDF
+		 * Display company logo or name
 		 */
 		public function get_company_logo_html() {
-			if ( ! empty( $this->template_options['bewpi_company_logo'] ) ) {
-				// get the relative path due to slow generation of invoice.
-				$image_path = str_replace( get_site_url(), '..', $this->template_options['bewpi_company_logo'] );
-				// give the user the option to change the image (path/url) due to some errors of mPDF.
-				$image_url = apply_filters( 'bewpi_company_logo_url', $image_path );
-
-				echo '<img class="company-logo" src="' . esc_attr( $image_url ) . '"/>';
+			$logo_url = $this->template_options['bewpi_company_logo'];
+			if ( ! empty( $logo_url ) ) {
+				// filter in order to fix potentially bugs (mPDF).
+				$logo_url = apply_filters( 'bewpi_company_logo_url', $logo_url );
+				printf( '<img class="company-logo" src="%s"/>', esc_attr( $logo_url ) );
 			} else {
-				echo '<h1 class="company-logo">' . $this->template_options['bewpi_company_name'] . '</h1>';
+				// show company name if company logo isn't uploaded.
+				$company_name = $this->template_options['bewpi_company_name'];
+				printf( '<h1 class="company-logo">%s</h1>', esc_html( $company_name ) );
 			}
 		}
 

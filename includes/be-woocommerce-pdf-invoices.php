@@ -616,7 +616,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Ask admin to review plugin.
 		 */
-		public function display_admin_notice() {
+		public function display_rate_admin_notice() {
 			$url = add_query_arg( array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) );
 
 			echo '<div class="updated"><p>';

@@ -60,6 +60,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		        $mpdf_options['orientation']         // orientation
 	        );
 
+	        // add company logo image as a variable.
+	        $wp_upload_dir = wp_upload_dir();
+	        $image_url = $this->template_options['bewpi_company_logo'];
+	        if ( ! empty( $image_url ) ) {
+		        // use absolute path in order to prevent errors due to wrong (local)host configurations when accessing files and this way `allow_url_fopen` doesn't need to be enabled.
+		        $image_path = str_replace( $wp_upload_dir['baseurl'], $wp_upload_dir['basedir'], $image_url );
+		        $mpdf->company_logo = file_get_contents( $image_path );
+	        }
+
 	        // show paid watermark
 	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
 		        $mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );

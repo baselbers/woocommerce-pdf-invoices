@@ -435,9 +435,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		public function get_company_logo_html() {
 			$logo_url = $this->template_options['bewpi_company_logo'];
 			if ( ! empty( $logo_url ) ) {
-				// filter in order to fix potentially bugs (mPDF).
-				$logo_url = apply_filters( 'bewpi_company_logo_url', $logo_url );
-				printf( '<img class="company-logo" src="%s"/>', esc_attr( $logo_url ) );
+				// mPDF' stablest method to display an image is to use their "Image data as a Variable" (https://mpdf.github.io/what-else-can-i-do/images.html) option.
+				$src = apply_filters( 'bewpi_company_logo_url', 'var:company_logo' );
+				printf( '<img class="company-logo" src="%s"/>', esc_attr( $src ) );
 			} else {
 				// show company name if company logo isn't uploaded.
 				$company_name = $this->template_options['bewpi_company_name'];

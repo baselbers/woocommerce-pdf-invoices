@@ -29,7 +29,6 @@ function bewpi_plugins_loaded() {
 	define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
 	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
 
-	require_once( BEWPI_DIR . 'functions.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-invoice.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-setting.php' );

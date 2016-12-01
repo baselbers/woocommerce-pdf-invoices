@@ -185,11 +185,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				    'id' => 'bewpi-company-logo',
 				    'name' => $this->prefix . 'company_logo',
 				    'title' => __( 'Company logo', 'woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'logo_callback' ),
+				    'callback' => array( $this, 'logo_callback' ),
 				    'page' => $this->settings_key,
 				    'section' => 'header',
 				    'type' => 'file',
-			        'desc' => '',
+				    'desc' => __( 'Supported extensions are GIF, JPG/JPEG and PNG.<br/><b>Note:</b> JPG/JPEG are recommended for best performance.', 'woocommerce-pdf-invoices' ),
 				    'default' => ''
 			    ),
 			    array(

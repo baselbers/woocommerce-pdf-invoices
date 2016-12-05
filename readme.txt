@@ -143,19 +143,19 @@ add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
 `
 
 #### How to display invoice download button on specific template files?
-Add below code to any template files. Replace {ORDER_ID} with the desired ID of the order to download the invoice from.
+Add below code for example to your "thankyou" page or "customer-completed-order" email template.
 
 `
-echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="{ORDER_ID}"]' );
+echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="' . $order->id . '"]' );
 `
 
-For use in WordPress editor:
+For use in WordPress editor use below shortcode. This will only work if you replace "{ORDER_ID}" with an actual order id.
 
 `
 [bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="{ORDER_ID}"]
 `
 
-Note: Download button will only show if PDF exists and order has been completed.
+Note: Download button will only be displayed when PDF exists and order has been paid.
 
 #### Logo image shows a red cross?
 By default the relative path is used for better performance, try to base64 the image. Also read the sticky topic on the support forum for more solutions!
@@ -232,6 +232,12 @@ add_filter('bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 1
 `
 
 == Changelog ==
+
+= 2.4.13 - December 5, 2016 =
+
+- Fixed: Fixed company logo "IMAGE Error: Image not found" and other mPDF image errors due to wrong (local)host server configurations (mainly on shared hosting) by using mPDF' "Image as a Variable" method.
+- Fixed: Warning: call_user_func_array() expects parameter 1 to be a valid callback, class 'BE_WooCommerce_PDF_Invoices' does not have a method 'display_rate_admin_notice'.
+- Fixed: Support for Hindi, Kuwaiti and more by adding "Free Serif" font.
 
 = 2.4.12 - November 23, 2016 =
 

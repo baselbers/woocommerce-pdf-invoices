@@ -13,7 +13,7 @@
 // More than 1 font can be specified but each will add to the processing time of the script
 
 // $this->backupSubsFont = array('dejavusanscondensed','arialunicodems','sun-exta');	// this will recognise most scripts
-$this->backupSubsFont = array('dejavusanscondensed');
+$this->backupSubsFont = array('dejavusanscondensed', 'freeserif');
 
 // Optionally set a font (name as defined below in $this->fontdata) to use for CJK characters
 // in Plane 2 Unicode (> U+20000) when using useSubstitutions.
@@ -91,6 +91,12 @@ $this->fontdata = array(
 		'useOTL' => 0xFF,
 		'useKashida' => 75,
 	),
+	// Hindi etc.
+    "freeserif" => array(
+	    'R' => "FreeSerif.ttf",
+	    'useOTL' => 0xFF,
+	    'useKashida' => 75,
+    ),
 	/* OCR-B font for Barcodes */
 	"ocrb" => array(
 		'R' => "ocrb10.ttf",

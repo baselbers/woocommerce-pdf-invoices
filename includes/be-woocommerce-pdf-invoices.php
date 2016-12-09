@@ -10,14 +10,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
 
-		const OPTION_INSTALL_DATE = 'bewpi-install-date';
-		const OPTION_ADMIN_NOTICE_KEY = 'bewpi-hide-notice';
-		const OPTION_ADMIN_ACTIVATION_NOTICE_KEY = 'bewpi-hide-activation-notice';
-
 		private $lang_code = 'en-US';
+
 		private $options_key = 'bewpi-invoices';
+
 		public $settings_tabs = array();
+
 		public $general_options = array();
+
 		public $template_options = array();
 
 		public function __construct() {
@@ -28,18 +28,34 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			do_action( 'bewpi_after_init_settings' );
 
 			/**
-			 * Initialize plugin
+			 * Initialize.
 			 */
 			add_action( 'init', array( $this, 'init' ) );
 
+			/**
+			 * Initialize admin.
+			 */
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
-			add_action( 'admin_init', array( $this, 'catch_hide_notice' ) );
+			/**
+			 * Initialize collizo4sky/persist-admin-notices-dismissal.
+			 */
+			add_action( 'admin_init', array( 'PAnD', 'init' ) );
 
 			/**
-			 * Adds Invoices submenu to WooCommerce menu.
+			 * Add "Invoices" submenu to WooCommerce menu.
 			 */
 			add_action( 'admin_menu', array( $this, 'add_woocommerce_submenu_page' ) );
+
+			/**
+			 * Admin notice to rate plugin on wordpress.org.
+			 */
+			add_action( 'admin_notices', array( $this, 'admin_notice_rate' ) );
+
+			/**
+			 * Admin notice to ask user to fill in a form on wcpdfinvoices.com.
+			 */
+			add_action( 'wp_ajax_bewpi_deactivation_notice', array( $this, 'bewpi_deactivation_notice' ) );
 
 			/**
 			 * Enqueue admin scripts
@@ -91,7 +107,116 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_shortcode( 'bewpi-download-invoice', array( $this, 'bewpi_download_invoice_func' ) );
 
             add_action('wp_trash_post', array( $this, 'delete_invoice' ), 10, 1);
+
             add_action('before_delete_post', array( $this, 'delete_invoice' ), 10, 1);
+		}
+
+		/**
+		 * Initialize.
+		 */
+		public function init() {
+			$this->init_settings_tabs();
+			$this->create_bewpi_dirs();
+			$this->invoice_actions();
+		}
+
+		/**
+		 * Initialize admin.
+		 */
+		public function admin_init() {
+			// Add plugin action links on "Plugins" page.
+			add_filter( 'plugin_action_links_woocommerce-pdf-invoices/bootstrap.php', array( $this, 'add_plugin_action_links' ) );
+		}
+
+		/**
+		 * AJAX backend deactivation notice.
+		 */
+		public function bewpi_deactivation_notice() {
+			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'bewpi_deactivation_notice' ) ) { // Input var okay.
+				die( 0 );
+			}
+
+			ob_start();
+			include BEWPI_DIR . 'includes/admin/views/html-deactivation-notice.php';
+			$content = ob_get_clean();
+			die( $content ); // WPCS: XSS OK.
+		}
+
+		/**
+		 * Save plugin install date as site option.
+		 */
+		private static function save_install_date() {
+			$now = (new \DateTime())->format( 'Y-m-d' );
+			update_site_option( 'bewpi-install-date', $now );
+		}
+
+		/**
+		 * Get plugin install date.
+		 *
+		 * @return DateTime|bool
+		 */
+		private static function get_install_date() {
+			$install_date = get_site_option( 'bewpi-install-date' );
+
+			if ( false !== $install_date ) {
+				$install_date = DateTime::createFromFormat( 'Y-m-d', $install_date );
+			}
+
+			return $install_date;
+		}
+
+		/**
+		 * Plugin activation.
+		 */
+		public static function plugin_activation() {
+			// to ask administrator to rate plugin on wordpress.org.
+			self::save_install_date();
+			// use transient to display activation admin notice.
+			set_transient( 'bewpi-admin-notice-activation', true, 30 );
+		}
+
+		/**
+		 * Admin notice for administrator to rate plugin on wordpress.org.
+		 */
+		public function admin_notice_rate() {
+			// notice needs to be inactive.
+			if ( ! PAnD::is_admin_notice_active( 'rate-forever' ) ) {
+				return;
+			}
+
+			// user needs to be an administrator and can install plugins.
+			if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'install_plugins' ) ) {
+				return;
+			}
+
+			// install date should be valid.
+			$install_date = self::get_install_date();
+			if ( false === $install_date ) {
+				return;
+			}
+
+			// at least 10 days should be past to display notice.
+			if ( new DateTime( '-10 second' ) >= $install_date ) {
+				include( BEWPI_DIR . 'includes/admin/views/html-rate-notice.php' );
+			}
+		}
+
+		/**
+		 * Admin notice to configure plugin when activated.
+		 */
+		public function admin_notice_activation() {
+			// notice needs to be inactive.
+			if ( ! PAnD::is_admin_notice_active( 'activation-forever' ) ) {
+				return;
+			}
+
+			// check if plugin has been activated by checking transient that has been set on plugin activation.
+			if ( ! get_transient( 'bewpi-admin-notice-activation' ) ) {
+				return;
+			}
+
+			include( BEWPI_DIR . 'includes/admin/views/html-activation-notice.php' );
+			delete_transient( 'bewpi-admin-notice-activation' );
 		}
 
         public function delete_invoice($post_id){
@@ -102,49 +227,37 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
             }
         }
 
-		public function init() {
-			$this->init_settings_tabs();
-			$this->create_bewpi_dirs();
-			$this->invoice_actions();
-
-			add_action( 'admin_notices', array( $this, 'display_activation_admin_notice' ) );
-		}
-
-		public function admin_init() {
-			$this->plugin_activation_notice_catch_hide();
-			$this->init_review_admin_notice();
-
-			add_filter( 'plugin_action_links_woocommerce-pdf-invoices/bootstrap.php', array( $this, 'add_plugin_action_links' ) );
-		}
-
-		public static function plugin_activation() {
-			self::insert_install_date();
-		}
-
-		public function display_activation_admin_notice() {
-			global $pagenow;
-			if ( $pagenow != 'plugins.php' )
-				return;
-
-			global $current_user;
-			$user_id = $current_user->ID;
-			if ( ! get_user_meta( $user_id, 'bewpi_hide_activation_notice', true ) ) {
-				?>
-				<div id="bewpi-plugin-activated-notice" class="updated notice is-dismissible">
-					<p>
-						<?php printf( __( 'Alrighty then! <a href="%s">Let\'s start configuring <strong>WooCommerce PDF Invoices</strong></a>.', 'woocommerce-pdf-invoices' ), admin_url() . 'admin.php?page=bewpi-invoices' ); ?>
-					</p>
-					<?php printf( '<a href="%1$s" class="notice-dismiss"></a>', '?bewpi_hide_activation_notice=0' ); ?>
-				</div>
-			<?php
-			}
-		}
-
+		/**
+		 * Add plugin action links on plugin.php page.
+		 *
+		 * @param array $links action links.
+		 *
+		 * @return array
+		 */
 		function add_plugin_action_links( $links ) {
-			return array_merge( array(
-				'<a href="' . admin_url( 'admin.php?page=bewpi-invoices' ) . '">' . __( 'Settings', 'woocommerce-pdf-invoices' ) . '</a>',
-				'<a href="http://wcpdfinvoices.com" target="_blank">' . __( 'Premium', 'woocommerce-pdf-invoices' ) . '</a>'
-			), $links );
+			// add onclick event to deactivate link to display reason for deactivation admin notice.
+			$dom = new DOMDocument();
+			$dom->loadHTML( $links['deactivate'] );
+			$anchors = $dom->getElementsByTagName( 'a' );
+			foreach ( $anchors as $node ) {
+				$node->setAttribute( 'id', 'bewpi-deactivate' );
+				$node->setAttribute( 'onclick', 'BEWPI.Settings.displayDeactivationNotice()' );
+				$links['deactivate'] = $dom->saveHTML( $node );
+				break;
+			}
+
+			// add settings link.
+			$settings_url = admin_url( 'admin.php?page=bewpi-invoices' );
+			$settings_title = __( 'Settings', 'woocommerce-pdf-invoices' );
+			$additional_links[] = sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title );
+
+			// add premium plugin link.
+			$premium_url = 'http://wcpdfinvoices.com';
+			$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );
+			$additional_links[] = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', $premium_url, $premium_title );
+
+			$links = array_merge( $additional_links, $links );
+			return $links;
 		}
 
 		public function bewpi_download_invoice_func( $atts ) {
@@ -172,14 +285,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				// example: Download (PDF) Invoice {formatted_invoice_number}
 				echo '<a href="' . esc_attr( $url ) . '" alt="' . esc_attr( $title ) . '">' . esc_html( $title ) . '</a>';
-			}
-		}
-
-		public function plugin_activation_notice_catch_hide() {
-			global $current_user;
-            $user_id = $current_user->ID;
-			if ( isset($_GET['bewpi_hide_activation_notice']) && '0' == $_GET['bewpi_hide_activation_notice'] ) {
-				update_user_meta( $user_id, 'bewpi_hide_activation_notice', '1' );
 			}
 		}
 
@@ -265,13 +370,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Admin scripts
 		 */
 		public function admin_enqueue_scripts() {
-			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . 'assets/js/admin.js' );
-            wp_enqueue_script( 'jquery_tiptip', WC()->plugin_url() . '/assets/js/jquery-tiptip/jquery.tipTip.min.js' );
-
-			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . '/assets/css/admin.css', false, '1.0.0' );
-			wp_register_style( 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css', array(), WC_VERSION );
+			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . 'assets/js/admin.js', array(), false, true );
+			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
+					'ajaxurl'          => admin_url( 'admin-ajax.php' ),
+					'deactivation_nonce' => wp_create_nonce( 'bewpi_deactivation_notice' ),
+				)
+			);
+			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . 'assets/css/admin.css', false, '1.0.0' );
 			wp_enqueue_style( 'bewpi_admin_settings_css' );
-			wp_enqueue_style( 'woocommerce_admin_styles' );
 		}
 
 		/**
@@ -280,7 +386,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function plugin_options_tabs() {
 			$current_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'bewpi_general_settings';
 
-			screen_icon();
 			echo '<h2 class="nav-tab-wrapper">';
 			foreach ( $this->settings_tabs as $tab_key => $tab_caption ) {
 				$active = $current_tab == $tab_key ? 'nav-tab-active' : '';
@@ -536,92 +641,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			);
 
 			return $actions;
-		}
-
-
-		/**
-		 * Check if we should show the admin notice
-		 * @return bool|void
-		 */
-		public function init_review_admin_notice() {
-			// Check if user is an administrator
-			if ( ! current_user_can( 'manage_options' ) ) {
-				return false;
-			}
-
-			$current_user = wp_get_current_user();
-			$hide_notice  = get_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, true );
-
-			if ( current_user_can( 'install_plugins' ) && $hide_notice == '' ) {
-				// Get installation date
-				$datetime_install = $this->get_install_date();
-				$datetime_past    = new DateTime( '-10 days' );
-				//$datetime_past    = new DateTime( '-10 second' );
-
-				if ( $datetime_past >= $datetime_install ) {
-					// 10 or more days ago, show admin notice
-					add_action( 'admin_notices', array( &$this, 'display_rate_admin_notice' ) );
-				}
-			}
-
-			// Don't add admin bar option in admin panel
-			if ( is_admin() ) {
-				return;
-			}
-		}
-
-		/**
-		 * @return string
-		 */
-		private static function insert_install_date() {
-			$datetime_now = new DateTime();
-			$date_string  = $datetime_now->format( 'Y-m-d' );
-			update_site_option( self::OPTION_INSTALL_DATE, $date_string );
-			return $date_string;
-		}
-
-		/**
-		 * Get the installation date of the plugin
-		 * @return DateTime
-		 */
-		private function get_install_date() {
-			$date_string = get_site_option( self::OPTION_INSTALL_DATE, '' );
-
-			if( empty( $date_string ) ) {
-				// There is no install date, plugin was installed before version 2.2.1. Add it now.
-				$date_string = self::insert_install_date();
-			}
-
-			return DateTime::createFromFormat('Y-m-d', $date_string );
-		}
-
-		/**
-		 * Callback to hide the admin notice.
-		 */
-		public function catch_hide_notice() {
-			if ( isset( $_GET[ self::OPTION_ADMIN_NOTICE_KEY ] ) && current_user_can( 'install_plugins' ) ) {
-				// Add user meta
-				global $current_user;
-
-				//add_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1', true );
-				update_user_meta( $current_user->ID, self::OPTION_ADMIN_NOTICE_KEY, '1' );
-
-				// Build redirect URL
-				$redirect_url = remove_query_arg( self::OPTION_ADMIN_NOTICE_KEY );
-				wp_redirect( $redirect_url );
-				exit;
-			}
-		}
-
-		/**
-		 * Ask admin to review plugin.
-		 */
-		public function display_rate_admin_notice() {
-			$url = add_query_arg( array( self::OPTION_ADMIN_NOTICE_KEY => '1' ) );
-
-			echo '<div class="updated"><p>';
-			printf( __( "You are working with <b>WooCommerce PDF Invoices</b> for some time now. We really need your ★★★★★ rating. It will support future development big-time. A huge thanks in advance and keep up the good work! <br /> <a href='%s' target='_blank'>Yes, will do it right away!</a> - <a href='%s'>No, already done it!</a>", 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', $url );
-			echo "</p></div>";
 		}
 	}
 }

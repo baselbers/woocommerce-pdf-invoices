@@ -27,8 +27,10 @@ function bewpi_plugins_loaded() {
 	define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices/' );
 	define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
 	define( 'BEWPI_LANG_DIR', basename( dirname( __FILE__ ) ) . '/lang' );
+	define( 'BEWPI_PLUGIN_FILE', basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ) );
 	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
 
+	require_once( __DIR__ . '/vendor/autoload.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-invoice.php' );
 	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-setting.php' );
@@ -46,4 +48,5 @@ add_action( 'plugins_loaded', 'bewpi_plugins_loaded', 10 );
 if ( is_admin() ) {
 	require_once( dirname( __FILE__ ) . '/includes/be-woocommerce-pdf-invoices.php' );
 	register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
+	register_deactivation_hook( __FILE__, 'plugin_deactivation' );
 }

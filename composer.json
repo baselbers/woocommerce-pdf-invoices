@@ -1,0 +1,5 @@
+{
+  "require": {
+    "collizo4sky/persist-admin-notices-dismissal": "1.3.*"
+  }
+}

@@ -53,9 +53,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notice_rate' ) );
 
 			/**
+			 * Admin notice to display settings page.
+			 */
+			add_action( 'admin_notices', array( $this, 'admin_notice_activation' ) );
+
+			/**
 			 * Admin notice to ask user to fill in a form on wcpdfinvoices.com.
 			 */
-			add_action( 'wp_ajax_bewpi_deactivation_notice', array( $this, 'bewpi_deactivation_notice' ) );
+			add_action( 'wp_ajax_bewpi_deactivation_notice', array( $this, 'admin_notice_deactivation' ) );
 
 			/**
 			 * Enqueue admin scripts
@@ -126,20 +131,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function admin_init() {
 			// Add plugin action links on "Plugins" page.
 			add_filter( 'plugin_action_links_woocommerce-pdf-invoices/bootstrap.php', array( $this, 'add_plugin_action_links' ) );
-		}
-
-		/**
-		 * AJAX backend deactivation notice.
-		 */
-		public function bewpi_deactivation_notice() {
-			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'bewpi_deactivation_notice' ) ) { // Input var okay.
-				die( 0 );
-			}
-
-			ob_start();
-			include BEWPI_DIR . 'includes/admin/views/html-deactivation-notice.php';
-			$content = ob_get_clean();
-			die( $content ); // WPCS: XSS OK.
 		}
 
 		/**
@@ -217,6 +208,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			include( BEWPI_DIR . 'includes/admin/views/html-activation-notice.php' );
 			delete_transient( 'bewpi-admin-notice-activation' );
+		}
+
+		/**
+		 * AJAX backend deactivation notice.
+		 */
+		public function admin_notice_deactivation() {
+			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'bewpi_deactivation_notice' ) ) { // Input var okay.
+				die( 0 );
+			}
+
+			ob_start();
+			include BEWPI_DIR . 'includes/admin/views/html-deactivation-notice.php';
+			$content = ob_get_clean();
+			die( $content ); // WPCS: XSS OK.
 		}
 
         public function delete_invoice($post_id){

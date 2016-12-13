@@ -3,8 +3,8 @@ Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
-Tested up to: 4.6
-Stable tag: 2.4.13
+Tested up to: 4.7
+Stable tag: 2.4.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,14 +97,22 @@ add_action( 'woocommerce_cart_calculate_fees','add_woocommerce_fee' );
 To hide order item meta from the invoice, simply add the following filter to your themes `functions.php`.
 
 `
-function add_hidden_order_items( $order_items ) {
-    $order_items[] = '_subscription_interval';
-    $order_items[] = '_subscription_length';
-    // end so on...
-
-    return $order_items;
+/**
+ * Hide order itemmeta on WooCommerce PDF Invoices' invoice template.
+ *
+ * @param array $hidden_order_itemmeta itemmeta.
+ *
+ * @return array
+ */
+function bewpi_alter_hidden_order_itemmeta( $hidden_order_itemmeta ) {
+	$hidden_order_itemmeta[] = '_wc_cog_item_cost';
+	$hidden_order_itemmeta[] = '_wc_cog_item_total_cost';
+	$hidden_order_itemmeta[] = '_subscription_interval';
+    $hidden_order_itemmeta[] = '_subscription_length';
+	// end so on..
+	return $hidden_order_itemmeta;
 }
-add_filter( 'woocommerce_hidden_order_itemmeta', 'add_hidden_order_items' );
+add_filter( 'bewpi_hidden_order_itemmeta', 'bewpi_alter_hidden_order_itemmeta', 10, 1 );
 `
 
 #### How to change the common PDF options?
@@ -232,6 +240,10 @@ add_filter('bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 1
 `
 
 == Changelog ==
+
+= 2.4.14 - December 13, 2016 =
+- Added: Deactivation notice, refactored notices in general and implemented composer to grab "collizo4sky/persist-admin-notices-dismissal".
+- Fixed: Hidden order itemmeta hiding on admin pages by adding custom filter "bewpi_hidden_order_itemmeta".
 
 = 2.4.13 - December 5, 2016 =
 

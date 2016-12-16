@@ -218,10 +218,11 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.4.14 - December 13, 2016 =
-- Added: Deactivation notice, refactored notices in general and added composer to grab "collizo4sky/persist-admin-notices-dismissal".
+= 2.4.14 - December 16, 2016 =
+- Added: Deactivation notice, refactored notices in general and added Composer and 'collizo4sky/persist-admin-notices-dismissal'.
 - Improved: Email attachment option with multiple checkboxes to attach invoice to multiple email types and fixed multiple bcc headers.
 - Fixed: Hidden order itemmeta hiding on admin pages by adding custom filter "bewpi_hidden_order_itemmeta".
+- Removed: Filters 'bewpi_paid_watermark_excluded_payment_methods' and 'bewpi_paid_watermark_excluded_order_statuses', because there is no reason to show watermark based on order status or payment method. Watermark should only be displayed when order has been paid for, so order status should be Processing or Completed. We use WooCommerce' "is_paid" function to achieve this.
 
 = 2.4.13 - December 5, 2016 =
 

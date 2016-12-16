@@ -5,6 +5,9 @@ form.bewpi-settings-form {
     padding-right: 40px;
     box-sizing: border-box;
 }
+#bewpi-email-types {
+    margin: 0;
+}
 .bewpi-settings-form select,
 .bewpi-settings-form input[type="text"],
 .bewpi-settings-form textarea {

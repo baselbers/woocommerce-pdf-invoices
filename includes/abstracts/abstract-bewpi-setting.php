@@ -1,105 +1,69 @@
 <?php
+/**
+ * Settings configuration.
+ *
+ * Validate and output settings.
+ *
+ * @author      Bas Elbers
+ * @category    Abstract Class
+ * @package     BE_WooCommerce_PDF_Invoices/Abstracts
+ * @version     1.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
-} // Exit if accessed directly
+}
 
 if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
-
 	/**
-	 * Abstract class with validation functions to validate all the template and general settings.
-	 * Class BEWPI_Settings
+	 * Class BEWPI_Abstract_Setting.
 	 */
 	abstract class BEWPI_Abstract_Setting {
-
 		/**
-		 * Options and settings prefix
+		 * Options and settings prefix.
+		 *
 		 * @var string
 		 */
-		public $prefix = 'bewpi_';
+		const PREFIX = 'bewpi_';
 
 		/**
-		 * For <textarea>.
-		 * @var array
-		 */
-		private $allowed_tags = array( '<b>', '<i>', '<br>', '<br/>' );
-
-		/**
-		 * Validates an email.
+		 * Gets all the tags that are allowed.
 		 *
-		 * @param $email
-		 *
-		 * @return bool
+		 * @return string|void
 		 */
-		protected function validate_email( $email ) {
-			return is_email( sanitize_email( $email ) ) ? true : false;
+		protected function allowed_tags_text() {
+			$allowed_tags_encoded = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>', '<br/>' ) );
+			$allowed_tags_formatted  = '<code>' . join( '</code>, <code>', $allowed_tags_encoded ) . '</code>';
+			$allowed_tags_text = sprintf( __( 'Allowed HTML tags: %1$s.', 'woocommerce-pdf-invoices' ), $allowed_tags_formatted );
+			return $allowed_tags_text;
 		}
 
 		/**
-		 * Validates a string.
+		 * String validation.
 		 *
-		 * @param $str
-		 *
-		 * @return bool
-		 */
-		protected function is_valid_str( $str ) {
-			return is_string( sanitize_text_field( $str ) );
-		}
-
-		/**
-		 * Validates an integer.
-		 *
-		 * @param $int
-		 *
-		 * @return bool
-		 */
-		protected function is_valid_int( $int ) {
-			return intval( $int ) && absint( $int );
-		}
-
-		/**
-		 * Validates a textarea.
-		 *
-		 * @param $str
+		 * @param string $str the string to validate.
 		 *
 		 * @return bool
 		 */
 		protected function strip_str( $str ) {
-			$str = preg_replace( "/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", '<$1$2>', $str ); // Removes the attributes in the HTML tags
+			$str = preg_replace( '/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $str );
 			return strip_tags( $str, '<b><i><br><br/>' );
 		}
 
 		/**
-		 * Check for a valid hex color string like '#c1c2b4'
+		 * Multiple checkboxes html.
 		 *
-		 * @param $hex
+		 * @param array $args option arguments.
 		 */
-		protected function is_valid_hex_color( $hex ) {
-			$valid = false;
-			if ( preg_match( '/^#[a-f0-9]{6}$/i', $hex ) ) {
-				return true;
-			} else if ( preg_match( '/^[a-f0-9]{6}$/i', $hex ) ) { // Check for a hex color string without hash like 'c1c2b4'
-				return '#' . $hex;
-			}
-
-			return false;
+		public function multiple_checkbox_callback( $args ) {
+			include BEWPI_DIR . 'includes/admin/views/html-multiple-checkbox-setting.php';
 		}
 
 		/**
-		 * Gets all the tags that are allowed to use for the textarea's.
-		 * @return string|void
+		 * Select html.
+		 *
+		 * @param array $args option arguments.
 		 */
-		protected function get_allowed_tags_str() {
-
-			if ( empty( $this->allowed_tags ) ) {
-				return '';
-			}
-
-			$encoded_tags = array_map( 'htmlspecialchars', $this->allowed_tags );
-			$tags_string  = '<code>' . join( '</code>, <code>', $encoded_tags ) . '</code>';
-
-			return __( 'Allowed HTML tags: ', 'woocommerce-pdf-invoices' ) . $tags_string . '.';
-		}
-
 		public function select_callback( $args ) {
 			$options = get_option( $args['page'] );
 			?>
@@ -121,7 +85,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			$options     = get_option( $args['page'] );
 			$class       = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
 			$is_checkbox = $args['type'] === 'checkbox';
-			?>
+			if ( $is_checkbox ) { ?>
+				<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
+			<?php } ?>
 			<input id="<?php echo $args['id']; ?>"
 			       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
 			       type="<?php echo $args['type']; ?>"

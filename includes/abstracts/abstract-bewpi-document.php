@@ -40,7 +40,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          * @param string $dest
          * @return string
          */
-        protected function generate( $html_sections, $dest, $paid ) {
+        protected function generate( $html_sections, $dest, $is_paid ) {
 	        set_time_limit(0);
 	        require_once BEWPI_LIB_DIR . 'mpdf/mpdf.php';
 	        require_once BEWPI_LIB_DIR . 'mpdf/vendor/autoload.php';
@@ -70,7 +70,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	        }
 
 	        // show paid watermark
-	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $paid ) {
+	        if ( (bool)$this->template_options[ 'bewpi_show_payment_status' ] && $is_paid ) {
 		        $mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 		        $mpdf->showWatermarkText = true;
 				$mpdf->watermarkTextAlpha = "0.2";

@@ -70,10 +70,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			/**
 			 * Add actions to overview order page.
 			 */
-			add_action( 'woocommerce_admin_order_actions_end', array(
-				$this,
-				'woocommerce_order_page_action_view_invoice'
-			) );
+			add_action( 'woocommerce_admin_order_actions_end', array( $this, 'woocommerce_order_page_action_view_invoice' ) );
 
 			/**
 			 * Adds a meta box to the order details page.
@@ -93,12 +90,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			/**
 			 * Adds a download link for the pdf invoice on the my account page
 			 */
-			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_download_pdf_action' ), 10, 2 );
+			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_pdf' ), 10, 2 );
 
 			/**
 			 * Shortcode to display invoice from view
 			 */
-			add_shortcode( 'bewpi-download-invoice', array( $this, 'bewpi_download_invoice_func' ) );
+			add_shortcode( 'bewpi-download-invoice', array( $this, 'download_invoice_shortcode' ) );
 
 			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
 
@@ -255,31 +252,42 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			return $links;
 		}
 
-		public function bewpi_download_invoice_func( $atts ) {
-			if ( ! isset( $atts["order_id"] ) ) {
+		/**
+		 * Shortcode to download invoice.
+		 *
+		 * @param array $atts shortcode attributes.
+		 */
+		public function download_invoice_shortcode( $atts ) {
+			if ( ! isset( $atts['order_id'] ) || 0 === intval( $atts['order_id'] ) ) {
 				return;
 			}
 
-			$order_id = $atts["order_id"];
-			$order    = wc_get_order( $order_id );
-			$title    = $atts['title'];
-			$invoice  = new BEWPI_Invoice( $order->id );
-
-			if ( $invoice->exists() && $invoice->is_download_allowed( $order->post_status ) ) {
-				$url = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
-
-				$tags = array(
-					'{formatted_invoice_number}' => $invoice->formatted_number,
-					'{order_number}'             => $order->id,
-					'{formatted_invoice_date}'   => $invoice->get_formatted_invoice_date(),
-					'{formatted_order_date}'     => $invoice->get_formatted_order_date()
-				);
-
-				$title = str_replace( array_keys( $tags ), array_values( $tags ), $title );
-
-				// example: Download (PDF) Invoice {formatted_invoice_number}
-				echo '<a href="' . esc_attr( $url ) . '" alt="' . esc_attr( $title ) . '">' . esc_html( $title ) . '</a>';
+			// by default order status should be Processing or Completed.
+			$order = wc_get_order( $atts['order_id'] );
+			if ( ! $order->is_paid() ) {
+				return;
 			}
+
+			$invoice = new BEWPI_Invoice( $order->id );
+			if ( ! $invoice->exists() ) {
+				return;
+			}
+
+			$url = add_query_arg( array(
+				'bewpi_action' => 'view',
+				'post' => $order->id,
+				'nonce' => wp_create_nonce( 'view' ),
+			), admin_url( 'admin-ajax.php' ) );
+
+			$tags = array(
+				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
+				'{order_number}'             => $order->id,
+				'{formatted_invoice_date}'   => $invoice->get_formatted_invoice_date(),
+				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
+			);
+			// find and replace placeholders.
+			$title = str_replace( array_keys( $tags ), array_values( $tags ), $atts['title'] );
+			printf( '<a href="%1$s">%2$s</a>', esc_attr( $url ), esc_html( $title ) );
 		}
 
 		/**
@@ -620,12 +628,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Display download link on My Account page
+		 * Display download link on My Account page.
+		 *
+		 * @param array    $actions my account order table actions.
+		 * @param WC_Order $order WooCommerce order object.
+		 *
+		 * @return mixed
 		 */
-		public function add_my_account_download_pdf_action( $actions, $order ) {
+		public function add_my_account_pdf( $actions, $order ) {
+			$order = wc_get_order( $order );
 			$general_options = get_option( 'bewpi_general_settings' );
-
-			if ( ! (bool) $general_options['bewpi_download_invoice_account'] ) {
+			if ( ! $general_options['bewpi_download_invoice_account'] || ! $order->is_paid() ) {
 				return $actions;
 			}
 
@@ -634,14 +647,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			if ( ! $invoice->is_download_allowed( $order->post_status ) ) {
-				return $actions;
-			}
+			$url = add_query_arg( array(
+				'bewpi_action' => 'view',
+				'post' => $order->id,
+				'nonce' => wp_create_nonce( 'view' ),
+			), admin_url( 'admin-ajax.php' ) );
 
-			$url                = admin_url( 'admin-ajax.php?bewpi_action=view&post=' . $order->id . '&nonce=' . wp_create_nonce( 'view' ) );
 			$actions['invoice'] = array(
 				'url'  => $url,
-				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->formatted_number )
+				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->formatted_number ),
 			);
 
 			return $actions;

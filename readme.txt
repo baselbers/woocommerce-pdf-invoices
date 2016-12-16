@@ -179,36 +179,14 @@ function convert_company_logo_to_base64( $company_logo_path ) {
 add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );
 `
 
-#### How to remove 'Paid' watermark based on specific order statuses?
-By default the 'Paid' watermark won't display for 'Pending', 'On-Hold' and 'Auto-Draft' statuses.
-
-`
-function bewpi_paid_watermark_excluded_order_statuses($order_statuses, $order_id){
-    // add (short) name of order status to exclude
-    return array('pending', 'on-hold', 'auto-draft');
-}
-add_filter('bewpi_paid_watermark_excluded_order_statuses', 'bewpi_paid_watermark_excluded_order_statuses', 10, 2);
-`
-
-#### How to remove 'Paid' watermark based on specific payment methods?
-By default 'BACS', 'Cash on Delivery' and 'Cheque' payment methods are excluded, so the invoice won't get marked as paid.
-
-`
-function exclude_payment_method_for_watermark($payment_methods, $order_id){
-    // add (short) name of payment method to exclude
-    return array('bacs', 'cod', 'cheque', 'paypal');
-}
-add_filter('bewpi_paid_watermark_excluded_payment_methods', 'exclude_payment_method_for_watermark', 10, 2);
-`
-
 #### How to skip invoice generation based on specific payment methods?
 Add the name of the payment method to the array.
 
 `
-function bewpi_attach_invoice_excluded_payment_methods($payment_methods) {
-    return array('bacs', 'cod', 'cheque', 'paypal');
+function bewpi_attach_invoice_excluded_payment_methods( $payment_methods ) {
+    return array( 'bacs', 'cod', 'cheque', 'paypal' );
 }
-add_filter('bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2);
+add_filter( 'bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2 );
 `
 
 #### How to allow specific roles to download invoice?
@@ -218,10 +196,10 @@ Add the name of the role to the array. By default shop managers and administrato
 function bewpi_allowed_roles_to_download_invoice($allowed_roles) {
     // available roles: shop_manager, customer, contributor, author, editor, administrator
     $allowed_roles[] = "editor";
-
+    // end so on..
     return $allowed_roles;
 }
-add_filter('bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_download_invoice', 10, 2);
+add_filter( 'bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_download_invoice', 10, 2 );
 `
 
 ### How to alter formatted invoice number? ###
@@ -233,16 +211,16 @@ function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_typ
       // add M for global invoices
       return 'M' . $formatted_invoice_number;
    }
-Filter to alter formatted invoice number.
    return $formatted_invoice_number;
 }
-add_filter('bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2);
+add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2 );
 `
 
 == Changelog ==
 
 = 2.4.14 - December 13, 2016 =
-- Added: Deactivation notice, refactored notices in general and implemented composer to grab "collizo4sky/persist-admin-notices-dismissal".
+- Added: Deactivation notice, refactored notices in general and added composer to grab "collizo4sky/persist-admin-notices-dismissal".
+- Improved: Email attachment option with multiple checkboxes to attach invoice to multiple email types and fixed multiple bcc headers.
 - Fixed: Hidden order itemmeta hiding on admin pages by adding custom filter "bewpi_hidden_order_itemmeta".
 
 = 2.4.13 - December 5, 2016 =

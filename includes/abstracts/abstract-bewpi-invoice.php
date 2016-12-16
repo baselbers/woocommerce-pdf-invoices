@@ -121,29 +121,31 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		/**
 		 * Format the invoice number with prefix and/or suffix.
-		 * @return mixed
+		 *
+		 * @return mixed|void
 		 */
 		public function get_formatted_number() {
-			$invoice_number_format = $this->template_options['bewpi_invoice_number_format'];
-			// Format number with the number of digits
-			$digit_str                = "%0" . $this->template_options['bewpi_invoice_number_digits'] . "s";
-			$digitized_invoice_number = sprintf( $digit_str, $this->number );
-			$year                     = date_i18n( 'Y' );
-			$y                        = date_i18n( 'y' );
-			$m                        = date_i18n( 'm' );
-
-			// Format invoice number
+			// format number with the number of digits.
+			$digitized_invoice_number = sprintf( '%0' . $this->template_options['bewpi_invoice_number_digits'] . 's', $this->number );
 			$formatted_invoice_number = str_replace(
-				array( '[prefix]', '[suffix]', '[number]', '[Y]', '[y]', '[m]' ),
+				array(
+					'[prefix]',
+					'[suffix]',
+					'[number]',
+					'[Y]',
+					'[y]',
+					'[m]',
+				),
 				array(
 					$this->template_options['bewpi_invoice_number_prefix'],
 					$this->template_options['bewpi_invoice_number_suffix'],
 					$digitized_invoice_number,
-					(string) $year,
-					(string) $y,
-					(string) $m
+					(string) date_i18n( 'Y' ),
+					(string) date_i18n( 'y' ),
+					(string) date_i18n( 'm' ),
 				),
-				$invoice_number_format );
+				$this->template_options['bewpi_invoice_number_format']
+			);
 
 			return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
 		}
@@ -348,41 +350,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->colspan = $this->get_colspan();
 			$html_sections = $this->output_template_files_to_buffer( $html_templates );
-			$paid          = $this->is_paid();
+			$is_paid       = $this->order->is_paid();
 
 			do_action( 'bewpi_before_document_generation', array(
 				'type'     => $this->type,
 				'order_id' => $this->order->id
 			) );
 
-			parent::generate( $html_sections, $dest, $paid );
+			parent::generate( $html_sections, $dest, $is_paid );
 
 			do_action( "bewpi_after_invoice_content", $this->order->id );
 
 			return $this->full_path;
-		}
-
-		/**
-		 * Checks if order is paid
-		 * @return bool
-		 */
-		public function is_paid() {
-			$payment_methods = apply_filters( 'bewpi_paid_watermark_excluded_payment_methods', array(
-				'bacs',
-				'cod',
-				'cheque'
-			), $this->order->id );
-			if ( in_array( $this->order->payment_method, $payment_methods ) ) {
-				return false;
-			}
-
-			$order_statuses = apply_filters( 'bewpi_paid_watermark_excluded_order_statuses', array(
-				'pending',
-				'on-hold',
-				'auto-draft'
-			), $this->order->id );
-
-			return ( ! in_array( $this->order->get_status(), $order_statuses ) );
 		}
 
 		public function view() {
@@ -412,21 +391,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			if ( $this->exists() ) {
 				parent::delete();
 			}
-		}
-
-		/**
-		 * @param $order_status
-		 * Customer is only allowed to download invoice if the status of the order matches the email type option.
-		 *
-		 * @return bool
-		 */
-		public function is_download_allowed( $order_status ) {
-			if ( $order_status === "wc-completed" ) {
-				return true;
-			}
-
-			// if user selected email type 'Cutomer Processing Order' download is also allowed.
-			return ( $order_status === "wc-processing" && $this->general_options['bewpi_email_type'] === "customer_processing_order" );
 		}
 
 		/**

@@ -11,11 +11,11 @@
  * Text Domain:       woocommerce-pdf-invoices
  * Domain Path:       /lang
  */
-
 function bewpi_plugins_loaded() {
 
-	if ( ! defined( 'ABSPATH' ) )
-		die( 'Access denied.' );
+	if ( ! defined( 'ABSPATH' ) ) {
+		exit;
+	}
 
 	$wp_upload_dir = wp_upload_dir();
 
@@ -30,16 +30,16 @@ function bewpi_plugins_loaded() {
 	define( 'BEWPI_PLUGIN_FILE', basename( dirname( __FILE__ ) ) . '/' . basename( __FILE__ ) );
 	define( 'BEWPI_LIB_DIR', plugin_dir_path( __FILE__ ) . '/lib/' );
 
-	require_once( __DIR__ . '/vendor/autoload.php' );
-	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php' );
-	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-invoice.php' );
-	require_once( BEWPI_DIR . 'includes/abstracts/abstract-bewpi-setting.php' );
-	require_once( BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-general.php' );
-	require_once( BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-template.php' );
-	require_once( BEWPI_DIR . 'includes/class-bewpi-invoice.php' );
-	require_once( BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php' );
+	require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php';
+	require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-invoice.php';
+	require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-setting.php';
+	require_once BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-general.php';
+	require_once BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-template.php';
+	require_once BEWPI_DIR . 'includes/admin/class-bewpi-admin-notices.php';
+	require_once BEWPI_DIR . 'includes/class-bewpi-invoice.php';
+	require_once BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php';
 
-    load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', BEWPI_LANG_DIR ) );
+	load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', BEWPI_LANG_DIR ) );
 
 	new BE_WooCommerce_PDF_Invoices();
 }

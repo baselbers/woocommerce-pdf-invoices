@@ -25,6 +25,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			new BEWPI_General_Settings();
 			new BEWPI_Template_Settings();
 
+			$this->includes();
+			$this->init_hooks();
+
 			do_action( 'bewpi_after_init_settings' );
 
 			/**
@@ -38,29 +41,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'admin_init', array( $this, 'admin_init' ) );
 
 			/**
-			 * Initialize collizo4sky/persist-admin-notices-dismissal.
-			 */
-			add_action( 'admin_init', array( 'PAnD', 'init' ) );
-
-			/**
 			 * Add "Invoices" submenu to WooCommerce menu.
 			 */
 			add_action( 'admin_menu', array( $this, 'add_woocommerce_submenu_page' ) );
-
-			/**
-			 * Admin notice to rate plugin on wordpress.org.
-			 */
-			add_action( 'admin_notices', array( $this, 'admin_notice_rate' ) );
-
-			/**
-			 * Admin notice to display settings page.
-			 */
-			add_action( 'admin_notices', array( $this, 'admin_notice_activation' ) );
-
-			/**
-			 * Admin notice to ask user to fill in a form on wcpdfinvoices.com.
-			 */
-			add_action( 'wp_ajax_bewpi_deactivation_notice', array( $this, 'admin_notice_deactivation' ) );
 
 			/**
 			 * Enqueue admin scripts
@@ -103,6 +86,19 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Initialize hooks and filters.
+		 */
+		private function init_hooks() {
+		}
+
+		/**
+		 * Include core backend and frontend files.
+		 */
+		public function includes() {
+			//require_once BEWPI_DIR . 'includes/admin/class-bewpi-admin-notices.php';
+		}
+
+		/**
 		 * Initialize.
 		 */
 		public function init() {
@@ -128,21 +124,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Get plugin install date.
-		 *
-		 * @return DateTime|bool
-		 */
-		private static function get_install_date() {
-			$install_date = get_site_option( 'bewpi-install-date' );
-
-			if ( false !== $install_date ) {
-				$install_date = DateTime::createFromFormat( 'Y-m-d', $install_date );
-			}
-
-			return $install_date;
-		}
-
-		/**
 		 * Plugin activation.
 		 */
 		public static function plugin_activation() {
@@ -150,72 +131,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			self::save_install_date();
 			// use transient to display activation admin notice.
 			set_transient( 'bewpi-admin-notice-activation', true, 30 );
-		}
-
-		/**
-		 * Admin notice for administrator to rate plugin on wordpress.org.
-		 */
-		public function admin_notice_rate() {
-			// notice needs to be inactive.
-			if ( ! PAnD::is_admin_notice_active( 'rate-forever' ) ) {
-				return;
-			}
-
-			// user needs to be an administrator and can install plugins.
-			if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'install_plugins' ) ) {
-				return;
-			}
-
-			// install date should be valid.
-			$install_date = self::get_install_date();
-			if ( false === $install_date ) {
-				return;
-			}
-
-			// at least 10 days should be past to display notice.
-			if ( new DateTime( '-10 second' ) >= $install_date ) {
-				include( BEWPI_DIR . 'includes/admin/views/html-rate-notice.php' );
-			}
-		}
-
-		/**
-		 * Admin notice to configure plugin when activated.
-		 */
-		public function admin_notice_activation() {
-			// notice needs to be inactive.
-			if ( ! PAnD::is_admin_notice_active( 'activation-forever' ) ) {
-				return;
-			}
-
-			// check if plugin has been activated by checking transient that has been set on plugin activation.
-			if ( ! get_transient( 'bewpi-admin-notice-activation' ) ) {
-				return;
-			}
-
-			include( BEWPI_DIR . 'includes/admin/views/html-activation-notice.php' );
-			delete_transient( 'bewpi-admin-notice-activation' );
-		}
-
-		/**
-		 * AJAX backend deactivation notice.
-		 */
-		public function admin_notice_deactivation() {
-			if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'bewpi_deactivation_notice' ) ) { // Input var okay.
-				die( 0 );
-			}
-
-			ob_start();
-			include BEWPI_DIR . 'includes/admin/views/html-deactivation-notice.php';
-			$content = ob_get_clean();
-			die( $content ); // WPCS: XSS OK.
-		}
-
-		public function delete_invoice( $post_id ) {
-			$type = get_post_type( $post_id );
-			if ( $type === 'shop_order' ) {
-				$invoice = new BEWPI_Invoice( $post_id );
-				$invoice->delete();
-			}
 		}
 
 		/**
@@ -333,6 +248,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 		}
 
+		public function delete_invoice( $post_id ) {
+			$type = get_post_type( $post_id );
+			if ( $type === 'shop_order' ) {
+				$invoice = new BEWPI_Invoice( $post_id );
+				$invoice->delete();
+			}
+		}
+
 		public function init_settings_tabs() {
 			$this->settings_tabs['bewpi_general_settings']  = __( 'General', 'woocommerce-pdf-invoices' );
 			$this->settings_tabs['bewpi_template_settings'] = __( 'Template', 'woocommerce-pdf-invoices' );
@@ -379,8 +302,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function admin_enqueue_scripts() {
 			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . 'assets/js/admin.js', array(), false, true );
 			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
-					'ajaxurl'            => admin_url( 'admin-ajax.php' ),
-					'deactivation_nonce' => wp_create_nonce( 'bewpi_deactivation_notice' ),
+					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
+					'deactivation_nonce'    => wp_create_nonce( 'bewpi_deactivation_notice' ),
 				)
 			);
 			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . 'assets/css/admin.css', false, '1.0.0' );

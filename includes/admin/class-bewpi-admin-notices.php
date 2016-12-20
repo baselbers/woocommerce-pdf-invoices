@@ -104,7 +104,7 @@ class BEWPI_Admin_Notices {
 	 */
 	public static function admin_notice_rate() {
 		// notice needs to be inactive.
-		if ( self::is_admin_notice_active( 'rate-forever' ) ) {
+		if ( ! self::is_admin_notice_active( 'rate-forever' ) ) {
 			return;
 		}
 

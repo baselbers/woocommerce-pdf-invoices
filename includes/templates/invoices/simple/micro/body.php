@@ -40,7 +40,7 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 </table>
 <?php echo $this->outlining_columns_html(); ?>
 <table class="products small-font">
-	<tbody>
+	<thead>
 	<tr class="table-headers">
 		<!-- Description -->
 		<th class="align-left"><?php _e( 'Description', 'woocommerce-pdf-invoices' ); ?></th>
@@ -72,6 +72,8 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 		<!-- Total -->
 		<th class="align-right"><?php _e( 'Total', 'woocommerce-pdf-invoices' ); ?></th>
 	</tr>
+	</thead>
+	<tbody>
 	<!-- Products -->
 	<?php foreach( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
 		$product = wc_get_product( $item['product_id'] ); ?>
@@ -203,8 +205,6 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 	<tr class="space">
 		<td colspan="<?php echo $this->columns_count; ?>"></td>
 	</tr>
-	</tbody>
-	<tfoot>
 	<!-- Table footers -->
 	<!-- Discount -->
 	<?php if( $this->template_options['bewpi_show_discount'] && $this->order->get_total_discount() !== 0.00 ) { ?>
@@ -289,7 +289,7 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 			<td colspan="<?php echo $this->colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
 		</tr>
 	<?php } ?>
-	</tfoot>
+	</thead>
 </table>
 <table id="terms-notes">
 	<!-- Notes & terms -->

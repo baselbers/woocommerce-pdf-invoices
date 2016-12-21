@@ -50,3 +50,38 @@ if ( is_admin() ) {
 	register_activation_hook( __FILE__, array( 'BE_WooCommerce_PDF_Invoices', 'plugin_activation' ) );
 	register_deactivation_hook( __FILE__, 'plugin_deactivation' );
 }
+
+/**
+ * Update settings on plugin update.
+ */
+function _on_plugin_update() {
+	if ( get_site_option( 'bewpi_version' ) !== BEWPI_VERSION ) {
+		// plugin is updated.
+		$general_options = get_option( 'bewpi_general_settings' );
+		// check if we need to add and/or remove options.
+		if ( isset( $general_options['bewpi_email_type'] ) ) {
+			$email_type = $general_options['bewpi_email_type'];
+			if ( ! empty( $email_type ) ) {
+				// set new email type option.
+				$general_options[ $email_type ] = 1;
+			}
+			// delete old option.
+			unset( $general_options['bewpi_email_type'] );
+		}
+
+		if ( isset( $general_options['bewpi_new_order'] ) ) {
+			$email_type = $general_options['bewpi_new_order'];
+			if ( $email_type ) {
+				// set invoice attach to new order email option.
+				$general_options['new_order'] = 1;
+			}
+			// delete old option.
+			unset( $general_options['bewpi_new_order'] );
+		}
+
+		update_option( 'bewpi_general_settings', $general_options );
+
+		update_site_option( 'bewpi_version', BEWPI_VERSION );
+	}
+}
+add_action( 'plugins_loaded', '_on_plugin_update' );

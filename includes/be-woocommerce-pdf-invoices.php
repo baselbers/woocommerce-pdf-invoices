@@ -95,7 +95,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Include core backend and frontend files.
 		 */
 		public function includes() {
-			//require_once BEWPI_DIR . 'includes/admin/class-bewpi-admin-notices.php';
 		}
 
 		/**
@@ -124,11 +123,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Save plugin version in order to check if we should update something.
+		 */
+		private static function save_plugin_version() {
+			update_site_option( 'bewpi_version', BEWPI_VERSION );
+		}
+
+		/**
 		 * Plugin activation.
 		 */
 		public static function plugin_activation() {
 			// to ask administrator to rate plugin on wordpress.org.
 			self::save_install_date();
+			// save plugin version in db.
+			self::save_plugin_version();
 			// use transient to display activation admin notice.
 			set_transient( 'bewpi-admin-notice-activation', true, 30 );
 		}
@@ -314,6 +322,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Callback function for adding plugin options tabs.
 		 */
 		private function plugin_options_tabs() {
+			var_dump(get_option( 'bewpi_general_settings' ));
 			$current_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'bewpi_general_settings';
 
 			echo '<h2 class="nav-tab-wrapper">';

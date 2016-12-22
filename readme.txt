@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.4.14
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -13,26 +13,25 @@ Automatically generate and attach customizable PDF Invoices to WooCommerce email
 == Description ==
 *Invoicing can be time consuming. Well, not anymore! WooCommerce PDF Invoices automates the invoicing process by generating and sending it to your customers.*
 
-This WooCommerce plugin generates PDF invoices, attaches it to the WooCommerce email type of your choice and sends invoices to your customers and Dropbox, Google Drive, OneDrive or Egnyte. The clean and customizable template will definitely suit your needs.
+This WooCommerce plugin generates PDF invoices, attaches it to WooCommerce email types of your choice and sends invoices to your customers and Dropbox, Google Drive, OneDrive or Egnyte. The clean and customizable template will definitely suit your needs.
 
 = Main features =
-- Automatic PDF invoice generation and attachment
-- Manually create or delete PDF invoice
-- Attach PDF invoice to WooCommerce email type of your choice
-- Connect with Google Drive, Egnyte, Dropbox or OneDrive
-- Clean PDF Invoice template with with many customization options
-- WooCommerce order numbering or built-in sequential invoice numbering
-- Many invoice and date format customization options
-- Advanced items table with refunds, discounts, different item tax rates columns and more
-- Resend PDF invoices to customer
-- Download invoice from customer account
-- Mark invoices as paid
+- Automatic PDF invoice generation and attachment.
+- Manually create or delete PDF invoice.
+- Attach PDF invoice to multiple WooCommerce email types of your choice.
+- Connect with Google Drive, Egnyte, Dropbox or OneDrive.
+- Clean PDF Invoice template with with many customization options.
+- WooCommerce order numbering or built-in sequential invoice numbering.
+- Many invoice and date format customization options.
+- Advanced items table with refunds, discounts, different item tax rates columns and more.
+- Download invoice from My Account page.
+- Mark invoices as paid.
 
 > **WooCommerce PDF Invoices Premium**<br /><br />
-> This plugin offers a premium version wich comes with the following features:<br /><br />
-> - Periodically bill by generating and sending global invoices.<br />
-> - Add additional PDF's to customer invoices.<br />
-> - Send customer invoices directly to suppliers and others.<br />
+> This plugin offers a premium version which comes with the following features:<br /><br />
+> - Periodically bill by generating and sending global invoices<br />
+> - Add additional PDF files to customer invoices.<br />
+> - Send customer invoices directly to multiple recipients like suppliers.<br />
 > - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
 > [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
 
@@ -207,8 +206,8 @@ Add following filter function to your functions.php within your theme.
 
 `
 function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_type ) {
-   if ( $invoice_type === 'global' ) {
-      // add M for global invoices
+   if ( $invoice_type === 'global' ) { // simple or global.
+      // add M for global invoices.
       return 'M' . $formatted_invoice_number;
    }
    return $formatted_invoice_number;
@@ -218,12 +217,16 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.4.14 - December 16, 2016 =
-- Improved: Admin notices by using transients and separated code into new class.
-- Improved: Email attachment option with multiple checkboxes to attach invoice to multiple email types and fixed multiple bcc headers.
+= 2.5.0 - December 21, 2016 =
+
+- Improved: Overall code from BE_WooCommerce_PDF_Invoices class and Settings classes by following WordPress Coding Standards and removing unnecessary variables, functions etc.
+- Improved: Email attachment option with multiple checkboxes to attach invoice to multiple email types.
+- Improved: Admin notices by using transients and did some separation of concern by creating a new class file for admin notices.
+- Fixed: Fatal error "tfoot must appear before tbody" by deleting tfoot and added thead so the header will appear on multiple pages. The tfoot does not need to be on all pages.
+- Fixed: Not sending email when there are multiple BCC headers.
 - Fixed: Hidden order itemmeta hiding on admin pages by adding custom filter "bewpi_hidden_order_itemmeta".
 - Fixed: Activation admin notice keeps displaying when redirected to different page.
-- Removed: Filters 'bewpi_paid_watermark_excluded_payment_methods' and 'bewpi_paid_watermark_excluded_order_statuses', because there is no reason to show watermark based on order status or payment method. Watermark should only be displayed when order has been paid for, so order status should be Processing or Completed. We use WooCommerce' "is_paid" function to achieve this.
+- Removed: Filters 'bewpi_paid_watermark_excluded_payment_methods' and 'bewpi_paid_watermark_excluded_order_statuses', because there is no reason to show watermark based on order status or payment method. Watermark should only be displayed when order has been paid for, so order status should be Processing or Completed. Using WooCommerce' "is_paid" function to achieve this.
 
 = 2.4.13 - December 5, 2016 =
 

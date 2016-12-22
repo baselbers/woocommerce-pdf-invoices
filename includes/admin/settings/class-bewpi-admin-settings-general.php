@@ -257,4 +257,6 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			settings_errors( self::SETTINGS_KEY );
 		}
 	}
+
+	new BEWPI_General_Settings();
 }

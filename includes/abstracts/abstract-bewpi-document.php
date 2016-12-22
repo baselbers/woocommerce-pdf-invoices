@@ -42,8 +42,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
          */
         protected function generate( $html_sections, $dest, $is_paid ) {
 	        set_time_limit(0);
-	        require_once BEWPI_LIB_DIR . 'mpdf/mpdf.php';
-	        require_once BEWPI_LIB_DIR . 'mpdf/vendor/autoload.php';
+	        require_once BEWPI_DIR . 'lib/mpdf/mpdf.php';
+	        require_once BEWPI_DIR . 'lib/mpdf/vendor/autoload.php';
 
 	        $mpdf_options = $this->get_mpdf_options();
 	        $mpdf = new mPDF(

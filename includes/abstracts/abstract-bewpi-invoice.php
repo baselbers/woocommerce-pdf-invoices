@@ -521,7 +521,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				return $custom_template_dir;
 			}
 
-			$template_dir = BEWPI_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+			$template_dir = BEWPI_TEMPLATES_DIR . 'invoices/' . $this->type . '/' . $template_name . '/';
 			if ( file_exists( $template_dir ) ) {
 				return $template_dir;
 			}

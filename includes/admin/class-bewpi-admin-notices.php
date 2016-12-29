@@ -23,29 +23,17 @@ class BEWPI_Admin_Notices {
 	 * Constructor.
 	 */
 	public static function init() {
-		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'load_script' ) );
-		add_action( 'wp_ajax_bewpi_dismiss_admin_notice', array( __CLASS__, 'dismiss_admin_notice' ) );
-		add_action( 'wp_ajax_bewpi_deactivation_notice', array( __CLASS__, 'admin_notice_deactivation' ) );
+		add_action( 'wp_ajax_dismiss-notice', array( __CLASS__, 'dismiss_notice' ) );
+		add_action( 'wp_ajax_deactivation-notice', array( __CLASS__, 'admin_notice_deactivation' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_activation' ) );
-	}
-
-	/**
-	 * Enqueue javascript and variables.
-	 */
-	public static function load_script() {
-		wp_enqueue_script( 'bewpi-admin-notices', BEWPI_URL . 'assets/js/notice.js', array(), false, true );
-		wp_localize_script( 'bewpi-admin-notices', 'bewpiAdminNotice', array(
-				'nonce' => wp_create_nonce( 'dismiss-notice' ),
-			)
-		);
 	}
 
 	/**
 	 * Handles Ajax request to persist notices dismissal.
 	 * Uses check_ajax_referer to verify nonce.
 	 */
-	public static function dismiss_admin_notice() {
+	public static function dismiss_notice() {
 		$option_name        = sanitize_text_field( wp_unslash( $_POST['option_name'] ) );
 		$dismissible_length = sanitize_text_field( wp_unslash( $_POST['dismissible_length'] ) );
 		$transient          = 0;
@@ -147,7 +135,7 @@ class BEWPI_Admin_Notices {
 	 * AJAX backend deactivation notice.
 	 */
 	public static function admin_notice_deactivation() {
-		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'bewpi_deactivation_notice' ) ) { // Input var okay.
+		if ( ! isset( $_GET['_wpnonce'] ) || ! wp_verify_nonce( sanitize_key( $_GET['_wpnonce'] ), 'deactivation-notice' ) ) { // Input var okay.
 			die( 0 );
 		}
 

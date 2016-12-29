@@ -125,19 +125,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array
 		 */
 		function add_plugin_action_links( $links ) {
-			// add onclick event to deactivate link to display reason for deactivation admin notice.
-			$dom = new DOMDocument();
-			$dom->loadHTML( $links['deactivate'] );
-			$anchors = $dom->getElementsByTagName( 'a' );
-			foreach ( $anchors as $node ) {
-				$node->setAttribute( 'id', 'bewpi-deactivate' );
-				$node->setAttribute( 'onclick', 'BEWPI.Settings.displayDeactivationNotice()' );
-				$links['deactivate'] = $dom->saveHTML( $node );
-				break;
-			}
-
 			// add settings link.
-			$settings_url       = admin_url( 'admin.php?page=bewpi-invoices' );
+			$settings_url       = add_query_arg( array( 'page' => 'bewpi-invoices' ), admin_url( 'admin.php' ) );
 			$settings_title     = __( 'Settings', 'woocommerce-pdf-invoices' );
 			$additional_links[] = sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title );
 
@@ -289,7 +278,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . 'assets/js/admin.js', array(), false, true );
 			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
-					'deactivation_nonce'    => wp_create_nonce( 'bewpi_deactivation_notice' ),
+					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
+					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
 			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . 'assets/css/admin.css', false, '1.0.0' );

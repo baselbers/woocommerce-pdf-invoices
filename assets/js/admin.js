@@ -1,29 +1,54 @@
 (function() {
     'use strict';
 
-    var Settings = {};
+    var setting = {};
 
-    Settings.removeCompanyLogo = function () {
+    setting.removeCompanyLogo = function () {
         var elem = document.getElementById('bewpi-company-logo-wrapper');
         elem.parentNode.removeChild(elem);
         document.getElementById('bewpi-company-logo-value').value = '';
     };
 
-    Settings.enableDisableNextInvoiceNumbering = function (elem) {
+    setting.enableDisableNextInvoiceNumbering = function (elem) {
         document.getElementById('bewpi-next-invoice-number').disabled = ! elem.checked;
     };
 
-    Settings.deactivatePlugin = function() {
-        var deactivate = document.getElementById('bewpi-deactivate');
-        deactivate.removeAttribute('onclick');
-        deactivate.click();
+    setting.deactivatePlugin = function(element) {
+        element.onclick = null;
+        element.click();
     };
 
-    Settings.displayDeactivationNotice = function () {
+    var notice = {};
+
+    notice.dismiss = function(event) {
+        event.preventDefault();
+        var attrValue, optionName, dismissableLength, data;
+
+        attrValue = event.target.parentElement.getAttribute('data-dismissible').split('-');
+
+        // remove the dismissible length from the attribute value and rejoin the array.
+        dismissableLength = attrValue.pop();
+        optionName = attrValue.join('-');
+
+        var params = 'action=dismiss-notice&option_name=' + optionName + '&dismissible_length=' + dismissableLength + '&nonce=' + BEWPI_AJAX.dismiss_nonce;
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', BEWPI_AJAX.ajaxurl, true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send(params);
+    };
+
+    notice.deactivate = function(event) {
+        var isNoticeActive = document.querySelector('tr.plugin-update-tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"]');
+        if (isNoticeActive) {
+            return true;
+        }
+
+        // display notice.
         event.preventDefault();
 
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', BEWPI_AJAX.ajaxurl + '?action=bewpi_deactivation_notice&_wpnonce=' + BEWPI_AJAX.deactivation_nonce, true);
+        xhr.open('GET', BEWPI_AJAX.ajaxurl + '?action=deactivation-notice&_wpnonce=' + BEWPI_AJAX.deactivation_nonce, true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -31,44 +56,37 @@
 
                     var adminNotice = xhr.responseText;
                     if ( adminNotice === 0 ) {
-                        Settings.deactivatePlugin();
-                        return;
-                    }
-
-                    var isNoticeActive = document.getElementById('bewpi-deactivation-notice');
-                    if (isNoticeActive !== null) {
-                        window.scrollTo(0, 0);
-                        return;
+                        setting.deactivatePlugin(event.target);
                     }
 
                     // create node from admin notice.
+                    var tr = document.createElement('tr');
+                    tr.setAttribute('class', 'plugin-update-tr active updated');
+                    tr.setAttribute('data-slug', 'woocommerce-pdf-invoices');
+                    tr.setAttribute('data-plugin', 'woocommerce-pdf-invoices/bootstrap.php');
+
+                    var td = document.createElement('td');
+                    td.setAttribute('colspan', '3');
+                    td.setAttribute('class', 'plugin-update colspanchange');
+
                     var div = document.createElement('div');
                     div.innerHTML = adminNotice;
-                    var node = div.firstChild;
+                    var notice = div.firstChild;
 
-                    // first try to insert element before activation message
-                    var message = document.getElementById('message');
-                    if (message !== null) {
-                        message.parentNode.insertBefore(node, message.nextSibling);
-                        window.scrollTo(0, 0);
+                    td.appendChild(notice);
+                    tr.appendChild(td);
+
+                    var plugin = document.querySelector('tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"]');
+                    if (plugin) {
+                        plugin.parentNode.insertBefore(tr, plugin.nextSibling);
+                        plugin.className += ' updated';
                         return;
                     }
 
-                    // insert before screen-reader-text h2 element.
-                    var beforeElem = document.getElementsByClassName('subsubsub');
-                    for (var i = 0; i < beforeElem.length; i++) {
-                        if (beforeElem[i].previousSibling.className === "screen-reader-text" ) {
-                            beforeElem[i].parentNode.insertBefore(node, beforeElem[i].previousSibling);
-                            window.scrollTo(0, 0);
-                            return;
-                        }
-                        break;
-                    }
-
                     // skip admin notice and just deactivate plugin.
-                    Settings.deactivatePlugin();
+                    setting.deactivatePlugin(event.target);
                 } else {
-                    Settings.deactivatePlugin();
+                    setting.deactivatePlugin(event.target);
                 }
             }
         };
@@ -76,7 +94,21 @@
         xhr.send();
     };
 
-    // Expose variables
-    window.BEWPI = {};
-    window.BEWPI.Settings = Settings;
+    window.onload = function() {
+        // add click listener to dismiss notice.
+        var notice = document.querySelector('div[data-dismissible] button.notice-dismiss');
+        if (notice !== null) {
+            notice.onclick = bewpi.notice.dismiss;
+        }
+
+        // add click listener to display notice on deactivation of plugin.
+        var deactivate = document.querySelector('tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"] span.deactivate a');
+        if (deactivate !== null) {
+            deactivate.onclick = bewpi.notice.deactivate;
+        }
+    };
+
+    window.bewpi = {};
+    window.bewpi.notice = notice;
+    window.bewpi.setting = setting;
 })();

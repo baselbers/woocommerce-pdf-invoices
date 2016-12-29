@@ -15,6 +15,6 @@ global $status, $page, $s;
 $bewpi_plugin_file = basename( dirname( BEWPI_FILE ) ) . '/' . basename( BEWPI_FILE );
 $deactivate_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $bewpi_plugin_file . '&amp;plugin_status=' . $status . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $bewpi_plugin_file );
 ?>
-<div id="bewpi-deactivation-notice" class="notice notice-warning">
+<div class="notice inline notice-alt notice-warning">
 	<p><?php printf( __( 'Before we deactivate WooCommerce PDF Invoices, would you care to <a href="%1$s" target="_blank">let us know why</a> so we can improve it for you? <a href="%2$s">No, deactivate now</a>.', 'woocommerce-pdf-invoices' ), $reason_deactivation_url, $deactivate_url ); ?></p>
 </div>

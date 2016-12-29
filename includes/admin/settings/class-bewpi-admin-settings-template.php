@@ -309,7 +309,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'desc'     => __( 'Reset invoice counter', 'woocommerce-pdf-invoices' ),
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,
-					'attrs'    => array( 'onchange="BEWPI.Settings.enableDisableNextInvoiceNumbering(this)"' ),
+					'attrs'    => array( 'onchange="bewpi.setting.enableDisableNextInvoiceNumbering(this)"' ),
 				),
 				array(
 					'id'       => 'bewpi-next-invoice-number',

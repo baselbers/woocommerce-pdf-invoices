@@ -63,7 +63,6 @@ function _bewpi_on_plugin_update() {
 		}
 
 		update_option( 'bewpi_general_settings', $general_options );
-
 		update_site_option( 'bewpi_version', BEWPI_VERSION );
 	}
 }

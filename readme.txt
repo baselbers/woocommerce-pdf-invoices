@@ -217,9 +217,11 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.5.0 - December 21, 2016 =
+= 2.5.0 - January 4, 2017 =
 
-- Improved: Overall code from BE_WooCommerce_PDF_Invoices class and Settings classes by following WordPress Coding Standards and removing unnecessary variables, functions etc.
+- Added: Czech Republic language files thanks to Stanislav Cihak.
+- Improved: All language files.
+- Improved: Overall code from BE_WooCommerce_PDF_Invoices class and Settings classes by following WordPress Coding Standards and removing unnecessary variables, functions etc. (long way to go but it's a start)
 - Improved: Email attachment option with multiple checkboxes to attach invoice to multiple email types.
 - Improved: Admin notices by using transients and did some separation of concern by creating a new class file for admin notices.
 - Fixed: Fatal error "tfoot must appear before tbody" by deleting tfoot and added thead so the header will appear on multiple pages. The tfoot does not need to be on all pages.

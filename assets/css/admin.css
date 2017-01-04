@@ -5,8 +5,11 @@ form.bewpi-settings-form {
     padding-right: 40px;
     box-sizing: border-box;
 }
-#bewpi-email-types {
+.bewpi-settings-form ul {
     margin: 0;
+}
+.bewpi-settings-form input[type="checkbox"]:disabled + label {
+    color: #999;
 }
 .bewpi-settings-form select,
 .bewpi-settings-form input[type="text"],

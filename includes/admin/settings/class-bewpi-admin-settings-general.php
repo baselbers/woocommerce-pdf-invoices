@@ -52,10 +52,11 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				array(
 					'id'       => 'bewpi-email-types',
 					'name'     => self::PREFIX . 'email_types',
-					'title'    => __( 'Attach to Email', 'woocommerce-pdf-invoices' ),
+					'title'    => __( 'Attach to Emails', 'woocommerce-pdf-invoices' ),
 					'callback' => array( $this, 'multiple_checkbox_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'email',
+					'type'     => 'multiple_checkbox',
 					'desc'     => '',
 					'options'  => array(
 						array(
@@ -82,6 +83,49 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 							'name'    => __( 'Customer invoice', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_invoice',
 							'default' => 0,
+						),
+					),
+				),
+				array(
+					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
+					'name'     => self::PREFIX . 'woocommerce_subscriptions_email_types',
+					'title'    => __( 'Attach to WooCommerce Subscriptions Emails', 'woocommerce-pdf-invoices' )
+					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', BEWPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
+					'callback' => array( $this, 'multiple_checkbox_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'email',
+					'type'     => 'multiple_checkbox',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name'    => __( 'New Renewal Order', 'woocommerce-subscriptions' ),
+							'value'   => 'new_renewal_order',
+							'default' => 0,
+							'disabled' => 1,
+						),
+						array(
+							'name'      => __( 'Subscription Switch Complete', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_completed_switch_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Processing Renewal order', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_processing_renewal_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Completed Renewal Order', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_completed_renewal_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Customer Renewal Invoice', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_renewal_invoice',
+							'default'   => 0,
+							'disabled'  => 1,
 						),
 					),
 				),
@@ -163,20 +207,37 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		}
 
 		/**
+		 * Fetch all multiple checkbox option defaults from settings.
+		 */
+		private function get_multiple_checkbox_defaults() {
+			$defaults = array();
+			$settings = $this->the_settings();
+			foreach ( $settings as $setting ) {
+				if ( array_key_exists( 'type', $setting ) && 'multiple_checkbox' === $setting['type'] ) {
+					$defaults = array_merge( $defaults, wp_list_pluck( $setting['options'], 'default', 'value' ) );
+				}
+			}
+
+			return $defaults;
+		}
+
+		/**
 		 * Get all default values from the settings array.
 		 *
 		 * @return array
 		 */
 		private function get_defaults() {
+			// remove multiple checkbox types from settings.
 			$settings = $this->the_settings();
+			foreach ( $settings as $index => $setting ) {
+				if ( array_key_exists( 'type', $setting ) && 'multiple_checkbox' === $setting['type'] ) {
+					unset( $settings[ $index ] );
+				}
+			}
 
 			// defaults of email types are within a lower hierarchy.
-			$email_types = $settings[0];
-			$defaults    = wp_list_pluck( $email_types['options'], 'default', 'value' );
-
-			// remove email types settings.
-			array_shift( $settings );
-			$defaults = array_merge( $defaults, wp_list_pluck( $settings, 'default', 'name' ) );
+			$multiple_checkbox_defaults = $this->get_multiple_checkbox_defaults();
+			$defaults = array_merge( $multiple_checkbox_defaults, wp_list_pluck( $settings, 'default', 'name' ) );
 
 			return $defaults;
 		}

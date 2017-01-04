@@ -15,11 +15,12 @@ $options = get_option( $args['page'] ); ?>
 	<?php
 	foreach ( $args['options'] as $arg ) {
 		$name = sprintf( '%1$s[%2$s]', $args['page'], $arg['value'] );
+		$disabled = isset( $arg['disabled'] ) && $arg['disabled'];
 		?>
 		<li>
-			<label>
-				<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0"/>
-				<input type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1" <?php checked( $options[ $arg['value'] ], 1 ); ?>/>
+			<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0" <?php echo ( $disabled ) ? 'disabled="disabled"' : ''; ?>/>
+			<input id="<?php echo $arg['value']; ?>" type="checkbox" name="<?php echo esc_attr( $name ); ?>" value="1" <?php checked( $options[ $arg['value'] ], 1 ); ?> <?php echo ( $disabled ) ? 'disabled="disabled"' : ''; ?>/>
+			<label for="<?php echo $arg['value']; ?>"">
 				<?php echo esc_html( $arg['name'] ); ?>
 			</label>
 		</li>

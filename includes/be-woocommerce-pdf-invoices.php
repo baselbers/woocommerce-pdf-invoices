@@ -343,7 +343,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Add "Email It In" email as recipient to Bcc of WooCommerce email(s).
+		 * Add "Email It In" email address as BCC to WooCommerce email.
 		 *
 		 * @param array  $headers email headers.
 		 * @param string $status email name.
@@ -352,42 +352,27 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		function add_emailitin_as_recipient( $headers, $status, $order ) {
-			// already processed?
+			// make sure invoice got only send once for each order.
 			$transient_name = sprintf( 'bewpi_emailitin_processed-%1$s', $order->id );
 			if ( get_transient( $transient_name ) ) {
 				return $headers;
 			}
 
 			$general_options = get_option( 'bewpi_general_settings' );
-			$emailitin_email = $general_options['bewpi_email_it_in_account'];
+			$emailitin_account = $general_options['bewpi_email_it_in_account'];
 			// Email It In option enabled?
-			if ( ! $general_options['bewpi_email_it_in'] || empty( $emailitin_email ) ) {
+			if ( ! $general_options['bewpi_email_it_in'] || empty( $emailitin_account ) ) {
 				return $headers;
 			}
 
-			// check if email is enabled.
+			// check if current email type is enabled.
 			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
 				return $headers;
 			}
 
 			set_transient( $transient_name, true, 20 );
-			// check if there is already a bcc header.
-			if ( strpos( strtolower( $headers ), 'bcc:' ) !== false ) {
-				// split on line break and remove empty elements.
-				$lines = array_filter( array_map( 'rtrim', explode( "\n", $headers ) ) );
-				$headers_count = count( $lines );
-				for ( $i = 0; $i < $headers_count; $i++ ) {
-					if ( strpos( strtolower( $lines[ $i ] ), 'bcc:' ) !== false ) {
-						// add Email It In email to bcc header.
-						$lines[ $i ] .= ',' . $emailitin_email;
-						$headers = join( "\r\n", $lines ) . "\r\n";
-						return $headers;
-					}
-				}
-			}
 
-			// no bcc header found so add new one.
-			$headers .= 'BCC: ' . $emailitin_email . "\r\n";
+			$headers .= 'BCC: <' . $emailitin_account . '>' . "\r\n";
 			return $headers;
 		}
 
@@ -401,17 +386,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array|mixed|void
 		 */
 		public function attach_invoice_to_email( $attachments, $status, $order ) {
-			$general_options = get_option( 'bewpi_general_settings' );
-			$attachments     = apply_filters( 'bewpi_email_attachments', $attachments, $status, $order );
-
-			// check if email is enabled.
-			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
-				return $attachments;
-			}
-
 			// payment methods for which the invoice generation should be cancelled.
 			$payment_methods = apply_filters( 'bewpi_attach_invoice_excluded_payment_methods', array() );
 			if ( in_array( $order->payment_method, $payment_methods, true ) ) {
+				return $attachments;
+			}
+
+			$general_options = get_option( 'bewpi_general_settings' );
+			// check if email is enabled.
+			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
 				return $attachments;
 			}
 
@@ -422,11 +405,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$full_path = $invoice->save( 'F' );
 			}
 
-			// attachment not already added?
-			if ( ! in_array( $full_path, $attachments, true ) ) {
-				$attachments[] = $full_path;
-			}
-
+			$attachments[] = $full_path;
 			return $attachments;
 		}
 

@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.5.0
+Stable tag: 2.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,6 +216,11 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 `
 
 == Changelog ==
+
+= 2.5.1 - January 5, 2017 =
+
+- Fixed: "Warning: array_merge(): Argument #2 is not an array" by casting empty get_option to array.
+- Fixed: "Parse error: syntax error, unexpected T_OBJECT_OPERATOR" by not using class member access on instantiation.
 
 = 2.5.0 - January 5, 2017 =
 

@@ -480,7 +480,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 */
 		public function load_settings() {
 			$defaults = $this->get_defaults();
-			$options  = get_option( self::SETTINGS_KEY );
+			$options  = (array) get_option( self::SETTINGS_KEY );
 			$options  = array_merge( $defaults, $options );
 			update_option( self::SETTINGS_KEY, $options );
 		}

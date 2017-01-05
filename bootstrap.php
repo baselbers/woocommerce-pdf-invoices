@@ -74,8 +74,8 @@ function _bewpi_on_plugin_update() {
  */
 function _bewpi_on_plugin_activation() {
 	// save install date for plugin activation admin notice.
-	$now = ( new \DateTime() )->format( 'Y-m-d' );
-	update_site_option( 'bewpi-install-date', $now );
+	$now = new DateTime();
+	update_site_option( 'bewpi-install-date', $now->format( 'Y-m-d' ) );
 
 	// use transient to display activation admin notice.
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );

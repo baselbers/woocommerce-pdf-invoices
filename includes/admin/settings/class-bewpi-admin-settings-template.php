@@ -22,7 +22,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		/**
 		 * Settings key constant.
 		 */
-		const SETTINGS_KEY = self::PREFIX . 'template_settings';
+		const SETTINGS_KEY = 'bewpi_template_settings';
 
 		/**
 		 * BEWPI_Template_Settings constructor.

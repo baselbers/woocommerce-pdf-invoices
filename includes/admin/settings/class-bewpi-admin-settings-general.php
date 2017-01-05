@@ -24,7 +24,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 *
 		 * @var string
 		 */
-		const SETTINGS_KEY = self::PREFIX . 'general_settings';
+		const SETTINGS_KEY = 'bewpi_general_settings';
 
 		/**
 		 * Initializes the template settings.

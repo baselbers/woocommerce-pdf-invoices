@@ -98,6 +98,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'admin_menu', array( $this, 'add_wc_submenu_options_page' ) );
 			add_action( 'woocommerce_admin_order_actions_end', array( $this, 'add_admin_order_pdf' ) );
 			add_action( 'add_meta_boxes', array( $this, 'add_admin_order_pdf_meta_box' ) );
+			add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_invoice_number_column' ), 999 );
+			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'invoice_number_column_data' ), 2 );
 			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_pdf' ), 10, 2 );
 			add_filter( 'woocommerce_email_headers', array( $this, 'add_emailitin_as_recipient' ), 10, 3 );
 			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
@@ -138,6 +140,40 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$links = array_merge( $additional_links, $links );
 
 			return $links;
+		}
+
+		/**
+		 * Create Shop Order column for Invoice Number.
+		 *
+		 * @param array $columns Shop Order columns.
+		 *
+		 * @return array
+		 */
+		public function add_invoice_number_column( $columns ) {
+			// invoice number column enabled by user?
+			$general_settings = get_option( 'bewpi_general_settings' );
+			if ( ! isset( $general_settings['bewpi_invoice_number_column'] ) ) {
+				return $columns;
+			}
+
+			// put the column after the Status column.
+			$new_columns = array_slice( $columns, 0, 2, true ) +
+			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommmerce-pdf-invoices' ) ) +
+			               array_slice( $columns, 2, count( $columns ) - 1, true );
+			return $new_columns;
+		}
+
+		/**
+		 * Display Invoice Number in Shop Order column (if available).
+		 *
+		 * @param string $column column slug.
+		 */
+		public function invoice_number_column_data( $column ) {
+			global $post;
+
+			if ( 'bewpi_invoice_number' === $column ) {
+				echo get_post_meta( $post->ID, '_bewpi_invoice_number', true );
+			}
 		}
 
 		/**

@@ -217,8 +217,9 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.5.0 - January 4, 2017 =
+= 2.5.0 - January 5, 2017 =
 
+- Added: Invoice number column on Shop Order page.
 - Added: Czech Republic language files thanks to Stanislav Cihak.
 - Improved: All language files.
 - Improved: Overall code from BE_WooCommerce_PDF_Invoices class and Settings classes by following WordPress Coding Standards and removing unnecessary variables, functions etc. (long way to go but it's a start)

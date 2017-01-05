@@ -189,6 +189,19 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'default'  => '',
 				),
 				array(
+					'id'       => 'bewpi-invoice-number-column',
+					'name'     => self::PREFIX . 'invoice_number_column',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'interface',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Enable Invoice Number column' )
+					              . '<br/><div class="bewpi-notes">' . __( 'Display invoice numbers on Shop Order page.', 'woocommerce-pdf-invoices' ) . '</div>',
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
 					'id'       => 'bewpi-mpdf-debug',
 					'name'     => self::PREFIX . 'mpdf_debug',
 					'title'    => '',
@@ -259,6 +272,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			add_settings_section( 'email', __( 'Email Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 			add_settings_section( 'download', __( 'Download Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 			add_settings_section( 'cloud_storage', __( 'Cloud Storage Options', 'woocommerce-pdf-invoices' ), array( $this, 'cloud_storage_desc_callback' ), self::SETTINGS_KEY );
+			add_settings_section( 'interface', __( 'Interface Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 			add_settings_section( 'debug', __( 'Debug Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 		}
 

@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BEWPI_VERSION', '2.5.2' );
+define( 'BEWPI_VERSION', '2.5.3' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.

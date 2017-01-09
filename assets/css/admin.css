@@ -102,7 +102,7 @@ form.bewpi-settings-form {
 }
 .bewpi-sidebar.premium {
     background: #222;
-    color: #ccc;
+    color: #ccc !important;
 }
 .bewpi-sidebar.support .btn {
     margin: 10px 10px 10px 0;

@@ -152,7 +152,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function add_invoice_number_column( $columns ) {
 			// invoice number column enabled by user?
 			$general_settings = get_option( 'bewpi_general_settings' );
-			if ( ! isset( $general_settings['bewpi_invoice_number_column'] ) ) {
+			if ( empty( $general_settings['bewpi_invoice_number_column'] ) ) {
 				return $columns;
 			}
 

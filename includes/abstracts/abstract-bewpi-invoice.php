@@ -82,12 +82,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		protected $template_dir_name;
 
 		/**
-		 * Next invoice counter reset enabling
-		 * @var bool
-		 */
-		protected $counter_reset = false;
-
-		/**
 		 * BEWPI_Abstract_Invoice constructor.
 		 *
 		 * @param $order_id
@@ -205,116 +199,123 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			return $html_sections;
 		}
 
+		/**
+		 * Delete invoice PDF files.
+		 */
 		private function delete_pdf_invoices() {
 			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
+				// get pdf files from year folder.
 				$current_year       = (int) date_i18n( 'Y', current_time( 'timestamp' ) );
 				$bewpi_invoices_dir = BEWPI_INVOICES_DIR . $current_year . '/*.pdf';
 			} else {
+				// get all pdf files.
 				$bewpi_invoices_dir = BEWPI_INVOICES_DIR . '*.pdf';
 			}
 
 			$files = glob( $bewpi_invoices_dir );
 			foreach ( $files as $file ) {
 				if ( is_file( $file ) ) {
-					unlink( $file );
+					wp_delete_file( $file );
 				}
 			}
 		}
 
+		/**
+		 * Delete invoice post meta information.
+		 */
 		private function delete_invoice_meta() {
 			global $wpdb;
 
 			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
-				// delete all by year
+				// delete by year.
 				$query = $wpdb->prepare(
-					"
-					DELETE pm2 FROM $wpdb->postmeta pm1
+					"DELETE pm2 FROM $wpdb->postmeta pm1
 					INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 			        WHERE pm1.meta_key = '%s'
 			            AND pm1.meta_value = %d
-			            AND (pm2.meta_key LIKE '%s' OR pm2.meta_key LIKE '%s')
-			        ",
-					"_bewpi_invoice_year",
+			            AND (pm2.meta_key LIKE '%s' OR pm2.meta_key LIKE '%s')",
+					'_bewpi_invoice_year',
 					(int) date_i18n( 'Y', current_time( 'timestamp' ) ),
-					"_bewpi_invoice_%",
-					"_bewpi_formatted_%"
+					'_bewpi_invoice_%',
+					'_bewpi_formatted_%'
 				);
 			} else {
-				// delete all
+				// delete all.
 				$query = $wpdb->prepare(
-					"
-					DELETE FROM $wpdb->postmeta
+					"DELETE FROM $wpdb->postmeta
 			        WHERE meta_key = '%s'
 			          OR meta_key = '%s'
 			          OR meta_key = '%s'
-			          OR meta_key = '%s'
-			        ",
-					"_bewpi_invoice_number",
-					"_bewpi_formatted_invoice_number",
-					"_bewpi_invoice_date",
-					"_bewpi_invoice_year"
+			          OR meta_key = '%s'",
+					'_bewpi_invoice_number',
+					'_bewpi_formatted_invoice_number',
+					'_bewpi_invoice_date',
+					'_bewpi_invoice_year'
 				);
 			}
 
 			$wpdb->query( $query );
 		}
 
+		/**
+		 * Get next invoice number from db.
+		 *
+		 * @return int
+		 */
 		private function get_next_invoice_number() {
-			// check if user uses the built in WooCommerce order numbers
-			if ( $this->template_options['bewpi_invoice_number_type'] !== "sequential_number" ) {
-				return $this->order->get_order_number();
+			// uses WooCommerce order numbers as invoice numbers?
+			if ( 'sequential_number' !== $this->template_options['bewpi_invoice_number_type'] ) {
+				return (int) $this->order->get_order_number();
 			}
 
-			// check if user did a counter reset
+			// check if user did a counter reset.
 			if ( $this->template_options['bewpi_reset_counter'] && $this->template_options['bewpi_next_invoice_number'] > 0 ) {
-				$this->counter_reset = true;
-
 				$this->delete_pdf_invoices();
 				$this->delete_invoice_meta();
 
-				// uncheck option to actually change the value
+				// unset option.
 				$this->template_options['bewpi_reset_counter'] = 0;
 				update_option( 'bewpi_template_settings', $this->template_options );
 
 				return $this->template_options['bewpi_next_invoice_number'];
 			}
 
-			$last_invoice_number = $this->get_max_invoice_number();
-
-			return ( empty( $last_invoice_number ) ) ? 1 : (int) $last_invoice_number + 1;
+			$max_invoice_number = $this->get_max_invoice_number();
+			return $max_invoice_number + 1;
 		}
 
+		/**
+		 * Return highest invoice number.
+		 *
+		 * @return int
+		 */
 		public function get_max_invoice_number() {
 			global $wpdb;
 
 			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
-				// get all by year
+				// get by year.
 				$query = $wpdb->prepare(
-					"
-					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
+					"SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
 					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 			        WHERE pm1.meta_key = '%s'
 			            AND pm1.meta_value = %d
-			            AND pm2.meta_key = '%s';
-			        ",
-					"_bewpi_invoice_year",
+			            AND pm2.meta_key = '%s';",
+					'_bewpi_invoice_year',
 					(int) date_i18n( 'Y', current_time( 'timestamp' ) ),
-					"_bewpi_invoice_number"
+					'_bewpi_invoice_number'
 				);
 			} else {
-				// get all
+				// get all.
 				$query = $wpdb->prepare(
-					"
-					SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
+					"SELECT max(cast(pm2.meta_value as unsigned)) as last_invoice_number
 					FROM $wpdb->postmeta pm1 INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
-			        WHERE pm1.meta_key = '%s' AND pm2.meta_key = '%s';
-			        ",
-					"_bewpi_invoice_year",
-					"_bewpi_invoice_number"
+			        WHERE pm1.meta_key = '%s' AND pm2.meta_key = '%s';",
+					'_bewpi_invoice_year',
+					'_bewpi_invoice_number'
 				);
 			}
 
-			return $wpdb->get_var( $query );
+			return intval( $wpdb->get_var( $query ) );
 		}
 
 		/**
@@ -589,14 +590,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$virtual_products_count = 0;
 			foreach ( $this->order->get_items() as $item ) {
 				$product_id = $item['product_id'];
-				$product = wc_get_product( $product_id );
+				$product    = wc_get_product( $product_id );
 				// product could be removed.
 				if ( null === $product ) {
 					continue;
 				}
 
 				if ( $product->is_virtual() ) {
-					$virtual_products_count++;
+					$virtual_products_count ++;
 				}
 			}
 

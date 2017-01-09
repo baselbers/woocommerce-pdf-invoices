@@ -220,6 +220,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 = 2.5.3 - January 9, 2017 =
 
 - Added: Option to show shipping address and do not show shipping address when order has only virtual products.
+- Fixed: reset counter option.
 - Fixed: Invoice number column on Shop Order page always visible.
 
 = 2.5.2 - January 5, 2017 =

@@ -331,7 +331,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'number',
-					'desc'     => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering. All PDF invoices will be deleted and need to be manually created again! Value will be editable by selecting checkbox.', 'woocommerce-pdf-invoices' ),
+					'desc'     => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering. All PDF invoices will be deleted and need to be manually created again! Value will be editable when selecting checkbox.', 'woocommerce-pdf-invoices' ),
 					'default'  => 1,
 					'attrs'    => array(
 						'disabled',
@@ -624,10 +624,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				$output['bewpi_company_logo'] = $_POST['bewpi_company_logo'];
 			}
 
-			// invoice number.
-			if ( ! isset( $input['bewpi_next_invoice_number'] ) ) {
-				// reset the next invoice number so it's visible in the disabled input field.
-				$output['bewpi_next_invoice_number'] = $template_options['bewpi_next_invoice_number'];
+			// reset invoice number.
+			if ( ! empty( $input['bewpi_reset_counter'] ) && ! empty( $input['bewpi_next_invoice_number'] ) ) {
+				$output['bewpi_next_invoice_number'] = $input['bewpi_next_invoice_number'];
 			}
 
 			// return the array processing any additional functions filtered by this action.

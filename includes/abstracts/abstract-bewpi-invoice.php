@@ -87,7 +87,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		protected $counter_reset = false;
 
-		/***
+		/**
 		 * BEWPI_Abstract_Invoice constructor.
 		 *
 		 * @param $order_id
@@ -560,6 +560,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			return $str;
 		}
 
+		/**
+		 * Checks if invoice needs to have a zero rated VAT.
+		 *
+		 * @return bool
+		 */
 		public function display_zero_rated_vat() {
 			$is_vat_valid = get_post_meta( $this->order->id, '_vat_number_is_valid', true );
 			if ( ! $is_vat_valid ) {
@@ -572,6 +577,30 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			return true;
+		}
+
+		/**
+		 * Check if order has only virtual products.
+		 *
+		 * @return bool
+		 * @since 2.5.3
+		 */
+		protected function has_only_virtual_products() {
+			$virtual_products_count = 0;
+			foreach ( $this->order->get_items() as $item ) {
+				$product_id = $item['product_id'];
+				$product = wc_get_product( $product_id );
+				// product could be removed.
+				if ( null === $product ) {
+					continue;
+				}
+
+				if ( $product->is_virtual() ) {
+					$virtual_products_count++;
+				}
+			}
+
+			return count( $this->order->get_items() ) === $virtual_products_count;
 		}
 	}
 }

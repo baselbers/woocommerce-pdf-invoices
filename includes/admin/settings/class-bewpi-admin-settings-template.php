@@ -233,6 +233,18 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'default'  => __( 'Thank you for your purchase!', 'woocommerce-pdf-invoices' ),
 				),
 				array(
+					'id'       => 'bewpi-show-ship-to',
+					'name'     => self::PREFIX . 'show_ship_to',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'body',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Show customers shipping address<br/><div class="bewpi-notes">By default the customers shipping address won\'t be displayed when order has only virtual products.</div>', 'woocommerce-pdf-invoices' ),
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 1,
+				),
+				array(
 					'id'       => 'bewpi-show-customer-notes',
 					'name'     => self::PREFIX . 'show_customer_notes',
 					'title'    => '',

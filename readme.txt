@@ -220,6 +220,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 = 2.5.4 - January 10, 2017 =
 
 - Added: '[order-date]' and '[order-number]' to invoice number option.
+- Improved: Language files.
 - Fixed: Customers shipping address not displayed at all.
 - Fixed: Total amount not calculating with refunds.
 

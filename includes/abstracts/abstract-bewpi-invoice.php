@@ -121,22 +121,24 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		public function get_formatted_number() {
 			// format number with the number of digits.
 			$digitized_invoice_number = sprintf( '%0' . $this->template_options['bewpi_invoice_number_digits'] . 's', $this->number );
-			$formatted_invoice_number = str_replace(
-				array(
+			$formatted_invoice_number = str_replace( array(
 					'[prefix]',
 					'[suffix]',
 					'[number]',
+					'[order-date]',
+					'[order-number]',
 					'[Y]',
 					'[y]',
 					'[m]',
-				),
-				array(
+				), array(
 					$this->template_options['bewpi_invoice_number_prefix'],
 					$this->template_options['bewpi_invoice_number_suffix'],
 					$digitized_invoice_number,
-					(string) date_i18n( 'Y' ),
-					(string) date_i18n( 'y' ),
-					(string) date_i18n( 'm' ),
+					$this->get_formatted_order_date(),
+					$this->order->get_order_number(),
+					date_i18n( 'Y' ),
+					date_i18n( 'y' ),
+					date_i18n( 'm' ),
 				),
 				$this->template_options['bewpi_invoice_number_format']
 			);
@@ -145,57 +147,74 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Format date
+		 * Format date.
 		 *
-		 * @param bool $insert
-		 *
-		 * @return bool|datetime|string
+		 * @return string
 		 */
 		public function get_formatted_invoice_date() {
-			$date_format = $this->template_options['bewpi_date_format'];
-
-			return ( ! empty( $date_format ) ) ? date_i18n( $date_format, current_time( 'timestamp' ) ) : date_i18n( "d-m-Y", current_time( 'timestamp' ) );
-		}
-
-		/*
-		 * Format the order date and return
-		 */
-		public function get_formatted_order_date( $order_id = 0 ) {
-			if ( $order_id != 0 ) {
-				// format date for global invoice
-				$order      = wc_get_order( $order_id );
-				$order_date = $order->order_date;
-			} else {
-				$order_date = $this->order->order_date;
-			}
-
-			$order_date = DateTime::createFromFormat( 'Y-m-d H:i:s', $order_date );
-			if ( ! empty ( $this->template_options['bewpi_date_format'] ) ) {
-				$date_format    = $this->template_options['bewpi_date_format'];
-				$formatted_date = $order_date->format( $date_format );
-
-				return date_i18n( $date_format, strtotime( $formatted_date ) );
-			} else {
-				$formatted_date = $order_date->format( 'd-m-Y' );
-
-				return date_i18n( "d-m-Y", strtotime( $formatted_date ) );
-			}
+			$date_format = $this->get_date_format();
+			return date_i18n( $date_format, current_time( 'timestamp' ) );
 		}
 
 		/**
-		 * Get all html from html files and store as vars
+		 * Get date format.
+		 *
+		 * @return string
+		 */
+		private function get_date_format() {
+			$date_format = $this->template_options['bewpi_date_format'];
+			if ( ! empty( $date_format ) ) {
+				return (string) $date_format;
+			}
+
+			return (string) get_option( 'date_format' );
+		}
+
+		/**
+		 * Get the order date by order id.
+		 *
+		 * @param int $order_id WC_Order ID.
+		 *
+		 * @return string
+		 */
+		private function get_order_date( $order_id = 0 ) {
+			if ( empty( $order_id ) ) {
+				return $this->order->order_date;
+			}
+
+			$order = wc_get_order( $order_id );
+			return $order->order_date;
+		}
+
+		/**
+		 * Format order date.
+		 *
+		 * @param int $order_id WC_Order ID.
+		 *
+		 * @return string
+		 */
+		public function get_formatted_order_date( $order_id = 0 ) {
+			$order_date = $this->get_order_date( $order_id );
+			$date_format = $this->get_date_format();
+			return date_i18n( $date_format, strtotime( $order_date ) );
+		}
+
+		/**
+		 * Output template files to buffer.
+		 *
+		 * @param array $html_template_files template file paths.
+		 *
+		 * @return array
 		 */
 		private function output_template_files_to_buffer( $html_template_files ) {
 			do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
-			$html_sections = array();
 
+			$html_sections = array();
 			foreach ( $html_template_files as $section => $full_path ) {
-				$html                      = ( $section === 'style' ) ? $this->output_style_to_buffer( $full_path ) : $this->output_to_buffer( $full_path );
-				$html_sections[ $section ] = $html;
+				$html_sections[ $section ] = ( 'style' === $section ) ? $this->output_style_to_buffer( $full_path ) : $this->output_to_buffer( $full_path );
 			}
 
 			do_action( 'bewpi_after_output_template_to_buffer' );
-
 			return $html_sections;
 		}
 

@@ -118,7 +118,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'general',
 					'type'     => 'text',
 					'desc'     => __( '<a href="http://php.net/manual/en/datetime.formats.date.php">Format</a> of invoice date and order date.', 'woocommerce-pdf-invoices' ),
-					'default'  => 'F j, Y',
+					'default'  => get_option( 'date_format' ),
 					'attrs'    => array( 'required' ),
 				),
 				array(
@@ -384,7 +384,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Allowed placeholders: <code>%1$s</code> <code>%2$s</code> <code>%3$s</code> <code>%4$s</code> <code>%5$s</code> <code>%6$s</code>.<br/><b>Note:</b> <code>%3$s</code> is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '[prefix]', '[suffix]', '[number]', '[m]', '[Y]', '[y]' ),
+					'desc'     => sprintf( __( 'Allowed placeholders: <code>%1$s</code> <code>%2$s</code> <code>%3$s</code> <code>%4$s</code> <code>%5$s</code> <code>%6$s</code><br/><b>Note:</b> <code>%3$s</code> is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '[prefix]', '[suffix]', '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' ),
 					'default'  => '[number]-[Y]',
 					'attrs'    => array( 'required' ),
 				),

@@ -607,7 +607,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		protected function has_only_virtual_products() {
 			$virtual_products_count = 0;
-			foreach ( $this->order->get_items() as $item ) {
+			foreach ( $this->order->get_items( 'line_item' ) as $item ) {
 				$product_id = $item['product_id'];
 				$product    = wc_get_product( $product_id );
 				// product could be removed.

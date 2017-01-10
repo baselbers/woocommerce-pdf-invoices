@@ -34,7 +34,7 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 			<?php $this->display_vat_number(); ?>
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
-			<h1 class="amount"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
+			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
 			<p><?php echo $this->template_options['bewpi_intro_text']; ?></p>
 		</td>
 	</tr>
@@ -281,7 +281,9 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 	<tr class="after-products">
 		<td colspan="<?php echo $this->colspan['left']; ?>"></td>
 		<td colspan="<?php echo $this->colspan['right_left']; ?>" class="total"><?php _e( 'Total', 'woocommerce-pdf-invoices' ); ?></td>
-		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+		<td colspan="<?php echo $this->colspan['right_right']; ?>" class="grand-total align-right" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;">
+			<?php echo $this->get_formatted_total(); ?>
+		</td>
 	</tr>
 	<!-- Refunded -->
 	<?php if ( $this->order->get_total_refunded() > 0 ) { ?>

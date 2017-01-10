@@ -12,7 +12,7 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 		</td>
 		<?php
 		$formatted_shipping_address = $this->order->get_formatted_shipping_address();
-		if ( ! empty( $this->template_settings['bewpi_show_ship_to'] ) && ! empty( $formatted_shipping_address ) && ! $this->has_only_virtual_products() ) { ?>
+		if ( ! empty( $this->template_options['bewpi_show_ship_to'] ) && ! empty( $formatted_shipping_address ) && ! $this->has_only_virtual_products() ) { ?>
 			<td class="address small-font" width="50%">
 				<b><?php _e( 'Ship to', 'woocommerce-pdf-invoices' ); ?></b><br/>
 				<?php echo $formatted_shipping_address; ?>

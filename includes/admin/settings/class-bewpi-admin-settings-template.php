@@ -240,7 +240,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'body',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Show customers shipping address<br/><div class="bewpi-notes">By default the customers shipping address won\'t be displayed when order has only virtual products.</div>', 'woocommerce-pdf-invoices' ),
+					'desc'     => __( 'Show customers shipping address<br/><div class="bewpi-notes">Customers shipping address won\'t be displayed when order has only virtual products.</div>', 'woocommerce-pdf-invoices' ),
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
 				),

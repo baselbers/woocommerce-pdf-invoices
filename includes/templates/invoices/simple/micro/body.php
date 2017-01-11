@@ -8,7 +8,9 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 		<td class="address small-font" width="50%">
 			<b><?php _e( 'Invoice to', 'woocommerce-pdf-invoices' ); ?></b><br/>
 			<?php echo $this->order->get_formatted_billing_address(); ?><br/>
-			<?php if ( $this->order->billing_phone != "" ) printf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $this->order->billing_phone ); ?>
+			<?php if ( ! empty( $this->order->billing_phone ) ) :
+				printf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $this->order->billing_phone );
+			endif; ?>
 		</td>
 		<?php
 		$formatted_shipping_address = $this->order->get_formatted_shipping_address();
@@ -229,7 +231,9 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 		<tr class="subtotal after-products">
 			<td colspan="<?php echo $this->colspan['left']; ?>"></td>
 			<td colspan="<?php echo $this->colspan['right_left']; ?>"><?php _e( 'Subtotal', 'woocommerce-pdf-invoices' ); ?></td>
-			<td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->get_subtotal(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			<td colspan="<?php echo $this->colspan['right_right']; ?>" class="align-right">
+				<?php echo $this->get_formatted_subtotal(); ?>
+			</td>
 		</tr>
 	<?php } ?>
 	<!-- Shipping -->

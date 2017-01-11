@@ -82,22 +82,28 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		protected $template_dir_name;
 
 		/**
+		 * Number of taxes in WooCommerce order.
+		 *
+		 * @var int
+		 */
+		protected $tax_count;
+
+		/**
 		 * BEWPI_Abstract_Invoice constructor.
 		 *
-		 * @param $order_id
-		 * @param $type
-		 * @param int $taxes_count
+		 * @param int    $order_id WooCommerce Order ID.
+		 * @param string $type Type of invoice.
 		 */
-		public function __construct( $order_id, $type, $taxes_count = 0 ) {
+		public function __construct( $order_id, $type ) {
 			parent::__construct();
 			$this->order            = wc_get_order( $order_id );
 			$this->type             = $type;
-			$this->columns_count    = $this->get_columns_count( $taxes_count );
+			$this->columns_count    = $this->get_columns_count( $this->tax_count );
 			$this->formatted_number = get_post_meta( $this->order->id, '_bewpi_formatted_invoice_number', true );
-			$this->template_name    = $this->template_options["bewpi_template_name"];
+			$this->template_name    = $this->template_options['bewpi_template_name'];
 
 			// Check if the invoice already exists.
-			if ( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && $_GET['bewpi_action'] !== 'cancel' ) {
+			if ( ! empty( $this->formatted_number ) || isset( $_GET['bewpi_action'] ) && 'cancel' !== $_GET['bewpi_action'] ) {
 				$this->init();
 			}
 		}
@@ -487,7 +493,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			<?php
 		}
 
-		private function get_columns_count( $taxes_count ) {
+		private function get_columns_count( $tax_count = 0 ) {
 			$columns_count = 4;
 
 			if ( $this->template_options['bewpi_show_sku'] ) {
@@ -495,7 +501,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) ) {
-				$columns_count += $taxes_count;
+				$columns_count += $tax_count;
 			}
 
 			return $columns_count;

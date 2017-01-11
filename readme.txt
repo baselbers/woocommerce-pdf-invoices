@@ -217,6 +217,11 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
+= 2.5.5 - January 11, 2017 =
+
+- Improved: `get_total()` method to `get_formatted_total()` and `get_subtotal()` to `get_formatted_subtotal()`. Custom templates in uploads folder need to be updated!
+- Fixed: "Fatal error: require_once(): Failed opening required 'header.php'" when custom template has been deleted and user option still has custom template set.
+
 = 2.5.4 - January 10, 2017 =
 
 - Added: '[order-date]' and '[order-number]' to invoice number option.

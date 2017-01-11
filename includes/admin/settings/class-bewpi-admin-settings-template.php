@@ -68,8 +68,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array
 		 */
 		private function the_settings() {
-			$templates = $this->get_templates();
-
 			$settings = array(
 				array(
 					'id'       => 'bewpi-template-name',
@@ -80,8 +78,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'general',
 					'type'     => 'text',
 					'desc'     => '',
-					'options'  => $templates,
-					'default'  => $templates[0]['value'],
+					'options'  => $this->get_templates(),
+					'default'  => 'micro',
 				),
 				array(
 					'id'       => 'bewpi-color-theme',
@@ -491,9 +489,17 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * Load (default) settings.
 		 */
 		public function load_settings() {
+			// merge defaults with options.
 			$defaults = $this->get_defaults();
 			$options  = (array) get_option( self::SETTINGS_KEY );
 			$options  = array_merge( $defaults, $options );
+
+			// check for deleted custom template.
+			$templates = wp_list_pluck( $this->get_templates(), 'value' );
+			if ( ! in_array( $options['bewpi_template_name'], $templates, true ) ) {
+				$options['bewpi_template_name'] = $defaults['bewpi_template_name'];
+			}
+
 			update_option( self::SETTINGS_KEY, $options );
 		}
 
@@ -571,8 +577,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return mixed|void
 		 */
 		public function validate_input( $input ) {
-			$output           = array();
-			$template_options = get_option( self::SETTINGS_KEY );
+			$output = array();
 
 			// strip strings.
 			foreach ( $input as $key => $value ) {

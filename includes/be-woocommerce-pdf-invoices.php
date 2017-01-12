@@ -202,15 +202,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			if ( ! is_user_logged_in() ) {
-				wp_die( 'Access denied' );
-			}
-
 			// verify nonce.
 			$action = sanitize_key( $_GET['bewpi_action'] );
 			$nonce = sanitize_key( $_GET['nonce'] );
 			if ( ! wp_verify_nonce( $nonce, $action ) ) {
 				wp_die( 'Invalid request.' );
+			}
+
+			if ( ! is_user_logged_in() ) {
+				wp_die( 'Access denied' );
 			}
 
 			// verify woocommerce order.

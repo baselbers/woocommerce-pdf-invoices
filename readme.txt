@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.5.4
+Stable tag: 2.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,7 +217,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.5.5 - January 11, 2017 =
+= 2.5.5 - January 12, 2017 =
 
 - Improved: `get_total()` method to `get_formatted_total()` and `get_subtotal()` to `get_formatted_subtotal()`. Custom templates in uploads folder need to be updated!
 - Fixed: "Fatal error: require_once(): Failed opening required 'header.php'" when custom template has been deleted and user option still has custom template set.

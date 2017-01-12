@@ -256,12 +256,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// validate allowed user roles.
 			$user = wp_get_current_user();
-			$wc_user_id = get_post_meta( $order->id, '_customer_user', true );
 			$allowed_roles = apply_filters( 'bewpi_allowed_roles_to_download_invoice', array(
 				'administrator',
 				'shop_manager',
 			) );
-			if ( ! array_intersect( $allowed_roles, $user->roles ) && $user->ID !== $wc_user_id ) {
+			if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
 				wp_die( 'Access denied' );
 			}
 

@@ -219,6 +219,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 = 2.5.5 - January 12, 2017 =
 
+- Improved: Language files.
 - Improved: Plugin action links on plugins.php page.
 - Improved: `get_total()` method to `get_formatted_total()` and `get_subtotal()` to `get_formatted_subtotal()`. Custom templates in uploads folder need to be updated!
 - Fixed: "Access denied" for customer trying to download/view pdf invoice by separating code into admin and frontend callback methods.

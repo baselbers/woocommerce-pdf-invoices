@@ -89,7 +89,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @since 2.5.0
 		 */
 		private function init_hooks() {
-			add_action( 'init', array( $this, 'init_pdf_actions' ) );
+			if ( ! is_admin() ) {
+				add_action( 'init', array( $this, 'frontend_pdf_callback' ) );
+			}
+
+			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
 			add_action( 'admin_init', array( $this, 'admin_init_hooks' ) );
 			add_action( 'admin_init', array( $this, 'setup_directories' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
@@ -113,7 +117,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			// Add plugin action links on "Plugins" page.
-			add_filter( 'plugin_action_links_woocommerce-pdf-invoices/bootstrap.php', array( $this, 'add_plugin_action_links' ) );
+			add_filter( 'plugin_action_links_' . BEWPI_PLUGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 			// delete invoice if deleting order.
 			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
 			add_action( 'before_delete_post', array( $this, 'delete_invoice' ), 10, 1 );
@@ -130,14 +135,26 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			// add settings link.
 			$settings_url       = add_query_arg( array( 'page' => 'bewpi-invoices' ), admin_url( 'admin.php' ) );
 			$settings_title     = __( 'Settings', 'woocommerce-pdf-invoices' );
-			$additional_links[] = sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title );
+			array_unshift( $links, sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title ) );
 
-			// add premium plugin link.
-			$premium_url        = 'http://wcpdfinvoices.com';
-			$premium_title      = __( 'Premium', 'woocommerce-pdf-invoices' );
-			$additional_links[] = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', $premium_url, $premium_title );
+			return $links;
+		}
 
-			$links = array_merge( $additional_links, $links );
+		/**
+		 * Add links to row meta on plugins.php page.
+		 *
+		 * @param array  $links row meta.
+		 * @param string $file plugin basename.
+		 *
+		 * @return array
+		 */
+		public static function add_plugin_row_meta( $links, $file ) {
+			if ( BEWPI_PLUGIN_BASENAME === $file ) {
+				// add premium plugin link.
+				$premium_url = 'http://wcpdfinvoices.com';
+				$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );
+				$links[] = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', $premium_url, $premium_title );
+			}
 
 			return $links;
 		}
@@ -177,86 +194,89 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Shortcode to download invoice.
-		 *
-		 * @param array $atts shortcode attributes.
+		 * Frontend pdf actions callback.
+		 * Customers only have permission to view invoice, so invoice should be created by system/admin.
 		 */
-		public function download_invoice_shortcode( $atts ) {
-			if ( ! isset( $atts['order_id'] ) || 0 === intval( $atts['order_id'] ) ) {
+		public function frontend_pdf_callback() {
+			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
 				return;
 			}
 
-			// by default order status should be Processing or Completed.
-			$order = wc_get_order( $atts['order_id'] );
-			if ( ! $order->is_paid() ) {
-				return;
+			if ( ! is_user_logged_in() ) {
+				wp_die( 'Access denied' );
+			}
+
+			// verify nonce.
+			$action = sanitize_key( $_GET['bewpi_action'] );
+			$nonce = sanitize_key( $_GET['nonce'] );
+			if ( ! wp_verify_nonce( $nonce, $action ) ) {
+				wp_die( 'Invalid request.' );
+			}
+
+			// verify woocommerce order.
+			$post_id = intval( $_GET['post'] );
+			$order = wc_get_order( $post_id );
+			if ( ! $order ) {
+				wp_die( 'Order not found.' );
+			}
+
+			// check if user has ordered order.
+			$user = wp_get_current_user();
+			$customer_user_id = (int) get_post_meta( $order->id, '_customer_user', true );
+			if ( $user->ID !== $customer_user_id ) {
+				wp_die( 'Access denied' );
 			}
 
 			$invoice = new BEWPI_Invoice( $order->id );
-			if ( ! $invoice->exists() ) {
-				return;
-			}
-
-			$url = add_query_arg( array(
-				'bewpi_action' => 'view',
-				'post' => $order->id,
-				'nonce' => wp_create_nonce( 'view' ),
-			), admin_url( 'admin-ajax.php' ) );
-
-			$tags = array(
-				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
-				'{order_number}'             => $order->id,
-				'{formatted_invoice_date}'   => $invoice->get_formatted_invoice_date(),
-				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
-			);
-			// find and replace placeholders.
-			$title = str_replace( array_keys( $tags ), array_values( $tags ), $atts['title'] );
-			printf( '<a href="%1$s">%2$s</a>', esc_attr( $url ), esc_html( $title ) );
+			$invoice->view();
 		}
 
 		/**
-		 * Callback to sniff for specific plugin actions to view, create or delete invoice.
+		 * Admin pdf actions callback.
+		 * Within admin by default only administrator and shop managers have permission to view, create, cancel invoice.
 		 */
-		public function init_pdf_actions() {
-			if ( isset( $_GET['bewpi_action'] ) && isset( $_GET['post'] ) && isset( $_GET['nonce'] ) ) {
-				// verify nonce.
-				$action   = sanitize_key( $_GET['bewpi_action'] );
-				$nonce = sanitize_key( $_GET['nonce'] );
-				if ( ! wp_verify_nonce( $nonce, $action ) ) {
-					wp_die( 'Invalid request.' );
-				}
+		public function admin_pdf_callback() {
+			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
+				return;
+			}
 
-				// verify WC_ORDER.
-				$post_id = intval( $_GET['post'] );
-				$order = wc_get_order( $post_id );
-				if ( ! $order ) {
-					wp_die( 'Order not found.' );
-				}
+			// sanitize data and verify nonce.
+			$action = sanitize_key( $_GET['bewpi_action'] );
+			$nonce = sanitize_key( $_GET['nonce'] );
+			if ( ! wp_verify_nonce( $nonce, $action ) ) {
+				wp_die( 'Invalid request.' );
+			}
 
-				// verify allowed user roles.
-				$user = wp_get_current_user();
-				$wc_user_id = get_post_meta( $order->id, '_customer_user', true );
-				$allowed_roles = apply_filters( 'bewpi_allowed_roles_to_download_invoice', array(
-					'administrator',
-					'shop_manager',
-				) );
-				if ( ! array_intersect( $allowed_roles, $user->roles ) && $user->ID !== $wc_user_id ) {
-					wp_die( 'Access denied' );
-				}
+			// validate woocommerce order.
+			$post_id = intval( $_GET['post'] );
+			$order = wc_get_order( $post_id );
+			if ( ! $order ) {
+				wp_die( 'Order not found.' );
+			}
 
-				// execute invoice action.
-				$invoice = new BEWPI_Invoice( $order->id );
-				switch ( $action ) {
-					case 'view':
-						$invoice->view();
-						break;
-					case 'cancel':
-						$invoice->delete();
-						break;
-					case 'create':
-						$invoice->save( 'F' );
-						break;
-				}
+			// validate allowed user roles.
+			$user = wp_get_current_user();
+			$wc_user_id = get_post_meta( $order->id, '_customer_user', true );
+			$allowed_roles = apply_filters( 'bewpi_allowed_roles_to_download_invoice', array(
+				'administrator',
+				'shop_manager',
+			) );
+			if ( ! array_intersect( $allowed_roles, $user->roles ) && $user->ID !== $wc_user_id ) {
+				wp_die( 'Access denied' );
+			}
+
+			// execute invoice action.
+			$invoice = new BEWPI_Invoice( $order->id );
+			switch ( $action ) {
+				case 'view':
+					$invoice->view();
+					break;
+				case 'cancel':
+					$invoice->delete();
+					break;
+				case 'create':
+					$invoice->save( 'F' );
+					break;
 			}
 		}
 
@@ -478,8 +498,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Display invoice date and formatted number on "Order Details" page.
 		 *
-		 * @param DateTime $date date of invoice.
-		 * @param int      $number formatted invoice number.
+		 * @param string $date date of invoice.
+		 * @param int    $number formatted invoice number.
 		 */
 		private function show_invoice_number_info( $date, $number ) {
 			?>
@@ -542,6 +562,44 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Shortcode to download invoice.
+		 *
+		 * @param array $atts shortcode attributes.
+		 */
+		public function download_invoice_shortcode( $atts ) {
+			if ( ! isset( $atts['order_id'] ) || 0 === intval( $atts['order_id'] ) ) {
+				return;
+			}
+
+			// by default order status should be Processing or Completed.
+			$order = wc_get_order( $atts['order_id'] );
+			if ( ! $order->is_paid() ) {
+				return;
+			}
+
+			$invoice = new BEWPI_Invoice( $order->id );
+			if ( ! $invoice->exists() ) {
+				return;
+			}
+
+			$url = add_query_arg( array(
+				'bewpi_action' => 'view',
+				'post' => $order->id,
+				'nonce' => wp_create_nonce( 'view' ),
+			) );
+
+			$tags = array(
+				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
+				'{order_number}'             => $order->id,
+				'{formatted_invoice_date}'   => $invoice->get_formatted_invoice_date(),
+				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
+			);
+			// find and replace placeholders.
+			$title = str_replace( array_keys( $tags ), array_values( $tags ), $atts['title'] );
+			printf( '<a href="%1$s">%2$s</a>', esc_attr( $url ), esc_html( $title ) );
+		}
+
+		/**
 		 * Display download link on My Account page.
 		 *
 		 * @param array    $actions my account order table actions.
@@ -565,7 +623,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'bewpi_action' => 'view',
 				'post' => $order->id,
 				'nonce' => wp_create_nonce( 'view' ),
-			), admin_url( 'admin-ajax.php' ) );
+			) );
 
 			$actions['invoice'] = array(
 				'url'  => $url,

@@ -25,6 +25,7 @@ function _bewpi_load_plugin() {
 
 	define( 'BEWPI_FILE', __FILE__ );
 	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
+	define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 	require_once BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php';
 

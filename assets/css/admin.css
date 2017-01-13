@@ -1,44 +1,22 @@
-form.be_woocommerce_pdf_invoices_settings_form {
+form.bewpi-settings-form {
     width: 75%;
     display: block;
     float: left;
     padding-right: 40px;
     box-sizing: border-box;
 }
-.bewpi_sidebar {
-    width: 25%;
-    box-sizing: border-box;
-    display: block;
-    float: right;
-    clear: right;
-    border: 1px solid #ccc;
-    background-color: white;
-    padding: 0 20px 20px;
-    margin-top: 20px;
+.bewpi-settings-form ul {
+    margin: 0;
 }
-.bewpi_sidebar.premium h3 {
-    color: white;
+.bewpi-settings-form input[type="checkbox"]:disabled + label {
+    color: #999;
 }
-.bewpi_sidebar.premium {
-    background: #222;
-    color: #ccc;
-}
-.bewpi_sidebar.support .btn {
-    margin: 10px 10px 10px 0;
-}
-.bewpi_sidebar.support .github.btn {
-    margin-bottom: -3px !important;
-    margin-top: 20px;
-}
-.bewpi_sidebar.support .twitter.btn {
-    margin-bottom: 0 !important;
-}
-.be_woocommerce_pdf_invoices_settings_form select,
-.be_woocommerce_pdf_invoices_settings_form input[type="text"],
-.be_woocommerce_pdf_invoices_settings_form textarea {
+.bewpi-settings-form select,
+.bewpi-settings-form input[type="text"],
+.bewpi-settings-form textarea {
     width: 348px;
 }
-.be_woocommerce_pdf_invoices_settings_form input[type="number"],
+.bewpi-settings-form input[type="number"],
 #bewpi-color-theme {
     width: 70px;
 }
@@ -64,7 +42,7 @@ form.be_woocommerce_pdf_invoices_settings_form {
     width: 25px;
     cursor: pointer;
 }
-.wpi-admin-order-create-invoice-btn {
+.bewpi-admin-order-create-invoice-btn {
     background-image: url(../images/invoice-icon.png) !important;
     background-repeat: no-repeat !important;
     background-position: center center !important;
@@ -74,7 +52,7 @@ form.be_woocommerce_pdf_invoices_settings_form {
     height: 2em !important;
     width: 2em;
 }
-.wpi-admin-order-create-invoice-btn button {
+.bewpi-admin-order-create-invoice-btn button {
     display: none;
 }
 .notes {
@@ -83,9 +61,6 @@ form.be_woocommerce_pdf_invoices_settings_form {
 }
 .block {
     display: block;
-}
-#color-picker {
-    height: 28px;
 }
 .foot {
     font-size: 12px;
@@ -110,11 +85,44 @@ form.be_woocommerce_pdf_invoices_settings_form {
 #bewpi-plugin-activated-notice button.notice-dismiss {
     display: none;
 }
-#mc_embed_signup form {
+/* Sidebar */
+.bewpi-sidebar {
+    width: 25%;
+    box-sizing: border-box;
+    display: block;
+    float: right;
+    clear: right;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 0 20px 20px;
+    margin-top: 20px;
+}
+.bewpi-sidebar.premium h3 {
+    color: white;
+}
+.bewpi-sidebar.premium {
+    background: #222;
+    color: #ccc !important;
+}
+.bewpi-sidebar.support .btn {
+    margin: 10px 10px 10px 0;
+}
+.bewpi-sidebar.support .github.btn {
+    margin-bottom: -3px !important;
+    margin-top: 20px;
+}
+.bewpi-sidebar.support .twitter.btn {
+    margin-bottom: 0 !important;
+}
+#bewpi-mc-embed-signup {
+    background: #222;
+    clear:left;
+}
+#bewpi-mc-embed-signup form {
     margin: 0 !important;
     padding: 0;
 }
-#mc_embed_signup input[type="text"] {
+#bewpi-mc-embed-signup input[type="text"] {
     width: 100%;
 }
 .bewpi-learn-more {
@@ -131,9 +139,46 @@ form.be_woocommerce_pdf_invoices_settings_form {
     background-color: #EE7600;
     color: white;
 }
+#bewpi-mc-embed-signup input.button {
+    margin: 0 !important;
+}
+#bewpi-mc-embedded-subscribe:hover {
+    background-color: #EE7600 !important;
+}
+#bewpi-mc-embedded-subscribe {
+    padding: 10px 0;
+    background-color: #F48C2D;
+    color: white;
+    text-decoration: none;
+    display: block;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    border-radius: 0;
+    box-shadow: none;
+    height: auto;
+    width: 100%;
+    line-height: normal;
+    border: none;
+}
+#bewpi-mce-EMAIL {
+    width: 100%;
+    border-radius: 0;
+    margin-top: 20px;
+    margin-left: 0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.bewpi-no-spam {
+    font-size: 11px;
+    text-align: center;
+    margin-top: 1px !important;
+}
+/* End sidebar */
 
 @media screen and (max-width: 790px) {
-    .bewpi_sidebar {
+    .bewpi-sidebar {
         display: none;
     }
 }

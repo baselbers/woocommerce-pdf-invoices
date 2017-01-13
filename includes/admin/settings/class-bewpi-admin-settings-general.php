@@ -1,241 +1,337 @@
 <?php
+/**
+ * General settings
+ *
+ * Handling general settings.
+ *
+ * @author      Bas Elbers
+ * @category    Admin
+ * @package     BE_WooCommerce_PDF_Invoices/Admin
+ * @version     1.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
-    exit; // Exit if accessed directly
+	exit;
 }
 
 if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
+	/**
+	 * Class BEWPI_General_Settings.
+	 */
+	class BEWPI_General_Settings extends BEWPI_Abstract_Setting {
+		/**
+		 * Constant template settings key
+		 *
+		 * @var string
+		 */
+		const SETTINGS_KEY = 'bewpi_general_settings';
 
-    /**
-     * Implements the template settings.
-     */
-    class BEWPI_General_Settings extends BEWPI_Abstract_Setting {
+		/**
+		 * Initializes the template settings.
+		 */
+		public function __construct() {
+			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			add_action( 'admin_notices', array( $this, 'show_settings_notices' ) );
+		}
 
-        /**
-         * Constant template settings key
-         * @var string
-         */
-        private $settings_key = 'bewpi_general_settings';
+		/**
+		 * Initialize settings within admin.
+		 */
+		public function admin_init() {
+			$this->load_settings();
+			$this->create_settings();
+		}
 
-        /**
-         * Initializes the template settings.
-         */
-        public function __construct() {
-            /**
-             * Loads all the template settings.
-             */
-            add_action( 'init', array( &$this, 'load_settings' ) );
+		/**
+		 * Settings configuration.
+		 *
+		 * @return array
+		 */
+		private function the_settings() {
+			$settings = array(
+				array(
+					'id'       => 'bewpi-email-types',
+					'name'     => self::PREFIX . 'email_types',
+					'title'    => __( 'Attach to Emails', 'woocommerce-pdf-invoices' ),
+					'callback' => array( $this, 'multiple_checkbox_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'email',
+					'type'     => 'multiple_checkbox',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name'    => __( 'New order', 'woocommerce-pdf-invoices' ),
+							'value'   => 'new_order',
+							'default' => 0,
+						),
+						array(
+							'name'    => __( 'Order on-hold', 'woocommerce-pdf-invoices' ),
+							'value'   => 'customer_on_hold_order',
+							'default' => 0,
+						),
+						array(
+							'name'    => __( 'Processing order', 'woocommerce-pdf-invoices' ),
+							'value'   => 'customer_processing_order',
+							'default' => 0,
+						),
+						array(
+							'name'    => __( 'Completed order', 'woocommerce-pdf-invoices' ),
+							'value'   => 'customer_completed_order',
+							'default' => 0,
+						),
+						array(
+							'name'    => __( 'Customer invoice', 'woocommerce-pdf-invoices' ),
+							'value'   => 'customer_invoice',
+							'default' => 0,
+						),
+					),
+				),
+				array(
+					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
+					'name'     => self::PREFIX . 'woocommerce_subscriptions_email_types',
+					'title'    => __( 'Attach to WooCommerce Subscriptions Emails', 'woocommerce-pdf-invoices' )
+					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', BEWPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
+					'callback' => array( $this, 'multiple_checkbox_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'email',
+					'type'     => 'multiple_checkbox',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name'    => __( 'New Renewal Order', 'woocommerce-subscriptions' ),
+							'value'   => 'new_renewal_order',
+							'default' => 0,
+							'disabled' => 1,
+						),
+						array(
+							'name'      => __( 'Subscription Switch Complete', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_completed_switch_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Processing Renewal order', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_processing_renewal_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Completed Renewal Order', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_completed_renewal_order',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+						array(
+							'name'      => __( 'Customer Renewal Invoice', 'woocommerce-subscriptions' ),
+							'value'     => 'customer_renewal_invoice',
+							'default'   => 0,
+							'disabled'  => 1,
+						),
+					),
+				),
+				array(
+					'id'       => 'bewpi-view-pdf',
+					'name'     => self::PREFIX . 'view_pdf',
+					'title'    => __( 'View PDF', 'woocommerce-pdf-invoices' ),
+					'callback' => array( $this, 'select_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'download',
+					'type'     => 'text',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name'  => __( 'Download', 'woocommerce-pdf-invoices' ),
+							'value' => 'download',
+						),
+						array(
+							'name'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
+							'value' => 'browser',
+						),
+					),
+					'default'  => 'download',
+				),
+				array(
+					'id'       => 'bewpi-download-invoice-account',
+					'name'     => self::PREFIX . 'download_invoice_account',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'download',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Enable download from my account', 'woocommerce-pdf-invoices' )
+					              . '<br/><div class="bewpi-notes">'
+					              . __( 'By default PDF is only downloadable when order has been paid, so order status should be Processing or Completed.', 'woocommerce-pdf-invoices' )
+					              . '</div>',
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 1,
+				),
+				array(
+					'id'       => 'bewpi-email-it-in',
+					'name'     => self::PREFIX . 'email_it_in',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'cloud_storage',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Enable Email It In', 'woocommerce-pdf-invoices' ),
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
+					'id'       => 'bewpi-email-it-in-account',
+					'name'     => self::PREFIX . 'email_it_in_account',
+					'title'    => __( 'Email It In account', 'woocommerce-pdf-invoices' ),
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'cloud_storage',
+					'type'     => 'text',
+					'desc'     => sprintf( __( 'Get your account from your Email It In <a href="%1$s">user account</a>.', 'woocommerce-pdf-invoices' ), 'https://www.emailitin.com/user_account' ),
+					'default'  => '',
+				),
+				array(
+					'id'       => 'bewpi-invoice-number-column',
+					'name'     => self::PREFIX . 'invoice_number_column',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'interface',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Enable Invoice Number column' )
+					              . '<br/><div class="bewpi-notes">' . __( 'Display invoice numbers on Shop Order page.', 'woocommerce-pdf-invoices' ) . '</div>',
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
+					'id'       => 'bewpi-mpdf-debug',
+					'name'     => self::PREFIX . 'mpdf_debug',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'debug',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Enable mPDF debugging' )
+					              . '<br/><div class="bewpi-notes">' . __( 'Enable mPDF debugging if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+			);
 
-            /**
-             * Register all template settings.
-             */
-            add_action( 'admin_init', array( &$this, 'create_settings' ) );
+			return apply_filters( 'bewpi_general_settings', $settings );
+		}
 
-            /**
-             * Displays all messages registered to 'template_settings'
-             */
-            add_action( 'admin_notices', array( &$this, 'show_settings_notices' ) );
-        }
+		/**
+		 * Fetch all multiple checkbox option defaults from settings.
+		 */
+		private function get_multiple_checkbox_defaults() {
+			$defaults = array();
+			$settings = $this->the_settings();
+			foreach ( $settings as $setting ) {
+				if ( array_key_exists( 'type', $setting ) && 'multiple_checkbox' === $setting['type'] ) {
+					$defaults = array_merge( $defaults, wp_list_pluck( $setting['options'], 'default', 'value' ) );
+				}
+			}
 
-        /**
-         * Load all settings into settings var and merge with defaults.
-         */
-        public function load_settings() {
+			return $defaults;
+		}
+
+		/**
+		 * Get all default values from the settings array.
+		 *
+		 * @return array
+		 */
+		private function get_defaults() {
+			// remove multiple checkbox types from settings.
+			$settings = $this->the_settings();
+			foreach ( $settings as $index => $setting ) {
+				if ( array_key_exists( 'type', $setting ) && 'multiple_checkbox' === $setting['type'] ) {
+					unset( $settings[ $index ] );
+				}
+			}
+
+			// defaults of email types are within a lower hierarchy.
+			$multiple_checkbox_defaults = $this->get_multiple_checkbox_defaults();
+			$defaults = array_merge( $multiple_checkbox_defaults, wp_list_pluck( $settings, 'default', 'name' ) );
+
+			return $defaults;
+		}
+
+		/**
+		 * Load all settings into settings var and merge with defaults.
+		 */
+		public function load_settings() {
 			$defaults = $this->get_defaults();
-	        $options = (array) get_option( $this->settings_key );
-	        $options = array_merge( $defaults, $options );
+			$options  = (array) get_option( self::SETTINGS_KEY );
+			$options  = array_merge( $defaults, $options );
+			update_option( self::SETTINGS_KEY, $options );
+		}
 
-	        //update_option( $this->settings_key, serialize( $options ) ); todo
-	        update_option( $this->settings_key, $options );
-        }
+		/**
+		 * Adds all the different settings sections
+		 */
+		private function add_settings_sections() {
+			add_settings_section( 'email', __( 'Email Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+			add_settings_section( 'download', __( 'Download Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+			add_settings_section( 'cloud_storage', __( 'Cloud Storage Options', 'woocommerce-pdf-invoices' ), array( $this, 'cloud_storage_desc_callback' ), self::SETTINGS_KEY );
+			add_settings_section( 'interface', __( 'Interface Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+			add_settings_section( 'debug', __( 'Debug Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+		}
 
-	    /**
-	     * Get all default values from the settings array.
-	     * @return array
-	     */
-	    private function get_defaults() {
-		    $defaults = array();
-		    foreach ( $this->the_settings() as $setting ) :
-			    $defaults[ $setting['name'] ] = $setting['default'];
-		    endforeach;
-		    return $defaults;
-	    }
+		/**
+		 * Validate settings.
+		 *
+		 * @param array $input settings.
+		 *
+		 * @return mixed|void
+		 */
+		public function validate_input( $input ) {
+			$output = get_option( self::SETTINGS_KEY );
+			foreach ( $input as $key => $value ) {
+				// strip all html tags and properly handle quoted strings.
+				$output[ $key ] = stripslashes( $input[ $key ] );
+			}
 
-        /**
-         * Register all settings fields.
-         */
-        public function create_settings() {
-	        $this->add_settings_sections();
-	        register_setting(
-		        $this->settings_key,
-		        $this->settings_key,
-		        array( &$this, 'validate_input' )
-	        );
-	        $this->add_settings_fields();
-        }
+			// sanitize email it in account.
+			if ( isset( $input['email_it_in_account'] ) ) {
+				$sanitized_email = sanitize_email( $input['email_it_in_account'] );
+				$output['email_it_in_account'] = $sanitized_email;
+			}
 
-	    /**
-	     * Settings array
-	     * @return array
-	     */
-	    private function the_settings() {
-		    $settings = array(
-			    // General section
-			    array(
-				    'id' => 'bewpi-view-pdf',
-				    'name' => $this->prefix . 'view_pdf',
-				    'title' => __( 'View PDF', 'be-woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'select_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'email',
-				    'type' => 'text',
-				    'desc' => '',
-				    'options' => array(
-					    array(
-						    'name' => __( 'Download', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'download'
-					    ),
-					    array(
-						    'name' => __( 'Open in new browser tab/window', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'browser'
-					    )
-				    ),
-				    'default' => 'download'
-			    ),
-			    array(
-				    'id' => 'bewpi-email-type',
-				    'name' => $this->prefix . 'email_type',
-				    'title' => __( 'Attach to Email', 'be-woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'select_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'email',
-				    'type' => 'text',
-				    'desc' => '',
-				    'options' => array(
-					    array(
-						    'name' => __( 'Processing order', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'customer_processing_order'
-					    ),
-					    array(
-						    'name' => __( 'Completed order', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'customer_completed_order'
-					    ),
-					    array(
-						    'name' => __( 'Customer invoice', 'be-woocommerce-pdf-invoices' ),
-						    'value' => 'customer_invoice'
-					    ),
-					    array(
-						    'name' => __( 'Do not attach', 'be-woocommerce-pdf-invoices' ),
-						    'value' => ''
-					    )
-				    ),
-				    'default' => 'customer_completed_order'
-			    ),
-			    array(
-				    'id' => 'bewpi-new-order',
-				    'name' => $this->prefix . 'new_order',
-				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'email',
-				    'type' => 'checkbox',
-				    'desc' => __( 'Attach to New order Email', 'be-woocommerce-pdf-invoices' ),
-				    'class' => 'bewpi-checkbox-option-title',
-				    'default' => 0
-			    ),
-			    array(
-				    'id' => 'bewpi-email-it-in',
-				    'name' => $this->prefix . 'email_it_in',
-				    'title' => '',
-				    'callback' => array( &$this, 'input_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'cloud_storage',
-				    'type' => 'checkbox',
-					'desc' => __( 'Enable Email It In', 'be-woocommerce-pdf-invoices' ),
-				    'class' => 'bewpi-checkbox-option-title',
-		            'default' => 0
-			    ),
-			    // Header section
-		        array(
-			        'id' =>  'bewpi-email-it-in-account',
-			        'name' => $this->prefix . 'email_it_in_account',
-				    'title' => __( 'Email It In account', 'be-woocommerce-pdf-invoices' ),
-				    'callback' => array( &$this, 'input_callback' ),
-				    'page' => $this->settings_key,
-				    'section' => 'cloud_storage',
-				    'type' => 'text',
-					'desc' => sprintf( __( 'Get your account from your Email It In %suser account%s.', 'be-woocommerce-pdf-invoices' ), '<a href="https://www.emailitin.com/user_account">', '</a>' ),
-			        'default' => ''
-		        )
-		    );
+			return apply_filters( 'validate_input', $output, $input );
+		}
 
-		    return apply_filters( 'bewpi_general_settings', $settings );
-	    }
+		/**
+		 * Adds settings fields
+		 */
+		private function add_settings_fields() {
+			$the_settings = $this->the_settings();
+			foreach ( $the_settings as $setting ) {
+				add_settings_field( $setting['name'], $setting['title'], $setting['callback'], $setting['page'], $setting['section'], $setting );
+			};
+		}
 
-	    /**
-	     * Adds all the different settings sections
-	     */
-	    private function add_settings_sections() {
-		    add_settings_section(
-			    'email',
-			    __( 'Email Options', 'be-woocommerce-pdf-invoices' ),
-			    array( &$this, 'email_desc_callback' ),
-			    $this->settings_key
-		    );
-		    add_settings_section(
-			    'cloud_storage',
-			    __( 'Cloud Storage Options', 'be-woocommerce-pdf-invoices' ),
-			    array( &$this, 'cloud_storage_desc_callback' ),
-			    $this->settings_key
-		    );
-	    }
+		/**
+		 * Register all settings fields.
+		 */
+		public function create_settings() {
+			$this->add_settings_sections();
+			register_setting( self::SETTINGS_KEY, self::SETTINGS_KEY, array( $this, 'validate_input' ) );
+			$this->add_settings_fields();
+		}
 
-	    public function email_desc_callback() { }
-	    public function cloud_storage_desc_callback() { printf( __( 'Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'be-woocommerce-pdf-invoices' ), '<a href="https://emailitin.com">Email It In</a>' ); }
+		/**
+		 * Cloud Storage section callback.
+		 */
+		public function cloud_storage_desc_callback() {
+			printf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' ); // WPCS: XSS OK.
+		}
 
-	    /**
-	     * Adds settings fields
-	     */
-	    private function add_settings_fields() {
-		    $the_settings = $this->the_settings();
-		    foreach ( $the_settings as $setting ) :
-			    add_settings_field(
-				    $setting['name'],
-				    $setting['title'],
-				    $setting['callback'],
-				    $setting['page'],
-				    $setting['section'],
-				    $setting
-			    );
-		    endforeach;
-	    }
+		/**
+		 * Show all settings notices.
+		 */
+		public function show_settings_notices() {
+			settings_errors( self::SETTINGS_KEY );
+		}
+	}
 
-	    /**
-	     * Show all settings notices.
-	     */
-	    public function show_settings_notices() {
-		    settings_errors( $this->settings_key );
-	    }
-
-	    /**
-	     * Validates all settings
-	     * @param $input
-	     * @return mixed|void
-	     */
-	    public function validate_input( $input ) {
-		    $output = array();
-		    foreach ( $input as $key => $value ) :
-			    if ( isset( $input[$key] ) ) :
-				    // Strip all HTML and PHP tags and properly handle quoted strings
-				    $output[$key] = stripslashes( $input[ $key ] );
-			    endif;
-		    endforeach;
-
-		    // Sanitize Email
-		    if ( isset( $input['email_it_in_account'] ) ) :
-			    $output['email_it_in_account'] = sanitize_email( $input['email_it_in_account'] );
-		    endif;
-
-		    return apply_filters( 'validate_input', $output, $input );
-	    }
-    }
+	new BEWPI_General_Settings();
 }

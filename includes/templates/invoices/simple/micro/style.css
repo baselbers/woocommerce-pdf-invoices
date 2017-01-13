@@ -1,17 +1,30 @@
-div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4 {
+div, table, td, tr, tfoot, tbody, thead, span, h1, h2, h3, h4, img {
     /*border: 1px solid black;*/
 }
 h1.company-logo {
     color: black;
-}
-img.company-logo {
-    max-height: 100%;
 }
 table {
     border-collapse: collapse;
     font-size: 14px;
     width: 100%;
     color: #757575;
+}
+.align-left { text-align: left; }
+.align-right { text-align: right; }
+.company .info,
+.company .logo {
+    text-align: left;
+    vertical-align: middle;
+    font-size: 14px !important;
+}
+table.two-column {
+    margin: 40px 0;
+    width: 100%;
+}
+.two-column td {
+    text-align: left;
+    vertical-align: top;
 }
 table.products th {
     border-bottom: 2px solid #A5A5A5;
@@ -46,30 +59,8 @@ span.payment-status {
     font-size: 14px;
     font-weight: normal;
 }
-span {
-    display: block;
-    width: 100%;
-}
 .nowrap {
     white-space: nowrap;
-}
-.align-left { text-align: left; }
-.align-right { text-align: right; }
-.company {
-    margin-bottom: 30px;
-}
-.company .info, .company .logo {
-    text-align: left;
-    vertical-align: middle;
-}
-.two-column {
-    margin-bottom: 40px;
-    width: 100%;
-}
-.two-column td {
-    text-align: left;
-    vertical-align: top;
-    width: 50%;
 }
 .invoice-head {
     margin-bottom: 30px;
@@ -83,6 +74,10 @@ span {
 }
 td.invoice-details {
     vertical-align: top;
+    /*line-height: 30px;*/
+}
+td.invoice-details span {
+    font-size: 14px;
 }
 .number {
     font-size: 16px;
@@ -90,15 +85,13 @@ td.invoice-details {
 .small-font {
     font-size: 14px;
 }
-.total-amount p {
-    margin: 0; padding: 0;
-}
 .total-amount {
     padding: 20px 20px 30px 20px;
     width: 54%;
 }
 .total-amount, .total-amount h1 {
     color: white;
+    font-size: 14px;
 }
 div.item-attribute {
     font-size: 12px;

@@ -260,7 +260,7 @@ function GetLangOpts($llcc, $adobeCJK, &$fontdata) {
 	//CASE "ccp":	// CHAKMA
 	//CASE "lep":	// LEPCHA
 	CASE "lif":		// LIMBU
-		$unifont = "sun-exta";
+		$unifont = "simsun";
 		break;
 	//CASE "sat":	// OL_CHIKI
 	//CASE "saz":	// SAURASHTRA
@@ -338,15 +338,15 @@ function GetLangOpts($llcc, $adobeCJK, &$fontdata) {
 	CASE "zh":  CASE "zho":	// Chinese
 		if ($country == "HK" || $country == "TW") { 
 			if ($adobeCJK) { $unifont = "big5"; }
-			else { $unifont = "sun-exta"; }
+			else { $unifont = "simsun"; }
 		}
 		else if ($country == "CN") { 
 			if ($adobeCJK) { $unifont = "gb"; }
-			else { $unifont = "sun-exta"; }
+			else { $unifont = "simsun"; }
 		}
 	  	else { 
 			if ($adobeCJK) { $unifont = "gb"; }
-			else { $unifont = "sun-exta"; }
+			else { $unifont = "simsun"; }
 		}
 		break;
 	CASE "ko":  CASE "kor":	// HANGUL Korean
@@ -355,11 +355,11 @@ function GetLangOpts($llcc, $adobeCJK, &$fontdata) {
 		break;
 	CASE "ja":  CASE "jpn":	// Japanese HIRAGANA KATAKANA
 		if ($adobeCJK) { $unifont = "sjis"; }
-		else { $unifont = "sun-exta"; }
+		else { $unifont = "simsun"; }
 		break;
 	CASE "ii":  CASE "iii":	// Nuosu; Yi
 		if ($adobeCJK) { $unifont = "gb"; }
-		else { $unifont = "sun-exta"; }
+		else { $unifont = "simsun"; }
 	CASE "lis":		// LISU
 		$unifont = "quivira";
 		break;
@@ -403,7 +403,7 @@ function GetLangOpts($llcc, $adobeCJK, &$fontdata) {
 			$unifont = "aegean";
 			break;
 		CASE "runr":	// RUNIC
-			$unifont = "sun-exta";
+			$unifont = "simsun";
 			break;
 		CASE "shaw":	// SHAVIAN
 			$unifont = "mph2bdamase";
@@ -468,14 +468,14 @@ function GetLangOpts($llcc, $adobeCJK, &$fontdata) {
 		/* East Asian */
 		CASE "hans":	// HAN (SIMPLIFIED)
 			if ($adobeCJK) { $unifont = "gb"; }
-			else { $unifont = "sun-exta"; }
+			else { $unifont = "simsun"; }
 			break;
 		CASE "bopo":	// BOPOMOFO
-			$unifont = "sun-exta";
+			$unifont = "simsun";
 			break;
 		//CASE "plrd":	// MIAO
 		CASE "yiii":	// YI
-			$unifont = "sun-exta";
+			$unifont = "simsun";
 			break;
 
 		/* American */

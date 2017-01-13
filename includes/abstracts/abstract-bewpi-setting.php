@@ -1,190 +1,157 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
+/**
+ * Settings configuration.
+ *
+ * Validate and output settings.
+ *
+ * @author      Bas Elbers
+ * @category    Abstract Class
+ * @package     BE_WooCommerce_PDF_Invoices/Abstracts
+ * @version     1.0.0
+ */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
+	/**
+	 * Class BEWPI_Abstract_Setting.
+	 */
+	abstract class BEWPI_Abstract_Setting {
+		/**
+		 * Options and settings prefix.
+		 *
+		 * @var string
+		 */
+		const PREFIX = 'bewpi_';
 
-    /**
-     * Abstract class with validation functions to validate all the template and general settings.
-     * Class BEWPI_Settings
-     */
-    abstract class BEWPI_Abstract_Setting {
+		/**
+		 * Gets all the tags that are allowed.
+		 *
+		 * @return string|void
+		 */
+		protected function allowed_tags_text() {
+			$allowed_tags_encoded = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>', '<br/>' ) );
+			$allowed_tags_formatted  = '<code>' . join( '</code>, <code>', $allowed_tags_encoded ) . '</code>';
+			$allowed_tags_text = sprintf( __( 'Allowed HTML tags: %1$s.', 'woocommerce-pdf-invoices' ), $allowed_tags_formatted );
+			return $allowed_tags_text;
+		}
 
-	    /**
-	     * Options and settings prefix
-	     * @var string
-	     */
-	    public $prefix = 'bewpi_';
+		/**
+		 * String validation.
+		 *
+		 * @param string $str the string to validate.
+		 *
+		 * @return bool
+		 */
+		protected function strip_str( $str ) {
+			$str = preg_replace( '/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $str );
+			return strip_tags( $str, '<b><i><br><br/>' );
+		}
 
-	    /**
-	     * For <textarea>.
-	     * @var array
-	     */
-	    private $allowed_tags = array( '<b>', '<i>', '<br>', '<br/>' );
+		/**
+		 * Multiple checkboxes html.
+		 *
+		 * @param array $args option arguments.
+		 */
+		public function multiple_checkbox_callback( $args ) {
+			include BEWPI_DIR . 'includes/admin/views/html-multiple-checkbox-setting.php';
+		}
 
-	    /**
-	     * Validates an email.
-	     *
-	     * @param $email
-	     *
-	     * @return bool
-	     */
-	    protected function validate_email( $email ) {
-		    return is_email( sanitize_email( $email ) ) ? true : false;
-	    }
+		/**
+		 * Select html.
+		 *
+		 * @param array $args option arguments.
+		 */
+		public function select_callback( $args ) {
+			$options = get_option( $args['page'] );
+			?>
+			<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
+				<?php
+				foreach ( $args['options'] as $option ) :
+					?>
+					<option
+						value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['name'] ); ?></option>
+					<?php
+				endforeach;
+				?>
+			</select>
+			<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
+			<?php
+		}
 
-	    /**
-	     * Validates a string.
-	     *
-	     * @param $str
-	     *
-	     * @return bool
-	     */
-	    protected function is_valid_str( $str ) {
-		    return is_string( sanitize_text_field( $str ) );
-	    }
+		public function input_callback( $args ) {
+			$options     = get_option( $args['page'] );
+			$class       = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+			$is_checkbox = $args['type'] === 'checkbox';
+			if ( $is_checkbox ) { ?>
+				<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
+			<?php } ?>
+			<input id="<?php echo $args['id']; ?>"
+			       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			       type="<?php echo $args['type']; ?>"
+			       value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
 
-	    /**
-	     * Validates an integer.
-	     *
-	     * @param $int
-	     *
-	     * @return bool
-	     */
-	    protected function is_valid_int( $int ) {
-		    return intval( $int ) && absint( $int );
-	    }
+				<?php if ( $is_checkbox ) {
+					checked( $options[ $args['name'] ] );
+				}
 
-	    /**
-	     * Validates a textarea.
-	     *
-	     * @param $str
-	     *
-	     * @return bool
-	     */
-	    protected function strip_str( $str ) {
-		    $str = preg_replace( "/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i", '<$1$2>', $str ); // Removes the attributes in the HTML tags
-		    return strip_tags( $str, '<b><i><br><br/>' );
-	    }
+				if ( isset ( $args['attrs'] ) ) {
+					foreach ( $args['attrs'] as $attr ) {
+						echo $attr . ' ';
+					}
+				}
+				?>
+			/>
+			<?php if ( $is_checkbox ) { ?>
+				<label for="<?php echo $args['id']; ?>"
+				       class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
+			<?php } else { ?>
+				<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
+			<?php } ?>
+			<?php
+		}
 
-	    /**
-	     * Check for a valid hex color string like '#c1c2b4'
-	     *
-	     * @param $hex
-	     */
-	    protected function is_valid_hex_color( $hex ) {
-		    $valid = false;
-		    if ( preg_match( '/^#[a-f0-9]{6}$/i', $hex ) ) {
-			    return true;
-		    } else if ( preg_match( '/^[a-f0-9]{6}$/i', $hex ) ) { // Check for a hex color string without hash like 'c1c2b4'
-			    return '#' . $hex;
-		    }
+		public function logo_callback( $args ) {
+			$options = get_option( $args['page'] );
+			?>
+			<input id="<?php echo $args['id']; ?>"
+			       name="<?php echo $args['name']; ?>"
+			       type="<?php echo $args['type']; ?>"
+			       accept="image/*"
+			/>
+			<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
+			<input id="<?php echo $args['id'] . '-value'; ?>"
+			       name="<?php echo $args['name']; ?>"
+			       type="hidden"
+			       value="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"
+			/>
 
-		    return false;
-	    }
+			<?php
+			if ( ! empty( $options[ $args['name'] ] ) ) {
+				?>
+				<div id="<?php echo $args['id'] . '-wrapper'; ?>">
+					<img id="<?php echo $args['id'] . '-image'; ?>"
+					     src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"/>
+					<img id="<?php echo $args['id'] . '-delete'; ?>"
+					     src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
+					     onclick="bewpi.setting.removeCompanyLogo()"
+					     title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>"/>
+				</div>
+				<?php
+			}
+		}
 
-	    /**
-	     * Gets all the tags that are allowed to use for the textarea's.
-	     * @return string|void
-	     */
-	    protected function get_allowed_tags_str() {
-
-		    if( empty( $this->allowed_tags ) ) {
-			    return '';
-		    }
-
-		    $encoded_tags = array_map( 'htmlspecialchars', $this->allowed_tags );
-		    $tags_string = '<code>' . join( '</code>, <code>', $encoded_tags ) . '</code>';
-
-			return __( 'Allowed HTML tags: ', 'be-woocommerce-pdf-invoices' ) . $tags_string . '.';
-	    }
-
-	    public function select_callback( $args ) {
-		    $options = get_option( $args['page'] );
-		    ?>
-		    <select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
-			    <?php
-			    foreach ( $args['options'] as $option ) :
-				    ?>
-				    <option
-					    value="<?php echo $option['value']; ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo $option['name']; ?></option>
-			    <?php
-			    endforeach;
-			    ?>
-		    </select>
-		    <div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-	    <?php
-	    }
-
-	    public function input_callback( $args ) {
-		    $options = get_option( $args['page'] );
-		    $class   = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
-		    ?>
-		    <input id="<?php echo $args['id']; ?>"
-		           name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		           type="<?php echo $args['type']; ?>"
-		           value="<?php if ( $args['type'] === "checkbox" ) {
-			           echo 1;
-		           } else {
-			           echo $options[ $args['name'] ];
-		           } ?>"
-			    <?php if ( $args['type'] === "checkbox" ) {
-				    checked( $options[ $args['name'] ] );
-			    } ?>
-			    <?php
-			    if ( isset ( $args['attrs'] ) ) :
-				    foreach ( $args['attrs'] as $attr ) :
-					    echo $attr . ' ';
-				    endforeach;
-			    endif;
-			    ?>
-			    />
-		    <?php if ( $args['type'] === "checkbox" ) { ?>
-			    <label class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
-		    <?php } else { ?>
-			    <div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
-		    <?php } ?>
-	    <?php
-	    }
-
-	    public function logo_callback( $args ) {
-		    $options = get_option( $args['page'] );
-		    ?>
-		    <input id="<?php echo $args['id']; ?>"
-		           name="<?php echo $args['name']; ?>"
-		           type="<?php echo $args['type']; ?>"
-		           accept="image/*"
-			    />
-		    <div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-		    <input id="<?php echo $args['id'] . '-value'; ?>"
-		           name="<?php echo $args['name']; ?>"
-		           type="hidden"
-		           value="<?php echo $options[ $args['name'] ]; ?>"
-			    />
-
-		    <?php
-		    if ( ! empty( $options[ $args['name'] ] ) ) :
-			    ?>
-			    <div id="<?php echo $args['id'] . '-wrapper'; ?>">
-				    <img id="<?php echo $args['id'] . '-image'; ?>"
-				         src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"/>
-				    <img id="<?php echo $args['id'] . '-delete'; ?>"
-				         src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
-				         onclick="Settings.removeCompanyLogo()"
-				         title="<?php _e( 'Remove logo', 'be-woocommerce-pdf-invoices' ); ?>"/>
-			    </div>
-		    <?php
-		    endif;
-	    }
-
-	    public function textarea_callback( $args ) {
-		    $options = get_option( $args['page'] );
-		    ?>
-		    <textarea id="<?php echo $args['id']; ?>"
-		              name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		              rows="5"
-			    ><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
-		    <div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-	    <?php
-	    }
-    }
+		public function textarea_callback( $args ) {
+			$options = get_option( $args['page'] );
+			?>
+			<textarea id="<?php echo $args['id']; ?>"
+			          name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			          rows="5"
+			><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
+			<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
+			<?php
+		}
+	}
 }

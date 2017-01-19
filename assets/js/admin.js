@@ -10,7 +10,7 @@
     };
 
     setting.enableDisableNextInvoiceNumbering = function (elem) {
-        document.getElementById('bewpi-next-invoice-number').disabled = ! elem.checked;
+        document.getElementById('bewpi-next-invoice-number').readOnly = ! elem.checked;
     };
 
     setting.deactivatePlugin = function(element) {

@@ -329,10 +329,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'number',
-					'desc'     => __( 'Reset the invoice counter and start counting from given invoice number.<br/><b>Note:</b> Only available for Sequential numbering. All PDF invoices will be deleted and need to be manually created again! Value will be editable when selecting checkbox.', 'woocommerce-pdf-invoices' ),
+					'desc'     => __( 'Next invoice number when resetting counter.<br/><b>Note:</b> Only available for Sequential numbering. All PDF invoices with invoice number greater then next invoice number will be deleted.', 'woocommerce-pdf-invoices' ),
 					'default'  => 1,
 					'attrs'    => array(
-						'disabled',
+						'readonly',
 						'min="1"',
 					),
 				),
@@ -345,7 +345,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'invoice_number',
 					'type'     => 'number',
 					'desc'     => '',
-					'default'  => 3,
+					'default'  => 5,
 					'attrs'    => array(
 						'min="3"',
 						'max="20"',
@@ -394,7 +394,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Reset on 1st of january', 'woocommerce-pdf-invoices' ),
+					'desc'     => __( 'Reset yearly', 'woocommerce-pdf-invoices' )
+								. '<br/><div class="bewpi-notes">'
+								. __( 'Automatically reset invoice numbers on new year\'s day. <br/><b>Note</b>: You will have to generate all invoices again when changing option.', 'woocommerce-pdf-invoices' )
+								. '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
 				),
@@ -629,10 +632,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				$output['bewpi_company_logo'] = $_POST['bewpi_company_logo'];
 			}
 
-			// reset invoice number.
-			if ( ! empty( $input['bewpi_reset_counter'] ) && ! empty( $input['bewpi_next_invoice_number'] ) ) {
-				$output['bewpi_next_invoice_number'] = $input['bewpi_next_invoice_number'];
-			}
+			$output['bewpi_next_invoice_number'] = intval( $input['bewpi_next_invoice_number'] );
 
 			// return the array processing any additional functions filtered by this action.
 			return apply_filters( 'validate_input', $output, $input );

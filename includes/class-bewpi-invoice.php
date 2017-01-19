@@ -20,13 +20,6 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	 */
 	class BEWPI_Invoice extends BEWPI_Abstract_Invoice {
 		/**
-		 * WooCommerce Order.
-		 *
-		 * @var WC_Order.
-		 */
-		public $order;
-
-		/**
 		 * Type of invoice.
 		 *
 		 * @var string
@@ -53,16 +46,12 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * @return string
 		 */
 		public function save( $dest, $html_templates = array() ) {
-			if ( empty( $this->template_name ) ) {
-				return '';
-			}
-
-			$template_dir_name = $this->get_template_dir( $this->template_name );
+			$template_dirname = $this->get_template_dir();
 			$html_templates    = array(
-				'header' => $template_dir_name . 'header.php',
-				'footer' => $template_dir_name . 'footer.php',
-				'body'   => $template_dir_name . 'body.php',
-				'style'  => $template_dir_name . 'style.css',
+				'header' => $template_dirname . 'header.php',
+				'footer' => $template_dirname . 'footer.php',
+				'body'   => $template_dirname . 'body.php',
+				'style'  => $template_dirname . 'style.css',
 			);
 
 			parent::save( $dest, $html_templates );

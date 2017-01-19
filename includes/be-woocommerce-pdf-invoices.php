@@ -160,40 +160,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Create Shop Order column for Invoice Number.
-		 *
-		 * @param array $columns Shop Order columns.
-		 *
-		 * @return array
-		 */
-		public function add_invoice_number_column( $columns ) {
-			// invoice number column enabled by user?
-			$general_settings = get_option( 'bewpi_general_settings' );
-			if ( empty( $general_settings['bewpi_invoice_number_column'] ) ) {
-				return $columns;
-			}
-
-			// put the column after the Status column.
-			$new_columns = array_slice( $columns, 0, 2, true ) +
-			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommmerce-pdf-invoices' ) ) +
-			               array_slice( $columns, 2, count( $columns ) - 1, true );
-			return $new_columns;
-		}
-
-		/**
-		 * Display Invoice Number in Shop Order column (if available).
-		 *
-		 * @param string $column column slug.
-		 */
-		public function invoice_number_column_data( $column ) {
-			global $post;
-
-			if ( 'bewpi_invoice_number' === $column ) {
-				echo get_post_meta( $post->ID, '_bewpi_invoice_number', true );
-			}
-		}
-
-		/**
 		 * Frontend pdf actions callback.
 		 * Customers only have permission to view invoice, so invoice should be created by system/admin.
 		 */
@@ -453,15 +419,73 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$invoice = new BEWPI_Invoice( $order->id );
-			if ( $invoice->exists() ) {
-				$full_path = $invoice->get_full_path();
+			if ( BEWPI_Invoice::exists( $order->id ) ) {
+				$full_path = get_post_meta( $order->id, '_bewpi_formatted_invoice_number', true ) . '.pdf';
 			} else {
+				$invoice = new BEWPI_Invoice( $order->id );
 				$full_path = $invoice->save( 'F' );
 			}
 
 			$attachments[] = $full_path;
 			return $attachments;
+		}
+
+		/**
+		 * Create Shop Order column for Invoice Number.
+		 *
+		 * @param array $columns Shop Order columns.
+		 *
+		 * @return array
+		 */
+		public function add_invoice_number_column( $columns ) {
+			// invoice number column enabled by user?
+			$general_settings = get_option( 'bewpi_general_settings' );
+			if ( empty( $general_settings['bewpi_invoice_number_column'] ) ) {
+				return $columns;
+			}
+
+			// put the column after the Status column.
+			$new_columns = array_slice( $columns, 0, 2, true ) +
+			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommmerce-pdf-invoices' ) ) +
+			               array_slice( $columns, 2, count( $columns ) - 1, true );
+
+			return $new_columns;
+		}
+
+		/**
+		 * Display Invoice Number in Shop Order column (if available).
+		 *
+		 * @param string $column column slug.
+		 */
+		public function invoice_number_column_data( $column ) {
+			global $post;
+
+			if ( 'bewpi_invoice_number' !== $column ) {
+				return;
+			}
+
+			if ( BEWPI_Invoice::exists( $post->ID ) ) {
+				echo get_post_meta( $post->ID, '_bewpi_invoice_number', true );
+			}
+		}
+
+		/**
+		 * Display PDF button on "Orders" page to view invoice.
+		 *
+		 * @param WC_ORDER $order WooCommerce Order.
+		 */
+		public function add_admin_order_pdf( $order ) {
+			if ( BEWPI_Invoice::exists( $order->id ) ) {
+				$this->show_invoice_button(
+					__( 'View invoice', 'woocommerce-pdf-invoices' ),
+					$order->id,
+					'view',
+					array(
+						'class="button tips bewpi-admin-order-create-invoice-btn"',
+						'target="_blank"',
+					)
+				);
+			}
 		}
 
 		/**
@@ -472,26 +496,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$this,
 				'display_admin_order_pdf_actions',
 			), 'shop_order', 'side', 'high' );
-		}
-
-		/**
-		 * Display PDF button on "Orders" page to view invoice.
-		 *
-		 * @param WC_ORDER $order WooCommerce Order.
-		 */
-		public function add_admin_order_pdf( $order ) {
-			$invoice = new BEWPI_Invoice( $order->id );
-			if ( $invoice->exists() ) {
-				$this->show_invoice_button(
-					__( 'View invoice', 'woocommerce-pdf-invoices' ),
-					$order->id,
-					'view',
-					array(
-						'class="button tips bewpi-admin-order-create-invoice-btn"',
-						'target="_blank"',
-						)
-				);
-			}
 		}
 
 		/**
@@ -539,20 +543,22 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param WP_Post $post as WC_Order object.
 		 */
 		public function display_admin_order_pdf_actions( $post ) {
-			$invoice = new BEWPI_Invoice( $post->ID );
-
-			if ( ! $invoice->exists() ) {
+			if ( ! BEWPI_Invoice::exists( $post->ID ) ) {
 				$this->show_invoice_button( __( 'Create', 'woocommerce-pdf-invoices' ), $post->ID, 'create', array( 'class="invoice-btn button grant_access"' ) );
 				return;
 			}
 
+			$invoice = new BEWPI_Invoice( $post->ID );
+
 			// invoice exists so display invoice info.
-			$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->formatted_number );
+			$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
+
 			// display button to view invoice.
 			$this->show_invoice_button( __( 'View', 'woocommerce-pdf-invoices' ), $post->ID, 'view', array(
 				'class="invoice-btn button grant_access"',
 				'target="_blank"',
 			) );
+
 			// display button to cancel invoice.
 			$this->show_invoice_button( __( 'Cancel', 'woocommerce-pdf-invoices' ), $post->ID, 'cancel', array(
 				'class="invoice-btn button grant_access"',
@@ -576,8 +582,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			$invoice = new BEWPI_Invoice( $order->id );
-			if ( ! $invoice->exists() ) {
+			if ( ! BEWPI_Invoice::exists( $order->id ) ) {
 				return;
 			}
 
@@ -587,6 +592,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'nonce' => wp_create_nonce( 'view' ),
 			) );
 
+			$invoice = new BEWPI_Invoice( $order->id );
 			$tags = array(
 				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
 				'{order_number}'             => $order->id,
@@ -613,8 +619,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			$invoice = new BEWPI_Invoice( $order->id );
-			if ( ! $invoice->exists() ) {
+			if ( ! BEWPI_Invoice::exists( $order->id ) ) {
 				return $actions;
 			}
 
@@ -624,9 +629,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'nonce' => wp_create_nonce( 'view' ),
 			) );
 
+			$invoice = new BEWPI_Invoice( $order->id );
 			$actions['invoice'] = array(
 				'url'  => $url,
-				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->formatted_number ),
+				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() ),
 			);
 
 			return $actions;

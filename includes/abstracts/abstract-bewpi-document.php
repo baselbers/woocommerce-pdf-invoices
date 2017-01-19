@@ -172,10 +172,21 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		/**
 		 * Check if document exists.
 		 *
+		 * @param string $full_path Full path to document.
+		 *
 		 * @return bool
 		 */
-		public function exists() {
-			return file_exists( $this->full_path );
+		public static function exists( $full_path ) {
+			return file_exists( $full_path );
+		}
+
+		/**
+		 * Get full path to document.
+		 *
+		 * @return string full path of document.
+		 */
+		public function get_full_path() {
+			return $this->full_path;
 		}
 	}
 }

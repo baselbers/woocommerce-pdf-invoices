@@ -219,7 +219,10 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 = 2.5.6 - January 19, 2017 =
 
+- Improved: Number of database calls to check if invoice exists.
+- Improved: Only deleting invoices with numbers greater then next number when using counter reset.
 - Fixed: 'view' action translatable.
+- Fixed: Not correct next number displayed on template settings page by changing input html attribute disabled to readonly.
 
 = 2.5.5 - January 12, 2017 =
 

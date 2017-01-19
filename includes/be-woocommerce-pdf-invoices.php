@@ -263,17 +263,30 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Creates invoices dir in uploads folder.
 		 */
 		public function setup_directories() {
-			// make invoices dir.
-			$current_year_dir = BEWPI_INVOICES_DIR . date_i18n( 'Y', current_time( 'timestamp' ) ) . '/';
-			wp_mkdir_p( $current_year_dir );
+			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
+			$directories        = array(
+				BEWPI_INVOICES_DIR => array(
+					'.htaccess',
+					'index.php',
+				),
+				BEWPI_INVOICES_DIR . $current_year . '/' => array(
+					'.htaccess',
+					'index.php',
+				),
+			);
 
-			// prevent direct access to invoices.
-			if ( ! file_exists( $current_year_dir . '.htaccess' ) ) {
-				copy( BEWPI_DIR . 'tmp/.htaccess', $current_year_dir . '.htaccess' );
-			}
+			// make pdf invoices dir.
+			wp_mkdir_p( BEWPI_INVOICES_DIR . $current_year . '/' );
 
-			if ( ! file_exists( $current_year_dir . 'index.php' ) ) {
-				copy( BEWPI_DIR . 'tmp/index.php', $current_year_dir . 'index.php' );
+			foreach ( $directories as $directory => $files ) {
+				foreach ( $files as $file ) {
+					if ( file_exists( $directory . $file ) ) {
+						continue;
+					}
+
+					// prevent direct access to invoices.
+					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
+				}
 			}
 
 			// make custom templates dir.

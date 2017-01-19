@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.5.6
+Stable tag: 2.5.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -216,6 +216,10 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 `
 
 == Changelog ==
+
+= 2.5.7 - January 20, 2017 =
+
+- Improved: Directory security by adding .htaccess and index.php to pdf invoices directory.
 
 = 2.5.6 - January 19, 2017 =
 

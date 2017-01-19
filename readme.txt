@@ -219,6 +219,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 = 2.5.6 - January 19, 2017 =
 
+- Improved: Language files.
 - Improved: Number of database calls to check if invoice exists.
 - Improved: Only deleting invoices with numbers greater then next number when using counter reset.
 - Fixed: 'view' action translatable.

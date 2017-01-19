@@ -549,7 +549,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			// invoice exists so display invoice info.
 			$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->formatted_number );
 			// display button to view invoice.
-			$this->show_invoice_button( __( 'View', 'woocommerce-pdf-invoices' ), $post->ID, __( 'view', 'woocommerce-pdf-invoices' ), array(
+			$this->show_invoice_button( __( 'View', 'woocommerce-pdf-invoices' ), $post->ID, 'view', array(
 				'class="invoice-btn button grant_access"',
 				'target="_blank"',
 			) );

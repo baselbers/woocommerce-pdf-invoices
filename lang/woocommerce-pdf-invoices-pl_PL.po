@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-19 21:19+0100\n"
-"PO-Revision-Date: 2017-01-19 21:19+0100\n"
+"POT-Creation-Date: 2017-01-20 17:38+0100\n"
+"PO-Revision-Date: 2017-01-20 17:38+0100\n"
 "Last-Translator: \n"
 "Language-Team: info@wcpdfinvoices.com\n"
 "Language: pl_PL\n"
@@ -224,47 +224,51 @@ msgstr ""
 msgid "Inactive"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:90
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:91
 msgid "Please select more then one order."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:208
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:209
 #: woocommerce-pdf-invoices-premium/includes/class-bewpipremium-invoice-reminder.php:52
 msgid "Invalid request"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:217
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:240
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:218
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:241
 msgid "Something went wrong."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:228
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:251
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:229
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:252
 msgid "No orders found."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:288
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:289
 #: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:137
 msgid "Settings"
 msgstr "Ustawienia"
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:289
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:50
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:290
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:51
 msgid "Support"
 msgstr "Wsparcie / Pomoc"
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:304
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:305
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:93
 #: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:155
 msgid "Premium"
 msgstr "Premium"
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:315
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:316
 msgid "Generate global invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:355
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:356
 msgid "Global invoice successfully generated! "
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bewpipremium-bulk-export.php:36
+msgid "Bulk Export PDF Invoices"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-bewpipremium-install.php:26
@@ -590,7 +594,7 @@ msgid ""
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:75
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:316
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:329
 msgid "Template"
 msgstr "Szablon"
 
@@ -901,63 +905,63 @@ msgid ""
 "rating. It will support future development big-time."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:289
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:302
 msgid "Invoices"
 msgstr "Faktury"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:315
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:328
 msgid "General"
 msgstr "Ogólne"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:354
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:367
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:363
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:376
 #, php-format
 msgid "Version %s"
 msgstr "Wersja %s"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:449
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:462
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:480
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:493
 msgid "View invoice"
 msgstr "Zobacz fakturę"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:495
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:508
 msgid "PDF Invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:511
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:524
 msgid "Invoiced on:"
 msgstr "Wystawiono dnia:"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:515
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:528
 msgid "Invoice number:"
 msgstr "Numer faktury:"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:547
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:560
 msgid "Create"
 msgstr "Stwórz"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:557
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:570
 msgid "View"
 msgstr "Zobacz"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:563
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:576
 msgid "Cancel"
 msgstr "Usuń"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:565
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:578
 msgid "Are you sure to delete the invoice?"
 msgstr "Czy na pewno chcesz usunąć fakturę?"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:635
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:648
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Faktura %s (PDF)"
@@ -972,31 +976,35 @@ msgid ""
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:5
+msgid "Bulk export and/or download PDF invoices."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:6
 msgid "Bill periodically by generating and sending global invoices."
 msgstr "Naliczaj okresowo generując i wysyłając globalne faktury."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:6
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:7
 msgid "Add additional PDF's to customer invoices."
 msgstr "Umieść dodatkowe PDF-y do faktur klienta."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:7
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:8
 msgid "Send customer invoices directly to suppliers and others."
 msgstr "Wysyłaj faktury bezpośrednio do dostawców i innych."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:8
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:9
 #, php-format
 msgid "Attach invoices to <a href=\"%s\">WooCommerce Subscriptions</a> emails."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:10
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:11
 msgid "Learn more"
 msgstr "Dowiedz się więcej"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:13
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:14
 msgid "Stay up-to-date"
 msgstr "Bądź na bieżąco"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:17
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:18
 msgid ""
 "We're constantly developing new features, stay up-to-date by subscribing to "
 "our newsletter."
@@ -1004,23 +1012,23 @@ msgstr ""
 "Wciąż udoskonalamy funkcjonalności, bądź na bieżąco zapisując się do "
 "newslettera."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:23
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:24
 msgid "Your email address"
 msgstr "Twój adres e-mail"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:29
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:30
 msgid "Signup"
 msgstr "Zapisz się"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:32
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:33
 msgid "No spam, ever. Unsubscribe at any time"
 msgstr "Bez spamu, zawsze. Wypisz się z listy kiedy chcesz."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:41
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:42
 msgid "About"
 msgstr "O wtyczce"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:43
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:44
 msgid ""
 "This plugin is an open source project wich aims to fill the invoicing gap of "
 "<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
@@ -1029,15 +1037,15 @@ msgstr ""
 "luki <a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a> w "
 "zakresie faktur."
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:45
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:46
 msgid "<b>Version</b>: "
 msgstr "<b>Wersja</b>: "
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:47
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:48
 msgid "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 msgstr "<b>Autor</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:52
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:53
 msgid ""
 "We will never ask for donations, but to guarantee future development, we do "
 "need your support. Please show us your appreciation by leaving a <a href="
@@ -1046,28 +1054,28 @@ msgid ""
 "org/plugins/woocommerce-pdf-invoices/\">works</a>."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:72
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:73
 msgid ""
 "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:77
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:78
 msgid "Need Help?"
 msgstr "Potrzebujesz pomocy?"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:79
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:80
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:80
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:81
 msgid "Support forum"
 msgstr "Forum wsparcia"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:81
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:82
 msgid "Request a feature"
 msgstr "Zaproponuj funkcjonalność"
 
-#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:82
+#: woocommerce-pdf-invoices/includes/partials/settings-sidebar.php:83
 msgid "Email us"
 msgstr "Napisz do nas"
 

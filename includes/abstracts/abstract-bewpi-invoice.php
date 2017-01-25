@@ -142,9 +142,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 					$digitized_invoice_number,
 					$this->get_formatted_order_date(),
 					$this->order->get_order_number(),
-					date_i18n( 'Y', strtotime( $this->date ) ),
-					date_i18n( 'y', strtotime( $this->date ) ),
-					date_i18n( 'm', strtotime( $this->date ) ),
+					date_i18n( 'Y', $this->formatted_str_to_time( $this->date ) ),
+					date_i18n( 'y', $this->formatted_str_to_time( $this->date ) ),
+					date_i18n( 'm', $this->formatted_str_to_time( $this->date ) ),
 				),
 				$this->template_options['bewpi_invoice_number_format']
 			);
@@ -153,14 +153,25 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Convert formatted datetime to unix timestamp.
+		 *
+		 * @param string $datetime Datetime to convert.
+		 *
+		 * @return int
+		 */
+		private function formatted_str_to_time( $datetime ) {
+			$date_format = $this->get_date_format();
+			$dt = date_parse_from_format( $date_format, $datetime );
+			return mktime( $dt['hour'], $dt['minute'], $dt['second'], $dt['month'], $dt['day'], $dt['year'] );
+		}
+
+		/**
 		 * Format date.
 		 *
 		 * @return string
 		 */
 		public function get_formatted_invoice_date() {
-			$date_format = $this->get_date_format();
-
-			return date_i18n( $date_format, strtotime( $this->date ) );
+			return $this->date;
 		}
 
 		/**
@@ -697,8 +708,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$filename = $formatted_number . '.pdf';
 			if ( (bool) $template_options['bewpi_reset_counter_yearly'] ) {
-				$invoice_date = get_post_meta( $order_id, '_bewpi_invoice_date', true );
-				$invoice_year = date_i18n( 'Y', strtotime( $invoice_date ) );
+				$invoice_year = get_post_meta( $order_id, '_bewpi_invoice_year', true );
 				$full_path    = BEWPI_INVOICES_DIR . $invoice_year . '/' . $filename;
 			} else {
 				$full_path = BEWPI_INVOICES_DIR . $filename;

@@ -62,7 +62,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 						array(
 							'name'    => __( 'New order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'new_order',
-							'default' => 0,
+							'default' => 1,
 						),
 						array(
 							'name'    => __( 'Order on-hold', 'woocommerce-pdf-invoices' ),
@@ -77,7 +77,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 						array(
 							'name'    => __( 'Completed order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_completed_order',
-							'default' => 0,
+							'default' => 1,
 						),
 						array(
 							'name'    => __( 'Customer invoice', 'woocommerce-pdf-invoices' ),
@@ -199,7 +199,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'desc'     => __( 'Enable Invoice Number column' )
 					              . '<br/><div class="bewpi-notes">' . __( 'Display invoice numbers on Shop Order page.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
-					'default'  => 0,
+					'default'  => 1,
 				),
 				array(
 					'id'       => 'bewpi-mpdf-debug',

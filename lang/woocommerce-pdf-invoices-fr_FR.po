@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-20 17:38+0100\n"
-"PO-Revision-Date: 2017-01-20 17:38+0100\n"
+"POT-Creation-Date: 2017-01-28 19:17+0100\n"
+"PO-Revision-Date: 2017-01-28 19:17+0100\n"
 "Last-Translator: Nicolas Bernier <nicolas.bernier@synagila.com>\n"
 "Language-Team: Pierre SAIKALI <pierre@mosaika.fr>\n"
 "Language: fr_FR\n"
@@ -275,7 +275,7 @@ msgstr "Premium"
 msgid "Generate global invoice"
 msgstr "Générer facture globale"
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:356
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:362
 msgid "Global invoice successfully generated! "
 msgstr "facture globale générée avec succès ! "
 
@@ -354,118 +354,113 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:5
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:9
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:9
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:11
 msgid "Invoice to"
 msgstr "Facture pour"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:7
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:12
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:11
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:14
 #, php-format
 msgid "Phone: %s"
 msgstr "Téléphone : %s"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:11
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:19
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:15
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:21
 msgid "Ship to"
 msgstr "Livraison pour"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:22
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:26
 msgid "Global Invoice"
 msgstr "Facture globale"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:40
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:50
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:43
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:51
 msgid "Description"
 msgstr "Description"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:44
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:48
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:412
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:54
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:55
 msgid "SKU"
 msgstr "UGS"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:48
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:52
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:58
 msgid "Cost"
 msgstr "Coût"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:50
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:54
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:60
 msgid "Qty"
 msgstr "Qté"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:56
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:66
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:61
 msgid "VAT"
 msgstr "TVA"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:67
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:283
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:77
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:287
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:72
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:286
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:69
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:273
 msgid "Total"
 msgstr "Total"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:75
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:80
 #, php-format
 msgid "Order #%d - %s"
 msgstr "Commande n°%d - %s"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:223
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:226
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:460
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:217
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:205
 msgid "Discount"
 msgstr "Réduction"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:231
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:247
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:234
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:250
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:472
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:225
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:243
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:213
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:229
 msgid "Shipping"
 msgstr "Livraison"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:239
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:242
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:424
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:233
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:221
 msgid "Subtotal"
 msgstr "Sous-total"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:258
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:254
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:261
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:240
 msgid "Fee"
 msgstr "Frais"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:290
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:296
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:293
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:282
 msgid "Refunded"
 msgstr "Remboursement"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/footer.php:27
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:623
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:530
 #, php-format
 msgid "%s of %s"
 msgstr "%s de %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:106
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:126
 msgid "Paid"
 msgstr "Payé"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:452
-#, php-format
-msgid ""
-"Invoice with invoice number %s not found. First create invoice and try again."
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:347
+msgid "Invoice not found. First create invoice and try again."
 msgstr ""
-"Facture avec numéro de facture %s non trouvé. Créez d'abord la facture et "
-"essayez à nouveau."
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:499
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:400
 #, php-format
 msgid "VAT Number: %s"
 msgstr "Numéro de TVA :%s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:510
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:411
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Numéro de Commande : %s"
@@ -940,43 +935,43 @@ msgstr ""
 msgid "Version %s"
 msgstr "Version %s"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:462
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:461
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:493
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:492
 msgid "View invoice"
 msgstr " Voir la facture"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:508
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:507
 msgid "PDF Invoice"
 msgstr "Facture PDF"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:524
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:523
 msgid "Invoiced on:"
 msgstr "Facturés sur"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:528
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:527
 msgid "Invoice number:"
 msgstr "Numéro de facture"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:560
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:559
 msgid "Create"
 msgstr "créer"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:570
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:569
 msgid "View"
 msgstr "Voir"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:576
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:575
 msgid "Cancel"
 msgstr "Annuler"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:578
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:577
 msgid "Are you sure to delete the invoice?"
 msgstr "Êtes-vous certain de vouloir supprimer la facture? "
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:648
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:647
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Facture %s (PDF)"
@@ -1100,28 +1095,35 @@ msgstr "Demander une fonctionnalité"
 msgid "Email us"
 msgstr "Nous envoyer un courrier électronique"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:33
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:35
 #, php-format
 msgid "Order Number: %s"
 msgstr "Numéro de commande : %s"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:34
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:36
 #, php-format
 msgid "Order Date: %s"
 msgstr "Date de commande : %s"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:280
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:266
 msgid "VAT 0%"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:311
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:316
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:297
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:302
 msgid "Customer note"
 msgstr "Note du client"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:325
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:311
 msgid "Zero rated for VAT as customer has supplied EU VAT number"
 msgstr ""
+
+#~ msgid ""
+#~ "Invoice with invoice number %s not found. First create invoice and try "
+#~ "again."
+#~ msgstr ""
+#~ "Facture avec numéro de facture %s non trouvé. Créez d'abord la facture et "
+#~ "essayez à nouveau."
 
 #~ msgid "Reset on 1st of january"
 #~ msgstr "Réinitialiser le 1er janvier"

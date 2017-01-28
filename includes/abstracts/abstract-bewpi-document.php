@@ -18,11 +18,25 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	 */
 	abstract class BEWPI_Abstract_Document {
 		/**
-		 * Document filename.
+		 * WooCommerce Order associated with invoice.
 		 *
-		 * @var string.
+		 * @var WC_Order
 		 */
-		protected $filename;
+		public $order;
+
+		/**
+		 * Output destination mode of mPDF.
+		 *
+		 * @var string
+		 */
+		protected $destination;
+
+		/**
+		 * Array containing all HTML to generate as PDF.
+		 *
+		 * @var array
+		 */
+		protected $html_templates = array();
 
 		/**
 		 * Full path to document.
@@ -30,6 +44,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @var string
 		 */
 		protected $full_path;
+
+		/**
+		 * Document filename.
+		 *
+		 * @var string.
+		 */
+		protected $filename;
 
 		/**
 		 * General options.
@@ -56,11 +77,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		/**
 		 * Generate document.
 		 *
-		 * @param array  $html_sections Html output.
-		 * @param string $dest Destination shortcode for file.
+		 * @param string $destination Destination mode for file.
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
-		protected function generate( $html_sections, $dest, $is_paid ) {
+		protected function generate( $destination, $is_paid ) {
 			require_once BEWPI_DIR . 'lib/mpdf/mpdf.php';
 			require_once BEWPI_DIR . 'lib/mpdf/vendor/autoload.php';
 
@@ -124,24 +144,73 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->useOnlyCoreFonts    = false;
 			$mpdf->useSubstitutions    = true;
 
-			if ( ! empty( $html_sections['header'] ) ) {
-				$mpdf->SetHTMLHeader( $html_sections['header'] );
+			$html = $this->get_html();
+			if ( count( $html ) === 0 ) {
+				return;
 			}
 
-			if ( ! empty( $html_sections['footer'] ) ) {
-				$mpdf->SetHTMLFooter( $html_sections['footer'] );
+			if ( ! empty( $html['header'] ) ) {
+				$mpdf->SetHTMLHeader( $html['header'] );
 			}
 
-			$mpdf->WriteHTML( $html_sections['style'] . $html_sections['body'] );
+			if ( ! empty( $html['footer'] ) ) {
+				$mpdf->SetHTMLFooter( $html['footer'] );
+			}
 
-			$mpdf     = apply_filters( 'bewpi_mpdf', $mpdf );
-			$filename = ( 'F' === $dest ) ? $this->full_path : $this->filename;
+			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
-			$mpdf->Output( $filename, $dest );
+			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
+
+			if ( 'F' === $destination ) {
+				$name = $this->full_path;
+			} else {
+				$name = $this->filename;
+			}
+
+			$mpdf->Output( $name, $destination );
 		}
 
 		/**
-		 * View document.
+		 * Output HTML file to buffer.
+		 *
+		 * @param string $full_path to html file.
+		 *
+		 * @return string
+		 */
+		private function buffer( $full_path ) {
+			ob_start();
+			require $full_path;
+			$html = ob_get_contents();
+			ob_end_clean();
+
+			return $html;
+		}
+
+		/**
+		 * Get PDF html.
+		 *
+		 * @return array
+		 */
+		private function get_html() {
+			do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
+
+			$html = array();
+			foreach ( $this->html_templates as $section => $full_path ) {
+				if ( 'style' === $section ) {
+					$html[ $section ] = '<style>' . $this->buffer( $full_path ) . '</style>';
+					continue;
+				}
+
+				$html[ $section ] = $this->buffer( $full_path );
+			}
+
+			do_action( 'bewpi_after_output_template_to_buffer' );
+
+			return $html;
+		}
+
+		/**
+		 * View pdf file.
 		 */
 		public function view() {
 			if ( 'browser' === $this->general_options['bewpi_view_pdf'] ) {
@@ -163,30 +232,39 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		}
 
 		/**
-		 * Delete document.
+		 * Delete pdf document.
+		 *
+		 * @param string $full_path absolute path to pdf document.
 		 */
-		public function delete() {
-			wp_delete_file( $this->full_path );
+		protected static function delete( $full_path ) {
+			if ( file_exists( $full_path ) ) {
+				wp_delete_file( $full_path );
+			}
 		}
 
 		/**
-		 * Check if document exists.
+		 * Full path to pdf invoice.
 		 *
-		 * @param string $full_path Full path to document.
-		 *
-		 * @return bool
-		 */
-		public static function exists( $full_path ) {
-			return file_exists( $full_path );
-		}
-
-		/**
-		 * Get full path to document.
-		 *
-		 * @return string full path of document.
+		 * @return string full path to pdf invoice.
 		 */
 		public function get_full_path() {
 			return $this->full_path;
+		}
+
+		/**
+		 * Check if pdf exists within uploads folder.
+		 *
+		 * @param string $full_path to pdf file.
+		 *
+		 * @return bool/string false when pdf does not exist else full path to pdf.
+		 */
+		public static function exists( $full_path ) {
+			// pdf file exists?
+			if ( ! file_exists( $full_path ) ) {
+				return false;
+			}
+
+			return $full_path;
 		}
 	}
 }

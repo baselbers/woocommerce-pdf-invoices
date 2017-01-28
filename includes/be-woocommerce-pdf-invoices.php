@@ -231,16 +231,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// execute invoice action.
-			$invoice = new BEWPI_Invoice( $order->id );
 			switch ( $action ) {
 				case 'view':
+					$invoice = new BEWPI_Invoice( $order->id );
 					$invoice->view();
 					break;
 				case 'cancel':
-					$invoice->delete();
+					BEWPI_Invoice::delete( $order->id );
 					break;
 				case 'create':
-					$invoice->save( 'F' );
+					$invoice = new BEWPI_Invoice( $order->id );
+					$invoice->save();
 					break;
 			}
 		}
@@ -254,8 +255,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$type = get_post_type( $post_id );
 			// is post a WooCommerce order?
 			if ( 'shop_order' === $type ) {
-				$invoice = new BEWPI_Invoice( $post_id );
-				$invoice->delete();
+				BEWPI_Invoice::delete( $post_id );
 			}
 		}
 
@@ -432,9 +432,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			if ( BEWPI_Invoice::exists( $order->id ) ) {
-				$full_path = get_post_meta( $order->id, '_bewpi_formatted_invoice_number', true ) . '.pdf';
-			} else {
+			$full_path = BEWPI_Invoice::exists( $order->id );
+			if ( ! $full_path ) {
 				$invoice = new BEWPI_Invoice( $order->id );
 				$full_path = $invoice->save( 'F' );
 			}

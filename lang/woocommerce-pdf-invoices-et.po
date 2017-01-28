@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-20 17:38+0100\n"
-"PO-Revision-Date: 2017-01-20 17:38+0100\n"
+"POT-Creation-Date: 2017-01-28 19:17+0100\n"
+"PO-Revision-Date: 2017-01-28 19:17+0100\n"
 "Last-Translator: Jüri Laur <jyri@jyrilaur.com>\n"
 "Language-Team: Jüri Laur\n"
 "Language: et\n"
@@ -263,7 +263,7 @@ msgstr "Premium"
 msgid "Generate global invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:356
+#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:362
 msgid "Global invoice successfully generated! "
 msgstr ""
 
@@ -342,116 +342,113 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:5
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:9
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:9
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:11
 msgid "Invoice to"
 msgstr "Arve saaja"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:7
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:12
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:11
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:14
 #, php-format
 msgid "Phone: %s"
 msgstr "Telefon: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:11
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:19
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:15
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:21
 msgid "Ship to"
 msgstr "Tarne aadress"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:22
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:26
 msgid "Global Invoice"
 msgstr "Globaalne arve"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:40
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:50
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:43
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:51
 msgid "Description"
 msgstr "Kirjeldus"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:44
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:48
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:412
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:54
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:55
 msgid "SKU"
 msgstr "Tootekood"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:48
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:52
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:58
 msgid "Cost"
 msgstr "Hind"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:50
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:54
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:60
 msgid "Qty"
 msgstr "TK"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:56
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:66
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:61
 msgid "VAT"
 msgstr "KM"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:67
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:283
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:77
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:287
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:72
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:286
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:69
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:273
 msgid "Total"
 msgstr "Kokku"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:75
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:80
 #, php-format
 msgid "Order #%d - %s"
 msgstr "Tellimus #%d - %s"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:223
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:226
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:460
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:217
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:205
 msgid "Discount"
 msgstr "Allahindlus"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:231
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:247
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:234
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:250
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:472
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:225
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:243
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:213
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:229
 msgid "Shipping"
 msgstr "Postikulu"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:239
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:242
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:424
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:233
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:221
 msgid "Subtotal"
 msgstr "Vahesumma"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:258
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:254
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:261
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:240
 msgid "Fee"
 msgstr "Tasu"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:290
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:296
+#: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/body.php:293
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:282
 msgid "Refunded"
 msgstr "Tagastatud"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoices/global/micro/footer.php:27
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:623
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:530
 #, php-format
 msgid "%s of %s"
 msgstr "Lehekülg %s /%s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:106
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:126
 msgid "Paid"
 msgstr "Makstud"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:452
-#, php-format
-msgid ""
-"Invoice with invoice number %s not found. First create invoice and try again."
-msgstr "Arve numbriga %s ei ole leitav. Loo arve ja proovi uuesti."
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:347
+msgid "Invoice not found. First create invoice and try again."
+msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:499
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:400
 #, php-format
 msgid "VAT Number: %s"
 msgstr "KMKR nr: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:510
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:411
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Ostukorralduse number: %s"
@@ -922,43 +919,43 @@ msgstr ""
 msgid "Version %s"
 msgstr "Versioon %s"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:462
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:461
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:493
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:492
 msgid "View invoice"
 msgstr "Vaata arvet"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:508
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:507
 msgid "PDF Invoice"
 msgstr "PDF Arve"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:524
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:523
 msgid "Invoiced on:"
 msgstr "Arve väljastatud:"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:528
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:527
 msgid "Invoice number:"
 msgstr "Arve number:"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:560
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:559
 msgid "Create"
 msgstr "Loo"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:570
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:569
 msgid "View"
 msgstr "Vaata"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:576
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:575
 msgid "Cancel"
 msgstr "Tühista"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:578
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:577
 msgid "Are you sure to delete the invoice?"
 msgstr "Oled sa kindel, et soovid arvet kustutada?"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:648
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:647
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Arve %s (PDF)"
@@ -1078,28 +1075,33 @@ msgstr "Küsi lisafunktsionaalsust"
 msgid "Email us"
 msgstr "Kirjuta meile"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:33
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:35
 #, php-format
 msgid "Order Number: %s"
 msgstr "Tellimuse number: %s"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:34
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:36
 #, php-format
 msgid "Order Date: %s"
 msgstr "Tellimuse kuupäev %s"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:280
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:266
 msgid "VAT 0%"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:311
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:316
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:297
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:302
 msgid "Customer note"
 msgstr "Kliendi märkus"
 
-#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:325
+#: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:311
 msgid "Zero rated for VAT as customer has supplied EU VAT number"
 msgstr ""
+
+#~ msgid ""
+#~ "Invoice with invoice number %s not found. First create invoice and try "
+#~ "again."
+#~ msgstr "Arve numbriga %s ei ole leitav. Loo arve ja proovi uuesti."
 
 #~ msgid "Reset on 1st of january"
 #~ msgstr "Nulli 1. jaanuaril"

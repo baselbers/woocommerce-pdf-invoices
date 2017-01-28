@@ -20,43 +20,33 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	 */
 	class BEWPI_Invoice extends BEWPI_Abstract_Invoice {
 		/**
-		 * Type of invoice.
-		 *
-		 * @var string
-		 */
-		protected $type = 'simple';
-
-		/**
 		 * BEWPI_Invoice constructor.
 		 *
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order     = wc_get_order( $order_id );
-			$this->tax_count = count( $this->order->get_taxes() );
-			parent::__construct( $order_id, $this->type );
+			$this->order = wc_get_order( $order_id );
+			$this->type  = 'simple';
+			parent::__construct( $order_id );
 		}
 
 		/**
-		 * Create PDF Invoice.
+		 * Save invoice.
 		 *
-		 * @param string $dest Save method.
-		 * @param array  $html_templates Paths of HTML template files.
+		 * @param string $destination file destination mode of mPDF PDF generation.
 		 *
 		 * @return string
 		 */
-		public function save( $dest, $html_templates = array() ) {
-			$template_dirname = $this->get_template_dir();
-			$html_templates    = array(
+		public function save( $destination = 'F' ) {
+			$template_dirname     = $this->get_template_dir();
+			$this->html_templates = array(
 				'header' => $template_dirname . 'header.php',
 				'footer' => $template_dirname . 'footer.php',
 				'body'   => $template_dirname . 'body.php',
 				'style'  => $template_dirname . 'style.css',
 			);
 
-			parent::save( $dest, $html_templates );
-
-			return $this->full_path;
+			return parent::save( $destination );
 		}
 
 		/**

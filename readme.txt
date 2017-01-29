@@ -217,7 +217,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.6.0 - January 28, 2017 =
+= 2.6.0 - January 29, 2017 =
 
 - Added: 'bewpi_formatted_invoice_number_order_date' filter to change format of order date within formatted invoice number.
 - Added: VAT rate percentages. Update your custom template within uploads folder!

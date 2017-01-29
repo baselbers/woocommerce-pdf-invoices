@@ -70,6 +70,8 @@ function update_email_type_options() {
 		}
 		// delete old option.
 		unset( $general_options['bewpi_email_type'] );
+
+		update_option( 'bewpi_general_settings', $general_options );
 	}
 
 	if ( isset( $general_options['bewpi_new_order'] ) ) {
@@ -80,9 +82,9 @@ function update_email_type_options() {
 		}
 		// delete old option.
 		unset( $general_options['bewpi_new_order'] );
-	}
 
-	update_option( 'bewpi_general_settings', $general_options );
+		update_option( 'bewpi_general_settings', $general_options );
+	}
 }
 
 /**

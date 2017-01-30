@@ -78,13 +78,12 @@ class BEWPI_Admin_Notices {
 	 * @return DateTime|bool
 	 */
 	private static function get_install_date() {
-		$install_date = get_site_option( 'bewpi-install-date' );
-
-		if ( false !== $install_date ) {
-			$install_date = DateTime::createFromFormat( 'Y-m-d', $install_date );
+		if ( version_compare( BEWPI_VERSION, '2.6.1' ) >= 0 ) {
+			// since 2.6.1+ option name changed and date has mysql format.
+			return DateTime::createFromFormat( 'Y-m-d H:i:s', get_site_option( 'bewpi_install_date' ) );
 		}
 
-		return $install_date;
+		return DateTime::createFromFormat( 'Y-m-d', get_site_option( 'bewpi-install-date' ) );
 	}
 
 	/**

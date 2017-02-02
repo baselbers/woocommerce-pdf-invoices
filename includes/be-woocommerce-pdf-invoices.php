@@ -478,6 +478,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			if ( BEWPI_Invoice::exists( $post->ID ) ) {
 				echo get_post_meta( $post->ID, '_bewpi_invoice_number', true );
+			} else {
+				echo '-';
 			}
 		}
 

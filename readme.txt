@@ -223,6 +223,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 - Added: "Send anonymous usage statistics" option to track (non-personal) option usage to get more insights for future releases.
 - Improved: 'readme.txt' and 'settings-sidebar.php' files.
 - Fixed: Invoice number compatibility with third party plugins.
+- Fixed: Invoice number column on mobile by adding a '-' when no invoice number exists.
 
 = 2.6.1 - January 30, 2017 =
 

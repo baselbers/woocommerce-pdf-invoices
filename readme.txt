@@ -220,8 +220,8 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 = 2.6.2 - February 2, 2017 =
 
+- Added: "Send anonymous usage statistics" option to track (non-personal) option usage to get more insights for future releases.
 - Improved: 'readme.txt' and 'settings-sidebar.php' files.
-
 
 = 2.6.1 - January 30, 2017 =
 

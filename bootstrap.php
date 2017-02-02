@@ -169,6 +169,38 @@ function update_date_format_postmeta( $post_id, $date_format ) {
 }
 
 /**
+ * Send anonymous user options to http://wcpdfinvoices.com to analyze usage.
+ *
+ * @param array $general_options General user options.
+ * @param array $template_options Template user options.
+ */
+function track_usage_statistics( $general_options, $template_options ) {
+	if ( get_transient( 'bewpi_options_sent' ) ) {
+		return;
+	}
+
+	// Do not send "Email It In" email address. Don't need personal info..
+	unset( $general_options['bewpi_email_it_in_account'] );
+
+	// add filter to add (non-personal) options of "WooCommerce PDF Invoices Premium" plugin.
+	$options = apply_filters( 'bewpi_track_option_usage_options', array_merge( $general_options, $template_options ) );
+
+	$response = wp_safe_remote_post( 'http://wcpdfinvoices.com', array(
+		'action' => 'bewpi_handle_options',
+		'nonce' => wp_create_nonce( 'bewpi_handle_options' ),
+		'plugin_version' => BEWPI_VERSION,
+		'options' => wp_json_encode( $options ),
+		)
+	);
+
+	if ( is_wp_error( $response ) && WP_DEBUG ) {
+		error_log( $response->get_error_message() );
+	}
+
+	set_transient( 'bewpi_options_sent', true );
+}
+
+/**
  * Save install date, plugin version to db and set transient to show activation notice.
  *
  * @since 2.5.0

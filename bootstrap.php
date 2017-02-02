@@ -39,11 +39,14 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
  * @since 2.5.0
  */
 function _bewpi_on_plugin_update() {
-	if ( get_site_option( 'bewpi_version' ) !== BEWPI_VERSION ) {
+	$current_version = get_site_option( 'bewpi_version' );
+	if ( BEWPI_VERSION !== $current_version ) {
 
-		update_email_type_options();
-
-		update_postmeta();
+		// version 2.6.1- need to be updated with new email options and postmeta.
+		if ( version_compare( $current_version, '2.6.1' ) <= 0 ) {
+			update_email_type_options();
+			update_postmeta();
+		}
 
 		update_site_option( 'bewpi_version', BEWPI_VERSION );
 	}

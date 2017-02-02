@@ -103,7 +103,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 					$this->template_options['bewpi_invoice_number_suffix'],
 					$digitized_invoice_number,
 					apply_filters( 'bewpi_formatted_invoice_number_order_date', $this->get_formatted_order_date() ),
-					$this->order->id,
+					$this->order->get_order_number(),
 					$this->year,
 					date_i18n( 'y', strtotime( $this->date ) ),
 					date_i18n( 'm', strtotime( $this->date ) ),

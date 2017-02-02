@@ -80,6 +80,5 @@
 		<li><a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/faq/"><?php _e( 'Frequently Asked Questions', 'woocommerce-pdf-invoices' ); ?> </a></li>
 		<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Support forum', 'woocommerce-pdf-invoices' ); ?></a></li>
 		<li><a href="https://wordpress.org/support/plugin/woocommerce-pdf-invoices"><?php _e( 'Request a feature', 'woocommerce-pdf-invoices' ); ?></a></li>
-		<li><a href="mailto:baselbers@hotmail.com"><?php _e( 'Email us', 'woocommerce-pdf-invoices' ); ?></a></li>
 	</ul>
 </aside>

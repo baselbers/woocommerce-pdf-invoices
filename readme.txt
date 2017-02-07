@@ -221,8 +221,10 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 = 2.6.2 - February 2, 2017 =
 
 - Added: "Send anonymous usage statistics" option to track (non-personal) option usage to get more insights for future releases.
+- Improved: Invoice number column position near 'Actions' columns and reduced width.
 - Improved: 'readme.txt' and 'settings-sidebar.php' files.
-- Fixed: Invoice number compatibility with third party plugins.
+- Fixed: `bewpi_mpdf` filter not working properly. Should be placed before writing html.
+- Fixed: Invoice number compatibility with third party plugins by using `get_order_number()` method instead of `id`.
 - Fixed: Invoice number column on mobile by adding a '-' when no invoice number exists.
 
 = 2.6.1 - January 30, 2017 =

@@ -157,9 +157,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
-			$mpdf->WriteHTML( $html['style'] . $html['body'] );
-
 			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
+
+			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
 			if ( 'F' === $destination ) {
 				$name = $this->full_path;

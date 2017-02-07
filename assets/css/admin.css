@@ -85,6 +85,9 @@ form.bewpi-settings-form {
 #bewpi-plugin-activated-notice button.notice-dismiss {
     display: none;
 }
+.manage-column.column-bewpi_invoice_number {
+    width: 8%;
+}
 /* Sidebar */
 .bewpi-sidebar {
     width: 25%;

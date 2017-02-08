@@ -50,8 +50,6 @@ function _bewpi_on_plugin_update() {
 
 		update_site_option( 'bewpi_version', BEWPI_VERSION );
 	}
-
-	track_usage_statistics( get_option( 'bewpi_general_settings' ), get_option( 'bewpi_template_settings' ) );
 }
 
 /**

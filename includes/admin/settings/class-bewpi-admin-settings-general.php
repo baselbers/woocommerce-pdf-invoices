@@ -207,23 +207,10 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'title'    => '',
 					'callback' => array( $this, 'input_callback' ),
 					'page'     => self::SETTINGS_KEY,
-					'section'  => 'other',
+					'section'  => 'debug',
 					'type'     => 'checkbox',
 					'desc'     => __( 'Enable mPDF debugging' )
 					              . '<br/><div class="bewpi-notes">' . __( 'Enable mPDF debugging if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
-					'class'    => 'bewpi-checkbox-option-title',
-					'default'  => 0,
-				),
-				array(
-					'id'       => 'bewpi-usage-tracking',
-					'name'     => self::PREFIX . 'usage_tracking',
-					'title'    => '',
-					'callback' => array( $this, 'input_callback' ),
-					'page'     => self::SETTINGS_KEY,
-					'section'  => 'other',
-					'type'     => 'checkbox',
-					'desc'     => __( 'Send anonymous usage statistics' )
-					              . '<br/><div class="bewpi-notes">' . __( 'Allow us to anonymously track option usage (of this plugin) and help us make it better fit your needs. No sensitive data will be tracked!', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,
 				),
@@ -286,7 +273,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			add_settings_section( 'download', __( 'Download Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 			add_settings_section( 'cloud_storage', __( 'Cloud Storage Options', 'woocommerce-pdf-invoices' ), array( $this, 'cloud_storage_desc_callback' ), self::SETTINGS_KEY );
 			add_settings_section( 'interface', __( 'Interface Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
-			add_settings_section( 'other', __( 'Other Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+			add_settings_section( 'debug', __( 'Debug Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 		}
 
 		/**

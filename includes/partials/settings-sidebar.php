@@ -2,6 +2,7 @@
 	<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
 		<?php _e( 'This plugin offers a premium version which comes with the following features:', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Bulk generate PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bulk export and/or download PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bill periodically by generating and sending global invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Add additional PDF\'s to customer invoices.', 'woocommerce-pdf-invoices' ); ?><br/>

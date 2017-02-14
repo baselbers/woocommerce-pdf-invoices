@@ -113,36 +113,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			<?php
 		}
 
-		public function logo_callback( $args ) {
-			$options = get_option( $args['page'] );
-			?>
-			<input id="<?php echo $args['id']; ?>"
-			       name="<?php echo $args['name']; ?>"
-			       type="<?php echo $args['type']; ?>"
-			       accept="image/*"
-			/>
-			<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-			<input id="<?php echo $args['id'] . '-value'; ?>"
-			       name="<?php echo $args['name']; ?>"
-			       type="hidden"
-			       value="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"
-			/>
-
-			<?php
-			if ( ! empty( $options[ $args['name'] ] ) ) {
-				?>
-				<div id="<?php echo $args['id'] . '-wrapper'; ?>">
-					<img id="<?php echo $args['id'] . '-image'; ?>"
-					     src="<?php echo esc_attr( $options[ $args['name'] ] ); ?>"/>
-					<img id="<?php echo $args['id'] . '-delete'; ?>"
-					     src="<?php echo BEWPI_URL . '/assets/images/delete-icon.png'; ?>"
-					     onclick="bewpi.setting.removeCompanyLogo()"
-					     title="<?php _e( 'Remove logo', 'woocommerce-pdf-invoices' ); ?>"/>
-				</div>
-				<?php
-			}
-		}
-
 		public function textarea_callback( $args ) {
 			$options = get_option( $args['page'] );
 			?>

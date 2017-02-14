@@ -221,6 +221,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 = 2.6.2 - February 2, 2017 =
 
+- Improved: Company logo setting by just using a attachment url from Media Library. Note that the image won't be shown on settings page anymore.
 - Improved: 'readme.txt' and 'settings-sidebar.php' files.
 - Fixed: `bewpi_mpdf` filter not working properly. Should be placed before writing html.
 - Fixed: Invoice number compatibility with third party plugins by using `get_order_number()` method instead of `id`.

@@ -420,13 +420,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array|mixed|void
 		 */
 		public function attach_invoice_to_email( $attachments, $status, $order ) {
+			$general_options = get_option( 'bewpi_general_settings' );
+			if ( $order->get_total() === 0.00 && (bool) $general_options['bewpi_disable_free_products'] ) {
+				return $attachments;
+			}
+
 			// payment methods for which the invoice generation should be cancelled.
 			$payment_methods = apply_filters( 'bewpi_attach_invoice_excluded_payment_methods', array() );
 			if ( in_array( $order->payment_method, $payment_methods, true ) ) {
 				return $attachments;
 			}
 
-			$general_options = get_option( 'bewpi_general_settings' );
 			// check if email is enabled.
 			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
 				return $attachments;

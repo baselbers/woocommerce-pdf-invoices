@@ -130,6 +130,21 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					),
 				),
 				array(
+					'id'       => 'bewpi-disable-free-products',
+					'name'     => self::PREFIX . 'disable_free_products',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'email',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Disable for free products', 'woocommerce-pdf-invoices' )
+					              . '<br/><div class="bewpi-notes">'
+					              . __( 'Do not generate PDF invoice for order with only free products.', 'woocommerce-pdf-invoices' )
+					              . '</div>',
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
 					'id'       => 'bewpi-view-pdf',
 					'name'     => self::PREFIX . 'view_pdf',
 					'title'    => __( 'View PDF', 'woocommerce-pdf-invoices' ),

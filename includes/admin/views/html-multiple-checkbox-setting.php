@@ -27,5 +27,5 @@ $options = get_option( $args['page'] ); ?>
 	<?php } ?>
 </ul>
 <div class="bewpi-notes">
-	<?php echo esc_html( $args['desc'] ); ?>
+	<?php echo $args['desc']; ?>
 </div>

@@ -222,8 +222,9 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 = 2.6.3 - February 17, 2017 =
 
 - Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
+- Improved: Translation files.
 
-= 2.6.2 - February 2, 2017 =
+= 2.6.2 - February 15, 2017 =
 
 - Improved: Company logo setting by just using a attachment url from Media Library. Note that the image won't be shown on settings page anymore.
 - Improved: 'readme.txt' and 'settings-sidebar.php' files.

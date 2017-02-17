@@ -25,28 +25,16 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order = wc_get_order( $order_id );
-			$this->type  = 'simple';
+			$this->order            = wc_get_order( $order_id );
+			$this->type             = 'simple';
 			parent::__construct( $order_id );
-		}
-
-		/**
-		 * Save invoice.
-		 *
-		 * @param string $destination file destination mode of mPDF PDF generation.
-		 *
-		 * @return string
-		 */
-		public function save( $destination = 'F' ) {
-			$template_dirname     = $this->get_template_dir();
-			$this->html_templates = array(
+			$template_dirname       = $this->get_template_dir();
+			$this->html_templates   = array(
 				'header' => $template_dirname . 'header.php',
 				'footer' => $template_dirname . 'footer.php',
 				'body'   => $template_dirname . 'body.php',
 				'style'  => $template_dirname . 'style.css',
 			);
-
-			return parent::save( $destination );
 		}
 
 		/**

@@ -432,10 +432,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$full_path = BEWPI_Invoice::exists( $order->id );
-			if ( ! $full_path ) {
-				$invoice = new BEWPI_Invoice( $order->id );
-				$full_path = $invoice->save( 'F' );
+			$invoice = new BEWPI_Invoice( $order->id );
+			if ( ! $invoice->exists( $order->id ) ) {
+				$full_path = $invoice->save();
+			} else {
+				$full_path = $invoice->update();
 			}
 
 			$attachments[] = $full_path;

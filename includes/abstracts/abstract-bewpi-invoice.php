@@ -299,7 +299,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return string
 		 */
-		protected function save( $destination ) {
+		public function save( $destination = 'F' ) {
 			do_action( 'bewpi_before_invoice_content', $this->order->id );
 
 			if ( BEWPI_Invoice::exists( $this->order->id ) ) {
@@ -340,6 +340,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Update invoice.
+		 *
+		 * @param string $destination pdf generation mode.
+		 *
+		 * @return string $full_path Full path to PDF invoice file.
+		 */
+		public function update( $destination = 'F' ) {
+			parent::delete( $this->full_path );
+			parent::generate( $destination, $this->order->is_paid() );
+
+			return $this->full_path;
+		}
+
+		/**
 		 * View invoice.
 		 */
 		public function view() {
@@ -350,6 +364,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				);
 			}
 
+			$this->update();
 			parent::view();
 		}
 

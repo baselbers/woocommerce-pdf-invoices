@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.6.2
+Stable tag: 2.6.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -29,8 +29,8 @@ This WooCommerce plugin generates PDF invoices, attaches it to WooCommerce email
 
 > **WooCommerce PDF Invoices Premium**<br /><br />
 > This plugin offers a premium version which comes with the following features:<br /><br />
-> - Bulk generate PDF invoices<br/>
-> - Bulk export and/or download PDF invoices<br/>
+> - Bulk generate PDF invoices<br />
+> - Bulk export and/or download PDF invoices<br />
 > - Periodically bill by generating and sending global invoices<br />
 > - Add additional PDF files to customer invoices.<br />
 > - Send customer invoices directly to multiple recipients like suppliers.<br />
@@ -218,6 +218,10 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 `
 
 == Changelog ==
+
+= 2.6.3 - February 17, 2017 =
+
+- Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
 
 = 2.6.2 - February 2, 2017 =
 

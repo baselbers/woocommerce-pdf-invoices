@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-17 16:34+0100\n"
-"PO-Revision-Date: 2017-02-17 16:34+0100\n"
+"POT-Creation-Date: 2017-02-20 16:47+0100\n"
+"PO-Revision-Date: 2017-02-20 16:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -515,79 +515,89 @@ msgstr ""
 msgid "Customer Renewal Invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:135
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:140
+msgid "Disable for free products"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:142
+msgid ""
+"Skip automatic PDF invoice generation for orders containing only free "
+"products."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:150
 msgid "View PDF"
 msgstr "Vezi PDF"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:143
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:158
 msgid "Download"
 msgstr "Descarcă"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:147
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:162
 msgid "Open in new browser tab/window"
 msgstr "Deschide în tab/fereastră nouă a browser-ului."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:161
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:176
 msgid "Enable download from my account"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:163
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:178
 msgid ""
 "By default PDF is only downloadable when order has been paid, so order "
 "status should be Processing or Completed."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:176
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:191
 msgid "Enable Email It In"
 msgstr "Activează trimiterea prin Email It In"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:183
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:198
 msgid "Email It In account"
 msgstr "Cont pentru email Email It In"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:188
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:203
 #, php-format
 msgid ""
 "Get your account from your Email It In <a href=\"%1$s\">user account</a>."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:199
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:214
 msgid "Enable Invoice Number column"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:200
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:215
 msgid "Display invoice numbers on Shop Order page."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:212
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:227
 msgid "Enable mPDF debugging"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:213
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:228
 msgid "Enable mPDF debugging if you aren't able to create an invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:272
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:287
 msgid "Email Options"
 msgstr "Opțiuni email"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:273
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:288
 msgid "Download Options"
 msgstr "Opțiuni descărcare"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:274
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:289
 msgid "Cloud Storage Options"
 msgstr "Opțiuni Storage Cloud"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:275
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:290
 msgid "Interface Options"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:276
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:291
 msgid "Debug Options"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:283
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:298
 #, php-format
 msgid ""
 "The PDF invoice will be generated when WooCommerce sends the corresponding "
@@ -595,7 +605,7 @@ msgid ""
 "class=\"underline\">automatically</span> generate the PDF invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:332
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:347
 #, php-format
 msgid ""
 "Sign-up at <a href=\"%1$s\">Email It In</a> to send invoices to your "
@@ -932,43 +942,43 @@ msgstr ""
 msgid "Version %s"
 msgstr "Versiunea %s"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:462
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:466
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:495
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:499
 msgid "View invoice"
 msgstr "Vezi factura"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:510
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:514
 msgid "PDF Invoice"
 msgstr "Factură PDF"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:526
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:530
 msgid "Invoiced on:"
 msgstr "Facturat pe data:"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:530
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:534
 msgid "Invoice number:"
 msgstr "Număr factură"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:562
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:566
 msgid "Create"
 msgstr "Crează"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:572
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:576
 msgid "View"
 msgstr "Vizualizare"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:578
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:582
 msgid "Cancel"
 msgstr "Anulare"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:580
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:584
 msgid "Are you sure to delete the invoice?"
 msgstr "Ești sigur că vrei să ștergi factura ?"
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:650
+#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:654
 #, php-format
 msgid "Invoice %s (PDF)"
 msgstr "Factura %s (PDF)"

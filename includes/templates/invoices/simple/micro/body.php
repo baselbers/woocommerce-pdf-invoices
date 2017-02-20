@@ -16,7 +16,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		</td>
 		<?php
 		$formatted_shipping_address = $this->order->get_formatted_shipping_address();
-		if ( ! empty( $this->template_options['bewpi_show_ship_to'] ) && ! empty( $formatted_shipping_address ) && ! $this->has_only_virtual_products() ) { ?>
+		if ( $this->template_options['bewpi_show_ship_to'] && ! empty( $formatted_shipping_address ) && ! $this->has_only_virtual_products() ) { ?>
 			<td class="address small-font" width="50%">
 				<b><?php _e( 'Ship to', 'woocommerce-pdf-invoices' ); ?></b><br/>
 				<?php echo $formatted_shipping_address; ?>

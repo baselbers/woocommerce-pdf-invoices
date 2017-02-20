@@ -219,11 +219,12 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 
 == Changelog ==
 
-= 2.6.3 - February 17, 2017 =
+= 2.6.3 - February 21, 2017 =
 
 - Added: Option to disable generation of PDF invoices for orders with only free products.
-- Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
 - Improved: Translation files.
+- Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
+- Fixed: Customer shipping address always showing.
 
 = 2.6.2 - February 15, 2017 =
 

@@ -139,7 +139,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'type'     => 'checkbox',
 					'desc'     => __( 'Disable for free products', 'woocommerce-pdf-invoices' )
 					              . '<br/><div class="bewpi-notes">'
-					              . __( 'Do not generate PDF invoice for order with only free products.', 'woocommerce-pdf-invoices' )
+					              . __( 'Skip automatic PDF invoice generation for orders containing only free products.', 'woocommerce-pdf-invoices' )
 					              . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,

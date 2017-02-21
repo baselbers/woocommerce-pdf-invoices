@@ -233,6 +233,7 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
 - Fixed: Customer shipping address always showing.
 - Fixed: 'Update Failed: Internal Server Error' when updating plugin (from version 2.5.7-) by temporary changing max_execution_time setting.
+- Fixed: Company logo url not saving due to use of `esc_url()` regarding special characters.
 
 = 2.6.2 - February 15, 2017 =
 

@@ -603,7 +603,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			if ( isset( $input['bewpi_company_logo'] ) ) {
 				global $wpdb;
 
-				$attachment_url = esc_url( $input['bewpi_company_logo'] );
+				$attachment_url = esc_url_raw( $input['bewpi_company_logo'], array( 'http', 'https' ) );
 				$post = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $attachment_url ) ); // db call ok; no-cache ok.
 
 				if ( null === $post ) {

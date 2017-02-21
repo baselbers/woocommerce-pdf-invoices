@@ -44,8 +44,16 @@ function _bewpi_on_plugin_update() {
 
 		// version 2.6.1- need to be updated with new email options and postmeta.
 		if ( version_compare( $current_version, '2.6.1' ) <= 0 ) {
+			// temporary change max execution time to higher value to prevent internal server errors.
+			$max_execution_time = (int) ini_get( 'max_execution_time' );
+			if ( 0 !== $max_execution_time ) {
+				set_time_limit( 360 );
+			}
+
 			update_email_type_options();
 			update_postmeta();
+
+			set_time_limit( $max_execution_time );
 		}
 
 		update_site_option( 'bewpi_version', BEWPI_VERSION );

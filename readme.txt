@@ -217,6 +217,13 @@ function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_typ
 add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2 );
 `
 
+### How to add custom fields/meta-data to the PDF invoice template? ###
+To add custom fields to the PDF invoice, a custom template is required. See FAQ on how to create a custom template. Use below code to display the meta-data. Replace META_KEY with the actual name of the custom field. Ask the author of the third party plugin if you don't know the name of the custom field.
+
+`
+<?php echo get_post_meta( $this->order->id, 'META_KEY', true ); ?>
+`
+
 == Changelog ==
 
 = 2.6.3 - February 21, 2017 =
@@ -225,6 +232,7 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 - Improved: Translation files.
 - Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
 - Fixed: Customer shipping address always showing.
+- Fixed: 'Update Failed: Internal Server Error' when updating plugin (from version 2.5.7-) by temporary changing max_execution_time setting.
 
 = 2.6.2 - February 15, 2017 =
 

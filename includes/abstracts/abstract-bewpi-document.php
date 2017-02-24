@@ -84,11 +84,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			require_once BEWPI_DIR . 'lib/mpdf/mpdf.php';
 			require_once BEWPI_DIR . 'lib/mpdf/vendor/autoload.php';
 
+			// only use default font with version 2.6.2- because we defining font in template.
+			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
+
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
 				'mode'              => '',
 				'format'            => '',
 				'default_font_size' => 0,
-				'default_font'      => '',
+				'default_font'      => $default_font,
 				'margin_left'       => 14,
 				'margin_right'      => 14,
 				'margin_top'        => 14,

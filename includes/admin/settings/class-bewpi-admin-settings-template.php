@@ -600,7 +600,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			}
 
 			// company logo file upload.
-			if ( isset( $input['bewpi_company_logo'] ) ) {
+			if ( isset( $input['bewpi_company_logo'] ) && ! empty( $input['bewpi_company_logo'] ) ) {
 				global $wpdb;
 
 				$attachment_url = esc_url_raw( $input['bewpi_company_logo'], array( 'http', 'https' ) );

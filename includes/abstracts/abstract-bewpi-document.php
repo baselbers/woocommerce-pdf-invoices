@@ -88,7 +88,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				'mode'              => '',
 				'format'            => '',
 				'default_font_size' => 0,
-				'default_font'      => 'opensans',
+				'default_font'      => '',
 				'margin_left'       => 14,
 				'margin_right'      => 14,
 				'margin_top'        => 14,

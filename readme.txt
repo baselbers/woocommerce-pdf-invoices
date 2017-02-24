@@ -231,6 +231,7 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Added: Option to disable generation of PDF invoices for orders with only free products.
 - Improved: Font usage by defining font-family within style.css file.
 - Improved: Translation files.
+- Fixed: Company logo not found by checking for possible modified image source url.
 - Fixed: PDF invoices not updated (with paid watermark) when order has been modified.
 - Fixed: Customer shipping address always showing.
 - Fixed: 'Update Failed: Internal Server Error' when updating plugin (from version 2.5.7-) by temporary changing max_execution_time setting.

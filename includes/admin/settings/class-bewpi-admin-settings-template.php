@@ -599,27 +599,16 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				$output[ $key ] = $this->strip_str( stripslashes( $input[ $key ] ) );
 			}
 
-			// company logo file upload.
 			if ( isset( $input['bewpi_company_logo'] ) && ! empty( $input['bewpi_company_logo'] ) ) {
-				global $wpdb;
-
-				$attachment_url = esc_url_raw( $input['bewpi_company_logo'], array( 'http', 'https' ) );
-				$post = $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts WHERE guid=%s", $attachment_url ) ); // db call ok; no-cache ok.
-
-				if ( null === $post ) {
-					add_settings_error(
-						esc_attr( self::SETTINGS_KEY ),
-						'file-invalid',
-						__( 'Company logo not found. First upload the image to the Media Library.', 'woocommerce-pdf-invoices' )
-					);
-				} elseif ( ! wp_attachment_is_image( $post ) ) {
-					add_settings_error(
-						esc_attr( self::SETTINGS_KEY ),
-						'file-invalid',
-						__( 'Company logo is not an image. The accepted file extensions/mime types are: .jpg, .jpeg, .gif, .png.', 'woocommerce-pdf-invoices' )
-					);
+				$image_url = $this->validate_image( $input['bewpi_company_logo'] );
+				if ( $image_url ) {
+					$output['bewpi_company_logo'] = $image_url;
 				} else {
-					$output['bewpi_company_logo'] = $attachment_url;
+					add_settings_error(
+						esc_attr( self::SETTINGS_KEY ),
+						'file-not-found',
+						__( 'Company logo not found. Upload the image to the Media Library and try again.', 'woocommerce-pdf-invoices' )
+					);
 				}
 			}
 

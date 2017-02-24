@@ -32,9 +32,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		 * @return string|void
 		 */
 		protected function allowed_tags_text() {
-			$allowed_tags_encoded = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>', '<br/>' ) );
-			$allowed_tags_formatted  = '<code>' . join( '</code>, <code>', $allowed_tags_encoded ) . '</code>';
-			$allowed_tags_text = sprintf( __( 'Allowed HTML tags: %1$s.', 'woocommerce-pdf-invoices' ), $allowed_tags_formatted );
+			$allowed_tags_encoded   = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>', '<br/>' ) );
+			$allowed_tags_formatted = '<code>' . join( '</code>, <code>', $allowed_tags_encoded ) . '</code>';
+			$allowed_tags_text      = sprintf( __( 'Allowed HTML tags: %1$s.', 'woocommerce-pdf-invoices' ), $allowed_tags_formatted );
+
 			return $allowed_tags_text;
 		}
 
@@ -47,6 +48,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		 */
 		protected function strip_str( $str ) {
 			$str = preg_replace( '/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $str );
+
 			return strip_tags( $str, '<b><i><br><br/>' );
 		}
 
@@ -122,6 +124,42 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
 			<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
 			<?php
+		}
+
+		/**
+		 * Validate image against modified urls and check for extension.
+		 *
+		 * @param string $image_url source url of the image.
+		 *
+		 * @return bool|string false or image url.
+		 */
+		public function validate_image( $image_url ) {
+			$image_url = esc_url_raw( $image_url, array( 'http', 'https' ) );
+
+			$uploads_dir = wp_upload_dir();
+			if ( false === strpos( $image_url, $uploads_dir['baseurl'] . '/' ) ) {
+				// url points to a place outside of upload directory.
+				return false;
+			}
+
+			$query = array(
+				'post_type'  => 'attachment',
+				'fields'     => 'ids',
+				'meta_query' => array(
+					array(
+						'key'     => '_wp_attached_file',
+						'value'   => basename( $image_url ),
+						'compare' => 'LIKE',
+					),
+				)
+			);
+
+			$ids = get_posts( $query );
+			if ( count( $ids ) === 0 ) {
+				return false;
+			}
+
+			return wp_get_attachment_image_url( $ids[0], 'full' );
 		}
 	}
 }

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-02-20 16:47+0100\n"
-"PO-Revision-Date: 2017-02-20 16:47+0100\n"
+"POT-Creation-Date: 2017-02-25 13:48+0100\n"
+"PO-Revision-Date: 2017-02-25 13:48+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -440,7 +440,7 @@ msgstr "Terugbetaald"
 msgid "%s of %s"
 msgstr "%s van %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:126
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:129
 msgid "Paid"
 msgstr "Betaald"
 
@@ -885,14 +885,9 @@ msgstr "Voetregel Opties"
 msgid "Visible Columns"
 msgstr "Zichtbare Kolommen"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:613
-msgid "Company logo not found. First upload the image to the Media Library."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:619
+#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:610
 msgid ""
-"Company logo is not an image. The accepted file extensions/mime types are: ."
-"jpg, .jpeg, .gif, .png."
+"Company logo not found. Upload the image to the Media Library and try again."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:16

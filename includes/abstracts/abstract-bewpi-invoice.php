@@ -119,7 +119,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return string
 		 */
-		private function get_date_format() {
+		public function get_date_format() {
 			$date_format = $this->template_options['bewpi_date_format'];
 			if ( ! empty( $date_format ) ) {
 				return (string) $date_format;

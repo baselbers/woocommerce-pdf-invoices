@@ -81,9 +81,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
 		protected function generate( $destination, $is_paid ) {
-			require_once BEWPI_DIR . 'lib/mpdf/mpdf.php';
-			require_once BEWPI_DIR . 'lib/mpdf/vendor/autoload.php';
-
 			// only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
 
@@ -113,6 +110,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['margin_footer'],
 				$mpdf_params['orientation']
 			);
+
+			$this->select_custom_font( $mpdf );
 
 			// add company logo image as a variable.
 			$wp_upload_dir = wp_upload_dir();
@@ -171,6 +170,58 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			$mpdf->Output( $name, $destination );
+		}
+
+		/**
+		 * Convert the mPDF fonts path to a relative path that points to our custom uploads directory using '..' parent directory command.
+		 *
+		 * @param string $fonts_path Path to the mPDF default fonts.
+		 *
+		 * @return string relative path to the custom fonts directory.
+		 */
+		private function make_fonts_path_relative( $fonts_path ) {
+			$fonts_path_relative = '';
+
+			$dirs = substr( $fonts_path, strpos( $fonts_path, basename( WP_CONTENT_DIR ) ) );
+			$dirs_up_count = count( array_filter( explode( '/', $dirs ) ) );
+			for ( $i = 0; $i < $dirs_up_count - 1; $i++ ) {
+				$fonts_path_relative .= '../';
+			}
+
+			return $fonts_path_relative . 'uploads/woocommerce-pdf-invoices/fonts/';
+		}
+
+		/**
+		 * Select a custom font from custom fonts directory.
+		 *
+		 * @param mPDF $mpdf mPDF library object.
+		 */
+		private function select_custom_font( $mpdf ) {
+			$fonts_path_relative = $this->make_fonts_path_relative( _MPDF_TTFONTPATH );
+			if ( empty( $fonts_path_relative ) ) {
+				return;
+			}
+
+			$mpdf->fontdata['opensans'] = array(
+				'R' => $fonts_path_relative . 'OpenSans-Regular.ttf',
+				'B' => $fonts_path_relative . 'OpenSans-Bold.ttf',
+				'I' => $fonts_path_relative . 'OpenSans-Italic.ttf',
+			);
+
+			foreach ( $mpdf->fontdata as $font_style => $font ) {
+				$mpdf->fontdata[ $font_style ] = $font;
+
+				// add to available fonts array.
+				$font_styles = array( 'R', 'B', 'I', 'BI' );
+				foreach ( $font_styles as $style ) {
+					if ( isset( $font[ $style ] ) && $font[ $style ] ) {
+						// no suffix for regular style.
+						$mpdf->available_unifonts[] = $font_style . trim( $style, 'R' );
+					}
+				}
+			}
+
+			$mpdf->default_available_fonts = $mpdf->available_unifonts;
 		}
 
 		/**

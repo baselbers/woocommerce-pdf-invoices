@@ -54,6 +54,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates/' );
 			define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices/' );
 			define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
+			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/' );
 		}
 
 		/**
@@ -81,6 +82,44 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function load_textdomain() {
 			$lang_dir = basename( dirname( BEWPI_FILE ) ) . '/lang';
 			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
+		}
+
+		/**
+		 * Creates invoices dir in uploads folder.
+		 */
+		public function setup_directories() {
+			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
+			$directories        = array(
+				WPI_UPLOADS_DIR . 'attachments/' . $current_year . '/' => array(
+					'.htaccess',
+					'index.php',
+				),
+				WPI_UPLOADS_DIR . 'fonts/' => array(
+					'.htaccess',
+					'index.php',
+				),
+				WPI_UPLOADS_DIR . 'templates/simple/' => array(
+					'.htaccess',
+					'index.php',
+				),
+			);
+
+			foreach ( $directories as $directory => $files ) {
+				foreach ( $files as $file ) {
+					if ( ! file_exists( $directory ) ) {
+						wp_mkdir_p( $directory );
+					}
+
+					if ( file_exists( $directory . $file ) ) {
+						continue;
+					}
+
+					// prevent direct access.
+					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
+				}
+			}
+
+			do_action( 'bewpi_after_setup_directories' );
 		}
 
 		/**
@@ -257,42 +296,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( 'shop_order' === $type ) {
 				BEWPI_Invoice::delete( $post_id );
 			}
-		}
-
-		/**
-		 * Creates invoices dir in uploads folder.
-		 */
-		public function setup_directories() {
-			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
-			$directories        = array(
-				BEWPI_INVOICES_DIR => array(
-					'.htaccess',
-					'index.php',
-				),
-				BEWPI_INVOICES_DIR . $current_year . '/' => array(
-					'.htaccess',
-					'index.php',
-				),
-			);
-
-			// make pdf invoices dir.
-			wp_mkdir_p( BEWPI_INVOICES_DIR . $current_year . '/' );
-
-			foreach ( $directories as $directory => $files ) {
-				foreach ( $files as $file ) {
-					if ( file_exists( $directory . $file ) ) {
-						continue;
-					}
-
-					// prevent direct access to invoices.
-					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
-				}
-			}
-
-			// make custom templates dir.
-			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
-
-			do_action( 'bewpi_after_setup_directories' );
 		}
 
 		/**

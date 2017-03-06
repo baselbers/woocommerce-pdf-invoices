@@ -420,6 +420,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array|mixed|void
 		 */
 		public function attach_invoice_to_email( $attachments, $status, $order ) {
+			// only attach to emails with WC_Order object.
+			if ( ! $order instanceof WC_Order ) {
+				return $attachments;
+			}
+
 			$general_options = get_option( 'bewpi_general_settings' );
 			if ( $order->get_total() === 0.00 && (bool) $general_options['bewpi_disable_free_products'] ) {
 				return $attachments;

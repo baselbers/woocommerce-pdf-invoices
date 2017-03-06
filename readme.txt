@@ -226,6 +226,10 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 
 == Changelog ==
 
+= 2.6.4 - March 6, 2017 =
+
+- Fixed: 'Fatal error:  Call to a member function get_total() on null' by checking for `WC_Order` object type within `attach_invoice_to_email()` method.
+
 = 2.6.3 - February 24, 2017 =
 
 - Added: Option to disable generation of PDF invoices for orders with only free products.

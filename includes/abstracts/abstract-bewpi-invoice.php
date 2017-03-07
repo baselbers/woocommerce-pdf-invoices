@@ -300,8 +300,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function save( $destination = 'F' ) {
-			do_action( 'bewpi_before_invoice_content', $this->order->id );
-
 			if ( BEWPI_Invoice::exists( $this->order->id ) ) {
 				// delete postmeta and PDF.
 				self::delete( $this->order->id );
@@ -333,8 +331,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			) );
 
 			parent::generate( $destination, $this->order->is_paid() );
-
-			do_action( 'bewpi_after_invoice_content', $this->order->id );
 
 			return $this->full_path;
 		}

@@ -114,6 +114,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['orientation']
 			);
 
+			do_action( 'bewpi_before_invoice_content', $this->order->id );
+
 			// add company logo image as a variable.
 			$wp_upload_dir = wp_upload_dir();
 			$image_url     = $this->template_options['bewpi_company_logo'];
@@ -169,6 +171,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			} else {
 				$name = $this->filename;
 			}
+
+			do_action( 'bewpi_after_invoice_content', $this->order->id );
 
 			$mpdf->Output( $name, $destination );
 		}

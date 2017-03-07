@@ -36,8 +36,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-			$this->includes();
 			$this->load_textdomain();
+			$this->includes();
 			do_action( 'bewpi_after_init_settings' );
 			$this->init_hooks();
 		}
@@ -160,11 +160,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Check if request is PDF action.
+		 *
+		 * @return bool
+		 */
+		private static function is_pdf_request() {
+			return ( isset( $_GET['post'] ) && isset( $_GET['bewpi_action'] ) && isset( $_GET['nonce'] ) );
+		}
+
+		/**
 		 * Frontend pdf actions callback.
 		 * Customers only have permission to view invoice, so invoice should be created by system/admin.
 		 */
 		public function frontend_pdf_callback() {
-			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
+			if ( ! self::is_pdf_request() ) {
 				return;
 			}
 
@@ -175,15 +184,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				wp_die( 'Invalid request.' );
 			}
 
-			if ( ! is_user_logged_in() ) {
-				wp_die( 'Access denied' );
-			}
-
 			// verify woocommerce order.
 			$post_id = intval( $_GET['post'] );
 			$order = wc_get_order( $post_id );
 			if ( ! $order ) {
 				wp_die( 'Order not found.' );
+			}
+
+			if ( ! is_user_logged_in() ) {
+				wp_die( 'Access denied' );
 			}
 
 			// check if user has ordered order.
@@ -202,7 +211,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Within admin by default only administrator and shop managers have permission to view, create, cancel invoice.
 		 */
 		public function admin_pdf_callback() {
-			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
+			if ( ! self::is_pdf_request() ) {
 				return;
 			}
 
@@ -244,6 +253,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$invoice->save();
 					break;
 			}
+
+			do_action( 'bewpi_after_pdf_action', $action );
 		}
 
 		/**
@@ -468,7 +479,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// put the column before actions column.
 			$new_columns = array_slice( $columns, 0, count( $columns ) - 1, true ) +
-			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommmerce-pdf-invoices' ) ) +
+			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ) ) +
 			               array_slice( $columns, count( $columns ) - 1, count( $columns ) - ( count( $columns ) - 1 ), true );
 
 			return $new_columns;
@@ -557,6 +568,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'action' => 'edit',
 				'bewpi_action' => $action,
 			), admin_url( 'post.php' ) ), $action, 'nonce' );
+
+			$url = apply_filters( 'bewpi_pdf_invoice_url', $order_id, $action, $url );
 
 			printf( '<a href="%1$s" title="%2$s" %3$s>%4$s</a>', $url, $title, join( ' ', $attributes ), $title );
 		}

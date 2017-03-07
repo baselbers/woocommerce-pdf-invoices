@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.6.4
+Stable tag: 2.6.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -225,6 +225,10 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 `
 
 == Changelog ==
+
+= 2.6.5 - March 7, 2017 =
+
+- Added several hooks and filters for WPML compatibility in WooCommerce PDF Invoices Premium and other new features.
 
 = 2.6.4 - March 6, 2017 =
 

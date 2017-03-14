@@ -50,8 +50,9 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<!-- Description -->
 		<th class="align-left"><?php _e( 'Description', 'woocommerce-pdf-invoices' ); ?></th>
 		<!-- SKU -->
-		<?php if ( $this->template_options['bewpi_show_sku'] ) { ?>
-			<?php $columns_count++; ?>
+		<?php if ( $this->template_options['bewpi_show_sku'] ) {
+			$columns_count++;
+		?>
 			<th class="align-left"><?php _e( 'SKU', 'woocommerce-pdf-invoices' ); ?></th>
 		<?php } ?>
 		<!-- Cost -->

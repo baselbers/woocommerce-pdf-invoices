@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2017-02-25 13:48+0100\n"
-"PO-Revision-Date: 2017-02-25 13:48+0100\n"
+"PO-Revision-Date: 2017-03-10 12:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -1094,7 +1094,7 @@ msgstr "Verzoek een nieuwe functionaliteit"
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:35
 #, php-format
 msgid "Order Number: %s"
-msgstr "Bestellingsnummer: %s"
+msgstr "Bestelnummer: %s"
 
 #: woocommerce-pdf-invoices/includes/templates/invoices/simple/micro/body.php:36
 #, php-format

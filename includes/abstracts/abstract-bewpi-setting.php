@@ -27,6 +27,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		const PREFIX = 'bewpi_';
 
 		/**
+		 * Option group key.
+		 *
+		 * @var string.
+		 */
+		protected $settings_key;
+
+		/**
 		 * Gets all the tags that are allowed.
 		 *
 		 * @return string|void

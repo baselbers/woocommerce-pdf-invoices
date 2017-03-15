@@ -41,12 +41,16 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			$scanned_templates = array();
 			$templates         = array();
 
-			if ( file_exists( BEWPI_TEMPLATES_DIR . 'invoices' ) ) {
+			if ( file_exists( BEWPI_TEMPLATES_DIR . 'invoices/simple/' ) ) {
 				$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_TEMPLATES_DIR . 'invoices/simple/' ) );
 			}
 
-			if ( file_exists( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR ) ) {
+			if ( file_exists( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) ) {
 				$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) );
+			}
+
+			if ( file_exists( WPI_UPLOADS_TEMPLATES_DIR . 'invoice/simple/' ) ) {
+				$scanned_templates = array_merge( $scanned_templates, scandir( WPI_UPLOADS_TEMPLATES_DIR . 'invoice/simple/' ) );
 			}
 
 			foreach ( $scanned_templates as $i => $template_name ) {

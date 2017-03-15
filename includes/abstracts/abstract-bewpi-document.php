@@ -81,6 +81,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
 		protected function generate( $destination, $is_paid ) {
+			do_action( 'bewpi_before_invoice_content', $this->order->id );
+
 			// only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
 
@@ -111,7 +113,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['orientation']
 			);
 
-			$this->select_custom_font( $mpdf );
+			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
 
 			// add company logo image as a variable.
 			$wp_upload_dir = wp_upload_dir();
@@ -159,8 +161,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
-			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
-
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
 			if ( 'F' === $destination ) {
@@ -169,59 +169,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$name = $this->filename;
 			}
 
+			do_action( 'bewpi_after_invoice_content', $this->order->id );
+
 			$mpdf->Output( $name, $destination );
-		}
-
-		/**
-		 * Convert the mPDF fonts path to a relative path that points to our custom uploads directory using '..' parent directory command.
-		 *
-		 * @param string $fonts_path Path to the mPDF default fonts.
-		 *
-		 * @return string relative path to the custom fonts directory.
-		 */
-		private function make_fonts_path_relative( $fonts_path ) {
-			$fonts_path_relative = '';
-
-			$dirs = substr( $fonts_path, strpos( $fonts_path, basename( WP_CONTENT_DIR ) ) );
-			$dirs_up_count = count( array_filter( explode( '/', $dirs ) ) );
-			for ( $i = 0; $i < $dirs_up_count - 1; $i++ ) {
-				$fonts_path_relative .= '../';
-			}
-
-			return $fonts_path_relative . 'uploads/woocommerce-pdf-invoices/fonts/';
-		}
-
-		/**
-		 * Select a custom font from custom fonts directory.
-		 *
-		 * @param mPDF $mpdf mPDF library object.
-		 */
-		private function select_custom_font( $mpdf ) {
-			$fonts_path_relative = $this->make_fonts_path_relative( _MPDF_TTFONTPATH );
-			if ( empty( $fonts_path_relative ) ) {
-				return;
-			}
-
-			$mpdf->fontdata['opensans'] = array(
-				'R' => $fonts_path_relative . 'OpenSans-Regular.ttf',
-				'B' => $fonts_path_relative . 'OpenSans-Bold.ttf',
-				'I' => $fonts_path_relative . 'OpenSans-Italic.ttf',
-			);
-
-			foreach ( $mpdf->fontdata as $font_style => $font ) {
-				$mpdf->fontdata[ $font_style ] = $font;
-
-				// add to available fonts array.
-				$font_styles = array( 'R', 'B', 'I', 'BI' );
-				foreach ( $font_styles as $style ) {
-					if ( isset( $font[ $style ] ) && $font[ $style ] ) {
-						// no suffix for regular style.
-						$mpdf->available_unifonts[] = $font_style . trim( $style, 'R' );
-					}
-				}
-			}
-
-			$mpdf->default_available_fonts = $mpdf->available_unifonts;
 		}
 
 		/**
@@ -264,24 +214,21 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		}
 
 		/**
-		 * View pdf file.
+		 * View PDF file.
+		 *
+		 * @param string $full_path absolute path to PDF file.
 		 */
-		public function view() {
-			if ( 'browser' === $this->general_options['bewpi_view_pdf'] ) {
-				header( 'Content-type: application/pdf' );
-				header( 'Content-Disposition: inline; filename = "' . $this->filename . '"' );
-				header( 'Content-Transfer-Encoding: binary' );
-				header( 'Content-Length: ' . filesize( $this->full_path ) );
-				header( 'Accept-Ranges: bytes' );
-			} else {
-				header( 'Content-type: application / pdf' );
-				header( 'Content-Disposition: attachment; filename="' . $this->filename . '"' );
-				header( 'Content-Transfer-Encoding: binary' );
-				header( 'Content-Length: ' . filesize( $this->full_path ) );
-				header( 'Accept-Ranges: bytes' );
-			}
+		public static function view( $full_path ) {
+			$general_options = get_option( 'bewpi_general_settings' );
+			$type = ( 'browser' === $general_options['bewpi_view_pdf'] ) ? 'inline' : 'attachment';
 
-			readfile( $this->full_path );
+			header( 'Content-type: application/pdf' );
+			header( 'Content-Disposition: ' . $type . '; filename="' . basename( $full_path ) . '"' );
+			header( 'Content-Transfer-Encoding: binary' );
+			header( 'Content-Length: ' . filesize( $full_path ) );
+			header( 'Accept-Ranges: bytes' );
+
+			readfile( $full_path );
 			exit;
 		}
 

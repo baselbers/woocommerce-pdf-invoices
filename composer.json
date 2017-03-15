@@ -21,7 +21,14 @@
       "includes/"
     ],
     "files": [
-      "includes/be-woocommerce-pdf-invoices.php"
+      "includes/be-woocommerce-pdf-invoices.php",
+      "includes/abstracts/abstract-bewpi-document.php",
+      "includes/abstracts/abstract-bewpi-invoice.php",
+      "includes/abstracts/abstract-bewpi-setting.php",
+      "includes/admin/settings/class-bewpi-admin-settings-general.php",
+      "includes/admin/settings/class-bewpi-admin-settings-template.php",
+      "includes/admin/class-bewpi-admin-notices.php",
+      "includes/class-bewpi-invoice.php"
     ]
   }
 }

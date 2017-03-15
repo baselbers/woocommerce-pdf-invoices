@@ -1,4 +1,15 @@
 <?php
+/**
+ * Final WooCommerce PDF Invoices Class.
+ *
+ * Processes several hooks and filter callbacks.
+ *
+ * @author      Bas Elbers
+ * @category    Class
+ * @package     BE_WooCommerce_PDF_Invoices/Class
+ * @version     1.0.0
+ */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -36,7 +47,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-			$this->includes();
 			$this->load_textdomain();
 			do_action( 'bewpi_after_init_settings' );
 			$this->init_hooks();
@@ -52,26 +62,26 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			define( 'BEWPI_URL', plugins_url( '', BEWPI_FILE ) . '/' );
 			define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates/' );
+			/**
+			 * Custom templates directory.
+			 *
+			 * @deprecated instead use WPI_UPLOADS_TEMPLATES_DIR.
+			 *
+			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/invoices.
+			 */
 			define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices/' );
+			/**
+			 * Attachments/invoices directory.
+			 *
+			 * @deprecated use WPI_ATTACHMENTS_DIR instead.
+			 *
+			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/attachments.
+			 */
 			define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
-			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/' );
-		}
 
-		/**
-		 * Include core backend and frontend files.
-		 *
-		 * @since 2.5.0
-		 */
-		public function includes() {
-			// Constants are not resolving in PHPStorm while requiring files.
-			// Issue will be fixed in PHPStorm version 2016.3 as stated https://youtrack.jetbrains.com/issue/WI-31754.
-			require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-document.php';
-			require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-invoice.php';
-			require_once BEWPI_DIR . 'includes/abstracts/abstract-bewpi-setting.php';
-			require_once BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-general.php';
-			require_once BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-template.php';
-			require_once BEWPI_DIR . 'includes/admin/class-bewpi-admin-notices.php';
-			require_once BEWPI_DIR . 'includes/class-bewpi-invoice.php';
+			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/' );
+			define( 'WPI_UPLOADS_TEMPLATES_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/templates/' );
+			define( 'WPI_ATTACHMENTS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/attachments/' );
 		}
 
 		/**
@@ -89,7 +99,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function setup_directories() {
 			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
-			$directories        = array(
+			$directories        = apply_filters( 'bewpi_uploads_directories', array(
+				WPI_UPLOADS_DIR . 'attachments/' => array(
+					'.htaccess',
+					'index.php',
+				),
 				WPI_UPLOADS_DIR . 'attachments/' . $current_year . '/' => array(
 					'.htaccess',
 					'index.php',
@@ -98,25 +112,35 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					'.htaccess',
 					'index.php',
 				),
-				WPI_UPLOADS_DIR . 'templates/simple/' => array(
-					'.htaccess',
-					'index.php',
-				),
-			);
+				WPI_UPLOADS_DIR . 'templates/invoice/simple/' => array(),
+			) );
 
+			// create directories and copy files.
 			foreach ( $directories as $directory => $files ) {
-				foreach ( $files as $file ) {
-					if ( ! file_exists( $directory ) ) {
-						wp_mkdir_p( $directory );
-					}
+				if ( ! file_exists( $directory ) ) {
+					wp_mkdir_p( $directory );
+				}
 
-					if ( file_exists( $directory . $file ) ) {
+				foreach ( $files as $file ) {
+					$destination_file = $directory . basename( $file );
+					if ( file_exists( $destination_file ) ) {
 						continue;
 					}
 
-					// prevent direct access.
-					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
+					$source_file = BEWPI_DIR . 'tmp/' . $file;
+					copy( $source_file, $destination_file );
 				}
+			}
+
+			// copy fonts from tmp directory to uploads/woocommerce-pdf-invoices/fonts.
+			$font_files = glob( BEWPI_DIR . 'tmp/fonts/*.{ttf,otf}', GLOB_BRACE );
+			foreach ( $font_files as $font_file ) {
+				$destination_file = WPI_UPLOADS_DIR . 'fonts/' . basename( $font_file );
+				if ( file_exists( $destination_file ) ) {
+					continue;
+				}
+
+				copy( $font_file, $destination_file );
 			}
 
 			do_action( 'bewpi_after_setup_directories' );
@@ -233,7 +257,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			$invoice = new BEWPI_Invoice( $order->id );
-			$invoice->view();
+			$full_path = $invoice->update();
+			BEWPI_Invoice::view( $full_path );
 		}
 
 		/**
@@ -273,7 +298,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			switch ( $action ) {
 				case 'view':
 					$invoice = new BEWPI_Invoice( $order->id );
-					$invoice->view();
+					$full_path = $invoice->update();
+					BEWPI_Invoice::view( $full_path );
 					break;
 				case 'cancel':
 					BEWPI_Invoice::delete( $order->id );
@@ -283,6 +309,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$invoice->save();
 					break;
 			}
+
+			do_action( 'bewpi_admin_pdf_callback_end', $action, $order->id );
 		}
 
 		/**
@@ -661,14 +689,3 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 	}
 }
-
-/**
- * Main instance of BE_WooCommerce_PDF_Invoices.
- *
- * @since  2.5.0
- * @return BE_WooCommerce_PDF_Invoices
- */
-function BEWPI() {
-	return BE_WooCommerce_PDF_Invoices::instance();
-}
-BEWPI();

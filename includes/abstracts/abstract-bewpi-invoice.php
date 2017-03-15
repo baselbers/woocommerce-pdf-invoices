@@ -119,7 +119,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return string
 		 */
-		private function get_date_format() {
+		public function get_date_format() {
 			$date_format = $this->template_options['bewpi_date_format'];
 			if ( ! empty( $date_format ) ) {
 				return (string) $date_format;
@@ -179,7 +179,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			// delete pdf files.
 			foreach ( $files as $pdf_path ) {
-				parent::delete( BEWPI_INVOICES_DIR . $pdf_path );
+				parent::delete( WPI_ATTACHMENTS_DIR . $pdf_path );
 			}
 		}
 
@@ -300,8 +300,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function save( $destination = 'F' ) {
-			do_action( 'bewpi_before_invoice_content', $this->order->id );
-
 			if ( BEWPI_Invoice::exists( $this->order->id ) ) {
 				// delete postmeta and PDF.
 				self::delete( $this->order->id );
@@ -319,7 +317,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				$pdf_path = $this->get_formatted_number() . '.pdf';
 			}
 
-			$this->full_path     = BEWPI_INVOICES_DIR . $pdf_path;
+			$this->full_path     = WPI_ATTACHMENTS_DIR . $pdf_path;
 			$this->filename      = basename( $this->full_path );
 
 			// update invoice data in db.
@@ -334,8 +332,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			parent::generate( $destination, $this->order->is_paid() );
 
-			do_action( 'bewpi_after_invoice_content', $this->order->id );
-
 			return $this->full_path;
 		}
 
@@ -347,25 +343,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string $full_path Full path to PDF invoice file.
 		 */
 		public function update( $destination = 'F' ) {
+			if ( ! BEWPI_Invoice::exists( $this->order->id ) ) {
+				wp_die( __( 'Invoice not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ), '', array( 'response' => 200, 'back_link' => true )
+				);
+			}
+
 			parent::delete( $this->full_path );
 			parent::generate( $destination, $this->order->is_paid() );
 
 			return $this->full_path;
-		}
-
-		/**
-		 * View invoice.
-		 */
-		public function view() {
-			if ( ! BEWPI_Invoice::exists( $this->order->id ) ) {
-				wp_die( __( 'Invoice not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ),
-					'',
-					array( 'response' => 200, 'back_link' => true )
-				);
-			}
-
-			$this->update();
-			parent::view();
 		}
 
 		/**
@@ -375,7 +361,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public static function delete( $order_id ) {
 			// remove pdf file.
-			$full_path = BEWPI_INVOICES_DIR . get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
+			$full_path = WPI_ATTACHMENTS_DIR . get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
 			parent::delete( $full_path );
 
 			// remove invoice postmeta from database.
@@ -615,7 +601,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				return false;
 			}
 
-			return parent::exists( BEWPI_INVOICES_DIR . $pdf_path );
+			return parent::exists( WPI_ATTACHMENTS_DIR . $pdf_path );
 		}
 	}
 }

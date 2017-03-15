@@ -226,6 +226,12 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 
 == Changelog ==
 
+= 2.7.0 - March 15, 2017 =
+
+- Added: 'composer.json' file, requiring mPDF with it and using autoloading.
+- Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
+- Improved: Uploads directory by moving all files (templates/invoices/fonts) to new 'uploads/woocommerce-pdf-invoices/' directory.
+
 = 2.6.3 - February 24, 2017 =
 
 - Added: Option to disable generation of PDF invoices for orders with only free products.

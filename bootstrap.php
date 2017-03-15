@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
  * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.6.3
+ * Version:           2.7.0
  * Author:            Bas Elbers
  * Author URI:        http://wcpdfinvoices.com
  * License:           GPL-2.0+
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BEWPI_VERSION', '2.6.3' );
+define( 'BEWPI_VERSION', '2.7.0' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.
@@ -28,7 +28,17 @@ function _bewpi_load_plugin() {
 	define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
 	require_once BEWPI_DIR . 'vendor/autoload.php';
-	require_once BEWPI_DIR . 'includes/be-woocommerce-pdf-invoices.php';
+
+	/**
+	 * Main instance of BE_WooCommerce_PDF_Invoices.
+	 *
+	 * @since  2.5.0
+	 * @return BE_WooCommerce_PDF_Invoices
+	 */
+	function BEWPI() {
+		return BE_WooCommerce_PDF_Invoices::instance();
+	}
+	BEWPI();
 
 	_bewpi_on_plugin_update();
 }
@@ -55,6 +65,12 @@ function _bewpi_on_plugin_update() {
 			update_postmeta();
 
 			set_time_limit( $max_execution_time );
+		}
+
+		// version 2.6.5- uploads folder changed to uploads/woocommerce-pdf-invoices.
+		if ( version_compare( $current_version, '2.7.0' ) <= 0 ) {
+			BEWPI()->setup_directories();
+			move_pdf_invoices();
 		}
 
 		update_site_option( 'bewpi_version', BEWPI_VERSION );
@@ -175,6 +191,28 @@ function update_date_format_postmeta( $post_id, $date_format ) {
 	}
 
 	update_post_meta( $post_id, '_bewpi_invoice_date', $date->format( 'Y-m-d H:i:s' ) );
+}
+
+/**
+ * Move all invoices to new uploads dir.
+ */
+function move_pdf_invoices() {
+	$files = glob( BEWPI_INVOICES_DIR . '*' );
+	foreach ( $files as $file ) {
+		if ( is_dir( $file ) ) {
+			wp_mkdir_p( WPI_ATTACHMENTS_DIR . basename( $file ) );
+
+			$files_year = glob( $file . '/*' );
+			foreach ( $files_year as $file_year ) {
+				$pdf_path = str_replace( BEWPI_INVOICES_DIR, '', $file_year );
+				copy( $file_year, WPI_ATTACHMENTS_DIR . $pdf_path );
+			}
+
+			continue;
+		}
+
+		copy( $file, WPI_ATTACHMENTS_DIR . basename( $file ) );
+	}
 }
 
 /**

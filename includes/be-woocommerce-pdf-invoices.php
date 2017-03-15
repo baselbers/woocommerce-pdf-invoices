@@ -338,42 +338,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Creates invoices dir in uploads folder.
-		 */
-		public function setup_directories() {
-			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
-			$directories        = array(
-				BEWPI_INVOICES_DIR => array(
-					'.htaccess',
-					'index.php',
-				),
-				BEWPI_INVOICES_DIR . $current_year . '/' => array(
-					'.htaccess',
-					'index.php',
-				),
-			);
-
-			// make pdf invoices dir.
-			wp_mkdir_p( BEWPI_INVOICES_DIR . $current_year . '/' );
-
-			foreach ( $directories as $directory => $files ) {
-				foreach ( $files as $file ) {
-					if ( file_exists( $directory . $file ) ) {
-						continue;
-					}
-
-					// prevent direct access to invoices.
-					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
-				}
-			}
-
-			// make custom templates dir.
-			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
-
-			do_action( 'bewpi_after_setup_directories' );
-		}
-
-		/**
 		 * Add submenu to WooCommerce menu and display options page.
 		 */
 		public function add_wc_submenu_options_page() {

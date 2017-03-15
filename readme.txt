@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.6.3
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,6 +231,14 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Added: 'composer.json' file, requiring mPDF with it and using autoloading.
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
 - Improved: Uploads directory by moving all files (templates/invoices/fonts) to new 'uploads/woocommerce-pdf-invoices/' directory.
+
+= 2.6.5 - March 7, 2017 =
+
+- Added several hooks and filters for WPML compatibility in WooCommerce PDF Invoices Premium and other new features.
+
+= 2.6.4 - March 6, 2017 =
+
+- Fixed: 'Fatal error:  Call to a member function get_total() on null' by checking for `WC_Order` object type within `attach_invoice_to_email()` method.
 
 = 2.6.3 - February 24, 2017 =
 

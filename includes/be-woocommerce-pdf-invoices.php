@@ -223,11 +223,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Check if request is PDF action.
+		 *
+		 * @return bool
+		 */
+		private static function is_pdf_request() {
+			return ( isset( $_GET['post'] ) && isset( $_GET['bewpi_action'] ) && isset( $_GET['nonce'] ) );
+		}
+
+		/**
 		 * Frontend pdf actions callback.
 		 * Customers only have permission to view invoice, so invoice should be created by system/admin.
 		 */
 		public function frontend_pdf_callback() {
-			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
+			if ( ! self::is_pdf_request() ) {
 				return;
 			}
 
@@ -266,7 +275,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Within admin by default only administrator and shop managers have permission to view, create, cancel invoice.
 		 */
 		public function admin_pdf_callback() {
-			if ( ! isset( $_GET['bewpi_action'] ) || ! isset( $_GET['post'] ) || ! isset( $_GET['nonce'] ) ) {
+			if ( ! self::is_pdf_request() ) {
 				return;
 			}
 
@@ -311,6 +320,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			do_action( 'bewpi_admin_pdf_callback_end', $action, $order->id );
+
+			do_action( 'bewpi_after_pdf_action', $action );
 		}
 
 		/**
@@ -324,6 +335,42 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			if ( 'shop_order' === $type ) {
 				BEWPI_Invoice::delete( $post_id );
 			}
+		}
+
+		/**
+		 * Creates invoices dir in uploads folder.
+		 */
+		public function setup_directories() {
+			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
+			$directories        = array(
+				BEWPI_INVOICES_DIR => array(
+					'.htaccess',
+					'index.php',
+				),
+				BEWPI_INVOICES_DIR . $current_year . '/' => array(
+					'.htaccess',
+					'index.php',
+				),
+			);
+
+			// make pdf invoices dir.
+			wp_mkdir_p( BEWPI_INVOICES_DIR . $current_year . '/' );
+
+			foreach ( $directories as $directory => $files ) {
+				foreach ( $files as $file ) {
+					if ( file_exists( $directory . $file ) ) {
+						continue;
+					}
+
+					// prevent direct access to invoices.
+					copy( BEWPI_DIR . 'tmp/' . $file, $directory . $file );
+				}
+			}
+
+			// make custom templates dir.
+			wp_mkdir_p( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' );
+
+			do_action( 'bewpi_after_setup_directories' );
 		}
 
 		/**
@@ -451,6 +498,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array|mixed|void
 		 */
 		public function attach_invoice_to_email( $attachments, $status, $order ) {
+			// only attach to emails with WC_Order object.
+			if ( ! $order instanceof WC_Order ) {
+				return $attachments;
+			}
+
 			$general_options = get_option( 'bewpi_general_settings' );
 			if ( $order->get_total() === 0.00 && (bool) $general_options['bewpi_disable_free_products'] ) {
 				return $attachments;
@@ -494,7 +546,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// put the column before actions column.
 			$new_columns = array_slice( $columns, 0, count( $columns ) - 1, true ) +
-			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommmerce-pdf-invoices' ) ) +
+			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ) ) +
 			               array_slice( $columns, count( $columns ) - 1, count( $columns ) - ( count( $columns ) - 1 ), true );
 
 			return $new_columns;
@@ -583,6 +635,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'action' => 'edit',
 				'bewpi_action' => $action,
 			), admin_url( 'post.php' ) ), $action, 'nonce' );
+
+			$url = apply_filters( 'bewpi_pdf_invoice_url', $order_id, $action, $url );
 
 			printf( '<a href="%1$s" title="%2$s" %3$s>%4$s</a>', $url, $title, join( ' ', $attributes ), $title );
 		}

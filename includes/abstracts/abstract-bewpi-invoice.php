@@ -571,20 +571,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @since 2.5.3
 		 */
 		protected function has_only_virtual_products() {
-			$virtual_products_count = 0;
 			foreach ( $this->order->get_items( 'line_item' ) as $item ) {
 				$product = $this->order->get_product_from_item( $item );
-				// product could be removed.
-				if ( ! $product ) {
-					continue;
-				}
-
-				if ( $product->is_virtual() ) {
-					$virtual_products_count ++;
+				if ( ! $product || ! $product->is_virtual() ) {
+					return false;
 				}
 			}
 
-			return count( $this->order->get_items() ) === $virtual_products_count;
+			return true;
 		}
 
 		/**

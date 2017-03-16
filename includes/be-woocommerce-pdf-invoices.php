@@ -391,7 +391,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				</form>
 
 				<?php if ( ! is_plugin_active( 'woocommerce-pdf-invoices-premium/bootstrap.php' ) ) {
-					include BEWPI_DIR . 'includes/partials/settings-sidebar.php';
+					include BEWPI_DIR . 'includes/admin/views/html-sidebar.php';
 				} ?>
 			</div>
 			<?php

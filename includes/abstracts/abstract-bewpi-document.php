@@ -198,8 +198,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @return array
 		 */
 		private function get_html() {
-			do_action( 'bewpi_before_output_template_to_buffer', array( 'order_id' => $this->order->id ) );
-
 			$html = array();
 			foreach ( $this->html_templates as $section => $full_path ) {
 				if ( 'style' === $section ) {
@@ -209,8 +207,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 				$html[ $section ] = $this->buffer( $full_path );
 			}
-
-			do_action( 'bewpi_after_output_template_to_buffer' );
 
 			return $html;
 		}

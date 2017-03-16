@@ -232,6 +232,7 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
 - Improved: Uploads directory by moving all files (templates/invoices/fonts) to new 'uploads/woocommerce-pdf-invoices/' directory.
 - Improved: File structure by moving partials to includes/admin/views.
+- Removed: Unused and unnecessary actions 'bewpi_before_output_template_to_buffer' and 'bewpi_after_output_template_to_buffer'.
 
 = 2.6.5 - March 7, 2017 =
 

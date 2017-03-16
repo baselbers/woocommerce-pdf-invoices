@@ -320,8 +320,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			do_action( 'bewpi_admin_pdf_callback_end', $action, $order->id );
-
-			do_action( 'bewpi_after_pdf_action', $action );
 		}
 
 		/**
@@ -600,7 +598,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'bewpi_action' => $action,
 			), admin_url( 'post.php' ) ), $action, 'nonce' );
 
-			$url = apply_filters( 'bewpi_pdf_invoice_url', $order_id, $action, $url );
+			$url = apply_filters( 'bewpi_pdf_invoice_url', $url, $order_id, $action );
 
 			printf( '<a href="%1$s" title="%2$s" %3$s>%4$s</a>', $url, $title, join( ' ', $attributes ), $title );
 		}

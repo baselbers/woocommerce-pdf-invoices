@@ -29,7 +29,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 	<tbody>
 	<tr>
 		<td class="invoice-details">
-			<h1 class="title"><?php echo $this->template_options['bewpi_title']; ?></h1>
+			<h1 class="title"><?php echo BEWPI()->templater()->get_option( 'bewpi_title', $this->order->id ); ?></h1>
 			<span class="number" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
 			<span><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
 			<span><?php printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $this->order->get_order_number() ); ?></span><br/>
@@ -39,7 +39,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
 			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
-			<p><?php echo $this->template_options['bewpi_intro_text']; ?></p>
+			<p><?php echo BEWPI()->templater()->get_option( 'bewpi_intro_text', $this->order->id ); ?></p>
 		</td>
 	</tr>
 	</tbody>
@@ -289,7 +289,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 	<!-- Notes & terms -->
 	<tr>
 		<td class="border" colspan="3">
-			<?php echo nl2br( $this->template_options['bewpi_terms'] ); ?><br/>
+			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_terms', $this->order->id ) ); ?><br/>
 			<?php
 			if ( $this->template_options['bewpi_show_customer_notes'] ) :
 				// Note added by customer.

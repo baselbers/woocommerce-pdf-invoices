@@ -36,7 +36,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function __construct() {
 			$this->define_constants();
-			$this->load_textdomain();
+			$this->load_plugin_textdomain();
 			$this->includes();
 			do_action( 'bewpi_after_init_settings' );
 			$this->init_hooks();
@@ -71,16 +71,19 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			require_once BEWPI_DIR . 'includes/admin/settings/class-bewpi-admin-settings-template.php';
 			require_once BEWPI_DIR . 'includes/admin/class-bewpi-admin-notices.php';
 			require_once BEWPI_DIR . 'includes/class-bewpi-invoice.php';
+			require_once BEWPI_DIR . 'includes/class-bewpi-template.php';
 		}
 
 		/**
-		 * Load plugin textdomain from /lang dir.
+		 * Load the translation / textdomain files
 		 *
-		 * @since 2.5.0
+		 * @since 2.6.5 removed 'bewpi_lang_dir' filter. WordPress made update-safe WP_LANG_DIR directory.
 		 */
-		private function load_textdomain() {
-			$lang_dir = basename( dirname( BEWPI_FILE ) ) . '/lang';
-			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, apply_filters( 'bewpi_lang_dir', $lang_dir ) );
+		public function load_plugin_textdomain() {
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce' );
+
+			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
+			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, BEWPI_PLUGIN_BASENAME . '/lang' );
 		}
 
 		/**
@@ -569,7 +572,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'bewpi_action' => $action,
 			), admin_url( 'post.php' ) ), $action, 'nonce' );
 
-			$url = apply_filters( 'bewpi_pdf_invoice_url', $order_id, $action, $url );
+			$url = apply_filters( 'bewpi_pdf_invoice_url', $url, $order_id, $action );
 
 			printf( '<a href="%1$s" title="%2$s" %3$s>%4$s</a>', $url, $title, join( ' ', $attributes ), $title );
 		}
@@ -673,6 +676,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			);
 
 			return $actions;
+		}
+
+		/**
+		 * @return BEWPI_Template.
+		 */
+		public function templater() {
+			return BEWPI_Template::instance();
 		}
 	}
 }

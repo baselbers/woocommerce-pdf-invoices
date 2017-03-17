@@ -228,7 +228,9 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 
 = 2.6.5 - March 7, 2017 =
 
-- Added several hooks and filters for WPML compatibility in WooCommerce PDF Invoices Premium and other new features.
+- Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
+- Improved: `load_plugin_textdomain` method by using locale filter.
+- Removed: 'bewpi_lang_dir' filter, because WordPress made update-safe directory 'wp-content/languages/plugins'.
 
 = 2.6.4 - March 6, 2017 =
 

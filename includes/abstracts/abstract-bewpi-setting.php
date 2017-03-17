@@ -81,7 +81,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 				foreach ( $args['options'] as $option ) :
 					?>
 					<option
-						value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['name'] ); ?></option>
+						value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['id'] ); ?></option>
 					<?php
 				endforeach;
 				?>

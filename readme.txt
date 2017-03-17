@@ -226,20 +226,18 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 
 == Changelog ==
 
-= 2.7.0 - March 15, 2017 =
+= 2.7.0 - March 17, 2017 =
 
 - Added: 'composer.json' file, requiring mPDF with it and using autoloading.
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
+- Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
 - Improved: Uploads directory by moving all files (templates/invoices/fonts) to new 'uploads/woocommerce-pdf-invoices/' directory.
+- Improved: `load_plugin_textdomain` method by using locale filter.
 - Improved: File structure by moving partials to includes/admin/views.
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Removed: Unused and unnecessary actions 'bewpi_before_output_template_to_buffer' and 'bewpi_after_output_template_to_buffer'.
-
-= 2.6.5 - March 7, 2017 =
-
-- Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
-- Improved: `load_plugin_textdomain` method by using locale filter.
 - Removed: 'bewpi_lang_dir' filter, because WordPress made update-safe directory 'wp-content/languages/plugins'.
+- Removed: `get_template_dir()` method. Using `BEWPI()->templater->get_template()` instead.
 
 = 2.6.4 - March 6, 2017 =
 

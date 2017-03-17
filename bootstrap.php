@@ -22,12 +22,24 @@ define( 'BEWPI_VERSION', '2.7.0' );
  * Load WooCommerce PDF Invoices plugin.
  */
 function _bewpi_load_plugin() {
-
+	/**
+	 * @deprecated instead use `WPI_FILE`.
+	 */
 	define( 'BEWPI_FILE', __FILE__ );
+	/**
+	 * @deprecated instead use `WPI_DIR`.
+	 */
 	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
+	/**
+	 * @deprecated instead use `plugin_basename( __FILE__ )`.
+	 */
 	define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 
-	require_once BEWPI_DIR . 'vendor/autoload.php';
+	// Constants.
+	define( 'WPI_FILE', __FILE__ );
+	define( 'WPI_DIR', plugin_dir_path( __FILE__ ) );
+
+	require_once WPI_DIR . 'vendor/autoload.php';
 
 	/**
 	 * Main instance of BE_WooCommerce_PDF_Invoices.
@@ -200,18 +212,18 @@ function move_pdf_invoices() {
 	$files = glob( BEWPI_INVOICES_DIR . '*' );
 	foreach ( $files as $file ) {
 		if ( is_dir( $file ) ) {
-			wp_mkdir_p( WPI_ATTACHMENTS_DIR . basename( $file ) );
+			wp_mkdir_p( WPI_ATTACHMENTS_DIR . '/' . basename( $file ) );
 
 			$files_year = glob( $file . '/*' );
 			foreach ( $files_year as $file_year ) {
 				$pdf_path = str_replace( BEWPI_INVOICES_DIR, '', $file_year );
-				copy( $file_year, WPI_ATTACHMENTS_DIR . $pdf_path );
+				copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
 			}
 
 			continue;
 		}
 
-		copy( $file, WPI_ATTACHMENTS_DIR . basename( $file ) );
+		copy( $file, WPI_ATTACHMENTS_DIR . '/' . basename( $file ) );
 	}
 }
 

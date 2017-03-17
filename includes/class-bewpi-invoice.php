@@ -25,16 +25,10 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order            = wc_get_order( $order_id );
-			$this->type             = 'simple';
+			$this->order        = wc_get_order( $order_id );
 			parent::__construct( $order_id );
-			$template_dirname       = $this->get_template_dir();
-			$this->html_templates   = array(
-				'header' => $template_dirname . 'header.php',
-				'footer' => $template_dirname . 'footer.php',
-				'body'   => $template_dirname . 'body.php',
-				'style'  => $template_dirname . 'style.css',
-			);
+			$this->type         = 'invoice/simple';
+			$this->template     = $this->get_template();
 		}
 
 		/**

@@ -155,11 +155,11 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'desc'     => '',
 					'options'  => array(
 						array(
-							'name'  => __( 'Download', 'woocommerce-pdf-invoices' ),
+							'id'  => __( 'Download', 'woocommerce-pdf-invoices' ),
 							'value' => 'download',
 						),
 						array(
-							'name'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
+							'id'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
 							'value' => 'browser',
 						),
 					),

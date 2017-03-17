@@ -48,7 +48,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function __construct() {
 			$this->define_constants();
 			$this->load_plugin_textdomain();
-			$this->includes();
 			do_action( 'bewpi_after_init_settings' );
 			$this->init_hooks();
 		}
@@ -61,16 +60,30 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function define_constants() {
 			$wp_upload_dir = wp_upload_dir();
 
+			/**
+			 * URL.
+			 *
+			 * @deprecated instead use WPI_URL.
+			 *
+			 * @since 2.7.0
+			 */
 			define( 'BEWPI_URL', plugins_url( '', BEWPI_FILE ) . '/' );
-			define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates/' );
+			/**
+			 * Templates dir.
+			 *
+			 * @deprecated instead use WPI_DIR.
+			 *
+			 * @since 2.7.0
+			 */
+			define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates' );
 			/**
 			 * Custom templates directory.
 			 *
-			 * @deprecated instead use WPI_UPLOADS_TEMPLATES_DIR.
+			 * @deprecated instead use WPI_TEMPLATES_DIR.
 			 *
 			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/invoices.
 			 */
-			define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices/' );
+			define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices' );
 			/**
 			 * Attachments/invoices directory.
 			 *
@@ -78,11 +91,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 *
 			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/attachments.
 			 */
-			define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices/' );
+			define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices' );
 
-			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/' );
-			define( 'WPI_UPLOADS_TEMPLATES_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/templates/' );
-			define( 'WPI_ATTACHMENTS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/attachments/' );
+			define( 'WPI_URL', untrailingslashit( plugins_url( '', WPI_FILE ) ) );
+			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices' );
+			define( 'WPI_TEMPLATES_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/templates' );
+			define( 'WPI_ATTACHMENTS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/attachments' );
 		}
 
 		/**
@@ -94,7 +108,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce' );
 
 			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
-			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, BEWPI_PLUGIN_BASENAME . '/lang' );
+			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, plugin_basename( __FILE__ ) . '/lang' );
 		}
 
 		/**
@@ -183,7 +197,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			// Add plugin action links on "Plugins" page.
-			add_filter( 'plugin_action_links_' . BEWPI_PLUGIN_BASENAME, array( $this, 'add_plugin_action_links' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_plugin_action_links' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 			// delete invoice if deleting order.
 			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
@@ -215,7 +229,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array
 		 */
 		public static function add_plugin_row_meta( $links, $file ) {
-			if ( BEWPI_PLUGIN_BASENAME === $file ) {
+			if ( plugin_basename( __FILE__ ) === $file ) {
 				// add premium plugin link.
 				$premium_url = 'http://wcpdfinvoices.com';
 				$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );
@@ -708,6 +722,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Templater instance.
+		 *
 		 * @return BEWPI_Template.
 		 */
 		public function templater() {

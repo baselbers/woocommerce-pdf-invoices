@@ -1,6 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
@@ -72,10 +72,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->full_path = self::exists( $order_id );
 			if ( $this->full_path ) {
-				$this->number    = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
-				$this->date      = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
-				$this->year      = date_i18n( 'Y', strtotime( $this->date ) );
-				$this->filename  = basename( $this->full_path );
+				$this->number   = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
+				$this->date     = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
+				$this->year     = date_i18n( 'Y', strtotime( $this->date ) );
+				$this->filename = basename( $this->full_path );
 			}
 		}
 
@@ -179,7 +179,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			// delete pdf files.
 			foreach ( $files as $pdf_path ) {
-				parent::delete( WPI_ATTACHMENTS_DIR . $pdf_path );
+				parent::delete( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
 			}
 		}
 
@@ -317,8 +317,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				$pdf_path = $this->get_formatted_number() . '.pdf';
 			}
 
-			$this->full_path     = WPI_ATTACHMENTS_DIR . $pdf_path;
-			$this->filename      = basename( $this->full_path );
+			$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;
+			$this->filename  = basename( $this->full_path );
 
 			// update invoice data in db.
 			update_post_meta( $this->order->id, '_bewpi_invoice_date', $this->date );
@@ -343,30 +343,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string $full_path Full path to PDF invoice file.
 		 */
 		public function update( $destination = 'F' ) {
-			if ( ! BEWPI_Invoice::exists( $this->order->id ) ) {
-				wp_die( __( 'Invoice not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ), '', array( 'response' => 200, 'back_link' => true )
-				);
-			}
-
 			parent::delete( $this->full_path );
 			parent::generate( $destination, $this->order->is_paid() );
 
 			return $this->full_path;
-		}
-
-		/**
-		 * View invoice.
-		 */
-		public function view() {
-			if ( ! BEWPI_Invoice::exists( $this->order->id ) ) {
-				wp_die( __( 'Invoice not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ),
-					'',
-					array( 'response' => 200, 'back_link' => true )
-				);
-			}
-
-			$this->update();
-			parent::view();
 		}
 
 		/**
@@ -376,7 +356,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public static function delete( $order_id ) {
 			// remove pdf file.
-			$full_path = WPI_ATTACHMENTS_DIR . get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
+			$full_path = WPI_ATTACHMENTS_DIR . '/' . get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
 			parent::delete( $full_path );
 
 			// remove invoice postmeta from database.
@@ -433,6 +413,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * Outline columns for within pdf template files.
 		 *
 		 * @param int $taxes_count number of tax classes.
+		 *
 		 * @deprecated
 		 */
 		public function outlining_columns_html( $taxes_count = 0 ) {
@@ -486,7 +467,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * Calculates colspan for table footer cells
 		 *
 		 * @deprecated
+		 *
 		 * @param int $columns_count number of columns.
+		 *
 		 * @return array
 		 */
 		public function get_colspan( $columns_count = 0 ) {
@@ -542,7 +525,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				return false;
 			}
 
-			return parent::exists( BEWPI_INVOICES_DIR . $pdf_path );
+			return parent::exists( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
 		}
 
 		/**
@@ -562,34 +545,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			return true;
-		}
-
-		/**
-		 * Get the active template directory.
-		 *
-		 * @deprecated moved to BEWPI_Template Class.
-		 *
-		 * @return string
-		 */
-		protected function get_template_dir() {
-			$template_name = $this->template_options['bewpi_template_name'];
-
-			// check if a custom template exists.
-			$custom_template_dir = WPI_UPLOADS_TEMPLATES_DIR . '/invoice/' . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $custom_template_dir ) ) {
-				return $custom_template_dir;
-			}
-
-			// check if a custom template exists.
-			$custom_template_dir = BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $custom_template_dir ) ) {
-				return $custom_template_dir;
-			}
-
-			$template_dir = BEWPI_TEMPLATES_DIR . 'invoices/' . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $template_dir ) ) {
-				return $template_dir;
-			}
 		}
 
 		/**

@@ -18,6 +18,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	 */
 	abstract class BEWPI_Abstract_Document {
 		/**
+		 * Type of document like invoice, packing slip or credit note.
+		 *
+		 * @var string type of document.
+		 */
+		protected $type;
+
+		/**
 		 * WooCommerce Order associated with invoice.
 		 *
 		 * @var WC_Order
@@ -32,11 +39,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		protected $destination;
 
 		/**
-		 * Array containing all HTML to generate as PDF.
+		 * Array containing all template files.
 		 *
 		 * @var array
 		 */
-		protected $html_templates = array();
+		protected $template = array();
 
 		/**
 		 * Full path to document.
@@ -161,8 +168,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
-			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
-
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
 			if ( 'F' === $destination ) {
@@ -199,7 +204,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 */
 		private function get_html() {
 			$html = array();
-			foreach ( $this->html_templates as $section => $full_path ) {
+			foreach ( $this->template as $section => $full_path ) {
 				if ( 'style' === $section ) {
 					$html[ $section ] = '<style>' . $this->buffer( $full_path ) . '</style>';
 					continue;
@@ -258,12 +263,47 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @return bool/string false when pdf does not exist else full path to pdf.
 		 */
 		public static function exists( $full_path ) {
-			// pdf file exists?
 			if ( ! file_exists( $full_path ) ) {
 				return false;
 			}
 
 			return $full_path;
+		}
+
+		/**
+		 * Get template files.
+		 *
+		 * @return array template files.
+		 */
+		protected function get_template() {
+			$template = array();
+			$directories = BEWPI()->templater()->get_directories();
+
+			// get template name from template options.
+			$template_options = get_option( 'bewpi_template_settings' );
+			$name = $template_options['bewpi_template_name'];
+
+			// first check custom directory, second plugin directory.
+			foreach ( $directories as $directory ) {
+				$template_path = $directory . '/' . $this->type . '/' . $name;
+				if ( ! file_exists( $template_path ) ) {
+					continue;
+				}
+
+				$files = glob( $template_path . '/*{.php,.css}', GLOB_BRACE );
+				foreach ( $files as $full_path ) {
+					$file = pathinfo( $full_path );
+					$template[ $file['filename'] ] = $full_path;
+				}
+
+				break;
+			}
+
+			if ( count( $template ) === 0 ) {
+				wp_die( __( 'Template not found.', 'woocommerce-pdf-invoices' ), '', array( 'back_link' => true ) );
+			}
+
+			return $template;
 		}
 	}
 }

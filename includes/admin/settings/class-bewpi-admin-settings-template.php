@@ -33,45 +33,19 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		}
 
 		/**
-		 * Get path to templates.
-		 *
-		 * @return array
-		 */
-		private function get_templates() {
-			$scanned_templates = array();
-			$templates         = array();
-
-			if ( file_exists( BEWPI_TEMPLATES_DIR . 'invoices/simple/' ) ) {
-				$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_TEMPLATES_DIR . 'invoices/simple/' ) );
-			}
-
-			if ( file_exists( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) ) {
-				$scanned_templates = array_merge( $scanned_templates, scandir( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . 'simple/' ) );
-			}
-
-			if ( file_exists( WPI_UPLOADS_TEMPLATES_DIR . 'invoice/simple/' ) ) {
-				$scanned_templates = array_merge( $scanned_templates, scandir( WPI_UPLOADS_TEMPLATES_DIR . 'invoice/simple/' ) );
-			}
-
-			foreach ( $scanned_templates as $i => $template_name ) {
-				if ( '..' !== $template_name && '.' !== $template_name ) {
-					$templates[] = array(
-						'id'    => $i,
-						'name'  => ucfirst( $template_name ),
-						'value' => $template_name,
-					);
-				}
-			}
-
-			return $templates;
-		}
-
-		/**
 		 * Settings configuration.
 		 *
 		 * @return array
 		 */
 		private function the_settings() {
+			$templater = BEWPI()->templater();
+			$templates = array();
+			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
+				$templates[] = array(
+					'id'    => $template,
+					'value' => strtolower( $template ),
+				);
+			}
 			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
 
 			$settings = array(
@@ -84,7 +58,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'general',
 					'type'     => 'text',
 					'desc'     => '',
-					'options'  => $this->get_templates(),
+					'options'  => $templates,
 					'default'  => 'micro',
 				),
 				array(
@@ -304,11 +278,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'desc'     => '',
 					'options'  => array(
 						array(
-							'name'  => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
+							'id'  => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
 							'value' => 'woocommerce_order_number',
 						),
 						array(
-							'name'  => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
+							'id'  => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
 							'value' => 'sequential_number',
 						),
 					),
@@ -504,7 +478,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			$options  = array_merge( $defaults, $options );
 
 			// check for deleted custom template.
-			$templates = wp_list_pluck( $this->get_templates(), 'value' );
+			$templater = BEWPI()->templater();
+			$templates = array_map( 'basename', $templater->get_templates() );
 			if ( ! in_array( $options['bewpi_template_name'], $templates, true ) ) {
 				$options['bewpi_template_name'] = $defaults['bewpi_template_name'];
 			}

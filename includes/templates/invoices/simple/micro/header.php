@@ -1,11 +1,11 @@
 <table class="company two-column" style="overflow: hidden;">
     <tr>
         <td class="logo" width="50%">
-            <?php $this->get_company_logo_html(); ?>
+            <?php BEWPI()->templater()->print_logo(); ?>
         </td>
         <td class="info small-font" width="50%">
-            <?php echo nl2br( $this->template_options['bewpi_company_address'] ); ?><br/>
-            <?php echo nl2br( $this->template_options['bewpi_company_details'] ); ?>
+            <p><?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_company_address', $this->order->id ) ); ?></p>
+            <p><?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_company_details', $this->order->id ) ); ?></p>
         </td>
     </tr>
 </table>

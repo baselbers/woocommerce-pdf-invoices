@@ -355,6 +355,21 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * View invoice.
+		 */
+		public function view() {
+			if ( ! BEWPI_Invoice::exists( $this->order->id ) ) {
+				wp_die( __( 'Invoice not found. First create invoice and try again.', 'woocommerce-pdf-invoices' ),
+					'',
+					array( 'response' => 200, 'back_link' => true )
+				);
+			}
+
+			$this->update();
+			parent::view();
+		}
+
+		/**
 		 * Delete all invoice data from database and pdf file.
 		 *
 		 * @param int $order_id WooCommerce Order ID.
@@ -497,80 +512,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Get the active template directory.
-		 *
-		 * @return string
-		 */
-		protected function get_template_dir() {
-			$template_name = $this->template_options['bewpi_template_name'];
-
-			// check if a custom template exists.
-			$custom_template_dir = WPI_UPLOADS_TEMPLATES_DIR . '/invoice/' . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $custom_template_dir ) ) {
-				return $custom_template_dir;
-			}
-
-			// check if a custom template exists.
-			$custom_template_dir = BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $custom_template_dir ) ) {
-				return $custom_template_dir;
-			}
-
-			$template_dir = BEWPI_TEMPLATES_DIR . 'invoices/' . $this->type . '/' . $template_name . '/';
-			if ( file_exists( $template_dir ) ) {
-				return $template_dir;
-			}
-		}
-
-		public function left_footer_column_html() {
-			$left_footer_column_text = $this->template_options['bewpi_left_footer_column'];
-			if ( ! empty( $left_footer_column_text ) ) {
-				echo '<p>' . nl2br( $this->replace_placeholders( $left_footer_column_text ) ) . '</p>';
-			}
-		}
-
-		public function right_footer_column_html() {
-			$right_footer_column_text = $this->template_options['bewpi_right_footer_column'];
-			if ( ! empty( $right_footer_column_text ) ) {
-				echo '<p>' . nl2br( $this->replace_placeholders( $right_footer_column_text ) ) . '</p>';
-			} else {
-				echo '<p>' . sprintf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ) . '</p>';
-			}
-		}
-
-		private function replace_placeholders( $str ) {
-			$placeholders = apply_filters( 'bewpi_placeholders', array(
-				'[payment_method]'  => $this->order->payment_method_title,
-				'[shipping_method]' => $this->order->get_shipping_method(),
-			), $this->order->id );
-
-			foreach ( $placeholders as $placeholder => $value ) {
-				$str = str_replace( $placeholder, $value, $str );
-			}
-
-			return $str;
-		}
-
-		/**
-		 * Checks if invoice needs to have a zero rated VAT.
-		 *
-		 * @return bool
-		 */
-		public function display_zero_rated_vat() {
-			$is_vat_valid = get_post_meta( $this->order->id, '_vat_number_is_valid', true );
-			if ( ! $is_vat_valid ) {
-				return false;
-			}
-
-			$is_tax_removed = count( $this->order->get_tax_totals() ) === 0;
-			if ( ! $is_tax_removed ) {
-				return false;
-			}
-
-			return true;
-		}
-
-		/**
 		 * Check if order has only virtual products.
 		 *
 		 * @return bool
@@ -601,7 +542,96 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				return false;
 			}
 
-			return parent::exists( WPI_ATTACHMENTS_DIR . $pdf_path );
+			return parent::exists( BEWPI_INVOICES_DIR . $pdf_path );
+		}
+
+		/**
+		 * Checks if invoice needs to have a zero rated VAT.
+		 *
+		 * @return bool
+		 */
+		public function display_zero_rated_vat() {
+			$is_vat_valid = get_post_meta( $this->order->id, '_vat_number_is_valid', true );
+			if ( ! $is_vat_valid ) {
+				return false;
+			}
+
+			$is_tax_removed = count( $this->order->get_tax_totals() ) === 0;
+			if ( ! $is_tax_removed ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * Get the active template directory.
+		 *
+		 * @deprecated moved to BEWPI_Template Class.
+		 *
+		 * @return string
+		 */
+		protected function get_template_dir() {
+			$template_name = $this->template_options['bewpi_template_name'];
+
+			// check if a custom template exists.
+			$custom_template_dir = WPI_UPLOADS_TEMPLATES_DIR . '/invoice/' . $this->type . '/' . $template_name . '/';
+			if ( file_exists( $custom_template_dir ) ) {
+				return $custom_template_dir;
+			}
+
+			// check if a custom template exists.
+			$custom_template_dir = BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . $this->type . '/' . $template_name . '/';
+			if ( file_exists( $custom_template_dir ) ) {
+				return $custom_template_dir;
+			}
+
+			$template_dir = BEWPI_TEMPLATES_DIR . 'invoices/' . $this->type . '/' . $template_name . '/';
+			if ( file_exists( $template_dir ) ) {
+				return $template_dir;
+			}
+		}
+
+		/**
+		 * @param $str
+		 *
+		 * @deprecated moved to BEWPI_Template Class.
+		 *
+		 * @return mixed
+		 */
+		private function replace_placeholders( $str ) {
+			$placeholders = apply_filters( 'bewpi_placeholders', array(
+				'[payment_method]'  => $this->order->payment_method_title,
+				'[shipping_method]' => $this->order->get_shipping_method(),
+			), $this->order->id );
+
+			foreach ( $placeholders as $placeholder => $value ) {
+				$str = str_replace( $placeholder, $value, $str );
+			}
+
+			return $str;
+		}
+
+		/**
+		 * @deprecated instead use 'BEWPI()->templater()->get_option()'.
+		 */
+		public function left_footer_column_html() {
+			$left_footer_column_text = $this->template_options['bewpi_left_footer_column'];
+			if ( ! empty( $left_footer_column_text ) ) {
+				echo '<p>' . nl2br( $this->replace_placeholders( $left_footer_column_text ) ) . '</p>';
+			}
+		}
+
+		/**
+		 * @deprecated instead use 'BEWPI()->templater()->get_option()'.
+		 */
+		public function right_footer_column_html() {
+			$right_footer_column_text = $this->template_options['bewpi_right_footer_column'];
+			if ( ! empty( $right_footer_column_text ) ) {
+				echo '<p>' . nl2br( $this->replace_placeholders( $right_footer_column_text ) ) . '</p>';
+			} else {
+				echo '<p>' . sprintf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ) . '</p>';
+			}
 		}
 	}
 }

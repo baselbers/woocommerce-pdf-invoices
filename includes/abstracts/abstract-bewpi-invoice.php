@@ -237,24 +237,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			// check if user did a counter reset.
-			if ( $this->template_options['bewpi_reset_counter'] && (int) $this->template_options['bewpi_next_invoice_number'] > 0 ) {
-				$next_number = (int) $this->template_options['bewpi_next_invoice_number'];
+			$next_number = get_transient( 'bewpi_next_invoice_number' );
+			if ( false !== $next_number ) {
 				$this->delete_pdf_invoices( $next_number );
 				$this->delete_invoice_meta( $next_number );
 
-				// unset reset counter checkbox.
-				$this->template_options['bewpi_reset_counter'] = 0;
-				update_option( 'bewpi_template_settings', $this->template_options );
+				delete_transient( 'bewpi_next_invoice_number' );
 
 				return $next_number;
 			}
 
-			$max_invoice_number = $this->get_max_invoice_number();
+			$max_invoice_number = self::get_max_invoice_number();
 			$next_number        = $max_invoice_number + 1;
-
-			// set next invoice number option.
-			$this->template_options['bewpi_next_invoice_number'] = $next_number + 1;
-			update_option( 'bewpi_template_settings', $this->template_options );
 
 			return $next_number;
 		}
@@ -264,10 +258,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return int
 		 */
-		public function get_max_invoice_number() {
+		public static function get_max_invoice_number() {
 			global $wpdb;
 
-			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
+			$template_options = get_option( 'bewpi_template_settings' );
+			if ( (bool) $template_options['bewpi_reset_counter_yearly'] ) {
 				// get by year.
 				$query = $wpdb->prepare(
 					"SELECT MAX(CAST(pm2.meta_value AS UNSIGNED)) AS last_invoice_number

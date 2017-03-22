@@ -90,10 +90,54 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			<?php
 		}
 
+		public function reset_counter_callback( $args ) {
+			$class = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+			?>
+			<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
+			<input id="<?php echo $args['id']; ?>"
+			       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			       type="<?php echo $args['type']; ?>"
+			       value="1"
+				<?php
+				checked( (bool) get_transient( 'bewpi_next_invoice_number' ) );
+
+				if ( isset ( $args['attrs'] ) ) {
+					foreach ( $args['attrs'] as $attr ) {
+						echo $attr . ' ';
+					}
+				}
+				?>
+			/>
+			<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>">
+				<?php echo $args['desc']; ?>
+			</label>
+			<?php
+		}
+
+		public function next_invoice_number_callback( $args ) {
+			$class               = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+			$next_invoice_number = get_transient( 'bewpi_next_invoice_number' );
+			?>
+			<input id="<?php echo $args['id']; ?>"
+			       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			       type="<?php echo $args['type']; ?>"
+			       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number() + 1 ); ?>"
+				<?php
+				if ( isset ( $args['attrs'] ) ) {
+					foreach ( $args['attrs'] as $attr ) {
+						echo $attr . ' ';
+					}
+				}
+				?>
+			/>
+			<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
+			<?php
+		}
+
 		public function input_callback( $args ) {
-			$options     = get_option( $args['page'] );
-			$class       = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
-			$is_checkbox = $args['type'] === 'checkbox';
+			$options             = get_option( $args['page'] );
+			$class               = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+			$is_checkbox         = $args['type'] === 'checkbox';
 			if ( $is_checkbox ) { ?>
 				<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
 			<?php } ?>

@@ -314,7 +314,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'id'       => 'bewpi-reset-counter',
 					'name'     => self::PREFIX . 'reset_counter',
 					'title'    => '',
-					'callback' => array( $this, 'input_callback' ),
+					'callback' => array( $this, 'reset_counter_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'checkbox',
@@ -327,7 +327,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'id'       => 'bewpi-next-invoice-number',
 					'name'     => self::PREFIX . 'next_invoice_number',
 					'title'    => __( 'Next', 'woocommerce-pdf-invoices' ),
-					'callback' => array( $this, 'input_callback' ),
+					'callback' => array( $this, 'next_invoice_number_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'number',
@@ -612,7 +612,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				}
 			}
 
-			$output['bewpi_next_invoice_number'] = intval( $input['bewpi_next_invoice_number'] );
+			if ( isset( $input['bewpi_reset_counter'] ) && $input['bewpi_reset_counter'] ) {
+				set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
+			}
 
 			// return the array processing any additional functions filtered by this action.
 			return apply_filters( 'validate_input', $output, $input );

@@ -79,6 +79,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		public function __construct() {
 			$this->general_options = get_option( 'bewpi_general_settings' );
 			$this->template_options = get_option( 'bewpi_template_settings' );
+			$this->template = $this->get_template();
 		}
 
 		/**

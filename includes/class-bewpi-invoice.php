@@ -26,9 +26,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 */
 		public function __construct( $order_id ) {
 			$this->order        = wc_get_order( $order_id );
-			parent::__construct( $order_id );
 			$this->type         = 'invoice/simple';
-			$this->template     = $this->get_template();
+			parent::__construct( $order_id );
 		}
 
 		/**

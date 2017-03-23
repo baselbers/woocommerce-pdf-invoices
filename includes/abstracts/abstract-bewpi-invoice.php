@@ -320,10 +320,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			update_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
 			update_post_meta( $this->order->id, '_bewpi_invoice_pdf_path', $pdf_path );
 
-			do_action( 'bewpi_before_document_generation', array(
-				'type'     => $this->type,
-				'order_id' => $this->order->id,
-			) );
+			do_action( 'bewpi_before_document_generation', $this->type, $this->order->id );
 
 			parent::generate( $destination, $this->order->is_paid() );
 

@@ -105,10 +105,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @since 2.6.5 removed 'bewpi_lang_dir' filter. WordPress made update-safe WP_LANG_DIR directory.
 		 */
 		public function load_plugin_textdomain() {
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce' );
+			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-pdf-invoices' );
 
 			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
-			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, plugin_basename( __FILE__ ) . '/lang' );
+			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, 'woocommerce-pdf-invoices/lang' );
 		}
 
 		/**
@@ -117,19 +117,19 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function setup_directories() {
 			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
 			$directories        = apply_filters( 'bewpi_uploads_directories', array(
-				WPI_UPLOADS_DIR . 'attachments/' => array(
+				WPI_UPLOADS_DIR . '/attachments/' => array(
 					'.htaccess',
 					'index.php',
 				),
-				WPI_UPLOADS_DIR . 'attachments/' . $current_year . '/' => array(
+				WPI_UPLOADS_DIR . '/attachments/' . $current_year . '/' => array(
 					'.htaccess',
 					'index.php',
 				),
-				WPI_UPLOADS_DIR . 'fonts/' => array(
+				WPI_UPLOADS_DIR . '/fonts/' => array(
 					'.htaccess',
 					'index.php',
 				),
-				WPI_UPLOADS_DIR . 'templates/invoice/simple/' => array(),
+				WPI_UPLOADS_DIR . '/templates/invoice/simple/' => array(),
 			) );
 
 			// create directories and copy files.
@@ -152,7 +152,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			// copy fonts from tmp directory to uploads/woocommerce-pdf-invoices/fonts.
 			$font_files = glob( BEWPI_DIR . 'tmp/fonts/*.{ttf,otf}', GLOB_BRACE );
 			foreach ( $font_files as $font_file ) {
-				$destination_file = WPI_UPLOADS_DIR . 'fonts/' . basename( $font_file );
+				$destination_file = WPI_UPLOADS_DIR . '/fonts/' . basename( $font_file );
 				if ( file_exists( $destination_file ) ) {
 					continue;
 				}
@@ -303,13 +303,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				wp_die( 'Invalid request.' );
 			}
 
-			// validate woocommerce order.
-			$post_id = intval( $_GET['post'] );
-			$order = wc_get_order( $post_id );
-			if ( ! $order ) {
-				wp_die( 'Order not found.' );
-			}
-
 			// validate allowed user roles.
 			$user = wp_get_current_user();
 			$allowed_roles = apply_filters( 'bewpi_allowed_roles_to_download_invoice', array(
@@ -320,23 +313,25 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				wp_die( 'Access denied' );
 			}
 
+			$order_id = intval( $_GET['post'] );
+
 			// execute invoice action.
 			switch ( $action ) {
 				case 'view':
-					$invoice = new BEWPI_Invoice( $order->id );
+					$invoice = new BEWPI_Invoice( $order_id );
 					$full_path = $invoice->update();
 					BEWPI_Invoice::view( $full_path );
 					break;
 				case 'cancel':
-					BEWPI_Invoice::delete( $order->id );
+					BEWPI_Invoice::delete( $order_id );
 					break;
 				case 'create':
-					$invoice = new BEWPI_Invoice( $order->id );
+					$invoice = new BEWPI_Invoice( $order_id );
 					$invoice->save();
 					break;
 			}
 
-			do_action( 'bewpi_admin_pdf_callback_end', $action, $order->id );
+			do_action( 'bewpi_admin_pdf_callback_end', $action, $order_id );
 		}
 
 		/**

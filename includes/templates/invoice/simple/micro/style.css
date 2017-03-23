@@ -1,6 +1,9 @@
 table {
     font-family: opensans, Arial, sans-serif;
 }
+table.company {
+    overflow: hidden;
+}
 h1.company-logo {
     color: black;
 }

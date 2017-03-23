@@ -43,10 +43,10 @@ class BEWPI_Template {
 	 * BEWPI_Template constructor.
 	 */
 	private function __construct() {
-		$this->directories = array(
+		$this->directories = apply_filters( 'bewpi_template_directories', array(
 			WPI_TEMPLATES_DIR, // uploads/woocommerce-pdf-invoices/templates.
 			WPI_DIR . '/includes/templates',
-		);
+		) );
 	}
 
 	/**
@@ -78,29 +78,13 @@ class BEWPI_Template {
 	public static function get_option( $name, $order_id = null ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$value = apply_filters( 'bewpi_template_option-' . $name, $template_options[ $name ], $name, $order_id );
+		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
 
 		if ( ! is_null( $order_id ) ) {
 			$value = self::replace_placeholders( $value, $order_id );
 		}
 
 		return $value;
-	}
-
-	/**
-	 * Display company logo or name
-	 */
-	public static function print_logo() {
-		$logo_url = self::get_option( 'bewpi_company_logo' );
-		if ( ! empty( $logo_url ) ) {
-			// mPDF' stablest method to display an image is to use their 'Image data as a Variable' (https://mpdf.github.io/what-else-can-i-do/images.html) option.
-			$src = apply_filters( 'bewpi_company_logo_url', 'var:company_logo' );
-			printf( '<img class="company-logo" src="%s"/>', esc_attr( $src ) );
-		} else {
-			// show company name if company logo does not exist.
-			$company_name = self::get_option( 'bewpi_company_name' );
-			printf( '<h1 class="company-logo">%s</h1>', esc_html( $company_name ) );
-		}
 	}
 
 	/**
@@ -116,11 +100,23 @@ class BEWPI_Template {
 
 		$value = str_replace(
 			array( '[payment_method]', '[shipping_method]' ),
-			array( $order->payment_method_title, $order->get_shipping_method() ),
+			array(
+				apply_filters( 'bewpi_payment_method_title', $order->payment_method_title ),
+				$order->get_shipping_method(),
+			),
 			$value
 		);
 
 		return $value;
+	}
+
+	/**
+	 * Get the company logo URL.
+	 *
+	 * @return string The actual url from the Media Library.
+	 */
+	public static function get_logo_url() {
+		return esc_url_raw( self::get_option( 'bewpi_company_logo' ) );
 	}
 
 	/**

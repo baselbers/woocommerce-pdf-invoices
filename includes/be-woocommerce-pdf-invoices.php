@@ -505,7 +505,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Create Shop Order column for Invoice Number.
+		 * Create Shop Order column for Invoice Number and place it before 'Actions' column.
 		 *
 		 * @param array $columns Shop Order columns.
 		 *
@@ -513,17 +513,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function add_invoice_number_column( $columns ) {
 			// invoice number column enabled by user?
-			$general_settings = get_option( 'bewpi_general_settings' );
-			if ( empty( $general_settings['bewpi_invoice_number_column'] ) ) {
+			$general_options = get_option( 'bewpi_general_settings' );
+			if ( ! $general_options['bewpi_invoice_number_column'] ) {
 				return $columns;
 			}
 
-			// put the column before actions column.
-			$new_columns = array_slice( $columns, 0, count( $columns ) - 1, true ) +
-			               array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ) ) +
-			               array_slice( $columns, count( $columns ) - 1, count( $columns ) - ( count( $columns ) - 1 ), true );
+			// Splice columns at 'Actions' column, add 'Invoice No.' column and merge with last part.
+			$offset = array_search( 'order_actions', array_keys( $columns ), true );
+			$columns = array_merge(
+				array_splice( $columns, 0, $offset ),
+				array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ) ),
+				$columns
+			);
 
-			return $new_columns;
+			return $columns;
 		}
 
 		/**

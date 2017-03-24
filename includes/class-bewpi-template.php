@@ -43,7 +43,10 @@ class BEWPI_Template {
 	 * BEWPI_Template constructor.
 	 */
 	private function __construct() {
+		$upload_dir = wp_upload_dir();
+
 		$this->directories = apply_filters( 'bewpi_template_directories', array(
+			$upload_dir['basedir'] . '/bewpi-templates', // Old custom templates directory.
 			WPI_TEMPLATES_DIR, // uploads/woocommerce-pdf-invoices/templates.
 			WPI_DIR . '/includes/templates',
 		) );
@@ -56,9 +59,6 @@ class BEWPI_Template {
 	 */
 	public function get_templates() {
 		$templates = array();
-
-		// uploads/bewpi-templates/invoices.
-		$templates = array_merge( $templates, glob( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR . '/simple/*', GLOB_ONLYDIR ) );
 
 		foreach ( $this->directories as $directory ) {
 			$templates = array_merge( $templates, glob( $directory . '/invoice/simple/*', GLOB_ONLYDIR ) );

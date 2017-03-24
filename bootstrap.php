@@ -82,7 +82,13 @@ function _bewpi_on_plugin_update() {
 		// version 2.7.0- uploads folder changed to uploads/woocommerce-pdf-invoices.
 		if ( version_compare( $current_version, '2.7.0' ) <= 0 ) {
 			BEWPI()->setup_directories();
+
+			// Move invoice from uploads/bewpi-invoices to uploads/woocommerce-pdf-invoices/attachments.
 			move_pdf_invoices();
+
+			// Rename uploads/bewpi-templates/invoices to uploads/bewpi-templates/invoice.
+			$upload_dir = wp_upload_dir();
+			rename( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR, $upload_dir['basedir'] . '/bewpi-templates/invoice' );
 		}
 
 		update_site_option( 'bewpi_version', BEWPI_VERSION );

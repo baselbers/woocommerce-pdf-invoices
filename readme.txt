@@ -76,7 +76,9 @@ The manual installation method involves downloading our plugin and uploading it 
 == Frequently Asked Questions ==
 
 #### How to add your custom template?
-To getting started, copy the default template files (including folder) called `plugins/woocommerce-pdf-invoices/includes/templates/invoices/simple/micro` to `uploads/bewpi-templates/invoices/simple` and rename the template folder `micro`. The plugin will now detect the template and makes it available for selection within the template settings tab. Now go ahead en start making some changes to the template files! :)
+Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple/micro` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple` and rename the template folder `micro`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
+
+Important: Before you update the plugin, always have a look at the Changelog for any changes to the template files. There will be updates that require updating your custom template!
 
 #### How to add a fee to the invoice?
 To add a fee to WooCommerce and your invoice, simply add the following action to your themes `functions.php`.
@@ -166,20 +168,6 @@ For use in WordPress editor use below shortcode. This will only work if you repl
 
 Note: Download button will only be displayed when PDF exists and order has been paid.
 
-#### Logo image shows a red cross?
-By default the relative path is used for better performance, try to base64 the image. Also read the sticky topic on the support forum for more solutions!
-
-`
-function convert_company_logo_to_base64( $company_logo_path ) {
-    $company_logo_url = str_replace( '..', get_site_url(), $company_logo_path );
-    $type = pathinfo( $company_logo_url, PATHINFO_EXTENSION );
-    $data = wp_remote_fopen( $company_logo_url );
-    $base64 = 'data:image/' . $type . ';base64,' . base64_encode( $data );
-    return $base64;
-}
-add_filter( 'bewpi_company_logo_url', 'convert_company_logo_to_base64' );
-`
-
 #### How to skip invoice generation based on specific payment methods?
 Add the name of the payment method to the array.
 
@@ -204,14 +192,15 @@ add_filter( 'bewpi_allowed_roles_to_download_invoice', 'bewpi_allowed_roles_to_d
 `
 
 ### How to alter formatted invoice number? ###
-Add following filter function to your functions.php within your theme.
+Add following filter function to your 'functions.php' within your theme.
 
 `
-function alter_formatted_invoice_number( $formatted_invoice_number, $invoice_type ) {
-   if ( $invoice_type === 'global' ) { // simple or global.
+function alter_formatted_invoice_number( $formatted_invoice_number, $document_type ) {
+   if ( $document_type === 'invoice/global' ) { // 'simple' or 'global'.
       // add M for global invoices.
       return 'M' . $formatted_invoice_number;
    }
+
    return $formatted_invoice_number;
 }
 add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 10, 2 );
@@ -228,10 +217,10 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 
 = 2.7.0 - March 22, 2017 =
 
-- Added: 'composer.json' file, requiring mPDF and using autoloading.
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
+- Added: 'composer.json' file, requiring mPDF and using autoloading.
 - Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
-- Improved: Uploads directory by moving all files (templates, invoices and fonts) to new 'uploads/woocommerce-pdf-invoices' directory.
+- Improved: Uploads directory by moving all files (templates, invoices and fonts) to new 'uploads/woocommerce-pdf-invoices' directory! Do not use the old uploads/bewpi-invoices and uploads/bewpi-templates anymore!
 - Improved: `load_plugin_textdomain` method by using locale filter.
 - Improved: File structure by moving partials to includes/admin/views.
 - Improved: Invoice number reset by using transient instead of updating complete template options.

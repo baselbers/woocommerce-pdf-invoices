@@ -207,11 +207,13 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 `
 
 ### How to add custom fields/meta-data to the PDF invoice template? ###
-To add custom fields to the PDF invoice, a custom template is required. See FAQ on how to create a custom template. Use below code to display the meta-data. Replace META_KEY with the actual name of the custom field. Ask the author of the third party plugin if you don't know the name of the custom field.
+Use below code to display meta-data. Replace `{META_KEY}` with the actual key. If you use another plugin, just ask the key from the author of that plugin.
 
 `
-<?php echo get_post_meta( $this->order->id, 'META_KEY', true ); ?>
+<?php echo BEWPI()->templater()->get_field( '{META_KEY}' ); ?>
 `
+
+Important: A custom template is required to add a custom field to the PDF invoice.
 
 == Changelog ==
 
@@ -229,6 +231,7 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Improved: `get_template()` method by moving it to `BEWPI_Abstract_Document` class so child classes can use it.
 - Improved: 'bewpi_before_document_generation' action by changing arguments array into separate variables.
 - Improved: Invoice `type` variable by using relative paths (invoice/simple and invoice/global), so renamed 'invoices' directory to singular 'invoice'.
+- Improved: `templater()` by setting `$order` object as a class variable, so the class methods can make use of it instead of using `$order_id` as param.
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Fixed: 'Invoice No.' column not always before 'Actions' column on Shop Order page.
 - Fixed: '_bewpi_pdf_invoice_path' postmeta only created when option 'Reset yearly' is enabled.

@@ -77,9 +77,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * BEWPI_Abstract_Document constructor.
 		 */
 		public function __construct() {
-			$this->general_options = get_option( 'bewpi_general_settings' );
-			$this->template_options = get_option( 'bewpi_template_settings' );
-			$this->template = $this->get_template();
+			$templater = BEWPI()->templater();
+			$templater->set_order( $this->order );
+			$this->template = $templater->get_template( $this->type );
+			$this->general_options = get_option( 'bewpi_general_settings' ); // @todo remove.
+			$this->template_options = get_option( 'bewpi_template_settings' ); // @todo remove and use 'templater()'.
 		}
 
 		/**
@@ -269,42 +271,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			return $full_path;
-		}
-
-		/**
-		 * Get template files.
-		 *
-		 * @return array template files.
-		 */
-		protected function get_template() {
-			$template = array();
-			$directories = BEWPI()->templater()->get_directories();
-
-			// get template name from template options.
-			$template_options = get_option( 'bewpi_template_settings' );
-			$name = $template_options['bewpi_template_name'];
-
-			// first check custom directory, second plugin directory.
-			foreach ( $directories as $directory ) {
-				$template_path = $directory . '/' . $this->type . '/' . $name;
-				if ( ! file_exists( $template_path ) ) {
-					continue;
-				}
-
-				$files = glob( $template_path . '/*{.php,.css}', GLOB_BRACE );
-				foreach ( $files as $full_path ) {
-					$file = pathinfo( $full_path );
-					$template[ $file['filename'] ] = $full_path;
-				}
-
-				break;
-			}
-
-			if ( count( $template ) === 0 ) {
-				wp_die( __( 'Template not found.', 'woocommerce-pdf-invoices' ), '', array( 'back_link' => true ) );
-			}
-
-			return $template;
 		}
 	}
 }

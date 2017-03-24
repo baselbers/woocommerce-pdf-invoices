@@ -39,7 +39,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
 			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
-			<p><?php echo BEWPI()->templater()->get_option( 'bewpi_intro_text', $this->order->id ); ?></p>
+			<p><?php echo BEWPI()->templater()->get_option( 'bewpi_intro_text' ); ?></p>
 		</td>
 	</tr>
 	</tbody>
@@ -289,7 +289,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 	<!-- Notes & terms -->
 	<tr>
 		<td class="border" colspan="3">
-			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_terms', $this->order->id ) ); ?><br/>
+			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_terms' ) ); ?><br/>
 			<?php
 			if ( $this->template_options['bewpi_show_customer_notes'] ) :
 				// Note added by customer.

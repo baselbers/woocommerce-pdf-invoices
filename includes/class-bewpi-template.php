@@ -16,6 +16,13 @@ class BEWPI_Template {
 	protected static $_instance = null;
 
 	/**
+	 * WooCommerce order.
+	 *
+	 * @var WC_Order.
+	 */
+	public $order;
+
+	/**
 	 * Template directories.
 	 *
 	 * @var array.
@@ -27,7 +34,7 @@ class BEWPI_Template {
 	 *
 	 * Ensures only one instance of BEWPI_Template is loaded or can be loaded.
 	 *
-	 * @since 2.1
+	 * @since 2.7.0
 	 * @static
 	 * @return BEWPI_Template Main instance
 	 */
@@ -42,18 +49,46 @@ class BEWPI_Template {
 	/**
 	 * BEWPI_Template constructor.
 	 */
-	private function __construct() {
-		$upload_dir = wp_upload_dir();
+	private function __construct() {}
 
-		$this->directories = apply_filters( 'bewpi_template_directories', array(
-			$upload_dir['basedir'] . '/bewpi-templates', // Old custom templates directory.
-			WPI_TEMPLATES_DIR, // uploads/woocommerce-pdf-invoices/templates.
-			WPI_DIR . '/includes/templates',
-		) );
+	/**
+	 * Get template files.
+	 *
+	 * @param string $type Document type.
+	 *
+	 * @return array
+	 */
+	public function get_template( $type ) {
+		$template = array();
+
+		// get template name from template options.
+		$name = $this->get_option( 'bewpi_template_name' );
+
+		// first check custom directory, second plugin directory.
+		foreach ( $this->directories as $directory ) {
+			$template_path = $directory . '/' . $type . '/' . $name;
+			if ( ! file_exists( $template_path ) ) {
+				continue;
+			}
+
+			$files = glob( $template_path . '/*{.php,.css}', GLOB_BRACE );
+			foreach ( $files as $full_path ) {
+				$file = pathinfo( $full_path );
+				$template[ $file['filename'] ] = $full_path;
+			}
+
+			break;
+		}
+
+		if ( count( $template ) === 0 ) {
+			wp_die( __( 'Template not found.', 'woocommerce-pdf-invoices' ), '', array( 'back_link' => true ) );
+		}
+
+		return $template;
 	}
 
 	/**
-	 * Get path to templates.
+	 * Get absolute paths of all invoice/simple templates.
 	 *
 	 * @return array
 	 */
@@ -71,18 +106,14 @@ class BEWPI_Template {
 	 * Get template options by key.
 	 *
 	 * @param string $name the option key.
-	 * @param int    $order_id the WooCommerce Order ID is needed to replace template placeholders.
 	 *
 	 * @return string
 	 */
-	public static function get_option( $name, $order_id = null ) {
+	public function get_option( $name ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
-
-		if ( ! is_null( $order_id ) ) {
-			$value = self::replace_placeholders( $value, $order_id );
-		}
+		$value = apply_filters( $name, $template_options[ $name ], $name, $this->order->id );
+		$value = $this->replace_placeholders( $value );
 
 		return $value;
 	}
@@ -91,18 +122,15 @@ class BEWPI_Template {
 	 * Replace template placeholder within string.
 	 *
 	 * @param string $value string to format.
-	 * @param int    $order_id WC_Order ID.
 	 *
 	 * @return string
 	 */
-	private static function replace_placeholders( $value, $order_id ) {
-		$order = wc_get_order( $order_id );
-
+	private function replace_placeholders( $value ) {
 		$value = str_replace(
 			array( '[payment_method]', '[shipping_method]' ),
 			array(
-				apply_filters( 'bewpi_payment_method_title', $order->payment_method_title ),
-				$order->get_shipping_method(),
+				apply_filters( 'bewpi_payment_method_title', $this->order->payment_method_title ),
+				$this->order->get_shipping_method(),
 			),
 			$value
 		);
@@ -115,8 +143,19 @@ class BEWPI_Template {
 	 *
 	 * @return string The actual url from the Media Library.
 	 */
-	public static function get_logo_url() {
-		return esc_url_raw( self::get_option( 'bewpi_company_logo' ) );
+	public function get_logo_url() {
+		return esc_url_raw( $this->get_option( 'bewpi_company_logo' ) );
+	}
+
+	/**
+	 * Get custom post meta data.
+	 *
+	 * @param string $meta_key The post meta key.
+	 *
+	 * @return string
+	 */
+	public function get_field( $meta_key ) {
+		return (string) get_post_meta( $this->order->id, $meta_key, true );
 	}
 
 	/**
@@ -126,5 +165,23 @@ class BEWPI_Template {
 	 */
 	public function get_directories() {
 		return $this->directories;
+	}
+
+	/**
+	 * Set template directories.
+	 *
+	 * @param array $directories Absolute paths to templates directories.
+	 */
+	public function set_directories( $directories ) {
+		$this->directories = $directories;
+	}
+
+	/**
+	 * Set order.
+	 *
+	 * @param WC_Order $order WooCommerce Order object.
+	 */
+	public function set_order( $order ) {
+		$this->order = $order;
 	}
 }

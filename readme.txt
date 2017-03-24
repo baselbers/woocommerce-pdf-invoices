@@ -231,10 +231,15 @@ To add custom fields to the PDF invoice, a custom template is required. See FAQ 
 - Added: 'composer.json' file, requiring mPDF and using autoloading.
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
 - Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
-- Improved: Uploads directory by moving all files (templates/invoices/fonts) to new 'uploads/woocommerce-pdf-invoices/' directory.
+- Improved: Uploads directory by moving all files (templates, invoices and fonts) to new 'uploads/woocommerce-pdf-invoices' directory.
 - Improved: `load_plugin_textdomain` method by using locale filter.
 - Improved: File structure by moving partials to includes/admin/views.
 - Improved: Invoice number reset by using transient instead of updating complete template options.
+- Improved: Template by using `printf()` for better readability and added html escaping.
+- Improved: Template by checking for company logo url to display logo.
+- Improved: `get_template()` method by moving it to `BEWPI_Abstract_Document` class so child classes can use it.
+- Improved: 'bewpi_before_document_generation' action by changing arguments array into separate variables.
+- Improved: Invoice `type` variable by using relative paths (invoice/simple and invoice/global), so renamed 'invoices' directory to singular 'invoice'.
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Fixed: 'Invoice No.' column not always before 'Actions' column on Shop Order page.
 - Fixed: '_bewpi_pdf_invoice_path' postmeta only created when option 'Reset yearly' is enabled.

@@ -79,7 +79,7 @@ function _bewpi_on_plugin_update() {
 			set_time_limit( $max_execution_time );
 		}
 
-		// version 2.6.5- uploads folder changed to uploads/woocommerce-pdf-invoices.
+		// version 2.7.0- uploads folder changed to uploads/woocommerce-pdf-invoices.
 		if ( version_compare( $current_version, '2.7.0' ) <= 0 ) {
 			BEWPI()->setup_directories();
 			move_pdf_invoices();
@@ -141,10 +141,10 @@ function update_postmeta() {
 	}
 
 	foreach ( $posts as $post_id ) {
-		// create pdf path postmeta for all shop orders.
+		// Create pdf path postmeta for all shop orders.
 		create_pdf_path_postmeta( $post_id, $template_options );
 
-		// format date postmeta to mysql date.
+		// Format date postmeta to mysql date.
 		update_date_format_postmeta( $post_id, $date_format );
 	}
 }
@@ -168,14 +168,16 @@ function create_pdf_path_postmeta( $post_id, $template_options ) {
 		return;
 	}
 
-	// one folder for all invoices.
+	// One folder for all invoices.
 	$new_pdf_path = $formatted_invoice_number . '.pdf';
 	if ( (bool) $template_options['bewpi_reset_counter_yearly'] ) {
-		// yearly sub-folders.
+		// Yearly sub-folders.
 		$invoice_year = get_post_meta( $post_id, '_bewpi_invoice_year', true );
 		if ( $invoice_year ) {
 			$new_pdf_path = $invoice_year . '/' . $formatted_invoice_number . '.pdf';
 		}
+	} else {
+		$new_pdf_path = $formatted_invoice_number . '.pdf';
 	}
 
 	if ( file_exists( BEWPI_INVOICES_DIR . $new_pdf_path ) ) {

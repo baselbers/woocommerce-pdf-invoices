@@ -477,6 +477,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
+			$skip = apply_filters( 'bewpi_skip_invoice_generation', false, $status, $order );
+			if ( $skip ) {
+				return $attachments;
+			}
+
 			$general_options = get_option( 'bewpi_general_settings' );
 			if ( $order->get_total() === 0.00 && (bool) $general_options['bewpi_disable_free_products'] ) {
 				return $attachments;

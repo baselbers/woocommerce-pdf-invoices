@@ -180,6 +180,18 @@ function bewpi_attach_invoice_excluded_payment_methods( $payment_methods ) {
 add_filter( 'bewpi_attach_invoice_excluded_payment_methods', 'bewpi_attach_invoice_excluded_payment_methods', 10, 2 );
 `
 
+#### How to skip invoice generation in general?
+Add below function to your themes 'functions.php' file.
+
+`
+function bewpi_skip_invoice_generation( $skip, $status, $order ) {
+    // Do your stuff based on the order.
+
+    return true; // True to skip.
+}
+add_filter( 'bewpi_skip_invoice_generation', 'bewpi_skip_invoice_generation', 10, 3 );
+`
+
 #### How to allow specific roles to download invoice?
 Add the name of the role to the array. By default shop managers and administrators are allowed to download invoices.
 
@@ -224,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
 - Added: 'composer.json' file, requiring mPDF and using autoloading.
 - Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
+- Added: 'bewpi_skip_invoice_generation' filter to skip invoice based on order data like products, categories etc.
 - Improved: Uploads directory by moving all files (templates, invoices and fonts) to new 'uploads/woocommerce-pdf-invoices' directory! Do not use the old uploads/bewpi-invoices and uploads/bewpi-templates anymore!
 - Improved: `load_plugin_textdomain` method by using locale filter.
 - Improved: File structure by moving partials to includes/admin/views.

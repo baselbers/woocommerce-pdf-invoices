@@ -224,16 +224,16 @@ add_filter( 'bewpi_formatted_invoice_number', 'alter_formatted_invoice_number', 
 Use below code to display meta-data. Replace `{META_KEY}` with the actual key. If you use another plugin, just ask the key from the author of that plugin.
 
 `
-<?php echo BEWPI()->templater()->get_field( '{META_KEY}' ); ?>
+<?php echo BEWPI()->templater()->get_meta( '{META_KEY}' ); ?>
 `
 
 Important: A custom template is required to add a custom field to the PDF invoice.
 
 == Changelog ==
 
-= 2.7.0 - March 22, 2017 =
+= 2.7.0 - March 30, 2017 =
 
-- Added: Ability to use custom fonts without changing mPDF lib. This is a WooCommerce PDF Invoices Premium feature.
+- Added: A brand new template inspired by [NextStepWebs](https://github.com/NextStepWebs/simple-html-invoice-template) called 'Minimal' that makes use of the new `BEWPI()->templater()` class. Important: 'Micro' template is deprecated and will no longer be supported. We've created a petition [#162](https://github.com/baselbers/woocommerce-pdf-invoices/issues/162) where you can leave a vote to keep the 'Micro' template.
 - Added: 'composer.json' file, requiring mPDF and using autoloading.
 - Added: Class `BEWPI_Template` which serves all template data. Your custom template needs an update!
 - Added: 'bewpi_skip_invoice_generation' filter to skip invoice based on order data like products, categories etc.
@@ -253,6 +253,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Removed: Unused and unnecessary actions 'bewpi_before_output_template_to_buffer' and 'bewpi_after_output_template_to_buffer'.
 - Removed: 'bewpi_lang_dir' filter, because WordPress made update-safe directory 'wp-content/languages/plugins'.
 - Removed: `get_template_dir()` method. Using `BEWPI()->templater->get_template()` instead.
+- Removed: Open Sans font and replaced it with Arial due to the use of composer. We load all fonts from mPDF library now.
 
 = 2.6.4 - March 6, 2017 =
 

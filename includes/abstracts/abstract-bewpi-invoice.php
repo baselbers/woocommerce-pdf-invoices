@@ -380,7 +380,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Get VAT number from WooCommerce EU VAT Number plugin
+		 * Get VAT number from WooCommerce EU VAT Number plugin.
+		 *
+		 * @deprecated Use BEWPI()->templater()->get_meta( '_vat_number' ) instead.
 		 */
 		public function display_vat_number() {
 			$vat_number = get_post_meta( $this->order->id, '_vat_number', true );
@@ -390,7 +392,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Get PO Number from WooCommerce Purchase Order Gateway plugin
+		 * Get PO Number from WooCommerce Purchase Order Gateway plugin.
+		 *
+		 * @deprecated Use BEWPI()->templater()->get_meta( '_po_number' ) instead.
 		 */
 		public function display_purchase_order_number() {
 			if ( isset( $this->order->payment_method ) && 'woocommerce_gateway_purchase_order' === $this->order->payment_method ) {
@@ -490,9 +494,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * Check if order has only virtual products.
 		 *
 		 * @return bool
+		 *
+		 * @deprecated moved to BEWPI()->templater().
 		 * @since 2.5.3
 		 */
-		protected function has_only_virtual_products() {
+		public function has_only_virtual_products() {
 			foreach ( $this->order->get_items( 'line_item' ) as $item ) {
 				$product = $this->order->get_product_from_item( $item );
 				if ( ! $product || ! $product->is_virtual() ) {

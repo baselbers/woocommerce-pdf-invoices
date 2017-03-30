@@ -1,0 +1,114 @@
+table, tr, td, div, p {
+    /*border:1px solid black;*/
+}
+
+h1, h2, h3, h4, h5, h6{
+    padding:0;
+    margin:0;
+}
+
+table, div {
+    font-family: opensans, Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    line-height: normal;
+    color: #555;
+    font-size: 12px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+table td {
+    padding:5px;
+    vertical-align:top;
+    line-height: inherit;
+}
+
+table tr.top td {
+   padding-top: 40px;
+}
+
+/* Invoice information */
+table tr.top td:nth-child(2){
+    text-align:right;
+}
+
+div.title div {
+    padding: 5px;
+    width: 40%;
+    float: left;
+    margin: 0 0 0 40px;
+    line-height: 55px;
+}
+
+div.title div.watermark {
+    float: right;
+    margin: 0 40px 0 0;
+    line-height: normal;
+}
+
+div.title div.watermark h2.rubber-stamp {
+    font-family: serif;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: green;
+    border: 3px solid green;
+    padding: 10px 7px;
+    border-radius: 10px;
+    opacity: 0.8;
+    text-align: center;
+    width: 130px;
+    float:right;
+}
+
+table tr.heading td{
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+}
+
+table tr.information td {
+    padding-bottom: 20px;
+}
+
+/* Customer billing address */
+table tr.information td:nth-child(3){
+    text-align: right;
+}
+
+table tr.item td{
+    border-bottom: 1px solid #eee;
+}
+
+table tr.spacer td {
+    padding-top: 20px;
+}
+
+/* Totals */
+table tr.total td:nth-child(2),
+table tr.total td:nth-child(3){
+    border-top: 2px solid #eee;
+    font-weight: bold;
+}
+
+/* Dynamic class */
+table tr.total td.order-total{
+    border-top: 2px solid #000;
+}
+
+table.notes {
+    margin-top: 40px;
+}
+
+table tr.terms td{
+    border-top: solid 1px #000;
+    text-align: center;
+}
+
+table tr.pagination td {
+    padding: 20px 0 20px;
+    width: 100%;
+    text-align: right;
+}

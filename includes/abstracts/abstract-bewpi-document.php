@@ -93,7 +93,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		protected function generate( $destination, $is_paid ) {
 			do_action( 'bewpi_before_invoice_content', $this->order->id );
 
-			// only use default font with version 2.6.2- because we defining font in template.
+			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
@@ -136,7 +136,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			// show paid watermark.
-			if ( (bool) $this->template_options['bewpi_show_payment_status'] && $is_paid ) {
+			if ( (bool) $this->template_options['bewpi_show_payment_status'] && $is_paid && 'micro' === $this->template_options['bewpi_template_name'] ) {
 				$mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 				$mpdf->showWatermarkText  = true;
 				$mpdf->watermarkTextAlpha = '0.2';
@@ -154,7 +154,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->autoLangToFont      = true;
 			$mpdf->setAutoTopMargin    = 'stretch';
 			$mpdf->setAutoBottomMargin = 'stretch';
-			$mpdf->autoMarginPadding   = 10;
+			$mpdf->autoMarginPadding   = ( 'micro' === $this->template_options['bewpi_template_name'] ) ? 10 : 20;
 			$mpdf->useOnlyCoreFonts    = false;
 			$mpdf->useSubstitutions    = true;
 

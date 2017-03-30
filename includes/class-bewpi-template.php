@@ -23,6 +23,13 @@ class BEWPI_Template {
 	public $order;
 
 	/**
+	 * WooCommerce PDF Invoices invoice.
+	 *
+	 * @var BEWPI_Invoice.
+	 */
+	public $invoice;
+
+	/**
 	 * Template directories.
 	 *
 	 * @var array.
@@ -139,6 +146,25 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Check if order has only virtual products.
+	 *
+	 * @param array $items WooCommerce products.
+	 *
+	 * @return bool
+	 * @since 2.5.3
+	 */
+	public function has_only_virtual_products( $items ) {
+		foreach ( $items as $item ) {
+			$product = $this->order->get_product_from_item( $item );
+			if ( ! $product || ! $product->is_virtual() ) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * Get the company logo URL.
 	 *
 	 * @return string The actual url from the Media Library.
@@ -154,7 +180,7 @@ class BEWPI_Template {
 	 *
 	 * @return string
 	 */
-	public function get_field( $meta_key ) {
+	public function get_meta( $meta_key ) {
 		return (string) get_post_meta( $this->order->id, $meta_key, true );
 	}
 
@@ -183,5 +209,14 @@ class BEWPI_Template {
 	 */
 	public function set_order( $order ) {
 		$this->order = $order;
+	}
+
+	/**
+	 * Set invoice.
+	 *
+	 * @param BEWPI_Invoice $invoice WooCommerce PDF Invoices invoice object.
+	 */
+	public function set_invoice( $invoice ) {
+		$this->invoice = $invoice;
 	}
 }

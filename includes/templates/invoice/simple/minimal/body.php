@@ -37,7 +37,7 @@ $line_items                     = $order->get_items( 'line_item' );
 </div>
 <table cellpadding="0" cellspacing="0">
 	<tr class="information">
-		<td>
+		<td width="50%">
 			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
 		</td>
 
@@ -54,21 +54,24 @@ $line_items                     = $order->get_items( 'line_item' );
 			<?php echo $formatted_billing_address; ?>
 		</td>
 	</tr>
+</table>
+<table cellpadding="0" cellspacing="0">
+	<thead>
+		<tr class="heading">
+			<th>
+				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
+			</th>
 
-	<tr class="heading">
-		<td>
-			<?php _e( 'Product', 'woocommerce' ); ?>
-		</td>
+			<th>
+				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
+			</th>
 
-		<td>
-			<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
-		</td>
-
-		<td>
-			<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
-		</td>
-	</tr>
-
+			<th>
+				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
+			</th>
+		</tr>
+	</thead>
+	<tbody>
 	<?php
 	foreach ( $line_items as $item_id => $item ) {
 		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
@@ -121,6 +124,7 @@ $line_items                     = $order->get_items( 'line_item' );
 		</tr>
 
 	<?php } ?>
+	</tbody>
 </table>
 
 <table class="notes" cellpadding="0" cellspacing="0">
@@ -139,13 +143,27 @@ $line_items                     = $order->get_items( 'line_item' );
 					printf( '<strong>' . __( 'Note to customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $custom_order_note->comment_content ) );
 				}
 			}
+			?>
+		</td>
+	</tr>
 
+	<tr>
+		<td>
+			<?php
 			// Zero Rated VAT message.
 			if ( $templater->get_meta( '_vat_number_is_valid' ) && count( $order->get_tax_totals() ) === 0 ) {
 				_e( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' );
 				printf( '<br />' );
 			}
 			?>
+		</td>
+	</tr>
+</table>
+
+<table class="terms">
+	<tr>
+		<td>
+			<?php echo nl2br( $templater->get_option( 'bewpi_terms' ) ); ?>
 		</td>
 	</tr>
 </table>

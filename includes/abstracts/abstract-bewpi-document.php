@@ -95,18 +95,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
+			$legacy_template = 'micro' === $this->template_options['bewpi_template_name'];
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
 				'mode'              => '',
 				'format'            => '',
 				'default_font_size' => 0,
 				'default_font'      => $default_font,
-				'margin_left'       => 14,
-				'margin_right'      => 14,
-				'margin_top'        => 14,
+				'margin_left'       => ( $legacy_template ) ? 14 : 0,
+				'margin_right'      => ( $legacy_template ) ? 14 : 0,
+				'margin_top'        => ( $legacy_template ) ? 14 : 0,
 				'margin_bottom'     => 0,
-				'margin_header'     => 14,
-				'margin_footer'     => 6,
+				'margin_header'     => ( $legacy_template ) ? 14 : 0,
+				'margin_footer'     => ( $legacy_template ) ? 6 : 0,
 				'orientation'       => 'P',
 			) );
 			$mpdf         = new mPDF(
@@ -136,7 +137,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			// show paid watermark.
-			if ( (bool) $this->template_options['bewpi_show_payment_status'] && $is_paid && 'micro' === $this->template_options['bewpi_template_name'] ) {
+			if ( (bool) $this->template_options['bewpi_show_payment_status'] && $is_paid && $legacy_template ) {
 				$mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 				$mpdf->showWatermarkText  = true;
 				$mpdf->watermarkTextAlpha = '0.2';
@@ -154,7 +155,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->autoLangToFont      = true;
 			$mpdf->setAutoTopMargin    = 'stretch';
 			$mpdf->setAutoBottomMargin = 'stretch';
-			$mpdf->autoMarginPadding   = ( 'micro' === $this->template_options['bewpi_template_name'] ) ? 10 : 20;
+			$mpdf->autoMarginPadding   = ( $legacy_template ) ? 10 : 20;
 			$mpdf->useOnlyCoreFonts    = false;
 			$mpdf->useSubstitutions    = true;
 

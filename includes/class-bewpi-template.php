@@ -56,7 +56,14 @@ class BEWPI_Template {
 	/**
 	 * BEWPI_Template constructor.
 	 */
-	private function __construct() {}
+	private function __construct() {
+		$upload_dir = wp_upload_dir();
+		$this->directories = apply_filters( 'bewpi_template_directories', array(
+			$upload_dir['basedir'] . '/bewpi-templates', // Old custom templates directory.
+			WPI_TEMPLATES_DIR, // uploads/woocommerce-pdf-invoices/templates.
+			WPI_DIR . '/includes/templates',
+		) );
+	}
 
 	/**
 	 * Get template files.
@@ -191,15 +198,6 @@ class BEWPI_Template {
 	 */
 	public function get_directories() {
 		return $this->directories;
-	}
-
-	/**
-	 * Set template directories.
-	 *
-	 * @param array $directories Absolute paths to templates directories.
-	 */
-	public function set_directories( $directories ) {
-		$this->directories = $directories;
 	}
 
 	/**

@@ -16,11 +16,11 @@ table {
     line-height: normal;
     color: #555;
     font-size: 12px;
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 60px; /* Invoice margin */
+    margin-right: 60px; /* Invoice margin */
 }
 
-table td {
+table td, table th {
     padding:5px;
     vertical-align:top;
     line-height: inherit;
@@ -39,13 +39,13 @@ div.title div {
     padding: 5px;
     width: 40%;
     float: left;
-    margin: 0 0 0 40px;
+    margin-left: 60px; /* Invoice margin */
     line-height: 55px;
 }
 
 div.title div.watermark {
     float: right;
-    margin: 0 40px 0 0;
+    margin-right: 60px; /* Invoice margin */
     line-height: normal;
 }
 
@@ -63,12 +63,6 @@ div.title div.watermark h2.rubber-stamp {
     float:right;
 }
 
-table tr.heading td{
-    background: #eee;
-    border-bottom: 1px solid #ddd;
-    font-weight: bold;
-}
-
 table tr.information td {
     padding-bottom: 20px;
 }
@@ -76,6 +70,13 @@ table tr.information td {
 /* Customer billing address */
 table tr.information td:nth-child(3){
     text-align: right;
+}
+
+table tr.heading th {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    text-align: left;
 }
 
 table tr.item td{
@@ -102,13 +103,26 @@ table.notes {
     margin-top: 40px;
 }
 
-table tr.terms td{
+table.terms {
+    margin-top: 40px;
+}
+
+table.terms tr td {
     border-top: solid 1px #000;
     text-align: center;
 }
 
-table tr.pagination td {
-    padding: 20px 0 20px;
+table.footer {
+    padding-top: 20px;
+    padding-bottom: 40px; /* Invoice margin */
     width: 100%;
+}
+
+table.footer tr td {
+    padding: 5px;
+    vertical-align: bottom;
+}
+
+table.footer tr td:nth-child(2) {
     text-align: right;
 }

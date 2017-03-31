@@ -17,14 +17,12 @@
 
 ?>
 
-<table cellpadding="0" cellspacing="0">
-	<tr class="terms">
+<table class="footer" cellpadding="0" cellspacing="0">
+	<tr>
 		<td>
-			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_terms' ) ); ?>
+			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_left_footer_column' ) ); ?>
 		</td>
-	</tr>
-	<tr class="pagination">
-		<td>
+		<td width="20%">
 			<?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?>
 		</td>
 	</tr>

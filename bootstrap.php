@@ -52,15 +52,6 @@ function _bewpi_load_plugin() {
 	}
 	BEWPI();
 
-	// Set template directories.
-	$upload_dir = wp_upload_dir();
-	$directories = apply_filters( 'bewpi_template_directories', array(
-		$upload_dir['basedir'] . '/bewpi-templates', // Old custom templates directory.
-		WPI_TEMPLATES_DIR, // uploads/woocommerce-pdf-invoices/templates.
-		WPI_DIR . '/includes/templates',
-	) );
-	BEWPI()->templater()->set_directories( $directories );
-
 	_bewpi_on_plugin_update();
 }
 add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );

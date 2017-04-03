@@ -18,6 +18,18 @@
         element.click();
     };
 
+    setting.switchSettings = function(event) {
+        var display = (event.target.value === 'minimal') ? 'none' : 'table-row';
+        var settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
+
+        settings.forEach(function (settingId){
+            var settingElem = document.getElementById(settingId);
+            if (settingElem) {
+                settingElem.parentElement.parentElement.style.display = display;
+            }
+        })
+    };
+
     var notice = {};
 
     notice.dismiss = function(event) {
@@ -105,6 +117,13 @@
         var deactivate = document.querySelector('tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"] span.deactivate a');
         if (deactivate !== null) {
             deactivate.onclick = bewpi.notice.deactivate;
+        }
+
+        var template = document.querySelector('select#bewpi-template-name');
+        if (template !== null) {
+            template.onchange = bewpi.setting.switchSettings;
+            var event = new Event('change');
+            template.dispatchEvent(event);
         }
     };
 

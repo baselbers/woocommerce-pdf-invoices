@@ -21,6 +21,7 @@ $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $line_items                     = $order->get_items( 'line_item' );
+$color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
 
@@ -58,7 +59,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 <table cellpadding="0" cellspacing="0">
 	<thead>
-		<tr class="heading">
+		<tr class="heading" bgcolor="<?php echo $color; ?>;">
 			<th>
 				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
 			</th>
@@ -112,6 +113,10 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<?php
 	foreach ( $order->get_order_item_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
+
+		if ( ! $templater->get_option( 'bewpi_show_subtotal' ) && 'cart_subtotal' === $key ) {
+			continue;
+		}
 
 		if ( 'payment_method' === $key ) {
 			continue;

@@ -73,10 +73,9 @@ table tr.information td:nth-child(3){
 }
 
 table tr.heading th {
-    background: #eee;
-    border-bottom: 1px solid #ddd;
     font-weight: bold;
     text-align: left;
+    color: #FFFFFF;
 }
 
 table tr.item td{

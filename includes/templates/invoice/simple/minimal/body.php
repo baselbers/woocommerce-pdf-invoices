@@ -21,6 +21,7 @@ $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $line_items                     = $order->get_items( 'line_item' );
+$terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
 
 <div class="title">
@@ -160,10 +161,14 @@ $line_items                     = $order->get_items( 'line_item' );
 	</tr>
 </table>
 
-<table class="terms">
-	<tr>
-		<td>
-			<?php echo nl2br( $templater->get_option( 'bewpi_terms' ) ); ?>
-		</td>
-	</tr>
-</table>
+<?php if ( $terms ) { ?>
+	<div class="terms">
+		<table>
+			<tr>
+				<td style="border: 1px solid #000;">
+					<?php echo nl2br( $terms ); ?>
+				</td>
+			</tr>
+		</table>
+	</div>
+<?php }

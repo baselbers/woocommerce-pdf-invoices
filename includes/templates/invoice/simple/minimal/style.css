@@ -103,18 +103,15 @@ table.notes {
     margin-top: 40px;
 }
 
-table.terms {
+div.terms {
     margin-top: 40px;
-}
-
-table.terms tr td {
-    border-top: solid 1px #000;
-    text-align: center;
+    position: absolute;
+    bottom: 70px;
 }
 
 table.footer {
     padding-top: 20px;
-    padding-bottom: 40px; /* Invoice margin */
+    padding-bottom: 20px; /* Invoice margin */
     width: 100%;
 }
 

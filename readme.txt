@@ -231,7 +231,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.7.0 - March 30, 2017 =
+= 2.7.0 - April 4, 2017 =
 
 - Added: A brand new template inspired by [NextStepWebs](https://github.com/NextStepWebs/simple-html-invoice-template) called 'Minimal' that makes use of the new `BEWPI()->templater()` class. Important: 'Micro' template is deprecated and will no longer be supported. We've created a petition [#162](https://github.com/baselbers/woocommerce-pdf-invoices/issues/162) where you can leave a vote to keep the 'Micro' template.
 - Added: 'composer.json' file, requiring mPDF and using autoloading.
@@ -247,6 +247,8 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: 'bewpi_before_document_generation' action by changing arguments array into separate variables.
 - Improved: Invoice `type` variable by using relative paths (invoice/simple and invoice/global), so renamed 'invoices' directory to singular 'invoice'.
 - Improved: `templater()` by setting `$order` object as a class variable, so the class methods can make use of it instead of using `$order_id` as param.
+- Improved: Settings descriptions due to new template.
+- Improved: Settings page by not showing related settings based on selected template.
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Fixed: 'Invoice No.' column not always before 'Actions' column on Shop Order page.
 - Fixed: '_bewpi_pdf_invoice_path' postmeta only created when option 'Reset yearly' is enabled.

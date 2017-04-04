@@ -59,7 +59,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'type'     => 'text',
 					'desc'     => sprintf( __( 'Create a custom template by copying it from %1$s to %2$s.', 'woocommerce-pdf-invoices' ), '<code>plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple</code>', '<code>uploads/woocommerce-pdf-invoices/templates/invoice/simple</code>' ),
 					'options'  => $templates,
-					'default'  => 'micro',
+					'default'  => 'minimal',
 				),
 				array(
 					'id'       => 'bewpi-color-theme',
@@ -70,7 +70,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'general',
 					'type'     => 'color',
 					'desc'     => '',
-					'default'  => '#11a7e7',
+					'default'  => '#eeeeee',
 				),
 				array(
 					'id'       => 'bewpi-theme-text-black',
@@ -174,7 +174,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'header',
 					'type'     => 'text',
-					'desc'     => __( 'Displayed in upper-right corner near logo.', 'woocommerce-pdf-invoices' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 					'default'  => '',
 				),
 				array(
@@ -185,7 +185,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'header',
 					'type'     => 'text',
-					'desc'     => __( 'Displayed below company address.', 'woocommerce-pdf-invoices' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 					'default'  => '',
 				),
 				array(
@@ -207,8 +207,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'header',
 					'type'     => 'text',
-					'desc'     => __( 'Displayed in big colored bar directly after invoice total.', 'woocommerce-pdf-invoices' ),
-					'default'  => __( 'Thank you for your purchase!', 'woocommerce-pdf-invoices' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ) . ' '
+					              . __( 'Visible in big colored bar directly after invoice total.', 'woocommerce-pdf-invoices' ),
+					'default'  => '',
 				),
 				array(
 					'id'       => 'bewpi-show-ship-to',
@@ -218,7 +219,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'body',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Show customers shipping address<br/><div class="bewpi-notes">Customers shipping address won\'t be displayed when order has only virtual products.</div>', 'woocommerce-pdf-invoices' ),
+					'desc'     => __( 'Show customers shipping address<br/><div class="bewpi-notes">Customers shipping address won\'t be visible when order has only virtual products.</div>', 'woocommerce-pdf-invoices' ),
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
 				),
@@ -242,8 +243,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'body',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Displayed below customer notes and above footer. Want to attach additional pages to the invoice? Take a look at the <a href="%s">Premium</a> plugin.', 'woocommerce-pdf-invoices' ), 'http://wcpdfinvoices.com' ),
-					'default'  => __( 'Items will be shipped within 2 days.', 'woocommerce-pdf-invoices' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ) . ' '
+					              . sprintf( __( 'Visible below customer notes and above footer. Want to attach additional pages to the invoice? Take a look at <a href="%s">WooCommerce PDF Invoices Premium</a> plugin.', 'woocommerce-pdf-invoices' ), 'http://wcpdfinvoices.com' ),
+					'default'  => '',
 				),
 				array(
 					'id'       => 'bewpi-left-footer-column',
@@ -253,8 +255,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'footer',
 					'type'     => 'text',
-					'desc'     => '',
-					'default'  => sprintf( __( '<b>Payment method</b> %s', 'woocommerce-pdf-invoices' ), '[payment_method]' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
+					'default'  => '',
 				),
 				array(
 					'id'       => 'bewpi-right-footer-column',
@@ -264,7 +266,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'footer',
 					'type'     => 'text',
-					'desc'     => __( 'Leave empty to show page numbering.', 'woocommerce-pdf-invoices' ),
+					'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 					'default'  => '',
 				),
 				array(
@@ -362,7 +364,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Allowed placeholders: <code>%1$s</code> <code>%2$s</code> <code>%3$s</code> <code>%4$s</code> <code>%5$s</code> <code>%6$s</code><br/><b>Note:</b> <code>%3$s</code> is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '[prefix]', '[suffix]', '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' ),
+					'desc'     => sprintf( __( 'Available placeholders: %s.', 'woocommerce-pdf-invoices' ), self::formatted_number_placeholders() )
+					              . '<br>'
+					              . sprintf( __( '<b>Note:</b> %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[number]</code>' ),
 					'default'  => '[number]-[Y]',
 					'attrs'    => array( 'required' ),
 				),
@@ -512,11 +516,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * Invoice header section information.
 		 */
 		public function footer_desc_callback() {
-			echo __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ) // WPCS: XSS OK.
-			     . '<br/>'
-			     . $this->allowed_tags_text()
-			     . '<br/>'
-			     . sprintf( __( '<b>Hint</b>: Use <code>%1$s</code> placeholder to display the order payment method or <code>%2$s</code> to display shipping method.', 'woocommerce-pdf-invoices' ), '[payment_method]', '[shipping_method]' );
+			echo __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' );
 		}
 
 		/**

@@ -34,16 +34,25 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		protected $settings_key;
 
 		/**
+		 * Format all available invoice number placeholders.
+		 *
+		 * @return string
+		 */
+		protected static function formatted_number_placeholders() {
+			$placeholders = array( '[prefix]', '[suffix]', '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
+
+			return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
+		}
+
+		/**
 		 * Gets all the tags that are allowed.
 		 *
 		 * @return string|void
 		 */
-		protected function allowed_tags_text() {
-			$allowed_tags_encoded   = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>', '<br/>' ) );
-			$allowed_tags_formatted = '<code>' . join( '</code>, <code>', $allowed_tags_encoded ) . '</code>';
-			$allowed_tags_text      = sprintf( __( 'Allowed HTML tags: %1$s.', 'woocommerce-pdf-invoices' ), $allowed_tags_formatted );
+		protected static function formatted_html_tags() {
+			$html_tags = array_map( 'htmlspecialchars', array( '<b>', '<i>', '<br>' ) );
 
-			return $allowed_tags_text;
+			return '<code>' . join( '</code>, <code>', $html_tags ) . '</code>';
 		}
 
 		/**

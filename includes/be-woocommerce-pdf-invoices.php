@@ -176,7 +176,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
 			add_action( 'admin_init', array( $this, 'admin_init_hooks' ) );
 			add_action( 'admin_init', array( $this, 'setup_directories' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
 
 			// woocommerce.
 			add_action( 'admin_menu', array( $this, 'add_wc_submenu_options_page' ) );
@@ -360,15 +360,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Admin scripts
 		 */
-		public function admin_enqueue_scripts() {
-			wp_enqueue_script( 'bewpi_admin_settings_script', BEWPI_URL . 'assets/js/admin.js', array(), BEWPI_VERSION, true );
+		public function load_admin_scripts() {
+			wp_enqueue_script( 'bewpi_admin_settings_script', WPI_URL . '/assets/js/admin.js', array(), BEWPI_VERSION, true );
 			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_style( 'bewpi_admin_settings_css', BEWPI_URL . 'assets/css/admin.css', false, BEWPI_VERSION );
+			wp_register_style( 'bewpi_admin_settings_css', WPI_URL . '/assets/css/admin.css', false, BEWPI_VERSION );
 			wp_enqueue_style( 'bewpi_admin_settings_css' );
 		}
 

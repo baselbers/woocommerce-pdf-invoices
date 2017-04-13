@@ -78,7 +78,7 @@ class BEWPI_Admin_Notices {
 	 * @return DateTime|bool
 	 */
 	private static function get_install_date() {
-		if ( version_compare( BEWPI_VERSION, '2.6.1' ) >= 0 ) {
+		if ( version_compare( WPI_VERSION, '2.6.1' ) >= 0 ) {
 			// since 2.6.1+ option name changed and date has mysql format.
 			return DateTime::createFromFormat( 'Y-m-d H:i:s', get_site_option( 'bewpi_install_date' ) );
 		}

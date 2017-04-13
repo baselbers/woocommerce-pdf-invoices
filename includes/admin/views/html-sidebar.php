@@ -46,7 +46,7 @@
 	<p>
 		<?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'woocommerce-pdf-invoices' ); ?>
 	</p>
-	<?php _e( '<b>Version</b>: ' . BEWPI_VERSION, 'woocommerce-pdf-invoices' ); ?>
+	<?php _e( '<b>Version</b>: ' . WPI_VERSION, 'woocommerce-pdf-invoices' ); ?>
 	<br/>
 	<?php _e( '<b>Author</b>: <a href="https://github.com/baselbers">Bas Elbers</a>', 'woocommerce-pdf-invoices' ); ?>
 </aside>

@@ -20,7 +20,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 * Implements main function for attaching invoice to email and show invoice buttons.
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
-
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
@@ -361,14 +360,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Admin scripts
 		 */
 		public function load_admin_scripts() {
-			wp_enqueue_script( 'bewpi_admin_settings_script', WPI_URL . '/assets/js/admin.js', array(), BEWPI_VERSION, true );
+			wp_enqueue_script( 'bewpi_admin_settings_script', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
 			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_style( 'bewpi_admin_settings_css', WPI_URL . '/assets/css/admin.css', false, BEWPI_VERSION );
+			wp_register_style( 'bewpi_admin_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
 			wp_enqueue_style( 'bewpi_admin_settings_css' );
 		}
 
@@ -425,7 +424,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		public function plugin_version() {
-			return sprintf( __( 'Version %s', 'woocommerce-pdf-invoices' ), BEWPI_VERSION );
+			return sprintf( __( 'Version %s', 'woocommerce-pdf-invoices' ), WPI_VERSION );
 		}
 
 		/**

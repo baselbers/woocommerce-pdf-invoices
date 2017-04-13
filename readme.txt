@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.7.0
+Stable tag: 3.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,7 +231,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.7.0 - April 4, 2017 =
+= 3.0.0 - April 13, 2017 =
 
 - Added: A brand new template inspired by [NextStepWebs](https://github.com/NextStepWebs/simple-html-invoice-template) called 'Minimal' that makes use of the new `BEWPI()->templater()` class. Important: 'Micro' template is deprecated and will no longer be supported. We've created a petition [#162](https://github.com/baselbers/woocommerce-pdf-invoices/issues/162) where you can leave a vote to keep the 'Micro' template.
 - Added: 'composer.json' file, requiring mPDF and using autoloading.
@@ -252,6 +252,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Fixed: 'Invoice No.' column not always before 'Actions' column on Shop Order page.
 - Fixed: '_bewpi_pdf_invoice_path' postmeta only created when option 'Reset yearly' is enabled.
+- Fixed: Getting WC_Order properties due to WooCommerce 3.x.
 - Removed: Unused and unnecessary actions 'bewpi_before_output_template_to_buffer' and 'bewpi_after_output_template_to_buffer'.
 - Removed: 'bewpi_lang_dir' filter, because WordPress made update-safe directory 'wp-content/languages/plugins'.
 - Removed: `get_template_dir()` method. Using `BEWPI()->templater->get_template()` instead.

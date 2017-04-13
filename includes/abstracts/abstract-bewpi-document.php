@@ -94,7 +94,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			do_action( 'bewpi_before_invoice_content', $this->order->get_id() );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
-			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
+			$default_font = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
 			$is_new_template = 'minimal' === $this->template_options['bewpi_template_name'];
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(

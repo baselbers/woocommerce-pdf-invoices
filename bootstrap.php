@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
  * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.7.0
+ * Version:           3.0.0
  * Author:            Bas Elbers
  * Author URI:        http://wcpdfinvoices.com
  * License:           GPL-2.0+
@@ -16,7 +16,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-define( 'BEWPI_VERSION', '2.7.0' );
+/**
+ * @deprecated instead use WPI_VERSION.
+ */
+define( 'BEWPI_VERSION', '3.0.0' );
+
+define( 'WPI_VERSION', '3.0.0' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.
@@ -63,7 +68,7 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
  */
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
-	if ( BEWPI_VERSION !== $current_version ) {
+	if ( WPI_VERSION !== $current_version ) {
 
 		// version 2.6.1- need to be updated with new email options and postmeta.
 		if ( version_compare( $current_version, '2.6.1' ) <= 0 ) {
@@ -91,7 +96,7 @@ function _bewpi_on_plugin_update() {
 			rename( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR, $upload_dir['basedir'] . '/bewpi-templates/invoice' );
 		}
 
-		update_site_option( 'bewpi_version', BEWPI_VERSION );
+		update_site_option( 'bewpi_version', WPI_VERSION );
 	}
 }
 
@@ -247,8 +252,7 @@ function _bewpi_on_plugin_activation() {
 	// use transient to display activation admin notice.
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
 
-	// save plugin version for update function.
-	update_site_option( 'bewpi_version', BEWPI_VERSION );
+	update_site_option( 'bewpi_version', WPI_VERSION );
 }
 
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

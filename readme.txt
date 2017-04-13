@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 3.0.0
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -231,7 +231,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 3.0.0 - April 13, 2017 =
+= 2.7.0 - April 13, 2017 =
 
 - Added: A brand new template inspired by [NextStepWebs](https://github.com/NextStepWebs/simple-html-invoice-template) called 'Minimal' that makes use of the new `BEWPI()->templater()` class. Important: 'Micro' template is deprecated and will no longer be supported. We've created a petition [#162](https://github.com/baselbers/woocommerce-pdf-invoices/issues/162) where you can leave a vote to keep the 'Micro' template.
 - Added: 'composer.json' file, requiring mPDF and using autoloading.

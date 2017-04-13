@@ -70,7 +70,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'general',
 					'type'     => 'color',
 					'desc'     => '',
-					'default'  => '#eeeeee',
+					'default'  => '#000000',
 				),
 				array(
 					'id'       => 'bewpi-theme-text-black',

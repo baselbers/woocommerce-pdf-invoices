@@ -72,8 +72,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->full_path = self::exists( $order_id );
 			if ( $this->full_path ) {
-				$this->number   = get_post_meta( $this->order->id, '_bewpi_invoice_number', true );
-				$this->date     = get_post_meta( $this->order->id, '_bewpi_invoice_date', true );
+				$this->number   = get_post_meta( $this->order->get_id(), '_bewpi_invoice_number', true );
+				$this->date     = get_post_meta( $this->order->get_id(), '_bewpi_invoice_date', true );
 				$this->year     = date_i18n( 'Y', strtotime( $this->date ) );
 				$this->filename = basename( $this->full_path );
 			}
@@ -143,7 +143,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function get_formatted_order_date() {
-			return date_i18n( $this->get_date_format(), strtotime( $this->order->order_date ) );
+			return date_i18n( $this->get_date_format(), strtotime( $this->order->get_date_created() ) );
 		}
 
 		/**
@@ -233,7 +233,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		private function get_next_invoice_number() {
 			// uses WooCommerce order numbers as invoice numbers?
 			if ( 'woocommerce_order_number' === $this->template_options['bewpi_invoice_number_type'] ) {
-				return $this->order->id;
+				return $this->order->get_id();
 			}
 
 			// check if user did a counter reset.
@@ -295,9 +295,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function save( $destination = 'F' ) {
-			if ( BEWPI_Invoice::exists( $this->order->id ) ) {
+			if ( BEWPI_Invoice::exists( $this->order->get_id() ) ) {
 				// delete postmeta and PDF.
-				self::delete( $this->order->id );
+				self::delete( $this->order->get_id() );
 			}
 
 			$this->date   = current_time( 'mysql' );
@@ -316,11 +316,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$this->filename  = basename( $this->full_path );
 
 			// update invoice data in db.
-			update_post_meta( $this->order->id, '_bewpi_invoice_date', $this->date );
-			update_post_meta( $this->order->id, '_bewpi_invoice_number', $this->number );
-			update_post_meta( $this->order->id, '_bewpi_invoice_pdf_path', $pdf_path );
+			update_post_meta( $this->order->get_id(), '_bewpi_invoice_date', $this->date );
+			update_post_meta( $this->order->get_id(), '_bewpi_invoice_number', $this->number );
+			update_post_meta( $this->order->get_id(), '_bewpi_invoice_pdf_path', $pdf_path );
 
-			do_action( 'bewpi_before_document_generation', $this->type, $this->order->id );
+			do_action( 'bewpi_before_document_generation', $this->type, $this->order->get_id() );
 
 			parent::generate( $destination, $this->order->is_paid() );
 
@@ -385,7 +385,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @deprecated Use BEWPI()->templater()->get_meta( '_vat_number' ) instead.
 		 */
 		public function display_vat_number() {
-			$vat_number = get_post_meta( $this->order->id, '_vat_number', true );
+			$vat_number = get_post_meta( $this->order->get_id(), '_vat_number', true );
 			if ( ! empty( $vat_number ) ) {
 				echo '<span>' . sprintf( __( 'VAT Number: %s', 'woocommerce-pdf-invoices' ), $vat_number ) . '</span>';
 			}
@@ -398,7 +398,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function display_purchase_order_number() {
 			if ( isset( $this->order->payment_method ) && 'woocommerce_gateway_purchase_order' === $this->order->payment_method ) {
-				$po_number = get_post_meta( $this->order->id, '_po_number', true );
+				$po_number = get_post_meta( $this->order->get_id(), '_po_number', true );
 				if ( ! empty( $po_number ) ) {
 					echo '<span>' . sprintf( __( 'Purchase Order Number: %s', 'woocommerce-gateway-purchase-order' ), $po_number ) . '</span>';
 				}
@@ -532,7 +532,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return bool
 		 */
 		public function display_zero_rated_vat() {
-			$is_vat_valid = get_post_meta( $this->order->id, '_vat_number_is_valid', true );
+			$is_vat_valid = get_post_meta( $this->order->get_id(), '_vat_number_is_valid', true );
 			if ( ! $is_vat_valid ) {
 				return false;
 			}
@@ -554,9 +554,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		private function replace_placeholders( $str ) {
 			$placeholders = apply_filters( 'bewpi_placeholders', array(
-				'[payment_method]'  => $this->order->payment_method_title,
+				'[payment_method]'  => $this->order->get_payment_method_title(),
 				'[shipping_method]' => $this->order->get_shipping_method(),
-			), $this->order->id );
+			), $this->order->get_id() );
 
 			foreach ( $placeholders as $placeholder => $value ) {
 				$str = str_replace( $placeholder, $value, $str );

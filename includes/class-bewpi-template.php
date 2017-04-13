@@ -126,7 +126,7 @@ class BEWPI_Template {
 	public function get_option( $name ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$value = apply_filters( $name, $template_options[ $name ], $name, $this->order->id );
+		$value = apply_filters( $name, $template_options[ $name ], $name, $this->order->get_id() );
 		$value = $this->replace_placeholders( $value );
 
 		return $value;
@@ -143,7 +143,7 @@ class BEWPI_Template {
 		$value = str_replace(
 			array( '[payment_method]', '[shipping_method]' ),
 			array(
-				apply_filters( 'bewpi_payment_method_title', $this->order->payment_method_title ),
+				apply_filters( 'bewpi_payment_method_title', $this->order->get_payment_method_title() ),
 				$this->order->get_shipping_method(),
 			),
 			$value
@@ -188,7 +188,7 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	public function get_meta( $meta_key ) {
-		return (string) get_post_meta( $this->order->id, $meta_key, true );
+		return (string) get_post_meta( $this->order->get_id(), $meta_key, true );
 	}
 
 	/**

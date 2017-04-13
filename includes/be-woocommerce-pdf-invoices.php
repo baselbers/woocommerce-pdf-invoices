@@ -277,12 +277,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// check if user has ordered order.
 			$user = wp_get_current_user();
-			$customer_user_id = (int) get_post_meta( $order->id, '_customer_user', true );
+			$customer_user_id = (int) get_post_meta( $order->get_id(), '_customer_user', true );
 			if ( $user->ID !== $customer_user_id ) {
 				wp_die( 'Access denied' );
 			}
 
-			$invoice = new BEWPI_Invoice( $order->id );
+			$invoice = new BEWPI_Invoice( $order->get_id() );
 			$full_path = $invoice->update();
 			BEWPI_Invoice::view( $full_path );
 		}
@@ -439,7 +439,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		function add_emailitin_as_recipient( $headers, $status, $order ) {
 			// make sure invoice got only send once for each order.
-			$transient_name = sprintf( 'bewpi_emailitin_processed-%1$s', $order->id );
+			$transient_name = sprintf( 'bewpi_emailitin_processed-%1$s', $order->get_id() );
 			if ( get_transient( $transient_name ) ) {
 				return $headers;
 			}
@@ -498,8 +498,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$invoice = new BEWPI_Invoice( $order->id );
-			if ( ! $invoice->exists( $order->id ) ) {
+			$invoice = new BEWPI_Invoice( $order->get_id() );
+			if ( ! $invoice->exists( $order->get_id() ) ) {
 				$full_path = $invoice->save();
 			} else {
 				$full_path = $invoice->update();
@@ -559,10 +559,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param WC_ORDER $order WooCommerce Order.
 		 */
 		public function add_admin_order_pdf( $order ) {
-			if ( BEWPI_Invoice::exists( $order->id ) ) {
+			if ( BEWPI_Invoice::exists( $order->get_id() ) ) {
 				$this->show_invoice_button(
 					__( 'View invoice', 'woocommerce-pdf-invoices' ),
-					$order->id,
+					$order->get_id(),
 					'view',
 					array(
 						'class="button tips bewpi-admin-order-create-invoice-btn"',
@@ -668,20 +668,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			if ( ! BEWPI_Invoice::exists( $order->id ) ) {
+			if ( ! BEWPI_Invoice::exists( $order->get_id() ) ) {
 				return;
 			}
 
 			$url = add_query_arg( array(
 				'bewpi_action' => 'view',
-				'post' => $order->id,
+				'post' => $order->get_id(),
 				'nonce' => wp_create_nonce( 'view' ),
 			) );
 
-			$invoice = new BEWPI_Invoice( $order->id );
+			$invoice = new BEWPI_Invoice( $order->get_id() );
 			$tags = array(
 				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
-				'{order_number}'             => $order->id,
+				'{order_number}'             => $order->get_id(),
 				'{formatted_invoice_date}'   => $invoice->get_formatted_invoice_date(),
 				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
 			);
@@ -705,17 +705,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			if ( ! BEWPI_Invoice::exists( $order->id ) ) {
+			if ( ! BEWPI_Invoice::exists( $order->get_id() ) ) {
 				return $actions;
 			}
 
 			$url = add_query_arg( array(
 				'bewpi_action' => 'view',
-				'post' => $order->id,
+				'post' => $order->get_id(),
 				'nonce' => wp_create_nonce( 'view' ),
 			) );
 
-			$invoice = new BEWPI_Invoice( $order->id );
+			$invoice = new BEWPI_Invoice( $order->get_id() );
 			$actions['invoice'] = array(
 				'url'  => $url,
 				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() ),

@@ -45,7 +45,7 @@ $invoice    = $templater->invoice;
 			if ( isset( $order->payment_method ) ) {
 
 				printf( '<br />' );
-				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $order->payment_method_title );
+				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $order->get_payment_method_title() );
 
 				if ( 'woocommerce_gateway_purchase_order' === $order->payment_method ) {
 					$po_number = $templater->get_meta( '_po_number' );

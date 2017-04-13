@@ -159,7 +159,7 @@ add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
 Add below code for example to your "thankyou" page or "customer-completed-order" email template.
 
 `
-echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="' . $order->id . '"]' );
+echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="' . $order->get_id() . '"]' );
 `
 
 For use in WordPress editor use below shortcode. This will only work if you replace "{ORDER_ID}" with an actual order id.

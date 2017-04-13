@@ -91,7 +91,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
 		protected function generate( $destination, $is_paid ) {
-			do_action( 'bewpi_before_invoice_content', $this->order->id );
+			do_action( 'bewpi_before_invoice_content', $this->order->get_id() );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( BEWPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
@@ -180,7 +180,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$name = $this->filename;
 			}
 
-			do_action( 'bewpi_after_invoice_content', $this->order->id );
+			do_action( 'bewpi_after_invoice_content', $this->order->get_id() );
 
 			$mpdf->Output( $name, $destination );
 		}

@@ -91,7 +91,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
 		protected function generate( $destination, $is_paid ) {
-			do_action( 'bewpi_before_invoice_content', $this->order->get_id() );
+			// WC backwards compatibility.
+			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+
+			do_action( 'bewpi_before_invoice_content', $order_id );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';

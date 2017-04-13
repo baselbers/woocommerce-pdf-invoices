@@ -252,7 +252,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Fixed: PDF invoice url by changing order of filter arguments.
 - Fixed: 'Invoice No.' column not always before 'Actions' column on Shop Order page.
 - Fixed: '_bewpi_pdf_invoice_path' postmeta only created when option 'Reset yearly' is enabled.
-- Fixed: Getting WC_Order properties due to WooCommerce 3.x.
+- Fixed: WooCommerce 3.x.x+ compatibility.
 - Removed: Unused and unnecessary actions 'bewpi_before_output_template_to_buffer' and 'bewpi_after_output_template_to_buffer'.
 - Removed: 'bewpi_lang_dir' filter, because WordPress made update-safe directory 'wp-content/languages/plugins'.
 - Removed: `get_template_dir()` method. Using `BEWPI()->templater->get_template()` instead.

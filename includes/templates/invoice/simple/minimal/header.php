@@ -41,13 +41,18 @@ $invoice    = $templater->invoice;
 			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_order_date() );
 			printf( '<br />' );
 			printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $order->get_order_number() );
+
+			// WC backwards compatibility.
+			$payment_method = method_exists( 'WC_Order', 'get_payment_method' ) ? $order->get_payment_method() : $order->payment_method;
 			// Get PO Number from 'WooCommerce Purchase Order Gateway' plugin.
-			if ( isset( $order->payment_method ) ) {
+			if ( isset( $payment_method ) ) {
 
 				printf( '<br />' );
-				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $order->get_payment_method_title() );
+				// WC backwards compatibility.
+				$payment_method_title = method_exists( 'WC_Order', 'get_payment_method_title' ) ? $order->get_payment_method_title() : $order->payment_method_title;
+				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $payment_method_title );
 
-				if ( 'woocommerce_gateway_purchase_order' === $order->payment_method ) {
+				if ( 'woocommerce_gateway_purchase_order' === $payment_method ) {
 					$po_number = $templater->get_meta( '_po_number' );
 					if ( $po_number ) {
 						printf( '<br />' );

@@ -140,8 +140,9 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			// Customer notes.
 			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
 				// Note added by customer.
-				if ( ! empty( $order->post->post_excerpt ) ) {
-					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $order->post->post_excerpt ) );
+				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				if ( $customer_note ) {
+					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
 				}
 
 				// Notes added by administrator on 'Edit Order' page.

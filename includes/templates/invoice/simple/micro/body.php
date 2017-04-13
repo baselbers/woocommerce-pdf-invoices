@@ -9,10 +9,12 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 	<tr>
 		<td class="address small-font" width="50%">
 			<b><?php _e( 'Invoice to', 'woocommerce-pdf-invoices' ); ?></b><br/>
-			<?php echo $this->order->get_formatted_billing_address(); ?><br/>
-			<?php if ( ! empty( $this->order->billing_phone ) ) :
-				printf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $this->order->billing_phone );
-			endif; ?>
+			<?php
+			echo $this->order->get_formatted_billing_address() . '<br/>';
+			// Billing phone.
+			$billing_phone = method_exists( 'WC_Order', 'get_billing_phone' ) ? $this->order->get_billing_phone() : $this->order->billing_phone;
+			echo $billing_phone ? sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $billing_phone ) : '';
+			?>
 		</td>
 		<?php
 		$formatted_shipping_address = $this->order->get_formatted_shipping_address();

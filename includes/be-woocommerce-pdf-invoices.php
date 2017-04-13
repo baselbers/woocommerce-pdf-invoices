@@ -197,7 +197,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			// Add plugin action links on "Plugins" page.
-			add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( $this, 'add_plugin_action_links' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 			// delete invoice if deleting order.
 			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
@@ -229,7 +229,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array
 		 */
 		public static function add_plugin_row_meta( $links, $file ) {
-			if ( plugin_basename( __FILE__ ) === $file ) {
+			if ( plugin_basename( WPI_FILE ) === $file ) {
 				// add premium plugin link.
 				$premium_url = 'http://wcpdfinvoices.com';
 				$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );

@@ -31,7 +31,7 @@ function _bewpi_load_plugin() {
 	 */
 	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
 	/**
-	 * @deprecated instead use `plugin_basename( __FILE__ )`.
+	 * @deprecated instead use `plugin_basename( WPI_FILE )`.
 	 */
 	define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 

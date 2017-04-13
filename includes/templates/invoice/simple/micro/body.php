@@ -295,8 +295,9 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 			<?php
 			if ( $this->template_options['bewpi_show_customer_notes'] ) :
 				// Note added by customer.
-				if ( $this->order->post->post_excerpt != "" ) {
-					echo '<p><strong>' . __( 'Customer note', 'woocommerce-pdf-invoices' ) . ' </strong> ' . $this->order->post->post_excerpt . '</p>';
+				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				if ( $customer_note ) {
+					echo '<p><strong>' . __( 'Customer note', 'woocommerce-pdf-invoices' ) . ' </strong> ' . $customer_note . '</p>';
 				}
 				// Notes added by administrator on order details page.
 				$customer_order_notes = $this->order->get_customer_order_notes();

@@ -728,7 +728,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$invoice = new BEWPI_Invoice( $order_id );
 			$actions['invoice'] = array(
 				'url'  => $url,
-				'name' => sprintf( __( 'Invoice %s (PDF)', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() ),
+				'name' => apply_filters( 'bewpi_my_account_pdf_name', sprintf( __( 'Invoice %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() ) ),
 			);
 
 			return $actions;

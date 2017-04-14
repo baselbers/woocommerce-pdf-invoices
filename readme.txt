@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.7.0
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -159,7 +159,8 @@ add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
 Add below code for example to your "thankyou" page or "customer-completed-order" email template.
 
 `
-echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="' . $order->get_id() . '"]' );
+$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+echo do_shortcode( '[bewpi-download-invoice title="Download (PDF) Invoice {formatted_invoice_number}" order_id="' . $order_id . '"]' );
 `
 
 For use in WordPress editor use below shortcode. This will only work if you replace "{ORDER_ID}" with an actual order id.
@@ -230,6 +231,10 @@ Use below code to display meta-data. Replace `{META_KEY}` with the actual key. I
 Important: A custom template is required to add a custom field to the PDF invoice.
 
 == Changelog ==
+
+= 2.7.1 - April, 14, 2017 =
+
+- Fixed: 'PHP Fatal error:  Call to undefined method WC_Order::get_id()'.
 
 = 2.7.0 - April 13, 2017 =
 

@@ -183,7 +183,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$name = $this->filename;
 			}
 
-			do_action( 'bewpi_after_invoice_content', $this->order->get_id() );
+			do_action( 'bewpi_after_invoice_content', $order_id );
 
 			$mpdf->Output( $name, $destination );
 		}

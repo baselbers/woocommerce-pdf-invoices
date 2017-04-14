@@ -438,6 +438,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		function add_emailitin_as_recipient( $headers, $status, $order ) {
+			// Only attach to emails with WC_Order object.
+			if ( ! $order instanceof WC_Order ) {
+				return $headers;
+			}
+
 			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
 
 			// make sure invoice got only send once for each order.

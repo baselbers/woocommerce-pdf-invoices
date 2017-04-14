@@ -236,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 = 2.7.2 - April, 15, 2017 =
 
 - Added: Filter 'bewpi_my_account_pdf_name' to change the name of the PDF button on My Account page.
+- Fixed: 'Fatal error: Call to a member function get_id() on null' by checking object type in method `add_emailitin_as_recipient()`.
 
 = 2.7.1 - April, 14, 2017 =
 

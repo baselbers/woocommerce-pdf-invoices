@@ -59,7 +59,8 @@ Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pd
 4. Create new invoice from the order page.
 5. View invoice from the shop order page.
 6. Download invoice from account.
-6. Nice and clean template with refunds, different tax rates, the ability to change the color and more!
+7. Nice and clean template called 'Micro'.
+8. Nice and clean template called 'Minimal'.
 
 == Installation ==
 

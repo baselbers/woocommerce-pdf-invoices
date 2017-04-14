@@ -78,7 +78,7 @@ The manual installation method involves downloading our plugin and uploading it 
 == Frequently Asked Questions ==
 
 #### How to add your custom template?
-Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple/micro` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple` and rename the template folder `micro`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
+Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple` and rename the template folder `micro` or `minimal`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
 
 Important: Before you update the plugin, always have a look at the Changelog for any changes to the template files. There will be updates that require updating your custom template!
 

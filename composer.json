@@ -21,6 +21,7 @@
       "includes/"
     ],
     "files": [
+      "includes/functions.php",
       "includes/be-woocommerce-pdf-invoices.php",
       "includes/abstracts/abstract-bewpi-document.php",
       "includes/abstracts/abstract-bewpi-invoice.php",

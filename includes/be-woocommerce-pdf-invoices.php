@@ -276,7 +276,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// check if user has ordered order.
 			$user = wp_get_current_user();
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
+			$order_id = bewpi_get_id( $order );
 			$customer_user_id = (int) get_post_meta( $order_id, '_customer_user', true );
 			if ( $user->ID !== $customer_user_id ) {
 				wp_die( 'Access denied' );
@@ -443,9 +443,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $headers;
 			}
 
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
-
 			// make sure invoice got only send once for each order.
+			$order_id = bewpi_get_id( $order );
 			$transient_name = sprintf( 'bewpi_emailitin_processed-%1$s', $order_id );
 			if ( get_transient( $transient_name ) ) {
 				return $headers;
@@ -507,7 +506,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
+			$order_id = bewpi_get_id( $order );
 			$invoice = new BEWPI_Invoice( $order_id );
 			if ( ! $invoice->exists( $order_id ) ) {
 				$full_path = $invoice->save();
@@ -570,7 +569,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param WC_ORDER $order WooCommerce Order.
 		 */
 		public function add_admin_order_pdf( $order ) {
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
+			$order_id = bewpi_get_id( $order );
 
 			if ( BEWPI_Invoice::exists( $order_id ) ) {
 				$this->show_invoice_button(
@@ -681,7 +680,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
+			$order_id = bewpi_get_id( $order );
 			if ( ! BEWPI_Invoice::exists( $order_id ) ) {
 				return;
 			}
@@ -719,7 +718,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $order->get_id() : $order->id;
+			$order_id = bewpi_get_id( $order );
 			if ( ! BEWPI_Invoice::exists( $order_id ) ) {
 				return $actions;
 			}
@@ -746,6 +745,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function templater() {
 			return BEWPI_Template::instance();
+		}
+
+		/**
+		 * Logger instance;
+		 *
+		 * @return BEWPI_Debug_Log.
+		 */
+		public function logger() {
+			return BEWPI_Debug_Log::instance();
 		}
 	}
 }

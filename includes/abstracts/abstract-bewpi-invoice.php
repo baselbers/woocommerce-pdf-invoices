@@ -72,8 +72,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->full_path = self::exists( $order_id );
 			if ( $this->full_path ) {
-				// WC backwards compatibility.
-				$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+				$order_id = bewpi_get_id( $this->order );
 
 				$this->number   = get_post_meta( $order_id, '_bewpi_invoice_number', true );
 				$this->date     = get_post_meta( $order_id, '_bewpi_invoice_date', true );
@@ -240,7 +239,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			// uses WooCommerce order numbers as invoice numbers?
 			if ( 'woocommerce_order_number' === $this->template_options['bewpi_invoice_number_type'] ) {
 				// WC backwards compatibility.
-				$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+				$order_id = bewpi_get_id( $this->order );
 
 				return $order_id;
 			}
@@ -305,7 +304,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function save( $destination = 'F' ) {
 			// WC backwards compatibility.
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+			$order_id = bewpi_get_id( $this->order );
 
 			if ( BEWPI_Invoice::exists( $order_id ) ) {
 				// delete postmeta and PDF.
@@ -398,7 +397,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function display_vat_number() {
 			// WC backwards compatibility.
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+			$order_id = bewpi_get_id( $this->order );
 
 			$vat_number = get_post_meta( $order_id, '_vat_number', true );
 			if ( ! empty( $vat_number ) ) {
@@ -417,7 +416,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			if ( isset( $payment_method ) && 'woocommerce_gateway_purchase_order' === $payment_method ) {
 				// WC backwards compatibility.
-				$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+				$order_id = bewpi_get_id( $this->order );
 
 				$po_number = get_post_meta( $order_id, '_po_number', true );
 				if ( ! empty( $po_number ) ) {
@@ -554,7 +553,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function display_zero_rated_vat() {
 			// WC backwards compatibility.
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+			$order_id = bewpi_get_id( $this->order );
 
 			$is_vat_valid = get_post_meta( $order_id, '_vat_number_is_valid', true );
 			if ( ! $is_vat_valid ) {
@@ -578,7 +577,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		private function replace_placeholders( $str ) {
 			// WC backwards compatibility.
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+			$order_id = bewpi_get_id( $this->order );
 
 			$placeholders = apply_filters( 'bewpi_placeholders', array(
 				'[payment_method]'  => method_exists( 'WC_Order', 'get_payment_method_title' ) ? $this->order->get_payment_method_title() : $this->order->payment_method_title,

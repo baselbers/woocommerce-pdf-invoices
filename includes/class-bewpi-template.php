@@ -95,7 +95,7 @@ class BEWPI_Template {
 		}
 
 		if ( count( $template ) === 0 ) {
-			wp_die( __( 'Template not found.', 'woocommerce-pdf-invoices' ), '', array( 'back_link' => true ) );
+			BEWPI()->logger()->warning( 'PDF generation aborted. Template not found.' );
 		}
 
 		return $template;
@@ -126,7 +126,7 @@ class BEWPI_Template {
 	public function get_option( $name ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+		$order_id = bewpi_get_id( $this->order );
 		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
 		$value = $this->replace_placeholders( $value );
 
@@ -189,7 +189,7 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	public function get_meta( $meta_key ) {
-		$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+		$order_id = bewpi_get_id( $this->order );
 
 		return (string) get_post_meta( $order_id, $meta_key, true );
 	}

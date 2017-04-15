@@ -17,6 +17,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	 * Class BEWPI_Abstract_Document.
 	 */
 	abstract class BEWPI_Abstract_Document {
+
 		/**
 		 * Type of document like invoice, packing slip or credit note.
 		 *
@@ -77,10 +78,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * BEWPI_Abstract_Document constructor.
 		 */
 		public function __construct() {
-			$templater = BEWPI()->templater();
+			$templater    = BEWPI()->templater();
 			$templater->set_order( $this->order );
-			$this->template = $templater->get_template( $this->type );
-			$this->general_options = get_option( 'bewpi_general_settings' ); // @todo remove.
+			$this->template         = $templater->get_template( $this->type );
+			$this->general_options  = get_option( 'bewpi_general_settings' ); // @todo remove.
 			$this->template_options = get_option( 'bewpi_template_settings' ); // @todo remove and use 'templater()'.
 		}
 
@@ -91,13 +92,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
 		protected function generate( $destination, $is_paid ) {
-			// WC backwards compatibility.
-			$order_id = method_exists( 'WC_Order', 'get_id' ) ? $this->order->get_id() : $this->order->id;
+			$order_id = bewpi_get_id( $this->order );
 
 			do_action( 'bewpi_before_invoice_content', $order_id );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
-			$default_font = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
+			$default_font    = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
 			$is_new_template = 'minimal' === $this->template_options['bewpi_template_name'];
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
@@ -113,7 +113,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				'margin_footer'     => ( $is_new_template ) ? 0 : 6,
 				'orientation'       => 'P',
 			) );
-			$mpdf         = new mPDF(
+			$mpdf        = new mPDF(
 				$mpdf_params['mode'],
 				$mpdf_params['format'],
 				$mpdf_params['default_font_size'],
@@ -163,7 +163,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->useSubstitutions    = true;
 
 			$html = $this->get_html();
-			if ( count( $html ) === 0 ) {
+			if ( count( $html ) > 0 ) {
+				BEWPI()->logger()->error( 'PDF generation aborted. No HTML for PDF.' );
 				return;
 			}
 
@@ -230,7 +231,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 */
 		public static function view( $full_path ) {
 			$general_options = get_option( 'bewpi_general_settings' );
-			$type = ( 'browser' === $general_options['bewpi_view_pdf'] ) ? 'inline' : 'attachment';
+			$type            = ( 'browser' === $general_options['bewpi_view_pdf'] ) ? 'inline' : 'attachment';
 
 			header( 'Content-type: application/pdf' );
 			header( 'Content-Disposition: ' . $type . '; filename="' . basename( $full_path ) . '"' );

@@ -29,8 +29,8 @@ This WooCommerce plugin generates PDF invoices, attaches it to WooCommerce email
 
 > **WooCommerce PDF Invoices Premium**<br /><br />
 > This plugin offers a premium version which comes with the following features:<br /><br />
-> - Change the font of the PDF invoices<br/ >
-> - Generate PDF invoices in multiple languages (WPML and Polylang compatible)<br />
+> - Design PDF invoices with custom fonts.<br />
+> - Multilingual PDF invoices with WPML and Polylang<br />
 > - Bulk generate PDF invoices<br />
 > - Bulk export and/or download PDF invoices<br />
 > - Periodically bill by generating and sending global invoices<br />

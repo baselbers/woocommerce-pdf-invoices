@@ -15,7 +15,7 @@ function bewpi_get_id( $order ) {
 	}
 
 	if ( $reflection->hasProperty( 'id' ) ) {
-		return $reflection->getProperty( 'id' )->getValue();
+		return $reflection->getProperty( 'id' )->getValue( $order );
 	}
 
 	return false;

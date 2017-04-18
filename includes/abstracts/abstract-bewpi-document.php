@@ -163,8 +163,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->useSubstitutions    = true;
 
 			$html = $this->get_html();
-			if ( count( $html ) > 0 ) {
-				BEWPI()->logger()->error( 'PDF generation aborted. No HTML for PDF.' );
+			if ( count( $html ) === 0 ) {
+				BEWPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );
 				return;
 			}
 

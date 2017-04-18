@@ -95,7 +95,7 @@ class BEWPI_Template {
 		}
 
 		if ( count( $template ) === 0 ) {
-			BEWPI()->logger()->warning( 'PDF generation aborted. Template not found.' );
+			BEWPI()->logger()->warning( sprintf( 'PDF generation aborted. Template not found in %1$s:%2$s', __FILE__,  __LINE__ ) );
 		}
 
 		return $template;

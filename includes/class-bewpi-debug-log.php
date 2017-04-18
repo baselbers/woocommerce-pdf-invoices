@@ -83,13 +83,9 @@ class BEWPI_Debug_Log {
 	private function log( $level, $message ) {
 		$level = self::to_level( $level );
 
-		$bt = debug_backtrace();
-		$caller = array_shift($bt);
-		$line = $caller[ 'line' ];
-
 		// Generate line.
 		$level_name = self::get_level_name( $level );
-		$message = sprintf( '%s: %s', $level_name, $message );
+		$message = sprintf( 'WooCommerce PDF Invoices %s: %s', $level_name, $message );
 
 		return error_log( $message );
 	}

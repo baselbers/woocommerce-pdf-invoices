@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.7.2
+Stable tag: 2.7.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -233,7 +233,11 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.7.2 - April, 15, 2017 =
+= 2.7.3 - April, 19, 2017 =
+
+- Fixed: `GLOB_BRACE` unsupported on some systems.
+
+= 2.7.2 - April, 18, 2017 =
 
 - Added: Filter 'bewpi_my_account_pdf_name' to change the name of the PDF button on My Account page.
 - Fixed: 'Fatal error: Call to a member function get_id() on null' by checking object type in method `add_emailitin_as_recipient()`.

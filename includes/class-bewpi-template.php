@@ -85,7 +85,7 @@ class BEWPI_Template {
 				continue;
 			}
 
-			$files = glob( $template_path . '/*{.php,.css}', GLOB_BRACE );
+			$files = array_merge( glob( $template_path . '/*.php' ), glob( $template_path . '/*.css' ) );
 			foreach ( $files as $full_path ) {
 				$file = pathinfo( $full_path );
 				$template[ $file['filename'] ] = $full_path;

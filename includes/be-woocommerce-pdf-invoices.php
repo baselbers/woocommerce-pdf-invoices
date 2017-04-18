@@ -149,7 +149,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// Copy fonts from tmp directory to uploads/woocommerce-pdf-invoices/fonts.
-			$font_files = glob( WPI_DIR . '/tmp/fonts/*.{ttf,otf}', GLOB_BRACE );
+			$font_files = array_merge( glob( WPI_DIR . '/tmp/fonts/*.ttf' ), glob( WPI_DIR . '/tmp/fonts/*.otf' ) );
 			foreach ( $font_files as $font_file ) {
 				$destination_file = WPI_UPLOADS_DIR . '/fonts/' . basename( $font_file );
 				if ( file_exists( $destination_file ) ) {

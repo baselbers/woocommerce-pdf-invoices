@@ -44,7 +44,9 @@ function _bewpi_load_plugin() {
 	define( 'WPI_FILE', __FILE__ );
 	define( 'WPI_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
 
-	require_once WPI_DIR . '/vendor/autoload.php';
+	if ( file_exists( WPI_DIR . '/vendor/autoload.php' ) ) {
+		require_once WPI_DIR . '/vendor/autoload.php';
+	}
 
 	/**
 	 * Main instance of BE_WooCommerce_PDF_Invoices.

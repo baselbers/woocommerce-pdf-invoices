@@ -237,6 +237,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 - Added: Filter 'bewpi_my_account_pdf_name' to change the name of the PDF button on My Account page.
 - Fixed: 'Fatal error: Call to a member function get_id() on null' by checking object type in method `add_emailitin_as_recipient()`.
+- Fixed: 'PHP Fatal error: Call to undefined function is_plugin_active()' by not checking on frontend/non-admin.
 
 = 2.7.1 - April, 14, 2017 =
 

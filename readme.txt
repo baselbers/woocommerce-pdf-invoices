@@ -233,8 +233,10 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.7.3 - April, 19, 2017 =
+= 2.7.3 - April, 18, 2017 =
 
+- Improved: `setup_directories()` running on every (admin) request by only running when `WPI_UPLOADS_DIR` does not exists.
+- Fixed: 'Call to undefined function bewpi_get_id()' by dumping Composer autoloading.
 - Fixed: `GLOB_BRACE` unsupported on some systems.
 
 = 2.7.2 - April, 18, 2017 =

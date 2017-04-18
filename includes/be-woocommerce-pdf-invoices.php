@@ -113,7 +113,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Creates invoices dir in uploads folder.
 		 */
-		public function setup_directories() {
+		public static function setup_directories() {
 			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
 			$directories        = apply_filters( 'bewpi_uploads_directories', array(
 				WPI_UPLOADS_DIR . '/attachments/' => array(
@@ -172,9 +172,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				add_action( 'init', array( $this, 'frontend_pdf_callback' ) );
 			}
 
+			if ( ! file_exists( WPI_UPLOADS_DIR ) ) {
+				add_action( 'admin_init', array( $this, 'setup_directories' ) );
+			}
+
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
 			add_action( 'admin_init', array( $this, 'admin_init_hooks' ) );
-			add_action( 'admin_init', array( $this, 'setup_directories' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
 
 			// woocommerce.

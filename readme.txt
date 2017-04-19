@@ -1,26 +1,27 @@
 === Plugin Name ===
 Contributors: baaaaas
 Donate link: 
-Tags: woocommerce pdf invoices, invoice, generate, pdf, woocommerce, attachment, email, completed order, customer invoice, processing order, attach, automatic, vat, rate, sequential, number
+Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.7
 Stable tag: 2.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
+Automatically generate and attach customizable PDF Invoices and PDF Packing Slips for WooCommerce emails and directly send to Dropbox, Google Drive, OneDrive or Egnyte.
 
 == Description ==
 *Invoicing can be time consuming. Well, not anymore! WooCommerce PDF Invoices automates the invoicing process by generating and sending it to your customers.*
 
-This WooCommerce plugin generates PDF invoices, attaches it to WooCommerce email types of your choice and sends invoices to your customers and Dropbox, Google Drive, OneDrive or Egnyte. The clean and customizable template will definitely suit your needs.
+This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches it to WooCommerce email types of your choice and sends invoices to your customers' Dropbox, Google Drive, OneDrive or Egnyte. Choose between multiple clean and customizable templates.
 
 = Main features =
 - Automatic PDF invoice generation and attachment.
 - Manually create or delete PDF invoice.
 - Attach PDF invoice to multiple WooCommerce email types of your choice.
+- Generate PDF packing slips.
 - Connect with Google Drive, Egnyte, Dropbox or OneDrive.
-- Clean PDF Invoice template with with many customization options.
+- Multiple clean and highly customizable PDF Invoice templates.
 - WooCommerce order numbering or built-in sequential invoice numbering.
 - Many invoice and date format customization options.
 - Advanced items table with refunds, discounts, different item tax rates columns and more.
@@ -34,7 +35,7 @@ This WooCommerce plugin generates PDF invoices, attaches it to WooCommerce email
 > - Bulk generate PDF invoices<br />
 > - Bulk export and/or download PDF invoices<br />
 > - Periodically bill by generating and sending global invoices<br />
-> - Add additional PDF files to customer invoices.<br />
+> - Add additional PDF files to PDF invoices.<br />
 > - Send customer invoices directly to multiple recipients like suppliers.<br />
 > - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
 > [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
@@ -235,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.8.0 - April 19, 2017 =
 
+- Added: Packing Slip PDF document (for 'Minimal' template, not 'Micro').
 - Fixed: 'Warning: ReflectionProperty::getValue() expects exactly 1 parameter, 0 given'.
 
 = 2.7.3 - April 18, 2017 =

@@ -261,6 +261,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// verify nonce.
 			$action = sanitize_key( $_GET['bewpi_action'] );
+			if ( 'view' !== $action ) {
+				return;
+			}
+
 			$nonce = sanitize_key( $_GET['nonce'] );
 			if ( ! wp_verify_nonce( $nonce, $action ) ) {
 				wp_die( 'Invalid request.' );
@@ -325,12 +329,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$full_path = $invoice->update();
 					BEWPI_Invoice::view( $full_path );
 					break;
+				case 'view_packing_slip':
+					$packing_slip = new BEWPI_Packing_Slip( $order_id );
+					$packing_slip->generate( 'D' );
+					break;
 				case 'cancel':
 					BEWPI_Invoice::delete( $order_id );
 					break;
 				case 'create':
 					$invoice = new BEWPI_Invoice( $order_id );
-					$invoice->save();
+					$invoice->generate();
 					break;
 			}
 
@@ -512,7 +520,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$order_id = bewpi_get_id( $order );
 			$invoice = new BEWPI_Invoice( $order_id );
 			if ( ! $invoice->exists( $order_id ) ) {
-				$full_path = $invoice->save();
+				$full_path = $invoice->generate();
 			} else {
 				$full_path = $invoice->update();
 			}

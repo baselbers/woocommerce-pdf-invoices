@@ -52,6 +52,16 @@ form.bewpi-settings-form {
     height: 2em !important;
     width: 2em;
 }
+.bewpi-admin-order-create-packing-slip-btn {
+    background-image: url(../images/packing-slip-icon.png) !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    text-indent: -9999px;
+    position: relative;
+    padding: 0 !important;
+    height: 2em !important;
+    width: 2em;
+}
 .bewpi-admin-order-create-invoice-btn button {
     display: none;
 }

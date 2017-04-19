@@ -35,6 +35,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *
+		 * @deprecated No longer used within template files. Custom templates should be replaced.
+		 *
 		 * @return string
 		 */
 		public function get_formatted_subtotal() {
@@ -51,6 +53,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 
 		/**
 		 * Formatted custom order total.
+		 *
+		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 *
 		 * @return string
 		 */

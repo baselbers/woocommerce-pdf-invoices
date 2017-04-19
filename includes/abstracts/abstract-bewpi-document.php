@@ -89,9 +89,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * Generate document.
 		 *
 		 * @param string $destination Destination mode for file.
-		 * @param bool   $is_paid WooCommerce order paid status.
 		 */
-		protected function generate( $destination, $is_paid ) {
+		public function generate( $destination = 'F' ) {
 			$order_id = bewpi_get_id( $this->order );
 
 			do_action( 'bewpi_before_invoice_content', $order_id );
@@ -139,8 +138,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->company_logo = file_get_contents( $image_path );
 			}
 
-			// show paid watermark.
-			if ( (bool) $this->template_options['bewpi_show_payment_status'] && $is_paid && ! $is_new_template ) {
+			// Show legacy paid watermark.
+			if ( strpos( $this->template_options['bewpi_template_name'], 'micro' ) !== false && $this->template_options['bewpi_show_payment_status'] && strpos( $this->type, 'invoice' ) !== false && $this->order->is_paid() ) {
 				$mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
 				$mpdf->showWatermarkText  = true;
 				$mpdf->watermarkTextAlpha = '0.2';
@@ -261,6 +260,32 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 */
 		public function get_full_path() {
 			return $this->full_path;
+		}
+
+		/**
+		 * Date format from user option or get default WordPress date format.
+		 *
+		 * @return string
+		 */
+		public function get_date_format() {
+			$date_format = $this->template_options['bewpi_date_format'];
+			if ( ! empty( $date_format ) ) {
+				return (string) $date_format;
+			}
+
+			return (string) get_option( 'date_format' );
+		}
+
+		/**
+		 * Order date formatted with user option format and localized.
+		 *
+		 * @return string
+		 */
+		public function get_formatted_order_date() {
+			// WC backwards compatibility.
+			$order_date = method_exists( 'WC_Order', 'get_date_created' ) ? $this->order->get_date_created() : $this->order->order_date;
+
+			return date_i18n( $this->get_date_format(), strtotime( $order_date ) );
 		}
 
 		/**

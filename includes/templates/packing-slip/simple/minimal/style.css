@@ -1,0 +1,82 @@
+table, tr, td, div, p {
+    /*border:1px solid black;*/
+}
+
+h1, h2, h3, h4, h5, h6{
+    padding:0;
+    margin:0;
+}
+
+table, div {
+    font-family: opensans, Arial, sans-serif;
+}
+
+table {
+    width: 100%;
+    line-height: normal;
+    color: #555;
+    font-size: 12px;
+    margin-left: 60px; /* Document margin */
+    margin-right: 60px; /* Document margin */
+}
+
+table td, table th {
+    padding:5px;
+    vertical-align:top;
+    line-height: inherit;
+}
+
+table tr.top td {
+   padding-top: 40px;
+}
+
+/* Top information */
+table tr.top td:nth-child(2){
+    text-align:right;
+}
+
+div.title div {
+    padding: 5px;
+    width: 40%;
+    float: left;
+    margin-left: 60px; /* Document margin */
+    line-height: 55px;
+}
+
+table tr.information td {
+    padding-bottom: 20px;
+}
+
+/* Customer billing address */
+table tr.information td:nth-child(3){
+    text-align: right;
+}
+
+table tr.heading th {
+    font-weight: bold;
+    text-align: left;
+    color: #FFFFFF;
+}
+
+table tr.item td{
+    border-bottom: 1px solid #eee;
+}
+
+table.notes {
+    margin-top: 40px;
+}
+
+table.footer {
+    padding-top: 20px;
+    padding-bottom: 20px; /* Document margin */
+    width: 100%;
+}
+
+table.footer tr td {
+    padding: 5px;
+    vertical-align: bottom;
+}
+
+table.footer tr td {
+    text-align: right;
+}

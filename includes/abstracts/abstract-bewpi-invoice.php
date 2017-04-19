@@ -117,38 +117,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Date format from user option or get default WordPress date format.
-		 *
-		 * @return string
-		 */
-		public function get_date_format() {
-			$date_format = $this->template_options['bewpi_date_format'];
-			if ( ! empty( $date_format ) ) {
-				return (string) $date_format;
-			}
-
-			return (string) get_option( 'date_format' );
-		}
-
-		/**
 		 * Format and localize (MySQL) invoice date.
 		 *
 		 * @return string
 		 */
 		public function get_formatted_invoice_date() {
 			return date_i18n( $this->get_date_format(), strtotime( $this->date ) );
-		}
-
-		/**
-		 * Order date formatted with user option format and localized.
-		 *
-		 * @return string
-		 */
-		public function get_formatted_order_date() {
-			// WC backwards compatibility.
-			$order_date = method_exists( 'WC_Order', 'get_date_created' ) ? $this->order->get_date_created() : $this->order->order_date;
-
-			return date_i18n( $this->get_date_format(), strtotime( $order_date ) );
 		}
 
 		/**
@@ -296,13 +270,24 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Backwards compatibility.
+		 *
+		 * @deprecated Use `generate()` instead.
+		 *
+		 * @param string $destination pdf generation mode.
+		 */
+		public function save( $destination = 'F' ) {
+			$this->generate( $destination );
+		}
+
+		/**
 		 * Save invoice.
 		 *
 		 * @param string $destination pdf generation mode.
 		 *
 		 * @return string
 		 */
-		public function save( $destination = 'F' ) {
+		public function generate( $destination = 'F' ) {
 			// WC backwards compatibility.
 			$order_id = bewpi_get_id( $this->order );
 
@@ -333,7 +318,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			do_action( 'bewpi_before_document_generation', $this->type, $order_id );
 
-			parent::generate( $destination, $this->order->is_paid() );
+			parent::generate( $destination );
 
 			return $this->full_path;
 		}
@@ -347,7 +332,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function update( $destination = 'F' ) {
 			parent::delete( $this->full_path );
-			parent::generate( $destination, $this->order->is_paid() );
+			parent::generate( $destination );
 
 			return $this->full_path;
 		}

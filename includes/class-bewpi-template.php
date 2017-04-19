@@ -30,6 +30,13 @@ class BEWPI_Template {
 	public $invoice;
 
 	/**
+	 * WooCommerce PDF Invoices packing slip.
+	 *
+	 * @var BEWPI_Packing_Slip.
+	 */
+	public $packing_slip;
+
+	/**
 	 * Template directories.
 	 *
 	 * @var array.
@@ -95,7 +102,7 @@ class BEWPI_Template {
 		}
 
 		if ( count( $template ) === 0 ) {
-			BEWPI()->logger()->warning( sprintf( 'PDF generation aborted. Template not found in %1$s:%2$s', __FILE__,  __LINE__ ) );
+			BEWPI()->logger()->error( sprintf( 'PDF generation aborted. Template not found in %1$s:%2$s', __FILE__,  __LINE__ ) );
 		}
 
 		return $template;
@@ -219,5 +226,14 @@ class BEWPI_Template {
 	 */
 	public function set_invoice( $invoice ) {
 		$this->invoice = $invoice;
+	}
+
+	/**
+	 * Set invoice.
+	 *
+	 * @param BEWPI_Packing_Slip $packing_slip WooCommerce PDF Invoices invoice object.
+	 */
+	public function set_packing_slip( $packing_slip ) {
+		$this->packing_slip = $packing_slip;
 	}
 }

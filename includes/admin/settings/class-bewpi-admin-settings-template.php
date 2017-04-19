@@ -337,7 +337,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				array(
 					'id'       => 'bewpi-invoice-number-prefix',
 					'name'     => self::PREFIX . 'invoice_number_prefix',
-					'title'    => __( '[prefix]', 'woocommerce-pdf-invoices' ),
+					'title'    => __( 'Prefix', 'woocommerce-pdf-invoices' ),
 					'callback' => array( $this, 'input_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',
@@ -348,7 +348,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				array(
 					'id'       => 'bewpi-invoice-number-suffix',
 					'name'     => self::PREFIX . 'invoice_number_suffix',
-					'title'    => __( '[suffix]', 'woocommerce-pdf-invoices' ),
+					'title'    => __( 'Suffix', 'woocommerce-pdf-invoices' ),
 					'callback' => array( $this, 'input_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'invoice_number',

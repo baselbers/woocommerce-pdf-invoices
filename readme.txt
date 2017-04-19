@@ -236,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.8.1 - April 20, 2017 =
 
+- Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.
 - Improved: Language files.
 
 = 2.8.0 - April 19, 2017 =

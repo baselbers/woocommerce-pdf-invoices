@@ -118,7 +118,8 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			continue;
 		}
 
-		if ( 'payment_method' === $key ) {
+		// Skip payment_method and refund.
+		if ( in_array( $key, array( 'payment_method', 'refund_' ), true ) ) {
 			continue;
 		}
 		?>

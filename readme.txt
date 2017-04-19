@@ -238,6 +238,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 - Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.
 - Improved: Language files.
+- Removed: Refunds on 'Minimal' invoice template.
 
 = 2.8.0 - April 19, 2017 =
 

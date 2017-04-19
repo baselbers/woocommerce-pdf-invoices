@@ -70,18 +70,16 @@ function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
 	if ( WPI_VERSION !== $current_version ) {
 
+		// temporary change max execution time to higher value to prevent internal server errors.
+		$max_execution_time = (int) ini_get( 'max_execution_time' );
+		if ( 0 !== $max_execution_time ) {
+			set_time_limit( 360 );
+		}
+
 		// version 2.6.1- need to be updated with new email options and postmeta.
 		if ( version_compare( $current_version, '2.6.1' ) <= 0 ) {
-			// temporary change max execution time to higher value to prevent internal server errors.
-			$max_execution_time = (int) ini_get( 'max_execution_time' );
-			if ( 0 !== $max_execution_time ) {
-				set_time_limit( 360 );
-			}
-
 			update_email_type_options();
 			update_postmeta();
-
-			set_time_limit( $max_execution_time );
 		}
 
 		// version 2.7.0- uploads folder changed to uploads/woocommerce-pdf-invoices.
@@ -95,6 +93,8 @@ function _bewpi_on_plugin_update() {
 			$upload_dir = wp_upload_dir();
 			rename( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR, $upload_dir['basedir'] . '/bewpi-templates/invoice' );
 		}
+
+		set_time_limit( $max_execution_time );
 
 		update_site_option( 'bewpi_version', WPI_VERSION );
 	}
@@ -254,5 +254,4 @@ function _bewpi_on_plugin_activation() {
 
 	update_site_option( 'bewpi_version', WPI_VERSION );
 }
-
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

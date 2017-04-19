@@ -87,10 +87,13 @@ table tr.spacer td {
 }
 
 /* Totals */
-table tr.total td:nth-child(2),
-table tr.total td:nth-child(3){
+table tr.total td.border {
     border-top: 2px solid #eee;
     font-weight: bold;
+}
+
+small.shipped_via {
+    display: none;
 }
 
 /* Dynamic class */

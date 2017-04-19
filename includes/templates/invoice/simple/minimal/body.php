@@ -68,6 +68,14 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
 			</th>
 
+			<?php
+			if ( $templater->get_option( 'bewpi_show_tax' ) && wc_tax_enabled() && empty( $legacy_order ) ) {
+				foreach ( $this->order->get_taxes() as $tax_item ) {
+					printf( '<th>%s</th>', $tax_item['label'] );
+				}
+			}
+			?>
+
 			<th>
 				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
 			</th>
@@ -76,13 +84,12 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 	<?php
 	foreach ( $line_items as $item_id => $item ) {
-		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
-		?>
+		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item ); ?>
 
 		<tr class="item">
 			<td width="50%">
 				<?php
-				$is_visible        = $product && $product->is_visible();
+				$is_visible = $product && $product->is_visible();
 
 				echo $item['name'];
 
@@ -95,11 +102,35 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 				?>
 			</td>
 
-			<td width="25%">
+			<td>
 				<?php echo $item['qty']; ?>
 			</td>
 
-			<td width="25%">
+			<?php
+			if ( $templater->get_option( 'bewpi_show_tax' ) && wc_tax_enabled() && empty( $legacy_order ) ) {
+				$line_tax_data         = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
+				$tax_data              = maybe_unserialize( $line_tax_data );
+
+				foreach ( $order->get_taxes() as $tax_item ) {
+					$tax_item_id = $tax_item['rate_id'];
+					$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
+					$tax_item_subtotal = isset( $tax_data['subtotal'][ $tax_item_id ] ) ? $tax_data['subtotal'][ $tax_item_id ] : '';
+					?>
+					<td>
+						<?php
+						if ( ! empty( $tax_item_total ) ) {
+							echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) );
+						} else {
+							echo '&ndash;';
+						}
+						?>
+					</td>
+
+					<?php }
+			}
+			?>
+
+			<td>
 				<?php echo $order->get_formatted_line_subtotal( $item ); ?>
 			</td>
 		</tr>
@@ -125,9 +156,9 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		?>
 
 		<tr class="total">
-			<td></td>
-			<td class="<?php echo $class; ?>"><?php echo $total['label']; ?></td>
-			<td class="<?php echo $class; ?>"><?php echo $total['value']; ?></td>
+			<td colspan="<?php echo count( $order->get_taxes() ) + 1; ?>"></td>
+			<td class="border <?php echo $class; ?>"><?php echo $total['label']; ?></td>
+			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
 		</tr>
 
 	<?php } ?>

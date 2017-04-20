@@ -230,12 +230,10 @@ function move_pdf_invoices() {
 
 			$files_year = glob( $file . '/*' );
 			foreach ( $files_year as $file_year ) {
-
 				if ( is_file( $file_year ) ) {
 					$pdf_path = str_replace( BEWPI_INVOICES_DIR . '/', '', $file_year );
 					copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
 				}
-
 			}
 
 			continue;

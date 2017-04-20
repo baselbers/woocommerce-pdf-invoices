@@ -238,6 +238,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 - Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.
 - Improved: Language files.
+- Fixed: 'PHP Warning:  copy(): The first argument to copy() function cannot be a directory' when moving PDF invoices to new uploads directory.
 - Removed: Refunds on 'Minimal' invoice template.
 
 = 2.8.0 - April 19, 2017 =

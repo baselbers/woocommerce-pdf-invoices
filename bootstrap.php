@@ -222,15 +222,20 @@ function update_date_format_postmeta( $post_id, $date_format ) {
  * Move all invoices to new uploads dir.
  */
 function move_pdf_invoices() {
-	$files = glob( BEWPI_INVOICES_DIR . '*' );
+	$files = glob( BEWPI_INVOICES_DIR . '/*' );
 	foreach ( $files as $file ) {
+
 		if ( is_dir( $file ) ) {
 			wp_mkdir_p( WPI_ATTACHMENTS_DIR . '/' . basename( $file ) );
 
 			$files_year = glob( $file . '/*' );
 			foreach ( $files_year as $file_year ) {
-				$pdf_path = str_replace( BEWPI_INVOICES_DIR, '', $file_year );
-				copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+
+				if ( is_file( $file_year ) ) {
+					$pdf_path = str_replace( BEWPI_INVOICES_DIR . '/', '', $file_year );
+					copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+				}
+
 			}
 
 			continue;

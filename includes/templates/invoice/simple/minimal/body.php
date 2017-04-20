@@ -23,6 +23,7 @@ $formatted_billing_address      = $order->get_formatted_billing_address();
 $line_items                     = $order->get_items( 'line_item' );
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
+$show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'bewpi_show_tax' );
 ?>
 
 <div class="title">
@@ -69,7 +70,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			</th>
 
 			<?php
-			if ( $templater->get_option( 'bewpi_show_tax' ) && wc_tax_enabled() && empty( $legacy_order ) ) {
+			if ( $show_tax_items ) {
 				foreach ( $this->order->get_taxes() as $tax_item ) {
 					printf( '<th>%s</th>', $tax_item['label'] );
 				}
@@ -107,14 +108,13 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			</td>
 
 			<?php
-			if ( $templater->get_option( 'bewpi_show_tax' ) && wc_tax_enabled() && empty( $legacy_order ) ) {
+			if ( $show_tax_items ) {
 				$line_tax_data         = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
 				$tax_data              = maybe_unserialize( $line_tax_data );
 
 				foreach ( $order->get_taxes() as $tax_item ) {
 					$tax_item_id = $tax_item['rate_id'];
 					$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
-					$tax_item_subtotal = isset( $tax_data['subtotal'][ $tax_item_id ] ) ? $tax_data['subtotal'][ $tax_item_id ] : '';
 					?>
 					<td>
 						<?php
@@ -142,22 +142,25 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	</tr>
 
 	<?php
+	$colspan = wc_tax_enabled() ? count( $order->get_taxes() ) + 1 : 1;
 	foreach ( $order->get_order_item_totals() as $key => $total ) {
-		$class = str_replace( '_', '-', $key );
-
-		if ( ! $templater->get_option( 'bewpi_show_subtotal' ) && 'cart_subtotal' === $key ) {
-			continue;
-		}
 
 		// Skip payment_method and refund.
 		if ( in_array( $key, array( 'payment_method', 'refund_' ), true ) ) {
 			continue;
 		}
+
+		// Skip subtotal?
+		if ( ! $templater->get_option( 'bewpi_show_subtotal' ) && 'cart_subtotal' === $key ) {
+			continue;
+		}
+
+		$class = str_replace( '_', '-', $key );
 		?>
 
 		<tr class="total">
-			<td colspan="<?php echo count( $order->get_taxes() ) + 1; ?>"></td>
-			<td class="border <?php echo $class; ?>"><?php echo $total['label']; ?></td>
+			<td></td>
+			<td class="border <?php echo $class; ?>" colspan="<?php echo $colspan; ?>"><?php echo $total['label']; ?></td>
 			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
 		</tr>
 

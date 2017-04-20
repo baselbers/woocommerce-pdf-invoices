@@ -80,9 +80,9 @@ The manual installation method involves downloading our plugin and uploading it 
 == Frequently Asked Questions ==
 
 #### How to add your custom template?
-Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple` and rename the template folder `micro` or `minimal`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
+Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
 
-Important: Before you update the plugin, always have a look at the Changelog for any changes to the template files. There will be updates that require updating your custom template!
+Important: Before you update the plugin, always have a look at the Changelog if their have been any changes to the template files. There will be updates that require updating your custom template!
 
 #### How to add a fee to the invoice?
 To add a fee to WooCommerce and your invoice, simply add the following action to your themes `functions.php`.
@@ -238,6 +238,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 - Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.
 - Improved: Language files.
+- Fixed: Settings for custom templates always showing by checking if custom template folder name contains 'minimal' or 'micro' name.
 - Fixed: 'PHP Warning:  copy(): The first argument to copy() function cannot be a directory' when moving PDF invoices to new uploads directory.
 - Removed: Refunds on 'Minimal' invoice template.
 

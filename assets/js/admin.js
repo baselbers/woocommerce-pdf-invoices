@@ -19,8 +19,8 @@
     };
 
     setting.switchSettings = function(event) {
-        var display = (event.target.value === 'minimal') ? 'none' : 'table-row';
-        var settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
+        var display = (event.target.value.toLowerCase().indexOf( 'minimal' ) !== -1) ? 'none' : 'table-row';
+        var settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
 
         settings.forEach(function (settingId){
             var settingElem = document.getElementById(settingId);

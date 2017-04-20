@@ -41,7 +41,14 @@ class BEWPI_Template {
 	 *
 	 * @var array.
 	 */
-	private $directories;
+	private $directories = array();
+
+	/**
+	 * String placeholders.
+	 *
+	 * @var array.
+	 */
+	private static $placeholders = array( '[payment_method]', '[shipping_method]' );
 
 	/**
 	 * Main BEWPI_Template Instance.
@@ -135,9 +142,29 @@ class BEWPI_Template {
 
 		$order_id = bewpi_get_id( $this->order );
 		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
-		$value = $this->replace_placeholders( $value );
+
+		if ( self::has_placeholder( $value ) ) {
+			$value = $this->replace_placeholders( $value );
+		}
 
 		return $value;
+	}
+
+	/**
+	 * Checks if string has placeholders.
+	 *
+	 * @param string $value Text value.
+	 *
+	 * @return bool
+	 */
+	private static function has_placeholder( $value ) {
+		foreach ( self::$placeholders as $placeholder ) {
+			if ( strpos( $value, $placeholder ) !== false ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -148,10 +175,12 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	private function replace_placeholders( $value ) {
+		$payment_gateway = wc_get_payment_gateway_by_order( $this->order );
+
 		$value = str_replace(
-			array( '[payment_method]', '[shipping_method]' ),
+			self::$placeholders,
 			array(
-				apply_filters( 'bewpi_payment_method_title', method_exists( 'WC_Order', 'get_payment_method_title' ) ? $this->order->get_payment_method_title() : $this->order->payment_method_title ),
+				( $payment_gateway ) ? $payment_gateway->get_title() : $value,
 				$this->order->get_shipping_method(),
 			),
 			$value

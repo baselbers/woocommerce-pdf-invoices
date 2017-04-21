@@ -234,8 +234,9 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.8.1 - April 20, 2017 =
+= 2.8.1 - April 21, 2017 =
 
+- Added: Composer (PHP 5.2 compatible) classmap autoloading.
 - Improved: WooCommerce compatibility.
 - Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.s
 - Improved: Language files.

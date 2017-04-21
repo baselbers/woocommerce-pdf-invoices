@@ -96,8 +96,8 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
 
-				$order->display_item_meta( $item );
-				$order->display_item_downloads( $item );
+				$templater->wc_display_item_meta( $item );
+				$templater->wc_display_item_downloads( $item );
 
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
 				?>
@@ -109,24 +109,9 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 
 			<?php
 			if ( $show_tax_items ) {
-				$line_tax_data         = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
-				$tax_data              = maybe_unserialize( $line_tax_data );
-
-				foreach ( $order->get_taxes() as $tax_item ) {
-					$tax_item_id = $tax_item['rate_id'];
-					$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
-					?>
-					<td>
-						<?php
-						if ( ! empty( $tax_item_total ) ) {
-							echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) );
-						} else {
-							echo '&ndash;';
-						}
-						?>
-					</td>
-
-					<?php }
+				foreach ( $templater->get_tax_totals( $item ) as $tax_total ) {
+					printf( '<td>%s</td>', $tax_total );
+				}
 			}
 			?>
 

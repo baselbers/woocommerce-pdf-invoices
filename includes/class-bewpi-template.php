@@ -1,8 +1,14 @@
 <?php
+/**
+ * Templater class to populate templates.
+ *
+ * @author      Bas Elbers
+ * @category    Class
+ * @package     BE_WooCommerce_PDF_Invoices/Class
+ * @version     0.0.1
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) or exit;
 
 /**
  * Class BEWPI_Template.
@@ -140,7 +146,7 @@ class BEWPI_Template {
 	public function get_option( $name ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$order_id = bewpi_get_id( $this->order );
+		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
 
 		if ( self::has_placeholder( $value ) ) {
@@ -209,6 +215,61 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Order item meta port.
+	 *
+	 * @param object $item Order item meta.
+	 */
+	public function wc_display_item_meta( $item ) {
+		// WooCommerce v3.
+		if ( function_exists( 'wc_display_item_meta' ) ) {
+			wc_display_item_meta( $item );
+		} else {
+			$this->order->display_item_meta( $item );
+		}
+	}
+
+	/**
+	 * Order item downloads meta.
+	 *
+	 * @param object $item Order item.
+	 */
+	public function wc_display_item_downloads( $item ) {
+		if ( function_exists( 'wc_display_item_downloads' ) ) {
+			// WooCommerce v3.
+			wc_display_item_downloads( $item );
+		} else {
+			$this->order->display_item_downloads( $item );
+		}
+	}
+
+	/**
+	 * Get tax total for item to display.
+	 *
+	 * @param object $item Order item.
+	 *
+	 * @return array Tax totals.
+	 */
+	public function get_tax_totals( $item ) {
+		$line_tax_data         = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
+		$tax_data              = maybe_unserialize( $line_tax_data );
+		$tax_totals            = array();
+
+		foreach ( $this->order->get_taxes() as $tax_item ) {
+			$tax_item_id = $tax_item['rate_id'];
+			$tax_item_total    = isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : '';
+
+			if ( ! empty( $tax_item_total ) ) {
+				$order_currency = ( method_exists( 'WC_Order', 'get_currency' ) ) ? $this->order->get_currency() : $this->order->get_order_currency();
+				$tax_totals[] = wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $order_currency ) );
+			} else {
+				$tax_totals[] = '&ndash;';
+			}
+		}
+
+		return $tax_totals;
+	}
+
+	/**
 	 * Get the company logo URL.
 	 *
 	 * @return string The actual url from the Media Library.
@@ -225,7 +286,7 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	public function get_meta( $meta_key ) {
-		$order_id = bewpi_get_id( $this->order );
+		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 		return (string) get_post_meta( $order_id, $meta_key, true );
 	}

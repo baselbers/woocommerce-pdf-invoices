@@ -10,9 +10,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	/**

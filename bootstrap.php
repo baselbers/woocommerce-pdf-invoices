@@ -12,9 +12,7 @@
  * Domain Path:       /lang
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 /**
  * @deprecated instead use WPI_VERSION.

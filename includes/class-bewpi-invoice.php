@@ -10,9 +10,7 @@
  * @version     2.5.4
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	/**

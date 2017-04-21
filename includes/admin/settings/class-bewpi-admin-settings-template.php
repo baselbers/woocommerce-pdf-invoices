@@ -10,9 +10,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 	/**
@@ -28,7 +26,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * BEWPI_Template_Settings constructor.
 		 */
 		public function __construct() {
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
+			$this->load_settings();
+			$this->create_settings();
 			add_action( 'admin_notices', array( $this, 'show_settings_notices' ) );
 		}
 
@@ -619,20 +618,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		}
 
 		/**
-		 * Initialize admin.
-		 */
-		public function admin_init() {
-			$this->load_settings();
-			$this->create_settings();
-		}
-
-		/**
 		 * Show all settings notices.
 		 */
 		public function show_settings_notices() {
 			settings_errors( self::SETTINGS_KEY );
 		}
 	}
-
-	new BEWPI_Template_Settings();
 }

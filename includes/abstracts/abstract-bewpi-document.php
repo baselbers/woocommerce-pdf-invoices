@@ -8,9 +8,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	/**
@@ -91,7 +89,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param string $destination Destination mode for file.
 		 */
 		public function generate( $destination = 'F' ) {
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			do_action( 'bewpi_before_invoice_content', $order_id );
 
@@ -283,7 +281,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 */
 		public function get_formatted_order_date() {
 			// WC backwards compatibility.
-			$order_date = method_exists( 'WC_Order', 'get_date_created' ) ? $this->order->get_date_created() : $this->order->order_date;
+			$order_date = BEWPI_WC_Order_Compatibility::get_date_created( $this->order );
 
 			return date_i18n( $this->get_date_format(), strtotime( $order_date ) );
 		}

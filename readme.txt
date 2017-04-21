@@ -236,11 +236,12 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.8.1 - April 20, 2017 =
 
-- Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.
+- Improved: WooCommerce compatibility.
+- Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.s
 - Improved: Language files.
-- Fixed: Settings for custom templates always showing by checking if custom template folder name contains 'minimal' or 'micro' name.
+- Fixed: Template specific settings not always showing. Make sure your custom template contains template name in order to get template specific settings.
 - Fixed: 'PHP Warning:  copy(): The first argument to copy() function cannot be a directory' when moving PDF invoices to new uploads directory.
-- Removed: Refunds on 'Minimal' invoice template.
+- Removed: Refunds in totals on 'Minimal' invoice template.
 
 = 2.8.0 - April 19, 2017 =
 

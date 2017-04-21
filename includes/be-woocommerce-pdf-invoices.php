@@ -205,6 +205,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			new BEWPI_General_Settings();
 			new BEWPI_Template_Settings();
+			BEWPI_Admin_Notices::init_hooks();
 			BEWPI_Packing_Slip::init_hooks();
 		}
 

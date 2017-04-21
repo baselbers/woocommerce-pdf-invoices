@@ -20,7 +20,7 @@ class BEWPI_Admin_Notices {
 	/**
 	 * Constructor.
 	 */
-	public static function init() {
+	public static function init_hooks() {
 		add_action( 'wp_ajax_dismiss-notice', array( __CLASS__, 'dismiss_notice' ) );
 		add_action( 'wp_ajax_deactivation-notice', array( __CLASS__, 'admin_notice_deactivation' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
@@ -105,8 +105,8 @@ class BEWPI_Admin_Notices {
 		}
 
 		// at least 10 days should be past to display notice.
-		if ( new \DateTime( '10 days ago' ) >= $install_date ) {
-			include( BEWPI_DIR . 'includes/admin/views/html-rate-notice.php' );
+		if ( new DateTime( '10 days ago' ) >= $install_date ) {
+			include( WPI_DIR . '/includes/admin/views/html-rate-notice.php' );
 		}
 	}
 
@@ -124,7 +124,7 @@ class BEWPI_Admin_Notices {
 			return;
 		}
 
-		include( BEWPI_DIR . 'includes/admin/views/html-activation-notice.php' );
+		include( WPI_DIR . '/includes/admin/views/html-activation-notice.php' );
 		delete_transient( 'bewpi-admin-notice-activation' );
 	}
 
@@ -137,10 +137,8 @@ class BEWPI_Admin_Notices {
 		}
 
 		ob_start();
-		include BEWPI_DIR . 'includes/admin/views/html-deactivation-notice.php';
+		include WPI_DIR . '/includes/admin/views/html-deactivation-notice.php';
 		$content = ob_get_clean();
 		die( $content ); // WPCS: XSS OK.
 	}
 }
-
-BEWPI_Admin_Notices::init();

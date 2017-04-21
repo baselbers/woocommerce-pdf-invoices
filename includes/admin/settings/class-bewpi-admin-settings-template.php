@@ -494,21 +494,14 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * General settings section information.
 		 */
 		public function general_desc_callback() {
-			_e( 'These are the general template options.', 'woocommerce-pdf-invoices' ); // WPCS: XSS OK.
-		}
-
-		/**
-		 * Invoice number section information.
-		 */
-		public function invoice_number_desc_callback() {
-			_e( 'These are the invoice number options.', 'woocommerce-pdf-invoices' ); // WPCS: XSS OK.
+			printf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a briefly description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' );
 		}
 
 		/**
 		 * Invoice header section information.
 		 */
 		public function header_desc_callback() {
-			_e( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' ); // WPCS: XSS OK.
+			_e( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' );
 		}
 
 		/**
@@ -522,7 +515,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * Visible columns section information.
 		 */
 		public function visible_columns_desc_callback() {
-			_e( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ); // WPCSS: XSS OK.
+			_e( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' );
 		}
 
 		/**
@@ -533,10 +526,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				$this,
 				'general_desc_callback',
 			), self::SETTINGS_KEY );
-			add_settings_section( 'invoice_number', __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ), array(
-				$this,
-				'invoice_number_desc_callback',
-			), self::SETTINGS_KEY );
+			add_settings_section( 'invoice_number', __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
 			add_settings_section( 'header', __( 'Header Options', 'woocommerce-pdf-invoices' ), array(
 				$this,
 				'header_desc_callback',

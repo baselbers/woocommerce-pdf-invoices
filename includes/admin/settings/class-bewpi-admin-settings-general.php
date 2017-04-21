@@ -80,8 +80,8 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				array(
 					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
 					'name'     => self::PREFIX . 'woocommerce_subscriptions_email_types',
-					'title'    => __( 'Attach to WooCommerce Subscriptions Emails', 'woocommerce-pdf-invoices' )
-					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', BEWPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
+					'title'    => sprintf( __( 'Attach to %s Emails', 'woocommerce-pdf-invoices' ), 'WooCommerce Subscriptions' )
+					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', WPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
 					'callback' => array( $this, 'multiple_checkbox_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'email',

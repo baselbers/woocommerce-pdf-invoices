@@ -301,6 +301,13 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Get two letter ISO language code.
+	 */
+	public function get_two_letter_iso_code() {
+		return substr( get_locale(), 0, 2 );
+	}
+
+	/**
 	 * Set order.
 	 *
 	 * @param WC_Order $order WooCommerce Order object.

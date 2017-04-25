@@ -110,6 +110,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				'margin_footer'     => ( $is_new_template ) ? 0 : 6,
 				'orientation'       => 'P',
 			) );
+			/* @var mPDF $mpdf */
 			$mpdf        = new mPDF(
 				$mpdf_params['mode'],
 				$mpdf_params['format'],
@@ -150,15 +151,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->showImageErrors = true;
 			}
 
-			$mpdf->SetDisplayMode( 'fullpage' );
-			$mpdf->autoScriptToLang    = true;
-			$mpdf->autoLangToFont      = true;
+			// Layout.
 			$mpdf->setAutoTopMargin    = 'stretch';
 			$mpdf->setAutoBottomMargin = 'stretch';
 			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 20 : 10;
-			$mpdf->useOnlyCoreFonts    = false;
+
+			// Font.
+			$mpdf->autoScriptToLang    = true;
+			$mpdf->autoLangToFont      = true;
+			$mpdf->baseScript          = 1;
+			$mpdf->autoVietnamese      = true;
+			$mpdf->autoArabic          = true;
 			$mpdf->useSubstitutions    = true;
 
+			// Template.
 			$html = $this->get_html();
 			if ( count( $html ) === 0 ) {
 				BEWPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );

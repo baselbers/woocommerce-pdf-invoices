@@ -98,7 +98,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$is_new_template = strpos( strtolower( $this->template_options['bewpi_template_name'] ), 'minimal' ) !== false;
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
-				'mode'              => '',
+				'mode'              => 'utf-8',
 				'format'            => '',
 				'default_font_size' => 0,
 				'default_font'      => $default_font,

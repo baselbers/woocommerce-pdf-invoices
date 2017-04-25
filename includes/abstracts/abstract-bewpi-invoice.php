@@ -17,12 +17,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	 * Class BEWPI_Invoice
 	 */
 	class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
-		/**
-		 * Type of invoice.
-		 *
-		 * @var string
-		 */
-		protected $type;
 
 		/**
 		 * Invoice number.

@@ -4,19 +4,19 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "b773916b3ee7e591168c13b8449072de",
+    "content-hash": "9b76612ae45843d4dfc11d74b7a6b2ab",
     "packages": [
         {
             "name": "mpdf/mpdf",
-            "version": "v6.1.3",
+            "version": "dev-mpdf",
             "source": {
                 "type": "git",
-                "url": "https://github.com/mpdf/mpdf.git",
+                "url": "https://github.com/baselbers/mpdf.git",
                 "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/7f138bf7508eac895ac2c13d2509b056ac7e7e97",
+                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/7f138bf7508eac895ac2c13d2509b056ac7e7e97",
                 "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97",
                 "shasum": ""
             },
@@ -38,7 +38,13 @@
                     "classes"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "post-install-cmd": [
+                    "php -r \"chmod('./ttfontdata', 0777);\"",
+                    "php -r \"chmod('./tmp', 0777);\"",
+                    "php -r \"chmod('./graph_cache', 0777);\""
+                ]
+            },
             "license": [
                 "GPL-2.0"
             ],
@@ -55,7 +61,12 @@
                 "php",
                 "utf-8"
             ],
-            "time": "2016-12-12T10:42:18+00:00"
+            "support": {
+                "issues": "https://github.com/mpdf/mpdf/issues",
+                "source": "https://github.com/mpdf/mpdf",
+                "docs": "http://mpdf.github.io"
+            },
+            "time": "2016-12-12 10:42:18"
         },
         {
             "name": "setasign/fpdi",
@@ -141,7 +152,9 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "mpdf/mpdf": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

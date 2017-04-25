@@ -23,10 +23,16 @@
       "xrstf\\Composer52\\Generator::onPostInstallCmd"
     ]
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/baselbers/mpdf"
+    }
+  ],
   "require": {
     "php": ">=5.2.14",
     "xrstf/composer-php52": "1.*",
-    "mpdf/mpdf": "6.1.*"
+    "mpdf/mpdf": "dev-mpdf"
   },
   "autoload": {
     "classmap": [

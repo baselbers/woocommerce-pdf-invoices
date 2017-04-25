@@ -236,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.8.1 - April 21, 2017 =
 
+- Added: Option to disable Packing Slips.
 - Added: Composer (PHP 5.2 compatible) classmap autoloading.
 - Improved: WooCommerce compatibility.
 - Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.s

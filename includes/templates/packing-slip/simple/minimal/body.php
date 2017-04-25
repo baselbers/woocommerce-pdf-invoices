@@ -29,7 +29,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</div>
 	<div class="watermark"></div>
 </div>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tr class="information">
 		<td width="50%">
 			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
@@ -49,7 +49,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 		</td>
 	</tr>
 </table>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<thead>
 		<tr class="heading" bgcolor="<?php echo $color; ?>;">
 			<th>
@@ -92,7 +92,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</tbody>
 </table>
 
-<table class="notes" cellpadding="0" cellspacing="0">
+<table class="notes">
 	<tr>
 		<td>
 			<?php

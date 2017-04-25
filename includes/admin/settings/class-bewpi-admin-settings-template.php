@@ -144,6 +144,18 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'default'  => 0,
 				),
 				array(
+					'id'       => 'bewpi-packing-slips',
+					'name'     => self::PREFIX . 'disable_packing_slips',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => self::SETTINGS_KEY,
+					'section'  => 'packing_slips',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Disable Packing Slips', 'woocommerce-pdf-invoices' ),
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
 					'id'       => 'bewpi-company-name',
 					'name'     => self::PREFIX . 'company_name',
 					'title'    => __( 'Company name', 'woocommerce-pdf-invoices' ),
@@ -498,6 +510,13 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		}
 
 		/**
+		 * Packing Slips description.
+		 */
+		public function packing_slip_desc_callback() {
+			_e( 'Packing Slips are <strong>only available</strong> when using minimal template.', 'woocommerce-pdf-invoices' );
+		}
+
+		/**
 		 * Invoice header section information.
 		 */
 		public function header_desc_callback() {
@@ -527,6 +546,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				'general_desc_callback',
 			), self::SETTINGS_KEY );
 			add_settings_section( 'invoice_number', __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ), null, self::SETTINGS_KEY );
+			add_settings_section( 'packing_slips', __( 'Packing Slip Options', 'woocommerce-pdf-invoices' ), array(
+				$this,
+				'packing_slip_desc_callback',
+			), self::SETTINGS_KEY );
 			add_settings_section( 'header', __( 'Header Options', 'woocommerce-pdf-invoices' ), array(
 				$this,
 				'header_desc_callback',

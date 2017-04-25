@@ -1,18 +1,20 @@
 table, tr, td, div, p {
-    /*border:1px solid black;*/
+    border: 1px solid black;
 }
 
 h1, h2, h3, h4, h5, h6{
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
 }
 
 table, div {
-    font-family: opensans, Arial, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
 table {
     width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
     line-height: normal;
     color: #555;
     font-size: 12px;
@@ -21,8 +23,8 @@ table {
 }
 
 table td, table th {
-    padding:5px;
-    vertical-align:top;
+    padding: 5px;
+    vertical-align: top;
     line-height: inherit;
 }
 
@@ -32,7 +34,7 @@ table tr.top td {
 
 /* Top information */
 table tr.top td:nth-child(2){
-    text-align:right;
+    text-align: right;
 }
 
 div.title div {

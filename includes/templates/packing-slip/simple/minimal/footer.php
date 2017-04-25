@@ -17,7 +17,7 @@
 
 ?>
 
-<table class="footer" cellpadding="0" cellspacing="0">
+<table class="footer">
 	<tr>
 		<td>
 			<?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?>

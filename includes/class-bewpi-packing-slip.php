@@ -42,6 +42,11 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @param WC_Order $order WooCommerce order object.
 		 */
 		public static function add_packing_slip_pdf( $order ) {
+			$template_options = get_option( 'bewpi_template_settings' );
+			if ( $template_options['bewpi_disable_packing_slips'] ) {
+				return;
+			}
+
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 
 			// View Packing Slip.

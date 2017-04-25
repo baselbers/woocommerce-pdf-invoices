@@ -21,7 +21,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 *
 		 * @var string type of document.
 		 */
-		protected $type;
+		public $type;
 
 		/**
 		 * WooCommerce Order associated with invoice.
@@ -175,13 +175,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
+			do_action( 'bewpi_after_invoice_content', $order_id );
+
+			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $this, $mpdf );
+
 			if ( 'F' === $destination ) {
 				$name = $this->full_path;
 			} else {
 				$name = $this->filename;
 			}
-
-			do_action( 'bewpi_after_invoice_content', $order_id );
 
 			$mpdf->Output( $name, $destination );
 		}

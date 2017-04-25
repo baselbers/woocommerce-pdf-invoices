@@ -81,7 +81,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
 					'name'     => self::PREFIX . 'woocommerce_subscriptions_email_types',
 					'title'    => sprintf( __( 'Attach to %s Emails', 'woocommerce-pdf-invoices' ), 'WooCommerce Subscriptions' )
-					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', WPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
+					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', WPI_URL . '/assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
 					'callback' => array( $this, 'multiple_checkbox_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'email',
@@ -286,7 +286,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 * Description of section Email Options.
 		 */
 		public function email_options_section_description() {
-			printf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to <span class="underline">automatically</span> generate the PDF invoice.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email' );
+			printf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email' );
 		}
 
 		/**

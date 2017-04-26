@@ -238,6 +238,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 - Added: Option to disable Packing Slips.
 - Added: Composer (PHP 5.2 compatible) classmap autoloading.
+- Improved: JavaScript by only running code on correct page.
 - Improved: Plugin size by using forked mpdf repo and removed a lot of default fonts to keep only [fonts that cover most languages/characters](https://mpdf.github.io/fonts-languages/fonts-language-cover-v5-x.html).
 - Improved: Font by switching from 'Arial' to 'dejavusanscondensed' for best character coverage.
 - Improved: WooCommerce compatibility.

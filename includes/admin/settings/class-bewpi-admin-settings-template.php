@@ -506,7 +506,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * General settings section information.
 		 */
 		public function general_desc_callback() {
-			printf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a briefly description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' );
+			printf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a brief description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' );
 		}
 
 		/**

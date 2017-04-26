@@ -23,7 +23,6 @@ $formatted_billing_address      = $order->get_formatted_billing_address();
 $line_items                     = $order->get_items( 'line_item' );
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
-$show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'bewpi_show_tax' );
 ?>
 
 <div class="title">
@@ -69,13 +68,7 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
 			</th>
 
-			<?php
-			if ( $show_tax_items ) {
-				foreach ( $this->order->get_taxes() as $tax_item ) {
-					printf( '<th>%s</th>', $tax_item['label'] );
-				}
-			}
-			?>
+			<?php do_action( 'bewpi_line_item_headers_after_quantity', $invoice ); ?>
 
 			<th>
 				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
@@ -85,13 +78,10 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 	<tbody>
 	<?php
 	foreach ( $line_items as $item_id => $item ) {
-		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item ); ?>
-
+		?>
 		<tr class="item">
 			<td width="50%">
 				<?php
-				$is_visible = $product && $product->is_visible();
-
 				echo $item['name'];
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
@@ -107,13 +97,7 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 				<?php echo $item['qty']; ?>
 			</td>
 
-			<?php
-			if ( $show_tax_items ) {
-				foreach ( $templater->get_tax_totals( $item ) as $tax_total ) {
-					printf( '<td>%s</td>', $tax_total );
-				}
-			}
-			?>
+			<?php do_action( 'bewpi_line_item_after_quantity', $item_id, $item, $invoice ); ?>
 
 			<td>
 				<?php echo $order->get_formatted_line_subtotal( $item ); ?>
@@ -127,25 +111,13 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 	</tr>
 
 	<?php
-	$colspan = wc_tax_enabled() ? count( $order->get_taxes() ) + 1 : 1;
-	foreach ( $order->get_order_item_totals() as $key => $total ) {
-
-		// Skip payment_method and refund.
-		if ( in_array( $key, array( 'payment_method', 'refund_' ), true ) ) {
-			continue;
-		}
-
-		// Skip subtotal?
-		if ( ! $templater->get_option( 'bewpi_show_subtotal' ) && 'cart_subtotal' === $key ) {
-			continue;
-		}
-
+	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
 
 		<tr class="total">
 			<td></td>
-			<td class="border <?php echo $class; ?>" colspan="<?php echo $colspan; ?>"><?php echo $total['label']; ?></td>
+			<td class="border <?php echo $class; ?>" colspan="<?php echo $templater->invoice->colspan; ?>"><?php echo $total['label']; ?></td>
 			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
 		</tr>
 
@@ -160,7 +132,7 @@ $show_tax_items                 = wc_tax_enabled() && $templater->get_option( 'b
 			// Customer notes.
 			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
 				// Note added by customer.
-				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				$customer_note = BEWPI_WC_Order_Compatibility::get_customer_note( $order );
 				if ( $customer_note ) {
 					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
 				}

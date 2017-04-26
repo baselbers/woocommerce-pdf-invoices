@@ -50,10 +50,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Colspan data to outline products table columns.
 		 *
-		 * @deprecated outlining columns will be refactored.
 		 * @var array
 		 */
-		protected $colspan;
+		public $colspan = 1;
 
 		/**
 		 * Width of the description cell of the product table.
@@ -538,6 +537,157 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Backwards compatibility.
+		 *
+		 * @deprecated Use `generate()` instead.
+		 *
+		 * @param string $destination pdf generation mode.
+		 */
+		public function save( $destination = 'F' ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
+			$this->generate( $destination );
+		}
+
+		/**
+		 * Add total row for subtotal.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
+			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
+			if ( $subtotal ) {
+				$total_rows['cart_subtotal'] = array(
+					'label' => __( 'Subtotal:', 'woocommerce' ),
+					'value'    => $subtotal,
+				);
+			}
+		}
+
+		/**
+		 * Add total row for discounts.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_total_discount() > 0 ) {
+				$total_rows['discount'] = array(
+					'label' => __( 'Discount:', 'woocommerce' ),
+					'value'    => '-' . $this->order->get_discount_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for shipping.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_shipping_method() ) {
+				$total_rows['shipping'] = array(
+					'label' => __( 'Shipping:', 'woocommerce' ),
+					'value'    => $this->order->get_shipping_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for fees.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
+			$fees = $this->order->get_fees();
+			if ( $fees ) {
+				/**
+				 * Fee annotations.
+				 *
+				 * @var string            $id WooCommerce ID.
+				 * @var WC_Order_Item_Fee $fee WooCommerce Fee.
+				 */
+				foreach ( $fees as $id => $fee ) {
+					if ( apply_filters( 'woocommerce_get_order_item_totals_excl_free_fees', empty( $fee['line_total'] ) && empty( $fee['line_tax'] ), $id ) ) {
+						continue;
+					}
+
+					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
+					$total_rows[ 'fee_' . $fee->get_id() ] = array(
+						'label' => $fee->get_name() . ':',
+						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => $currency ) ),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for taxes.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
+			// Tax for tax exclusive prices.
+			if ( 'excl' === $tax_display ) {
+				if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+					foreach ( $this->order->get_tax_totals() as $code => $tax ) {
+						$total_rows[ sanitize_title( $code ) ] = array(
+							'label' => $tax->label . ':',
+							'value'    => $tax->formatted_amount,
+						);
+					}
+				} else {
+					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
+					$total_rows['tax'] = array(
+						'label' => WC()->countries->tax_or_vat() . ':',
+						'value'    => wc_price( $this->order->get_total_tax(), array( 'currency' => $currency ) ),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for grand total.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
+			$total_rows['order_total'] = array(
+				'label' => __( 'Total:', 'woocommerce' ),
+				'value'    => $this->order->get_formatted_order_total( $tax_display, false ),
+			);
+		}
+
+		/**
+		 * Get totals for display on pages and in emails.
+		 *
+		 * @param string $tax_display 'excl' or 'incl'.
+		 *
+		 * @return array
+		 */
+		public function get_order_item_totals( $tax_display = '' ) {
+			$template_options = get_option( 'bewpi_template_settings' );
+			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
+			$total_rows  = array();
+
+			if ( $template_options['bewpi_show_subtotal'] ) {
+				$this->add_order_item_totals_subtotal_row( $total_rows, $tax_display );
+			}
+
+			$this->add_order_item_totals_discount_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_shipping_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_fee_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_tax_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_total_row( $total_rows, $tax_display );
+
+			return apply_filters( 'bewpi_get_order_item_totals', $total_rows, $this, $tax_display );
+		}
+
+		/**
 		 * Checks if invoice needs to have a zero rated VAT.
 		 *
 		 * @deprecated See minimal template.
@@ -610,15 +760,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Backwards compatibility.
+		 * Set order item totals colspan.
 		 *
-		 * @deprecated Use `generate()` instead.
-		 *
-		 * @param string $destination pdf generation mode.
+		 * @param int $colspan Order item totals table colspan.
 		 */
-		public function save( $destination = 'F' ) {
-			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
-			$this->generate( $destination );
+		public function set_colspan( $colspan ) {
+			$this->colspan = $colspan;
 		}
 	}
 }

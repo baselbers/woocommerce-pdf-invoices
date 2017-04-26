@@ -54,6 +54,7 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 *
 		 * @since 4.2.0
 		 * @param WC_Order $order order object
+		 *
 		 * @return string|int order ID
 		 */
 		public static function get_id( $order ) {
@@ -66,6 +67,28 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 
 				return isset( $order->id ) ? $order->id : false;
 			}
+		}
+
+		/**
+		 * Backports WC_Order::get_currency() method.
+		 *
+		 * @param WC_Order $order order object.
+		 *
+		 * @return string.
+		 */
+		public static function get_currency( $order ) {
+			return method_exists( 'WC_Order', 'get_currency' ) ? $order->get_currency() : $order->get_order_currency();
+		}
+
+		/**
+		 * Backports WC_Order::get_customer_note() method.
+		 *
+		 * @param WC_Order $order order object.
+		 *
+		 * @return string.
+		 */
+		public static function get_customer_note( $order ) {
+			return method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
 		}
 
 		/**

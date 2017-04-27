@@ -191,7 +191,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'cloud_storage',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Get your account from your Email It In <a href="%1$s">user account</a>.', 'woocommerce-pdf-invoices' ), 'https://www.emailitin.com/user_account' ),
+					'desc'     => sprintf( __( 'Get your account from your %1$s <a href="%2$s">user account</a>.', 'woocommerce-pdf-invoices' ), 'Email It In', 'https://www.emailitin.com/user_account' ),
 					'default'  => '',
 				),
 				array(
@@ -216,7 +216,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'section'  => 'debug',
 					'type'     => 'checkbox',
 					'desc'     => __( 'Enable mPDF debugging' )
-					              . '<br/><div class="bewpi-notes">' . __( 'Enable mPDF debugging if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
+					              . '<br/><div class="bewpi-notes">' . __( 'Enable if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,
 				),
@@ -335,7 +335,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 * Cloud Storage section callback.
 		 */
 		public function cloud_storage_desc_callback() {
-			printf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' ); // WPCS: XSS OK.
+			printf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' );
 		}
 
 		/**

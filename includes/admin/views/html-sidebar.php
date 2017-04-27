@@ -46,14 +46,16 @@
 	<p>
 		<?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'woocommerce-pdf-invoices' ); ?>
 	</p>
-	<?php _e( '<b>Version</b>: ' . WPI_VERSION, 'woocommerce-pdf-invoices' ); ?>
-	<br/>
-	<?php _e( '<b>Author</b>: <a href="https://github.com/baselbers">Bas Elbers</a>', 'woocommerce-pdf-invoices' ); ?>
+	<?php
+	echo '<b>' . sprintf( __( 'Version: %s', 'woocommerce-pdf-invoices' ), WPI_VERSION ) . '</b>';
+	printf( '<br>' );
+	echo '<b>' . sprintf( __( 'Author: %s', 'woocommerce-pdf-invoices' ), '<a href="https://github.com/baselbers">Bas Elbers</a>' ) . '</b>';
+	?>
 </aside>
 <aside class="bewpi-sidebar support">
 	<h3><?php _e( 'Support', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
-		<?php _e( 'We will never ask for donations, but to guarantee future development, we do need your support. Please show us your appreciation by leaving a <a href="https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform">★★★★★</a> rating and vote for <a href="https://wordpress.org/plugins/woocommerce-pdf-invoices/">works</a>.', 'woocommerce-pdf-invoices' ); ?>
+		<?php printf( __( 'We will never ask for donations, but to guarantee future development, we do need your support. Please show us your appreciation by leaving a <a href="%1$s">★★★★★</a> rating and vote for <a href="%2$s">works</a>.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', 'https://wordpress.org/plugins/woocommerce-pdf-invoices/' ); ?>
 	</p>
 	<!-- Github star -->
 	<div class="github btn">

@@ -99,7 +99,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 			// Customer notes.
 			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
 				// Note added by customer.
-				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				$customer_note = BEWPI_WC_Order_Compatibility::get_customer_note( $order );
 				if ( $customer_note ) {
 					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
 				}

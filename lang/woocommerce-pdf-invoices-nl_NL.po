@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2017-04-27 11:44+0200\n"
-"PO-Revision-Date: 2017-04-28 12:21+0200\n"
+"PO-Revision-Date: 2017-04-28 12:32+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -60,7 +60,7 @@ msgstr "Email adressen behoren met komma's gescheiden te worden."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:162
 msgid "Enable customer generation"
-msgstr "Inschakelen klant generatie"
+msgstr "Activeer klant generatie"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:164
 msgid "Let customers generate a global invoice from their account"
@@ -534,7 +534,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:131
 msgid "Disable for free products"
-msgstr "Schakel uit voor gratis producten"
+msgstr "Deactiveer voor gratis producten"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:133
 msgid ""
@@ -558,7 +558,7 @@ msgstr "Openen in nieuw browser tabblad/venster"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:167
 msgid "Enable download from my account"
-msgstr "Inschakelen downloaden vanaf account"
+msgstr "Activeer download vanaf account"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:169
 msgid ""
@@ -570,7 +570,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:182
 msgid "Enable Email It In"
-msgstr "Inschakelen Email It In"
+msgstr "Activeer Email It In"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:189
 msgid "Email It In account"
@@ -583,7 +583,7 @@ msgstr "Voer het %1$s <a href=\"%2$s\">gebruiker account</a> in."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:205
 msgid "Enable Invoice Number column"
-msgstr "Inschakelen factuurnummer kolom"
+msgstr "Activeer factuurnummer kolom"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:206
 msgid "Display invoice numbers on Shop Order page."
@@ -591,7 +591,7 @@ msgstr "Toon factuurnummers op Bestellingen pagina."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:218
 msgid "Enable mPDF debugging"
-msgstr "Inschakelen mPDF debugging"
+msgstr "Activeer mPDF debugging"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:219
 msgid "Enable if you aren't able to create an invoice."
@@ -625,7 +625,7 @@ msgid ""
 "automatically generate the PDF invoice."
 msgstr ""
 "De PDF factuur wordt gegenereerd wanneer WooCommerce de desbetreffende e-"
-"mail verzendt. De e-mail moet <a href=\"%1$s\"> ingeschakeld </a> zijn om de "
+"mail verzendt. De e-mail moet <a href=\"%1$s\"> geactiveerd</a> zijn om de "
 "PDF factuur automatisch te genereren."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:338
@@ -647,8 +647,8 @@ msgstr "Template"
 #, php-format
 msgid "Create a custom template by copying it from %1$s to %2$s."
 msgstr ""
-"Kopieer een template van %1$s naar %2$s om een aangepaste template te "
-"creëren."
+"Kopieer een template van %1$s naar %2$s om een template toe te voegen en te "
+"wijzigen."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:66
 msgid "Color theme"
@@ -908,7 +908,7 @@ msgstr "De voetnoot wordt op iedere pagina getoond."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:544
 msgid "Enable or disable the columns."
-msgstr "In- of uitschakelen van kolommen en rijen."
+msgstr "Activeren of deactiveren van kolommen en rijen."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:551
 msgid "General Options"

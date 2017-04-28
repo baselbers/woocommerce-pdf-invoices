@@ -202,7 +202,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'interface',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Enable Invoice Number column' )
+					'desc'     => __( 'Enable Invoice Number column', 'woocommerce-pdf-invoices' )
 					              . '<br/><div class="bewpi-notes">' . __( 'Display invoice numbers on Shop Order page.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
@@ -215,7 +215,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'debug',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Enable mPDF debugging' )
+					'desc'     => __( 'Enable mPDF debugging', 'woocommerce-pdf-invoices' )
 					              . '<br/><div class="bewpi-notes">' . __( 'Enable if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,

@@ -148,13 +148,13 @@ add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );
 To fully customize the PDF, use below code. This filter gives you full control over the mPDF library. Check the mPDF [manual](https://www.dropbox.com/s/h44f7v5anvcmmvl/mpdfmanual.pdf?dl=0) for more info.
 
 `
-function bewpi_mpdf( $mpdf ) {
+function bewpi_mpdf( $mpdf, $document ) {
     // change the direction of the invoice to RTL
     $mpdf->SetDirectionality( 'rtl' );
 
     return $mpdf;
 }
-add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
+add_filter( 'bewpi_mpdf', 'bewpi_mpdf', 10, 2 );
 `
 
 #### How to display invoice download button on specific template files?

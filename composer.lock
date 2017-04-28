@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/baselbers/mpdf.git",
-                "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97"
+                "reference": "9cc2da090a02a94304fb39e743985f0230de03df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/7f138bf7508eac895ac2c13d2509b056ac7e7e97",
-                "reference": "7f138bf7508eac895ac2c13d2509b056ac7e7e97",
+                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/9cc2da090a02a94304fb39e743985f0230de03df",
+                "reference": "9cc2da090a02a94304fb39e743985f0230de03df",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "source": "https://github.com/mpdf/mpdf",
                 "docs": "http://mpdf.github.io"
             },
-            "time": "2016-12-12 10:42:18"
+            "time": "2017-04-28 10:10:17"
         },
         {
             "name": "setasign/fpdi",

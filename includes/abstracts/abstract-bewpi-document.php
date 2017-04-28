@@ -125,8 +125,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['orientation']
 			);
 
-			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
-
 			// add company logo image as a variable.
 			$wp_upload_dir = wp_upload_dir();
 			$image_url     = $this->template_options['bewpi_company_logo'];
@@ -179,11 +177,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
+			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf, $this );
+
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
 			do_action( 'bewpi_after_invoice_content', $order_id );
 
-			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $this, $mpdf );
+			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $mpdf, $this );
 
 			if ( 'F' === $destination ) {
 				$name = $this->full_path;

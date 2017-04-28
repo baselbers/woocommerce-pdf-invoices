@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
  * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.8.0
+ * Version:           2.8.1
  * Author:            Bas Elbers
  * Author URI:        http://wcpdfinvoices.com
  * License:           GPL-2.0+
@@ -12,16 +12,14 @@
  * Domain Path:       /lang
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 /**
  * @deprecated instead use WPI_VERSION.
  */
-define( 'BEWPI_VERSION', '2.8.0' );
+define( 'BEWPI_VERSION', '2.8.1' );
 
-define( 'WPI_VERSION', '2.8.0' );
+define( 'WPI_VERSION', '2.8.1' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.
@@ -222,15 +220,18 @@ function update_date_format_postmeta( $post_id, $date_format ) {
  * Move all invoices to new uploads dir.
  */
 function move_pdf_invoices() {
-	$files = glob( BEWPI_INVOICES_DIR . '*' );
+	$files = glob( BEWPI_INVOICES_DIR . '/*' );
 	foreach ( $files as $file ) {
+
 		if ( is_dir( $file ) ) {
 			wp_mkdir_p( WPI_ATTACHMENTS_DIR . '/' . basename( $file ) );
 
 			$files_year = glob( $file . '/*' );
 			foreach ( $files_year as $file_year ) {
-				$pdf_path = str_replace( BEWPI_INVOICES_DIR, '', $file_year );
-				copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+				if ( is_file( $file_year ) ) {
+					$pdf_path = str_replace( BEWPI_INVOICES_DIR . '/', '', $file_year );
+					copy( $file_year, WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+				}
 			}
 
 			continue;

@@ -10,9 +10,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	/**
@@ -30,16 +28,9 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 * Initializes the template settings.
 		 */
 		public function __construct() {
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
-			add_action( 'admin_notices', array( $this, 'show_settings_notices' ) );
-		}
-
-		/**
-		 * Initialize settings within admin.
-		 */
-		public function admin_init() {
 			$this->load_settings();
 			$this->create_settings();
+			add_action( 'admin_notices', array( $this, 'show_settings_notices' ) );
 		}
 
 		/**
@@ -89,8 +80,8 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 				array(
 					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
 					'name'     => self::PREFIX . 'woocommerce_subscriptions_email_types',
-					'title'    => __( 'Attach to WooCommerce Subscriptions Emails', 'woocommerce-pdf-invoices' )
-					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', BEWPI_URL . 'assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
+					'title'    => sprintf( __( 'Attach to %s Emails', 'woocommerce-pdf-invoices' ), 'WooCommerce Subscriptions' )
+					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', WPI_URL . '/assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
 					'callback' => array( $this, 'multiple_checkbox_callback' ),
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'email',
@@ -200,7 +191,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'cloud_storage',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Get your account from your Email It In <a href="%1$s">user account</a>.', 'woocommerce-pdf-invoices' ), 'https://www.emailitin.com/user_account' ),
+					'desc'     => sprintf( __( 'Get your account from your %1$s <a href="%2$s">user account</a>.', 'woocommerce-pdf-invoices' ), 'Email It In', 'https://www.emailitin.com/user_account' ),
 					'default'  => '',
 				),
 				array(
@@ -211,7 +202,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'interface',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Enable Invoice Number column' )
+					'desc'     => __( 'Enable Invoice Number column', 'woocommerce-pdf-invoices' )
 					              . '<br/><div class="bewpi-notes">' . __( 'Display invoice numbers on Shop Order page.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
@@ -224,8 +215,8 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'page'     => self::SETTINGS_KEY,
 					'section'  => 'debug',
 					'type'     => 'checkbox',
-					'desc'     => __( 'Enable mPDF debugging' )
-					              . '<br/><div class="bewpi-notes">' . __( 'Enable mPDF debugging if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
+					'desc'     => __( 'Enable mPDF debugging', 'woocommerce-pdf-invoices' )
+					              . '<br/><div class="bewpi-notes">' . __( 'Enable if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,
 				),
@@ -295,7 +286,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 * Description of section Email Options.
 		 */
 		public function email_options_section_description() {
-			printf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to <span class="underline">automatically</span> generate the PDF invoice.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email' );
+			printf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email' );
 		}
 
 		/**
@@ -344,7 +335,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 * Cloud Storage section callback.
 		 */
 		public function cloud_storage_desc_callback() {
-			printf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' ); // WPCS: XSS OK.
+			printf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' );
 		}
 
 		/**
@@ -354,6 +345,4 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			settings_errors( self::SETTINGS_KEY );
 		}
 	}
-
-	new BEWPI_General_Settings();
 }

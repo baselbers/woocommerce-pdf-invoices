@@ -1,8 +1,14 @@
 <?php
+/**
+ * Templater class to populate templates.
+ *
+ * @author      Bas Elbers
+ * @category    Class
+ * @package     BE_WooCommerce_PDF_Invoices/Class
+ * @version     0.0.1
+ */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+defined( 'ABSPATH' ) or exit;
 
 /**
  * Class BEWPI_Template.
@@ -41,7 +47,14 @@ class BEWPI_Template {
 	 *
 	 * @var array.
 	 */
-	private $directories;
+	private $directories = array();
+
+	/**
+	 * String placeholders.
+	 *
+	 * @var array.
+	 */
+	private static $placeholders = array( '[payment_method]', '[shipping_method]' );
 
 	/**
 	 * Main BEWPI_Template Instance.
@@ -133,11 +146,31 @@ class BEWPI_Template {
 	public function get_option( $name ) {
 		$template_options = get_option( 'bewpi_template_settings' );
 
-		$order_id = bewpi_get_id( $this->order );
+		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 		$value = apply_filters( $name, $template_options[ $name ], $name, $order_id );
-		$value = $this->replace_placeholders( $value );
+
+		if ( self::has_placeholder( $value ) ) {
+			$value = $this->replace_placeholders( $value );
+		}
 
 		return $value;
+	}
+
+	/**
+	 * Checks if string has placeholders.
+	 *
+	 * @param string $value Text value.
+	 *
+	 * @return bool
+	 */
+	private static function has_placeholder( $value ) {
+		foreach ( self::$placeholders as $placeholder ) {
+			if ( strpos( $value, $placeholder ) !== false ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -148,10 +181,12 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	private function replace_placeholders( $value ) {
+		$payment_gateway = wc_get_payment_gateway_by_order( $this->order );
+
 		$value = str_replace(
-			array( '[payment_method]', '[shipping_method]' ),
+			self::$placeholders,
 			array(
-				apply_filters( 'bewpi_payment_method_title', method_exists( 'WC_Order', 'get_payment_method_title' ) ? $this->order->get_payment_method_title() : $this->order->payment_method_title ),
+				( $payment_gateway ) ? $payment_gateway->get_title() : $value,
 				$this->order->get_shipping_method(),
 			),
 			$value
@@ -180,6 +215,34 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Order item meta port.
+	 *
+	 * @param object $item Order item meta.
+	 */
+	public function wc_display_item_meta( $item ) {
+		// WooCommerce v3.
+		if ( function_exists( 'wc_display_item_meta' ) ) {
+			wc_display_item_meta( $item );
+		} else {
+			$this->order->display_item_meta( $item );
+		}
+	}
+
+	/**
+	 * Order item downloads meta.
+	 *
+	 * @param object $item Order item.
+	 */
+	public function wc_display_item_downloads( $item ) {
+		if ( function_exists( 'wc_display_item_downloads' ) ) {
+			// WooCommerce v3.
+			wc_display_item_downloads( $item );
+		} else {
+			$this->order->display_item_downloads( $item );
+		}
+	}
+
+	/**
 	 * Get the company logo URL.
 	 *
 	 * @return string The actual url from the Media Library.
@@ -196,7 +259,7 @@ class BEWPI_Template {
 	 * @return string
 	 */
 	public function get_meta( $meta_key ) {
-		$order_id = bewpi_get_id( $this->order );
+		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 		return (string) get_post_meta( $order_id, $meta_key, true );
 	}
@@ -208,6 +271,13 @@ class BEWPI_Template {
 	 */
 	public function get_directories() {
 		return $this->directories;
+	}
+
+	/**
+	 * Get two letter ISO language code.
+	 */
+	public function get_two_letter_iso_code() {
+		return substr( get_locale(), 0, 2 );
 	}
 
 	/**

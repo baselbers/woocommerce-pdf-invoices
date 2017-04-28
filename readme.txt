@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.8.0
+Stable tag: 2.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,9 +80,9 @@ The manual installation method involves downloading our plugin and uploading it 
 == Frequently Asked Questions ==
 
 #### How to add your custom template?
-Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple` and rename the template folder `micro` or `minimal`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
+Copy the default template files (including folder) you'll find in `plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple` to `uploads/woocommerce-pdf-invoices/templates/invoice/simple`. The plugin will automatically detect the template and makes it available for selection within the Template Settings. Now go ahead and start making some changes to the template files! :)
 
-Important: Before you update the plugin, always have a look at the Changelog for any changes to the template files. There will be updates that require updating your custom template!
+Important: Before you update the plugin, always have a look at the Changelog if their have been any changes to the template files. There will be updates that require updating your custom template!
 
 #### How to add a fee to the invoice?
 To add a fee to WooCommerce and your invoice, simply add the following action to your themes `functions.php`.
@@ -148,13 +148,13 @@ add_filter( 'bewpi_mpdf_options', 'custom_bewpi_mpdf_options' );
 To fully customize the PDF, use below code. This filter gives you full control over the mPDF library. Check the mPDF [manual](https://www.dropbox.com/s/h44f7v5anvcmmvl/mpdfmanual.pdf?dl=0) for more info.
 
 `
-function bewpi_mpdf( $mpdf ) {
+function bewpi_mpdf( $mpdf, $document ) {
     // change the direction of the invoice to RTL
     $mpdf->SetDirectionality( 'rtl' );
 
     return $mpdf;
 }
-add_filter( 'bewpi_mpdf', 'bewpi_mpdf' );
+add_filter( 'bewpi_mpdf', 'bewpi_mpdf', 10, 2 );
 `
 
 #### How to display invoice download button on specific template files?
@@ -233,6 +233,23 @@ Use below code to display meta-data. Replace `{META_KEY}` with the actual key. I
 Important: A custom template is required to add a custom field to the PDF invoice.
 
 == Changelog ==
+
+= 2.8.1 - April 21, 2017 =
+
+- Added: Option to disable Packing Slips.
+- Added: Composer (PHP 5.2 compatible) classmap autoloading.
+- Added: Custom `get_order_item_totals()` method to be able to override and did some backporting.
+- Improved: JavaScript by only running code on correct page.
+- Improved: Plugin size by using forked mpdf repo and removed a lot of default fonts to keep only [fonts that cover most languages/characters](https://mpdf.github.io/fonts-languages/fonts-language-cover-v5-x.html).
+- Improved: Font by switching from 'Arial' to 'dejavusanscondensed' for best character coverage.
+- Improved: WooCommerce compatibility.
+- Improved: Prefix and suffix by removing unnecessary '[prefix]' and '[suffix]' placeholders.s
+- Improved: Language files.
+- Improved: Admin notices hooks only loading on admin.
+- Improved: 'bewpi_mpdf' filter by moving it directly before document write and added document object as argument.
+- Fixed: Template specific settings not always showing. Make sure your custom template contains template name in order to get template specific settings.
+- Fixed: 'PHP Warning:  copy(): The first argument to copy() function cannot be a directory' when moving PDF invoices to new uploads directory.
+- Removed: Refunds in totals on 'Minimal' invoice template.
 
 = 2.8.0 - April 19, 2017 =
 

@@ -10,9 +10,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
@@ -204,6 +202,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			// delete invoice if deleting order.
 			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
 			add_action( 'before_delete_post', array( $this, 'delete_invoice' ), 10, 1 );
+
+			new BEWPI_General_Settings();
+			new BEWPI_Template_Settings();
+			BEWPI_Admin_Notices::init_hooks();
+			BEWPI_Packing_Slip::init_hooks();
 		}
 
 		/**
@@ -283,7 +286,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// check if user has ordered order.
 			$user = wp_get_current_user();
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 			$customer_user_id = (int) get_post_meta( $order_id, '_customer_user', true );
 			if ( $user->ID !== $customer_user_id ) {
 				wp_die( 'Access denied' );
@@ -455,7 +458,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// make sure invoice got only send once for each order.
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 			$transient_name = sprintf( 'bewpi_emailitin_processed-%1$s', $order_id );
 			if ( get_transient( $transient_name ) ) {
 				return $headers;
@@ -505,7 +508,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// WC backwards compatibility.
-			$payment_method = method_exists( 'WC_Order', 'get_payment_method' ) ? $order->get_payment_method() : $order->get_payment_method;
+			$payment_method = BEWPI_WC_Order_Compatibility::get_prop( $order, 'payment_method' );
 			// payment methods for which the invoice generation should be cancelled.
 			$payment_methods = apply_filters( 'bewpi_attach_invoice_excluded_payment_methods', array() );
 			if ( in_array( $payment_method, $payment_methods, true ) ) {
@@ -517,7 +520,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 			$invoice = new BEWPI_Invoice( $order_id );
 			if ( ! $invoice->exists( $order_id ) ) {
 				$full_path = $invoice->generate();
@@ -580,7 +583,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param WC_ORDER $order WooCommerce Order.
 		 */
 		public function add_admin_order_pdf( $order ) {
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 
 			if ( BEWPI_Invoice::exists( $order_id ) ) {
 				$this->show_invoice_button(
@@ -691,7 +694,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 			if ( ! BEWPI_Invoice::exists( $order_id ) ) {
 				return;
 			}
@@ -729,7 +732,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			$order_id = bewpi_get_id( $order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 			if ( ! BEWPI_Invoice::exists( $order_id ) ) {
 				return $actions;
 			}

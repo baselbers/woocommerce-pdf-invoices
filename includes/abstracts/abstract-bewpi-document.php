@@ -8,9 +8,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	/**
@@ -23,7 +21,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 *
 		 * @var string type of document.
 		 */
-		protected $type;
+		public $type;
 
 		/**
 		 * WooCommerce Order associated with invoice.
@@ -91,16 +89,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param string $destination Destination mode for file.
 		 */
 		public function generate( $destination = 'F' ) {
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			do_action( 'bewpi_before_invoice_content', $order_id );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font    = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
-			$is_new_template = 'minimal' === $this->template_options['bewpi_template_name'];
+			$is_new_template = strpos( strtolower( $this->template_options['bewpi_template_name'] ), 'minimal' ) !== false;
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
-				'mode'              => '',
+				'mode'              => 'utf-8',
 				'format'            => '',
 				'default_font_size' => 0,
 				'default_font'      => $default_font,
@@ -112,6 +110,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				'margin_footer'     => ( $is_new_template ) ? 0 : 6,
 				'orientation'       => 'P',
 			) );
+			/* @var mPDF $mpdf */
 			$mpdf        = new mPDF(
 				$mpdf_params['mode'],
 				$mpdf_params['format'],
@@ -125,8 +124,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['margin_footer'],
 				$mpdf_params['orientation']
 			);
-
-			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf );
 
 			// add company logo image as a variable.
 			$wp_upload_dir = wp_upload_dir();
@@ -152,15 +149,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->showImageErrors = true;
 			}
 
-			$mpdf->SetDisplayMode( 'fullpage' );
-			$mpdf->autoScriptToLang    = true;
-			$mpdf->autoLangToFont      = true;
+			// Layout.
 			$mpdf->setAutoTopMargin    = 'stretch';
 			$mpdf->setAutoBottomMargin = 'stretch';
 			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 20 : 10;
-			$mpdf->useOnlyCoreFonts    = false;
+
+			// Font.
+			$mpdf->autoScriptToLang    = true;
+			$mpdf->autoLangToFont      = true;
+			$mpdf->baseScript          = 1;
+			$mpdf->autoVietnamese      = true;
+			$mpdf->autoArabic          = true;
 			$mpdf->useSubstitutions    = true;
 
+			// Template.
 			$html = $this->get_html();
 			if ( count( $html ) === 0 ) {
 				BEWPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );
@@ -175,15 +177,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
+			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf, $this );
+
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
+
+			do_action( 'bewpi_after_invoice_content', $order_id );
+
+			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $mpdf, $this );
 
 			if ( 'F' === $destination ) {
 				$name = $this->full_path;
 			} else {
 				$name = $this->filename;
 			}
-
-			do_action( 'bewpi_after_invoice_content', $order_id );
 
 			$mpdf->Output( $name, $destination );
 		}
@@ -283,7 +289,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 */
 		public function get_formatted_order_date() {
 			// WC backwards compatibility.
-			$order_date = method_exists( 'WC_Order', 'get_date_created' ) ? $this->order->get_date_created() : $this->order->order_date;
+			$order_date = BEWPI_WC_Order_Compatibility::get_date_created( $this->order );
 
 			return date_i18n( $this->get_date_format(), strtotime( $order_date ) );
 		}

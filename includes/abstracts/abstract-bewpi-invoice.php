@@ -1,7 +1,14 @@
 <?php
-if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly.
-}
+/**
+ * Invoice Class for different types of (invoice) documents.
+ *
+ * @author      Bas Elbers
+ * @category    Abstract Class
+ * @package     BE_WooCommerce_PDF_Invoices/Abstracts
+ * @version     1.0.0
+ */
+
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
@@ -10,12 +17,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	 * Class BEWPI_Invoice
 	 */
 	class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
-		/**
-		 * Type of invoice.
-		 *
-		 * @var string
-		 */
-		protected $type;
 
 		/**
 		 * Invoice number.
@@ -49,10 +50,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Colspan data to outline products table columns.
 		 *
-		 * @deprecated outlining columns will be refactored.
 		 * @var array
 		 */
-		protected $colspan;
+		public $colspan = 1;
 
 		/**
 		 * Width of the description cell of the product table.
@@ -72,7 +72,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->full_path = self::exists( $order_id );
 			if ( $this->full_path ) {
-				$order_id = bewpi_get_id( $this->order );
+				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 				$this->number   = get_post_meta( $order_id, '_bewpi_invoice_number', true );
 				$this->date     = get_post_meta( $order_id, '_bewpi_invoice_date', true );
@@ -99,10 +99,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			// format number with the number of digits.
 			$digitized_invoice_number = sprintf( '%0' . $this->template_options['bewpi_invoice_number_digits'] . 's', $this->number );
 			$formatted_invoice_number = str_replace(
-				array( '[prefix]', '[suffix]', '[number]', '[order-date]', '[order-number]', '[Y]', '[y]', '[m]' ),
+				array( '[number]', '[order-date]', '[order-number]', '[Y]', '[y]', '[m]' ),
 				array(
-					$this->template_options['bewpi_invoice_number_prefix'],
-					$this->template_options['bewpi_invoice_number_suffix'],
 					$digitized_invoice_number,
 					apply_filters( 'bewpi_formatted_invoice_number_order_date', $this->get_formatted_order_date() ),
 					$this->order->get_order_number(),
@@ -112,6 +110,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				),
 				$this->template_options['bewpi_invoice_number_format']
 			);
+
+			// Since 2.8.1 we do not use [prefix] and [suffix] placeholders so remove them from formatted invoice number.
+			if ( version_compare( WPI_VERSION, '2.8.1' ) <= 0 ) {
+				$formatted_invoice_number = str_replace(
+					array( '[prefix]', '[suffix]' ),
+					array( '', '' ),
+					$formatted_invoice_number
+				);
+			}
+
+			// Add prefix and suffix directly to formatted invoice number.
+			$formatted_invoice_number = $this->template_options['bewpi_invoice_number_prefix'] . $formatted_invoice_number . $this->template_options['bewpi_invoice_number_suffix'];
 
 			return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
 		}
@@ -213,7 +223,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			// uses WooCommerce order numbers as invoice numbers?
 			if ( 'woocommerce_order_number' === $this->template_options['bewpi_invoice_number_type'] ) {
 				// WC backwards compatibility.
-				$order_id = bewpi_get_id( $this->order );
+				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 				return $order_id;
 			}
@@ -270,17 +280,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Backwards compatibility.
-		 *
-		 * @deprecated Use `generate()` instead.
-		 *
-		 * @param string $destination pdf generation mode.
-		 */
-		public function save( $destination = 'F' ) {
-			$this->generate( $destination );
-		}
-
-		/**
 		 * Save invoice.
 		 *
 		 * @param string $destination pdf generation mode.
@@ -289,7 +288,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function generate( $destination = 'F' ) {
 			// WC backwards compatibility.
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			if ( BEWPI_Invoice::exists( $order_id ) ) {
 				// delete postmeta and PDF.
@@ -361,8 +360,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 		/**
 		 * Display company logo or name
+		 *
+		 * @deprecated See minimal template.
 		 */
 		public function get_company_logo_html() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'BEWPI()->templater()->get_meta( \'_vat_number\' )' );
 			$logo_url = $this->template_options['bewpi_company_logo'];
 			if ( ! empty( $logo_url ) ) {
 				// mPDF' stablest method to display an image is to use their "Image data as a Variable" (https://mpdf.github.io/what-else-can-i-do/images.html) option.
@@ -378,11 +380,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Get VAT number from WooCommerce EU VAT Number plugin.
 		 *
-		 * @deprecated Use BEWPI()->templater()->get_meta( '_vat_number' ) instead.
+		 * @deprecated See minimal template.
 		 */
 		public function display_vat_number() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'BEWPI()->templater()->get_meta( \'_vat_number\' )' );
 			// WC backwards compatibility.
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			$vat_number = get_post_meta( $order_id, '_vat_number', true );
 			if ( ! empty( $vat_number ) ) {
@@ -393,16 +396,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Get PO Number from WooCommerce Purchase Order Gateway plugin.
 		 *
-		 * @deprecated Use BEWPI()->templater()->get_meta( '_po_number' ) instead.
+		 * @deprecated See minimal template.
 		 */
 		public function display_purchase_order_number() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'BEWPI()->templater()->get_meta( \'_po_number\' )' );
 			// WC backwards compatibility.
-			$payment_method = method_exists( 'WC_Order', 'get_payment_method' ) ? $this->order->get_payment_method() : $this->order->payment_method;
-
+			$payment_method = BEWPI_WC_Order_Compatibility::get_prop( $this->order, 'payment_method' );
 			if ( isset( $payment_method ) && 'woocommerce_gateway_purchase_order' === $payment_method ) {
 				// WC backwards compatibility.
-				$order_id = bewpi_get_id( $this->order );
-
+				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 				$po_number = get_post_meta( $order_id, '_po_number', true );
 				if ( ! empty( $po_number ) ) {
 					echo '<span>' . sprintf( __( 'Purchase Order Number: %s', 'woocommerce-gateway-purchase-order' ), $po_number ) . '</span>';
@@ -415,9 +417,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @param int $taxes_count number of tax classes.
 		 *
-		 * @deprecated
+		 * @deprecated See minimal template.
 		 */
 		public function outlining_columns_html( $taxes_count = 0 ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			$columns_count = $this->get_columns_count( $taxes_count );
 			$colspan       = $this->get_colspan( $columns_count );
 			?>
@@ -447,10 +450,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @param int $tax_count number of taxes.
 		 *
-		 * @deprecated
+		 * @deprecated See minimal template.
 		 * @return int
 		 */
 		public function get_columns_count( $tax_count = 0 ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			$columns_count = 4;
 
 			if ( $this->template_options['bewpi_show_sku'] ) {
@@ -467,13 +471,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Calculates colspan for table footer cells
 		 *
-		 * @deprecated
+		 * @deprecated See minimal template solution.
 		 *
 		 * @param int $columns_count number of columns.
 		 *
 		 * @return array
 		 */
 		public function get_colspan( $columns_count = 0 ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			$colspan                     = array();
 			$number_of_left_half_columns = 3;
 			$this->desc_cell_width       = '30%';
@@ -532,13 +537,166 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Backwards compatibility.
+		 *
+		 * @deprecated Use `generate()` instead.
+		 *
+		 * @param string $destination pdf generation mode.
+		 */
+		public function save( $destination = 'F' ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
+			$this->generate( $destination );
+		}
+
+		/**
+		 * Add total row for subtotal.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
+			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
+			if ( $subtotal ) {
+				$total_rows['cart_subtotal'] = array(
+					'label' => __( 'Subtotal:', 'woocommerce' ),
+					'value'    => $subtotal,
+				);
+			}
+		}
+
+		/**
+		 * Add total row for discounts.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_total_discount() > 0 ) {
+				$total_rows['discount'] = array(
+					'label' => __( 'Discount:', 'woocommerce' ),
+					'value'    => '-' . $this->order->get_discount_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for shipping.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_shipping_method() ) {
+				$total_rows['shipping'] = array(
+					'label' => __( 'Shipping:', 'woocommerce' ),
+					'value'    => $this->order->get_shipping_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for fees.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
+			$fees = $this->order->get_fees();
+			if ( $fees ) {
+				/**
+				 * Fee annotations.
+				 *
+				 * @var string            $id WooCommerce ID.
+				 * @var WC_Order_Item_Fee $fee WooCommerce Fee.
+				 */
+				foreach ( $fees as $id => $fee ) {
+					if ( apply_filters( 'woocommerce_get_order_item_totals_excl_free_fees', empty( $fee['line_total'] ) && empty( $fee['line_tax'] ), $id ) ) {
+						continue;
+					}
+
+					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
+					$total_rows[ 'fee_' . $fee->get_id() ] = array(
+						'label' => $fee->get_name() . ':',
+						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => $currency ) ),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for taxes.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
+			// Tax for tax exclusive prices.
+			if ( 'excl' === $tax_display ) {
+				if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+					foreach ( $this->order->get_tax_totals() as $code => $tax ) {
+						$total_rows[ sanitize_title( $code ) ] = array(
+							'label' => $tax->label . ':',
+							'value'    => $tax->formatted_amount,
+						);
+					}
+				} else {
+					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
+					$total_rows['tax'] = array(
+						'label' => WC()->countries->tax_or_vat() . ':',
+						'value'    => wc_price( $this->order->get_total_tax(), array( 'currency' => $currency ) ),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for grand total.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
+			$total_rows['order_total'] = array(
+				'label' => __( 'Total:', 'woocommerce' ),
+				'value'    => $this->order->get_formatted_order_total( $tax_display, false ),
+			);
+		}
+
+		/**
+		 * Get totals for display on pages and in emails.
+		 *
+		 * @param string $tax_display 'excl' or 'incl'.
+		 *
+		 * @return array
+		 */
+		public function get_order_item_totals( $tax_display = '' ) {
+			$template_options = get_option( 'bewpi_template_settings' );
+			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
+			$total_rows  = array();
+
+			if ( $template_options['bewpi_show_subtotal'] ) {
+				$this->add_order_item_totals_subtotal_row( $total_rows, $tax_display );
+			}
+
+			$this->add_order_item_totals_discount_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_shipping_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_fee_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_tax_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_total_row( $total_rows, $tax_display );
+
+			return apply_filters( 'bewpi_get_order_item_totals', $total_rows, $this, $tax_display );
+		}
+
+		/**
 		 * Checks if invoice needs to have a zero rated VAT.
 		 *
+		 * @deprecated See minimal template.
 		 * @return bool
 		 */
 		public function display_zero_rated_vat() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			// WC backwards compatibility.
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			$is_vat_valid = get_post_meta( $order_id, '_vat_number_is_valid', true );
 			if ( ! $is_vat_valid ) {
@@ -561,11 +719,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return mixed
 		 */
 		private function replace_placeholders( $str ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			// WC backwards compatibility.
-			$order_id = bewpi_get_id( $this->order );
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			$placeholders = apply_filters( 'bewpi_placeholders', array(
-				'[payment_method]'  => method_exists( 'WC_Order', 'get_payment_method_title' ) ? $this->order->get_payment_method_title() : $this->order->payment_method_title,
+				'[payment_method]'  => BEWPI_WC_Order_Compatibility::get_prop( $this->order, 'payment_method_title' ),
 				'[shipping_method]' => $this->order->get_shipping_method(),
 			), $order_id );
 
@@ -580,6 +739,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @deprecated instead use 'BEWPI()->templater()->get_option()'.
 		 */
 		public function left_footer_column_html() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'BEWPI()->templater()->get_option( \'bewpi_left_footer_column\' )' );
 			$left_footer_column_text = $this->template_options['bewpi_left_footer_column'];
 			if ( ! empty( $left_footer_column_text ) ) {
 				echo '<p>' . nl2br( $this->replace_placeholders( $left_footer_column_text ) ) . '</p>';
@@ -590,12 +750,22 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @deprecated instead use 'BEWPI()->templater()->get_option()'.
 		 */
 		public function right_footer_column_html() {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8' );
 			$right_footer_column_text = $this->template_options['bewpi_right_footer_column'];
 			if ( ! empty( $right_footer_column_text ) ) {
 				echo '<p>' . nl2br( $this->replace_placeholders( $right_footer_column_text ) ) . '</p>';
 			} else {
 				echo '<p>' . sprintf( __( '%s of %s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ) . '</p>';
 			}
+		}
+
+		/**
+		 * Set order item totals colspan.
+		 *
+		 * @param int $colspan Order item totals table colspan.
+		 */
+		public function set_colspan( $colspan ) {
+			$this->colspan = $colspan;
 		}
 	}
 }

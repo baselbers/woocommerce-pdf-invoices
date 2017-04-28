@@ -3,6 +3,8 @@
 
     var setting = {};
 
+    setting.settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
+
     setting.removeCompanyLogo = function () {
         var elem = document.getElementById('bewpi-company-logo-wrapper');
         elem.parentNode.removeChild(elem);
@@ -19,10 +21,9 @@
     };
 
     setting.switchSettings = function(event) {
-        var display = (event.target.value === 'minimal') ? 'none' : 'table-row';
-        var settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
+        var display = (event.target.value.toLowerCase().indexOf( 'minimal' ) !== -1) ? 'none' : 'table-row';
 
-        settings.forEach(function (settingId){
+        setting.settings.forEach(function (settingId){
             var settingElem = document.getElementById(settingId);
             if (settingElem) {
                 settingElem.parentElement.parentElement.style.display = display;
@@ -106,7 +107,7 @@
         xhr.send();
     };
 
-    window.onload = function() {
+    window.addEventListener('load', function () {
         // add click listener to dismiss notice.
         var notice = document.querySelector('div[data-dismissible] button.notice-dismiss');
         if (notice !== null) {
@@ -119,13 +120,15 @@
             deactivate.onclick = bewpi.notice.deactivate;
         }
 
-        var template = document.querySelector('select#bewpi-template-name');
-        if (template !== null) {
-            template.onchange = bewpi.setting.switchSettings;
-            var event = new Event('change');
-            template.dispatchEvent(event);
+        if ( pagenow === 'woocommerce_page_bewpi-invoices' ) {
+            var template = document.querySelector('select#bewpi-template-name');
+            if (template !== null) {
+                template.onchange = bewpi.setting.switchSettings;
+                var event = new Event('change');
+                template.dispatchEvent(event);
+            }
         }
-    };
+    });
 
     window.bewpi = {};
     window.bewpi.notice = notice;

@@ -10,9 +10,7 @@
  * @version     1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	/**
@@ -39,7 +37,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		 * @return string
 		 */
 		protected static function formatted_number_placeholders() {
-			$placeholders = array( '[prefix]', '[suffix]', '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
+			$placeholders = array( '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
 
 			return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
 		}

@@ -29,7 +29,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</div>
 	<div class="watermark"></div>
 </div>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tr class="information">
 		<td width="50%">
 			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
@@ -49,7 +49,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 		</td>
 	</tr>
 </table>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<thead>
 		<tr class="heading" bgcolor="<?php echo $color; ?>;">
 			<th>
@@ -76,8 +76,8 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
 
-				$order->display_item_meta( $item );
-				$order->display_item_downloads( $item );
+				$templater->wc_display_item_meta( $item );
+				$templater->wc_display_item_downloads( $item );
 
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
 				?>
@@ -92,14 +92,14 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</tbody>
 </table>
 
-<table class="notes" cellpadding="0" cellspacing="0">
+<table class="notes">
 	<tr>
 		<td>
 			<?php
 			// Customer notes.
 			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
 				// Note added by customer.
-				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				$customer_note = BEWPI_WC_Order_Compatibility::get_customer_note( $order );
 				if ( $customer_note ) {
 					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
 				}

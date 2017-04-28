@@ -68,6 +68,8 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
 			</th>
 
+			<?php do_action( 'bewpi_line_item_headers_after_quantity', $invoice ); ?>
+
 			<th>
 				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
 			</th>
@@ -76,30 +78,28 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 	<?php
 	foreach ( $line_items as $item_id => $item ) {
-		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
 		?>
-
 		<tr class="item">
 			<td width="50%">
 				<?php
-				$is_visible        = $product && $product->is_visible();
-
 				echo $item['name'];
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
 
-				$order->display_item_meta( $item );
-				$order->display_item_downloads( $item );
+				$templater->wc_display_item_meta( $item );
+				$templater->wc_display_item_downloads( $item );
 
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
 				?>
 			</td>
 
-			<td width="25%">
+			<td>
 				<?php echo $item['qty']; ?>
 			</td>
 
-			<td width="25%">
+			<?php do_action( 'bewpi_line_item_after_quantity', $item_id, $item, $invoice ); ?>
+
+			<td>
 				<?php echo $order->get_formatted_line_subtotal( $item ); ?>
 			</td>
 		</tr>
@@ -111,22 +111,14 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	</tr>
 
 	<?php
-	foreach ( $order->get_order_item_totals() as $key => $total ) {
+	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
-
-		if ( ! $templater->get_option( 'bewpi_show_subtotal' ) && 'cart_subtotal' === $key ) {
-			continue;
-		}
-
-		if ( 'payment_method' === $key ) {
-			continue;
-		}
 		?>
 
 		<tr class="total">
 			<td></td>
-			<td class="<?php echo $class; ?>"><?php echo $total['label']; ?></td>
-			<td class="<?php echo $class; ?>"><?php echo $total['value']; ?></td>
+			<td class="border <?php echo $class; ?>" colspan="<?php echo $templater->invoice->colspan; ?>"><?php echo $total['label']; ?></td>
+			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
 		</tr>
 
 	<?php } ?>
@@ -140,7 +132,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			// Customer notes.
 			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
 				// Note added by customer.
-				$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $order->get_customer_note() : $order->customer_note;
+				$customer_note = BEWPI_WC_Order_Compatibility::get_customer_note( $order );
 				if ( $customer_note ) {
 					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
 				}

@@ -8,11 +8,10 @@
  * @version     0.0.1
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+defined( 'ABSPATH' ) or exit;
 
 if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
+
 	/**
 	 * Class BEWPI_Packing_Slip.
 	 */
@@ -25,7 +24,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		public function __construct( $order_id ) {
 			$this->order        = wc_get_order( $order_id );
 			$this->type         = 'packing-slip/simple';
-			$this->filename     = apply_filters( 'bewpi_pdf_packing_slip_filename', sprintf( 'packing-slip-%s.pdf', bewpi_get_id( $this->order ) ), $this );
+			$this->filename     = apply_filters( 'bewpi_pdf_packing_slip_filename', sprintf( 'packing-slip-%s.pdf', BEWPI_WC_Order_Compatibility::get_id( $this->order ) ), $this );
 			BEWPI()->templater()->set_packing_slip( $this );
 			parent::__construct();
 		}
@@ -43,7 +42,12 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @param WC_Order $order WooCommerce order object.
 		 */
 		public static function add_packing_slip_pdf( $order ) {
-			$order_id = bewpi_get_id( $order );
+			$template_options = get_option( 'bewpi_template_settings' );
+			if ( $template_options['bewpi_disable_packing_slips'] ) {
+				return;
+			}
+
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 
 			// View Packing Slip.
 			$action = 'view_packing_slip';
@@ -58,6 +62,4 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 			printf( '<a href="%1$s" title="%2$s" class="button tips bewpi-admin-order-create-packing-slip-btn" target="_blank">%2$s</a>', $url, __( 'View packing slip', 'woocommerce-pdf-invoices' ) );
 		}
 	}
-
-	BEWPI_Packing_Slip::init_hooks();
 }

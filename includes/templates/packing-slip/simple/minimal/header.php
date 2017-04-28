@@ -20,7 +20,7 @@ $document   = $templater->packing_slip;
 $order      = $templater->order;
 ?>
 
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tr class="top">
 		<td>
 			<?php

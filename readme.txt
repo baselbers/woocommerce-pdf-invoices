@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -233,6 +233,10 @@ Use below code to display meta-data. Replace `{META_KEY}` with the actual key. I
 Important: A custom template is required to add a custom field to the PDF invoice.
 
 == Changelog ==
+
+= 2.8.2 - April 29, 2017 =
+
+- Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.
 
 = 2.8.1 - April 21, 2017 =
 

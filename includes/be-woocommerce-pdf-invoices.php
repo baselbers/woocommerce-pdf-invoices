@@ -521,10 +521,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
+			$transient_name = sprintf( 'bewpi_pdf_invoice_generated-%s', $order_id );
+			$full_path = BEWPI_Invoice::exists( $order_id );
 			$invoice = new BEWPI_Invoice( $order_id );
-			if ( ! $invoice->exists( $order_id ) ) {
+			if ( ! $full_path ) {
 				$full_path = $invoice->generate();
-			} else {
+				set_transient( $transient_name, 60 );
+			} elseif ( $full_path && ! get_transient( $transient_name )  ) {
+				// No need to update for same request.
 				$full_path = $invoice->update();
 			}
 

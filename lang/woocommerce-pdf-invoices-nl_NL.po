@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2017-04-27 11:44+0200\n"
-"PO-Revision-Date: 2017-04-28 12:32+0200\n"
+"PO-Revision-Date: 2017-04-29 14:51+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -1144,7 +1144,7 @@ msgstr "PDF Factuur"
 
 #: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:621
 msgid "Invoiced on:"
-msgstr "Gefactureerd op:"
+msgstr "Factuurdatum:"
 
 #: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:625
 msgid "Invoice number:"

@@ -62,16 +62,20 @@
 		<iframe src="https://ghbtns.com/github-btn.html?user=baselbers&repo=woocommerce-pdf-invoices&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
 	</div>
 	<!-- FB share -->
+	<div id="fb-root"></div>
 	<div class="btn">
-		<div id="fb-root"></div>
-		<script>(function(d, s, id) {
+		<script>
+			(function(d, s, id) {
 				var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) return;
 				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/<?php echo get_bloginfo( 'language' ); ?>/sdk.js#xfbml=1&version=v2.4&appId=483906578380615";
+				js.src = "//connect.facebook.net/<?php echo get_locale(); ?>/sdk.js#xfbml=1&version=v2.9";
 				fjs.parentNode.insertBefore(js, fjs);
-			}(document, 'script', 'facebook-jssdk'));</script>
-		<div class="fb-share-button" data-href="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-layout="button_count"></div>
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+		<div class="fb-share-button" data-href="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-layout="button_count" data-size="small" data-mobile-iframe="true">
+			<a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a>
+		</div>
 	</div>
 	<!-- Tweet -->
 	<div class="twitter btn">

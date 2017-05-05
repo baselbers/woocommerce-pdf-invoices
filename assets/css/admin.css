@@ -1,93 +1,67 @@
-form.bewpi-settings-form {
-    width: 75%;
+div.wpi form {
     display: block;
     float: left;
-    padding-right: 40px;
     box-sizing: border-box;
 }
-.bewpi-settings-form ul {
+
+div.wpi form div.notice {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+div.wpi form ul {
     margin: 0;
 }
-.bewpi-settings-form input[type="checkbox"]:disabled + label {
+
+div.wpi form input[type="checkbox"]:disabled + label {
     color: #999;
 }
-.bewpi-settings-form select,
-.bewpi-settings-form input[type="text"],
-.bewpi-settings-form textarea {
+
+div.wpi form select,
+div.wpi form input[type="text"],
+div.wpi form textarea {
     width: 348px;
 }
-.bewpi-settings-form input[type="number"],
-#bewpi-color-theme {
+
+div.wpi form input[type="number"],
+div.wpi form input[type="color"] {
     width: 70px;
 }
-#bewpi-company-logo-wrapper {
-    margin-top: 10px;
+
+a.wpi.shop-order-action {
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    text-indent: -9999px;
     position: relative;
-    display: inline-block;
-    padding: 21px 21px 0 0;
+    padding: 0 !important;
+    height: 2em !important;
+    width: 2em;
 }
-#bewpi-company-logo-image {
-    position: relative;
-    max-height: 150px;
-}
-#bewpi-company-logo-wrapper:hover #bewpi-company-logo-delete{
-    display: block;
-}
-#bewpi-company-logo-delete{
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: none;
-    height: 25px;
-    width: 25px;
-    cursor: pointer;
-}
-.bewpi-admin-order-create-invoice-btn {
+
+a.wpi.shop-order-action.invoice {
     background-image: url(../images/invoice-icon.png) !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    text-indent: -9999px;
-    position: relative;
-    padding: 0 !important;
-    height: 2em !important;
-    width: 2em;
 }
-.bewpi-admin-order-create-packing-slip-btn {
+
+a.wpi.shop-order-action.packing-slip {
     background-image: url(../images/packing-slip-icon.png) !important;
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    text-indent: -9999px;
-    position: relative;
-    padding: 0 !important;
-    height: 2em !important;
-    width: 2em;
 }
-.bewpi-admin-order-create-invoice-btn button {
-    display: none;
-}
-.notes {
-    display: inline;
-    font-style: italic;
-}
-.block {
-    display: block;
-}
-.foot {
-    font-size: 12px;
-}
-.invoice-info {
+
+table.wpi.order-page-meta-box.pdf-invoice {
     margin-bottom: 10px;
+    width: 100%;
 }
-.invoice-btn {
-    margin-right: 3px !important;
+
+table.wpi.order-page-meta-box.pdf-invoice tr td:last-child {
+    text-align: right;
+    font-weight: bold;
 }
-#footer-left #footer-thankyou {
-    font-style: normal !important;
+
+a.wpi.order-page.invoice.button {
+    margin-right: 4px !important;
 }
-.bewpi-checkbox-option-title, .bewpi-notes {
-    cursor: default;
-}
+
 .bewpi-notes {
+    cursor: default;
     font-size: 13px;
     font-style: italic;
     margin-top: 3px;

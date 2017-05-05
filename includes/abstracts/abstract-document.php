@@ -143,8 +143,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf->watermarkImgBehind = false;
 			}
 
-			// debug.
-			if ( (bool) $this->general_options['bewpi_mpdf_debug'] ) {
+			// mPDF debugging.
+			if ( BEWPI()->get_option( 'bewpi_mpdf_debug' ) ) {
 				$mpdf->debug           = true;
 				$mpdf->showImageErrors = true;
 			}

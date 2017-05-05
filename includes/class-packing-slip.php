@@ -59,7 +59,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 
 			$url = apply_filters( 'bewpi_pdf_packing_slip_url', $url, $order_id, $action );
 
-			printf( '<a href="%1$s" title="%2$s" class="button tips bewpi-admin-order-create-packing-slip-btn" target="_blank">%2$s</a>', $url, __( 'View packing slip', 'woocommerce-pdf-invoices' ) );
+			printf( '<a href="%1$s" title="%2$s" class="button shop-order-action packing-slip wpi" target="_blank">%2$s</a>', $url, __( 'View packing slip', 'woocommerce-pdf-invoices' ) );
 		}
 	}
 }

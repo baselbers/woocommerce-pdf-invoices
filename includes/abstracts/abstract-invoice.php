@@ -342,16 +342,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public static function delete( $order_id ) {
-			// remove pdf file.
+			// Remove pdf file.
 			$full_path = WPI_ATTACHMENTS_DIR . '/' . get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
 			parent::delete( $full_path );
 
-			// remove invoice postmeta from database.
+			// Remove invoice postmeta from database.
 			delete_post_meta( $order_id, '_bewpi_invoice_number' );
 			delete_post_meta( $order_id, '_bewpi_invoice_date' );
 			delete_post_meta( $order_id, '_bewpi_invoice_pdf_path' );
 
-			// version 3.6+ not used anymore.
+			// Version 2.6+ not used anymore.
 			delete_post_meta( $order_id, '_bewpi_formatted_invoice_number' );
 			delete_post_meta( $order_id, '_bewpi_invoice_year' );
 

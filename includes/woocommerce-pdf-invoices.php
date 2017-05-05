@@ -18,6 +18,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 * Implements main function for attaching invoice to email and show invoice buttons.
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
+
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
@@ -25,6 +26,20 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @since 2.5.0
 		 */
 		protected static $_instance = null;
+
+		/**
+		 * Settings classes.
+		 *
+		 * @var array.
+		 */
+		public $settings = array();
+
+		/**
+		 * All settings merged.
+		 *
+		 * @var array.
+		 */
+		public static $options = array();
 
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
@@ -42,10 +57,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * WooCommerce Constructor.
 		 */
-		public function __construct() {
+		private function __construct() {
 			$this->define_constants();
 			$this->load_plugin_textdomain();
-			do_action( 'bewpi_after_init_settings' );
 			$this->init_hooks();
 		}
 
@@ -64,7 +78,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 *
 			 * @since 2.7.0
 			 */
-			define( 'BEWPI_URL', plugins_url( '', BEWPI_FILE ) . '/' );
+			if ( ! defined( 'BEWPI_URL' ) ) {
+				define( 'BEWPI_URL', plugins_url( '', BEWPI_FILE ) . '/' );
+			}
+
 			/**
 			 * Templates dir.
 			 *
@@ -72,7 +89,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 *
 			 * @since 2.7.0
 			 */
-			define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates' );
+			if ( ! defined( 'BEWPI_TEMPLATES_DIR' ) ) {
+				define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates' );
+			}
+
 			/**
 			 * Custom templates directory.
 			 *
@@ -80,7 +100,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 *
 			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/invoices.
 			 */
-			define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices' );
+			if ( ! defined( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR' ) ) {
+				define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices' );
+			}
+
 			/**
 			 * Attachments/invoices directory.
 			 *
@@ -88,12 +111,25 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			 *
 			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/attachments.
 			 */
-			define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices' );
+			if ( ! defined( 'BEWPI_INVOICES_DIR' ) ) {
+				define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices' );
+			}
 
-			define( 'WPI_URL', untrailingslashit( plugins_url( '', WPI_FILE ) ) );
-			define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices' );
-			define( 'WPI_TEMPLATES_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/templates' );
-			define( 'WPI_ATTACHMENTS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/attachments' );
+			if ( ! defined( 'WPI_URL' ) ) {
+				define( 'WPI_URL', untrailingslashit( plugins_url( '', WPI_FILE ) ) );
+			}
+
+			if ( ! defined( 'WPI_UPLOADS_DIR' ) ) {
+				define( 'WPI_UPLOADS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices' );
+			}
+
+			if ( ! defined( 'WPI_TEMPLATES_DIR' ) ) {
+				define( 'WPI_TEMPLATES_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/templates' );
+			}
+
+			if ( ! defined( 'WPI_ATTACHMENTS_DIR' ) ) {
+				define( 'WPI_ATTACHMENTS_DIR', $wp_upload_dir['basedir'] . '/woocommerce-pdf-invoices/attachments' );
+			}
 		}
 
 		/**
@@ -109,9 +145,79 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Initialize hooks and filters.
+		 *
+		 * @since 2.5.0
+		 */
+		private function init_hooks() {
+			if ( is_admin() ) {
+				$this->admin_init_hooks();
+			} else {
+				$this->frontend_init_hooks();
+			}
+
+			// @todo Move to BEWPI_Invoice class.
+			add_filter( 'woocommerce_email_headers', array( $this, 'add_emailitin_as_recipient' ), 10, 3 );
+			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
+			add_shortcode( 'bewpi-download-invoice', array( $this, 'download_invoice_shortcode' ) );
+		}
+
+		/**
+		 * Initialize admin.
+		 *
+		 * @since 2.5.0
+		 */
+		public function admin_init_hooks() {
+			add_action( 'admin_init', array( $this, 'load_settings' ) );
+			add_action( 'admin_init', array( $this, 'setup_directories' ) );
+			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
+			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
+			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
+
+			BEWPI_Abstract_Setting::init_hooks();
+			BEWPI_Admin_Notices::init_hooks();
+			BEWPI_Invoice::init_hooks();
+			BEWPI_Packing_Slip::init_hooks();
+
+			// @todo Move to BEWPI_Invoice class.
+			add_action( 'woocommerce_admin_order_actions_end', array( $this, 'add_admin_order_pdf' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_admin_order_pdf_meta_box' ) );
+			add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_invoice_number_column' ), 999 );
+			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'invoice_number_column_data' ), 2 );
+			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_pdf' ), 10, 2 );
+		}
+
+		/**
+		 * Initialize non-admin.
+		 */
+		private function frontend_init_hooks() {
+			add_action( 'init', array( $this, 'frontend_pdf_callback' ) );
+		}
+
+		/**
+		 * Initialize settings.
+		 */
+		public function load_settings() {
+			$this->settings[] = new BEWPI_General_Settings();
+			$this->settings[] = new BEWPI_Template_Settings();
+			$this->settings = apply_filters( 'bewpi_settings', $this->settings );
+
+			foreach ( $this->settings as $setting ) {
+				self::$options = array_merge( self::$options, get_option( $setting->settings_key ) );
+			}
+
+			self::$options = apply_filters( 'bewpi_options', self::$options );
+		}
+
+		/**
 		 * Creates invoices dir in uploads folder.
 		 */
 		public static function setup_directories() {
+			if ( file_exists( WPI_UPLOADS_DIR ) ) {
+				return;
+			}
+
 			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
 			$directories        = apply_filters( 'bewpi_uploads_directories', array(
 				WPI_UPLOADS_DIR . '/attachments/' => array(
@@ -158,90 +264,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			do_action( 'bewpi_after_setup_directories' );
-		}
-
-		/**
-		 * Initialize hooks and filters.
-		 *
-		 * @since 2.5.0
-		 */
-		private function init_hooks() {
-			if ( ! is_admin() ) {
-				add_action( 'init', array( $this, 'frontend_pdf_callback' ) );
-			}
-
-			if ( ! file_exists( WPI_UPLOADS_DIR ) ) {
-				add_action( 'admin_init', array( $this, 'setup_directories' ) );
-			}
-
-			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
-			add_action( 'admin_init', array( $this, 'admin_init_hooks' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
-
-			// woocommerce.
-			add_action( 'admin_menu', array( $this, 'add_wc_submenu_options_page' ) );
-			add_action( 'woocommerce_admin_order_actions_end', array( $this, 'add_admin_order_pdf' ) );
-			add_action( 'add_meta_boxes', array( $this, 'add_admin_order_pdf_meta_box' ) );
-			add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_invoice_number_column' ), 999 );
-			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'invoice_number_column_data' ), 2 );
-			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_pdf' ), 10, 2 );
-			add_filter( 'woocommerce_email_headers', array( $this, 'add_emailitin_as_recipient' ), 10, 3 );
-			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
-			add_shortcode( 'bewpi-download-invoice', array( $this, 'download_invoice_shortcode' ) );
-		}
-
-		/**
-		 * Initialize admin.
-		 *
-		 * @since 2.5.0
-		 */
-		public function admin_init_hooks() {
-			// Add plugin action links on "Plugins" page.
-			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
-			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
-			// delete invoice if deleting order.
-			add_action( 'wp_trash_post', array( $this, 'delete_invoice' ), 10, 1 );
-			add_action( 'before_delete_post', array( $this, 'delete_invoice' ), 10, 1 );
-
-			new BEWPI_General_Settings();
-			new BEWPI_Template_Settings();
-			BEWPI_Admin_Notices::init_hooks();
-			BEWPI_Packing_Slip::init_hooks();
-		}
-
-		/**
-		 * Add plugin action links on plugin.php page.
-		 *
-		 * @param array $links action links.
-		 *
-		 * @return array
-		 */
-		function add_plugin_action_links( $links ) {
-			// add settings link.
-			$settings_url       = add_query_arg( array( 'page' => 'bewpi-invoices' ), admin_url( 'admin.php' ) );
-			$settings_title     = __( 'Settings', 'woocommerce-pdf-invoices' );
-			array_unshift( $links, sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title ) );
-
-			return $links;
-		}
-
-		/**
-		 * Add links to row meta on plugins.php page.
-		 *
-		 * @param array  $links row meta.
-		 * @param string $file plugin basename.
-		 *
-		 * @return array
-		 */
-		public static function add_plugin_row_meta( $links, $file ) {
-			if ( plugin_basename( WPI_FILE ) === $file ) {
-				// add premium plugin link.
-				$premium_url = 'http://wcpdfinvoices.com';
-				$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );
-				$links[] = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', $premium_url, $premium_title );
-			}
-
-			return $links;
 		}
 
 		/**
@@ -349,97 +371,55 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Need to delete invoice after deleting WooCommerce order or else we get invoice number conflicts.
+		 * Add plugin action links on plugin.php page.
 		 *
-		 * @param int $post_id Post ID.
+		 * @param array $links action links.
+		 *
+		 * @return array
 		 */
-		public function delete_invoice( $post_id ) {
-			$type = get_post_type( $post_id );
-			// is post a WooCommerce order?
-			if ( 'shop_order' === $type ) {
-				BEWPI_Invoice::delete( $post_id );
+		function add_plugin_action_links( $links ) {
+			// add settings link.
+			$settings_url       = add_query_arg( array( 'page' => 'bewpi-invoices' ), admin_url( 'admin.php' ) );
+			$settings_title     = __( 'Settings', 'woocommerce-pdf-invoices' );
+			array_unshift( $links, sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title ) );
+
+			return $links;
+		}
+
+		/**
+		 * Add links to row meta on plugins.php page.
+		 *
+		 * @param array  $links row meta.
+		 * @param string $file plugin basename.
+		 *
+		 * @return array
+		 */
+		public static function add_plugin_row_meta( $links, $file ) {
+			if ( plugin_basename( WPI_FILE ) === $file ) {
+				// add premium plugin link.
+				$premium_url = 'http://wcpdfinvoices.com';
+				$premium_title = __( 'Premium', 'woocommerce-pdf-invoices' );
+				$links[] = sprintf( '<a href="%1$s" target="_blank">%2$s</a>', $premium_url, $premium_title );
 			}
+
+			return $links;
 		}
 
 		/**
-		 * Add submenu to WooCommerce menu and display options page.
+		 * Load admin scripts.
+		 *
+		 * @param string $hook To check current page.
 		 */
-		public function add_wc_submenu_options_page() {
-			add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), 'manage_options', 'bewpi-invoices', array(
-				$this,
-				'options_page',
-			) );
-		}
-
-		/**
-		 * Admin scripts
-		 */
-		public function load_admin_scripts() {
-			wp_enqueue_script( 'bewpi_admin_settings_script', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
-			wp_localize_script( 'bewpi_admin_settings_script', 'BEWPI_AJAX', array(
+		public function load_admin_scripts( $hook ) {
+			wp_enqueue_script( 'bewpi_settings_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
+			wp_localize_script( 'bewpi_settings_js', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_style( 'bewpi_admin_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
-			wp_enqueue_style( 'bewpi_admin_settings_css' );
-		}
-
-		/**
-		 * WooCommerce PDF Invoices settings page.
-		 */
-		public function options_page() {
-			$tabs = apply_filters( 'bewpi_settings_tabs', array(
-				'bewpi_general_settings' => __( 'General', 'woocommerce-pdf-invoices' ),
-				'bewpi_template_settings' => __( 'Template', 'woocommerce-pdf-invoices' ),
-			) );
-
-			$current_tab = 'bewpi_general_settings';
-			if ( isset( $_GET['tab'] ) ) {
-				$current_tab = sanitize_key( $_GET['tab'] );
-			} ?>
-			<div class="wrap">
-				<h2 class="nav-tab-wrapper">
-					<?php foreach ( $tabs as $tab_key => $tab_caption ) {
-						$active = $current_tab === $tab_key ? 'nav-tab-active' : '';
-						printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', esc_attr( $active ), esc_attr( $tab_key ), esc_html( $tab_caption ) );
-					} ?>
-				</h2>
-				<form class="bewpi-settings-form" method="post" action="options.php"
-				      enctype="multipart/form-data">
-					<?php wp_nonce_field( 'update-options' ); ?>
-					<?php settings_fields( $current_tab ); ?>
-					<?php do_settings_sections( $current_tab ); ?>
-					<?php submit_button(); ?>
-				</form>
-
-				<?php if ( ! is_plugin_active( 'woocommerce-pdf-invoices-premium/bootstrap.php' ) ) {
-					include BEWPI_DIR . 'includes/admin/views/html-sidebar.php';
-				} ?>
-			</div>
-			<?php
-			// add rate plugin text in footer.
-			add_filter( 'admin_footer_text', array( $this, 'plugin_review_text' ), 50 );
-			add_filter( 'update_footer', array( $this, 'plugin_version' ), 50 );
-		}
-
-		/**
-		 * Add rate plugin text to footer of settings page.
-		 *
-		 * @return string
-		 */
-		public function plugin_review_text() {
-			return sprintf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a href="%s">★★★★★</a> rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform' );
-		}
-
-		/**
-		 * Plugin version text in footer of settings page.
-		 *
-		 * @return string
-		 */
-		public function plugin_version() {
-			return sprintf( __( 'Version %s', 'woocommerce-pdf-invoices' ), WPI_VERSION );
+			wp_register_style( 'bewpi_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
+			wp_enqueue_style( 'bewpi_settings_css' );
 		}
 
 		/**
@@ -595,7 +575,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$order_id,
 					'view',
 					array(
-						'class="button tips bewpi-admin-order-create-invoice-btn"',
+						'class="button shop-order-action invoice wpi"',
 						'target="_blank"',
 					)
 				);
@@ -608,29 +588,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		function add_admin_order_pdf_meta_box() {
 			add_meta_box( 'order_page_create_invoice', __( 'PDF Invoice', 'woocommerce-pdf-invoices' ), array(
 				$this,
-				'display_admin_order_pdf_actions',
+				'display_order_page_pdf_invoice_meta_box',
 			), 'shop_order', 'side', 'high' );
-		}
-
-		/**
-		 * Display invoice date and formatted number on "Order Details" page.
-		 *
-		 * @param string $date date of invoice.
-		 * @param int    $number formatted invoice number.
-		 */
-		private function show_invoice_number_info( $date, $number ) {
-			?>
-			<table class="invoice-info" width="100%">
-				<tr>
-					<td><?php echo esc_html( __( 'Invoiced on:', 'woocommerce-pdf-invoices' ) ); ?></td>
-					<td align="right"><b><?php echo esc_html( $date ); ?></b></td>
-				</tr>
-				<tr>
-					<td><?php echo esc_html( __( 'Invoice number:', 'woocommerce-pdf-invoices' ) ); ?></td>
-					<td align="right"><b><?php echo esc_html( $number ); ?></b></td>
-				</tr>
-			</table>
-			<?php
 		}
 
 		/**
@@ -658,26 +617,36 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @param WP_Post $post as WC_Order object.
 		 */
-		public function display_admin_order_pdf_actions( $post ) {
+		public function display_order_page_pdf_invoice_meta_box( $post ) {
 			if ( ! BEWPI_Invoice::exists( $post->ID ) ) {
-				$this->show_invoice_button( __( 'Create', 'woocommerce-pdf-invoices' ), $post->ID, 'create', array( 'class="invoice-btn button grant_access"' ) );
+				$this->show_invoice_button( __( 'Create', 'woocommerce-pdf-invoices' ), $post->ID, 'create', array( 'class="button grant_access order-page invoice wpi"' ) );
 				return;
 			}
 
 			$invoice = new BEWPI_Invoice( $post->ID );
 
-			// invoice exists so display invoice info.
-			$this->show_invoice_number_info( $invoice->get_formatted_invoice_date(), $invoice->get_formatted_number() );
+			$details = apply_filters( 'bewpi_order_page_pdf_invoice_meta_box_details', array(
+				'invoice_date' => array(
+					'title' => __( 'Invoiced on:', 'woocommerce-pdf-invoices' ),
+					'value' => $invoice->get_formatted_invoice_date(),
+				),
+				'invoice_number' => array(
+					'title' => __( 'Invoice number:', 'woocommerce-pdf-invoices' ),
+					'value' => $invoice->get_formatted_number(),
+				),
+			), $invoice );
+
+			include WPI_DIR . '/includes/admin/views/html-order-page-pdf-invoice-meta-box.php';
 
 			// display button to view invoice.
 			$this->show_invoice_button( __( 'View', 'woocommerce-pdf-invoices' ), $post->ID, 'view', array(
-				'class="invoice-btn button grant_access"',
+				'class="button grant_access order-page invoice wpi"',
 				'target="_blank"',
 			) );
 
 			// display button to cancel invoice.
 			$this->show_invoice_button( __( 'Cancel', 'woocommerce-pdf-invoices' ), $post->ID, 'cancel', array(
-				'class="invoice-btn button grant_access"',
+				'class="button grant_access order-page invoice wpi"',
 				'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', 'woocommerce-pdf-invoices' ) . '\')"',
 			) );
 		}
@@ -732,6 +701,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function add_my_account_pdf( $actions, $order ) {
 			$order = wc_get_order( $order );
 			$general_options = get_option( 'bewpi_general_settings' );
+
 			if ( ! $general_options['bewpi_download_invoice_account'] || ! $order->is_paid() ) {
 				return $actions;
 			}
@@ -750,10 +720,25 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$invoice = new BEWPI_Invoice( $order_id );
 			$actions['invoice'] = array(
 				'url'  => $url,
-				'name' => apply_filters( 'bewpi_my_account_pdf_name', sprintf( __( 'Invoice %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() ) ),
+				'name' => apply_filters( 'bewpi_my_account_pdf_name', __( 'Invoice', 'woocommerce-pdf-invoices' ), $invoice ),
 			);
 
 			return $actions;
+		}
+
+		/**
+		 * Get option.
+		 *
+		 * @param string $name Option name.
+		 *
+		 * @return bool|mixed
+		 */
+		public static function get_option( $name ) {
+			if ( ! isset( self::$options[ $name ] ) ) {
+				return false;
+			}
+
+			return self::$options[ $name ];
 		}
 
 		/**

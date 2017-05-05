@@ -30,6 +30,37 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		}
 
 		/**
+		 * Initialize hooks.
+		 */
+		public static function init_hooks() {
+			if ( is_admin() ) {
+				self::admin_init_hooks();
+			}
+		}
+
+		/**
+		 * Initialize admin hooks.
+		 */
+		private static function admin_init_hooks() {
+			// Delete PDF invoice file and data when deleting order.
+			add_action( 'wp_trash_post', array( __CLASS__, 'delete' ) );
+			add_action( 'before_delete_post', array( __CLASS__, 'delete' ) );
+		}
+
+		/**
+		 * Delete invoice file and data to prevent invoice number conflicts.
+		 *
+		 * @param int $post_id WordPress post ID.
+		 */
+		public static function delete( $post_id ) {
+			if ( 'shop_order' !== get_post_type( $post_id ) ) {
+				return;
+			}
+
+			parent::delete( $post_id );
+		}
+
+		/**
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *

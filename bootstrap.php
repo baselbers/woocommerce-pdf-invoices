@@ -25,22 +25,35 @@ define( 'WPI_VERSION', '2.8.2' );
  * Load WooCommerce PDF Invoices plugin.
  */
 function _bewpi_load_plugin() {
+
 	/**
 	 * @deprecated instead use `WPI_FILE`.
 	 */
-	define( 'BEWPI_FILE', __FILE__ );
+	if ( ! defined( 'BEWPI_FILE' ) ) {
+		define( 'BEWPI_FILE', __FILE__ );
+	}
+
 	/**
 	 * @deprecated instead use `WPI_DIR`.
 	 */
-	define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
+	if ( ! defined( 'BEWPI_DIR' ) ) {
+		define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
+	}
+
 	/**
 	 * @deprecated instead use `plugin_basename( WPI_FILE )`.
 	 */
-	define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+	if ( ! defined( 'BEWPI_PLUGIN_BASENAME' ) ) {
+		define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+	}
 
-	// Constants.
-	define( 'WPI_FILE', __FILE__ );
-	define( 'WPI_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+	if ( ! defined( 'WPI_FILE' ) ) {
+		define( 'WPI_FILE', __FILE__ );
+	}
+
+	if ( ! defined( 'WPI_DIR' ) ) {
+		define( 'WPI_DIR', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
+	}
 
 	require_once WPI_DIR . '/vendor/autoload.php';
 

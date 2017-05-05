@@ -5,12 +5,6 @@
 
     setting.settings = ['bewpi-theme-text-black', 'bewpi-display-prices-incl-tax', 'bewpi-shipping-taxable', 'bewpi-company-details', 'bewpi-intro-text', 'bewpi-right-footer-column', 'bewpi-show-sku', 'bewpi-show-tax', 'bewpi-show-tax-row', 'bewpi-show-discount', 'bewpi-show-shipping'];
 
-    setting.removeCompanyLogo = function () {
-        var elem = document.getElementById('bewpi-company-logo-wrapper');
-        elem.parentNode.removeChild(elem);
-        document.getElementById('bewpi-company-logo-value').value = '';
-    };
-
     setting.enableDisableNextInvoiceNumbering = function (elem) {
         document.getElementById('bewpi-next-invoice-number').readOnly = ! elem.checked;
     };
@@ -108,16 +102,18 @@
     };
 
     window.addEventListener('load', function () {
-        // add click listener to dismiss notice.
+        // Add click listener to dismiss notice.
         var notice = document.querySelector('div[data-dismissible] button.notice-dismiss');
         if (notice !== null) {
             notice.onclick = bewpi.notice.dismiss;
         }
 
-        // add click listener to display notice on deactivation of plugin.
-        var deactivate = document.querySelector('tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"] span.deactivate a');
-        if (deactivate !== null) {
-            deactivate.onclick = bewpi.notice.deactivate;
+        if ( pagenow === 'plugins' ) {
+            // Add click listener to display notice on deactivation of plugin.
+            var deactivate = document.querySelector('tr[data-plugin="woocommerce-pdf-invoices/bootstrap.php"] span.deactivate a');
+            if (deactivate !== null) {
+                deactivate.onclick = bewpi.notice.deactivate;
+            }
         }
 
         if ( pagenow === 'woocommerce_page_bewpi-invoices' ) {

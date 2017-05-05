@@ -236,7 +236,12 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.8.2 - April 29, 2017 =
 
+- Improved: Settings classes with a complete refactor.
+- Improved: File names by removing unnecessary prefixes.
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.
+- Improved: Deactivation notice by only checking for notice on plugins.php page.
+- Fixed: Facebook share button.
+- Removed: Unused CSS and JS.
 
 = 2.8.1 - April 21, 2017 =
 

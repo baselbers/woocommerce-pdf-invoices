@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-04-27 11:44+0200\n"
-"PO-Revision-Date: 2017-04-27 11:44+0200\n"
+"POT-Creation-Date: 2017-05-05 15:01+0200\n"
+"PO-Revision-Date: 2017-05-05 15:01+0200\n"
 "Last-Translator: Mikael Akerlund <mikael.akerlund@sponsorhjalpen.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -21,224 +21,217 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SearchPathExcluded-1: woocommerce-pdf-invoices/lib\n"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:113
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:25
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:145
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:401
+msgid "Premium"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:135
+msgid "Premium Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:138
+msgid "Template Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:141
+msgid "Supplier Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:142
+msgid "Send customer invoice automatically to your supplier(s)."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:145
+msgid "Global Invoice Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:146
+msgid ""
+"Generate global invoices on Orders page by selecting multiple orders and "
+"applying action or let customers generate periodically from My Account page."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:149
+msgid "Reminder Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:150
+#, php-format
+msgid ""
+"Automatically send the PDF invoice after a specific period of time. When "
+"enabled, a new <a href=\"%s\">Customer invoice reminder</a> email will be "
+"used to send the PDF invoice."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:168
 msgid "Activation email"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:118
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:173
 #, php-format
 msgid "Enter your activation email from %s."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:124
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:179
 msgid "License"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:129
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:184
 #, php-format
 msgid "Enter your license key from %s to receive updates."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:135
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:190
 msgid "PDF attachment"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:140
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:195
 msgid "Add for example a PDF with your terms & conditions."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:146
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:201
 msgid "Suppliers"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:151
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:206
 msgid ""
 "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by simply "
 "adding there Email It In email addresses. Email addresses need to be "
 "seperated by comma's."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:162
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:217
 msgid "Enable customer generation"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:164
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:219
 msgid "Let customers generate a global invoice from their account"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:172
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:227
 msgid "Customer generation period"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:177
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:232
 msgid ""
 "Should your customers have the ability to generate a global invoice by month "
 "or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:180
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:235
 msgid "Month"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:184
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:239
 msgid "Year"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:198
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:253
 msgid "Send to your Cloud Storage"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:210
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:265
 msgid "Email to customer"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:222
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:277
 msgid "Email to supplier(s)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:229
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:284
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:146
 msgid "Email subject"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:234
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:289
 msgid "Subject for the global invoice email."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:241
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:296
 msgid "Email message"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:246
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:301
 msgid "Message for the global invoice email."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:258
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:313
 msgid "Enable reminder"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:265
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:320
 msgid "Days until reminder"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:270
-msgid "Number of days from starting date until reminder date."
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:325
+msgid "Number of days from order or invoice date until reminder date."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:279
-msgid "Start date type"
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:334
+msgid "Date type"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:284
-msgid ""
-"Custom date will add a checkout field to the Checkout page, so a customer "
-"can decide from which date to start counting."
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:339
+msgid "Choose the type of date to count from."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:287
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:342
 msgid "Order date"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:291
-msgid "Custom date"
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:346
+msgid "Invoice date"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:305
-msgid "Custom date is editable on My Account page"
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:423
+msgid "Activation email cannot be empty."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:317
-msgid "Custom date is required"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:324
-msgid "Custom date field name"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:343
-msgid "Premium Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:349
-msgid "Template Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:355
-msgid "Supplier Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:361
-msgid "Global Invoice Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:367
-msgid "Reminder Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:377
-msgid "Send customer invoice automatically to your supplier(s)."
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:384
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:460
 msgid ""
-"Generate global invoices on Orders page by selecting multiple orders and "
-"applying action or let customers generate periodically from My Account page."
+"Something went wrong with the activation of your license. Contact the author "
+"for support."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:391
-msgid ""
-"Send a reminder email with invoice after a specific period of time. The "
-"period until the actual sending date, uses the order date as a starting "
-"point to count from. The email template called Customer Invoice will be "
-"used. By default an email will only be sent, if the order has the Processing "
-"status."
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:502
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:481
 msgid "File to large."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:506
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:487
 msgid "Only PDF files are allowed."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:522
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:512
 msgid "Remove"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:526
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:516
 msgid "Choose"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:546
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:539
 msgid "Active"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-bewpip-admin-settings.php:548
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium-settings.php:541
 msgid "Inactive"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-custom-invoice-date-field.php:11
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:143
-msgid "YYYY-MM-DD"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-custom-invoice-date-field.php:15
-msgid "Save"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:1
+#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:10
 msgid "Generate Global Invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:11
+#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:20
 msgid "Select a month"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:24
+#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:33
 msgid "Select a year"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:38
+#: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:47
 msgid "Generate invoice"
 msgstr ""
 
@@ -246,119 +239,124 @@ msgstr ""
 msgid "Global invoice successfully generated! "
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-meta-box-invoice-reminder.php:7
-msgid "Reminder scheduled on:"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-meta-box-invoice-reminder.php:11
-msgid "Reminder sent?"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-meta-box-invoice-reminder.php:13
-msgid "Yes"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/views/html-meta-box-invoice-reminder.php:13
-msgid "No"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:101
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:222
-msgid "Settings"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:102
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:56
-msgid "Support"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/be-woocommerce-pdf-invoices-premium.php:118
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:84
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:240
-msgid "Premium"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-bulk-export.php:36
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:37
 msgid "Bulk Export PDF Invoices"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-bulk-generate.php:36
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:37
 msgid "Bulk Generate PDF Invoices"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-bulk-generate.php:71
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:72
 msgid "No order selected."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-install.php:70
+#: woocommerce-pdf-invoices-premium/includes/class-install.php:74
 #, php-format
 msgid ""
 "%1$s requires %2$s to be activated. Install and activate it and you should "
 "be good to go! :)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-install.php:79
+#: woocommerce-pdf-invoices-premium/includes/class-install.php:83
 #, php-format
 msgid ""
 "%1$s requires at least %2$s. Update it and get the best out of both "
 "plugins. :)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:197
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:52
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:199
 msgid "Invalid request"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:207
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:235
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:209
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:237
 msgid "Something went wrong."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:222
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:250
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:224
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:252
 msgid "No orders found."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:295
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:297
 msgid "Generate global invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-global.php:330
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:332
 msgid "Select more then one order to generate a global invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:60
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:153
-#, php-format
-msgid "%s is required."
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:60
+msgid "Yes"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:67
-msgid "Order changed successfully."
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:60
+msgid "No"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice-reminder.php:200
-msgid "PDF Invoice Reminder"
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:63
+msgid "Reminder on:"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice.php:140
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:576
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:68
+msgid "Reminder sent?"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:142
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:576
 msgid "Discount:"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice.php:156
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:591
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:158
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:591
 msgid "Shipping:"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice.php:226
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:561
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:228
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:561
 msgid "Subtotal:"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bewpip-invoice.php:266
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:660
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:268
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:660
 msgid "Total:"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:43
+msgid "Customer invoice reminder"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:44
+msgid ""
+"Customer invoice reminder emails can be sent to customers containing their "
+"order information and payment links."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:49
+msgid "Invoice reminder for order {order_number} from {order_date}"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:50
+msgid "Invoice reminder for order {order_number}"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:149
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:158
+#, php-format
+msgid "Defaults to %s"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:155
+msgid "Email heading"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:164
+msgid "Email type"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
+msgid "Choose which format of email to send."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:9
@@ -387,7 +385,7 @@ msgid "Description"
 msgstr "Beskrivning"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:52
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:414
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:452
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:57
 msgid "SKU"
 msgstr "SKU"
@@ -421,21 +419,21 @@ msgid "Order #%d - %s"
 msgstr "Order #%d - %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:233
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:462
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:500
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:207
 msgid "Discount"
 msgstr "Rabatt"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:241
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:257
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:474
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:512
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:215
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:231
 msgid "Shipping"
 msgstr "Frakt"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:249
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:426
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:464
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:223
 msgid "Subtotal"
 msgstr "Delsumma"
@@ -458,159 +456,63 @@ msgstr "Betalas"
 msgid "%1$s of %2$s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-document.php:142
+#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:103
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:383
+msgid "Settings"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:104
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:56
+msgid "Support"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-document.php:140
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:35
 msgid "Paid"
 msgstr "Betald"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:392
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:392
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:64
 #, php-format
 msgid "VAT Number: %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:410
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:410
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:55
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-bewpi-invoice.php:758
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:758
 #, php-format
 msgid "%s of %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:46
-msgid "Attach to Emails"
-msgstr ""
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-setting.php:87
+msgid "Invoices"
+msgstr "Faktura"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:54
-msgid "New order"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:59
-msgid "Order on-hold"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:64
-msgid "Processing order"
-msgstr "Pågående order"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:69
-msgid "Completed order"
-msgstr "Genomförd beställning"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:74
-msgid "Customer invoice"
-msgstr "Kundfaktura"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:83
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-setting.php:144
 #, php-format
-msgid "Attach to %s Emails"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:92
-msgid "New Renewal Order"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:98
-msgid "Subscription Switch Complete"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:104
-msgid "Processing Renewal order"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:110
-msgid "Completed Renewal Order"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:116
-msgid "Customer Renewal Invoice"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:131
-msgid "Disable for free products"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:133
 msgid ""
-"Skip automatic PDF invoice generation for orders containing only free "
-"products."
+"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
+"href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:141
-msgid "View PDF"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:149
-msgid "Download"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:153
-msgid "Open in new browser tab/window"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:167
-msgid "Enable download from my account"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:169
-msgid ""
-"By default PDF is only downloadable when order has been paid, so order "
-"status should be Processing or Completed."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:182
-msgid "Enable Email It In"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:189
-msgid "Email It In account"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:194
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-setting.php:153
 #, php-format
-msgid "Get your account from your %1$s <a href=\"%2$s\">user account</a>."
+msgid "Version %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:205
-msgid "Enable Invoice Number column"
-msgstr ""
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:25
+msgid "General"
+msgstr "Allmänt"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:206
-msgid "Display invoice numbers on Shop Order page."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:218
-msgid "Enable mPDF debugging"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:219
-msgid "Enable if you aren't able to create an invoice."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:278
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:76
 msgid "Email Options"
 msgstr "E-post inställningar"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:279
-msgid "Download Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:280
-msgid "Cloud Storage Options"
-msgstr "Moln lagring inställningar"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:281
-msgid "Interface Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:282
-msgid "Debug Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:289
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:77
 #, php-format
 msgid ""
 "The PDF invoice will be generated when WooCommerce sends the corresponding "
@@ -618,84 +520,259 @@ msgid ""
 "automatically generate the PDF invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-general.php:338
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:80
+msgid "Download Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:83
+msgid "Cloud Storage Options"
+msgstr "Moln lagring inställningar"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:84
 #, php-format
 msgid ""
 "Sign-up at <a href=\"%1$s\">Email It In</a> to send invoices to your "
 "Dropbox, OneDrive, Google Drive or Egnyte and enter your account below."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:54
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:395
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:87
+msgid "Interface Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:90
+msgid "Debug Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:107
+msgid "Attach to Emails"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:115
+msgid "New order"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:120
+msgid "Order on-hold"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:125
+msgid "Processing order"
+msgstr "Pågående order"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:130
+msgid "Completed order"
+msgstr "Genomförd beställning"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:135
+msgid "Customer invoice"
+msgstr "Kundfaktura"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:144
+#, php-format
+msgid "Attach to %s Emails"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:153
+msgid "New Renewal Order"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:159
+msgid "Subscription Switch Complete"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:165
+msgid "Processing Renewal order"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:171
+msgid "Completed Renewal Order"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:177
+msgid "Customer Renewal Invoice"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:192
+msgid "Disable for free products"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:194
+msgid ""
+"Skip automatic PDF invoice generation for orders containing only free "
+"products."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:202
+msgid "View PDF"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:210
+msgid "Download"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:214
+msgid "Open in new browser tab/window"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:228
+msgid "Enable download from my account"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:230
+msgid ""
+"By default PDF is only downloadable when order has been paid, so order "
+"status should be Processing or Completed."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:243
+msgid "Enable Email It In"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:250
+msgid "Email It In account"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:255
+#, php-format
+msgid "Get your account from your %1$s <a href=\"%2$s\">user account</a>."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:266
+msgid "Enable Invoice Number column"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:267
+msgid "Display invoice numbers on Shop Order page."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:279
+msgid "Enable mPDF debugging"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:280
+msgid "Enable if you aren't able to create an invoice."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:25
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:92
 msgid "Template"
 msgstr "Mall"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:59
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:45
+msgid "General Options"
+msgstr "Allmänt inställningar"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:46
+#, php-format
+msgid ""
+"Want to customize the template? The <a href=\"%s\">FAQ</a> will give you a "
+"brief description."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:49
+msgid "Invoice Number Options"
+msgstr "Fakturanummer inställningar"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:52
+msgid "Packing Slips Options"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:53
+msgid ""
+"Packing slips are <strong>only available</strong> when using minimal "
+"template."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:56
+msgid "Header Options"
+msgstr "Heder inställningar"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:57
+msgid "The header will be visible on every page."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:60
+msgid "Footer Options"
+msgstr "Footer inställningar"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:61
+msgid "The footer will be visible on every page."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:64
+msgid "Visible Columns"
+msgstr "Synliga kolumner "
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:65
+msgid "Enable or disable the columns."
+msgstr "Aktivera eller avaktivera kolumner."
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:97
 #, php-format
 msgid "Create a custom template by copying it from %1$s to %2$s."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:66
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:104
 msgid "Color theme"
 msgstr "Färg tema"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:82
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:120
 msgid "Display theme text in black color"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:84
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:122
 msgid ""
 "Enable if you've set the color theme to white or some other light color."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:92
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:130
 msgid "Date format"
 msgstr "Datum format"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:97
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:135
 #, php-format
 msgid "<a href=\"%s\">Format</a> of invoice date and order date."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:109
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:147
 msgid "Display prices including tax"
 msgstr "Visa pris inklusive moms"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:111
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:149
 msgid ""
 "Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
 "still be excluding tax, so disable it within the visible columns section."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:124
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:162
 msgid "Shipping taxable"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:126
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:164
 msgid "Enable to display subtotal including shipping."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:139
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:177
 msgid "Mark invoice as paid"
 msgstr "Markera som betald"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:141
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:179
 msgid "Invoice will be watermarked when order has been paid."
 msgstr "Faktura kommer att  få en vattenstämpel när beställning har betalats."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:154
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:192
 msgid "Disable Packing Slips"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:161
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:199
 msgid "Company name"
 msgstr "Företagsnamn"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:172
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:210
 msgid "Company logo"
 msgstr "Företagslogi"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:177
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:215
 #, php-format
 msgid ""
 "Use the <a href=\"%1$s\">Media Library</a> to <a href=\"%2$s\">upload</a> or "
@@ -703,209 +780,157 @@ msgid ""
 "\" target=\"_blank\">URL</a>."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:183
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:221
 msgid "Company address"
 msgstr "Företagsadress"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:188
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:199
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:221
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:260
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:272
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:283
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:226
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:237
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:259
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:298
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:310
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:321
 #, php-format
 msgid "Allowed HTML tags: %s."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:194
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:232
 msgid "Company details"
 msgstr "Företags detaljer"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:205
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:243
 msgid "Title"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:210
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:248
 msgid "Change the name of the invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:211
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:249
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:723
 msgid "Invoice"
 msgstr "Faktura"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:216
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:254
 msgid "Thank you text"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:222
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:260
 msgid "Visible in big colored bar directly after invoice total."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:233
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:271
 msgid "Show customers shipping address"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:235
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:273
 msgid ""
 "Customers shipping address won't be visible when order has only virtual "
 "products."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:248
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:286
 msgid "Show customer notes"
 msgstr "Visa kund anteckningar"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:255
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293
 msgid "Terms & conditions, policies etc."
 msgstr "Regler och villkor, politik etc."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:261
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:299
 #, php-format
 msgid ""
 "Visible below customer notes and above footer. Want to attach additional "
 "pages to the invoice? Take a look at <a href=\"%1$s\">%2$s</a> plugin."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:267
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:305
 msgid "Left footer column."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:278
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:316
 msgid "Right footer column."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:289
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:327
 msgid "Type"
 msgstr "Typ"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:297
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:335
 msgid "WooCommerce order number"
 msgstr "WooCommerce order nummer"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:301
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:339
 msgid "Sequential number"
 msgstr "Löpnummer"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:315
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:353
 msgid "Reset invoice counter"
 msgstr "Återställ faktura räknare"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:323
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:361
 msgid "Next"
 msgstr "Nästa"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:328
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:366
 msgid "Next invoice number when resetting counter."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:330
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:368
 msgid ""
 "<b>Note:</b> Only available for Sequential numbering. All PDF invoices with "
 "invoice number greater then next invoice number will be deleted!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:340
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:378
 msgid "Digits"
 msgstr "Siffror"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:356
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:394
 msgid "Prefix"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:367
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:405
 msgid "Suffix"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:378
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:416
 msgid "Format"
 msgstr "Format"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:383
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:421
 #, php-format
 msgid "Available placeholders: %s."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:385
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:423
 #, php-format
 msgid "<b>Note:</b> %s is required and slashes aren't supported."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:397
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:435
 msgid "Reset yearly"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:399
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:437
 msgid "Automatically reset invoice numbers on new year's day."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:401
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:439
 msgid ""
 "<b>Note</b>: You will have to generate all invoices again when changing "
 "option."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:438
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:476
 msgid "Tax (item)"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:450
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:488
 msgid "Tax (total)"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:516
-#, php-format
-msgid ""
-"Want to customize the template? The <a href=\"%s\">FAQ</a> will give you a "
-"brief description."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:523
-msgid ""
-"Packing Slips are <strong>only available</strong> when using minimal "
-"template."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:530
-msgid "The header will be visible on every page."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:537
-msgid "The footer will be visible on every page."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:544
-msgid "Enable or disable the columns."
-msgstr "Aktivera eller avaktivera kolumner."
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:551
-msgid "General Options"
-msgstr "Allmänt inställningar"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:555
-msgid "Invoice Number Options"
-msgstr "Fakturanummer inställningar"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:556
-msgid "Packing Slip Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:560
-msgid "Header Options"
-msgstr "Heder inställningar"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:564
-msgid "Body Options"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:565
-msgid "Footer Options"
-msgstr "Footer inställningar"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:569
-msgid "Visible Columns"
-msgstr "Synliga kolumner "
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-bewpi-admin-settings-template.php:608
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:554
 msgid ""
 "Company logo not found. Upload the image to the Media Library and try again."
 msgstr ""
@@ -1030,93 +1055,32 @@ msgid ""
 "\"%1$s\">★★★★★</a> rating and vote for <a href=\"%2$s\">works</a>."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:78
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:82
 msgid ""
 "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:83
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:87
 msgid "Need Help?"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:85
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:89
 msgid "Frequently Asked Questions"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:86
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:90
 msgid "Support forum"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:87
+#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:91
 msgid "Request a feature"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:368
-msgid "Invoices"
-msgstr "Faktura"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:394
-msgid "General"
-msgstr "Allmänt"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:433
-#, php-format
-msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
-"href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:442
-#, php-format
-msgid "Version %s"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:554
-msgid "Invoice No."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:590
-msgid "View invoice"
-msgstr "Visa Faktura"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:605
-msgid "PDF Invoice"
-msgstr "PDF Faktura"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:621
-msgid "Invoiced on:"
-msgstr "Fakturerad"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:625
-msgid "Invoice number:"
-msgstr "Fakturanummer"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:659
-msgid "Create"
-msgstr "Skapa"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:669
-msgid "View"
-msgstr "Visa"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:675
-msgid "Cancel"
-msgstr "Avbryt"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:677
-msgid "Are you sure to delete the invoice?"
-msgstr "Är du säker på att du vill radera fakturan?"
-
-#: woocommerce-pdf-invoices/includes/be-woocommerce-pdf-invoices.php:749
-#, php-format
-msgid "Invoice %s"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/class-bewpi-packing-slip.php:62
+#: woocommerce-pdf-invoices/includes/class-packing-slip.php:62
 msgid "View packing slip"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/compatibility/class-bewpi-wc-core-compatibility.php:245
+#: woocommerce-pdf-invoices/includes/compatibility/class-wc-core-compatibility.php:245
 msgid "WooCommerce"
 msgstr ""
 
@@ -1197,6 +1161,42 @@ msgstr ""
 #, php-format
 msgid "Shipping Method: %s"
 msgstr ""
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:538
+msgid "Invoice No."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:574
+msgid "View invoice"
+msgstr "Visa Faktura"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:589
+msgid "PDF Invoice"
+msgstr "PDF Faktura"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:622
+msgid "Create"
+msgstr "Skapa"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:630
+msgid "Invoiced on:"
+msgstr "Fakturerad"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:634
+msgid "Invoice number:"
+msgstr "Fakturanummer"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:642
+msgid "View"
+msgstr "Visa"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:648
+msgid "Cancel"
+msgstr "Avbryt"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:650
+msgid "Are you sure to delete the invoice?"
+msgstr "Är du säker på att du vill radera fakturan?"
 
 #~ msgid "These are the general template options."
 #~ msgstr "Detta är de generella mallalternativ."

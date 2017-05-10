@@ -70,8 +70,6 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 		<tr class="item">
 			<td width="75%">
 				<?php
-				$is_visible        = $product && $product->is_visible();
-
 				echo $item['name'];
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );

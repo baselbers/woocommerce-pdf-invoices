@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-05-05 15:00+0200\n"
-"PO-Revision-Date: 2017-05-05 15:00+0200\n"
+"POT-Creation-Date: 2017-05-10 13:23+0200\n"
+"PO-Revision-Date: 2017-05-10 13:23+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -271,25 +271,19 @@ msgid ""
 "plugins. :)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:199
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:206
 msgid "Invalid request"
 msgstr "Ungültige Anfrage"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:209
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:237
-msgid "Something went wrong."
-msgstr "Uuhps! Da ist wohl etwas schief gelaufen."
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:224
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:252
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:226
 msgid "No orders found."
 msgstr "Keine Bestellungen gefunden."
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:297
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:273
 msgid "Generate global invoice"
 msgstr "Generate global invoice"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:332
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:308
 msgid "Select more then one order to generate a global invoice."
 msgstr ""
 
@@ -1203,6 +1197,9 @@ msgstr "abbrechen"
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:650
 msgid "Are you sure to delete the invoice?"
 msgstr "Bist du dir sicher, dass du die Rechnung löschen willst?"
+
+#~ msgid "Something went wrong."
+#~ msgstr "Uuhps! Da ist wohl etwas schief gelaufen."
 
 #~ msgid "Please select more then one order."
 #~ msgstr "Bitte mehr als eine Bestellungen auswählen."

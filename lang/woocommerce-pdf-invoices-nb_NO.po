@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-05-05 15:01+0200\n"
-"PO-Revision-Date: 2017-05-05 15:01+0200\n"
+"POT-Creation-Date: 2017-05-10 13:24+0200\n"
+"PO-Revision-Date: 2017-05-10 13:24+0200\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -270,25 +270,19 @@ msgid ""
 "plugins. :)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:199
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:206
 msgid "Invalid request"
 msgstr "Ugyldig forespørsel"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:209
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:237
-msgid "Something went wrong."
-msgstr "Noe gikk galt."
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:224
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:252
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:226
 msgid "No orders found."
 msgstr "Ingen ordre funnet."
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:297
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:273
 msgid "Generate global invoice"
 msgstr "Opprett global faktura"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:332
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:308
 msgid "Select more then one order to generate a global invoice."
 msgstr ""
 
@@ -1214,6 +1208,9 @@ msgstr "Slett"
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:650
 msgid "Are you sure to delete the invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
+
+#~ msgid "Something went wrong."
+#~ msgstr "Noe gikk galt."
 
 #~ msgid "Body Options"
 #~ msgstr "Hovedalternativer"

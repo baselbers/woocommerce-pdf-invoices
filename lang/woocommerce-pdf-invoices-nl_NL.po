@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-05-05 15:01+0200\n"
-"PO-Revision-Date: 2017-05-05 15:01+0200\n"
+"POT-Creation-Date: 2017-05-10 13:24+0200\n"
+"PO-Revision-Date: 2017-05-10 13:24+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -268,25 +268,19 @@ msgstr ""
 "%1$s verseist op zijn minst %2$s. Update de plugin om het best uit beide te "
 "krijgen. :)"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:199
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:206
 msgid "Invalid request"
 msgstr "Invalide aanroep"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:209
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:237
-msgid "Something went wrong."
-msgstr "Oeps, iets ging verkeerd."
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:224
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:252
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:226
 msgid "No orders found."
 msgstr "Geen bestellingen gevonden."
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:297
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:273
 msgid "Generate global invoice"
 msgstr "Genereer globale factuur"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:332
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:308
 msgid "Select more then one order to generate a global invoice."
 msgstr "Selecteer meer dan één bestelling om een global factuur te genereren."
 
@@ -1256,6 +1250,9 @@ msgstr "Verwijder"
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:650
 msgid "Are you sure to delete the invoice?"
 msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
+
+#~ msgid "Something went wrong."
+#~ msgstr "Oeps, iets ging verkeerd."
 
 #~ msgid "YYYY-MM-DD"
 #~ msgstr "YYYY-MM-DD"

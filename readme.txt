@@ -234,8 +234,9 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.9.0 - April 29, 2017 =
+= 2.9.0 - May 10, 2017 =
 
+- Improved: Spanish translation files thanks to [Jorge Fuentes](www.jorgefuentes.net).
 - Improved: Settings classes with a complete refactor.
 - Improved: File names by removing unnecessary prefixes.
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.

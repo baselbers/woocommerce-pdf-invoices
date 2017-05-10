@@ -159,23 +159,12 @@ class BEWPI_Abstract_Setting {
 	 */
 	private function add_sections() {
 		foreach ( $this->sections as $id => $section ) {
-
-			if ( isset( $section['description'] ) ) {
-				$this->section_description = $section['description'];
-				$callback = array( $this, 'display_section_description' );
-			} else {
-				$callback = null;
-			}
-
-			add_settings_section( $id, $section['title'], $callback, $this->settings_key );
+			add_settings_section( $id, $section['title'], function() use ( $section ) {
+				if ( isset( $section['description'] ) ) {
+					echo $section['description'];
+				}
+			}, $this->settings_key );
 		}
-	}
-
-	/**
-	 * Display section description callback.
-	 */
-	public function display_section_description() {
-		echo $this->section_description;
 	}
 
 	/**

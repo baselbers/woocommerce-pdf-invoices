@@ -94,7 +94,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => $this->settings_key,
 					'section'  => 'general',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Create a custom template by copying it from %1$s to %2$s.', 'woocommerce-pdf-invoices' ), '<code>plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple</code>', '<code>uploads/woocommerce-pdf-invoices/templates/invoice/simple</code>' ),
+					'desc'     => sprintf( __( 'Create a custom template by copying it from %1$s to %2$s.', 'woocommerce-pdf-invoices' ), '<code>plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple</code>', '<code>uploads/woocommerce-pdf-invoices/templates/invoice/simple</code>' )
+					              . '<br><div class="bewpi-notes">'
+					              . sprintf( __( '<strong>Note:</strong> The %1$s template will probably no longer be supported in future versions, consider to use the %2$s template.', 'woocommerce-pdf-invoices' ), '<strong>micro</strong>', '<strong>minimal</strong>' )
+					              . '</div>',
 					'options'  => $templates,
 					'default'  => 'minimal',
 				),

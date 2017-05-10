@@ -241,6 +241,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.
 - Improved: Deactivation notice by only checking for notice on plugins.php page.
 - Fixed: Facebook share button.
+- Fixed: Download from my account page not working.
 - Removed: Unused CSS and JS.
 
 = 2.8.1 - April 21, 2017 =

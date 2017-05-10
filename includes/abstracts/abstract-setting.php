@@ -70,6 +70,7 @@ class BEWPI_Abstract_Setting {
 	public function __construct() {
 		$this->add_sections();
 		$this->add_fields();
+		$this->set_defaults();
 	}
 
 	/**

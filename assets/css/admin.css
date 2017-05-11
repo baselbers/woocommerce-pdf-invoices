@@ -108,6 +108,7 @@ a.wpi.order-page.invoice.button {
 #bewpi-mc-embed-signup form {
     margin: 0 !important;
     padding: 0;
+    float: none;
 }
 #bewpi-mc-embed-signup input[type="text"] {
     width: 100%;

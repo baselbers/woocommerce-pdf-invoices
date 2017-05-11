@@ -192,7 +192,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			$mpdf->Output( $name, $destination );
-			exit;
 		}
 
 		/**

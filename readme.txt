@@ -241,7 +241,6 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: File names by removing unnecessary prefixes.
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.
 - Improved: Deactivation notice by only checking for notice on plugins.php page.
-- Fixed: PDF documents getting .html extension.
 - Fixed: Facebook share button.
 - Fixed: Download from my account page not working.
 - Fixed: Item meta and download item meta not displayed inline within table cells by stripping `<p>` and `<br>` tags.

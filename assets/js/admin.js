@@ -119,7 +119,9 @@
         if ( pagenow === 'woocommerce_page_bewpi-invoices' ) {
             var template = document.querySelector('select#bewpi-template-name');
             if (template !== null) {
-                template.onchange = bewpi.setting.switchSettings;
+
+                template.addEventListener('change', bewpi.setting.switchSettings );
+
                 var event = new Event('change');
                 template.dispatchEvent(event);
             }

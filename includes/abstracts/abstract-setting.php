@@ -58,13 +58,6 @@ class BEWPI_Abstract_Setting {
 	protected $defaults = array();
 
 	/**
-	 * Section description.
-	 *
-	 * @var string.
-	 */
-	private $section_description;
-
-	/**
 	 * BEWPI_Abstract_Setting constructor.
 	 */
 	public function __construct() {

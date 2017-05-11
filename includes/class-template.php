@@ -215,14 +215,32 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Strip some non-inline elements.
+	 *
+	 * @param string $string Value.
+	 *
+	 * @return mixed
+	 */
+	private function strip_non_inline_tags( $string ) {
+		return str_replace( array( '<p>', '</p>', '<br>', '</br>' ), '', $string );
+	}
+
+	/**
 	 * Order item meta port.
 	 *
 	 * @param object $item Order item meta.
+	 * @param bool   $inline Strip <b> and <p> tags to avoid breaks.
 	 */
-	public function wc_display_item_meta( $item ) {
-		// WooCommerce v3.
+	public function wc_display_item_meta( $item, $inline = false ) {
 		if ( function_exists( 'wc_display_item_meta' ) ) {
+
+			if ( $inline ) {
+				echo $this->strip_non_inline_tags( wc_display_item_meta( $item, array( 'echo' => false ) ) );
+				return;
+			}
+
 			wc_display_item_meta( $item );
+
 		} else {
 			$this->order->display_item_meta( $item );
 		}
@@ -232,11 +250,18 @@ class BEWPI_Template {
 	 * Order item downloads meta.
 	 *
 	 * @param object $item Order item.
+	 * @param bool   $inline Strip <b> and <p> tags to avoid breaks.
 	 */
-	public function wc_display_item_downloads( $item ) {
+	public function wc_display_item_downloads( $item, $inline = false ) {
 		if ( function_exists( 'wc_display_item_downloads' ) ) {
-			// WooCommerce v3.
-			wc_display_item_downloads( $item );
+
+			if ( $inline ) {
+				echo $this->strip_non_inline_tags( wc_display_item_downloads( $item, array( 'echo' => false ) ) );
+				return;
+			}
+
+			wc_display_item_meta( $item );
+
 		} else {
 			$this->order->display_item_downloads( $item );
 		}

@@ -74,8 +74,8 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 
 				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
 
-				$templater->wc_display_item_meta( $item );
-				$templater->wc_display_item_downloads( $item );
+				$templater->wc_display_item_meta( $item, true );
+				$templater->wc_display_item_downloads( $item, true );
 
 				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
 				?>

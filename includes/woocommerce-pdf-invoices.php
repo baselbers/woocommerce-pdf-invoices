@@ -175,7 +175,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 
-			BEWPI_Abstract_Setting::init_hooks();
+			BEWPI_Abstract_Settings::init_hooks();
 			BEWPI_Admin_Notices::init_hooks();
 			BEWPI_Invoice::init_hooks();
 			BEWPI_Packing_Slip::init_hooks();

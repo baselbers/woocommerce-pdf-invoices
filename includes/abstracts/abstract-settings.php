@@ -11,9 +11,9 @@
 defined( 'ABSPATH' ) or exit;
 
 /**
- * Class BEWPI_Abstract_Setting.
+ * Class BEWPI_Abstract_Settings.
  */
-class BEWPI_Abstract_Setting {
+class BEWPI_Abstract_Settings {
 
 	/**
 	 * Option name prefix.
@@ -58,7 +58,7 @@ class BEWPI_Abstract_Setting {
 	protected $defaults = array();
 
 	/**
-	 * BEWPI_Abstract_Setting constructor.
+	 * BEWPI_Abstract_Settings constructor.
 	 */
 	public function __construct() {
 		$this->add_sections();
@@ -97,6 +97,13 @@ class BEWPI_Abstract_Setting {
 				foreach ( BEWPI()->settings as $setting ) {
 					$active = $current_tab === $setting->settings_key ? 'nav-tab-active' : '';
 					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', $active, $setting->settings_key, $setting->settings_tab );
+				}
+
+				// Backwards compatibility.
+				$tabs = apply_filters( 'bewpi_settings_tabs', array() );
+				foreach ( $tabs as $settings_key => $settings_tab ) {
+					$active = $current_tab === $settings_key ? 'nav-tab-active' : '';
+					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', $active, $settings_key, $settings_tab );
 				}
 				?>
 			</h2>

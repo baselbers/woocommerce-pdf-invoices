@@ -15,7 +15,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 	/**
 	 * Class BEWPI_General_Settings.
 	 */
-	class BEWPI_General_Settings extends BEWPI_Abstract_Setting {
+	class BEWPI_General_Settings extends BEWPI_Abstract_Settings {
 
 		/**
 		 * BEWPI_General_Settings constructor.

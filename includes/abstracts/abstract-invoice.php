@@ -543,7 +543,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @param string $destination pdf generation mode.
 		 */
-		public function save( $destination = 'F' ) {
+		public function save( $destination = 'F', $html_templates = array() ) {
 			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
 			$this->generate( $destination );
 		}

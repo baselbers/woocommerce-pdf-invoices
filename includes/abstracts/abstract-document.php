@@ -21,7 +21,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 *
 		 * @var string type of document.
 		 */
-		public $type;
+		protected $type;
 
 		/**
 		 * WooCommerce Order associated with invoice.
@@ -307,6 +307,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			return $full_path;
+		}
+
+		/**
+		 * Get document type.
+		 *
+		 * @return string.
+		 */
+		public function get_type() {
+			return $this->type;
 		}
 	}
 }

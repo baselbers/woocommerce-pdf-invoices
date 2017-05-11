@@ -17,6 +17,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 	 * Class BEWPI_Abstract_Setting.
 	 */
 	abstract class BEWPI_Abstract_Setting {
+
 		/**
 		 * Options and settings prefix.
 		 *
@@ -25,11 +26,17 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		const PREFIX = 'bewpi_';
 
 		/**
+		 * @deprecated.
+		 * @var string.
+		 */
+		protected $prefix = 'bewpi_';
+
+		/**
 		 * Option group key.
 		 *
 		 * @var string.
 		 */
-		protected $settings_key;
+		private $settings_key;
 
 		/**
 		 * Format all available invoice number placeholders.
@@ -86,6 +93,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
 				<?php
 				foreach ( $args['options'] as $option ) :
+
+					// Backwards compatibility.
+					if ( ! isset( $option['id'] ) ) {
+						$option['id'] = $option['name'];
+					}
+
 					?>
 					<option
 						value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['id'] ); ?></option>

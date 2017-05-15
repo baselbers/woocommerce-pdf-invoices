@@ -234,7 +234,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.9.0 - May 10, 2017 =
+= 2.9.0 - May 15, 2017 =
 
 - Improved: Spanish translation files thanks to [Jorge Fuentes](www.jorgefuentes.net).
 - Improved: Settings classes with a complete refactor.
@@ -243,7 +243,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: Deactivation notice by only checking for notice on plugins.php page.
 - Fixed: Facebook share button.
 - Fixed: Download from my account page not working.
-- Fixed: Item meta and download item meta not displayed inline within table cells by stripping `<p>` and `<br>` tags.
+- Fixed: Item meta and download item meta not displayed inline within table cells by stripping `<p>` and `<br>` tags. Update custom template needed!
 - Removed: Unused CSS and JS.
 
 = 2.8.1 - April 21, 2017 =

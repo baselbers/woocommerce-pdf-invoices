@@ -222,10 +222,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		private function get_next_invoice_number() {
 			// uses WooCommerce order numbers as invoice numbers?
 			if ( 'woocommerce_order_number' === $this->template_options['bewpi_invoice_number_type'] ) {
-				// WC backwards compatibility.
-				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
-
-				return $order_id;
+				return $this->order->get_order_number();
 			}
 
 			// check if user did a counter reset.

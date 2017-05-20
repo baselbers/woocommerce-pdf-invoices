@@ -236,11 +236,13 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.9.1 - May 15, 2017 =
 
+- Improved: Viewing packing slip by checking Download and Send to browser view modes.
+- Fixed: .html extension added while viewing/downloading packing slip.
 - Fixed: Sequential Invoice Number plugin compatibility by using `get_order_number()` instead of `get_id()`.
 
 = 2.9.0 - May 15, 2017 =
 
-- Improved: Spanish translation files thanks to [Jorge Fuentes](www.jorgefuentes.net).
+- Improved: Spanish translation files thanks to [Jorge Fuentes](http://jorgefuentes.net).
 - Improved: Settings classes with a complete refactor.
 - Improved: File names by removing unnecessary prefixes.
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.

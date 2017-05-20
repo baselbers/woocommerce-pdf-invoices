@@ -89,6 +89,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param string $destination Destination mode for file.
 		 */
 		public function generate( $destination = 'F' ) {
+			// Use ttfontdata from uploads folder.
+			define( '_MPDF_TTFONTDATAPATH', WPI_UPLOADS_DIR . '/mpdf/ttfontdata/' );
+
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
 			do_action( 'bewpi_before_invoice_content', $order_id );

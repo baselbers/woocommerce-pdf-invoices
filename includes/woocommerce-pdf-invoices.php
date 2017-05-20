@@ -169,7 +169,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			add_action( 'admin_init', array( $this, 'load_settings' ) );
-			add_action( 'admin_init', array( $this, 'setup_directories' ) );
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
@@ -214,10 +213,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Creates invoices dir in uploads folder.
 		 */
 		public static function setup_directories() {
-			if ( file_exists( WPI_UPLOADS_DIR ) ) {
-				return;
-			}
-
 			$current_year       = date_i18n( 'Y', current_time( 'timestamp' ) );
 			$directories        = apply_filters( 'bewpi_uploads_directories', array(
 				WPI_UPLOADS_DIR . '/attachments/' => array(
@@ -229,6 +224,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					'index.php',
 				),
 				WPI_UPLOADS_DIR . '/fonts/' => array(
+					'.htaccess',
+					'index.php',
+				),
+				WPI_UPLOADS_DIR . '/mpdf/ttfontdata/' => array(
 					'.htaccess',
 					'index.php',
 				),

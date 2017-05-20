@@ -237,6 +237,8 @@ Important: A custom template is required to add a custom field to the PDF invoic
 = 2.9.1 - May 15, 2017 =
 
 - Improved: Viewing packing slip by checking Download and Send to browser view modes.
+- Improved: Creation of uploads directories only on admin request and plugin activation/update.
+- Fixed: ttfontdata folder lost cached font data files by using custom directory in uploads folder.
 - Fixed: .html extension added while viewing/downloading packing slip.
 - Fixed: Sequential Invoice Number plugin compatibility by using `get_order_number()` instead of `get_id()`.
 

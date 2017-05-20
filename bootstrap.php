@@ -68,7 +68,9 @@ function _bewpi_load_plugin() {
 	}
 	BEWPI();
 
-	_bewpi_on_plugin_update();
+	if ( is_admin() ) {
+		_bewpi_on_plugin_update();
+	}
 }
 add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 
@@ -80,6 +82,9 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
 	if ( WPI_VERSION !== $current_version ) {
+
+		// Create uploads directories on activation and on update.
+		BEWPI()->setup_directories();
 
 		// temporary change max execution time to higher value to prevent internal server errors.
 		$max_execution_time = (int) ini_get( 'max_execution_time' );
@@ -95,8 +100,6 @@ function _bewpi_on_plugin_update() {
 
 		// version 2.7.0- uploads folder changed to uploads/woocommerce-pdf-invoices.
 		if ( version_compare( $current_version, '2.7.0' ) <= 0 ) {
-			BEWPI()->setup_directories();
-
 			// Move invoice from uploads/bewpi-invoices to uploads/woocommerce-pdf-invoices/attachments.
 			move_pdf_invoices();
 
@@ -265,7 +268,5 @@ function _bewpi_on_plugin_activation() {
 
 	// use transient to display activation admin notice.
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
-
-	update_site_option( 'bewpi_version', WPI_VERSION );
 }
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

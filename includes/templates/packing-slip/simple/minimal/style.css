@@ -37,10 +37,7 @@ table tr.top td:nth-child(2){
     text-align: right;
 }
 
-div.title div {
-    padding: 5px;
-    width: 40%;
-    float: left;
+table tr.title td {
     margin-left: 60px; /* Document margin */
     line-height: 55px;
 }
@@ -69,13 +66,12 @@ table.notes {
 }
 
 table.footer {
-    padding-top: 20px;
-    padding-bottom: 20px; /* Document margin */
+    margin-top: 20px;
+    margin-bottom: 20px; /* Document margin */
     width: 100%;
 }
 
 table.footer tr td {
-    padding: 5px;
     vertical-align: bottom;
 }
 

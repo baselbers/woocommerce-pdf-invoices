@@ -240,6 +240,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: Creation of uploads directories only on admin request and plugin activation/update.
 - Fixed: ttfontdata folder lost cached font data files by using custom directory in uploads folder.
 - Fixed: .html extension added while viewing/downloading packing slip.
+- Fixed: VAT number message always showing when '_vat_number_is_valid' is not empty.
 - Fixed: Sequential Invoice Number plugin compatibility by using `get_order_number()` instead of `get_id()`.
 
 = 2.9.0 - May 15, 2017 =

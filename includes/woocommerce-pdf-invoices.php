@@ -355,8 +355,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					BEWPI_Invoice::view( $full_path );
 					break;
 				case 'view_packing_slip':
+					$view_mode = 'download' === BEWPI()->get_option( 'bewpi_view_pdf' ) ? 'D' : 'I';
 					$packing_slip = new BEWPI_Packing_Slip( $order_id );
-					$packing_slip->generate( 'D' );
+					$packing_slip->generate( $view_mode );
 					break;
 				case 'cancel':
 					BEWPI_Invoice::delete( $order_id );
@@ -729,7 +730,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Get option.
 		 *
-		 * @param string $name Option name.
+		 * @param string $name Option name with or without prefix.
 		 *
 		 * @return bool|mixed
 		 */

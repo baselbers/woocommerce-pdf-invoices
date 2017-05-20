@@ -81,9 +81,17 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
  */
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
-	if ( WPI_VERSION !== $current_version ) {
 
-		// Create uploads directories on activation and on update.
+	if ( $current_version === false ) {
+
+		// First time creation of directories.
+		BEWPI()->setup_directories();
+
+		add_site_option( 'bewpi_version', WPI_VERSION );
+
+	} elseif ( WPI_VERSION !== $current_version ) {
+
+		// Update directories.
 		BEWPI()->setup_directories();
 
 		// temporary change max execution time to higher value to prevent internal server errors.
@@ -263,10 +271,7 @@ function move_pdf_invoices() {
  * @since 2.5.0
  */
 function _bewpi_on_plugin_activation() {
-	// save install datetime for plugin activation admin notice.
-	update_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
-
-	// use transient to display activation admin notice.
+	add_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
 }
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

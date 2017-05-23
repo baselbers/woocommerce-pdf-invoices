@@ -725,8 +725,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return bool|mixed
 		 */
 		public static function get_option( $group, $name = '' ) {
-			$name = 'bewpi_' . $name;
-
 			$option = apply_filters( 'bewpi_option', false, $group, $name );
 			if ( $option !== false ) {
 				return $option;
@@ -737,7 +735,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return false;
 			}
 
-			if ( ! isset( $options[ 'bewpi_' . $name ] ) ) {
+			$name = 'bewpi_' . $name;
+			if ( ! isset( $options[ $name ] ) ) {
 				return false;
 			}
 

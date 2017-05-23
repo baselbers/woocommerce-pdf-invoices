@@ -241,6 +241,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 - Improved: Main global class function name by renaming it from 'BEWPI()' to 'WPI()'.
 - Improved: Viewing packing slip by using Download and Send to browser view modes.
 - Improved: Creation of uploads directories only on admin request and plugin activation/update.
+- Fixed: 'BEWPI()->templater()->get_meta()' always empty by setting order directly after order creation.
 - Fixed: 'Bad gateway' and 'PHP Warning: A non-numeric value encountered' on checkout page due to mPDF 7.1 incompatibility.
 - Fixed: ttfontdata folder losing cached font data files by using custom directory in uploads folder.
 - Fixed: .html extension added while viewing/downloading packing slip.

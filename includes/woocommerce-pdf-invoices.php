@@ -149,6 +149,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$this->frontend_init_hooks();
 			}
 
+			add_action( 'woocommerce_checkout_order_processed', array( __CLASS__, 'set_order' ), 10, 3 );
+
 			// @todo Move to BEWPI_Invoice class.
 			add_filter( 'woocommerce_email_headers', array( $this, 'add_emailitin_as_recipient' ), 10, 3 );
 			add_filter( 'woocommerce_email_attachments', array( $this, 'attach_invoice_to_email' ), 99, 3 );
@@ -701,6 +703,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			);
 
 			return $actions;
+		}
+
+		/**
+		 * Set order for templater directly after creation to fetch order data.
+		 *
+		 * @param int      $order_id WC_Order ID.
+		 * @param string   $posted_data WC_Order posted data.
+		 * @param WC_Order $order WC_Order object.
+		 */
+		public static function set_order( $order_id, $posted_data, $order ) {
+			BEWPI()->templater()->set_order( $order );
 		}
 
 		/**

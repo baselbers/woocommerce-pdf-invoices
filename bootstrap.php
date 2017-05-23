@@ -61,12 +61,25 @@ function _bewpi_load_plugin() {
 	 * Main instance of BE_WooCommerce_PDF_Invoices.
 	 *
 	 * @since  2.5.0
+	 * @deprecated Use WPI() instead.
+	 *
 	 * @return BE_WooCommerce_PDF_Invoices
 	 */
 	function BEWPI() {
 		return BE_WooCommerce_PDF_Invoices::instance();
 	}
 	BEWPI();
+
+	/**
+	 * Main instance of BE_WooCommerce_PDF_Invoices.
+	 *
+	 * @since  2.9.1
+	 * @return BE_WooCommerce_PDF_Invoices
+	 */
+	function WPI() {
+		return BE_WooCommerce_PDF_Invoices::instance();
+	}
+	WPI();
 
 	if ( is_admin() ) {
 		_bewpi_on_plugin_update();

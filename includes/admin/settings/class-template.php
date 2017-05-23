@@ -29,8 +29,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 			parent::__construct();
 
-			register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
-
 			$this->fix_deleted_custom_template();
 		}
 
@@ -75,7 +73,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array
 		 */
 		private function get_fields() {
-			$templater = BEWPI()->templater();
+			$templater = WPI()->templater();
 			$templates = array();
 			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
 				$templates[] = array(
@@ -607,7 +605,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 */
 		private function fix_deleted_custom_template() {
 			$options   = get_option( $this->settings_key );
-			$templates = array_map( 'basename', BEWPI()->templater()->get_templates() );
+			$templates = array_map( 'basename', WPI()->templater()->get_templates() );
 
 			// Check for deleted custom template.
 			if ( in_array( $options['bewpi_template_name'], $templates, true ) ) {

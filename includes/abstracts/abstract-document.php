@@ -76,7 +76,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * BEWPI_Abstract_Document constructor.
 		 */
 		public function __construct() {
-			$templater    = BEWPI()->templater();
+			$templater    = WPI()->templater();
 			$templater->set_order( $this->order );
 			$this->template         = $templater->get_template( $this->type );
 			$this->general_options  = get_option( 'bewpi_general_settings' ); // @todo remove.
@@ -147,7 +147,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			// mPDF debugging.
-			if ( BEWPI()->get_option( 'bewpi_mpdf_debug' ) ) {
+			if ( WPI()->get_option( 'general', 'mpdf_debug' ) ) {
 				$mpdf->debug           = true;
 				$mpdf->showImageErrors = true;
 			}
@@ -168,7 +168,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			// Template.
 			$html = $this->get_html();
 			if ( count( $html ) === 0 ) {
-				BEWPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );
+				WPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );
 				return;
 			}
 

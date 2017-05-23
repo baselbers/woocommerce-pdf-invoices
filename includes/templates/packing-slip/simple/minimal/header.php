@@ -15,7 +15,7 @@
  * @version 0.0.1
  */
 
-$templater  = BEWPI()->templater();
+$templater  = WPI()->templater();
 $document   = $templater->packing_slip;
 $order      = $templater->order;
 ?>

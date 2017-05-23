@@ -15,7 +15,7 @@
  * @version 0.0.1
  */
 
-$templater       = BEWPI()->templater();
+$templater       = WPI()->templater();
 $order           = $templater->order;
 $invoice         = $templater->invoice;
 $payment_gateway = wc_get_payment_gateway_by_order( $order );

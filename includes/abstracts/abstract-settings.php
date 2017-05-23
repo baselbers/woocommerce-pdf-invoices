@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) or exit;
 /**
  * Class BEWPI_Abstract_Settings.
  */
-class BEWPI_Abstract_Settings {
+abstract class BEWPI_Abstract_Settings {
 
 	/**
 	 * Option name prefix.
@@ -58,20 +58,44 @@ class BEWPI_Abstract_Settings {
 	protected $defaults = array();
 
 	/**
+	 * Settings classes.
+	 *
+	 * @var array
+	 */
+	private static $settings = array();
+
+	/**
 	 * BEWPI_Abstract_Settings constructor.
 	 */
 	public function __construct() {
 		$this->add_sections();
 		$this->add_fields();
 		$this->set_defaults();
+
+		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
 	}
 
 	/**
 	 * Initialize hooks.
 	 */
 	public static function init_hooks() {
+		add_action( 'admin_init', array( __CLASS__, 'load_settings' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
+	}
+
+	/**
+	 * Load all settings classes.
+	 */
+	public static function load_settings() {
+		global $pagenow;
+
+		// Only load settings on settings page. @todo Only load settings for specific tab.
+		if ( isset( $_GET['page'] ) && 'bewpi-invoices' === $_GET['page'] || 'options.php' === $pagenow ) {
+			$settings[] = new BEWPI_General_Settings();
+			$settings[] = new BEWPI_Template_Settings();
+			self::$settings = apply_filters( 'bewpi_settings', $settings );
+		}
 	}
 
 	/**
@@ -94,7 +118,7 @@ class BEWPI_Abstract_Settings {
 
 			<h2 class="nav-tab-wrapper">
 				<?php
-				foreach ( BEWPI()->settings as $setting ) {
+				foreach ( self::$settings as $setting ) {
 					$active = $current_tab === $setting->settings_key ? 'nav-tab-active' : '';
 					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', $active, $setting->settings_key, $setting->settings_tab );
 				}
@@ -367,4 +391,11 @@ class BEWPI_Abstract_Settings {
 
 		return update_option( $this->settings_key, $options );
 	}
+
+	/**
+	 * @param $input
+	 *
+	 * @return mixed
+	 */
+	public abstract function sanitize( $input );
 }

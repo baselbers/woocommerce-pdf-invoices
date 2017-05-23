@@ -28,8 +28,6 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			$this->defaults = $this->get_defaults();
 
 			parent::__construct();
-
-			register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
 		}
 
 		/**

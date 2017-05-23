@@ -15,7 +15,7 @@
  * @version 0.0.1
  */
 
-$templater                      = BEWPI()->templater();
+$templater                      = WPI()->templater();
 $order                          = $templater->order;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();

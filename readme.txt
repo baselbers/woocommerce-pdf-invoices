@@ -236,9 +236,13 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.9.1 - May 15, 2017 =
 
-- Improved: Viewing packing slip by checking Download and Send to browser view modes.
+- Improved: Loading settings only on settings pages.
+- Improved: Option method for getting options by option group and option name.
+- Improved: Main global class function name by renaming it from 'BEWPI()' to 'WPI()'.
+- Improved: Viewing packing slip by using Download and Send to browser view modes.
 - Improved: Creation of uploads directories only on admin request and plugin activation/update.
-- Fixed: ttfontdata folder lost cached font data files by using custom directory in uploads folder.
+- Fixed: 'Bad gateway' and 'PHP Warning: A non-numeric value encountered' on checkout page due to mPDF 7.1 incompatibility.
+- Fixed: ttfontdata folder losing cached font data files by using custom directory in uploads folder.
 - Fixed: .html extension added while viewing/downloading packing slip.
 - Fixed: VAT number message always showing when '_vat_number_is_valid' is not empty.
 - Fixed: Sequential Invoice Number plugin compatibility by using `get_order_number()` instead of `get_id()`.

@@ -25,7 +25,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 			$this->order        = wc_get_order( $order_id );
 			$this->type         = 'packing-slip/simple';
 			$this->filename     = apply_filters( 'bewpi_pdf_packing_slip_filename', sprintf( 'packing-slip-%s.pdf', BEWPI_WC_Order_Compatibility::get_id( $this->order ) ), $this );
-			BEWPI()->templater()->set_packing_slip( $this );
+			WPI()->templater()->set_packing_slip( $this );
 			parent::__construct();
 		}
 

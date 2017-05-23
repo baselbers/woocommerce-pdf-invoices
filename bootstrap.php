@@ -98,14 +98,14 @@ function _bewpi_on_plugin_update() {
 	if ( $current_version === false ) {
 
 		// First time creation of directories.
-		BEWPI()->setup_directories();
+		WPI()->setup_directories();
 
 		add_site_option( 'bewpi_version', WPI_VERSION );
 
 	} elseif ( WPI_VERSION !== $current_version ) {
 
 		// Update directories.
-		BEWPI()->setup_directories();
+		WPI()->setup_directories();
 
 		// temporary change max execution time to higher value to prevent internal server errors.
 		$max_execution_time = (int) ini_get( 'max_execution_time' );

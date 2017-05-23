@@ -35,13 +35,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public $settings = array();
 
 		/**
-		 * All settings merged.
-		 *
-		 * @var array.
-		 */
-		public static $options = array();
-
-		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
 		 * @return BE_WooCommerce_PDF_Invoices
@@ -168,7 +161,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @since 2.5.0
 		 */
 		public function admin_init_hooks() {
-			add_action( 'admin_init', array( $this, 'load_settings' ) );
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
@@ -192,21 +184,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function frontend_init_hooks() {
 			add_action( 'init', array( $this, 'frontend_pdf_callback' ) );
 			add_filter( 'woocommerce_my_account_my_orders_actions', array( $this, 'add_my_account_pdf' ), 10, 2 );
-		}
-
-		/**
-		 * Initialize settings.
-		 */
-		public function load_settings() {
-			$this->settings[] = new BEWPI_General_Settings();
-			$this->settings[] = new BEWPI_Template_Settings();
-			$this->settings = apply_filters( 'bewpi_settings', $this->settings );
-
-			foreach ( $this->settings as $setting ) {
-				self::$options = array_merge( self::$options, get_option( $setting->settings_key ) );
-			}
-
-			self::$options = apply_filters( 'bewpi_options', self::$options );
 		}
 
 		/**
@@ -354,7 +331,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					BEWPI_Invoice::view( $full_path );
 					break;
 				case 'view_packing_slip':
-					$view_mode = 'download' === BEWPI()->get_option( 'bewpi_view_pdf' ) ? 'D' : 'I';
+					$view_mode = 'download' === WPI()->get_option( 'general', 'view_pdf' ) ? 'D' : 'I';
 					$packing_slip = new BEWPI_Packing_Slip( $order_id );
 					$packing_slip->generate( $view_mode );
 					break;
@@ -727,18 +704,31 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Get option.
+		 * Get option by group and name.
 		 *
-		 * @param string $name Option name with or without prefix.
+		 * @param string $group Option group name (without 'bewpi_' prefix and '_settings' suffix). Available groups are: 'general', 'template' and 'premium'.
+		 * @param string $name Option name (without 'bewpi_' prefix).
 		 *
 		 * @return bool|mixed
 		 */
-		public static function get_option( $name ) {
-			if ( ! isset( self::$options[ $name ] ) ) {
+		public static function get_option( $group, $name = '' ) {
+			$name = 'bewpi_' . $name;
+
+			$option = apply_filters( 'bewpi_options', $group, $name );
+			if ( $option !== false ) {
+				return $option;
+			}
+
+			$options = get_option( 'bewpi_' . $group . '_settings' );
+			if ( $options === false ) {
 				return false;
 			}
 
-			return self::$options[ $name ];
+			if ( ! isset( $options[ 'bewpi_' . $name ] ) ) {
+				return false;
+			}
+
+			return $options[ $name ];
 		}
 
 		/**

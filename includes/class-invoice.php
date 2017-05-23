@@ -25,7 +25,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		public function __construct( $order_id ) {
 			$this->order        = wc_get_order( $order_id );
 			$this->type         = 'invoice/simple';
-			BEWPI()->templater()->set_invoice( $this );
+			WPI()->templater()->set_invoice( $this );
 			parent::__construct( $order_id );
 		}
 

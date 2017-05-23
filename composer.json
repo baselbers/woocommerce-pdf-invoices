@@ -34,6 +34,9 @@
     "xrstf/composer-php52": "1.*",
     "mpdf/mpdf": "dev-mpdf"
   },
+  "require-dev": {
+    "wp-coding-standards/wpcs": "dev-master"
+  },
   "autoload": {
     "classmap": [
       "includes/"

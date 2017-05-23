@@ -17,7 +17,7 @@
 
 ?>
 
-<table class="footer" cellpadding="0" cellspacing="0">
+<table class="footer">
 	<tr>
 		<td>
 			<?php echo nl2br( BEWPI()->templater()->get_option( 'bewpi_left_footer_column' ) ); ?>

@@ -23,13 +23,12 @@ $line_items                     = $order->get_items( 'line_item' );
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 ?>
 
-<div class="title">
-	<div>
-		<h2><?php _e( 'Packing Slip', 'woocommerce-pdf-invoices' ); ?></h2>
-	</div>
-	<div class="watermark"></div>
-</div>
 <table>
+	<tr class="title">
+		<td colspan="3">
+			<h2><?php _e( 'Packing Slip', 'woocommerce-pdf-invoices' ); ?></h2>
+		</td>
+	</tr>
 	<tr class="information">
 		<td width="50%">
 			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>

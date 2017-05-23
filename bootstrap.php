@@ -3,7 +3,7 @@
  * Plugin Name:       WooCommerce PDF Invoices
  * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
  * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           2.9.0
+ * Version:           2.9.1
  * Author:            Bas Elbers
  * Author URI:        http://wcpdfinvoices.com
  * License:           GPL-2.0+
@@ -17,9 +17,9 @@ defined( 'ABSPATH' ) or exit;
 /**
  * @deprecated instead use WPI_VERSION.
  */
-define( 'BEWPI_VERSION', '2.9.0' );
+define( 'BEWPI_VERSION', '2.9.1' );
 
-define( 'WPI_VERSION', '2.9.0' );
+define( 'WPI_VERSION', '2.9.1' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.
@@ -61,6 +61,8 @@ function _bewpi_load_plugin() {
 	 * Main instance of BE_WooCommerce_PDF_Invoices.
 	 *
 	 * @since  2.5.0
+	 * @deprecated Use WPI() instead.
+	 *
 	 * @return BE_WooCommerce_PDF_Invoices
 	 */
 	function BEWPI() {
@@ -68,7 +70,20 @@ function _bewpi_load_plugin() {
 	}
 	BEWPI();
 
-	_bewpi_on_plugin_update();
+	/**
+	 * Main instance of BE_WooCommerce_PDF_Invoices.
+	 *
+	 * @since  2.9.1
+	 * @return BE_WooCommerce_PDF_Invoices
+	 */
+	function WPI() {
+		return BE_WooCommerce_PDF_Invoices::instance();
+	}
+	WPI();
+
+	if ( is_admin() ) {
+		_bewpi_on_plugin_update();
+	}
 }
 add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 
@@ -79,7 +94,18 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
  */
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
-	if ( WPI_VERSION !== $current_version ) {
+
+	if ( $current_version === false ) {
+
+		// First time creation of directories.
+		BEWPI()->setup_directories();
+
+		add_site_option( 'bewpi_version', WPI_VERSION );
+
+	} elseif ( WPI_VERSION !== $current_version ) {
+
+		// Update directories.
+		BEWPI()->setup_directories();
 
 		// temporary change max execution time to higher value to prevent internal server errors.
 		$max_execution_time = (int) ini_get( 'max_execution_time' );
@@ -95,8 +121,6 @@ function _bewpi_on_plugin_update() {
 
 		// version 2.7.0- uploads folder changed to uploads/woocommerce-pdf-invoices.
 		if ( version_compare( $current_version, '2.7.0' ) <= 0 ) {
-			BEWPI()->setup_directories();
-
 			// Move invoice from uploads/bewpi-invoices to uploads/woocommerce-pdf-invoices/attachments.
 			move_pdf_invoices();
 
@@ -260,12 +284,7 @@ function move_pdf_invoices() {
  * @since 2.5.0
  */
 function _bewpi_on_plugin_activation() {
-	// save install datetime for plugin activation admin notice.
-	update_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
-
-	// use transient to display activation admin notice.
+	add_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
-
-	update_site_option( 'bewpi_version', WPI_VERSION );
 }
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

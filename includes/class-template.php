@@ -286,7 +286,7 @@ class BEWPI_Template {
 	public function get_meta( $meta_key ) {
 		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
-		return (string) get_post_meta( $order_id, $meta_key, true );
+		return get_post_meta( $order_id, $meta_key, true );
 	}
 
 	/**

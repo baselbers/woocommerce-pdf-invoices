@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.9.0
+Stable tag: 2.9.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -234,9 +234,18 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
+= 2.9.1 - May 15, 2017 =
+
+- Improved: Viewing packing slip by checking Download and Send to browser view modes.
+- Improved: Creation of uploads directories only on admin request and plugin activation/update.
+- Fixed: ttfontdata folder lost cached font data files by using custom directory in uploads folder.
+- Fixed: .html extension added while viewing/downloading packing slip.
+- Fixed: VAT number message always showing when '_vat_number_is_valid' is not empty.
+- Fixed: Sequential Invoice Number plugin compatibility by using `get_order_number()` instead of `get_id()`.
+
 = 2.9.0 - May 15, 2017 =
 
-- Improved: Spanish translation files thanks to [Jorge Fuentes](www.jorgefuentes.net).
+- Improved: Spanish translation files thanks to [Jorge Fuentes](http://jorgefuentes.net).
 - Improved: Settings classes with a complete refactor.
 - Improved: File names by removing unnecessary prefixes.
 - Improved: PDF invoice generation by skipping unnecessary PDF invoice update for same request.

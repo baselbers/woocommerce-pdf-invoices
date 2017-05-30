@@ -234,6 +234,10 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
+= 2.9.2 - May 30, 2017 =
+
+- Fixed: WC 2.6 compatibility.
+
 = 2.9.1 - May 15, 2017 =
 
 - Improved: Loading settings only on settings pages.

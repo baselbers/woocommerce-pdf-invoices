@@ -224,6 +224,10 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 					$prop = 'order_shipping';
 
 					// get the post_parent and bail early
+				} elseif ( 'total' === $prop && 'view' !== $context ) {
+
+					$prop = 'order_total';
+
 				} elseif ( 'parent_id' === $prop ) {
 
 					return $object->post->post_parent;

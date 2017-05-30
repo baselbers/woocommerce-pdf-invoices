@@ -4,7 +4,6 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6dbaa92cdf898ad2134abfb2e5da01f0",
     "content-hash": "e3455881688d5a53680ab016ce6572ba",
     "packages": [
         {
@@ -13,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/baselbers/mpdf.git",
-                "reference": "d08e076ce0036cd7a9a3e4e6c195339478460f47"
+                "reference": "5cbaff4303604247f698afc6b13a51987a58f5bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/d08e076ce0036cd7a9a3e4e6c195339478460f47",
-                "reference": "d08e076ce0036cd7a9a3e4e6c195339478460f47",
+                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/5cbaff4303604247f698afc6b13a51987a58f5bc",
+                "reference": "5cbaff4303604247f698afc6b13a51987a58f5bc",
                 "shasum": ""
             },
             "require": {
@@ -67,7 +66,7 @@
                 "source": "https://github.com/mpdf/mpdf",
                 "docs": "http://mpdf.github.io"
             },
-            "time": "2017-04-28 11:25:56"
+            "time": "2017-05-23 11:52:01"
         },
         {
             "name": "setasign/fpdi",
@@ -116,7 +115,7 @@
                 "fpdi",
                 "pdf"
             ],
-            "time": "2017-05-11 14:25:49"
+            "time": "2017-05-11T14:25:49+00:00"
         },
         {
             "name": "xrstf/composer-php52",
@@ -147,7 +146,7 @@
             "license": [
                 "MIT"
             ],
-            "time": "2016-04-16 21:52:24"
+            "time": "2016-04-16T21:52:24+00:00"
         }
     ],
     "packages-dev": [
@@ -227,7 +226,7 @@
                 "phpcs",
                 "standards"
             ],
-            "time": "2017-05-22 02:43:20"
+            "time": "2017-05-22T02:43:20+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -263,7 +262,7 @@
                 "standards",
                 "wordpress"
             ],
-            "time": "2017-03-20 23:17:58"
+            "time": "2017-03-20T23:17:58+00:00"
         }
     ],
     "aliases": [],

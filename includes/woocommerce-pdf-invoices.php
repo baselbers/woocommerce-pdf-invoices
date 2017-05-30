@@ -456,13 +456,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $attachments;
 			}
 
-			$skip = apply_filters( 'bewpi_skip_invoice_generation', false, $status, $order );
+			$skip = apply_filters( 'bewpi_skip_invoice_generation', false, $status, $order->get_total() );
 			if ( $skip ) {
 				return $attachments;
 			}
 
-			$general_options = get_option( 'bewpi_general_settings' );
-			if ( $order->get_total() === 0.00 && (bool) $general_options['bewpi_disable_free_products'] ) {
+			$order_total = BEWPI_WC_Order_Compatibility::get_prop( $order, 'total' );
+			if ( (double) $order_total === 0.00 && WPI()->get_option( 'general', 'disable_free_products' ) ) {
 				return $attachments;
 			}
 
@@ -475,6 +475,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// check if email is enabled.
+			$general_options = get_option( 'bewpi_general_settings' );
 			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
 				return $attachments;
 			}

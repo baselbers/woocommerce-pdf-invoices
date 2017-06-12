@@ -33,7 +33,16 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * Initialize packing slips hooks.
 		 */
 		public static function init_hooks() {
-			add_action( 'woocommerce_admin_order_actions_end', array( __CLASS__, 'add_packing_slip_pdf' ) );
+			add_action( 'admin_init', array( __CLASS__, 'admin_init_hooks' ) );
+		}
+
+		/**
+		 * Initialize admin hooks.
+		 */
+		public static function admin_init_hooks() {
+			if ( self::show_packing_slip_icons() ) {
+				add_action( 'woocommerce_admin_order_actions_end', array( __CLASS__, 'add_packing_slip_pdf' ) );
+			}
 		}
 
 		/**
@@ -42,11 +51,6 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @param WC_Order $order WooCommerce order object.
 		 */
 		public static function add_packing_slip_pdf( $order ) {
-			$template_options = get_option( 'bewpi_template_settings' );
-			if ( $template_options['bewpi_disable_packing_slips'] ) {
-				return;
-			}
-
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 
 			// View Packing Slip.
@@ -63,11 +67,30 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		}
 
 		/**
+		 * Determine whether to show packing slip PDF icon on Shop Order page.
+		 *
+		 * @return bool
+		 */
+		private static function show_packing_slip_icons() {
+			if ( WPI()->get_option( 'template','disable_packing_slips' ) ) {
+				return false;
+			}
+
+			// There is no packing slip available for micro template.
+			$template_name = WPI()->get_option( 'template', 'template_name' );
+			if ( strpos( $template_name, 'micro' ) !== false ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
 		 * Get path for Packing Slip PDF.
 		 *
 		 * @return string
 		 */
-		public function get_pdf_path(){
+		public function get_pdf_path() {
 			// Yearly sub-folders.
 			if ( WPI()->get_option( 'template', 'reset_counter_yearly' ) ) {
 				$year     = date_i18n( 'Y', current_time( 'timestamp' ) );

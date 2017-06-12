@@ -237,6 +237,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 = 2.9.2 - June 12, 2017 =
 
 - Added: SKU to packing slip.
+- Fixed: Packing slips redirecting to Edit Order page when using micro template. Consider using minimal template. Micro template is deprecated and will probably no longer be supported in future versions.
 - Fixed: WC 2.6 compatibility.
 
 = 2.9.1 - May 15, 2017 =

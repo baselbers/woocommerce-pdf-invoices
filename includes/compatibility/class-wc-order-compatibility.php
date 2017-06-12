@@ -488,6 +488,24 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 			return self::get_prop( $order, 'shipping_address_1' ) || self::get_prop( $order, 'shipping_address_2' );
 		}
 
+		/**
+		 * Get product.
+		 *
+		 * @param WC_Order $order order object.
+		 * @param WC_Order_Item_Product $item order product object.
+		 *
+		 * @return bool|WC_Product
+		 */
+		public static function get_product( WC_Order $order, WC_Order_Item_Product $item ) {
+
+			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
+				$product = $item->get_product();
+			} else {
+				$product = $order->get_product_from_item( $item );
+			}
+
+			return $product;
+		}
 
 	}
 

@@ -52,6 +52,10 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo $color; ?>;">
 			<th>
+				<?php _e( 'SKU', 'woocommerce-pdf-invoices' ); ?>
+			</th>
+
+			<th>
 				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
 			</th>
 
@@ -63,11 +67,15 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	<tbody>
 	<?php
 	foreach ( $line_items as $item_id => $item ) {
-		$product = apply_filters( 'woocommerce_order_item_product', $order->get_product_from_item( $item ), $item );
+		$product = BEWPI_WC_Order_Compatibility::get_product( $order, $item );
 		?>
 
 		<tr class="item">
-			<td width="75%">
+			<td width="10%">
+				<?php echo $product && $product->get_sku() ? $product->get_sku() : '-'; ?>
+			</td>
+
+			<td width="65%">
 				<?php
 				echo $item['name'];
 

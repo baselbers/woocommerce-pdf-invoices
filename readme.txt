@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.7
-Stable tag: 2.9.1
+Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -234,8 +234,9 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.9.2 - May 30, 2017 =
+= 2.9.2 - June 12, 2017 =
 
+- Added: SKU to packing slip.
 - Fixed: WC 2.6 compatibility.
 
 = 2.9.1 - May 15, 2017 =

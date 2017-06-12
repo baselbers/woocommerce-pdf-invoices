@@ -236,6 +236,7 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 = 2.9.2 - June 12, 2017 =
 
+- Added: Filter to change the value of the option when using `WPI()->get_option()`. See [Issue #190](https://github.com/baselbers/woocommerce-pdf-invoices/issues/190).
 - Added: SKU to packing slip.
 - Fixed: Packing slips redirecting to Edit Order page when using micro template. Consider using minimal template. Micro template is deprecated and will probably no longer be supported in future versions.
 - Fixed: WC 2.6 compatibility.

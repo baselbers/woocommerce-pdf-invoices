@@ -306,6 +306,15 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Get order object.
+	 *
+	 * @return WC_Order $order order object.
+	 */
+	public function get_order() {
+		return $this->order;
+	}
+
+	/**
 	 * Set order.
 	 *
 	 * @param WC_Order $order WooCommerce Order object.

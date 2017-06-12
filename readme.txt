@@ -3,7 +3,7 @@ Contributors: baaaaas
 Donate link: 
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
-Tested up to: 4.7
+Tested up to: 4.8
 Stable tag: 2.9.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html

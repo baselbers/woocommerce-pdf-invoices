@@ -448,7 +448,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @param string $status name of email.
 		 * @param object $order order.
 		 *
-		 * @return array|mixed|void
+		 * @return array.
 		 */
 		public function attach_invoice_to_email( $attachments, $status, $order ) {
 			// only attach to emails with WC_Order object.
@@ -625,10 +625,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			) );
 
 			// display button to cancel invoice.
-			$this->show_invoice_button( __( 'Cancel', 'woocommerce-pdf-invoices' ), $post->ID, 'cancel', array(
+			/*$this->show_invoice_button( __( 'Cancel', 'woocommerce-pdf-invoices' ), $post->ID, 'cancel', array(
 				'class="button grant_access order-page invoice wpi"',
 				'onclick="return confirm(\'' . __( 'Are you sure to delete the invoice?', 'woocommerce-pdf-invoices' ) . '\')"',
-			) );
+			) );*/
+
+			do_action( 'bewpi_order_page_after_meta_box_details_end', $post->ID );
 		}
 
 		/**
@@ -704,6 +706,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			);
 
 			return $actions;
+		}
+
+		/**
+		 * Get invoice by order ID.
+		 *
+		 * @param int $order_id order ID.
+		 *
+		 * @return BEWPI_Abstract_Invoice
+		 */
+		public function get_invoice( $order_id ) {
+
+			return new BEWPI_Invoice( $order_id );
 		}
 
 		/**

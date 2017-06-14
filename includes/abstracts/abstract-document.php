@@ -17,6 +17,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	abstract class BEWPI_Abstract_Document {
 
 		/**
+		 * ID of document.
+		 *
+		 * @var int.
+		 */
+		protected $id;
+
+		/**
 		 * Type of document like invoice, packing slip or credit note.
 		 *
 		 * @var string type of document.

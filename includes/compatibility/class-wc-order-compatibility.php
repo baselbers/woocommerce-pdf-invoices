@@ -53,7 +53,7 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 * Backports WC_Order::get_id() method to pre-2.6.0
 		 *
 		 * @since 4.2.0
-		 * @param WC_Order $order order object
+		 * @param WC_Abstract_Order $order order object
 		 *
 		 * @return string|int order ID
 		 */
@@ -96,12 +96,12 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 *
 		 * @since 4.6.0
 		 *
-		 * @param \WC_Order $order order object
+		 * @param \WC_Abstract_Order $order order object
 		 * @param string $context if 'view' then the value will be filtered
 		 *
 		 * @return \WC_DateTime|null
 		 */
-		public static function get_date_created( WC_Order $order, $context = 'edit' ) {
+		public static function get_date_created( WC_Abstract_Order $order, $context = 'edit' ) {
 
 			return self::get_date_prop( $order, 'created', $context );
 		}
@@ -162,13 +162,13 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 *
 		 * @since 4.6.0
 		 *
-		 * @param \WC_Order $order order object
+		 * @param \WC_Abstract_Order $order order object
 		 * @param string $type type of date to get
 		 * @param string $context if 'view' then the value will be filtered
 		 *
 		 * @return \WC_DateTime|null
 		 */
-		public static function get_date_prop( WC_Order $order, $type, $context = 'edit' ) {
+		public static function get_date_prop( WC_Abstract_Order $order, $type, $context = 'edit' ) {
 
 			$date = null;
 			$prop = "date_{$type}";

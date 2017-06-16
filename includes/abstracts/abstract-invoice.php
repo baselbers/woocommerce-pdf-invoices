@@ -72,8 +72,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 			$this->full_path = self::exists( $order_id );
 			if ( $this->full_path ) {
-				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
-
 				$this->number   = get_post_meta( $order_id, '_bewpi_invoice_number', true );
 				$this->date     = get_post_meta( $order_id, '_bewpi_invoice_date', true );
 				$this->year     = date_i18n( 'Y', strtotime( $this->date ) );

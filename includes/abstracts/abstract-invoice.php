@@ -100,7 +100,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				array( '[number]', '[order-date]', '[order-number]', '[Y]', '[y]', '[m]' ),
 				array(
 					$digitized_invoice_number,
-					apply_filters( 'bewpi_formatted_invoice_number_order_date', $this->get_formatted_order_date() ),
+					date_i18n( apply_filters( 'bewpi_formatted_invoice_number_order_date_format', 'Y-m-d' ), strtotime( $this->date ) ),
 					$this->order->get_order_number(),
 					$this->year,
 					date_i18n( 'y', strtotime( $this->date ) ),

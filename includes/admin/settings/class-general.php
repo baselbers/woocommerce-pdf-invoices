@@ -72,7 +72,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 			$sections = array(
 				'email' => array(
 					'title' => __( 'Email Options', 'woocommerce-pdf-invoices' ),
-					'description' => sprintf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email' ),
+					'description' => sprintf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice. Want to attach PDF documents to many more email types? Take a look at %2$s.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email', '<a href="https://wcpdfinvoices.com" target="_blank">WooCommerce PDF Invoices Premium</a>' ),
 				),
 				'download' => array(
 					'title' => __( 'Download Options', 'woocommerce-pdf-invoices' ),
@@ -108,7 +108,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'section'  => 'email',
 					'type'     => 'multiple_checkbox',
 					'desc'     => '',
-					'options'  => array(
+					'options'  => apply_filters( 'wpi_email_types', array(
 						array(
 							'name'    => __( 'New order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'new_order',
@@ -134,50 +134,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 							'value'   => 'customer_invoice',
 							'default' => 0,
 						),
-					),
-				),
-				array(
-					'id'       => 'bewpi-woocommerce-subscriptions-email-types',
-					'name'     => $this->prefix . 'woocommerce_subscriptions_email_types',
-					'title'    => sprintf( __( 'Attach to %s Emails', 'woocommerce-pdf-invoices' ), 'WooCommerce Subscriptions' )
-					              . sprintf( ' <img src="%1$s" alt="%2$s" title="%2$s" width="18"/>', WPI_URL . '/assets/images/star-icon.png', __( 'Premium', 'woocommerce-pdf-invoices' ) ),
-					'callback' => array( $this, 'multiple_checkbox_callback' ),
-					'page'     => $this->settings_key,
-					'section'  => 'email',
-					'type'     => 'multiple_checkbox',
-					'desc'     => '',
-					'options'  => array(
-						array(
-							'name'    => __( 'New Renewal Order', 'woocommerce-subscriptions' ),
-							'value'   => 'new_renewal_order',
-							'default' => 0,
-							'disabled' => 1,
-						),
-						array(
-							'name'      => __( 'Subscription Switch Complete', 'woocommerce-subscriptions' ),
-							'value'     => 'customer_completed_switch_order',
-							'default'   => 0,
-							'disabled'  => 1,
-						),
-						array(
-							'name'      => __( 'Processing Renewal order', 'woocommerce-subscriptions' ),
-							'value'     => 'customer_processing_renewal_order',
-							'default'   => 0,
-							'disabled'  => 1,
-						),
-						array(
-							'name'      => __( 'Completed Renewal Order', 'woocommerce-subscriptions' ),
-							'value'     => 'customer_completed_renewal_order',
-							'default'   => 0,
-							'disabled'  => 1,
-						),
-						array(
-							'name'      => __( 'Customer Renewal Invoice', 'woocommerce-subscriptions' ),
-							'value'     => 'customer_renewal_invoice',
-							'default'   => 0,
-							'disabled'  => 1,
-						),
-					),
+					) ),
 				),
 				array(
 					'id'       => 'bewpi-disable-free-products',

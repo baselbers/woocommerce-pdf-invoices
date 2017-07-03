@@ -234,10 +234,12 @@ Important: A custom template is required to add a custom field to the PDF invoic
 
 == Changelog ==
 
-= 2.9.3 - June 19, 2017 =
+= 2.9.3 - July 3, 2017 =
 
+- Added: 'wpi_email_types' filter to add email types.
 - Fixed: PDF abortion error by not using date format from settings for [order-date] since it can have slashes.
 - Fixed: Missing argument 3 fatal error due to 'woocommerce_checkout_order_processed' hook used by third party plugins.
+- Removed: Greyed out WooCommerce Subscriptions emails.
 
 = 2.9.2 - June 12, 2017 =
 

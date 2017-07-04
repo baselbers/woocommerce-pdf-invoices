@@ -486,8 +486,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$invoice = new BEWPI_Invoice( $order_id );
 			if ( ! $full_path ) {
 				$full_path = $invoice->generate();
-				set_transient( $transient_name, 60 );
-			} elseif ( $full_path && ! get_transient( $transient_name )  ) {
+				set_transient( $transient_name, true, 60 );
+			} elseif ( $full_path && ! get_transient( $transient_name ) ) {
 				// No need to update for same request.
 				$full_path = $invoice->update();
 			}

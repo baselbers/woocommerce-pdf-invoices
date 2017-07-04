@@ -404,7 +404,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Add "Email It In" email address as BCC to WooCommerce email.
 		 *
-		 * @param array  $headers email headers.
+		 * @param string $headers email headers.
 		 * @param string $status email name.
 		 * @param object $order WooCommerce order.
 		 *
@@ -423,21 +423,23 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $headers;
 			}
 
-			$general_options = get_option( 'bewpi_general_settings' );
-			$emailitin_account = $general_options['bewpi_email_it_in_account'];
+			$emailitin_account = WPI()->get_option( 'general', 'email_it_in_account' );
+			$emailitin_enabled = WPI()->get_option( 'general', 'email_it_in' );
 			// Email It In option enabled?
-			if ( ! $general_options['bewpi_email_it_in'] || empty( $emailitin_account ) ) {
+			if ( ! $emailitin_enabled || empty( $emailitin_account ) ) {
 				return $headers;
 			}
 
 			// check if current email type is enabled.
-			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
+			$email_types = WPI()->get_option( 'general', 'email_types' );
+			if ( ! isset( $email_types[ $status ] ) || ! $email_types[ $status ] ) {
 				return $headers;
 			}
 
 			set_transient( $transient_name, true, 20 );
 
 			$headers .= 'BCC: <' . $emailitin_account . '>' . "\r\n";
+
 			return $headers;
 		}
 
@@ -462,7 +464,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			$order_total = BEWPI_WC_Order_Compatibility::get_prop( $order, 'total' );
-			if ( (double) $order_total === 0.00 && WPI()->get_option( 'general', 'disable_free_products' ) ) {
+			if ( 0.00 === (double) $order_total && WPI()->get_option( 'general', 'disable_free_products' ) ) {
 				return $attachments;
 			}
 
@@ -475,15 +477,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// check if email is enabled.
-			$general_options = get_option( 'bewpi_general_settings' );
-			if ( ! isset( $general_options[ $status ] ) || ! $general_options[ $status ] ) {
+			$email_types = WPI()->get_option( 'general', 'email_types' );
+			if ( ! isset( $email_types[ $status ] ) || ! $email_types[ $status ] ) {
 				return $attachments;
 			}
 
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
+			$order_id       = BEWPI_WC_Order_Compatibility::get_id( $order );
 			$transient_name = sprintf( 'bewpi_pdf_invoice_generated-%s', $order_id );
-			$full_path = BEWPI_Invoice::exists( $order_id );
-			$invoice = new BEWPI_Invoice( $order_id );
+			$full_path      = BEWPI_Invoice::exists( $order_id );
+			$invoice        = new BEWPI_Invoice( $order_id );
 			if ( ! $full_path ) {
 				$full_path = $invoice->generate();
 				set_transient( $transient_name, true, 60 );
@@ -515,7 +517,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$offset = array_search( 'order_actions', array_keys( $columns ), true );
 			$columns = array_merge(
 				array_splice( $columns, 0, $offset ),
-				array( 'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ) ),
+				array(
+					'bewpi_invoice_number' => __( 'Invoice No.', 'woocommerce-pdf-invoices' ),
+					),
 				$columns
 			);
 

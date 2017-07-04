@@ -95,7 +95,7 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
 
-	if ( $current_version === false ) {
+	if ( false === $current_version ) {
 
 		// First time creation of directories.
 		WPI()->setup_directories();
@@ -127,6 +127,11 @@ function _bewpi_on_plugin_update() {
 			// Rename uploads/bewpi-templates/invoices to uploads/bewpi-templates/invoice.
 			$upload_dir = wp_upload_dir();
 			rename( BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR, $upload_dir['basedir'] . '/bewpi-templates/invoice' );
+		}
+
+		// version 2.9.2- need to update "Attach to Emails" option to recursive structure.
+		if ( version_compare( $current_version, '2.9.2' ) <= 0 ) {
+			update_email_types_options_to_recursive();
 		}
 
 		set_time_limit( $max_execution_time );
@@ -276,6 +281,29 @@ function move_pdf_invoices() {
 
 		copy( $file, WPI_ATTACHMENTS_DIR . '/' . basename( $file ) );
 	}
+}
+
+/**
+ * Update email types options to recursive array structure.
+ */
+function update_email_types_options_to_recursive() {
+	$general_options = get_option( 'bewpi_general_settings' );
+	$email_types     = array( 'new_order', 'customer_on_hold_order', 'customer_processing_order', 'customer_completed_order', 'customer_invoice', 'new_renewal_order', 'customer_completed_switch_order', 'customer_processing_renewal_order', 'customer_completed_renewal_order', 'customer_renewal_invoice' );
+
+	foreach ( $email_types as $email_type ) {
+
+		if ( isset( $general_options[ $email_type ] ) ) {
+			$general_options['bewpi_email_types'] = array(
+				$email_type => $general_options[ $email_type ],
+			);
+
+			// Remove older option.
+			unset( $general_options[ $email_type ] );
+		}
+
+	}
+
+	update_option( 'bewpi_general_settings', $general_options );
 }
 
 /**

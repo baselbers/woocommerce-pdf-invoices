@@ -31,39 +31,6 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		}
 
 		/**
-		 * Get all default values from the settings array.
-		 *
-		 * @return array
-		 */
-		public function get_defaults() {
-			$fields = $this->get_fields();
-
-			// Remove multiple checkbox types from settings.
-			foreach ( $fields as $index => $field ) {
-				if ( array_key_exists( 'type', $field ) && 'multiple_checkbox' === $field['type'] ) {
-					unset( $fields[ $index ] );
-				}
-			}
-
-			return array_merge( $this->get_multiple_checkbox_defaults(), wp_list_pluck( $fields, 'default', 'name' ) );
-		}
-
-		/**
-		 * Fetch all multiple checkbox option defaults from settings.
-		 */
-		private function get_multiple_checkbox_defaults() {
-			$defaults = array();
-
-			foreach ( $this->fields as $field ) {
-				if ( array_key_exists( 'type', $field ) && 'multiple_checkbox' === $field['type'] ) {
-					$defaults = array_merge( $defaults, wp_list_pluck( $field['options'], 'default', 'value' ) );
-				}
-			}
-
-			return $defaults;
-		}
-
-		/**
 		 * Get all sections.
 		 *
 		 * @return array.
@@ -246,12 +213,21 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 *
 		 * @param array $input settings.
 		 *
-		 * @return mixed|void
+		 * @return mixed
 		 */
 		public function sanitize( $input ) {
 			$output = get_option( $this->settings_key );
 
 			foreach ( $input as $key => $value ) {
+				if ( ! isset( $input[ $key ] ) ) {
+					continue;
+				}
+
+				if ( is_array( $input[ $key ] ) ) {
+					$output[ $key ] = $input[ $key ];
+					continue;
+				}
+
 				// Strip all html and properly handle quoted strings.
 				$output[ $key ] = stripslashes( $input[ $key ] );
 			}

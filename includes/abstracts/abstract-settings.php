@@ -348,8 +348,7 @@ abstract class BEWPI_Abstract_Settings {
 			?>
 		/>
 		<?php if ( $is_checkbox ) { ?>
-			<label for="<?php echo $args['id']; ?>"
-			       class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
+			<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
 		<?php } else { ?>
 			<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
 		<?php } ?>
@@ -378,7 +377,21 @@ abstract class BEWPI_Abstract_Settings {
 	 * @return array
 	 */
 	protected function get_defaults() {
-		return wp_list_pluck( $this->fields, 'default', 'name' );
+		$fields   = $this->fields;
+		$defaults = array();
+
+		// Remove multiple checkbox types from settings.
+		foreach ( $fields as $index => $field ) {
+			if ( isset( $field['type'] ) && 'multiple_checkbox' === $field['type'] ) {
+				// Add options defaults.
+				$defaults[ $field['name'] ] = wp_list_pluck( $field['options'], 'default', 'value' );
+				unset( $fields[ $index ] );
+			}
+		}
+
+		$defaults = wp_parse_args( $defaults, wp_list_pluck( $fields, 'default', 'name' ) );
+
+		return $defaults;
 	}
 
 	/**
@@ -387,7 +400,16 @@ abstract class BEWPI_Abstract_Settings {
 	 * @return bool
 	 */
 	protected function set_defaults() {
-		$options = array_merge( $this->defaults, (array) get_option( $this->settings_key ) );
+		$options = get_option( $this->settings_key );
+
+		// Recursive merge.
+		foreach ( $this->defaults as $key => $value ) {
+			if ( is_array( $value ) && isset( $options[ $key ] ) ) {
+				$options[ $key ] = wp_parse_args( $value, $options[ $key ] );
+			} else {
+				$options[ $key ] = $this->defaults[ $key ];
+			}
+		}
 
 		return update_option( $this->settings_key, $options );
 	}

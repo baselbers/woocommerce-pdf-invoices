@@ -616,16 +616,5 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			$options['bewpi_template_name'] = $defaults['bewpi_template_name'];
 			update_option( $this->settings_key, $options );
 		}
-
-		/**
-		 * Format all available invoice number placeholders.
-		 *
-		 * @return string
-		 */
-		protected static function formatted_number_placeholders() {
-			$placeholders = array( '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
-
-			return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
-		}
 	}
 }

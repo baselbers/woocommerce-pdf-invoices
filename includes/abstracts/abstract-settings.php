@@ -210,6 +210,17 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
+	 * Format all available invoice number placeholders.
+	 *
+	 * @return string
+	 */
+	protected static function formatted_number_placeholders() {
+		$placeholders = array( '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
+
+		return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
+	}
+
+	/**
 	 * Gets all the tags that are allowed.
 	 *
 	 * @return string|void
@@ -402,16 +413,27 @@ abstract class BEWPI_Abstract_Settings {
 	protected function set_defaults() {
 		$options = get_option( $this->settings_key );
 
-		// Recursive merge.
-		foreach ( $this->defaults as $key => $value ) {
-			if ( is_array( $value ) && isset( $options[ $key ] ) ) {
-				$options[ $key ] = wp_parse_args( $value, $options[ $key ] );
-			} else {
-				$options[ $key ] = $this->defaults[ $key ];
-			}
+		// Initialize options.
+		if ( false === $options ) {
+			return add_option( $this->settings_key, $this->defaults );
 		}
 
-		return update_option( $this->settings_key, $options );
+		// Recursive merge options with defaults.
+		foreach ( $this->defaults as $key => $value ) {
+
+			if ( ! isset( $options[ $key ] ) ) {
+				continue;
+			}
+
+			if ( is_array( $options[ $key ] ) ) {
+				$this->defaults[ $key ] = array_merge( $value, $options[ $key ] );
+			} else {
+				$this->defaults[ $key ] = $options[ $key ];
+			}
+
+		}
+
+		return update_option( $this->settings_key, $this->defaults );
 	}
 
 	/**

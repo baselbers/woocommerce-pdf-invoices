@@ -94,9 +94,10 @@ class BEWPI_Template {
 	 */
 	public function get_template( $type ) {
 		$template = array();
+		$order_id = BEWPI_WC_Order_Compatibility::get_id( WPI()->templater()->get_order() );
 
 		// get template name from template options.
-		$name = $this->get_option( 'bewpi_template_name' );
+		$name = apply_filters( 'wpi_template_name', WPI()->get_option( 'template', 'template_name' ), $type, $order_id );
 
 		// first check custom directory, second plugin directory.
 		foreach ( $this->directories as $directory ) {

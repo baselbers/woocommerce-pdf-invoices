@@ -232,10 +232,46 @@ Use below code to display meta-data. Replace `{META_KEY}` with the actual key. I
 
 Important: A custom template is required to add a custom field to the PDF invoice.
 
+### How to use a different template based on some order variable? ###
+Use below code to use a different template based on WPML order language. You can for example change the function to use a different template based on the payment method instead.
+
+`
+/**
+ * Change template based on WPML order language.
+ * Make sure to create custom templates with the correct names or the templates won't be found.
+ *
+ * @param string $template_name template name.
+ * @param string $template_type template type like global or simple.
+ * @param int    $order_id WC Order ID.
+ *
+ * @return string
+ */
+function change_template_based_on_order_language( $template_name, $template_type, $order_id ) {
+	$order_language = get_post_meta( $order_id, 'wpml_language', true );
+
+	if ( false === $order_language ) {
+		return $template_name;
+	}
+
+	switch ( $order_language ) {
+		case 'en':
+			$template_name = 'minimal-en';
+			break;
+		case 'nl':
+			$template_name = 'minimal-nl';
+			break;
+	}
+
+	return $template_name;
+}
+add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 3 );
+`
+
 == Changelog ==
 
-= 2.9.3 - July 3, 2017 =
+= 2.9.3 - July 5, 2017 =
 
+- Added: 'wpi_template_name' filter to change the template based on specific order variables. See FAQ.
 - Added: 'wpi_email_types' filter to add email types.
 - Fixed: PDF abortion error by not using date format from settings for [order-date] since it can have slashes.
 - Fixed: Missing argument 3 fatal error due to 'woocommerce_checkout_order_processed' hook used by third party plugins.

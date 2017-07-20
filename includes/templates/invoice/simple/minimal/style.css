@@ -49,18 +49,26 @@ div.title div.watermark {
     line-height: normal;
 }
 
-div.title div.watermark h2.rubber-stamp {
+div.title div.watermark h2 {
     font-family: serif;
     text-transform: uppercase;
     font-weight: bold;
-    color: green;
-    border: 3px solid green;
     padding: 10px 7px;
     border-radius: 10px;
     opacity: 0.8;
     text-align: center;
     width: 130px;
     float:right;
+}
+
+div.title div.watermark h2.green {
+    color: green;
+    border: 3px solid green;
+}
+
+div.title div.watermark h2.red {
+    color: red;
+    border: 3px solid red;
 }
 
 table tr.information td {

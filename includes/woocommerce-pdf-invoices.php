@@ -164,7 +164,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 
@@ -385,20 +386,54 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Load admin scripts.
+		 * Get plugin screen ids.
 		 *
-		 * @param string $hook To check current page.
+		 * @return array
 		 */
-		public function load_admin_scripts( $hook ) {
-			wp_enqueue_script( 'bewpi_settings_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
+		public static function get_screen_ids() {
+			$screen_ids = array(
+				'woocommerce_page_bewpi-invoices',
+				'edit-shop_order',
+				'shop_order',
+			);
+
+			return $screen_ids;
+		}
+
+		/**
+		 * Load admin styles.
+		 */
+		public function admin_styles() {
+			wp_register_style( 'bewpi_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
+			wp_register_style( 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css', array(), WC()->version );
+
+			$screen       = get_current_screen();
+			$screen_id    = $screen ? $screen->id : '';
+			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
+				wp_enqueue_style( 'bewpi_settings_css' );
+				wp_enqueue_style( 'woocommerce_admin_styles' );
+			}
+		}
+
+		/**
+		 * Load admin scripts.
+		 */
+		public function admin_scripts() {
+			wp_register_script( 'bewpi_settings_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
 			wp_localize_script( 'bewpi_settings_js', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_style( 'bewpi_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
-			wp_enqueue_style( 'bewpi_settings_css' );
+			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'select2' ), WC()->version );
+
+			$screen = get_current_screen();
+			$screen_id    = $screen ? $screen->id : '';
+			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
+				wp_enqueue_script( 'bewpi_settings_js' );
+				wp_enqueue_script( 'wc-enhanced-select' );
+			}
 		}
 
 		/**

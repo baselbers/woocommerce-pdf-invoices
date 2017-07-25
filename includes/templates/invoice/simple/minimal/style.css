@@ -80,14 +80,24 @@ table tr.information td:nth-child(3){
     text-align: right;
 }
 
-table tr.heading th {
-    font-weight: bold;
+table tr.heading th:nth-child(1) {
     text-align: left;
-    color: #FFFFFF;
+    width: 50%;
 }
 
-table tr.item td{
+table tr.heading th {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: right;
+}
+
+table tr.item td:nth-child(1) {
+    text-align: left;
+}
+
+table tr.item td {
     border-bottom: 1px solid #eee;
+    text-align: right;
 }
 
 table tr.spacer td {

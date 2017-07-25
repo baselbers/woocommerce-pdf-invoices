@@ -59,7 +59,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'description' => __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ),
 				),
 				'visible_columns' => array(
-					'title' => __( 'Visible Columns', 'woocommerce-pdf-invoices' ),
+					'title' => __( 'Table Content', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
 				),
 			);
@@ -514,6 +514,105 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
 				),
+				array(
+					'id'       => 'bewpi-columns',
+					'name'     => $this->prefix . 'columns',
+					'title'    => __( 'Line item', 'woocommerce-pdf-invoices' ),
+					'callback' => array( $this, 'multi_select_callback' ),
+					'page'     => $this->settings_key,
+					'section'  => 'visible_columns',
+					'type'     => 'multiple_select',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name' => __( 'SKU', 'woocommerce-pdf-invoices' ),
+							'value' => 'sku',
+							'default' => 0,
+						),
+						array(
+							'name' => __( 'Description', 'woocommerce-pdf-invoices' ),
+							'value' => 'description',
+							'default' => 1,
+						),
+						array(
+							'name' => __( 'Cost (ex. VAT)', 'woocommerce-pdf-invoices' ),
+							'value' => 'cost_ex_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => __( 'Cost (incl. VAT)', 'woocommerce-pdf-invoices' ),
+							'value' => 'cost_incl_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => __( 'Quantity', 'woocommerce-pdf-invoices' ),
+							'value' => 'quantity',
+							'default' => 1,
+						),
+						array(
+							'name' => WC()->countries->tax_or_vat(),
+							'value' => 'vat',
+							'default' => 0,
+						),
+						array(
+							'name' => __( 'Total (ex. VAT)', 'woocommerce-pdf-invoices' ),
+							'value' => 'total_ex_vat',
+							'default' => 1,
+						),
+						array(
+							'name' => __( 'Total (incl. VAT)', 'woocommerce-pdf-invoices' ),
+							'value' => 'total_incl_vat',
+							'default' => 0,
+						),
+					),
+				),
+				array(
+					'id'       => 'bewpi-totals',
+					'name'     => $this->prefix . 'totals',
+					'title'    => __( 'Totals', 'woocommerce-pdf-invoices' ),
+					'callback' => array( $this, 'multi_select_callback' ),
+					'page'     => $this->settings_key,
+					'section'  => 'visible_columns',
+					'type'     => 'multiple_select',
+					'desc'     => '',
+					'options'  => array(
+						array(
+							'name' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'value' => 'shipping_ex_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => sprintf( __( 'Subtotal %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'value' => 'subtotal_ex_vat',
+							'default' => 1,
+						),
+						array(
+							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ),
+							'value' => 'discount',
+							'default' => 1,
+						),
+						array(
+							'name' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'value' => 'shipping_incl_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => WC()->countries->tax_or_vat(),
+							'value' => 'vat',
+							'default' => 0,
+						),
+						array(
+							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'value' => 'total_ex_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'value' => 'total_incl_vat',
+							'default' => 1,
+						),
+					),
+				),
 			);
 
 			return $settings;
@@ -532,6 +631,22 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			// strip strings.
 			foreach ( $input as $key => $value ) {
 				if ( ! isset( $input[ $key ] ) ) {
+					continue;
+				}
+
+				if ( is_array( $input[ $key ] ) ) {
+
+					switch ( $key ) {
+						case 'bewpi_columns':
+
+							$defaults = $this->get_defaults();
+							foreach ( $defaults[ $key ] as $id => $title ) {
+								$output[ $key ][ $id ] = in_array( $id, $input[ $key ], true ) ? 1 : 0;
+							}
+
+							break;
+					}
+
 					continue;
 				}
 

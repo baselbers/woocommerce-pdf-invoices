@@ -20,19 +20,19 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$line_items                     = $order->get_items( 'line_item' );
+$headers                        = $invoice->get_headers();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
 
 <div class="title">
 	<div>
-		<h2><?php echo $templater->get_option( 'bewpi_title' ); ?></h2>
+		<h2><?php echo esc_html( $templater->get_option( 'bewpi_title' ) ); ?></h2>
 	</div>
 	<div class="watermark">
 		<?php
 		if ( $templater->get_option( 'bewpi_show_payment_status' ) && $order->is_paid() ) {
-			printf( '<h2 class="green">%s</h2>', __( 'Paid', 'woocommerce-pdf-invoices' ) );
+			printf( '<h2 class="green">%s</h2>', esc_html__( 'Paid', 'woocommerce-pdf-invoices' ) );
 		}
 
 		do_action( 'wpi_watermark_end', $order, $invoice );
@@ -48,7 +48,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<td>
 			<?php
 			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! empty( $formatted_shipping_address ) && $formatted_shipping_address !== $formatted_billing_address && ! $templater->has_only_virtual_products( $line_items ) ) {
-				printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $formatted_shipping_address;
 			}
 			?>
@@ -61,56 +61,74 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 <table cellpadding="0" cellspacing="0">
 	<thead>
-		<tr class="heading" bgcolor="<?php echo $color; ?>;">
-			<th>
-				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
+			<?php
+			foreach ( $headers as $key => $label ) {
+				do_action( sprintf( 'wpi_invoice_before_column-%s', $key ), $invoice );
 
-			<th>
-				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+				printf( '<th>%s</th>', $label );
 
-			<?php do_action( 'bewpi_line_item_headers_after_quantity', $invoice ); ?>
-
-			<th>
-				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+				do_action( sprintf( 'wpi_invoice_after_column-%s', $key ), $invoice );
+			}
+			?>
 		</tr>
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $line_items as $item_id => $item ) {
-		?>
-		<tr class="item">
-			<td width="50%">
-				<?php
-				echo $item['name'];
+	foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
+		echo '<tr class="item">';
 
-				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
+		foreach ( $headers as $key => $label ) {
+			do_action( sprintf( 'wpi_invoice_line_item_before_column-%s', $key ), $item, $invoice );
 
-				$templater->wc_display_item_meta( $item, true );
-				$templater->wc_display_item_downloads( $item, true );
+			echo '<td>';
 
-				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
-				?>
-			</td>
+			switch ( $key ) {
+				case 'description':
 
-			<td>
-				<?php echo $item['qty']; ?>
-			</td>
+					echo esc_html( $item['name'] );
 
-			<?php do_action( 'bewpi_line_item_after_quantity', $item_id, $item, $invoice ); ?>
+					do_action( 'wpi_order_item_meta_start', $item, $this->order );
+					do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
 
-			<td>
-				<?php echo $order->get_formatted_line_subtotal( $item ); ?>
-			</td>
-		</tr>
+					$templater->wc_display_item_meta( $item, true );
+					$templater->wc_display_item_downloads( $item, true );
 
-	<?php } ?>
+					do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
+
+					break;
+				case 'quantity':
+
+					echo esc_html( $item['qty'] );
+
+					break;
+				case 'total_ex_vat':
+
+					echo wc_price( $this->order->get_line_total( $item, false ), array(
+						'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
+					) );
+
+					break;
+			}
+
+			echo '</td>';
+
+			do_action( sprintf( 'wpi_invoice_line_item_after_column-%s', $key ), $item, $invoice );
+		} // End foreach().
+
+		echo '</tr>';
+	} // End foreach().
+	?>
 
 	<tr class="spacer">
 		<td></td>
 	</tr>
+
+	</tbody>
+</table>
+
+<table cellpadding="0" cellspacing="0">
+	<tbody>
 
 	<?php
 	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
@@ -118,9 +136,9 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		?>
 
 		<tr class="total">
-			<td></td>
-			<td class="border <?php echo $class; ?>" colspan="<?php echo $templater->invoice->colspan; ?>"><?php echo $total['label']; ?></td>
-			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
+			<td width="50%"></td>
+			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>"><?php echo esc_html( $total['label'] ); ?></td>
+			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>"><?php echo $total['value']; ?></td>
 		</tr>
 
 	<?php } ?>

@@ -88,14 +88,9 @@ abstract class BEWPI_Abstract_Settings {
 	 * Load all settings classes.
 	 */
 	public static function load_settings() {
-		global $pagenow;
-
-		// Only load settings on settings page. @todo Only load settings for specific tab.
-		if ( isset( $_GET['page'] ) && 'bewpi-invoices' === $_GET['page'] || 'options.php' === $pagenow ) {
-			$settings[] = new BEWPI_General_Settings();
-			$settings[] = new BEWPI_Template_Settings();
-			self::$settings = apply_filters( 'bewpi_settings', $settings );
-		}
+		$settings[] = new BEWPI_General_Settings();
+		$settings[] = new BEWPI_Template_Settings();
+		self::$settings = apply_filters( 'bewpi_settings', $settings );
 	}
 
 	/**
@@ -276,6 +271,30 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
+	 * Multiple select box.
+	 *
+	 * @param array $args field arguments.
+	 */
+	public function multi_select_callback( $args ) {
+		$page_options = get_option( $args['page'] );
+		$selections = $page_options[ $args['name'] ];
+		?>
+		<select
+				multiple="multiple"
+				name="<?php echo $args['page'] . '[' . $args['name'] . '][]'; ?>"
+				data-placeholder="<?php esc_attr_e( 'Choose columns&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+				aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
+				class="wc-enhanced-select">
+			<?php
+				foreach ( $args['options'] as $option ) {
+					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( $selections[ $option['value'] ], 1, true, false ) . '>' . $option['name'] . '</option>';
+				}
+			?>
+		</select> <?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?> <br /><a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce' ); ?></a> <a class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce' ); ?></a>
+		<?php
+	}
+
+	/**
 	 * Reset counter field.
 	 *
 	 * @param string $args Field arguments.
@@ -393,7 +412,7 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && 'multiple_checkbox' === $field['type'] ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ) ) ) {
 				// Add options defaults.
 				$defaults[ $field['name'] ] = wp_list_pluck( $field['options'], 'default', 'value' );
 				unset( $fields[ $index ] );

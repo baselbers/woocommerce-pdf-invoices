@@ -272,6 +272,7 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 = 2.9.4 - July 20, 2017 =
 
 - Added: Action 'wpi_watermark_end' to add multiple watermarks.
+- Fixed: [prefix] and/or [suffix] hardcoded in invoice number.
 
 = 2.9.3 - July 5, 2017 =
 

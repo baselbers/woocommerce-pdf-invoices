@@ -94,7 +94,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function get_formatted_number() {
-			// format number with the number of digits.
+			// Format number with the number of digits.
 			$digitized_invoice_number = sprintf( '%0' . WPI()->get_option( 'template', 'invoice_number_digits' ) . 's', $this->number );
 			$formatted_invoice_number = str_replace(
 				array( '[number]', '[order-date]', '[order-number]', '[Y]', '[y]', '[m]' ),
@@ -106,20 +106,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 					date_i18n( 'y', strtotime( $this->date ) ),
 					date_i18n( 'm', strtotime( $this->date ) ),
 				),
-				$this->template_options['bewpi_invoice_number_format']
+				WPI()->get_option( 'template', 'invoice_number_format' )
 			);
 
-			// Since 2.8.1 we do not use [prefix] and [suffix] placeholders so remove them from formatted invoice number.
-			if ( version_compare( WPI_VERSION, '2.8.1' ) <= 0 ) {
-				$formatted_invoice_number = str_replace(
-					array( '[prefix]', '[suffix]' ),
-					array( '', '' ),
-					$formatted_invoice_number
-				);
-			}
+			// Since 2.8.1 [prefix] and [suffix] were removed.
+			$formatted_invoice_number = str_replace(
+				array( '[prefix]', '[suffix]' ),
+				array( '', '' ),
+				$formatted_invoice_number
+			);
 
-			// Add prefix and suffix directly to formatted invoice number.
-			$formatted_invoice_number = $this->template_options['bewpi_invoice_number_prefix'] . $formatted_invoice_number . $this->template_options['bewpi_invoice_number_suffix'];
+			// Add prefix and suffix directly.
+			$formatted_invoice_number = WPI()->get_option( 'template', 'invoice_number_prefix' ) . $formatted_invoice_number . WPI()->get_option( 'template', 'invoice_number_suffix' );
 
 			return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
 		}

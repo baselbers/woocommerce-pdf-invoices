@@ -32,8 +32,10 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<div class="watermark">
 		<?php
 		if ( $templater->get_option( 'bewpi_show_payment_status' ) && $order->is_paid() ) {
-			printf( '<h2 class="rubber-stamp">%s</h2>', __( 'Paid', 'woocommerce-pdf-invoices' ) );
+			printf( '<h2 class="green">%s</h2>', __( 'Paid', 'woocommerce-pdf-invoices' ) );
 		}
+
+		do_action( 'wpi_watermark_end', $order, $invoice );
 		?>
 	</div>
 </div>

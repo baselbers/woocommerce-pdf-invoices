@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 2.9.3
+Stable tag: 2.9.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -268,6 +268,11 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 `
 
 == Changelog ==
+
+= 2.9.4 - July 20, 2017 =
+
+- Added: Action 'wpi_watermark_end' to add multiple watermarks.
+- Fixed: [prefix] and/or [suffix] hardcoded in invoice number.
 
 = 2.9.3 - July 5, 2017 =
 

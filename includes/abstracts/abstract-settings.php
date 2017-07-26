@@ -88,14 +88,9 @@ abstract class BEWPI_Abstract_Settings {
 	 * Load all settings classes.
 	 */
 	public static function load_settings() {
-		//global $pagenow;
-
-		// Only load settings on settings page. @todo Only load settings for specific tab.
-		//if ( isset( $_GET['page'] ) && 'bewpi-invoices' === $_GET['page'] || 'options.php' === $pagenow ) {
-			$settings[] = new BEWPI_General_Settings();
-			$settings[] = new BEWPI_Template_Settings();
-			self::$settings = apply_filters( 'bewpi_settings', $settings );
-		//}
+		$settings[] = new BEWPI_General_Settings();
+		$settings[] = new BEWPI_Template_Settings();
+		self::$settings = apply_filters( 'bewpi_settings', $settings );
 	}
 
 	/**

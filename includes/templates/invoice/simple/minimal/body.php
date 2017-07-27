@@ -162,6 +162,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 
 <?php if ( $terms ) { ?>
+	<!-- Using div to position absolute the block. -->
 	<div class="terms">
 		<table>
 			<tr>

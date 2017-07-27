@@ -269,11 +269,13 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
-= 2.9.4 - July 20, 2017 =
+= 2.9.4 - July 27, 2017 =
 
 - Added: Action 'wpi_watermark_end' to add multiple watermarks.
 - Improved: Language files by adding more keywords.
 - Fixed: [prefix] and/or [suffix] hardcoded in invoice number.
+- Fixed: Fixed body options section not showing on settings page.
+- Fixed: 'Fatal Error: non-numeric value encountered' when using position absolute.
 
 = 2.9.3 - July 5, 2017 =
 

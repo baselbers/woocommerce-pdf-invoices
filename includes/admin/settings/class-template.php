@@ -54,6 +54,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'title' => __( 'Header Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' ),
 				),
+				'body' => array(
+					'title' => __( 'Body Options', 'woocommerce-pdf-invoices' ),
+					'description' => __( 'Configuration options for the body of the template. .', 'woocommerce-pdf-invoices' ),
+				),
 				'footer' => array(
 					'title' => __( 'Footer Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ),

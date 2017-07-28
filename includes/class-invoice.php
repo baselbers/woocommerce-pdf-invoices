@@ -61,6 +61,18 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		}
 
 		/**
+		 * Check if PDF invoice is sent to client.
+		 *
+		 * @return bool
+		 */
+		public function is_sent() {
+			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
+			$is_sent  = get_post_meta( $order_id, 'bewpi_pdf_invoice_sent', true );
+
+			return (bool) $is_sent;
+		}
+
+		/**
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *

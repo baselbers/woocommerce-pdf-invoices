@@ -73,6 +73,17 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		}
 
 		/**
+		 * Get invoice number type.
+		 *
+		 * @return string
+		 */
+		public static function get_number_type() {
+			$number_type = WPI()->get_option( 'template', 'invoice_number_type' );
+
+			return (string) $number_type;
+		}
+
+		/**
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *

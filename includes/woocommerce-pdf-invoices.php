@@ -659,11 +659,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 						'class="button grant_access order-page invoice wpi"',
 					) );
 
+					// Create confirm message when deleting PDF invoice.
 					$message = __( 'Are you sure to delete the PDF invoice?', 'woocommerce-pdf-invoices' );
-					$max_invoice_number = BEWPI_Abstract_Invoice::get_max_invoice_number();
-					$is_sequential = 'sequential_number' === WPI()->get_option( 'template', 'invoice_number_type' );
-					if ( $is_sequential && $invoice->get_number() !== $max_invoice_number ) {
-						$message .= ' ' . sprintf( __( 'You will be missing a PDF invoice with invoice number %d and thus creating an accounting gab! Instead consider Cancelled PDF invoices with %s.', 'woocommerce-pdf-invoices' ), $invoice->get_number(), 'WooCommerce PDF Invoices Premium' );
+					if ( 'sequential_number' === BEWPI_Invoice::get_number_type() && $invoice->get_number() !== BEWPI_Abstract_Invoice::get_max_invoice_number() ) {
+
+						/* translators: $d: invoice number */
+						$message .= ' ' . sprintf( __( 'You will be missing a PDF invoice with invoice number %d and thus creating an accounting gap!', 'woocommerce-pdf-invoices' ), $invoice->get_number() );
+
+						/* translators: %s: plugin name. */
+						$message .= ' ' . apply_filters( 'wpi_delete_invoice_confirm_message', sprintf( __( 'Instead consider using Cancelled PDF invoices with %s.', 'woocommerce-pdf-invoices' ), 'WooCommerce PDF Invoices Premium' ) );
+
 					}
 
 					// display button to delete invoice.

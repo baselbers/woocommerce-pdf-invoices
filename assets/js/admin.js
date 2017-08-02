@@ -136,13 +136,13 @@
 /* global woocommerce_settings_params */
 ( function( $ ) {
 	// Select all/none
-	$( '.woocommerce' ).on( 'click', '.select_all', function() {
+	$( '.wpi' ).on( 'click', '.select_all', function() {
 		$( this ).closest( 'td' ).find( 'select option' ).attr( 'selected', 'selected' );
 		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
 		return false;
 	});
 
-	$( '.woocommerce' ).on( 'click', '.select_none', function() {
+	$( '.wpi' ).on( 'click', '.select_none', function() {
 		$( this ).closest( 'td' ).find( 'select option' ).removeAttr( 'selected' );
 		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
 		return false;

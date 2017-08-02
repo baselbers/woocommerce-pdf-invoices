@@ -354,6 +354,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$invoice = new BEWPI_Invoice( $order_id );
 					$invoice->update();
 					break;
+				case 'debug':
+					$invoice = new BEWPI_Invoice( $order_id );
+					$full_path = $invoice->update();
+					BEWPI_Invoice::view( $full_path );
+					break;
 			}
 
 			do_action( 'bewpi_admin_pdf_callback_end', $action, $order_id );

@@ -636,15 +636,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 				if ( is_array( $input[ $key ] ) ) {
 
-					switch ( $key ) {
-						case 'bewpi_columns':
-
-							$defaults = $this->get_defaults();
-							foreach ( $defaults[ $key ] as $id => $title ) {
-								$output[ $key ][ $id ] = in_array( $id, $input[ $key ], true ) ? 1 : 0;
-							}
-
-							break;
+					if ( in_array( $key, array( 'bewpi_columns', 'bewpi_totals' ), true ) ) {
+						$defaults = $this->get_defaults();
+						foreach ( $defaults[ $key ] as $id => $title ) {
+							$output[ $key ][ $id ] = in_array( $id, $input[ $key ], true ) ? 1 : 0;
+						}
 					}
 
 					continue;

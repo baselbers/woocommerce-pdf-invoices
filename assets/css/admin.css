@@ -19,7 +19,8 @@ div.wpi form input[type="checkbox"]:disabled + label {
 
 div.wpi form select,
 div.wpi form input[type="text"],
-div.wpi form textarea {
+div.wpi form textarea,
+div.wpi form .select2-container {
     width: 348px;
 }
 

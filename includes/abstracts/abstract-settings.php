@@ -290,7 +290,9 @@ abstract class BEWPI_Abstract_Settings {
 					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( $selections[ $option['value'] ], 1, true, false ) . '>' . $option['name'] . '</option>';
 				}
 			?>
-		</select> <?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?> <br /><a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce' ); ?></a> <a class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce' ); ?></a>
+		</select>
+		<?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?>
+		<a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce-pdf-invoices' ); ?></a> <a class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce-pdf-invoices' ); ?></a>
 		<?php
 	}
 

@@ -559,6 +559,75 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
+		protected function add_order_item_description_column( &$columns, $tax_display ) {
+			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
+			if ( $subtotal ) {
+				$total_rows['description'] = array(
+					'label' => __( 'Description', 'woocommerce' ),
+				);
+			}
+		}
+
+		/**
+		 * Get totals for display on pages and in emails.
+		 *
+		 * @param string $tax_display 'excl' or 'incl'.
+		 *
+		 * @return array
+		 */
+		public function get_column_headers( $tax_display = '' ) {
+			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
+			$columns     = array();
+
+			foreach ( $this->get_columns() as $key => $value ) {
+				$columns = apply_filters( sprintf( 'wpi_invoice_before_column_header-%s', $key ), $columns, $this );
+
+				switch ( $key ) {
+					case 'description':
+
+						$columns['description'] = array(
+							'label' => __( 'Description', 'woocommerce' ),
+						);
+
+						break;
+					case 'quantity':
+
+						$columns['quantity'] = array(
+							'label' => __( 'Qty', 'woocommerce' ),
+						);
+
+						break;
+					case 'total_ex_vat':
+
+						/* translators: excluding vat label */
+						$columns['total_ex_vat'] = array(
+							'label' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), '<br><small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>' ),
+						);
+
+						break;
+
+					case 'total_incl_vat':
+
+						/* translators: including vat label */
+						$columns['total_incl_vat'] = array(
+							'label' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), '<br><small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>' ),
+						);
+
+						break;
+				}
+
+				$columns = apply_filters( sprintf( 'wpi_invoice_after_column_header-%s', $key ), $columns, $this );
+			} // End foreach().
+
+			return apply_filters( 'wpi_get_order_item_columns', $columns, $this, $tax_display );
+		}
+
+		/**
+		 * Add total row for subtotal.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
 		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
 			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
 			if ( $subtotal ) {
@@ -773,74 +842,37 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Get enabled columns.
 		 *
+		 * @param bool $enabled selected columns.
+		 *
 		 * @return array
 		 */
-		public function get_headers() {
-			$columns = array();
+		public function get_columns( $enabled = true ) {
+			$columns = (array) WPI()->get_option( 'template', 'columns' );
 
-			foreach ( (array) WPI()->get_option( 'template', 'columns' ) as $column => $enabled ) {
-
-				// skip disabled.
-				if ( ! $enabled ) {
-					continue;
-				}
-
-				switch ( $column ) {
-					case 'description':
-						$columns[ $column ] = __( 'Description', 'woocommerce-pdf-invoices' );
-						break;
-					case 'quantity':
-						$columns[ $column ] = __( 'Qty', 'woocommerce-pdf-invoices' );
-						break;
-					case 'total_ex_vat':
-						$columns[ $column ] = sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), '<small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>' );
-						break;
-				}
+			if ( $enabled ) {
+				return array_filter( $columns );
 			}
 
 			return $columns;
 		}
 
 		/**
-		 * Get line items column data.
+		 * Check if column is enabled.
+		 *
+		 * @param string $column column name.
+		 *
+		 * @return bool.
 		 */
-		public function get_line_item_data() {
-			$line_items = $this->order->get_items( 'line_item' );
-			$rows = array();
-			$templater = WPI()->templater();
+		public static function is_column_enabled( $column ) {
+			$columns    = WPI()->get_option( 'template', 'columns' );
 
-			foreach ( $line_items as $item_id => $item ) {
-				$line_item = array();
-
-				// get description.
-				ob_start();
-
-				echo esc_html( $item['name'] );
-
-				do_action( 'wpi_order_item_meta_start', $item, $this->order );
-				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
-
-				$templater->wc_display_item_meta( $item, true );
-				$templater->wc_display_item_downloads( $item, true );
-
-				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
-
-				$description = ob_get_clean();
-				$line_item['description'] = $description;
-
-				// get quantity.
-				$line_item['quantity'] = $item['qty'];
-
-				// get line total ex VAT.
-				$line_item['total_ex_vat'] = wc_price( $this->order->get_line_total( $item, false ), array(
-						'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
-					)
-				);
-
-				$rows[] = $line_item;
+			if ( false === $columns ) {
+				return false;
 			}
 
-			return $rows;
+			$is_enabled = isset( $columns[ $column ] ) && $columns[ $column ];
+
+			return $is_enabled;
 		}
 	}
 } // End if().

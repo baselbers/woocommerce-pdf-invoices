@@ -82,6 +82,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				);
 			}
 			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
+			$is_incl_vat = 'incl' === get_option( 'woocommerce_tax_display_cart' );
 
 			$settings = array(
 				array(
@@ -557,12 +558,12 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 						array(
 							'name' => __( 'Total (ex. VAT)', 'woocommerce-pdf-invoices' ),
 							'value' => 'total_ex_vat',
-							'default' => 1,
+							'default' => ! $is_incl_vat ? 1 : 0,
 						),
 						array(
 							'name' => __( 'Total (incl. VAT)', 'woocommerce-pdf-invoices' ),
 							'value' => 'total_incl_vat',
-							'default' => 0,
+							'default' => $is_incl_vat ? 1 : 0,
 						),
 					),
 				),
@@ -577,9 +578,14 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'desc'     => '',
 					'options'  => array(
 						array(
+							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ),
+							'value' => 'discount',
+							'default' => 1,
+						),
+						array(
 							'name' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
 							'value' => 'shipping_ex_vat',
-							'default' => 0,
+							'default' => 1,
 						),
 						array(
 							'name' => sprintf( __( 'Subtotal %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
@@ -587,8 +593,13 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 1,
 						),
 						array(
-							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ),
-							'value' => 'discount',
+							'name' => sprintf( __( 'Subtotal %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'value' => 'subtotal_incl_vat',
+							'default' => 0,
+						),
+						array(
+							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ),
+							'value' => 'fee',
 							'default' => 1,
 						),
 						array(
@@ -597,13 +608,13 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 0,
 						),
 						array(
-							'name' => WC()->countries->tax_or_vat(),
-							'value' => 'vat',
+							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'value' => 'total_ex_vat',
 							'default' => 0,
 						),
 						array(
-							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
-							'value' => 'total_ex_vat',
+							'name' => WC()->countries->tax_or_vat(),
+							'value' => 'vat',
 							'default' => 0,
 						),
 						array(
@@ -630,19 +641,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 			// strip strings.
 			foreach ( $input as $key => $value ) {
-				if ( ! isset( $input[ $key ] ) ) {
-					continue;
-				}
-
 				if ( is_array( $input[ $key ] ) ) {
-
-					if ( in_array( $key, array( 'bewpi_columns', 'bewpi_totals' ), true ) ) {
-						$defaults = $this->get_defaults();
-						foreach ( $defaults[ $key ] as $id => $title ) {
-							$output[ $key ][ $id ] = in_array( $id, $input[ $key ], true ) ? 1 : 0;
-						}
-					}
-
 					continue;
 				}
 
@@ -672,7 +671,67 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
 			}
 
+			if ( isset( $input['bewpi_columns'] ) ) {
+				$output['bewpi_columns'] = $this->sanitize_columns( $input['bewpi_columns'] );
+			}
+
+			if ( isset( $input['bewpi_totals'] ) ) {
+				$output['bewpi_totals'] = $this->sanitize_totals( $input['bewpi_totals'] );
+			}
+
 			return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );
+		}
+
+		/**
+		 * Sanitize columns.
+		 *
+		 * @param array $columns Table content columns.
+		 *
+		 * @return array
+		 */
+		private function sanitize_columns( $columns ) {
+			$columns_data = array();
+
+			foreach ( $this->defaults['bewpi_columns'] as $column => $enabled ) {
+				$selected = in_array( $column, $columns, true );
+				$columns_data[ sanitize_key( $column ) ] = $selected ? 1 : 0;
+			}
+
+			// Required.
+			$columns_data['description'] = 1;
+			$columns_data['quantity']    = 1;
+
+			// At least one total should exist.
+			$total_exists = (bool) count( array_intersect( array( 'total_ex_vat', 'total_incl_vat' ), $columns ) );
+			if ( ! $total_exists ) {
+				$columns_data[ 'incl' === get_option( 'woocommerce_tax_display_cart' ) ? 'total_incl_vat' : 'total_ex_vat' ] = 1;
+			}
+
+			return $columns_data;
+		}
+
+		/**
+		 * Sanitize totals rows.
+		 *
+		 * @param array $rows Table content rows.
+		 *
+		 * @return array
+		 */
+		private function sanitize_totals( $rows ) {
+			$rows_data = array();
+
+			foreach ( $this->defaults['bewpi_totals'] as $row => $enabled ) {
+				$selected = in_array( $row, $rows, true );
+				$rows_data[ sanitize_key( $row ) ] = $selected ? 1 : 0;
+			}
+
+			// Required.
+			$total_exists = (bool) count( array_intersect( array( 'total_ex_vat', 'total_incl_vat' ), $rows ) );
+			if ( ! $total_exists ) {
+				$rows_data['total_incl_vat'] = 1;
+			}
+
+			return $rows_data;
 		}
 
 		/**

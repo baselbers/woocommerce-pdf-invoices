@@ -89,6 +89,7 @@ table tr.heading th {
     font-weight: bold;
     color: #FFFFFF;
     text-align: right;
+    vertical-align: middle;
 }
 
 table tr.item td:nth-child(1) {

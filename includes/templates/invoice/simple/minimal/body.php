@@ -20,7 +20,7 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$headers                        = $invoice->get_headers();
+$column_headers                 = $invoice->get_column_headers();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -63,22 +63,18 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $headers as $key => $label ) {
-				do_action( sprintf( 'wpi_invoice_before_column-%s', $key ), $invoice );
-
-				printf( '<th>%s</th>', $label );
-
-				do_action( sprintf( 'wpi_invoice_after_column-%s', $key ), $invoice );
+			foreach ( $column_headers as $key => $header ) {
+				printf( '<th>%s</th>', $header['label'] );
 			}
 			?>
 		</tr>
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
+	foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
 		echo '<tr class="item">';
 
-		foreach ( $headers as $key => $label ) {
+		foreach ( $column_headers as $key => $header ) {
 			do_action( sprintf( 'wpi_invoice_line_item_before_column-%s', $key ), $item, $invoice );
 
 			echo '<td>';
@@ -104,7 +100,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 					break;
 				case 'total_ex_vat':
 
-					echo wc_price( $this->order->get_line_total( $item, false ), array(
+					echo wc_price( $order->get_line_total( $item, false ), array(
 						'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
 					) );
 

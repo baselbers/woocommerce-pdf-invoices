@@ -287,7 +287,7 @@ abstract class BEWPI_Abstract_Settings {
 				class="wc-enhanced-select">
 			<?php
 				foreach ( $args['options'] as $option ) {
-					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( $selections[ $option['value'] ], 1, true, false ) . '>' . $option['name'] . '</option>';
+					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( $selections[ $option['value'] ], 1,  false ) . '>' . $option['name'] . '</option>';
 				}
 			?>
 		</select>

@@ -491,12 +491,12 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		/**
 		 * Get product.
 		 *
-		 * @param WC_Order      $order order object.
-		 * @param WC_Order_Item $item order product object.
+		 * @param WC_Order $order order object.
+		 * @param object   $item order product object.
 		 *
 		 * @return bool|WC_Product
 		 */
-		public static function get_product( WC_Order $order, WC_Order_Item $item ) {
+		public static function get_product( $order, $item ) {
 
 			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
 				$product = $item->get_product();

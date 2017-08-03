@@ -516,6 +516,18 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'default'  => 1,
 				),
 				array(
+					'id'       => 'bewpi-show-sku-meta',
+					'name'     => $this->prefix . 'show_sku_meta',
+					'title'    => '',
+					'callback' => array( $this, 'input_callback' ),
+					'page'     => $this->settings_key,
+					'section'  => 'visible_columns',
+					'type'     => 'checkbox',
+					'desc'     => __( 'Show SKU as meta data', 'woocommerce-pdf-invoices' ),
+					'class'    => 'bewpi-checkbox-option-title',
+					'default'  => 0,
+				),
+				array(
 					'id'       => 'bewpi-columns',
 					'name'     => $this->prefix . 'columns',
 					'title'    => __( 'Line item', 'woocommerce-pdf-invoices' ),
@@ -525,11 +537,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'type'     => 'multiple_select',
 					'desc'     => '',
 					'options'  => array(
-						array(
-							'name' => __( 'SKU', 'woocommerce-pdf-invoices' ),
-							'value' => 'sku',
-							'default' => 0,
-						),
 						array(
 							'name' => __( 'Description', 'woocommerce-pdf-invoices' ),
 							'value' => 'description',

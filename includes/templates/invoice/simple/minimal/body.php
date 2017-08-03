@@ -21,6 +21,7 @@ $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $headers                        = $invoice->get_line_item_column_header_data();
+$headers_count                  = apply_filters( 'wpi_invoice_headers_count', count( $headers ), $headers );
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -63,8 +64,18 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $headers as $key => $header ) {
-				printf( '<th>%s</th>', $header['label'] );
+			foreach ( $headers as $key => $label ) {
+				// Calculate table cell width for headers on right half of the table.
+				$width = ( 'description' === $key ) ? 50 : 50 / ( $headers_count - 1 );
+
+				if ( is_array( $label ) ) {
+					foreach ( $label as $k => $l ) {
+						printf( '<th class="%s" width="%s%%">%s</th>', $key, $width, $l );
+					}
+					continue;
+				}
+
+				printf( '<th class="%s" width="%s%%">%s</th>', $key, $width, $label );
 			}
 			?>
 		</tr>
@@ -74,8 +85,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
 		echo '<tr class="item">';
 
-		foreach ( $headers as $key => $header ) {
-			do_action( sprintf( 'wpi_invoice_line_item_before_column-%s', $key ), $item, $invoice );
+		foreach ( $headers as $key => $label ) {
 
 			echo '<td>';
 
@@ -109,7 +119,6 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 
 			echo '</td>';
 
-			do_action( sprintf( 'wpi_invoice_line_item_after_column-%s', $key ), $item, $invoice );
 		} // End foreach().
 
 		echo '</tr>';

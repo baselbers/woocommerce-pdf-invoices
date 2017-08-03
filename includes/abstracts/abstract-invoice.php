@@ -554,18 +554,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Add total row for subtotal.
+		 * Add column header data.
 		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
+		 * @param array  $data Column header data.
+		 * @param string $key Column name.
+		 * @param string $label Column title.
+		 * @param string $tax_display Display tax label.
 		 */
-		protected function add_order_item_description_column( &$columns, $tax_display ) {
-			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
-			if ( $subtotal ) {
-				$total_rows['description'] = array(
-					'label' => __( 'Description', 'woocommerce' ),
-				);
+		public function add_line_item_column_header_data( &$data, $key, $label, $tax_display = '' ) {
+			if ( ! empty( $tax_display ) ) {
+				$tax_label = 'incl' === $tax_display ? WC()->countries->inc_tax_or_vat() : WC()->countries->ex_tax_or_vat();
+				$label     .= '<br><small class="tax_label">' . $tax_label . '</small>';
 			}
+
+			$data[ $key ] = $label;
 		}
 
 		/**
@@ -576,50 +578,37 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return array
 		 */
 		public function get_line_item_column_header_data( $tax_display = '' ) {
-			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
-			$columns     = array();
+			$tax_display      = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
+			$data             = array();
+			$selected_columns = (array) WPI()->get_option( 'template', 'columns' );
 
-			foreach ( $this->get_columns() as $key => $value ) {
-				$columns = apply_filters( sprintf( 'wpi_invoice_before_column_header-%s', $key ), $columns, $this );
-
+			foreach ( $selected_columns as $key => $value ) {
 				switch ( $key ) {
 					case 'description':
 
-						$columns['description'] = array(
-							'label' => __( 'Description', 'woocommerce' ),
-						);
+						$this->add_line_item_column_header_data( $data, $key, __( 'Description', 'woocommerce-pdf-invoices' ) );
 
 						break;
 					case 'quantity':
 
-						$columns['quantity'] = array(
-							'label' => __( 'Qty', 'woocommerce' ),
-						);
+						$this->add_line_item_column_header_data( $data, $key, __( 'Qty', 'woocommerce-pdf-invoices' ) );
 
 						break;
 					case 'total_ex_vat':
 
-						/* translators: excluding vat label */
-						$columns['total_ex_vat'] = array(
-							'label' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), '<br><small class="tax_label">' . WC()->countries->ex_tax_or_vat() . '</small>' ),
-						);
+						$this->add_line_item_column_header_data( $data, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'excl' );
 
 						break;
 
 					case 'total_incl_vat':
 
-						/* translators: including vat label */
-						$columns['total_incl_vat'] = array(
-							'label' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), '<br><small class="tax_label">' . WC()->countries->inc_tax_or_vat() . '</small>' ),
-						);
+						$this->add_line_item_column_header_data( $data, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'incl' );
 
 						break;
 				}
-
-				$columns = apply_filters( sprintf( 'wpi_invoice_after_column_header-%s', $key ), $columns, $this );
 			} // End foreach().
 
-			return apply_filters( 'wpi_invoice_line_item_column_header_data', $columns, $this, $tax_display );
+			return apply_filters( 'wpi_invoice_line_item_column_header_data', $data, $this, $tax_display );
 		}
 
 		/**
@@ -837,23 +826,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function set_colspan( $colspan ) {
 			$this->colspan = $colspan;
-		}
-
-		/**
-		 * Get enabled columns.
-		 *
-		 * @param bool $enabled selected columns.
-		 *
-		 * @return array
-		 */
-		public function get_columns( $enabled = true ) {
-			$columns = (array) WPI()->get_option( 'template', 'columns' );
-
-			if ( $enabled ) {
-				return array_filter( $columns );
-			}
-
-			return $columns;
 		}
 
 		/**

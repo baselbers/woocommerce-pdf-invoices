@@ -81,15 +81,24 @@ table tr.information td:nth-child(3){
 }
 
 table tr.heading th:nth-child(1) {
-    text-align: left;
     width: 50%;
+}
+
+table tr.heading th:nth-child(1),
+table tr.heading th:nth-child(2) {
+    text-align: left;
 }
 
 table tr.heading th {
     font-weight: bold;
     color: #FFFFFF;
+    border: 1px solid white;
+    text-align: center;
+}
+
+table tr.heading th.total_ex_vat,
+table tr.heading th.total_incl_vat {
     text-align: right;
-    vertical-align: middle;
 }
 
 table tr.item td:nth-child(1) {
@@ -98,7 +107,7 @@ table tr.item td:nth-child(1) {
 
 table tr.item td {
     border-bottom: 1px solid #eee;
-    text-align: right;
+    text-align: center;
 }
 
 table tr.spacer td {

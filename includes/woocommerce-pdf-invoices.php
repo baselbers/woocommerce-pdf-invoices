@@ -426,13 +426,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'select2' ), WC()->version );
+			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'jquery-ui-sortable', 'select2' ), WC()->version );
 
 			$screen = get_current_screen();
 			$screen_id    = $screen ? $screen->id : '';
 			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
 				wp_enqueue_script( 'bewpi_settings_js' );
 				wp_enqueue_script( 'wc-enhanced-select' );
+				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
 		}
 

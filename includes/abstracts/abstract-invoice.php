@@ -575,7 +575,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_column_headers( $tax_display = '' ) {
+		public function get_line_item_column_header_data( $tax_display = '' ) {
 			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
 			$columns     = array();
 
@@ -619,7 +619,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				$columns = apply_filters( sprintf( 'wpi_invoice_after_column_header-%s', $key ), $columns, $this );
 			} // End foreach().
 
-			return apply_filters( 'wpi_get_order_item_columns', $columns, $this, $tax_display );
+			return apply_filters( 'wpi_invoice_line_item_column_header_data', $columns, $this, $tax_display );
 		}
 
 		/**

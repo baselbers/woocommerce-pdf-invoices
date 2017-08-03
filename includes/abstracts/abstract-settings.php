@@ -287,7 +287,7 @@ abstract class BEWPI_Abstract_Settings {
 				class="wc-enhanced-select">
 			<?php
 				foreach ( $args['options'] as $option ) {
-					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( $selections[ $option['value'] ], 1,  false ) . '>' . $option['name'] . '</option>';
+					echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $option['value'], array_keys( $selections ), true), true,  false ) . '>' . $option['name'] . '</option>';
 				}
 			?>
 		</select>
@@ -416,7 +416,7 @@ abstract class BEWPI_Abstract_Settings {
 		foreach ( $fields as $index => $field ) {
 			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ) ) ) {
 				// Add options defaults.
-				$defaults[ $field['name'] ] = wp_list_pluck( $field['options'], 'default', 'value' );
+				$defaults[ $field['name'] ] = array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) );
 				unset( $fields[ $index ] );
 			}
 		}
@@ -446,12 +446,7 @@ abstract class BEWPI_Abstract_Settings {
 				continue;
 			}
 
-			if ( is_array( $options[ $key ] ) ) {
-				$this->defaults[ $key ] = array_merge( $value, $options[ $key ] );
-			} else {
-				$this->defaults[ $key ] = $options[ $key ];
-			}
-
+			$this->defaults[ $key ] = $options[ $key ];
 		}
 
 		return update_option( $this->settings_key, $this->defaults );

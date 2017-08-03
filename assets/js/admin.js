@@ -147,4 +147,9 @@
 		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
 		return false;
 	});
+
+	$( window ).load(function() {
+		$( ".wpi ul.select2-choices" ).first().sortable();
+		$( ".wpi ul.select2-choices" ).first().disableSelection();
+	});
 })( jQuery );

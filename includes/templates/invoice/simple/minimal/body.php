@@ -20,7 +20,7 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$column_headers                 = $invoice->get_column_headers();
+$headers                        = $invoice->get_line_item_column_header_data();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -63,7 +63,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $column_headers as $key => $header ) {
+			foreach ( $headers as $key => $header ) {
 				printf( '<th>%s</th>', $header['label'] );
 			}
 			?>
@@ -74,7 +74,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
 		echo '<tr class="item">';
 
-		foreach ( $column_headers as $key => $header ) {
+		foreach ( $headers as $key => $header ) {
 			do_action( sprintf( 'wpi_invoice_line_item_before_column-%s', $key ), $item, $invoice );
 
 			echo '<td>';

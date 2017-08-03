@@ -692,19 +692,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		private function sanitize_columns( $columns ) {
 			$columns_data = array();
 
-			foreach ( $this->defaults['bewpi_columns'] as $column => $enabled ) {
-				$selected = in_array( $column, $columns, true );
-				$columns_data[ sanitize_key( $column ) ] = $selected ? 1 : 0;
-			}
-
-			// Required.
-			$columns_data['description'] = 1;
-			$columns_data['quantity']    = 1;
-
-			// At least one total should exist.
-			$total_exists = (bool) count( array_intersect( array( 'total_ex_vat', 'total_incl_vat' ), $columns ) );
-			if ( ! $total_exists ) {
-				$columns_data[ 'incl' === get_option( 'woocommerce_tax_display_cart' ) ? 'total_incl_vat' : 'total_ex_vat' ] = 1;
+			foreach ( $columns as $column ) {
+				$columns_data[ $column ] = 1;
 			}
 
 			return $columns_data;

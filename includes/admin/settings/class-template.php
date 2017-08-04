@@ -74,6 +74,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 */
 		private function get_fields() {
 			$templater = WPI()->templater();
+
 			$templates = array();
 			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
 				$templates[] = array(
@@ -81,8 +82,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'value' => strtolower( $template ),
 				);
 			}
-			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
-			$is_incl_vat = 'incl' === get_option( 'woocommerce_tax_display_cart' );
+
+			$company_logo  = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
+			$cart_incl_tax = 'incl' === get_option( 'woocommerce_tax_display_cart' );
 
 			$settings = array(
 				array(
@@ -536,21 +538,11 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'visible_columns',
 					'type'     => 'multiple_select',
 					'desc'     => '',
-					'options'  => array(
+					'options'  => apply_filters( 'wpi_columns_options', array(
 						array(
 							'name' => __( 'Description', 'woocommerce-pdf-invoices' ),
 							'value' => 'description',
 							'default' => 1,
-						),
-						array(
-							'name' => __( 'Cost (ex. VAT)', 'woocommerce-pdf-invoices' ),
-							'value' => 'cost_ex_vat',
-							'default' => 0,
-						),
-						array(
-							'name' => __( 'Cost (incl. VAT)', 'woocommerce-pdf-invoices' ),
-							'value' => 'cost_incl_vat',
-							'default' => 0,
 						),
 						array(
 							'name' => __( 'Quantity', 'woocommerce-pdf-invoices' ),
@@ -558,21 +550,16 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 1,
 						),
 						array(
-							'name' => WC()->countries->tax_or_vat(),
-							'value' => 'vat',
-							'default' => 0,
-						),
-						array(
-							'name' => __( 'Total (ex. VAT)', 'woocommerce-pdf-invoices' ),
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat(),
 							'value' => 'total_ex_vat',
-							'default' => ! $is_incl_vat ? 1 : 0,
+							'default' => (int) ! $cart_incl_tax,
 						),
 						array(
-							'name' => __( 'Total (incl. VAT)', 'woocommerce-pdf-invoices' ),
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat(),
 							'value' => 'total_incl_vat',
-							'default' => $is_incl_vat ? 1 : 0,
+							'default' => (int) $cart_incl_tax,
 						),
-					),
+					) ),
 				),
 				array(
 					'id'       => 'bewpi-totals',

@@ -419,21 +419,22 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Load admin scripts.
 		 */
 		public function admin_scripts() {
-			wp_register_script( 'bewpi_settings_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
-			wp_localize_script( 'bewpi_settings_js', 'BEWPI_AJAX', array(
+			wp_register_script( 'bewpi_admin_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
+			wp_localize_script( 'bewpi_admin_js', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'jquery-ui-sortable', 'select2' ), WC()->version );
+			wp_register_script( 'bewpi_settings_js', WPI_URL . '/assets/js/settings.js', array(), WPI_VERSION, true );
+			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'select2' ), WC()->version );
 
 			$screen = get_current_screen();
 			$screen_id    = $screen ? $screen->id : '';
 			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
+				wp_enqueue_script( 'bewpi_admin_js' );
 				wp_enqueue_script( 'bewpi_settings_js' );
 				wp_enqueue_script( 'wc-enhanced-select' );
-				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
 		}
 

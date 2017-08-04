@@ -132,24 +132,3 @@
     window.bewpi.notice = notice;
     window.bewpi.setting = setting;
 })();
-
-/* global woocommerce_settings_params */
-( function( $ ) {
-	// Select all/none
-	$( '.wpi' ).on( 'click', '.select_all', function() {
-		$( this ).closest( 'td' ).find( 'select option' ).attr( 'selected', 'selected' );
-		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
-		return false;
-	});
-
-	$( '.wpi' ).on( 'click', '.select_none', function() {
-		$( this ).closest( 'td' ).find( 'select option' ).removeAttr( 'selected' );
-		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
-		return false;
-	});
-
-	$( window ).load(function() {
-		$( ".wpi ul.select2-choices" ).first().sortable();
-		$( ".wpi ul.select2-choices" ).first().disableSelection();
-	});
-})( jQuery );

@@ -85,19 +85,23 @@ table tr.heading th:nth-child(1) {
 }
 
 table tr.heading th:nth-child(1),
-table tr.heading th:nth-child(2) {
+table tr.heading th:nth-child(2),
+table tr.item td:nth-child(1),
+table tr.item td:nth-child(2) {
     text-align: left;
 }
 
 table tr.heading th {
     font-weight: bold;
     color: #FFFFFF;
-    border: 1px solid white;
+    /*border: 1px solid white;*/
     text-align: center;
 }
 
 table tr.heading th.total_ex_vat,
-table tr.heading th.total_incl_vat {
+table tr.heading th.total_incl_vat,
+table tr.item td.total_ex_vat,
+table tr.item td.total_incl_vat {
     text-align: right;
 }
 

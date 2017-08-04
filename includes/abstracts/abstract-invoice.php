@@ -611,6 +611,85 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			return apply_filters( 'wpi_invoice_line_item_column_header_data', $data, $this, $tax_display );
 		}
 
+		protected function add_line_item_description( &$data, $item_id, $item ) {
+			$templater = WPI()->templater();
+
+			ob_start();
+			echo esc_html( $item['name'] );
+
+			do_action( 'wpi_order_item_meta_start', $item, $this->order );
+			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
+
+			$templater->wc_display_item_meta( $item, true );
+			$templater->wc_display_item_downloads( $item, true );
+
+			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
+			$description = ob_get_contents();
+			ob_end_clean();
+
+			$data['description'] = $description;
+		}
+
+		protected function add_line_item_quantity( &$data, $item_id, $item ) {
+			$data['quantity'] = $item['qty'];
+		}
+
+		protected function add_line_item_total_ex_vat( &$data, $item_id, $item ) {
+			$data['total_ex_vat'] = wc_price( $this->order->get_line_total( $item, false ), array(
+				'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
+			) );
+		}
+
+		protected function add_line_item_total_incl_vat( &$data, $item_id, $item ) {
+			$data['total_incl_vat'] = wc_price( $this->order->get_line_total( $item, true ), array(
+				'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
+			) );
+		}
+
+		/**
+		 * Get totals for display on pages and in emails.
+		 *
+		 * @return array $data.
+		 */
+		public function get_line_items() {
+			$line_items       = array();
+			$selected_columns = (array) WPI()->get_option( 'template', 'columns' );
+
+			foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
+				$line_item = array();
+
+				foreach ( $selected_columns as $key => $value ) {
+					switch ( $key ) {
+						case 'description':
+
+							$this->add_line_item_description( $line_item, $item_id, $item );
+
+							break;
+						case 'quantity':
+
+							$this->add_line_item_quantity( $line_item, $item_id, $item );
+
+							break;
+						case 'total_ex_vat':
+
+							$this->add_line_item_total_ex_vat( $line_item, $item_id, $item );
+
+							break;
+
+						case 'total_incl_vat':
+
+							$this->add_line_item_total_incl_vat( $line_item, $item_id, $item );
+
+							break;
+					}
+				} // End foreach().
+
+				$line_items[] = apply_filters( 'wpi_invoice_line_item_columns', $line_item, $item_id, $item, $this );
+			}
+
+			return $line_items;
+		}
+
 		/**
 		 * Add total row for subtotal.
 		 *

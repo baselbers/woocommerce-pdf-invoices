@@ -64,62 +64,43 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $headers as $key => $label ) {
+			foreach ( $headers as $id => $value ) {
 				// Calculate table cell width for headers on right half of the table.
 				$width = ( 'description' === $key ) ? 50 : 50 / ( $headers_count - 1 );
 
-				if ( is_array( $label ) ) {
-					foreach ( $label as $k => $l ) {
-						printf( '<th class="%s" width="%s%%">%s</th>', $key, $width, $l );
+				if ( is_array( $value ) ) {
+					foreach ( $value as $val ) {
+						printf( '<th class="%s">%s</th>', $id, $val );
 					}
 					continue;
 				}
 
-				printf( '<th class="%s" width="%s%%">%s</th>', $key, $width, $label );
+				printf( '<th class="%s">%s</th>', $id, $value );
 			}
 			?>
 		</tr>
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $order->get_items( 'line_item' ) as $item_id => $item ) {
+	foreach ( $invoice->get_line_items() as $index => $line_item ) {
 		echo '<tr class="item">';
 
-		foreach ( $headers as $key => $label ) {
+		foreach ( $headers as $header_id => $header_label ) {
 
-			echo '<td>';
+			if ( isset( $line_item[ $header_id ] ) ) {
+				$value = $line_item[ $header_id ];
 
-			switch ( $key ) {
-				case 'description':
+				if ( is_array( $value ) ) {
+					foreach ( $value as $val ) {
+						printf( '<td class="%s">%s</td>', $header_id, $val );
+					}
+					continue;
+				}
 
-					echo esc_html( $item['name'] );
-
-					do_action( 'wpi_order_item_meta_start', $item, $this->order );
-					do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
-
-					$templater->wc_display_item_meta( $item, true );
-					$templater->wc_display_item_downloads( $item, true );
-
-					do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
-
-					break;
-				case 'quantity':
-
-					echo esc_html( $item['qty'] );
-
-					break;
-				case 'total_ex_vat':
-
-					echo wc_price( $order->get_line_total( $item, false ), array(
-						'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
-					) );
-
-					break;
+				printf( '<td class="%s">%s</td>', $header_id, $value );
 			}
 
-			echo '</td>';
-
-		} // End foreach().
+		}
 
 		echo '</tr>';
 	} // End foreach().
@@ -143,7 +124,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<tr class="total">
 			<td width="50%"></td>
 			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>"><?php echo esc_html( $total['label'] ); ?></td>
-			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>"><?php echo $total['value']; ?></td>
+			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>"><?php echo str_replace( '&nbsp;', '', $total['value'] ); ?></td>
 		</tr>
 
 	<?php } ?>

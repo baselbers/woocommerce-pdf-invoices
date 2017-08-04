@@ -538,23 +538,24 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'visible_columns',
 					'type'     => 'multiple_select',
 					'desc'     => '',
+					'class'    => 'bewpi-columns',
 					'options'  => apply_filters( 'wpi_columns_options', array(
-						array(
+						'description' => array(
 							'name' => __( 'Description', 'woocommerce-pdf-invoices' ),
 							'value' => 'description',
 							'default' => 1,
 						),
-						array(
+						'quantity' => array(
 							'name' => __( 'Quantity', 'woocommerce-pdf-invoices' ),
 							'value' => 'quantity',
 							'default' => 1,
 						),
-						array(
+						'total_ex_vat' => array(
 							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat(),
 							'value' => 'total_ex_vat',
 							'default' => (int) ! $cart_incl_tax,
 						),
-						array(
+						'total_incl_vat' => array(
 							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat(),
 							'value' => 'total_incl_vat',
 							'default' => (int) $cart_incl_tax,
@@ -570,6 +571,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'section'  => 'visible_columns',
 					'type'     => 'multiple_select',
 					'desc'     => '',
+					'class'    => 'bewpi-totals',
 					'options'  => array(
 						array(
 							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ),
@@ -577,17 +579,17 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 1,
 						),
 						array(
-							'name' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
 							'value' => 'shipping_ex_vat',
 							'default' => 1,
 						),
 						array(
-							'name' => sprintf( __( 'Subtotal %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
 							'value' => 'subtotal_ex_vat',
 							'default' => 1,
 						),
 						array(
-							'name' => sprintf( __( 'Subtotal %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
 							'value' => 'subtotal_incl_vat',
 							'default' => 0,
 						),
@@ -597,12 +599,12 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 1,
 						),
 						array(
-							'name' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
 							'value' => 'shipping_incl_vat',
 							'default' => 0,
 						),
 						array(
-							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->ex_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
 							'value' => 'total_ex_vat',
 							'default' => 0,
 						),
@@ -612,7 +614,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 0,
 						),
 						array(
-							'name' => sprintf( __( 'Total %s', 'woocommerce-pdf-invoices' ), esc_html( WC()->countries->inc_tax_or_vat() ) ),
+							'name' => sprintf( __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
 							'value' => 'total_incl_vat',
 							'default' => 1,
 						),
@@ -703,15 +705,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		private function sanitize_totals( $rows ) {
 			$rows_data = array();
 
-			foreach ( $this->defaults['bewpi_totals'] as $row => $enabled ) {
-				$selected = in_array( $row, $rows, true );
-				$rows_data[ sanitize_key( $row ) ] = $selected ? 1 : 0;
-			}
-
-			// Required.
-			$total_exists = (bool) count( array_intersect( array( 'total_ex_vat', 'total_incl_vat' ), $rows ) );
-			if ( ! $total_exists ) {
-				$rows_data['total_incl_vat'] = 1;
+			foreach ( $rows as $row ) {
+				$rows_data[ $row ] = 1;
 			}
 
 			return $rows_data;

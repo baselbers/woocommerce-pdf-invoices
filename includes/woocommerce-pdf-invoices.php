@@ -804,6 +804,21 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Get tax or vat label.
+		 *
+		 * @param bool $incl Including tax or vat.
+		 *
+		 * @return string
+		 */
+		public function tax_or_vat_label( $incl = true ) {
+			if ( ! $incl ) {
+				return WC()->countries->ex_tax_or_vat();
+			}
+
+			return WC()->countries->inc_tax_or_vat();
+		}
+
+		/**
 		 * Templater instance.
 		 *
 		 * @return BEWPI_Template.

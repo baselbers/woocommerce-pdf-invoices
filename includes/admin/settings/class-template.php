@@ -83,8 +83,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				);
 			}
 
-			$company_logo  = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
-			$cart_incl_tax = 'incl' === get_option( 'woocommerce_tax_display_cart' );
+			$company_logo   = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
+			$cart_incl_tax  = 'incl' === get_option( 'woocommerce_tax_display_cart' );
+			$ex_tax_or_vat  = WC()->countries->ex_tax_or_vat();
+			$inc_tax_or_vat = WC()->countries->inc_tax_or_vat();
 
 			$settings = array(
 				array(
@@ -551,12 +553,12 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 							'default' => 1,
 						),
 						'total_ex_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat(),
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
 							'value' => 'total_ex_vat',
 							'default' => (int) ! $cart_incl_tax,
 						),
 						'total_incl_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat(),
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
 							'value' => 'total_incl_vat',
 							'default' => (int) $cart_incl_tax,
 						),
@@ -573,50 +575,60 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'desc'     => '',
 					'class'    => 'bewpi-totals',
 					'options'  => array(
-						array(
-							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ),
-							'value' => 'discount',
-							'default' => 1,
+						'discount_ex_vat' => array(
+							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+							'value' => 'discount_ex_vat',
+							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
+						'shipping_ex_vat' => array(
+							'name' => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
 							'value' => 'shipping_ex_vat',
-							'default' => 1,
+							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
+						'fee_ex_vat' => array(
+							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+							'value' => 'fee_ex_vat',
+							'default' => 0,
+						),
+						'subtotal_ex_vat' => array(
+							'name' => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
 							'value' => 'subtotal_ex_vat',
-							'default' => 1,
+							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
+						'subtotal_incl_vat' => array(
+							'name' => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
 							'value' => 'subtotal_incl_vat',
 							'default' => 0,
 						),
-						array(
-							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ),
-							'value' => 'fee',
-							'default' => 1,
+						'discount_incl_vat' => array(
+							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+							'value' => 'discount_incl_vat',
+							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
+						'shipping_incl_vat' => array(
+							'name' => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
 							'value' => 'shipping_incl_vat',
 							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->ex_tax_or_vat() ),
+						'fee_incl_vat' => array(
+							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+							'value' => 'fee_incl_vat',
+							'default' => 0,
+						),
+						'total_ex_vat' => array(
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
 							'value' => 'total_ex_vat',
 							'default' => 0,
 						),
-						array(
+						'vat' => array(
 							'name' => WC()->countries->tax_or_vat(),
 							'value' => 'vat',
 							'default' => 0,
 						),
-						array(
-							'name' => sprintf( __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . WC()->countries->inc_tax_or_vat() ),
+						'total_incl_vat' => array(
+							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
 							'value' => 'total_incl_vat',
-							'default' => 1,
+							'default' => 0,
 						),
 					),
 				),

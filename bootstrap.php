@@ -26,6 +26,10 @@ define( 'WPI_VERSION', '2.9.4' );
  */
 function _bewpi_load_plugin() {
 
+	if ( ! class_exists( 'WooCommerce' ) ) {
+		return;
+	}
+
 	/**
 	 * @deprecated instead use `WPI_FILE`.
 	 */

@@ -819,6 +819,30 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Get order currency.
+		 *
+		 * @param WC_Order $order order object.
+		 *
+		 * @return string
+		 */
+		public static function get_currency( $order ) {
+			return BEWPI_WC_Order_Compatibility::get_currency( $order );
+		}
+
+		/**
+		 * Get order property.
+		 *
+		 * @param WC_Order $order order object.
+		 * @param string   $prop order property.
+		 * @param string   $context display context.
+		 *
+		 * @return mixed
+		 */
+		public static function get_prop( $order, $prop, $context = 'edit' ) {
+			return BEWPI_WC_Order_Compatibility::get_prop( $order, $prop, $context );
+		}
+
+		/**
 		 * Templater instance.
 		 *
 		 * @return BEWPI_Template.

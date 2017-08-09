@@ -123,7 +123,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 
 		<tr class="total">
 			<td width="50%"></td>
-			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>"><?php echo esc_html( $total['label'] ); ?></td>
+			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>"><?php echo $total['label']; ?></td>
 			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>"><?php echo str_replace( '&nbsp;', '', $total['value'] ); ?></td>
 		</tr>
 

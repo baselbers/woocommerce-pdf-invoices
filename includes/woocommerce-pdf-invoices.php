@@ -807,15 +807,22 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Get tax or vat label.
 		 *
 		 * @param bool $incl Including tax or vat.
+		 * @param bool $small text font size.
 		 *
 		 * @return string
 		 */
-		public function tax_or_vat_label( $incl = true ) {
-			if ( ! $incl ) {
-				return WC()->countries->ex_tax_or_vat();
+		public function tax_or_vat_label( $incl = true, $small = true ) {
+			if ( $incl ) {
+				$label = WC()->countries->inc_tax_or_vat();
+			} else {
+				$label = WC()->countries->ex_tax_or_vat();
 			}
 
-			return WC()->countries->inc_tax_or_vat();
+			if ( $small ) {
+				$label = sprintf( '<small class="tax_label">%s</small>', $label );
+			}
+
+			return $label;
 		}
 
 		/**
@@ -840,6 +847,32 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public static function get_prop( $order, $prop, $context = 'edit' ) {
 			return BEWPI_WC_Order_Compatibility::get_prop( $order, $prop, $context );
+		}
+
+		/**
+		 * Check if column is enabled/selected within settings.
+		 *
+		 * @param string $column Column name.
+		 *
+		 * @return bool
+		 */
+		public function has_column( $column ) {
+			$selected_columns = array_keys( self::get_option( 'template', 'columns' ) );
+
+			return in_array( $column, $selected_columns, true );
+		}
+
+		/**
+		 * Check if total row is enabled/selected within settings.
+		 *
+		 * @param string $total_row Total row name.
+		 *
+		 * @return bool
+		 */
+		public function has_total_row( $total_row ) {
+			$selected_totals = array_keys( self::get_option( 'template', 'totals' ) );
+
+			return in_array( $total_row, $selected_totals, true );
 		}
 
 		/**

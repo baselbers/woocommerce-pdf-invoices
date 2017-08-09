@@ -228,6 +228,10 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 
 					$prop = 'order_total';
 
+				} elseif ( 'shipping_tax' === $prop && 'view' !== $context ) {
+
+					$prop = 'order_shipping_tax';
+
 				} elseif ( 'parent_id' === $prop ) {
 
 					return $object->post->post_parent;

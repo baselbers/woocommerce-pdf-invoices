@@ -832,7 +832,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @return string
 		 */
-		public static function get_currency( $order ) {
+		public function get_currency( $order ) {
 			return BEWPI_WC_Order_Compatibility::get_currency( $order );
 		}
 
@@ -845,7 +845,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @return mixed
 		 */
-		public static function get_prop( $order, $prop, $context = 'edit' ) {
+		public function get_prop( $order, $prop, $context = 'edit' ) {
 			return BEWPI_WC_Order_Compatibility::get_prop( $order, $prop, $context );
 		}
 
@@ -873,6 +873,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$selected_totals = array_keys( self::get_option( 'template', 'totals' ) );
 
 			return in_array( $total_row, $selected_totals, true );
+		}
+
+		/**
+		 * Get all total rows before subtotal.
+		 *
+		 * @return array
+		 */
+		public function get_totals_before_subtotal() {
+			$selected_totals = self::get_option( 'template', 'totals' );
+			$subtotal        = array_search( 'subtotal_ex_vat', array_keys( $selected_totals ), true );
+
+			return array_slice( array_keys( $selected_totals ), 0, $subtotal );
 		}
 
 		/**

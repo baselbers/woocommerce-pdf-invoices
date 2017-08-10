@@ -561,57 +561,59 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param string $label Column title.
 		 * @param string $tax_display Display tax label.
 		 */
-		public function add_line_item_column_header_data( &$data, $key, $label, $tax_display = '' ) {
+		public function add_column( &$data, $key, $label, $tax_display = '' ) {
 			if ( ! empty( $tax_display ) ) {
-				$tax_label = 'incl' === $tax_display ? WC()->countries->inc_tax_or_vat() : WC()->countries->ex_tax_or_vat();
-				$label     .= '<br><small class="tax_label">' . $tax_label . '</small>';
+				$label .= '&nbsp;' . WPI()->tax_or_vat_label( 'incl' === $tax_display );
 			}
 
 			$data[ $key ] = $label;
 		}
 
 		/**
-		 * Get totals for display on pages and in emails.
-		 *
-		 * @param string $tax_display 'excl' or 'incl'.
+		 * Get columns.
 		 *
 		 * @return array
 		 */
-		public function get_line_item_column_header_data( $tax_display = '' ) {
-			$tax_display      = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
-			$data             = array();
-			$selected_columns = (array) WPI()->get_option( 'template', 'columns' );
+		public function get_columns() {
+			$columns = array();
 
-			foreach ( $selected_columns as $key => $value ) {
+			foreach ( (array) WPI()->get_option( 'template', 'columns' ) as $key => $value ) {
 				switch ( $key ) {
 					case 'description':
 
-						$this->add_line_item_column_header_data( $data, $key, __( 'Description', 'woocommerce-pdf-invoices' ) );
+						$this->add_column( $columns, $key, __( 'Description', 'woocommerce-pdf-invoices' ) );
 
 						break;
 					case 'quantity':
 
-						$this->add_line_item_column_header_data( $data, $key, __( 'Qty', 'woocommerce-pdf-invoices' ) );
+						$this->add_column( $columns, $key, __( 'Qty', 'woocommerce-pdf-invoices' ) );
 
 						break;
 					case 'total_ex_vat':
 
-						$this->add_line_item_column_header_data( $data, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'excl' );
+						$this->add_column( $columns, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'excl' );
 
 						break;
 
 					case 'total_incl_vat':
 
-						$this->add_line_item_column_header_data( $data, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'incl' );
+						$this->add_column( $columns, $key, __( 'Total', 'woocommerce-pdf-invoices' ), 'incl' );
 
 						break;
 				}
 			} // End foreach().
 
-			return apply_filters( 'wpi_invoice_line_item_column_header_data', $data, $this, $tax_display );
+			return apply_filters( 'wpi_invoice_columns', $columns, $this );
 		}
 
-		protected function add_line_item_description( &$data, $item_id, $item ) {
+		/**
+		 * Adds line item description to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		protected function add_description_column_data( &$data, $item_id, $item ) {
 			$templater = WPI()->templater();
 
 			ob_start();
@@ -630,64 +632,84 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$data['description'] = $description;
 		}
 
-		protected function add_line_item_quantity( &$data, $item_id, $item ) {
+		/**
+		 * Adds line item quantity to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		protected function add_quantity_column_data( &$data, $item_id, $item ) {
 			$data['quantity'] = $item['qty'];
 		}
 
-		protected function add_line_item_total_ex_vat( &$data, $item_id, $item ) {
+		/**
+		 * Adds line item total excl. tax to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		protected function add_total_ex_vat_column_data( &$data, $item_id, $item ) {
 			$data['total_ex_vat'] = wc_price( $this->order->get_line_subtotal( $item, false ), array(
-				'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
-			) );
-		}
-
-		protected function add_line_item_total_incl_vat( &$data, $item_id, $item ) {
-			$data['total_incl_vat'] = wc_price( $this->order->get_line_total( $item, true ), array(
-				'currency' => BEWPI_WC_Order_Compatibility::get_currency( $this->order ),
+				'currency' => WPI()->get_currency( $this->order ),
 			) );
 		}
 
 		/**
-		 * Get totals for display on pages and in emails.
+		 * Adds line item total incl. tax to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		protected function add_total_incl_vat_column_data( &$data, $item_id, $item ) {
+			$data['total_incl_vat'] = wc_price( $this->order->get_line_total( $item, true ), array(
+				'currency' => WPI()->get_currency( $this->order ),
+			) );
+		}
+
+		/**
+		 * Get line item data for all user selected columns.
 		 *
 		 * @return array $data.
 		 */
-		public function get_line_items() {
-			$line_items       = array();
-			$selected_columns = (array) WPI()->get_option( 'template', 'columns' );
+		public function get_columns_data() {
+			$rows = array();
 
 			foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
-				$line_item = array();
+				$row = array();
 
-				foreach ( $selected_columns as $key => $value ) {
+				foreach ( (array) WPI()->get_option( 'template', 'columns' ) as $key => $value ) {
 					switch ( $key ) {
 						case 'description':
 
-							$this->add_line_item_description( $line_item, $item_id, $item );
+							$this->add_description_column_data( $row, $item_id, $item );
 
 							break;
 						case 'quantity':
 
-							$this->add_line_item_quantity( $line_item, $item_id, $item );
+							$this->add_quantity_column_data( $row, $item_id, $item );
 
 							break;
 						case 'total_ex_vat':
 
-							$this->add_line_item_total_ex_vat( $line_item, $item_id, $item );
+							$this->add_total_ex_vat_column_data( $row, $item_id, $item );
 
 							break;
 
 						case 'total_incl_vat':
 
-							$this->add_line_item_total_incl_vat( $line_item, $item_id, $item );
+							$this->add_total_incl_vat_column_data( $row, $item_id, $item );
 
 							break;
 					}
 				} // End foreach().
 
-				$line_items[] = apply_filters( 'wpi_invoice_line_item_columns', $line_item, $item_id, $item, $this );
+				$rows[] = apply_filters( 'wpi_invoice_columns_data', $row, $item_id, $item, $this );
 			}
 
-			return $line_items;
+			return $rows;
 		}
 
 		/**
@@ -696,7 +718,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
+		protected function add_subtotal_total_row( &$total_rows, $tax_display ) {
 			$subtotal = $this->order->get_subtotal();
 
 			if ( $subtotal ) {
@@ -708,14 +730,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 
 				} else {
 
-					if ( WPI()->has_total_row( 'shipping_ex_vat' ) ) {
-						// Add shipping ex tax.
-						$subtotal += WPI()::get_prop( $this->order, 'shipping_total', 'edit' );
-					}
-
-					if ( WPI()->has_total_row( 'discount_ex_vat' ) ) {
-						// Reduce subtotal with discount ex tax.
-						$subtotal -= $this->order->get_total_discount();
+					foreach ( WPI()->get_totals_before_subtotal() as $total ) {
+						switch ( $total ) {
+							case 'discount_ex_vat':
+								$subtotal -= $this->order->get_total_discount();
+								break;
+							case 'shipping_ex_vat':
+								$subtotal += WPI()->get_prop( $this->order, 'shipping_total', 'edit' );
+								break;
+						}
 					}
 
 					$formatted_subtotal = wc_price( $subtotal, array(
@@ -738,14 +761,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
+		protected function add_discount_total_row( &$total_rows, $tax_display ) {
 			if ( $this->order->get_total_discount() > 0 ) {
 				$incl_tax               = 'incl' === $tax_display;
 				$total_rows['discount'] = array(
 					/* translators: tax or vat label */
 					'label' => sprintf( __( 'Discount %s', 'woocommerce-pdf-invoices' ), WPI()->tax_or_vat_label( $incl_tax ) ),
 					'value' => '-' . wc_price( $this->order->get_total_discount( ! $incl_tax ), array(
-							'currency' => WPI()::get_currency( $this->order ),
+							'currency' => WPI()->get_currency( $this->order ),
 						)
 					),
 				);
@@ -758,20 +781,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
+		protected function add_shipping_total_row( &$total_rows, $tax_display ) {
 			if ( $this->order->get_shipping_method() ) {
 				$incl_tax       = 'incl' === $tax_display;
-				$shipping_total = WPI()::get_prop( $this->order, 'shipping_total', 'edit' );
+				$shipping_total = WPI()->get_prop( $this->order, 'shipping_total', 'edit' );
 
 				if ( $incl_tax ) {
-					$shipping_total += (float) WPI()::get_prop( $this->order, 'shipping_tax', 'edit' );
+					$shipping_total += (float) WPI()->get_prop( $this->order, 'shipping_tax', 'edit' );
 				}
 
 				$total_rows['shipping'] = array(
 					/* translators: tax or vat label */
 					'label' => sprintf( __( 'Shipping %s', 'woocommerce-pdf-invoices' ), WPI()->tax_or_vat_label( $incl_tax ) ),
 					'value' => wc_price( $shipping_total, array(
-							'currency' => WPI()::get_currency( $this->order ),
+							'currency' => WPI()->get_currency( $this->order ),
 						)
 					),
 				);
@@ -784,7 +807,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
+		protected function add_fee_total_row( &$total_rows, $tax_display ) {
 			$fees = $this->order->get_fees();
 			if ( $fees ) {
 				$incl_tax = 'incl' === $tax_display;
@@ -802,7 +825,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 					$total_rows[ 'fee_' . $fee->get_id() ] = array(
 						/* translators: Fee name and tax or vat label */
 						'label' => sprintf( __( '%1$s %2$s', 'woocommerce-pdf-invoices' ), $fee->get_name(), WPI()->tax_or_vat_label( $incl_tax ) ),
-						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => WPI()::get_currency( $this->order ) ) ),
+						'value' => wc_price( ! $incl_tax ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => WPI()->get_currency( $this->order ) ) ),
 					);
 				}
 			}
@@ -814,11 +837,11 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
+		protected function add_tax_total_row( &$total_rows, $tax_display ) {
 			// Tax for tax exclusive prices.
 			if ( 'excl' === $tax_display ) {
 				if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
-					foreach ( $this->get_tax_totals() as $code => $tax ) {
+					foreach ( $this->order->get_tax_totals() as $code => $tax ) {
 						$total_rows[ sanitize_title( $code ) ] = array(
 							'label' => $tax->label,
 							'value' => $tax->formatted_amount,
@@ -827,7 +850,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				} else {
 					$total_rows['tax'] = array(
 						'label' => WC()->countries->tax_or_vat(),
-						'value' => wc_price( $this->order->get_total_tax(), array( 'currency' => WPI()::get_currency( $this->order ) ) ),
+						'value' => wc_price( $this->order->get_total_tax(), array( 'currency' => WPI()->get_currency( $this->order ) ) ),
 					);
 				}
 			}
@@ -839,7 +862,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @param array  $total_rows totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
-		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
+		protected function add_total_total_row( &$total_rows, $tax_display ) {
 			$incl_tax                  = 'incl' === $tax_display;
 			$total_rows['order_total'] = array(
 					/* translators: tax or vat label */
@@ -855,51 +878,49 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 *
 		 * @return array
 		 */
-		public function get_order_item_totals( $tax_display = '' ) {
-			$tax_display     = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
-			$total_rows      = array();
-			$selected_totals = WPI()->get_option( 'template', 'totals' );
-			$prices_include_tax = $this->order->prices_include_tax;
+		public function get_totals( $tax_display = '' ) {
+			$total_rows         = array();
+			$prices_include_tax = $this->order->get_prices_include_tax( 'edit' );
 
 			// Do not display tax labels on prices.
-			$this->order->prices_include_tax = false;
+			$this->order->set_prices_include_tax( false );
 
-			foreach ( $selected_totals as $key => $value ) {
+			foreach ( (array) WPI()->get_option( 'template', 'totals' ) as $key => $value ) {
 				switch ( $key ) {
 					case 'discount_ex_vat':
-						$this->add_order_item_totals_discount_row( $total_rows, 'excl' );
+						$this->add_discount_total_row( $total_rows, 'excl' );
 						break;
 					case 'shipping_ex_vat':
-						$this->add_order_item_totals_shipping_row( $total_rows, 'excl' );
+						$this->add_shipping_total_row( $total_rows, 'excl' );
 						break;
 					case 'subtotal_ex_vat':
-						$this->add_order_item_totals_subtotal_row( $total_rows, 'excl' );
+						$this->add_subtotal_total_row( $total_rows, 'excl' );
 						break;
 					case 'subtotal_incl_vat':
-						$this->add_order_item_totals_subtotal_row( $total_rows, 'incl' );
+						$this->add_subtotal_total_row( $total_rows, 'incl' );
 						break;
 					case 'discount_incl_vat':
-						$this->add_order_item_totals_discount_row( $total_rows, 'incl' );
+						$this->add_discount_total_row( $total_rows, 'incl' );
 						break;
 					case 'shipping_incl_vat':
-						$this->add_order_item_totals_shipping_row( $total_rows, 'incl' );
+						$this->add_shipping_total_row( $total_rows, 'incl' );
 						break;
 					case 'fee_incl_vat':
-						$this->add_order_item_totals_fee_rows( $total_rows, 'incl' );
+						$this->add_fee_total_row( $total_rows, 'incl' );
 						break;
 					case 'vat':
-						$this->add_order_item_totals_tax_rows( $total_rows, 'excl' );
+						$this->add_tax_total_row( $total_rows, 'excl' );
 						break;
 					case 'total_incl_vat':
-						$this->add_order_item_totals_total_row( $total_rows, 'incl' );
+						$this->add_total_total_row( $total_rows, 'incl' );
 						break;
 				}
 			}
 
 			// Reset wc property.
-			$this->order->prices_include_tax = $prices_include_tax;
+			$this->order->set_prices_include_tax( $prices_include_tax );
 
-			return apply_filters( 'wpi_get_order_item_totals', $total_rows, $this, $tax_display );
+			return apply_filters( 'wpi_invoice_totals', $total_rows, $this, $tax_display );
 		}
 
 		/**
@@ -919,66 +940,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 					'currency' => WPI()->get_currency( $this->order ),
 				)
 			);
-		}
-
-		private function get_discount_tax_by_rate_id( $rate_id ) {
-			$discount_tax      = 0;
-
-			foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
-				$line_tax_data = isset( $item['line_tax_data'] ) ? $item['line_tax_data'] : '';
-				$tax_data      = maybe_unserialize( $line_tax_data );
-
-				$tax_item_id       = $rate_id;
-				$tax_item_total    = (float) isset( $tax_data['total'][ $tax_item_id ] ) ? $tax_data['total'][ $tax_item_id ] : 0;
-				$tax_item_subtotal = (float) isset( $tax_data['subtotal'][ $tax_item_id ] ) ? $tax_data['subtotal'][ $tax_item_id ] : 0;
-
-				if ( $tax_item_total !== $tax_item_subtotal ) {
-					$discount_tax += $tax_item_subtotal - $tax_item_total;
-				}
-			}
-
-			return (float) $discount_tax;
-		}
-
-		/**
-		 * Get taxes, merged by code, formatted ready for output.
-		 *
-		 * @return array
-		 */
-		public function get_tax_totals() {
-			$taxes      = $this->order->get_items( 'tax' );
-			$tax_totals = array();
-
-			foreach ( $taxes as $key => $tax ) {
-				$code = $tax['name'];
-
-				if ( ! isset( $tax_totals[ $code ] ) ) {
-					$tax_totals[ $code ] = new stdClass();
-					$tax_totals[ $code ]->amount = 0;
-				}
-
-				$tax_totals[ $code ]->id                = $key;
-				$tax_totals[ $code ]->rate_id           = $tax['rate_id'];
-				$tax_totals[ $code ]->is_compound       = $tax['compound'];
-				$tax_totals[ $code ]->label             = isset( $tax['label'] ) ? $tax['label'] : $tax['name'];
-				$tax_totals[ $code ]->amount           += (float) $tax['tax_amount'];
-
-				if ( ! WPI()->has_total_row( 'shipping_incl_vat' ) ) {
-					$tax_totals[ $code ]->amount += (float) $tax['shipping_tax_amount'];
-				}
-
-				if ( ! WPI()->has_total_row( 'discount_incl_vat' ) ) {
-					$discount_tax                 = $this->get_discount_tax_by_rate_id( $tax['rate_id'] );
-					$tax_totals[ $code ]->amount += $discount_tax;
-				}
-
-				$tax_totals[ $code ]->formatted_amount  = wc_price( wc_round_tax_total( $tax_totals[ $code ]->amount ), array(
-						'currency' => WPI()::get_currency( $this->order ),
-					)
-				);
-			}
-
-			return $tax_totals;
 		}
 
 		/**

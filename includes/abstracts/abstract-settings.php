@@ -277,7 +277,7 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public function multi_select_callback( $args ) {
 		$page_options = get_option( $args['page'] );
-		$selections   = $page_options[ $args['name'] ];
+		$selections   = (array) $page_options[ $args['name'] ];
 		$options      = array_merge( $selections, $args['options'] );
 		?>
 		<select

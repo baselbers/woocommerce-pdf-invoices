@@ -23,9 +23,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		public function __construct() {
 			$this->settings_key = 'bewpi_template_settings';
 			$this->settings_tab = __( 'Template', 'woocommerce-pdf-invoices' );
-			$this->fields = $this->get_fields();
-			$this->sections = $this->get_sections();
-			$this->defaults = $this->get_defaults();
+			$this->fields       = $this->get_fields();
+			$this->sections     = $this->get_sections();
+			$this->defaults     = $this->get_defaults();
 
 			parent::__construct();
 
@@ -73,20 +73,15 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array
 		 */
 		private function get_fields() {
-			$templater = WPI()->templater();
-
-			$templates = array();
+			$templater    = WPI()->templater();
+			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
+			$templates    = array();
 			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
 				$templates[] = array(
 					'id'    => $template,
 					'value' => strtolower( $template ),
 				);
 			}
-
-			$company_logo   = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
-			$cart_incl_tax  = 'incl' === get_option( 'woocommerce_tax_display_cart' );
-			$ex_tax_or_vat  = WC()->countries->ex_tax_or_vat();
-			$inc_tax_or_vat = WC()->countries->inc_tax_or_vat();
 
 			$settings = array(
 				array(
@@ -531,110 +526,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 0,
 				),
-				array(
-					'id'       => 'bewpi-columns',
-					'name'     => $this->prefix . 'columns',
-					'title'    => __( 'Line item', 'woocommerce-pdf-invoices' ),
-					'callback' => array( $this, 'multi_select_callback' ),
-					'page'     => $this->settings_key,
-					'section'  => 'visible_columns',
-					'type'     => 'multiple_select',
-					'desc'     => '',
-					'class'    => 'bewpi-columns',
-					'options'  => apply_filters( 'wpi_columns_options', array(
-						'description' => array(
-							'name' => __( 'Description', 'woocommerce-pdf-invoices' ),
-							'value' => 'description',
-							'default' => 1,
-						),
-						'quantity' => array(
-							'name' => __( 'Quantity', 'woocommerce-pdf-invoices' ),
-							'value' => 'quantity',
-							'default' => 1,
-						),
-						'total_ex_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'total_ex_vat',
-							'default' => (int) ! $cart_incl_tax,
-						),
-						'total_incl_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'total_incl_vat',
-							'default' => (int) $cart_incl_tax,
-						),
-					) ),
-				),
-				array(
-					'id'       => 'bewpi-totals',
-					'name'     => $this->prefix . 'totals',
-					'title'    => __( 'Totals', 'woocommerce-pdf-invoices' ),
-					'callback' => array( $this, 'multi_select_callback' ),
-					'page'     => $this->settings_key,
-					'section'  => 'visible_columns',
-					'type'     => 'multiple_select',
-					'desc'     => '',
-					'class'    => 'bewpi-totals',
-					'options'  => array(
-						'discount_ex_vat' => array(
-							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'discount_ex_vat',
-							'default' => 0,
-						),
-						'shipping_ex_vat' => array(
-							'name' => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'shipping_ex_vat',
-							'default' => 0,
-						),
-						'fee_ex_vat' => array(
-							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'fee_ex_vat',
-							'default' => 0,
-						),
-						'subtotal_ex_vat' => array(
-							'name' => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'subtotal_ex_vat',
-							'default' => 0,
-						),
-						'subtotal_incl_vat' => array(
-							'name' => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'subtotal_incl_vat',
-							'default' => 0,
-						),
-						'discount_incl_vat' => array(
-							'name' => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'discount_incl_vat',
-							'default' => 0,
-						),
-						'shipping_incl_vat' => array(
-							'name' => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'shipping_incl_vat',
-							'default' => 0,
-						),
-						'fee_incl_vat' => array(
-							'name' => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'fee_incl_vat',
-							'default' => 0,
-						),
-						'total_ex_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
-							'value' => 'total_ex_vat',
-							'default' => 0,
-						),
-						'vat' => array(
-							'name' => WC()->countries->tax_or_vat(),
-							'value' => 'vat',
-							'default' => 0,
-						),
-						'total_incl_vat' => array(
-							'name' => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
-							'value' => 'total_incl_vat',
-							'default' => 0,
-						),
-					),
-				),
 			);
 
-			return $settings;
+			return apply_filters( 'wpi_template_settings', $settings, $this );
 		}
 
 		/**
@@ -649,7 +543,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 			// strip strings.
 			foreach ( $input as $key => $value ) {
+
 				if ( is_array( $input[ $key ] ) ) {
+					$output[ $key ] = $this->sanitize_array( $input[ $key ] );
 					continue;
 				}
 
@@ -679,14 +575,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
 			}
 
-			if ( isset( $input['bewpi_columns'] ) ) {
-				$output['bewpi_columns'] = $this->sanitize_columns( $input['bewpi_columns'] );
-			}
-
-			if ( isset( $input['bewpi_totals'] ) ) {
-				$output['bewpi_totals'] = $this->sanitize_totals( $input['bewpi_totals'] );
-			}
-
 			return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );
 		}
 
@@ -697,31 +585,14 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 *
 		 * @return array
 		 */
-		private function sanitize_columns( $columns ) {
-			$columns_data = array();
+		private function sanitize_array( $columns ) {
+			$data = array();
 
 			foreach ( $columns as $column ) {
-				$columns_data[ $column ] = 1;
+				$data[ $column ] = 1;
 			}
 
-			return $columns_data;
-		}
-
-		/**
-		 * Sanitize totals rows.
-		 *
-		 * @param array $rows Table content rows.
-		 *
-		 * @return array
-		 */
-		private function sanitize_totals( $rows ) {
-			$rows_data = array();
-
-			foreach ( $rows as $row ) {
-				$rows_data[ $row ] = 1;
-			}
-
-			return $rows_data;
+			return $data;
 		}
 
 		/**

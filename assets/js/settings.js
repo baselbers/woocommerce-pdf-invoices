@@ -14,17 +14,20 @@
 	});
 
 	$( window ).load( function () {
-		$( '.wpi .bewpi-columns' ).find( 'ul.select2-choices' ).sortable();
-		$( '.wpi .bewpi-columns' ).find( 'ul.select2-choices' ).disableSelection();
-		$( '.wpi .bewpi-totals' ).find( 'ul.select2-choices' ).sortable();
-		$( '.wpi .bewpi-totals' ).find( 'ul.select2-choices' ).disableSelection();
-		$( '.wpi ul.select2-choices' ).sortable({
+		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).sortable();
+		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).disableSelection();
+
+		$( '.wpi .bewpi-columns ul, .wpi .bewpi-totals ul' ).sortable({
 			stop: function( event, ui ) {
 
 				var tr = $(event.target.closest('tr'));
 
-				var columns = tr.find('li.select2-search-choice div').map(function () {
-					return $(this).text();
+				var columns = tr.find('li div, li').map(function () {
+					return $(this).clone()
+						.children()
+						.remove()
+						.end()
+						.text();
 				}).get();
 
 				var options = tr.find('select option');

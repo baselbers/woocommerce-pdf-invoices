@@ -24,8 +24,12 @@ div.wpi form .select2-container {
     width: 348px;
 }
 
+div.wpi form .select2-container {
+    display: block;
+}
+
 div.wpi form tr.bewpi-columns .select2-container {
-    width: auto;
+    width: 100% !important;
 }
 
 div.wpi form input[type="number"],
@@ -37,11 +41,12 @@ div.wpi form .select2-container {
     margin-bottom: 3px;
 }
 
-div.wpi form .select2-container ul li div {
-    cursor: move;
+div.wpi form .select2-container ul li div,
+div.wpi form .select2-container ul li {
+    cursor: move !important;
 }
 
-div.wpi form tr.bewpi-totals .select2-container-multi .select2-choices li {
+div.wpi form tr.bewpi-totals li {
     clear: left;
 }
 

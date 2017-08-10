@@ -20,8 +20,7 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$headers                        = $invoice->get_line_item_column_header_data();
-//$headers_count                  = apply_filters( 'wpi_invoice_headers_count', count( $headers ), $headers );
+$columns                        = $invoice->get_columns();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -64,7 +63,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $headers as $id => $value ) {
+			foreach ( $columns as $id => $value ) {
 				// Calculate table cell width for headers on right half of the table.
 				//$width = ( 'description' === $key ) ? 50 : 50 / ( $headers_count - 1 );
 
@@ -82,22 +81,22 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $invoice->get_line_items() as $index => $line_item ) {
+	foreach ( $invoice->get_columns_data() as $index => $row ) {
 		echo '<tr class="item">';
 
-		foreach ( $headers as $header_id => $header_label ) {
+		foreach ( $columns as $column_key => $column_label ) {
 
-			if ( isset( $line_item[ $header_id ] ) ) {
-				$value = $line_item[ $header_id ];
+			if ( isset( $row[ $column_key ] ) ) {
+				$value = $row[ $column_key ];
 
 				if ( is_array( $value ) ) {
 					foreach ( $value as $val ) {
-						printf( '<td class="%s">%s</td>', $header_id, $val );
+						printf( '<td class="%s">%s</td>', esc_html( $column_key ), $val );
 					}
 					continue;
 				}
 
-				printf( '<td class="%s">%s</td>', $header_id, $value );
+				printf( '<td class="%s">%s</td>', esc_html( $column_key ), $value );
 			}
 
 		}
@@ -117,7 +116,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 
 	<?php
-	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
+	foreach ( $invoice->get_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
 

@@ -283,7 +283,7 @@ abstract class BEWPI_Abstract_Settings {
 		<select
 				multiple="multiple"
 				name="<?php echo $args['page'] . '[' . $args['name'] . '][]'; ?>"
-				data-placeholder="<?php esc_attr_e( 'Choose columns&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+				data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
 				aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
 				class="wc-enhanced-select">
 			<?php
@@ -417,7 +417,7 @@ abstract class BEWPI_Abstract_Settings {
 		foreach ( $fields as $index => $field ) {
 			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ) ) ) {
 				// Add options defaults.
-				$defaults[ $field['name'] ] = array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) );
+				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );
 			}
 		}
@@ -451,6 +451,17 @@ abstract class BEWPI_Abstract_Settings {
 		}
 
 		return update_option( $this->settings_key, $this->defaults );
+	}
+
+	/**
+	 * Get the formatted html setting id.
+	 *
+	 * @param string $id String to format.
+	 *
+	 * @return string.
+	 */
+	public static function get_formatted_setting_id( $id ) {
+		return str_replace( '_', '-', WPI()->get_prefix() . $id );
 	}
 
 	/**

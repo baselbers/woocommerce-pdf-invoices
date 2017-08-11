@@ -18,7 +18,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 * Implements main function for attaching invoice to email and show invoice buttons.
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
-
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
@@ -33,6 +32,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @var array.
 		 */
 		public $settings = array();
+
+		/**
+		 * Prefix.
+		 *
+		 * @var string.
+		 */
+		private $prefix = 'wpi_';
 
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
@@ -885,6 +891,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$subtotal        = array_search( 'subtotal_ex_vat', array_keys( $selected_totals ), true );
 
 			return array_slice( array_keys( $selected_totals ), 0, $subtotal );
+		}
+
+		/**
+		 * Get prefix.
+		 *
+		 * @return string
+		 */
+		public function get_prefix() {
+			return $this->prefix;
 		}
 
 		/**

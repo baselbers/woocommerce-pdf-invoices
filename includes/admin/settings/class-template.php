@@ -62,6 +62,10 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'title' => __( 'Table Content', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
 				),
+				'advanced_visible_columns' => array(
+					'title' => __( 'Advanced Table Content', 'woocommerce-pdf-invoices' ),
+					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
+				),
 			);
 
 			return $sections;

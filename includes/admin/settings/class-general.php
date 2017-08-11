@@ -70,33 +70,33 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'id'       => 'bewpi-email-types',
 					'name'     => $this->prefix . 'email_types',
 					'title'    => __( 'Attach to Emails', 'woocommerce-pdf-invoices' ),
-					'callback' => array( $this, 'multiple_checkbox_callback' ),
+					'callback' => array( $this, 'multi_select_callback' ),
 					'page'     => $this->settings_key,
 					'section'  => 'email',
-					'type'     => 'multiple_checkbox',
+					'type'     => 'multiple_select',
 					'desc'     => '',
 					'options'  => apply_filters( 'wpi_email_types', array(
-						array(
+						'new_order' => array(
 							'name'    => __( 'New order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'new_order',
 							'default' => 1,
 						),
-						array(
+						'customer_on_hold_order' => array(
 							'name'    => __( 'Order on-hold', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_on_hold_order',
 							'default' => 0,
 						),
-						array(
+						'customer_processing_order' => array(
 							'name'    => __( 'Processing order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_processing_order',
 							'default' => 0,
 						),
-						array(
+						'customer_completed_order' => array(
 							'name'    => __( 'Completed order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_completed_order',
 							'default' => 1,
 						),
-						array(
+						'customer_invoice' => array(
 							'name'    => __( 'Customer invoice', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_invoice',
 							'default' => 0,

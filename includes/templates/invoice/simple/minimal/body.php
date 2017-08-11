@@ -21,6 +21,7 @@ $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $columns                        = $invoice->get_columns();
+$total_rows                     = (bool) WPI()->get_option( 'template', 'enable_advanced_table_content' ) ? $invoice->get_totals() : $invoice->get_order_item_totals();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -64,8 +65,6 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
 			foreach ( $columns as $id => $value ) {
-				// Calculate table cell width for headers on right half of the table.
-				//$width = ( 'description' === $key ) ? 50 : 50 / ( $headers_count - 1 );
 
 				if ( is_array( $value ) ) {
 					foreach ( $value as $val ) {
@@ -116,7 +115,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 
 	<?php
-	foreach ( $invoice->get_totals() as $key => $total ) {
+	foreach ( $total_rows as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
 

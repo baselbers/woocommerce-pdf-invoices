@@ -888,9 +888,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function get_totals_before_subtotal() {
 			$selected_totals = self::get_option( 'template', 'totals' );
-			$subtotal        = array_search( 'subtotal_ex_vat', array_keys( $selected_totals ), true );
+			$subtotal        = array_search( 'subtotal_ex_vat', $selected_totals, true );
 
-			return array_slice( array_keys( $selected_totals ), 0, $subtotal );
+			return array_slice( $selected_totals, 0, $subtotal );
 		}
 
 		/**

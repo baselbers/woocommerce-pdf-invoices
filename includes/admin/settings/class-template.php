@@ -38,7 +38,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array.
 		 */
 		private function get_sections() {
-			$sections = array(
+			$sections = apply_filters( 'wpi_template_sections', array(
 				'general' => array(
 					'title' => __( 'General Options', 'woocommerce-pdf-invoices' ),
 					'description' => sprintf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a brief description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' ),
@@ -62,13 +62,27 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'title' => __( 'Table Content', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
 				),
-				'advanced_visible_columns' => array(
-					'title' => __( 'Advanced Table Content', 'woocommerce-pdf-invoices' ),
-					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
-				),
-			);
+			) );
 
 			return $sections;
+		}
+
+		/**
+		 * Get templates for options.
+		 *
+		 * @return array
+		 */
+		private function get_template_options() {
+			$templates    = array();
+
+			foreach ( array_map( 'basename', WPI()->templater()->get_templates() ) as $template ) {
+				$templates[] = array(
+					'id'    => $template,
+					'value' => strtolower( $template ),
+				);
+			}
+
+			return $templates;
 		}
 
 		/**
@@ -77,15 +91,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array
 		 */
 		private function get_fields() {
-			$templater    = WPI()->templater();
 			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
-			$templates    = array();
-			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
-				$templates[] = array(
-					'id'    => $template,
-					'value' => strtolower( $template ),
-				);
-			}
 
 			$settings = array(
 				array(
@@ -100,7 +106,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					              . '<br><div class="bewpi-notes">'
 					              . sprintf( __( '<strong>Note:</strong> The %1$s template will probably no longer be supported in future versions, consider using the %2$s template.', 'woocommerce-pdf-invoices' ), '<strong>micro</strong>', '<strong>minimal</strong>' )
 					              . '</div>',
-					'options'  => $templates,
+					'options'  => $this->get_template_options(),
 					'default'  => 'minimal',
 				),
 				array(
@@ -518,18 +524,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'class'    => 'bewpi-checkbox-option-title',
 					'default'  => 1,
 				),
-				array(
-					'id'       => 'bewpi-show-sku-meta',
-					'name'     => $this->prefix . 'show_sku_meta',
-					'title'    => '',
-					'callback' => array( $this, 'input_callback' ),
-					'page'     => $this->settings_key,
-					'section'  => 'visible_columns',
-					'type'     => 'checkbox',
-					'desc'     => __( 'Show SKU as meta data', 'woocommerce-pdf-invoices' ),
-					'class'    => 'bewpi-checkbox-option-title',
-					'default'  => 0,
-				),
 			);
 
 			return apply_filters( 'wpi_template_settings', $settings, $this );
@@ -549,7 +543,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			foreach ( $input as $key => $value ) {
 
 				if ( is_array( $input[ $key ] ) ) {
-					$output[ $key ] = $this->sanitize_array( $input[ $key ] );
+					$output[ $key ] = $input[ $key ];
 					continue;
 				}
 
@@ -580,23 +574,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			}
 
 			return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );
-		}
-
-		/**
-		 * Sanitize columns.
-		 *
-		 * @param array $columns Table content columns.
-		 *
-		 * @return array
-		 */
-		private function sanitize_array( $columns ) {
-			$data = array();
-
-			foreach ( $columns as $column ) {
-				$data[ $column ] = 1;
-			}
-
-			return $data;
 		}
 
 		/**
@@ -652,4 +629,4 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			update_option( $this->settings_key, $options );
 		}
 	}
-}
+} // End if().

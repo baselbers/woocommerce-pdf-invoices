@@ -234,8 +234,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 
 			// Sanitize email.
 			if ( isset( $input['email_it_in_account'] ) ) {
-				$sanitized_email = sanitize_email( $input['email_it_in_account'] );
-				$output['email_it_in_account'] = $sanitized_email;
+				$output['email_it_in_account'] = sanitize_email( $input['email_it_in_account'] );
 			}
 
 			return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );

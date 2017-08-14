@@ -20,8 +20,9 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
+$has_advanced_table_content     = (bool) WPI()->templater()->has_advanced_table_content();
 $columns                        = $invoice->get_columns();
-$total_rows                     = (bool) WPI()->get_option( 'template', 'enable_advanced_table_content' ) ? $invoice->get_totals() : $invoice->get_order_item_totals();
+$total_rows                     = $invoice->get_totals();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>

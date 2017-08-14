@@ -86,6 +86,15 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Get current active template name.
+	 *
+	 * @return string.
+	 */
+	public function get_active_template() {
+		return (string) WPI()->get_option( 'template', 'template_name' );
+	}
+
+	/**
 	 * Get template files.
 	 *
 	 * @param string $type Document type.
@@ -273,6 +282,29 @@ class BEWPI_Template {
 		} else {
 			$this->order->display_item_downloads( $item );
 		}
+	}
+
+	/**
+	 * Template uses advanced table content?
+	 *
+	 * @return bool.
+	 */
+	public function has_advanced_table_content() {
+		return (bool) WPI()->get_option( 'template', 'enable_advanced_table_content' );
+	}
+
+	/**
+	 * Template needs to show sku as meta data.
+	 *
+	 * @return bool.
+	 */
+	public function has_sku_as_meta_data() {
+		// Only available for minimal template.
+		if ( false === strpos( $this->get_active_template(), 'minimal' ) ) {
+			return false;
+		}
+
+		return $this->has_advanced_table_content() && (bool) WPI()->get_option( 'template', 'show_sku_meta' );
 	}
 
 	/**

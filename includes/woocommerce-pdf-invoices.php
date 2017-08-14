@@ -856,32 +856,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Check if column is enabled/selected within settings.
-		 *
-		 * @param string $column Column name.
-		 *
-		 * @return bool
-		 */
-		public function has_column( $column ) {
-			$selected_columns = array_keys( self::get_option( 'template', 'columns' ) );
-
-			return in_array( $column, $selected_columns, true );
-		}
-
-		/**
-		 * Check if total row is enabled/selected within settings.
-		 *
-		 * @param string $total_row Total row name.
-		 *
-		 * @return bool
-		 */
-		public function has_total_row( $total_row ) {
-			$selected_totals = array_keys( self::get_option( 'template', 'totals' ) );
-
-			return in_array( $total_row, $selected_totals, true );
-		}
-
-		/**
 		 * Get all total rows before subtotal.
 		 *
 		 * @return array

@@ -22,7 +22,6 @@ $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $has_advanced_table_content     = (bool) WPI()->templater()->has_advanced_table_content();
 $columns                        = $invoice->get_columns();
-$total_rows                     = $invoice->get_totals();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
@@ -116,14 +115,20 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 
 	<?php
-	foreach ( $total_rows as $key => $total ) {
+	foreach ( $invoice->get_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
 
 		<tr class="total">
 			<td width="50%"></td>
-			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>"><?php echo $total['label']; ?></td>
-			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>"><?php echo str_replace( '&nbsp;', '', $total['value'] ); ?></td>
+
+			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
+				<?php echo $total['label']; ?>
+			</td>
+
+			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>">
+				<?php echo str_replace( '&nbsp;', '', $total['value'] ); ?>
+			</td>
 		</tr>
 
 	<?php } ?>

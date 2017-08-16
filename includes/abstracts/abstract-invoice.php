@@ -548,10 +548,12 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 						continue;
 					}
 
-					$currency                              = WPI()->get_currency( $this->order );
 					$total_rows[ 'fee_' . $fee->get_id() ] = array(
 						'label' => $fee->get_name() . ':',
-						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => $currency ) ),
+						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array(
+								'currency' => WPI()->get_currency( $this->order ),
+							)
+						),
 					);
 				}
 			}
@@ -574,11 +576,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 						);
 					}
 				} else {
-					$currency          = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
 					$total_rows['tax'] = array(
 						'label' => WC()->countries->tax_or_vat() . ':',
 						'value' => wc_price( $this->order->get_total_tax(), array(
-								'currency' => $currency,
+								'currency' => WPI()->get_currency( $this->order ),
 							)
 						),
 					);

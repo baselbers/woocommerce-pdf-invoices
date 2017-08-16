@@ -94,7 +94,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 
 	<?php
-	foreach ( $invoice->get_totals() as $key => $total ) {
+	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
 

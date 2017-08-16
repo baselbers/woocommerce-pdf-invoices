@@ -19,13 +19,35 @@ div.wpi form input[type="checkbox"]:disabled + label {
 
 div.wpi form select,
 div.wpi form input[type="text"],
-div.wpi form textarea {
+div.wpi form textarea,
+div.wpi form .select2-container {
     width: 348px;
+}
+
+div.wpi form .select2-container {
+    display: block;
+}
+
+div.wpi form tr.bewpi-columns .select2-container {
+    width: 100% !important;
 }
 
 div.wpi form input[type="number"],
 div.wpi form input[type="color"] {
     width: 70px;
+}
+
+div.wpi form .select2-container {
+    margin-bottom: 3px;
+}
+
+div.wpi form .select2-container ul li div,
+div.wpi form .select2-container ul li {
+    cursor: move !important;
+}
+
+div.wpi form tr.bewpi-totals li {
+    clear: left;
 }
 
 a.wpi.shop-order-action {
@@ -72,6 +94,7 @@ a.wpi.order-page.invoice.button {
 .manage-column.column-bewpi_invoice_number {
     width: 8%;
 }
+
 /* Sidebar */
 .bewpi-sidebar {
     width: 25%;

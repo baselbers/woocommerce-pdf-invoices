@@ -20,19 +20,19 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$line_items                     = $order->get_items( 'line_item' );
+$columns                        = $invoice->get_columns();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
 ?>
 
 <div class="title">
 	<div>
-		<h2><?php echo $templater->get_option( 'bewpi_title' ); ?></h2>
+		<h2><?php echo esc_html( $templater->get_option( 'bewpi_title' ) ); ?></h2>
 	</div>
 	<div class="watermark">
 		<?php
 		if ( $templater->get_option( 'bewpi_show_payment_status' ) && $order->is_paid() ) {
-			printf( '<h2 class="green">%s</h2>', __( 'Paid', 'woocommerce-pdf-invoices' ) );
+			printf( '<h2 class="green">%s</h2>', esc_html__( 'Paid', 'woocommerce-pdf-invoices' ) );
 		}
 
 		do_action( 'wpi_watermark_end', $order, $invoice );
@@ -48,7 +48,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<td>
 			<?php
 			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! empty( $formatted_shipping_address ) && $formatted_shipping_address !== $formatted_billing_address && ! $templater->has_only_virtual_products( $line_items ) ) {
-				printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $formatted_shipping_address;
 			}
 			?>
@@ -61,56 +61,37 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 <table cellpadding="0" cellspacing="0">
 	<thead>
-		<tr class="heading" bgcolor="<?php echo $color; ?>;">
-			<th>
-				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
-			</th>
-
-			<th>
-				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
-			</th>
-
-			<?php do_action( 'bewpi_line_item_headers_after_quantity', $invoice ); ?>
-
-			<th>
-				<?php _e( 'Price', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
+			<?php
+			foreach ( $columns as $key => $data ) {
+				$templater->display_header_recursive( $key, $data );
+			}
+			?>
 		</tr>
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $line_items as $item_id => $item ) {
-		?>
-		<tr class="item">
-			<td width="50%">
-				<?php
-				echo $item['name'];
+	foreach ( $invoice->get_columns_data() as $index => $row ) {
+		echo '<tr class="item">';
 
-				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
+		// Display row data.
+		foreach ( $row as $column_key => $data ) {
+			$templater->display_data_recursive( $column_key, $data );
+		}
 
-				$templater->wc_display_item_meta( $item, true );
-				$templater->wc_display_item_downloads( $item, true );
-
-				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
-				?>
-			</td>
-
-			<td>
-				<?php echo $item['qty']; ?>
-			</td>
-
-			<?php do_action( 'bewpi_line_item_after_quantity', $item_id, $item, $invoice ); ?>
-
-			<td>
-				<?php echo $order->get_formatted_line_subtotal( $item ); ?>
-			</td>
-		</tr>
-
-	<?php } ?>
+		echo '</tr>';
+	} // End foreach().
+	?>
 
 	<tr class="spacer">
 		<td></td>
 	</tr>
+
+	</tbody>
+</table>
+
+<table cellpadding="0" cellspacing="0">
+	<tbody>
 
 	<?php
 	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
@@ -118,9 +99,15 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		?>
 
 		<tr class="total">
-			<td></td>
-			<td class="border <?php echo $class; ?>" colspan="<?php echo $templater->invoice->colspan; ?>"><?php echo $total['label']; ?></td>
-			<td class="border <?php echo $class; ?>"><?php echo $total['value']; ?></td>
+			<td width="50%"></td>
+
+			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
+				<?php echo $total['label']; ?>
+			</td>
+
+			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>">
+				<?php echo str_replace( '&nbsp;', '', $total['value'] ); ?>
+			</td>
 		</tr>
 
 	<?php } ?>

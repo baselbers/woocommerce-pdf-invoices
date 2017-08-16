@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 19:28+0200\n"
-"PO-Revision-Date: 2017-07-26 19:28+0200\n"
+"POT-Creation-Date: 2017-07-20 16:35+0200\n"
+"PO-Revision-Date: 2017-07-20 16:35+0200\n"
 "Last-Translator: Julius Reich <shop@koerner-musik.de>\n"
 "Language-Team: German (Formal)\n"
 "Language: de_DE\n"
@@ -433,22 +433,22 @@ msgid "Cancelled"
 msgstr "Abbrechen"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:163
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:579
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:581
 msgid "Discount:"
 msgstr "Rabatt:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:179
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:594
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:596
 msgid "Shipping:"
 msgstr "Versand:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:564
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:566
 msgid "Subtotal:"
 msgstr "Zwischensumme:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:289
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:663
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:665
 msgid "Total:"
 msgstr "Summe:"
 
@@ -631,14 +631,14 @@ msgid "Payment Method: %s"
 msgstr "Zahlungsart: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:64
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:415
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:55
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Auftragsnummer: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:73
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:395
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:397
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:64
 #, php-format
 msgid "VAT Number: %s"
@@ -755,7 +755,7 @@ msgstr "Support"
 msgid "Paid"
 msgstr "Bezahlt"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:761
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:763
 #, php-format
 msgid "%s of %s"
 msgstr "%s von %s"
@@ -977,9 +977,7 @@ msgstr "Erstellen Sie ein eigenes template durch Kopie von %1$s zu %2$s."
 msgid ""
 "<strong>Note:</strong> The %1$s template will probably no longer be "
 "supported in future versions, consider using the %2$s template."
-msgstr ""
-"Hinweis: Das %1$s template wird nicht mehr weiterentwickelt. Nutzen Sie "
-"stattdessen lieber das %2$s template."
+msgstr "Hinweis: Das %1$s template wird nicht mehr weiterentwickelt."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:105
 msgid "Color theme"
@@ -1051,9 +1049,8 @@ msgid ""
 "choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href=\"%3$s"
 "\" target=\"_blank\">URL</a>."
 msgstr ""
-"Benutzen Sie die <a href=\"%1$s\">Media Library</a>, um ein Bild <a href="
-"\"%2$s\">hochzuladen</a> und geben Sie die <a href=\"%3$s\" target=\"_blank"
-"\">URL</a> der Datei an."
+"Benutzen Sie die <a href=\"%1$s\">Media Library</a> und geben Sie die <a "
+"href=\"%3$s\" target=\"_blank\">URL</a> der Datei an."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:222
 msgid "Company address"
@@ -1084,7 +1081,7 @@ msgstr "Ändern Sie den Namen der Rechnung."
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:250
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:709
 msgid "Invoice"
-msgstr "Rechnung TEST"
+msgstr "Rechnung"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:255
 msgid "Thank you text"
@@ -1269,7 +1266,7 @@ msgstr "Weitere PDF-Dateien anhängen."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:11
 msgid "Send customer invoices directly to suppliers and others."
-msgstr "Rechnungen direkt an Lieferanten und weitere versenden."
+msgstr "Rechnungen direkt an Lieferanten und weitere versenden.\n"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:12
 #, php-format

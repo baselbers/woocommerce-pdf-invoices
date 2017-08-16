@@ -18,7 +18,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 * Implements main function for attaching invoice to email and show invoice buttons.
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
-
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
@@ -33,6 +32,13 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @var array.
 		 */
 		public $settings = array();
+
+		/**
+		 * Prefix.
+		 *
+		 * @var string.
+		 */
+		private $prefix = 'wpi_';
 
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
@@ -164,7 +170,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function admin_init_hooks() {
 			add_action( 'admin_init', array( $this, 'admin_pdf_callback' ) );
-			add_action( 'admin_enqueue_scripts', array( $this, 'load_admin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'admin_scripts' ) );
 			add_filter( 'plugin_action_links_' . plugin_basename( WPI_FILE ), array( $this, 'add_plugin_action_links' ) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
 
@@ -385,20 +392,57 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Load admin scripts.
+		 * Get plugin screen ids.
 		 *
-		 * @param string $hook To check current page.
+		 * @return array
 		 */
-		public function load_admin_scripts( $hook ) {
-			wp_enqueue_script( 'bewpi_settings_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
-			wp_localize_script( 'bewpi_settings_js', 'BEWPI_AJAX', array(
+		public static function get_screen_ids() {
+			$screen_ids = array(
+				'woocommerce_page_bewpi-invoices',
+				'edit-shop_order',
+				'shop_order',
+			);
+
+			return $screen_ids;
+		}
+
+		/**
+		 * Load admin styles.
+		 */
+		public function admin_styles() {
+			wp_register_style( 'bewpi_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
+			wp_register_style( 'woocommerce_admin_styles', WC()->plugin_url() . '/assets/css/admin.css', array(), WC()->version );
+
+			$screen       = get_current_screen();
+			$screen_id    = $screen ? $screen->id : '';
+			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
+				wp_enqueue_style( 'bewpi_settings_css' );
+				wp_enqueue_style( 'woocommerce_admin_styles' );
+			}
+		}
+
+		/**
+		 * Load admin scripts.
+		 */
+		public function admin_scripts() {
+			wp_register_script( 'bewpi_admin_js', WPI_URL . '/assets/js/admin.js', array(), WPI_VERSION, true );
+			wp_localize_script( 'bewpi_admin_js', 'BEWPI_AJAX', array(
 					'ajaxurl'               => admin_url( 'admin-ajax.php' ),
 					'deactivation_nonce'    => wp_create_nonce( 'deactivation-notice' ),
 					'dismiss_nonce'         => wp_create_nonce( 'dismiss-notice' ),
 				)
 			);
-			wp_register_style( 'bewpi_settings_css', WPI_URL . '/assets/css/admin.css', false, WPI_VERSION );
-			wp_enqueue_style( 'bewpi_settings_css' );
+			wp_register_script( 'bewpi_settings_js', WPI_URL . '/assets/js/settings.js', array(), WPI_VERSION, true );
+			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array( 'jquery', 'jquery-ui-sortable', 'select2' ), WC()->version );
+
+			$screen = get_current_screen();
+			$screen_id    = $screen ? $screen->id : '';
+			if ( in_array( $screen_id, self::get_screen_ids(), true ) ) {
+				wp_enqueue_script( 'bewpi_admin_js' );
+				wp_enqueue_script( 'bewpi_settings_js' );
+				wp_enqueue_script( 'wc-enhanced-select' );
+				wp_enqueue_script( 'jquery-ui-sortable' );
+			}
 		}
 
 		/**
@@ -763,6 +807,73 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$hook = sprintf( 'bewpi_pre_option-%1$s-%2$s', $group, $name );
 
 			return apply_filters( $hook, $option );
+		}
+
+		/**
+		 * Get tax or vat label.
+		 *
+		 * @param bool $incl Including tax or vat.
+		 * @param bool $small text font size.
+		 *
+		 * @return string
+		 */
+		public function tax_or_vat_label( $incl = true, $small = true ) {
+			if ( $incl ) {
+				$label = WC()->countries->inc_tax_or_vat();
+			} else {
+				$label = WC()->countries->ex_tax_or_vat();
+			}
+
+			if ( $small ) {
+				$label = sprintf( '<small class="tax_label">%s</small>', $label );
+			}
+
+			return $label;
+		}
+
+		/**
+		 * Get order currency.
+		 *
+		 * @param WC_Order $order order object.
+		 *
+		 * @return string
+		 */
+		public function get_currency( $order ) {
+			return BEWPI_WC_Order_Compatibility::get_currency( $order );
+		}
+
+		/**
+		 * Get order property.
+		 *
+		 * @param WC_Order $order order object.
+		 * @param string   $prop order property.
+		 * @param string   $context display context.
+		 *
+		 * @return mixed
+		 */
+		public function get_prop( $order, $prop, $context = 'edit' ) {
+			return BEWPI_WC_Order_Compatibility::get_prop( $order, $prop, $context );
+		}
+
+		/**
+		 * Get all total rows before subtotal.
+		 *
+		 * @return array
+		 */
+		public function get_totals_before_subtotal() {
+			$selected_totals = self::get_option( 'template', 'totals' );
+			$subtotal        = array_search( 'subtotal_ex_vat', $selected_totals, true );
+
+			return array_slice( $selected_totals, 0, $subtotal );
+		}
+
+		/**
+		 * Get prefix.
+		 *
+		 * @return string
+		 */
+		public function get_prefix() {
+			return $this->prefix;
 		}
 
 		/**

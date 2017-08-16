@@ -23,9 +23,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		public function __construct() {
 			$this->settings_key = 'bewpi_template_settings';
 			$this->settings_tab = __( 'Template', 'woocommerce-pdf-invoices' );
-			$this->fields = $this->get_fields();
-			$this->sections = $this->get_sections();
-			$this->defaults = $this->get_defaults();
+			$this->fields       = $this->get_fields();
+			$this->sections     = $this->get_sections();
+			$this->defaults     = $this->get_defaults();
 
 			parent::__construct();
 
@@ -38,37 +38,52 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array.
 		 */
 		private function get_sections() {
-			$sections = array(
-				'general' => array(
-					'title' => __( 'General Options', 'woocommerce-pdf-invoices' ),
+			$sections = apply_filters( 'wpi_template_sections', array(
+				'general'         => array(
+					'title'       => __( 'General Options', 'woocommerce-pdf-invoices' ),
 					'description' => sprintf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a brief description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' ),
 				),
-				'invoice_number' => array(
-					'title' => __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ),
+				'invoice_number'  => array(
+					'title'       => __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ),
 				),
-				'packing_slips' => array(
-					'title' => __( 'Packing Slips Options', 'woocommerce-pdf-invoices' ),
+				'packing_slips'   => array(
+					'title'       => __( 'Packing Slips Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Packing slips are <strong>only available</strong> when using minimal template.', 'woocommerce-pdf-invoices' ),
 				),
-				'header' => array(
-					'title' => __( 'Header Options', 'woocommerce-pdf-invoices' ),
+				'header'          => array(
+					'title'       => __( 'Header Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' ),
 				),
-				'body' => array(
-					'title' => __( 'Body Options', 'woocommerce-pdf-invoices' ),
+				'body'            => array(
+					'title'       => __( 'Body Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Configuration options for the body of the template. .', 'woocommerce-pdf-invoices' ),
 				),
-				'footer' => array(
-					'title' => __( 'Footer Options', 'woocommerce-pdf-invoices' ),
+				'footer'          => array(
+					'title'       => __( 'Footer Options', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ),
 				),
 				'visible_columns' => array(
-					'title' => __( 'Visible Columns', 'woocommerce-pdf-invoices' ),
+					'title'       => __( 'Table Content', 'woocommerce-pdf-invoices' ),
 					'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
 				),
-			);
+			) );
 
 			return $sections;
+		}
+
+		/**
+		 * Get templates for options.
+		 *
+		 * @return array
+		 */
+		private function get_template_options() {
+			$templates = array();
+
+			foreach ( array_map( 'basename', WPI()->templater()->get_templates() ) as $template ) {
+				$templates[ $template ] = strtolower( $template );
+			}
+
+			return $templates;
 		}
 
 		/**
@@ -77,14 +92,6 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return array
 		 */
 		private function get_fields() {
-			$templater = WPI()->templater();
-			$templates = array();
-			foreach ( array_map( 'basename', $templater->get_templates() ) as $template ) {
-				$templates[] = array(
-					'id'    => $template,
-					'value' => strtolower( $template ),
-				);
-			}
 			$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
 
 			$settings = array(
@@ -100,7 +107,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					              . '<br><div class="bewpi-notes">'
 					              . sprintf( __( '<strong>Note:</strong> The %1$s template will probably no longer be supported in future versions, consider using the %2$s template.', 'woocommerce-pdf-invoices' ), '<strong>micro</strong>', '<strong>minimal</strong>' )
 					              . '</div>',
-					'options'  => $templates,
+					'options'  => $this->get_template_options(),
 					'default'  => 'minimal',
 				),
 				array(
@@ -217,7 +224,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => $this->settings_key,
 					'section'  => 'header',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Use the <a href="%1$s">Media Library</a> to <a href="%2$s">upload</a> or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="%3$s" target="_blank">URL</a>.', 'woocommerce-pdf-invoices' ), 'media-new.php', 'upload.php', 'https://codex.wordpress.org/Media_Library_Screen#Attachment_Details' ),
+					'desc'     => sprintf( __( 'Use the <a href="%1$s">Media Library</a> to <a href="%2$s">upload</a> or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="%3$s" target="_blank">File URL</a>.', 'woocommerce-pdf-invoices' ), 'media-new.php', 'upload.php', 'https://codex.wordpress.org/Media_Library_Screen#Attachment_Details' ),
 					'default'  => ( is_array( $company_logo ) ) ? $company_logo[0] : '',
 				),
 				array(
@@ -336,14 +343,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'type'     => 'text',
 					'desc'     => '',
 					'options'  => array(
-						array(
-							'id'    => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
-							'value' => 'woocommerce_order_number',
-						),
-						array(
-							'id'    => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
-							'value' => 'sequential_number',
-						),
+						'woocommerce_order_number' => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
+						'sequential_number'        => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
 					),
 					'default'  => 'sequential_number',
 				),
@@ -520,7 +521,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				),
 			);
 
-			return $settings;
+			return apply_filters( 'wpi_template_settings', $settings, $this );
 		}
 
 		/**
@@ -535,7 +536,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 			// strip strings.
 			foreach ( $input as $key => $value ) {
-				if ( ! isset( $input[ $key ] ) ) {
+
+				if ( is_array( $input[ $key ] ) ) {
+					$output[ $key ] = $input[ $key ];
 					continue;
 				}
 
@@ -577,14 +580,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 */
 		public function validate_image( $image_url ) {
 			$image_url = esc_url_raw( $image_url, array( 'http', 'https' ) );
-
-			$uploads_dir = wp_upload_dir();
-			if ( false === strpos( $image_url, $uploads_dir['baseurl'] . '/' ) ) {
-				// url points to a place outside of upload directory.
-				return false;
-			}
-
-			$query = array(
+			$query     = array(
 				'post_type'  => 'attachment',
 				'fields'     => 'ids',
 				'meta_query' => array(
@@ -598,6 +594,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 
 			$ids = get_posts( $query );
 			if ( count( $ids ) === 0 ) {
+				WPI()->logger()->error( sprintf( 'Image %s not found in post table.', basename( $image_url ) ) );
+
 				return false;
 			}
 
@@ -616,9 +614,9 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				return;
 			}
 
-			$defaults = $this->get_defaults();
+			$defaults                       = $this->get_defaults();
 			$options['bewpi_template_name'] = $defaults['bewpi_template_name'];
 			update_option( $this->settings_key, $options );
 		}
 	}
-}
+} // End if().

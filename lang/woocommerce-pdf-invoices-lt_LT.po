@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-26 19:26+0200\n"
-"PO-Revision-Date: 2017-07-26 19:26+0200\n"
+"POT-Creation-Date: 2017-07-20 16:35+0200\n"
+"PO-Revision-Date: 2017-07-20 16:35+0200\n"
 "Last-Translator: Denisas <setasss@yahoo.com>\n"
 "Language-Team: \n"
 "Language: lt\n"
@@ -14,9 +14,11 @@ msgstr ""
 "%100<10||n%100 >= 20)? 1 : 2);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: ../..\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: lt_LT\n"
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-SearchPath-0: woocommerce-pdf-invoices\n"
@@ -425,22 +427,22 @@ msgid "Cancelled"
 msgstr "Atšaukti"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:163
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:579
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:581
 msgid "Discount:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:179
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:594
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:596
 msgid "Shipping:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:564
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:566
 msgid "Subtotal:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:289
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:663
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:665
 msgid "Total:"
 msgstr ""
 
@@ -611,14 +613,14 @@ msgid "Payment Method: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:64
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:415
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:55
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:73
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:395
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:397
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:64
 #, php-format
 msgid "VAT Number: %s"
@@ -735,7 +737,7 @@ msgstr "Palaikymas"
 msgid "Paid"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:761
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:763
 #, php-format
 msgid "%s of %s"
 msgstr "%s iš %s"

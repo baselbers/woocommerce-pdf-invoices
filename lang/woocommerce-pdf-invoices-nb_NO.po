@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2017-07-26 19:26+0200\n"
-"PO-Revision-Date: 2017-07-26 19:26+0200\n"
+"POT-Creation-Date: 2017-07-20 16:35+0200\n"
+"PO-Revision-Date: 2017-07-20 16:35+0200\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -12,9 +12,9 @@ msgstr ""
 "X-Generator: Poedit 2.0.2\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_x:1,2c;_ex:1,2c;_n:1,2; _nx:1,2,4c;_n_noop:1,2;"
-"_nx_noop:1,2,3c;esc_attr__;esc_html__;esc_attr_e;esc_html_e;esc_attr_x:1,2c;"
-"esc_html_x:1,2c\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: woocommerce-pdf-invoices\n"
 "X-Poedit-SearchPath-1: woocommerce-pdf-invoices-premium\n"
@@ -428,22 +428,22 @@ msgid "Cancelled"
 msgstr "Slett"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:163
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:579
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:581
 msgid "Discount:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:179
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:594
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:596
 msgid "Shipping:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:564
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:566
 msgid "Subtotal:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:289
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:663
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:665
 msgid "Total:"
 msgstr ""
 
@@ -614,14 +614,14 @@ msgid "Payment Method: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:64
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:415
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:55
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Ordrenummer: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:73
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:395
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:397
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:64
 #, php-format
 msgid "VAT Number: %s"
@@ -738,7 +738,7 @@ msgstr "Hjelp"
 msgid "Paid"
 msgstr "Betalt"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:761
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:763
 #, php-format
 msgid "%s of %s"
 msgstr "%s av %s"

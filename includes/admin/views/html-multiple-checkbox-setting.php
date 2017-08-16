@@ -11,13 +11,13 @@
  */
 
 $page_options = get_option( $args['page'] );
-$options = $page_options[ $args['name'] ];
+$options      = $page_options[ $args['name'] ];
 ?>
 <ul id="<?php echo esc_html( $args['id'] ); ?>">
 	<?php
 	foreach ( $args['options'] as $arg ) {
-		$name = sprintf( '%1$s[%2$s][%3$s]', $args['page'], $args['name'], $arg['value'] );
-		$disabled = isset( $arg['disabled'] ) && $arg['disabled'];
+		$name    = sprintf( '%1$s[%2$s][]', $args['page'], $args['name'] );
+		$checked = in_array( $args['value'], $options, true );
 		?>
 		<li>
 			<input type="hidden" name="<?php echo esc_attr( $name ); ?>" value="0" />

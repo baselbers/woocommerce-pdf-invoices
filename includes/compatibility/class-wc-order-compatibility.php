@@ -228,6 +228,10 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 
 					$prop = 'order_total';
 
+				} elseif ( 'shipping_tax' === $prop && 'view' !== $context ) {
+
+					$prop = 'order_shipping_tax';
+
 				} elseif ( 'parent_id' === $prop ) {
 
 					return $object->post->post_parent;
@@ -492,11 +496,11 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 * Get product.
 		 *
 		 * @param WC_Order $order order object.
-		 * @param WC_Order_Item_Product $item order product object.
+		 * @param object   $item order product object.
 		 *
 		 * @return bool|WC_Product
 		 */
-		public static function get_product( WC_Order $order, WC_Order_Item_Product $item ) {
+		public static function get_product( $order, $item ) {
 
 			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
 				$product = $item->get_product();

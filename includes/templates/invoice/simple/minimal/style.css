@@ -80,14 +80,33 @@ table tr.information td:nth-child(3){
     text-align: right;
 }
 
-table tr.heading th {
-    font-weight: bold;
-    text-align: left;
-    color: #FFFFFF;
+table tr.heading th:nth-child(1) {
+    width: 50%;
 }
 
-table tr.item td{
+table tr.heading th:nth-child(1),
+table tr.item td:nth-child(1) {
+    text-align: left;
+}
+
+table tr.heading th {
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+table tr.heading th.total,
+table tr.heading th.total_ex_vat,
+table tr.heading th.total_incl_vat,
+table tr.item td.total,
+table tr.item td.total_ex_vat,
+table tr.item td.total_incl_vat {
+    text-align: right;
+}
+
+table tr.item td {
     border-bottom: 1px solid #eee;
+    text-align: center;
 }
 
 table tr.spacer td {

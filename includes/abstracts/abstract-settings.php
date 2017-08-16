@@ -258,15 +258,40 @@ abstract class BEWPI_Abstract_Settings {
 		?>
 		<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
 			<?php
-			foreach ( $args['options'] as $option ) :
+			foreach ( $args['options'] as $key => $label ) :
 				?>
 				<option
-					value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['id'] ); ?></option>
+					value="<?php echo esc_attr( $key ); ?>" <?php selected( $options[ $args['name'] ], $key ); ?>><?php echo esc_html( $label ); ?></option>
 				<?php
 			endforeach;
 			?>
 		</select>
 		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
+		<?php
+	}
+
+	/**
+	 * Multiple select box.
+	 *
+	 * @param array $args field arguments.
+	 */
+	public function multi_select_callback( $args ) {
+		$page_options = get_option( $args['page'] );
+		$selections   = (array) $page_options[ $args['name'] ];
+		?>
+		<select multiple="multiple"
+				name="<?php echo $args['page'] . '[' . $args['name'] . '][]'; ?>"
+				data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+				aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
+				class="wc-enhanced-select">
+			<?php
+			foreach ( $args['options'] as $id => $option ) {
+				echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $id, $selections, true ), true, false ) . '>' . $option['name'] . '</option>';
+			}
+			?>
+		</select>
+		<?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?>
+		<a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce-pdf-invoices' ); ?></a> <a class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce-pdf-invoices' ); ?></a>
 		<?php
 	}
 
@@ -388,9 +413,9 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && 'multiple_checkbox' === $field['type'] ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ) ) ) {
 				// Add options defaults.
-				$defaults[ $field['name'] ] = wp_list_pluck( $field['options'], 'default', 'value' );
+				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );
 			}
 		}
@@ -420,15 +445,21 @@ abstract class BEWPI_Abstract_Settings {
 				continue;
 			}
 
-			if ( is_array( $options[ $key ] ) ) {
-				$this->defaults[ $key ] = array_merge( $value, $options[ $key ] );
-			} else {
-				$this->defaults[ $key ] = $options[ $key ];
-			}
-
+			$this->defaults[ $key ] = $options[ $key ];
 		}
 
 		return update_option( $this->settings_key, $this->defaults );
+	}
+
+	/**
+	 * Get the formatted html setting id.
+	 *
+	 * @param string $id String to format.
+	 *
+	 * @return string.
+	 */
+	public static function get_formatted_setting_id( $id ) {
+		return str_replace( '_', '-', WPI()->get_prefix() . $id );
 	}
 
 	/**

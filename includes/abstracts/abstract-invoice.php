@@ -16,7 +16,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 	 * Makes the invoice.
 	 * Class BEWPI_Invoice
 	 */
-	class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
+	abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 
 		/**
 		 * Invoice number.
@@ -50,7 +50,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Colspan data to outline products table columns.
 		 *
-		 * @var array
+		 * @var int
 		 */
 		public $colspan = 1;
 
@@ -362,6 +362,276 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Check if invoice exists.
+		 *
+		 * @param int $order_id WooCommerce Order ID.
+		 *
+		 * @return bool|string false when no pdf invoice exists or full path when exists.
+		 */
+		public static function exists( $order_id ) {
+			// pdf data exists in database?
+			$pdf_path = get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
+			if ( ! $pdf_path ) {
+				return false;
+			}
+
+			return parent::exists( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+		}
+
+		/**
+		 * Add column header data.
+		 *
+		 * @param array  $data Column header data.
+		 * @param string $key Column name.
+		 * @param string $label Column title.
+		 * @param string $tax_display Display tax label.
+		 */
+		public function add_column( &$data, $key, $label, $tax_display = '' ) {
+			if ( ! empty( $tax_display ) ) {
+				$label .= '&nbsp;' . WPI()->tax_or_vat_label( 'incl' === $tax_display );
+			}
+
+			$data[ $key ] = $label;
+		}
+
+		/**
+		 * Get columns.
+		 *
+		 * @return array
+		 */
+		public function get_columns() {
+			$columns = array();
+
+			$this->add_column( $columns, 'description', __( 'Description', 'woocommerce-pdf-invoices' ) );
+			$this->add_column( $columns, 'quantity', __( 'Qty', 'woocommerce-pdf-invoices' ) );
+			$this->add_column( $columns, 'total', __( 'Total', 'woocommerce-pdf-invoices' ) );
+
+			return apply_filters( 'wpi_get_invoice_columns', $columns, $this );
+		}
+
+		/**
+		 * Adds line item description to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		public function add_description_column_data( &$data, $item_id, $item ) {
+			$templater = WPI()->templater();
+
+			ob_start();
+			echo esc_html( $item['name'] );
+
+			do_action( 'wpi_order_item_meta_start', $item, $this->order );
+			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
+
+			$templater->wc_display_item_meta( $item, true );
+			$templater->wc_display_item_downloads( $item, true );
+
+			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
+			$description = ob_get_contents();
+			ob_end_clean();
+
+			$data['description'] = $description;
+		}
+
+		/**
+		 * Adds line item quantity to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 */
+		public function add_quantity_column_data( &$data, $item_id, $item ) {
+			$data['quantity'] = $item['qty'];
+		}
+
+		/**
+		 * Adds line item total incl. tax to columns data array.
+		 *
+		 * @param array  $data line item data.
+		 * @param int    $item_id item ID.
+		 * @param object $item item object.
+		 * @param bool   $ex_tax Excluding tax.
+		 */
+		public function add_total_column_data( &$data, $item_id, $item, $ex_tax = true ) {
+			$data['total'] = $this->order->get_formatted_line_subtotal( $item, $ex_tax ? 'excl' : 'incl' );
+		}
+
+		/**
+		 * Get line item data for all user selected columns.
+		 *
+		 * @return array $data.
+		 */
+		public function get_columns_data() {
+			$rows               = array();
+			$prices_include_tax = WPI()->get_prop( $this->order, 'prices_include_tax' );
+
+			foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
+				$row = array();
+
+				$this->add_description_column_data( $row, $item_id, $item );
+				$this->add_quantity_column_data( $row, $item_id, $item );
+				$this->add_total_column_data( $row, $item_id, $item, ! $prices_include_tax );
+
+				$rows[] = apply_filters( 'wpi_get_invoice_columns_data_row', $row, $item_id, $item, $this );
+			}
+
+			return $rows;
+		}
+
+		/**
+		 * Add total row for subtotal.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
+			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
+			if ( $subtotal ) {
+				$total_rows['cart_subtotal'] = array(
+					'label' => __( 'Subtotal:', 'woocommerce-pdf-invoices' ),
+					'value' => $subtotal,
+				);
+			}
+		}
+
+		/**
+		 * Add total row for discounts.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_total_discount() > 0 ) {
+				$total_rows['discount'] = array(
+					'label' => __( 'Discount:', 'woocommerce-pdf-invoices' ),
+					'value' => '-' . $this->order->get_discount_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for shipping.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
+			if ( $this->order->get_shipping_method() ) {
+				$total_rows['shipping'] = array(
+					'label' => __( 'Shipping:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->order->get_shipping_to_display( $tax_display ),
+				);
+			}
+		}
+
+		/**
+		 * Add total row for fees.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
+			$fees = $this->order->get_fees();
+			if ( $fees ) {
+				/**
+				 * Fee annotations.
+				 *
+				 * @var string            $id WooCommerce ID.
+				 * @var WC_Order_Item_Fee $fee WooCommerce Fee.
+				 */
+				foreach ( $fees as $id => $fee ) {
+					if ( apply_filters( 'woocommerce_get_order_item_totals_excl_free_fees', empty( $fee['line_total'] ) && empty( $fee['line_tax'] ), $id ) ) {
+						continue;
+					}
+
+					$total_rows[ 'fee_' . $fee->get_id() ] = array(
+						'label' => $fee->get_name() . ':',
+						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array(
+								'currency' => WPI()->get_currency( $this->order ),
+							)
+						),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for taxes.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
+			// Tax for tax exclusive prices.
+			if ( 'excl' === $tax_display ) {
+				if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
+					foreach ( $this->order->get_tax_totals() as $code => $tax ) {
+						$total_rows[ sanitize_title( $code ) ] = array(
+							'label' => $tax->label . ':',
+							'value' => $tax->formatted_amount,
+						);
+					}
+				} else {
+					$total_rows['tax'] = array(
+						'label' => WC()->countries->tax_or_vat() . ':',
+						'value' => wc_price( $this->order->get_total_tax(), array(
+								'currency' => WPI()->get_currency( $this->order ),
+							)
+						),
+					);
+				}
+			}
+		}
+
+		/**
+		 * Add total row for grand total.
+		 *
+		 * @param array  $total_rows totals.
+		 * @param string $tax_display 'excl' or 'incl'.
+		 */
+		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
+			$total_rows['order_total'] = array(
+				'label' => __( 'Total:', 'woocommerce-pdf-invoices' ),
+				'value' => $this->order->get_formatted_order_total( $tax_display, false ),
+			);
+		}
+
+		/**
+		 * Get totals for display.
+		 *
+		 * @param string $tax_display 'excl' or 'incl' tax.
+		 *
+		 * @return array
+		 */
+		public function get_order_item_totals( $tax_display = '' ) {
+			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
+			$total_rows  = array();
+
+			$this->add_order_item_totals_subtotal_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_discount_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_shipping_row( $total_rows, $tax_display );
+			$this->add_order_item_totals_fee_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_tax_rows( $total_rows, $tax_display );
+			$this->add_order_item_totals_total_row( $total_rows, $tax_display );
+
+			return apply_filters( 'wpi_get_invoice_total_rows', $total_rows, $this );
+		}
+
+		/**
+		 * Backwards compatibility.
+		 *
+		 * @deprecated Use `generate()` instead.
+		 *
+		 * @param string $destination pdf generation mode.
+		 */
+		public function save( $destination = 'F', $html_templates = array() ) {
+			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
+			$this->generate( $destination );
+		}
+
+		/**
 		 * Display company logo or name
 		 *
 		 * @deprecated See minimal template.
@@ -407,7 +677,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$payment_method = BEWPI_WC_Order_Compatibility::get_prop( $this->order, 'payment_method' );
 			if ( isset( $payment_method ) && 'woocommerce_gateway_purchase_order' === $payment_method ) {
 				// WC backwards compatibility.
-				$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
+				$order_id  = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 				$po_number = get_post_meta( $order_id, '_po_number', true );
 				if ( ! empty( $po_number ) ) {
 					echo '<span>' . sprintf( __( 'Purchase Order Number: %s', 'woocommerce-gateway-purchase-order' ), $po_number ) . '</span>';
@@ -523,174 +793,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-		 * Check if invoice exists.
-		 *
-		 * @param int $order_id WooCommerce Order ID.
-		 *
-		 * @return bool|string false when no pdf invoice exists or full path when exists.
-		 */
-		public static function exists( $order_id ) {
-			// pdf data exists in database?
-			$pdf_path = get_post_meta( $order_id, '_bewpi_invoice_pdf_path', true );
-			if ( ! $pdf_path ) {
-				return false;
-			}
-
-			return parent::exists( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
-		}
-
-		/**
-		 * Backwards compatibility.
-		 *
-		 * @deprecated Use `generate()` instead.
-		 *
-		 * @param string $destination pdf generation mode.
-		 */
-		public function save( $destination = 'F', $html_templates = array() ) {
-			_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices v2.8', 'generate' );
-			$this->generate( $destination );
-		}
-
-		/**
-		 * Add total row for subtotal.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
-			$subtotal = $this->order->get_subtotal_to_display( false, $tax_display );
-			if ( $subtotal ) {
-				$total_rows['cart_subtotal'] = array(
-					'label' => __( 'Subtotal:', 'woocommerce' ),
-					'value'    => $subtotal,
-				);
-			}
-		}
-
-		/**
-		 * Add total row for discounts.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
-			if ( $this->order->get_total_discount() > 0 ) {
-				$total_rows['discount'] = array(
-					'label' => __( 'Discount:', 'woocommerce' ),
-					'value'    => '-' . $this->order->get_discount_to_display( $tax_display ),
-				);
-			}
-		}
-
-		/**
-		 * Add total row for shipping.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
-			if ( $this->order->get_shipping_method() ) {
-				$total_rows['shipping'] = array(
-					'label' => __( 'Shipping:', 'woocommerce' ),
-					'value'    => $this->order->get_shipping_to_display( $tax_display ),
-				);
-			}
-		}
-
-		/**
-		 * Add total row for fees.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
-			$fees = $this->order->get_fees();
-			if ( $fees ) {
-				/**
-				 * Fee annotations.
-				 *
-				 * @var string            $id WooCommerce ID.
-				 * @var WC_Order_Item_Fee $fee WooCommerce Fee.
-				 */
-				foreach ( $fees as $id => $fee ) {
-					if ( apply_filters( 'woocommerce_get_order_item_totals_excl_free_fees', empty( $fee['line_total'] ) && empty( $fee['line_tax'] ), $id ) ) {
-						continue;
-					}
-
-					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
-					$total_rows[ 'fee_' . $fee->get_id() ] = array(
-						'label' => $fee->get_name() . ':',
-						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array( 'currency' => $currency ) ),
-					);
-				}
-			}
-		}
-
-		/**
-		 * Add total row for taxes.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
-			// Tax for tax exclusive prices.
-			if ( 'excl' === $tax_display ) {
-				if ( 'itemized' === get_option( 'woocommerce_tax_total_display' ) ) {
-					foreach ( $this->order->get_tax_totals() as $code => $tax ) {
-						$total_rows[ sanitize_title( $code ) ] = array(
-							'label' => $tax->label . ':',
-							'value'    => $tax->formatted_amount,
-						);
-					}
-				} else {
-					$currency = BEWPI_WC_Order_Compatibility::get_currency( $this->order );
-					$total_rows['tax'] = array(
-						'label' => WC()->countries->tax_or_vat() . ':',
-						'value'    => wc_price( $this->order->get_total_tax(), array( 'currency' => $currency ) ),
-					);
-				}
-			}
-		}
-
-		/**
-		 * Add total row for grand total.
-		 *
-		 * @param array  $total_rows totals.
-		 * @param string $tax_display 'excl' or 'incl'.
-		 */
-		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
-			$total_rows['order_total'] = array(
-				'label' => __( 'Total:', 'woocommerce' ),
-				'value'    => $this->order->get_formatted_order_total( $tax_display, false ),
-			);
-		}
-
-		/**
-		 * Get totals for display on pages and in emails.
-		 *
-		 * @param string $tax_display 'excl' or 'incl'.
-		 *
-		 * @return array
-		 */
-		public function get_order_item_totals( $tax_display = '' ) {
-			$template_options = get_option( 'bewpi_template_settings' );
-			$tax_display = $tax_display ? $tax_display : get_option( 'woocommerce_tax_display_cart' );
-			$total_rows  = array();
-
-			if ( $template_options['bewpi_show_subtotal'] ) {
-				$this->add_order_item_totals_subtotal_row( $total_rows, $tax_display );
-			}
-
-			$this->add_order_item_totals_discount_row( $total_rows, $tax_display );
-			$this->add_order_item_totals_shipping_row( $total_rows, $tax_display );
-			$this->add_order_item_totals_fee_rows( $total_rows, $tax_display );
-			$this->add_order_item_totals_tax_rows( $total_rows, $tax_display );
-			$this->add_order_item_totals_total_row( $total_rows, $tax_display );
-
-			return apply_filters( 'bewpi_get_order_item_totals', $total_rows, $this, $tax_display );
-		}
-
-		/**
 		 * Checks if invoice needs to have a zero rated VAT.
 		 *
 		 * @deprecated See minimal template.
@@ -771,4 +873,4 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$this->colspan = $colspan;
 		}
 	}
-}
+} // End if().

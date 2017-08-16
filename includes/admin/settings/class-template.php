@@ -223,7 +223,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'page'     => $this->settings_key,
 					'section'  => 'header',
 					'type'     => 'text',
-					'desc'     => sprintf( __( 'Use the <a href="%1$s">Media Library</a> to <a href="%2$s">upload</a> or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="%3$s" target="_blank">URL</a>.', 'woocommerce-pdf-invoices' ), 'media-new.php', 'upload.php', 'https://codex.wordpress.org/Media_Library_Screen#Attachment_Details' ),
+					'desc'     => sprintf( __( 'Use the <a href="%1$s">Media Library</a> to <a href="%2$s">upload</a> or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="%3$s" target="_blank">File URL</a>.', 'woocommerce-pdf-invoices' ), 'media-new.php', 'upload.php', 'https://codex.wordpress.org/Media_Library_Screen#Attachment_Details' ),
 					'default'  => ( is_array( $company_logo ) ) ? $company_logo[0] : '',
 				),
 				array(

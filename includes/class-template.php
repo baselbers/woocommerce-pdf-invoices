@@ -285,6 +285,42 @@ class BEWPI_Template {
 	}
 
 	/**
+	 * Display column recursively.
+	 *
+	 * @param string       $key Column ID.
+	 * @param array/string $data Column or column label.
+	 */
+	public function display_header_recursive( $key, $data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $k => $d ) {
+				$this->display_header_recursive( $k, $d );
+			}
+
+			return;
+		}
+
+		printf( '<th class="%1$s">%2$s</th>', esc_attr( $key ), $data );
+	}
+
+	/**
+	 * Display row recursively.
+	 *
+	 * @param string       $key Column ID.
+	 * @param array/string $data Column or column label.
+	 */
+	public function display_data_recursive( $key, $data ) {
+		if ( is_array( $data ) ) {
+			foreach ( $data as $k => $d ) {
+				$this->display_data_recursive( $k, $d );
+			}
+
+			return;
+		}
+
+		printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $data );
+	}
+
+	/**
 	 * Template uses advanced table content?
 	 *
 	 * @return bool.

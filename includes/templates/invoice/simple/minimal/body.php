@@ -20,7 +20,6 @@ $order                          = $templater->order;
 $invoice                        = $templater->invoice;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
-$has_advanced_table_content     = (bool) WPI()->templater()->has_advanced_table_content();
 $columns                        = $invoice->get_columns();
 $color                          = $templater->get_option( 'bewpi_color_theme' );
 $terms                          = $templater->get_option( 'bewpi_terms' );
@@ -64,16 +63,8 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<thead>
 		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
 			<?php
-			foreach ( $columns as $id => $value ) {
-
-				if ( is_array( $value ) ) {
-					foreach ( $value as $val ) {
-						printf( '<th class="%s">%s</th>', $id, $val );
-					}
-					continue;
-				}
-
-				printf( '<th class="%s">%s</th>', $id, $value );
+			foreach ( $columns as $key => $data ) {
+				$templater->display_header_recursive( $key, $data );
 			}
 			?>
 		</tr>
@@ -83,21 +74,9 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	foreach ( $invoice->get_columns_data() as $index => $row ) {
 		echo '<tr class="item">';
 
-		foreach ( $columns as $column_key => $column_label ) {
-
-			if ( isset( $row[ $column_key ] ) ) {
-				$value = $row[ $column_key ];
-
-				if ( is_array( $value ) ) {
-					foreach ( $value as $val ) {
-						printf( '<td class="%s">%s</td>', esc_html( $column_key ), $val );
-					}
-					continue;
-				}
-
-				printf( '<td class="%s">%s</td>', esc_html( $column_key ), $value );
-			}
-
+		// Display row data.
+		foreach ( $row as $column_key => $data ) {
+			$templater->display_data_recursive( $column_key, $data );
 		}
 
 		echo '</tr>';

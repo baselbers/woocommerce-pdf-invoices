@@ -23,9 +23,9 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		public function __construct() {
 			$this->settings_key = 'bewpi_general_settings';
 			$this->settings_tab = __( 'General', 'woocommerce-pdf-invoices' );
-			$this->fields = $this->get_fields();
-			$this->sections = $this->get_sections();
-			$this->defaults = $this->get_defaults();
+			$this->fields       = $this->get_fields();
+			$this->sections     = $this->get_sections();
+			$this->defaults     = $this->get_defaults();
 
 			parent::__construct();
 		}
@@ -37,21 +37,21 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		 */
 		private function get_sections() {
 			$sections = array(
-				'email' => array(
-					'title' => __( 'Email Options', 'woocommerce-pdf-invoices' ),
+				'email'         => array(
+					'title'       => __( 'Email Options', 'woocommerce-pdf-invoices' ),
 					'description' => sprintf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice. Want to attach PDF documents to many more email types? Take a look at %2$s.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email', '<a href="https://wcpdfinvoices.com" target="_blank">WooCommerce PDF Invoices Premium</a>' ),
 				),
-				'download' => array(
+				'download'      => array(
 					'title' => __( 'Download Options', 'woocommerce-pdf-invoices' ),
 				),
 				'cloud_storage' => array(
-					'title' => __( 'Cloud Storage Options', 'woocommerce-pdf-invoices' ),
+					'title'       => __( 'Cloud Storage Options', 'woocommerce-pdf-invoices' ),
 					'description' => sprintf( __( 'Sign-up at <a href="%1$s">Email It In</a> to send invoices to your Dropbox, OneDrive, Google Drive or Egnyte and enter your account below.', 'woocommerce-pdf-invoices' ), 'https://emailitin.com' ),
 				),
-				'interface' => array(
+				'interface'     => array(
 					'title' => __( 'Interface Options', 'woocommerce-pdf-invoices' ),
 				),
-				'debug' => array(
+				'debug'         => array(
 					'title' => __( 'Debug Options', 'woocommerce-pdf-invoices' ),
 				),
 			);
@@ -76,12 +76,12 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'type'     => 'multiple_select',
 					'desc'     => '',
 					'options'  => apply_filters( 'wpi_email_types', array(
-						'new_order' => array(
+						'new_order'                 => array(
 							'name'    => __( 'New order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'new_order',
 							'default' => 1,
 						),
-						'customer_on_hold_order' => array(
+						'customer_on_hold_order'    => array(
 							'name'    => __( 'Order on-hold', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_on_hold_order',
 							'default' => 0,
@@ -91,12 +91,12 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 							'value'   => 'customer_processing_order',
 							'default' => 0,
 						),
-						'customer_completed_order' => array(
+						'customer_completed_order'  => array(
 							'name'    => __( 'Completed order', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_completed_order',
 							'default' => 1,
 						),
-						'customer_invoice' => array(
+						'customer_invoice'          => array(
 							'name'    => __( 'Customer invoice', 'woocommerce-pdf-invoices' ),
 							'value'   => 'customer_invoice',
 							'default' => 0,
@@ -128,14 +128,8 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 					'type'     => 'text',
 					'desc'     => '',
 					'options'  => array(
-						array(
-							'id'  => __( 'Download', 'woocommerce-pdf-invoices' ),
-							'value' => 'download',
-						),
-						array(
-							'id'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
-							'value' => 'browser',
-						),
+						'download' => __( 'Download', 'woocommerce-pdf-invoices' ),
+						'browser'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
 					),
 					'default'  => 'download',
 				),

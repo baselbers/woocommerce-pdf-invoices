@@ -258,10 +258,10 @@ abstract class BEWPI_Abstract_Settings {
 		?>
 		<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
 			<?php
-			foreach ( $args['options'] as $option ) :
+			foreach ( $args['options'] as $key => $label ) :
 				?>
 				<option
-					value="<?php echo esc_attr( $option['value'] ); ?>" <?php selected( $options[ $args['name'] ], $option['value'] ); ?>><?php echo esc_html( $option['id'] ); ?></option>
+					value="<?php echo esc_attr( $key ); ?>" <?php selected( $options[ $args['name'] ], $key ); ?>><?php echo esc_html( $label ); ?></option>
 				<?php
 			endforeach;
 			?>

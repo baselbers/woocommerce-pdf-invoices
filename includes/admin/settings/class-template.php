@@ -76,10 +76,7 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 			$templates = array();
 
 			foreach ( array_map( 'basename', WPI()->templater()->get_templates() ) as $template ) {
-				$templates[] = array(
-					'id'    => $template,
-					'value' => strtolower( $template ),
-				);
+				$templates[ $template ] = strtolower( $template );
 			}
 
 			return $templates;
@@ -342,14 +339,8 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 					'type'     => 'text',
 					'desc'     => '',
 					'options'  => array(
-						array(
-							'id'    => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
-							'value' => 'woocommerce_order_number',
-						),
-						array(
-							'id'    => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
-							'value' => 'sequential_number',
-						),
+						'woocommerce_order_number' => __( 'WooCommerce order number', 'woocommerce-pdf-invoices' ),
+						'sequential_number'        => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
 					),
 					'default'  => 'sequential_number',
 				),

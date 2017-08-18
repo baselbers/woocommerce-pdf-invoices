@@ -271,6 +271,7 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 = 2.9.4 - August 16, 2017 =
 
+- Added: Added invoice actions to view, update and delete invoice.
 - Added: Action 'wpi_watermark_end' to add multiple watermarks.
 - Improved: Language files by adding more keywords.
 - Fixed: Company logo not found when protocol has been changed.

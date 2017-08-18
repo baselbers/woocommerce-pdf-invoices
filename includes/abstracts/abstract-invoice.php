@@ -545,9 +545,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 						continue;
 					}
 
-					$total_rows[ 'fee_' . $fee->get_id() ] = array(
-						'label' => $fee->get_name() . ':',
-						'value' => wc_price( 'excl' === $tax_display ? $fee->get_total() : (double) $fee->get_total() + (double) $fee->get_total_tax(), array(
+					$total_rows[ 'fee_' . $id ] = array(
+						'label' => $fee['name'] . ':',
+						'value' => wc_price( 'excl' === $tax_display ? $fee['line_total'] : (double) $fee['line_total'] + (double) $fee['line_tax'], array(
 								'currency' => WPI()->get_currency( $this->order ),
 							)
 						),

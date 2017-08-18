@@ -131,7 +131,7 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 						'download' => __( 'Download', 'woocommerce-pdf-invoices' ),
 						'browser'  => __( 'Open in new browser tab/window', 'woocommerce-pdf-invoices' ),
 					),
-					'default'  => 'download',
+					'default'  => 'browser',
 				),
 				array(
 					'id'       => 'bewpi-download-invoice-account',

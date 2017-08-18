@@ -290,20 +290,19 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return string
 		 */
 		public function generate( $destination = 'F' ) {
-			// WC backwards compatibility.
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
-
-			if ( BEWPI_Invoice::exists( $order_id ) ) {
-				// delete postmeta and PDF.
-				self::delete( $order_id );
+			$order_id  = BEWPI_WC_Order_Compatibility::get_id( $this->order );
+			$full_path = BEWPI_Invoice::exists( $order_id );
+			if ( false === $full_path ) {
+				$this->date   = current_time( 'mysql' );
+				$this->number = $this->get_next_invoice_number();
+				$this->year   = date_i18n( 'Y', current_time( 'timestamp' ) );
+			} else {
+				// delete PDF.
+				parent::delete( $full_path );
 			}
 
-			$this->date   = current_time( 'mysql' );
-			$this->number = $this->get_next_invoice_number();
-			$this->year   = date_i18n( 'Y', current_time( 'timestamp' ) );
-
 			// yearly sub-folders.
-			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
+			if ( (bool) WPI()->get_option( 'template','reset_counter_yearly' ) ) {
 				$pdf_path = $this->year . '/' . $this->get_formatted_number() . '.pdf';
 			} else {
 				// one folder for all invoices.

@@ -140,6 +140,10 @@ function _bewpi_on_plugin_update() {
 			update_email_types_options_to_recursive();
 		}
 
+		if ( version_compare( $current_version, '2.9.3' ) <= 0 ) {
+			update_email_types_options();
+		}
+
 		set_time_limit( $max_execution_time );
 
 		update_site_option( 'bewpi_version', WPI_VERSION );
@@ -297,7 +301,6 @@ function update_email_types_options_to_recursive() {
 	$email_types     = array( 'new_order', 'customer_on_hold_order', 'customer_processing_order', 'customer_completed_order', 'customer_invoice', 'new_renewal_order', 'customer_completed_switch_order', 'customer_processing_renewal_order', 'customer_completed_renewal_order', 'customer_renewal_invoice' );
 
 	foreach ( $email_types as $email_type ) {
-
 		if ( isset( $general_options[ $email_type ] ) ) {
 			$general_options['bewpi_email_types'] = array(
 				$email_type => $general_options[ $email_type ],
@@ -306,10 +309,27 @@ function update_email_types_options_to_recursive() {
 			// Remove older option.
 			unset( $general_options[ $email_type ] );
 		}
-
 	}
 
 	update_option( 'bewpi_general_settings', $general_options );
+}
+
+/**
+ * Update email types for plugin version 2.9.4+.
+ */
+function update_email_types_options() {
+	$general_settings = get_option( 'bewpi_general_settings' );
+	$email_types = array();
+
+	foreach ( (array) $general_settings['bewpi_email_types'] as $email_type => $enabled ) {
+		if ( $enabled ) {
+			$email_types[] = $email_type;
+		}
+	}
+
+	$general_settings['bewpi_email_types'] = $email_types;
+
+	update_option( 'bewpi_general_settings', $general_settings );
 }
 
 /**

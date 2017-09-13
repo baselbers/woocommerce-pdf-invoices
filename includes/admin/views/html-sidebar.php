@@ -2,13 +2,19 @@
 	<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
 		<?php _e( 'This plugin offers a premium version which comes with the following features:', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Attach PDF invoices to many more email types inclouding third party plugins.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Send credit notes and cancelled PDF invoices when refunding or cancelling order.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Fully customize the table content by modifying line item columns and total rows.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Automatically send PDF invoices as a reminder configurable within a specific period of time.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Let customers decide if they would like to get a PDF invoice on checkout.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Change the font of the PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
+
 		- <?php _e( 'Generate PDF invoices in multiple languages (WPML and Polylang compatible).', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bulk generate PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bulk export and/or download PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bill periodically by generating and sending global invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Add additional PDF\'s to PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
-		- <?php _e( 'Send customer invoices directly to suppliers and others.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Send PDF invoices to multiple recipients.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php printf( __( 'Attach invoices to <a href="%s">WooCommerce Subscriptions</a> emails.', 'woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>
 	</p>
 	<a class="bewpi-learn-more" href="http://wcpdfinvoices.com" target="_blank"><?php _e ( 'Learn more', 'woocommerce-pdf-invoices' ); ?></a>

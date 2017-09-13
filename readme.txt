@@ -269,7 +269,7 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
-= 2.9.4 - August 16, 2017 =
+= 2.9.4 - September 13, 2017 =
 
 - Added: Added invoice actions to view, update and delete invoice.
 - Added: Action 'wpi_watermark_end' to add multiple watermarks.

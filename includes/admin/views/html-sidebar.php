@@ -2,7 +2,7 @@
 	<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
 		<?php _e( 'This plugin offers a premium version which comes with the following features:', 'woocommerce-pdf-invoices' ); ?><br/>
-		- <?php _e( 'Attach PDF invoices to many more email types inclouding third party plugins.', 'woocommerce-pdf-invoices' ); ?><br/>
+		- <?php _e( 'Attach PDF invoices to many more email types including third party plugins.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Send credit notes and cancelled PDF invoices when refunding or cancelling order.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Fully customize the table content by modifying line item columns and total rows.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Automatically send PDF invoices as a reminder configurable within a specific period of time.', 'woocommerce-pdf-invoices' ); ?><br/>

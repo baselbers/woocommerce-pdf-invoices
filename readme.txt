@@ -30,13 +30,17 @@ This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches i
 
 > **WooCommerce PDF Invoices Premium**<br /><br />
 > This plugin offers a premium version which comes with the following features:<br /><br />
-> - Design PDF invoices with custom fonts.<br />
-> - Multilingual PDF invoices with WPML and Polylang<br />
+> - Attach PDF invoices to many more email types including third party plugins<br />
+> - Send credit notes and cancelled PDF invoices<br />
+> - Fully customize PDF invoice table content by modifying line item columns and total rows<br />
+> - Automatically send PDF invoices as a reminder configurable within a specific period of time<br />
 > - Bulk generate PDF invoices<br />
 > - Bulk export and/or download PDF invoices<br />
-> - Periodically bill by generating and sending global invoices<br />
-> - Add additional PDF files to PDF invoices.<br />
-> - Send customer invoices directly to multiple recipients like suppliers.<br />
+> - Bill periodically by generating and sending global invoices<br />
+> - Let customers decide to generate a PDF invoice on checkout<br />
+> - Change the font of the PDF invoices<br />
+> - Add additional PDF files to PDF invoices<br />
+> - Send customer invoices directly to multiple recipients<br />
 > - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
 > [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
 

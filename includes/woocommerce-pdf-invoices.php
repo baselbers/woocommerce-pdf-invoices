@@ -791,10 +791,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $actions;
 			}
 
-			if ( ! $invoice->is_sent() ) {
-				return $actions;
-			}
-
 			$url = add_query_arg( array(
 				'bewpi_action' => 'view',
 				'post'         => $order_id,

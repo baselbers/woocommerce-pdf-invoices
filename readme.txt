@@ -269,8 +269,9 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
-= 2.9.5 - September 19, 2017 =
+= 2.9.5 - September 20, 2017 =
 
+- Fixed: Download invoice from my account page not showing.
 - Fixed: Non-dismissable rate admin notice.
 
 = 2.9.4 - September 13, 2017 =

@@ -557,7 +557,24 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			$attachments[] = $full_path;
-			update_post_meta( $order_id, 'bewpi_pdf_invoice_sent', 1 );
+
+			/**
+			 * Check if current email is a customer email.
+			 *
+			 * @var WC_Email $email
+			 */
+			$is_customer_email = false;
+			foreach ( WC()->mailer()->get_emails() as $email ) {
+				if ( $email->id === $status ) {
+					$is_customer_email = $email->is_customer_email();
+					break;
+				}
+			}
+
+			// Only mark the invoice as sent for customer emails.
+			if ( $is_customer_email ) {
+				update_post_meta( $order_id, 'bewpi_pdf_invoice_sent', 1 );
+			}
 
 			return $attachments;
 		}

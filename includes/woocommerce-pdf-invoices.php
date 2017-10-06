@@ -556,6 +556,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$full_path = $invoice->update();
 			}
 
+			if ( apply_filters( 'wpi_skip_pdf_invoice_attachment', false, $status, $order ) ) {
+				return $attachments;
+			}
+
+			// Attach invoice to email.
 			$attachments[] = $full_path;
 
 			/**

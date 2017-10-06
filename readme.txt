@@ -273,8 +273,9 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
-= 2.9.6 - October 5, 2017 =
+= 2.9.6 - October 6, 2017 =
 
+- Added: Filter 'wpi_skip_pdf_invoice_attachment' to skip PDF invoice email attachment.
 - Fixed: Non-dismissable notice by temporary disabling it.
 - Fixed: PDF invoice marked as sent when sent to admin.
 

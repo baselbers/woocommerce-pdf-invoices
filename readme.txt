@@ -275,6 +275,7 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 = 2.9.6 - October 5, 2017 =
 
+- Fixed: Non-dismissable notice by temporary disabling it.
 - Fixed: PDF invoice marked as sent when sent to admin.
 
 = 2.9.5 - September 20, 2017 =

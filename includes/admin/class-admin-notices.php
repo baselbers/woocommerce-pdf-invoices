@@ -23,7 +23,7 @@ class BEWPI_Admin_Notices {
 	public static function init_hooks() {
 		add_action( 'wp_ajax_dismiss-notice', array( __CLASS__, 'dismiss_notice' ) );
 		add_action( 'wp_ajax_deactivation-notice', array( __CLASS__, 'admin_notice_deactivation' ) );
-		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
+		//add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_activation' ) );
 	}
 

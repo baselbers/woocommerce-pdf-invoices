@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.8
-Stable tag: 2.9.7
+Stable tag: 2.9.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -272,6 +272,10 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 `
 
 == Changelog ==
+
+= 2.9.8 - October 13, 2017 =
+
+- Fixed: Options with enhanced selections resetting sort order.
 
 = 2.9.7 - October 12, 2017 =
 

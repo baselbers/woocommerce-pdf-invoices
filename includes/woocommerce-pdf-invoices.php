@@ -456,7 +456,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			wp_register_script( 'wc-enhanced-select', WC()->plugin_url() . '/assets/js/admin/wc-enhanced-select.js', array(
 				'jquery',
 				'jquery-ui-sortable',
-				'select2',
+				version_compare( WC()->version, '3.2.0', '>=' ) ? 'selectWoo' : 'select2',
 			), WC()->version );
 
 			$screen    = get_current_screen();

@@ -273,6 +273,10 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
+= 2.9.7 - October 12, 2017 =
+
+- Fixed: WC 3.2.0 compatibility.
+
 = 2.9.6 - October 10, 2017 =
 
 - Added: Filter 'wpi_skip_pdf_invoice_attachment' to skip PDF invoice email attachment.

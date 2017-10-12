@@ -530,7 +530,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			// Skip invoice generation.
-			$skip = apply_filters( 'bewpi_skip_invoice_generation', false, $status, $order->get_total() );
+			$skip = apply_filters( 'bewpi_skip_invoice_generation', false, $status, $order );
 			if ( $skip ) {
 				return $attachments;
 			}

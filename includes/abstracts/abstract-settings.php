@@ -278,14 +278,16 @@ abstract class BEWPI_Abstract_Settings {
 	public function multi_select_callback( $args ) {
 		$page_options = get_option( $args['page'] );
 		$selections   = (array) $page_options[ $args['name'] ];
+		$options      = array_merge( array_flip( $selections ), $args['options'] );
 		?>
 		<select multiple="multiple"
-				name="<?php echo $args['page'] . '[' . $args['name'] . '][]'; ?>"
+				name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
+				title="<?php echo esc_attr( $args['title'] ); ?>"
 				data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
 				aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
 				class="wc-enhanced-select">
 			<?php
-			foreach ( $args['options'] as $id => $option ) {
+			foreach ( $options as $id => $option ) {
 				echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $id, $selections, true ), true, false ) . '>' . $option['name'] . '</option>';
 			}
 			?>

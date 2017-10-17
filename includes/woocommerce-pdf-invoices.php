@@ -718,6 +718,14 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				$details = apply_filters( 'bewpi_order_page_pdf_invoice_meta_box_details', $details, $invoice );
 				include WPI_DIR . '/includes/admin/views/html-order-page-pdf-invoice-meta-box.php';
 
+				// display button to view invoice in debug mode.
+				if ( (bool) WPI()::get_option( 'general', 'mpdf_debug' ) ) {
+					$this->show_invoice_button( __( 'Debug', 'woocommerce-pdf-invoices' ), $post->ID, 'debug', array(
+						'class="button grant_access order-page invoice wpi"',
+						'target="_blank"',
+					) );
+				}
+
 				// display button to view invoice.
 				$this->show_invoice_button( __( 'View', 'woocommerce-pdf-invoices' ), $post->ID, 'view', array(
 					'class="button grant_access order-page invoice wpi"',

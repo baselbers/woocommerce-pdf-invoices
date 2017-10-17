@@ -430,7 +430,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$description = ob_get_contents();
 			ob_end_clean();
 
-			$data['description'] = $description;
+			$data['description'] = apply_filters( 'wpi_item_description_data', $description, $item_id, $item );
 		}
 
 		/**

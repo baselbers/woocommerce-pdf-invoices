@@ -273,8 +273,9 @@ add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 
 
 == Changelog ==
 
-= 2.9.8 - October 13, 2017 =
+= 2.9.8 - October 17, 2017 =
 
+- Added: 'wpi_item_description_data' filter to modify product description data.
 - Fixed: Options with enhanced selections resetting sort order.
 
 = 2.9.7 - October 12, 2017 =

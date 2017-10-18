@@ -271,10 +271,52 @@ function change_template_based_on_order_language( $template_name, $template_type
 add_filter( 'wpi_template_name', 'change_template_based_on_order_language', 10, 3 );
 `
 
+### How to add invoice information meta? ###
+Use below code to add invoice information meta to the PDF invoice template.
+
+`
+/**
+ * Add PDF invoice information meta (from third party plugins).
+ *
+ * @param array         $info Invoice info meta.
+ * @param BEWPI_Invoice $invoice Invoice object.
+ * @since 2.9.8
+ *
+ * @return array.
+ */
+function add_invoice_information_meta( $info, $invoice ) {
+	$payment_gateway = wc_get_payment_gateway_by_order( $invoice->order );
+
+	// Add PO Number from 'WooCommerce Purchase Order Gateway' plugin.
+	if ( $payment_gateway && 'woocommerce_gateway_purchase_order' === $payment_gateway->get_method_title() ) {
+		$po_number = WPI()->get_meta( $invoice->order, '_po_number' );
+		if ( $po_number ) {
+			$info['po_number'] = array(
+				'title' => __( 'Purchase Order Number:', 'woocommerce-pdf-invoices' ),
+				'value' => $po_number,
+			);
+		}
+	}
+
+	// Add VAT Number from 'WooCommerce EU VAT Number' plugin.
+	$vat_number = WPI()->get_meta( $invoice->order, '_vat_number' );
+	if ( $vat_number ) {
+		$info['vat_number'] = array(
+			'title' => __( 'VAT Number:', 'woocommerce-pdf-invoices' ),
+			'value' => $vat_number,
+		);
+	}
+
+	return $info;
+}
+add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 2 );
+`
+
 == Changelog ==
 
-= 2.9.8 - October 17, 2017 =
+= 2.9.8 - October 18, 2017 =
 
+- Added: 'add_invoice_information_meta' filter to add/remove PDF invoice information meta. See FAQ for example code. Make sure to update your custom template!
 - Added: 'wpi_item_description_data' filter to modify product description data.
 - Fixed: Options with enhanced selections resetting sort order.
 

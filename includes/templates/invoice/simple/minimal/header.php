@@ -18,7 +18,6 @@
 $templater       = WPI()->templater();
 $order           = $templater->order;
 $invoice         = $templater->invoice;
-$payment_gateway = wc_get_payment_gateway_by_order( $order );
 ?>
 
 <table cellpadding="0" cellspacing="0">
@@ -35,33 +34,14 @@ $payment_gateway = wc_get_payment_gateway_by_order( $order );
 
 		<td>
 			<?php
-			printf( __( 'Invoice #: %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_number() );
-			printf( '<br />' );
-			printf( __( 'Invoice Date: %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_invoice_date() );
-			printf( '<br />' );
-			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $invoice->get_formatted_order_date() );
-			printf( '<br />' );
-			printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $order->get_order_number() );
-
-			if ( $payment_gateway ) {
-				printf( '<br />' );
-				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $payment_gateway->get_title() );
-
-				// Get PO Number from 'WooCommerce Purchase Order Gateway' plugin.
-				if ( 'woocommerce_gateway_purchase_order' === $payment_gateway->get_method_title() ) {
-					$po_number = $templater->get_meta( '_po_number' );
-					if ( $po_number ) {
-						printf( '<br />' );
-						printf( __( 'Purchase Order Number: %s', 'woocommerce-pdf-invoices' ), $po_number );
-					}
-				}
-			}
-
-			// Get VAT Number from 'WooCommerce EU VAT Number' plugin.
-			$vat_number = $templater->get_meta( '_vat_number' );
-			if ( $vat_number ) {
-				printf( '<br />' );
-				printf( __( 'VAT Number: %s', 'woocommerce-pdf-invoices' ), $vat_number );
+			/**
+			 * Invoice object.
+			 *
+			 * @var BEWPI_Invoice $invoice.
+			 */
+			foreach ( $invoice->get_invoice_info() as $id => $info ) {
+				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
+				echo '<br>';
 			}
 			?>
 		</td>

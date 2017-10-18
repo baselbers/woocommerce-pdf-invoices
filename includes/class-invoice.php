@@ -90,6 +90,35 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		}
 
 		/**
+		 * Get invoice details.
+		 */
+		public function get_invoice_info() {
+
+			return apply_filters( 'wpi_invoice_information_meta', array(
+				'invoice_number' => array(
+					'title' => __( 'Invoice #:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->get_formatted_number(),
+				),
+				'invoice_date' => array(
+					'title' => __( 'Invoice Date:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->get_formatted_date(),
+				),
+				'order_date' => array(
+					'title' => __( 'Order Date:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->get_formatted_order_date(),
+				),
+				'order_number' => array(
+					'title' => __( 'Order Number:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->order->get_order_number(),
+				),
+				'payment_method' => array(
+					'title' => __( 'Payment Method:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->order->get_payment_method_title(),
+				),
+			), $this );
+		}
+
+		/**
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *

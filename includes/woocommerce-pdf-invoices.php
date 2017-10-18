@@ -946,6 +946,18 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Get order meta.
+		 *
+		 * @param WC_Order $order Order object.
+		 * @param string   $meta_key Post meta key.
+		 *
+		 * @return bool/string
+		 */
+		public function get_meta( $order, $meta_key ) {
+			return get_post_meta( BEWPI_WC_Order_Compatibility::get_id( $order ), $meta_key, true );
+		}
+
+		/**
 		 * Get all total rows before subtotal.
 		 *
 		 * @return array

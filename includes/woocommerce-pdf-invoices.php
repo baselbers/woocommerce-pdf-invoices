@@ -719,7 +719,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				include WPI_DIR . '/includes/admin/views/html-order-page-pdf-invoice-meta-box.php';
 
 				// display button to view invoice in debug mode.
-				if ( (bool) WPI()::get_option( 'general', 'mpdf_debug' ) ) {
+				if ( (bool) WPI()->get_option( 'general', 'mpdf_debug' ) ) {
 					$this->show_invoice_button( __( 'Debug', 'woocommerce-pdf-invoices' ), $post->ID, 'debug', array(
 						'class="button grant_access order-page invoice wpi"',
 						'target="_blank"',

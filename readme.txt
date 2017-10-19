@@ -33,7 +33,7 @@ This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches i
 > - Attach PDF invoices to many more email types including third party plugins<br />
 > - Send credit notes and cancelled PDF invoices<br />
 > - Fully customize PDF invoice table content by modifying line item columns and total rows<br />
-> - Automatically send PDF invoices as a reminder configurable within a specific period of time<br />
+> - Automatically send a reminder email configurable within a specific period of time and display a payment due date<br />
 > - Bulk generate PDF invoices<br />
 > - Bulk export and/or download PDF invoices<br />
 > - Bill periodically by generating and sending global invoices<br />

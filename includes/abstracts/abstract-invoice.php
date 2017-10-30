@@ -618,6 +618,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Get invoice date.
+		 *
+		 * @return DateTime
+		 */
+		public function get_date() {
+			return new DateTime( $this->date );
+		}
+
+		/**
 		 * Backwards compatibility.
 		 *
 		 * @deprecated Use `generate()` instead.

@@ -314,8 +314,10 @@ add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 
 
 == Changelog ==
 
-= 2.9.10 - October 30, 2017 =
+= 2.9.10 - November 10, 2017 =
 
+- Added: WC required version comments.
+- Fixed: Missing $line_items on invoice template for has_only_virtual_products().
 - Fixed: Fatal error non-numeric value.
 
 = 2.9.9 - October 19, 2017 =

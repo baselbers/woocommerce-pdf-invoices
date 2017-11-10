@@ -55,9 +55,29 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Setup multisite sepcific upload dir.
+		 *
+		 * @param array $upload_dir uploads dir data.
+		 *
+		 * @return array
+		 */
+		public function setup_multisite_upload_dir( $upload_dir ) {
+			$upload_dir['basedir'] = $upload_dir['basedir'] . '/sites/' . get_current_blog_id();
+			$upload_dir['path']    = $upload_dir['basedir'] . $upload_dir['subdir'];
+			$upload_dir['baseurl'] = $upload_dir['baseurl'] . '/sites/' . get_current_blog_id();
+			$upload_dir['url']     = $upload_dir['baseurl'] . $upload_dir['subdir'];
+
+			return $upload_dir;
+		}
+
+		/**
 		 * WooCommerce Constructor.
 		 */
 		private function __construct() {
+			if ( is_multisite() ) {
+				add_filter( 'upload_dir', array( $this, 'setup_multisite_upload_dir' ) );
+			}
+
 			$this->define_constants();
 			$this->load_plugin_textdomain();
 			$this->init_hooks();

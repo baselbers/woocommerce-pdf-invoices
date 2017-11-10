@@ -18,6 +18,7 @@
 $templater                      = WPI()->templater();
 $order                          = $templater->order;
 $invoice                        = $templater->invoice;
+$line_items                     = $order->get_items( 'line_item' );
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $columns                        = $invoice->get_columns();

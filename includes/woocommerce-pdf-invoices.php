@@ -178,6 +178,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'add_plugin_action_links',
 			) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
+			add_action( 'admin_notices', array( $this, 'admin_notice_rate' ) );
 
 			BEWPI_Abstract_Settings::init_hooks();
 			BEWPI_Admin_Notices::init_hooks();
@@ -844,6 +845,41 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function is_email_enabled( $email ) {
 			return in_array( $email, (array) $this->get_option( 'general', 'email_types' ), true );
+		}
+
+		/**
+		 * Get plugin install date.
+		 *
+		 * @return DateTime|bool
+		 */
+		private function get_install_date() {
+			if ( version_compare( WPI_VERSION, '2.6.1' ) >= 0 ) {
+				// since 2.6.1+ option name changed and date has mysql format.
+				return DateTime::createFromFormat( 'Y-m-d H:i:s', get_site_option( 'bewpi_install_date' ) );
+			}
+
+			return DateTime::createFromFormat( 'Y-m-d', get_site_option( 'bewpi-install-date' ) );
+		}
+
+		/**
+		 * Display rate notice after 10 days based on installation date.
+		 */
+		public function admin_notice_rate() {
+			if ( get_site_transient( 'wpi_admin_notice_rate' ) ) {
+				return;
+			}
+
+			// install date should be valid.
+			$install_date = $this->get_install_date();
+			if ( false === $install_date ) {
+				return;
+			}
+
+			// at least 10 days should be past to display notice.
+			if ( new DateTime( '10 days ago' ) >= $install_date ) {
+				include WPI_DIR . '/includes/admin/views/html-rate-notice.php';
+				set_site_transient( 'wpi_admin_notice_rate', true );
+			}
 		}
 
 		/**

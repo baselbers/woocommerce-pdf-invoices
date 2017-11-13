@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "POT-Creation-Date: 2017-10-19 11:37+0200\n"
-"PO-Revision-Date: 2017-10-19 11:37+0200\n"
+"PO-Revision-Date: 2017-11-13 18:33+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: nl_NL\n"
@@ -33,6 +33,9 @@ msgid ""
 "premium support, we offer you a 30%% discount when you <a href=\"%2$s\" "
 "target=\"_blank\">renew your license</a>."
 msgstr ""
+"Oeps, de licentie voor %1$s is verlopen. Blijf in aanmerking komen voor "
+"updates en premium support en <a href=\"%2$s\" target=\"_blank\">verleng de "
+"licentie nu</a> met 30%% korting."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:225
 msgid "Premium Options"
@@ -73,6 +76,10 @@ msgid ""
 "<strong>Global invoices are only supported when using the micro template!</"
 "strong>"
 msgstr ""
+"Genereer globale facturen op de bestellingen pagina door meerdere "
+"bestellingen te selecteren en de actielijst te gebruiken of laat klanten "
+"periodiek genereren op de account pagina. <strong>Globale facturen worden "
+"alleen door de micro template ondersteund!</strong> "
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:245
 msgid "Reminder Options"
@@ -435,8 +442,6 @@ msgid "Reminder sent?"
 msgstr "Herinnering verstuurd?"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:296
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Due Date:"
 msgstr "Besteldatum: %s"
 

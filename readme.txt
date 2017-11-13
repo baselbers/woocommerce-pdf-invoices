@@ -314,7 +314,7 @@ add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 
 
 == Changelog ==
 
-= 2.9.10 - November 10, 2017 =
+= 2.9.10 - November 13, 2017 =
 
 - Added: Multisite compatibility by changing uploads directory.
 - Added: WC required version comments.

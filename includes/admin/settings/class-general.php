@@ -212,23 +212,19 @@ if ( ! class_exists( 'BEWPI_General_Settings' ) ) {
 		public function sanitize( $input ) {
 			$output = get_option( $this->settings_key );
 
-			foreach ( $input as $key => $value ) {
+			foreach ( $output as $key => $value ) {
 				if ( ! isset( $input[ $key ] ) ) {
+					$output[ $key ] = is_array( $output[ $key ] ) ? array() : '';
 					continue;
 				}
 
-				if ( is_array( $input[ $key ] ) ) {
+				if ( is_array( $output[ $key ] ) ) {
 					$output[ $key ] = $input[ $key ];
 					continue;
 				}
 
 				// Strip all html and properly handle quoted strings.
 				$output[ $key ] = stripslashes( $input[ $key ] );
-			}
-
-			// Sanitize email.
-			if ( isset( $input['email_it_in_account'] ) ) {
-				$output['email_it_in_account'] = sanitize_email( $input['email_it_in_account'] );
 			}
 
 			return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );

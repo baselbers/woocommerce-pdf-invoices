@@ -532,18 +532,20 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 		 * @return mixed|void
 		 */
 		public function sanitize( $input ) {
-			$output = array();
+			$output = get_option( $this->settings_key );
 
-			// strip strings.
-			foreach ( $input as $key => $value ) {
+			foreach ( $output as $key => $value ) {
+				if ( ! isset( $input[ $key ] ) ) {
+					$output[ $key ] = is_array( $output[ $key ] ) ? array() : '';
+					continue;
+				}
 
-				if ( is_array( $input[ $key ] ) ) {
+				if ( is_array( $output[ $key ] ) ) {
 					$output[ $key ] = $input[ $key ];
 					continue;
 				}
 
 				if ( 'bewpi_company_logo' === $key ) {
-					$output[ $key ] = '';
 					continue;
 				}
 

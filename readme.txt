@@ -320,6 +320,7 @@ add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 
 - Added: WC required version comments.
 - Fixed: Missing $line_items on invoice template for has_only_virtual_products().
 - Fixed: Fatal error non-numeric value.
+- Fixed: Enhanced select options not removable.
 
 = 2.9.9 - October 19, 2017 =
 

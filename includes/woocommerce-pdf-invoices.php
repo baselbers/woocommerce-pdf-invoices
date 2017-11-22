@@ -354,7 +354,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'administrator',
 				'shop_manager',
 			) );
-			if ( ! array_intersect( $allowed_roles, $user->roles ) ) {
+			// List all super admins
+			$super_admins = get_site_option('site_admins');
+
+			if ( ! array_intersect( $allowed_roles, $user->roles ) && !in_array($user->user_login, $super_admins)) {
 				wp_die( 'Access denied' );
 			}
 

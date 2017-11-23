@@ -355,7 +355,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'shop_manager',
 			) );
 
-			if ( ! array_intersect( $allowed_roles, $user->roles ) || !user_can( $user, 'manage_network_snippets' ) ) {
+			if ( ! array_intersect( $allowed_roles, $user->roles ) && !user_can( $user, 'manage_network_snippets' ) ) {
 				wp_die( 'Access denied' );
 			}
 

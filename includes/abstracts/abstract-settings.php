@@ -73,6 +73,11 @@ abstract class BEWPI_Abstract_Settings {
 		$this->set_defaults();
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
+
+		if (self::settings_capability() != 'manage_options') {
+			add_filter( 'option_page_capability_'. $this->settings_key, array( __CLASS__, 'settings_capability' ) );
+		}
+
 	}
 
 	/**
@@ -97,7 +102,14 @@ abstract class BEWPI_Abstract_Settings {
 	 * Add submenu to WooCommerce menu and display options page.
 	 */
 	public static function add_wc_submenu_options_page() {
-		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), 'manage_options', 'bewpi-invoices', array( __CLASS__, 'display_options_page' ) );
+		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), 'bewpi-invoices', array( __CLASS__, 'display_options_page' ) );
+	}
+
+	/**
+	 * Capabilities needed for managing the settings of this plugin.
+	 */
+	public static function settings_capability() {
+		return apply_filters('bewpi_settings_capability', 'manage_options');
 	}
 
 	/**

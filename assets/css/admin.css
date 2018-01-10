@@ -60,6 +60,10 @@ a.wpi.shop-order-action {
     width: 2em;
 }
 
+#order_page_create_invoice .invoice-actions {
+    text-align: center;
+}
+
 a.wpi.shop-order-action.invoice {
     background-image: url(../images/invoice-icon.png) !important;
 }
@@ -79,7 +83,7 @@ table.wpi.order-page-meta-box.pdf-invoice tr td:last-child {
 }
 
 a.wpi.order-page.invoice.button {
-    margin-right: 4px !important;
+    margin: 4px !important;
 }
 
 .bewpi-notes {

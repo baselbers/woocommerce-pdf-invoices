@@ -312,7 +312,22 @@ function add_invoice_information_meta( $info, $invoice ) {
 add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 2 );
 `
 
+#### How to update the PDF invoice when it already has been sent to the customer?
+Since version 2.9.4 the plugin removed the ability to update the PDF invoice when it already has been sent to the customer. If in what manner you still want to update the invoice, you can do so by resetting a custom field.
+
+1. Go to Edit Order page.
+2. Change custom field 'bewpi_pdf_invoice_sent' value within custom field widget to 0.
+3. Refresh page and Update button will appear.
+
 == Changelog ==
+
+= 2.9.11 - January 10, 2017 =
+
+- Added: Filter to change the default value of the request invoice checkout field.
+- Added: Filter 'bewpi_settings_capability' to change settings permissions.
+- Added: Allowance for network admin to view pdf invoice without registering for single site.
+- Improved: Alignment of invoice actions within Edit Order page.
+- Improved: Language files and translations.
 
 = 2.9.10 - November 13, 2017 =
 

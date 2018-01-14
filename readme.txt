@@ -328,6 +328,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 - Added: Allowance for network admin to view pdf invoice without registering for single site.
 - Improved: Alignment of invoice actions within Edit Order page.
 - Improved: Language files and translations.
+- Fixed: Not existing attachments year folder.
 
 = 2.9.10 - November 13, 2017 =
 

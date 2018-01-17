@@ -346,7 +346,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 2.9.11 - January 17, 2017 =
+= 2.9.11 - January 17, 2018 =
 
 - Added: 'wpi_invoice_date' filter to change the date of the invoice.
 - Added: Bulk Print PDF Packing Slips action that merges selected packing slips.

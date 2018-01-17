@@ -312,6 +312,31 @@ function add_invoice_information_meta( $info, $invoice ) {
 add_filter( 'wpi_invoice_information_meta', 'add_invoice_information_meta', 10, 2 );
 `
 
+### How to change the invoice date? ###
+Use below filter to change the invoice date.
+
+`
+/**
+ * Change invoice date to order date in order to regenerate old invoices and keep the date.
+ *
+ * @param string                 $invoice_date date of invoice.
+ * @param BEWPI_Abstract_Invoice $invoice invoice object.
+ *
+ * @return string
+ */
+function change_invoice_date_to_order_date( $invoice_date, $invoice ) {
+   $date_completed = $invoice->order->get_date_completed();
+
+   if ( null === $date_completed ) {
+      return $invoice_date;
+   }
+
+   // needs to be in mysql format.
+   return $date_completed;
+}
+add_filter( 'wpi_invoice_date', 'change_invoice_date_to_order_date', 10, 2 );
+`
+
 #### How to update the PDF invoice when it already has been sent to the customer?
 Since version 2.9.4 the plugin removed the ability to update the PDF invoice when it already has been sent to the customer. If in what manner you still want to update the invoice, you can do so by resetting a custom field.
 
@@ -321,8 +346,9 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 2.9.11 - January 14, 2017 =
+= 2.9.11 - January 17, 2017 =
 
+- Added: 'wpi_invoice_date' filter to change the date of the invoice.
 - Added: Bulk Print PDF Packing Slips action that merges selected packing slips.
 - Added: Filter to change the default value of the request invoice checkout field.
 - Added: Filter 'bewpi_settings_capability' to change settings permissions.

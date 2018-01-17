@@ -291,7 +291,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 */
 		public function generate( $destination = 'F' ) {
 			if ( false === $this->full_path ) {
-				$this->date   = current_time( 'mysql' );
+				$this->date   = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
 				$this->number = $this->get_next_invoice_number();
 				$this->year   = date_i18n( 'Y', current_time( 'timestamp' ) );
 			} else {

@@ -60,10 +60,6 @@ a.wpi.shop-order-action {
     width: 2em;
 }
 
-#order_page_create_invoice .invoice-actions {
-    text-align: center;
-}
-
 a.wpi.shop-order-action.invoice {
     background-image: url(../images/invoice-icon.png) !important;
 }

@@ -617,8 +617,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return $columns;
 			}
 
+			$actions_column = BEWPI_WC_Core_Compatibility::is_wc_version_gt( '3.2.6' ) ? 'wc_actions' : 'order_actions';
 			// Splice columns at 'Actions' column, add 'Invoice No.' column and merge with last part.
-			$offset  = array_search( 'order_actions', array_keys( $columns ), true );
+			$offset  = array_search( $actions_column, array_keys( $columns ), true );
 			$columns = array_merge(
 				array_splice( $columns, 0, $offset ),
 				array(

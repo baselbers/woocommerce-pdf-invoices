@@ -346,6 +346,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
+= 2.9.12 - February 18, 2018 =
+
+- Fixed: Invoice number column displayed at first place of shop order table.
+
 = 2.9.11 - January 17, 2018 =
 
 - Added: 'wpi_invoice_date' filter to change the date of the invoice.

@@ -11,7 +11,7 @@
  * Text Domain:       woocommerce-pdf-invoices
  * Domain Path:       /lang
  * WC requires at least: 2.6.14
- * WC tested up to: 3.3.2
+ * WC tested up to: 3.3.3
  */
 
 defined( 'ABSPATH' ) or exit;

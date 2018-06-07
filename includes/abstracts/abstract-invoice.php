@@ -416,21 +416,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Adds line item description to columns data array.
 		 *
-		 * @param array  $data line item data.
-		 * @param int    $item_id item ID.
-		 * @param object $item item object.
+		 * @param array         $data line item data.
+		 * @param int           $item_id item ID.
+		 * @param WC_Order_Item $item item object.
 		 */
 		public function add_description_column_data( &$data, $item_id, $item ) {
-			$templater = WPI()->templater();
-
 			ob_start();
 			echo esc_html( $item['name'] );
 
 			do_action( 'wpi_order_item_meta_start', $item, $this->order );
 			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
 
-			$templater->wc_display_item_meta( $item, true );
-			$templater->wc_display_item_downloads( $item, true );
+			WPI()->templater()->display_item_meta( $item );
 
 			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
 			$description = ob_get_contents();

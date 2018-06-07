@@ -346,6 +346,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
+= 2.9.13 - June 7, 2018 =
+
+- Removed: wc_display_item_downloads() from template files and refactored wc_display_item_meta().
+
 = 2.9.12 - February 18, 2018 =
 
 - Fixed: Invoice number column displayed at first place of shop order table.

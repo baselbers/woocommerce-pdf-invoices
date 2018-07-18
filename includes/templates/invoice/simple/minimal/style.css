@@ -1,5 +1,5 @@
 table, tr, td, div, p {
-    border:1px solid black;
+    /*border:1px solid black;*/
 }
 
 h1, h2, h3, h4, h5, h6{
@@ -27,7 +27,7 @@ table td, table th {
 }
 
 table tr.top td {
-   padding-top: 80px;
+   padding-top: 75px;
 }
 
 /* Invoice information */
@@ -37,7 +37,7 @@ table tr.top td:nth-child(2){
 
 div.title div {
     padding: 5px;
-    width: 40%;
+    width: 35%;
     float: left;
     margin-left: 80px; /* Invoice margin */
     line-height: 55px;

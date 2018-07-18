@@ -18,8 +18,8 @@ table {
     line-height: normal;
     color: #555;
     font-size: 12px;
-    margin-left: 60px; /* Document margin */
-    margin-right: 60px; /* Document margin */
+    margin-left: 80px; /* Document margin */
+    margin-right: 80px; /* Document margin */
 }
 
 table td, table th {
@@ -29,7 +29,7 @@ table td, table th {
 }
 
 table tr.top td {
-   padding-top: 40px;
+   padding-top: 80px;
 }
 
 /* Top information */
@@ -38,7 +38,7 @@ table tr.top td:nth-child(2){
 }
 
 table tr.title td {
-    margin-left: 60px; /* Document margin */
+    margin-left: 80px; /* Document margin */
     line-height: 55px;
 }
 

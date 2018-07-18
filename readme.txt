@@ -348,7 +348,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 = 2.9.13 - July 18, 2018 =
  
-- Improved: PDF margin. 
+- Improved: PDF margin and general template design. 
 - Fixed: PHP 7.2 compatibility.
 
 = 2.9.12 - February 18, 2018 =

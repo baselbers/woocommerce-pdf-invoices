@@ -16,8 +16,8 @@ table {
     line-height: normal;
     color: #555;
     font-size: 12px;
-    margin-left: 60px; /* Invoice margin */
-    margin-right: 60px; /* Invoice margin */
+    margin-left: 70px; /* Invoice margin */
+    margin-right: 70px; /* Invoice margin */
 }
 
 table td, table th {
@@ -27,7 +27,7 @@ table td, table th {
 }
 
 table tr.top td {
-   padding-top: 40px;
+   padding-top: 80px;
 }
 
 /* Invoice information */
@@ -39,13 +39,13 @@ div.title div {
     padding: 5px;
     width: 40%;
     float: left;
-    margin-left: 60px; /* Invoice margin */
+    margin-left: 70px; /* Invoice margin */
     line-height: 55px;
 }
 
 div.title div.watermark {
     float: right;
-    margin-right: 60px; /* Invoice margin */
+    margin-right: 70px; /* Invoice margin */
     line-height: normal;
 }
 

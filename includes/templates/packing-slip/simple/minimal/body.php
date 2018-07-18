@@ -17,6 +17,7 @@
 
 $templater                      = WPI()->templater();
 $order                          = $templater->order;
+$document   			= $templater->packing_slip;
 $formatted_shipping_address     = $order->get_formatted_shipping_address();
 $formatted_billing_address      = $order->get_formatted_billing_address();
 $line_items                     = $order->get_items( 'line_item' );
@@ -31,20 +32,32 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</tr>
 	<tr class="information">
 		<td width="50%">
-			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
-		</td>
-
-		<td>
+			
 			<?php
-			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! empty( $formatted_shipping_address ) && $formatted_shipping_address !== $formatted_billing_address && ! $templater->has_only_virtual_products( $line_items ) ) {
-				printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
-				echo $formatted_shipping_address;
+			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $document->get_formatted_order_date() );
+			printf( '<br />' );
+			printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $order->get_order_number() );
+
+			$shipping_method = $order->get_shipping_method();
+			if ( $shipping_method ) {
+				printf( '<br />' );
+				printf( __( 'Shipping Method: %s', 'woocommerce-pdf-invoices' ), $shipping_method );
 			}
 			?>
 		</td>
 
 		<td>
-			<?php echo $formatted_billing_address; ?>
+			<?php
+			printf( '<strong>%s</strong><br />', __( 'Bill to:', 'woocommerce-pdf-invoices' ) );
+			echo $formatted_billing_address;
+			?>
+		</td>
+
+		<td>
+			<?php
+			printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+			echo $formatted_shipping_address;
+			?>
 		</td>
 	</tr>
 </table>

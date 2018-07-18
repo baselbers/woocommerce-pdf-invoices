@@ -33,17 +33,7 @@ $invoice         = $templater->invoice;
 		</td>
 
 		<td>
-			<?php
-			/**
-			 * Invoice object.
-			 *
-			 * @var BEWPI_Invoice $invoice.
-			 */
-			foreach ( $invoice->get_invoice_info() as $id => $info ) {
-				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
-				echo '<br>';
-			}
-			?>
+			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
 		</td>
 	</tr>
 </table>

@@ -43,20 +43,34 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 <table cellpadding="0" cellspacing="0">
 	<tr class="information">
 		<td width="50%">
-			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
-		</td>
-
-		<td>
 			<?php
-			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! empty( $formatted_shipping_address ) && $formatted_shipping_address !== $formatted_billing_address && ! $templater->has_only_virtual_products( $line_items ) ) {
-				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
-				echo $formatted_shipping_address;
+			/**
+			 * Invoice object.
+			 * 
+			 * @var BEWPI_Invoice $invoice.
+			 */
+			foreach ( $invoice->get_invoice_info() as $id => $info ) {
+				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
+				echo '<br>';
 			}
 			?>
 		</td>
 
 		<td>
-			<?php echo $formatted_billing_address; ?>
+		
+			<?php
+	       		printf( '<strong>%s</strong><br />', esc_html__( 'Bill to:', 'woocommerce-pdf-invoices' ) );
+			echo $formatted_billing_address;
+			?>
+		</td>
+
+		<td>
+			<?php
+			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! $templater->has_only_virtual_products( $line_items ) ) {
+				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+				echo $formatted_shipping_address;
+			}
+			?>
 		</td>
 	</tr>
 </table>

@@ -33,17 +33,7 @@ $order      = $templater->order;
 		</td>
 
 		<td>
-			<?php
-			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $document->get_formatted_order_date() );
-			printf( '<br />' );
-			printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $order->get_order_number() );
-
-			$shipping_method = $order->get_shipping_method();
-			if ( $shipping_method ) {
-				printf( '<br />' );
-				printf( __( 'Shipping Method: %s', 'woocommerce-pdf-invoices' ), $shipping_method );
-			}
-			?>
+			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
 		</td>
 	</tr>
 </table>

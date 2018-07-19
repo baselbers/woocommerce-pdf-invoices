@@ -77,7 +77,7 @@ if ( ! class_exists( 'BEWPI_WC_Order_Compatibility' ) ) :
 		 * @return string.
 		 */
 		public static function get_currency( $order ) {
-			return method_exists( 'WC_Order', 'get_currency' ) ? $order->get_currency() : $order->get_order_currency();
+			return method_exists( 'WC_Order', 'get_currency' ) ? $order->get_currency() : $order->get_currency();
 		}
 
 		/**

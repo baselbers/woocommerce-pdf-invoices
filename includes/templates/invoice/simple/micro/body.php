@@ -40,7 +40,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 			<?php $this->display_vat_number(); ?>
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
-			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></h1>
+			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_currency() ) ); ?></h1>
 			<p><?php echo WPI()->templater()->get_option( 'bewpi_intro_text' ); ?></p>
 		</td>
 	</tr>
@@ -126,9 +126,9 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 				<?php
 				if ( isset( $item['line_total'] ) ) {
 					if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] !== $item['line_total'] ) {
-						echo '<del>' . wc_price( $this->order->get_item_subtotal( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+						echo '<del>' . wc_price( $this->order->get_item_subtotal( $item, false, true ), array( 'currency' => $this->order->get_currency() ) ) . '</del> ';
 					}
-					echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_order_currency() ) );
+					echo wc_price( $this->order->get_item_total( $item, false, true ), array( 'currency' => $this->order->get_currency() ) );
 				}
 				?>
 			</td>
@@ -155,17 +155,17 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 						<?php
 						if ( isset( $tax_item_total ) ) {
 							if ( isset( $tax_item_subtotal ) && $tax_item_subtotal !== $tax_item_total ) {
-								echo '<del>' . wc_price( wc_round_tax_total( $tax_item_subtotal ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+								echo '<del>' . wc_price( wc_round_tax_total( $tax_item_subtotal ), array( 'currency' => $this->order->get_currency() ) ) . '</del> ';
 							}
 
-							echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_order_currency() ) );
+							echo wc_price( wc_round_tax_total( $tax_item_total ), array( 'currency' => $this->order->get_currency() ) );
 						} else {
 							echo '&ndash;';
 						}
 
 						$refunded = $this->order->get_tax_refunded_for_item( $item_id, $tax_item_id );
 						if ( $refunded ) {
-							echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+							echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_currency() ) ) . '</small>';
 						}
 						?>
 					</td>
@@ -180,15 +180,15 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 					$incl_tax = $this->template_options['bewpi_display_prices_incl_tax'];
 
 					if ( isset( $item['line_subtotal'] ) && $item['line_subtotal'] !== $item['line_total'] ) {
-						echo '<del>' . wc_price( $this->order->get_line_subtotal( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) ) . '</del> ';
+						echo '<del>' . wc_price( $this->order->get_line_subtotal( $item, $incl_tax, true ), array( 'currency' => $this->order->get_currency() ) ) . '</del> ';
 					}
 
-					echo wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_order_currency() ) );
+					echo wc_price( $this->order->get_line_total( $item, $incl_tax, true ), array( 'currency' => $this->order->get_currency() ) );
 				}
 
 				$refunded = $this->order->get_total_refunded_for_item( $item_id );
 				if ( $refunded ) {
-					echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+					echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_currency() ) ) . '</small>';
 				}
 				?>
 			</td>
@@ -205,7 +205,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<tr class="discount after-products">
 			<td colspan="<?php echo $colspan['left']; ?>"></td>
 			<td colspan="<?php echo $colspan['right_left']; ?>"><?php _e( 'Discount', 'woocommerce-pdf-invoices' ); ?></td>
-			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_discount(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_discount(), array( 'currency' => $this->order->get_currency() ) ); ?></td>
 		</tr>
 	<?php } ?>
 	<!-- Shipping -->
@@ -213,7 +213,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<tr class="shipping after-products">
 			<td colspan="<?php echo $colspan['left']; ?>"></td>
 			<td colspan="<?php echo $colspan['right_left']; ?>"><?php _e( 'Shipping', 'woocommerce-pdf-invoices' ); ?></td>
-			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_currency() ) ); ?></td>
 		</tr>
 	<?php } ?>
 	<!-- Subtotal -->
@@ -229,7 +229,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<tr class="shipping after-products">
 			<td colspan="<?php echo $colspan['left']; ?>"></td>
 			<td colspan="<?php echo $colspan['right_left']; ?>"><?php _e( 'Shipping', 'woocommerce-pdf-invoices' ); ?></td>
-			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( $this->order->get_total_shipping(), array( 'currency' => $this->order->get_currency() ) ); ?></td>
 		</tr>
 	<?php } ?>
 	<!-- Fees -->
@@ -245,7 +245,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 				echo ( isset( $item['line_total'] ) ) ? wc_price( wc_round_tax_total( $item['line_total'] ) ) : '';
 
 				if ( $refunded = $this->order->get_total_refunded_for_item( $item_id, 'fee' ) ) {
-					echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_order_currency() ) ) . '</small>';
+					echo '<br/><small class="refunded">-' . wc_price( $refunded, array( 'currency' => $this->order->get_currency() ) ) . '</small>';
 				}
 				?>
 			</td>
@@ -266,7 +266,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<tr class="after-products">
 			<td colspan="<?php echo $colspan['left']; ?>"></td>
 			<td colspan="<?php echo $colspan['right_left']; ?>"><?php _e( 'VAT 0%' ); ?></td>
-			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( 0, array( 'currency' => $this->order->get_order_currency() ) );  ?></td>
+			<td colspan="<?php echo $colspan['right_right']; ?>" class="align-right"><?php echo wc_price( 0, array( 'currency' => $this->order->get_currency() ) );  ?></td>
 		</tr>
 	<?php } ?>
 	<!-- Total -->
@@ -282,7 +282,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<tr class="after-products">
 			<td colspan="<?php echo $colspan['left']; ?>"></td>
 			<td colspan="<?php echo $colspan['right_left']; ?>" class="refunded"><?php _e( 'Refunded', 'woocommerce-pdf-invoices' ); ?></td>
-			<td colspan="<?php echo $colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->order->get_total_refunded(), array( 'currency' => $this->order->get_order_currency() ) ); ?></td>
+			<td colspan="<?php echo $colspan['right_right']; ?>" class="refunded align-right"><?php echo '-' . wc_price( $this->order->get_total_refunded(), array( 'currency' => $this->order->get_currency() ) ); ?></td>
 		</tr>
 	<?php } ?>
 	</thead>

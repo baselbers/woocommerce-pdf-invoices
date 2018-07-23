@@ -162,7 +162,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			// Layout.
 			$mpdf->setAutoTopMargin    = 'stretch';
 			$mpdf->setAutoBottomMargin = 'stretch';
-			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 20 : 10;
+			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 25 : 10;
 
 			// Font.
 			$mpdf->autoScriptToLang    = true;

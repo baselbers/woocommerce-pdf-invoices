@@ -56,6 +56,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		</td>
 
 		<td>
+			<strong><?php _e( 'Invoice to', 'woocommerce-pdf-invoices' ); ?></strong><br>
 			<?php echo $formatted_billing_address; ?>
 		</td>
 	</tr>
@@ -72,7 +73,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	</thead>
 	<tbody>
 	<?php
-	foreach ( $invoice->get_columns_data() as $index => $row ) {
+	foreach ( $invoice->get_columns_data( $line_items ) as $index => $row ) {
 		echo '<tr class="item">';
 
 		// Display row data.

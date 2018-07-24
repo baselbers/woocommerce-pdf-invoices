@@ -701,8 +701,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$columns_count = $this->get_columns_count( $taxes_count );
 			$colspan       = $this->get_colspan( $columns_count );
 			?>
-			<style>
-				<?php
+            <style>
+                <?php
 				// Create css for outlining the product cells.
 				$righter_product_row_tds_css = "";
 				for ( $td = $colspan['left'] + 1; $td <= $columns_count; $td++ ) {
@@ -715,10 +715,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				}
 				echo $righter_product_row_tds_css;
 				?>
-				tr.product-row td:nth-child(1) {
-					width: <?php echo $this->desc_cell_width; ?>;
-				}
-			</style>
+                tr.product-row td:nth-child(1) {
+                    width: <?php echo $this->desc_cell_width; ?>;
+                }
+            </style>
 			<?php
 		}
 
@@ -764,7 +764,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			if ( $columns_count <= 4 ) :
 				$number_of_left_half_columns = 1;
 				$this->desc_cell_width       = '48%';
-			elseif ( $columns_count <= 6 ) :
+            elseif ( $columns_count <= 6 ) :
 				$number_of_left_half_columns = 2;
 				$this->desc_cell_width       = '35.50%';
 			endif;
@@ -797,20 +797,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
-         * Check if invoice needs zero rated vat.
-         *
+		 * Check if invoice needs zero rated vat.
+		 *
 		 * @return bool
 		 */
-		public function is_zero_rated() {
-			if ( 'true' !== WPI()->get_meta( $this->order, '_vat_number_is_valid' ) ) {
-				return false;
+		public function is_vat_exempt() {
+			if ( count( $this->order->get_taxes() ) === 0 && 'true' === WPI()->get_meta( $this->order, '_vat_number_is_valid' ) ) {
+				return true;
 			}
 
-			if ( count( $this->order->get_tax_totals() ) > 0 ) {
-				return false;
-			}
-
-			return true;
+			return false;
 		}
 
 		/**

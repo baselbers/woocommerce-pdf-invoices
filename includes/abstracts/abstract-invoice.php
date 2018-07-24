@@ -797,6 +797,23 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+         * Check if invoice needs zero rated vat.
+         *
+		 * @return bool
+		 */
+		public function is_zero_rated() {
+			if ( 'true' !== WPI()->get_meta( $this->order, '_vat_number_is_valid' ) ) {
+				return false;
+			}
+
+			if ( count( $this->order->get_tax_totals() ) > 0 ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
 		 * Checks if invoice needs to have a zero rated VAT.
 		 *
 		 * @deprecated See minimal template.
@@ -877,4 +894,4 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$this->colspan = $colspan;
 		}
 	}
-} // End if().
+}

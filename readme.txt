@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 4.9
-Stable tag: 2.9.14
+Stable tag: 2.9.15
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -345,6 +345,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 3. Refresh page and Update button will appear.
 
 == Changelog ==
+
+= 2.9.15 - July 24, 2018 =
+
+- Added: Check for EU B2B zero rated vat.
 
 = 2.9.14 - July 23, 2018 =
 

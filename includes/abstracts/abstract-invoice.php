@@ -465,13 +465,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Get line item data for all user selected columns.
 		 *
+		 * @param array $line_items items.
+		 *
 		 * @return array $data.
 		 */
-		public function get_columns_data() {
+		public function get_columns_data( $line_items = array() ) {
+			// backward compatibility.
+			if ( count( $line_items ) === 0 ) {
+				$line_items = $this->order->get_items( 'line_item' );
+			}
+
 			$rows               = array();
 			$prices_include_tax = WPI()->get_prop( $this->order, 'prices_include_tax' );
 
-			foreach ( $this->order->get_items( 'line_item' ) as $item_id => $item ) {
+			foreach ( $line_items as $item_id => $item ) {
 				$row = array();
 
 				$this->add_description_column_data( $row, $item_id, $item );

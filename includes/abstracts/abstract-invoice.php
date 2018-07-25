@@ -416,21 +416,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Adds line item description to columns data array.
 		 *
-		 * @param array  $data line item data.
-		 * @param int    $item_id item ID.
-		 * @param object $item item object.
+		 * @param array         $data line item data.
+		 * @param int           $item_id item ID.
+		 * @param WC_Order_Item $item item object.
 		 */
 		public function add_description_column_data( &$data, $item_id, $item ) {
-			$templater = WPI()->templater();
-
 			ob_start();
 			echo esc_html( $item['name'] );
 
 			do_action( 'wpi_order_item_meta_start', $item, $this->order );
 			do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
 
-			$templater->wc_display_item_meta( $item, true );
-			$templater->wc_display_item_downloads( $item, true );
+			WPI()->templater()->display_item_meta( $item );
 
 			do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
 			$description = ob_get_contents();
@@ -465,20 +462,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Get line item data for all user selected columns.
 		 *
-		 * @param array $line_items items.
+		 * @param array $items line items.
 		 *
-		 * @return array $data.
+		 * @return array
 		 */
-		public function get_columns_data( $line_items = array() ) {
-			// backward compatibility.
-			if ( count( $line_items ) === 0 ) {
-				$line_items = $this->order->get_items( 'line_item' );
+		public function get_columns_data( $items = array() ) {
+			// Make backwards compatible with older custom templates.
+			if ( count( $items ) === 0 ) {
+				$items = $this->order->get_items( 'line_item' );
 			}
 
 			$rows               = array();
 			$prices_include_tax = WPI()->get_prop( $this->order, 'prices_include_tax' );
 
-			foreach ( $line_items as $item_id => $item ) {
+			foreach ( $items as $item_id => $item ) {
 				$row = array();
 
 				$this->add_description_column_data( $row, $item_id, $item );
@@ -708,8 +705,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$columns_count = $this->get_columns_count( $taxes_count );
 			$colspan       = $this->get_colspan( $columns_count );
 			?>
-            <style>
-                <?php
+			<style>
+				<?php
 				// Create css for outlining the product cells.
 				$righter_product_row_tds_css = "";
 				for ( $td = $colspan['left'] + 1; $td <= $columns_count; $td++ ) {
@@ -722,10 +719,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				}
 				echo $righter_product_row_tds_css;
 				?>
-                tr.product-row td:nth-child(1) {
-                    width: <?php echo $this->desc_cell_width; ?>;
-                }
-            </style>
+				tr.product-row td:nth-child(1) {
+					width: <?php echo $this->desc_cell_width; ?>;
+				}
+			</style>
 			<?php
 		}
 
@@ -771,7 +768,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			if ( $columns_count <= 4 ) :
 				$number_of_left_half_columns = 1;
 				$this->desc_cell_width       = '48%';
-            elseif ( $columns_count <= 6 ) :
+			elseif ( $columns_count <= 6 ) :
 				$number_of_left_half_columns = 2;
 				$this->desc_cell_width       = '35.50%';
 			endif;
@@ -801,19 +798,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			return true;
-		}
-
-		/**
-		 * Check if invoice needs zero rated vat.
-		 *
-		 * @return bool
-		 */
-		public function is_vat_exempt() {
-			if ( count( $this->order->get_taxes() ) === 0 && 'true' === WPI()->get_meta( $this->order, '_vat_number_is_valid' ) ) {
-				return true;
-			}
-
-			return false;
 		}
 
 		/**
@@ -897,4 +881,4 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$this->colspan = $colspan;
 		}
 	}
-}
+} // End if().

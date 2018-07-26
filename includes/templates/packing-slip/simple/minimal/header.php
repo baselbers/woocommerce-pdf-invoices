@@ -15,25 +15,22 @@
  * @version 0.0.1
  */
 
-$templater  = WPI()->templater();
-$document   = $templater->packing_slip;
-$order      = $templater->order;
 ?>
 
 <table>
 	<tr class="top">
 		<td>
 			<?php
-			if ( $templater->get_logo_url() ) {
+			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
 				printf( '<img src="var:company_logo" style="max-height:100px;"/>' );
 			} else {
-				printf( '<h2>%s</h2>', esc_html( $templater->get_option( 'bewpi_company_name' ) ) );
+				printf( '<h2>%s</h2>', esc_html( WPI()->get_option( 'template', 'company_name' ) ) );
 			}
 			?>
 		</td>
 
 		<td>
-			<?php echo nl2br( $templater->get_option( 'bewpi_company_address' ) ); ?>
+			<?php echo nl2br( WPI()->get_option( 'template', 'company_address' ) ); ?>
 		</td>
 	</tr>
 </table>

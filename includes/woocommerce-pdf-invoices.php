@@ -1031,6 +1031,29 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Check if order has only virtual products.
+		 *
+		 * @param WC_Order $order order object.
+		 *
+		 * @return bool
+		 */
+		public function has_only_virtual_products( $order ) {
+			foreach ( $order->get_items( 'line_item' ) as $item ) {
+				/**
+				 * Product order item object.
+				 *
+				 * @var WC_Order_Item_Product $item product.
+				 */
+				$product = $item->get_product();
+				if ( ! $product || ! $product->is_virtual() ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+		/**
 		 * Get prefix.
 		 *
 		 * @return string

@@ -136,7 +136,9 @@ class BEWPI_Template {
 	}
 
 	/**
-	 * @param $directory
+	 * Add dir.
+	 *
+	 * @param string $directory dir.
 	 */
 	public function add_directory( $directory ) {
 		$this->directories[] = $directory;
@@ -164,6 +166,7 @@ class BEWPI_Template {
 	 *
 	 * @return bool
 	 * @since 2.5.3
+	 * @deprecated Use 'WPI()->has_only_virtual_product( $order )' instead.
 	 */
 	public function has_only_virtual_products( $items ) {
 		foreach ( $items as $item ) {
@@ -258,7 +261,7 @@ class BEWPI_Template {
 	 * Display column recursively.
 	 *
 	 * @param string $key Column ID.
-	 * @param        array /string $data Column or column label.
+	 * @param array  $data Column or column label.
 	 */
 	public function display_header_recursive( $key, $data ) {
 		if ( is_array( $data ) ) {
@@ -276,7 +279,7 @@ class BEWPI_Template {
 	 * Display row recursively.
 	 *
 	 * @param string $key Column ID.
-	 * @param        array /string $data Column or column label.
+	 * @param array  $data Column or column label.
 	 */
 	public function display_data_recursive( $key, $data ) {
 		if ( is_array( $data ) ) {
@@ -324,6 +327,8 @@ class BEWPI_Template {
 
 	/**
 	 * Get the company logo URL.
+	 *
+	 * @deprecated use 'esc_url_raw( WPI()->get_option( 'template', 'company_logo' )' instead.
 	 *
 	 * @return string The actual url from the Media Library.
 	 */

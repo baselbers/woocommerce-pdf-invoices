@@ -83,7 +83,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * BEWPI_Abstract_Document constructor.
 		 */
 		public function __construct() {
-			$templater    = WPI()->templater();
+			$templater = WPI()->templater();
 			$templater->set_order( $this->order );
 			$this->template         = $templater->get_template( $this->type );
 			$this->general_options  = get_option( 'bewpi_general_settings' ); // @todo remove.
@@ -121,7 +121,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				'orientation'       => 'P',
 			) );
 			/* @var mPDF $mpdf */
-			$mpdf        = new mPDF(
+			$mpdf = new mPDF(
 				$mpdf_params['mode'],
 				$mpdf_params['format'],
 				$mpdf_params['default_font_size'],
@@ -165,17 +165,18 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 25 : 10;
 
 			// Font.
-			$mpdf->autoScriptToLang    = true;
-			$mpdf->autoLangToFont      = true;
-			$mpdf->baseScript          = 1;
-			$mpdf->autoVietnamese      = true;
-			$mpdf->autoArabic          = true;
-			$mpdf->useSubstitutions    = true;
+			$mpdf->autoScriptToLang = true;
+			$mpdf->autoLangToFont   = true;
+			$mpdf->baseScript       = 1;
+			$mpdf->autoVietnamese   = true;
+			$mpdf->autoArabic       = true;
+			$mpdf->useSubstitutions = true;
 
 			// Template.
 			$html = $this->get_html();
 			if ( count( $html ) === 0 ) {
-				WPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__,  __LINE__ ) );
+				WPI()->logger()->error( sprintf( 'PDF generation aborted. No HTML for PDF in %1$s:%2$s', __FILE__, __LINE__ ) );
+
 				return;
 			}
 

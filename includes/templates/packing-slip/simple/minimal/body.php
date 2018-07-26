@@ -90,14 +90,14 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 
 			<td width="65%">
 				<?php
-				echo $item['name'];
+				echo esc_html( $item['name'] );
 
-				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $order );
+				do_action( 'wpi_order_item_meta_start', $item, $this->order );
+				do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
 
-				$templater->wc_display_item_meta( $item, true );
-				$templater->wc_display_item_downloads( $item, true );
+				WPI()->templater()->display_item_meta( $item );
 
-				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $order );
+				do_action( 'woocommerce_order_item_meta_end', $item_id, $item, $this->order );
 				?>
 			</td>
 

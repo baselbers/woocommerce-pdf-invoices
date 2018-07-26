@@ -66,7 +66,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 
 		<td>
 			<?php
-			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! $templater->has_only_virtual_products( $line_items ) ) {
+			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! WPI()->has_only_virtual_products( $order ) ) {
 				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $formatted_shipping_address;
 			}
@@ -95,7 +95,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		}
 
 		echo '</tr>';
-	} // End foreach().
+	}
 	?>
 
 	<tr class="spacer">

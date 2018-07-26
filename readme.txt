@@ -346,9 +346,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 2.9.15 - July 24, 2018 =
+= 2.9.15 - July 26, 2018 =
 
 - Added: Check for EU B2B zero rated vat.
+- Improved: Templates in general.
 
 = 2.9.14 - July 23, 2018 =
 

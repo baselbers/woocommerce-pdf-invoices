@@ -114,7 +114,9 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		?>
 
 		<tr class="total">
-			<td width="50%"></td>
+			<td width="50%">
+				<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
+            </td>
 
 			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
 				<?php echo $total['label']; ?>

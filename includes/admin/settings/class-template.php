@@ -553,16 +553,20 @@ if ( ! class_exists( 'BEWPI_Template_Settings' ) ) {
 				$output[ $key ] = $this->strip_str( stripslashes( $input[ $key ] ) );
 			}
 
-			if ( isset( $input['bewpi_company_logo'] ) && ! empty( $input['bewpi_company_logo'] ) ) {
-				$image_url = $this->validate_image( $input['bewpi_company_logo'] );
-				if ( $image_url ) {
-					$output['bewpi_company_logo'] = $image_url;
+			if ( isset( $input['bewpi_company_logo'] ) ) {
+				if ( ! empty( $input['bewpi_company_logo'] ) ) {
+					$image_url = $this->validate_image( $input['bewpi_company_logo'] );
+					if ( $image_url ) {
+						$output['bewpi_company_logo'] = $image_url;
+					} else {
+						add_settings_error(
+							esc_attr( $this->settings_key ),
+							'file-not-found',
+							__( 'Company logo not found. Upload the image to the Media Library and try again.', 'woocommerce-pdf-invoices' )
+						);
+					}
 				} else {
-					add_settings_error(
-						esc_attr( $this->settings_key ),
-						'file-not-found',
-						__( 'Company logo not found. Upload the image to the Media Library and try again.', 'woocommerce-pdf-invoices' )
-					);
+					$output['bewpi_company_logo'] = '';
 				}
 			}
 

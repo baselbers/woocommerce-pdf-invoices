@@ -62,8 +62,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return array
 		 */
 		public function setup_multisite_upload_dir( $upload_dir ) {
-			$upload_dir['path']    = $upload_dir['basedir'] . $upload_dir['subdir'];
-			$upload_dir['url']     = $upload_dir['baseurl'] . $upload_dir['subdir'];
+			$upload_dir['path'] = $upload_dir['basedir'] . $upload_dir['subdir'];
+			$upload_dir['url']  = $upload_dir['baseurl'] . $upload_dir['subdir'];
 
 			return $upload_dir;
 		}
@@ -353,7 +353,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'shop_manager',
 			) );
 
-			if ( ! array_intersect( $allowed_roles, $user->roles ) && !user_can( $user, 'manage_network_snippets' ) ) {
+			if ( ! array_intersect( $allowed_roles, $user->roles ) && ! user_can( $user, 'manage_network_snippets' ) ) {
 				wp_die( 'Access denied' );
 			}
 
@@ -414,7 +414,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Add links to row meta on plugins.php page.
 		 *
-		 * @param array  $links row meta.
+		 * @param array $links row meta.
 		 * @param string $file plugin basename.
 		 *
 		 * @return array
@@ -532,7 +532,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Attach a generated invoice to WooCommerce emails.
 		 *
-		 * @param array  $attachments attachments.
+		 * @param array $attachments attachments.
 		 * @param string $status name of email.
 		 * @param object $order order.
 		 *
@@ -685,9 +685,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Display invoice button html.
 		 *
 		 * @param string $title title attribute of button.
-		 * @param int    $order_id WC_ORDER id.
+		 * @param int $order_id WC_ORDER id.
 		 * @param string $action action create, view or cancel.
-		 * @param array  $attributes additional attributes.
+		 * @param array $attributes additional attributes.
 		 */
 		private function show_invoice_button( $title, $order_id, $action, $attributes = array() ) {
 			$url = wp_nonce_url( add_query_arg( array(
@@ -829,7 +829,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Display download link on My Account page.
 		 *
-		 * @param array    $actions my account order table actions.
+		 * @param array $actions my account order table actions.
 		 * @param WC_Order $order WooCommerce order object.
 		 *
 		 * @return mixed
@@ -940,22 +940,24 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return bool|mixed
 		 */
 		public static function get_option( $group, $name = '' ) {
-			$option = apply_filters( 'bewpi_option', false, $group, $name );
+			$option_name = apply_filters( 'wpi_option_name', array(
+				'prefix' => 'bewpi_',
+				'group'  => $group,
+				'suffix' => '_settings',
+			) );
+			//$option = apply_filters( 'bewpi_option', false, $group, $name );
 
-			if ( false === $option ) {
-				$options = get_option( 'bewpi_' . $group . '_settings' );
-				if ( false === $options ) {
-					return false;
-				}
-
-				if ( ! isset( $options[ 'bewpi_' . $name ] ) ) {
-					return false;
-				}
-
-				$option = $options[ 'bewpi_' . $name ];
+			$options = get_option( join( '', $option_name ) );
+			if ( false === $options ) {
+				return false;
 			}
 
-			$hook = sprintf( 'bewpi_pre_option-%1$s-%2$s', $group, $name );
+			if ( ! isset( $options[ 'bewpi_' . $name ] ) ) {
+				return false;
+			}
+
+			$option = $options[ 'bewpi_' . $name ];
+			$hook   = sprintf( 'bewpi_pre_option-%1$s-%2$s', $group, $name );
 
 			return apply_filters( $hook, $option );
 		}
@@ -997,8 +999,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Get order property.
 		 *
 		 * @param WC_Order $order order object.
-		 * @param string   $prop order property.
-		 * @param string   $context display context.
+		 * @param string $prop order property.
+		 * @param string $context display context.
 		 *
 		 * @return mixed
 		 */
@@ -1010,7 +1012,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Get order meta.
 		 *
 		 * @param WC_Order $order Order object.
-		 * @param string   $meta_key Post meta key.
+		 * @param string $meta_key Post meta key.
 		 *
 		 * @return bool/string
 		 */

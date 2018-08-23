@@ -8,7 +8,7 @@
  * @version     0.0.1
  */
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 
@@ -22,9 +22,9 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order        = wc_get_order( $order_id );
-			$this->type         = 'packing-slip/simple';
-			$this->filename     = apply_filters( 'bewpi_pdf_packing_slip_filename', sprintf( 'packing-slip-%s.pdf', BEWPI_WC_Order_Compatibility::get_id( $this->order ) ), $this );
+			$this->order    = wc_get_order( $order_id );
+			$this->type     = 'packing-slip/simple';
+			$this->filename = apply_filters( 'bewpi_pdf_packing_slip_filename', sprintf( 'packing-slip-%s.pdf', BEWPI_WC_Order_Compatibility::get_id( $this->order ) ), $this );
 			WPI()->templater()->set_packing_slip( $this );
 			parent::__construct();
 		}
@@ -40,9 +40,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * Initialize admin hooks.
 		 */
 		public static function admin_init_hooks() {
-			if ( self::show_packing_slip_icons() ) {
-				add_action( 'woocommerce_admin_order_actions_end', array( __CLASS__, 'add_packing_slip_pdf' ) );
-			}
+			add_action( 'woocommerce_admin_order_actions_end', array( __CLASS__, 'add_packing_slip_pdf' ) );
 		}
 
 		/**
@@ -51,13 +49,17 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @param WC_Order $order WooCommerce order object.
 		 */
 		public static function add_packing_slip_pdf( $order ) {
+			if ( ! self::packing_slips_enabled() ) {
+				return;
+			}
+
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
 
 			// View Packing Slip.
 			$action = 'view_packing_slip';
-			$url = wp_nonce_url( add_query_arg( array(
-				'post' => $order_id,
-				'action' => 'edit',
+			$url    = wp_nonce_url( add_query_arg( array(
+				'post'         => $order_id,
+				'action'       => 'edit',
 				'bewpi_action' => $action,
 			), admin_url( 'post.php' ) ), $action, 'nonce' );
 
@@ -71,8 +73,8 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 *
 		 * @return bool
 		 */
-		private static function show_packing_slip_icons() {
-			if ( WPI()->get_option( 'template','disable_packing_slips' ) ) {
+		private static function packing_slips_enabled() {
+			if ( WPI()->get_option( 'template', 'disable_packing_slips' ) ) {
 				return false;
 			}
 

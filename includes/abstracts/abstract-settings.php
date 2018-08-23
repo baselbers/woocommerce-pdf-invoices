@@ -64,6 +64,8 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	private static $settings = array();
 
+	private $errors = array();
+
 	/**
 	 * BEWPI_Abstract_Settings constructor.
 	 */
@@ -74,8 +76,8 @@ abstract class BEWPI_Abstract_Settings {
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
 
-		if (self::settings_capability() != 'manage_options') {
-			add_filter( 'option_page_capability_'. $this->settings_key, array( __CLASS__, 'settings_capability' ) );
+		if ( 'manage_options' !== self::settings_capability() ) {
+			add_filter( 'option_page_capability_' . $this->settings_key, array( __CLASS__, 'settings_capability' ) );
 		}
 
 	}
@@ -93,32 +95,53 @@ abstract class BEWPI_Abstract_Settings {
 	 * Load all settings classes.
 	 */
 	public static function load_settings() {
-		$settings[] = new BEWPI_General_Settings();
-		$settings[] = new BEWPI_Template_Settings();
+		$settings[]     = new BEWPI_General_Settings();
+		$settings[]     = new BEWPI_Template_Settings();
 		self::$settings = apply_filters( 'bewpi_settings', $settings );
+	}
+
+	/**
+	 * Add setting error.
+	 *
+	 * @param object $error setting error object.
+	 */
+	protected function add_error( $error ) {
+		add_settings_error( $this->settings_key, 'error', $error->message, $error->type );
+	}
+
+	/**
+	 * Get all settings errors.
+	 *
+	 * @return array
+	 */
+	protected function get_errors() {
+		return get_settings_errors( $this->settings_key );
 	}
 
 	/**
 	 * Add submenu to WooCommerce menu and display options page.
 	 */
 	public static function add_wc_submenu_options_page() {
-		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), 'bewpi-invoices', array( __CLASS__, 'display_options_page' ) );
+		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), 'bewpi-invoices', array(
+			__CLASS__,
+			'display_options_page',
+		) );
 	}
 
 	/**
 	 * Capabilities needed for managing the settings of this plugin.
 	 */
 	public static function settings_capability() {
-		return apply_filters('bewpi_settings_capability', 'manage_options');
+		return apply_filters( 'bewpi_settings_capability', 'manage_options' );
 	}
 
 	/**
 	 * WooCommerce PDF Invoices settings page.
 	 */
 	public static function display_options_page() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'bewpi_general_settings';
+		$current_tab  = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'bewpi_general_settings';
 		$sidebar_path = apply_filters( 'bewpi_sidebar_path', WPI_DIR . '/includes/admin/views/html-sidebar.php' );
-		$width = sprintf( 'style="width: %s;"', $sidebar_path ? '75%' : '100%' );
+		$width        = sprintf( 'style="width: %s;"', $sidebar_path ? '75%' : '100%' );
 		?>
 
 		<div class="wrap wpi">
@@ -167,6 +190,7 @@ abstract class BEWPI_Abstract_Settings {
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'bewpi_general_settings';
 		settings_errors( $current_tab );
 	}
+
 	/**
 	 * Add rate plugin text to footer of settings page.
 	 *
@@ -190,7 +214,7 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	private function add_sections() {
 		foreach ( $this->sections as $id => $section ) {
-			add_settings_section( $id, $section['title'], function() use ( $section ) {
+			add_settings_section( $id, $section['title'], function () use ( $section ) {
 				if ( isset( $section['description'] ) ) {
 					echo $section['description'];
 				}
@@ -293,11 +317,11 @@ abstract class BEWPI_Abstract_Settings {
 		$options      = array_merge( array_flip( $selections ), $args['options'] );
 		?>
 		<select multiple="multiple"
-				name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
-				title="<?php echo esc_attr( $args['title'] ); ?>"
-				data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
-				aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
-				class="wc-enhanced-select">
+		        name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
+		        title="<?php echo esc_attr( $args['title'] ); ?>"
+		        data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+		        aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
+		        class="wc-enhanced-select">
 			<?php
 			foreach ( $options as $id => $option ) {
 				echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $id, $selections, true ), true, false ) . '>' . $option['name'] . '</option>';
@@ -305,7 +329,8 @@ abstract class BEWPI_Abstract_Settings {
 			?>
 		</select>
 		<?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?>
-		<a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce-pdf-invoices' ); ?></a> <a class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce-pdf-invoices' ); ?></a>
+		<a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce-pdf-invoices' ); ?></a> <a
+			class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce-pdf-invoices' ); ?></a>
 		<?php
 	}
 
@@ -369,9 +394,9 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function input_callback( $args ) {
-		$options             = get_option( $args['page'] );
-		$class               = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
-		$is_checkbox         = 'checkbox' === $args['type'];
+		$options     = get_option( $args['page'] );
+		$class       = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
+		$is_checkbox = 'checkbox' === $args['type'];
 		if ( $is_checkbox ) { ?>
 			<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
 		<?php } ?>
@@ -427,7 +452,11 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ) ) ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array(
+					'multiple_checkbox',
+					'multiple_select'
+				) )
+			) {
 				// Add options defaults.
 				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );

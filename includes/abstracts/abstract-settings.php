@@ -8,13 +8,12 @@
  * @version     1.0.0
  */
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class BEWPI_Abstract_Settings.
  */
 abstract class BEWPI_Abstract_Settings {
-
 	/**
 	 * Setting ID.
 	 *
@@ -79,6 +78,20 @@ abstract class BEWPI_Abstract_Settings {
 	public static $setting_tabs = array();
 
 	/**
+	 * Setting object.
+	 *
+	 * @var BEWPI_Abstract_Settings
+	 */
+	public static $setting = null;
+
+	/**
+	 * Current active tab.
+	 *
+	 * @var string
+	 */
+	private static $current_tab = 'general';
+
+	/**
 	 * BEWPI_Abstract_Settings constructor.
 	 */
 	public function __construct() {
@@ -93,14 +106,36 @@ abstract class BEWPI_Abstract_Settings {
 	 * Initialize hooks.
 	 */
 	public static function init_hooks() {
+		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
 	}
 
 	/**
+	 * Admin init.
+	 */
+	public static function admin_init() {
+		// Only load settings on settings saved or page load.
+		if ( isset( $_GET['key'] ) && md5( WPI()::PLUGIN_SLUG ) === $_GET['key'] || isset( $_GET['page'] ) && WPI()::PLUGIN_SLUG === $_GET['page'] ) {
+			self::load_setting_tabs();
+
+			self::$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
+
+			/**
+			 * Setting annotation.
+			 *
+			 * @var BEWPI_Abstract_Settings $current_setting setting object.
+			 */
+			if ( isset( self::$setting_tabs[ self::$current_tab ] ) ) {
+				self::$setting = new self::$setting_tabs[ self::$current_tab ]['class']();
+			}
+		}
+	}
+
+	/**
 	 * Load settings.
 	 */
-	public static function load_settings() {
+	public static function load_setting_tabs() {
 		$setting_tabs['general']  = array(
 			'class' => 'BEWPI_General_Settings',
 			'label' => __( 'General', 'woocommerce-pdf-invoices' ),
@@ -135,7 +170,7 @@ abstract class BEWPI_Abstract_Settings {
 	 * Add submenu to WooCommerce menu and display options page.
 	 */
 	public static function add_wc_submenu_options_page() {
-		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), 'bewpi-invoices', array(
+		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), WPI()::PLUGIN_SLUG, array(
 			__CLASS__,
 			'display_options_page',
 		) );
@@ -154,21 +189,6 @@ abstract class BEWPI_Abstract_Settings {
 	 * @throws Exception Cannot find settings class.
 	 */
 	public static function display_options_page() {
-		self::load_settings();
-
-		$current_tab  = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'general';
-
-		/**
-		 * Setting annotation.
-		 *
-		 * @var BEWPI_Abstract_Settings $current_setting setting object.
-		 */
-		if ( isset( self::$setting_tabs[ $current_tab ] ) ) {
-			$current_setting = new self::$setting_tabs[ $current_tab ]['class']();
-		} else {
-			throw new Exception( 'No settings class found.' );
-		}
-
 		$sidebar_path = apply_filters( 'wpi_sidebar_path', WPI_DIR . '/includes/admin/views/html-sidebar.php' );
 		$width        = sprintf( 'style="width: %s;"', $sidebar_path ? '75%' : '100%' );
 		?>
@@ -178,20 +198,25 @@ abstract class BEWPI_Abstract_Settings {
 			<h2 class="nav-tab-wrapper">
 				<?php
 				foreach ( self::$setting_tabs as $id => $tab ) {
-					$active = $current_tab === $id ? 'nav-tab-active' : '';
-					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>',
+					$active = self::$current_tab === $id ? 'nav-tab-active' : '';
+					printf( '<a class="nav-tab %1$s" href="%2$s">%3$s</a>',
 						esc_attr( $active ),
-						esc_attr( $id ),
+						add_query_arg( array(
+							'page' => WPI()::PLUGIN_SLUG,
+							'tab'  => $id,
+						), '' ),
 						esc_html( $tab['label'] )
 					);
 				}
 				?>
 			</h2>
-			<form method="post" action="options.php" enctype="multipart/form-data" <?php echo esc_html( $width ); ?>>
+			<form method="post"
+			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()::PLUGIN_SLUG ); ?>"
+			      enctype="multipart/form-data" <?php echo esc_html( $width ); ?>>
 				<?php
-				settings_fields( $current_setting->settings_key );
-				do_settings_sections( $current_setting->settings_key );
-				submit_button( $current_setting->get_submit_button_text() );
+				settings_fields( self::$setting->settings_key );
+				do_settings_sections( self::$setting->settings_key );
+				submit_button( self::$setting->get_submit_button_text() );
 				?>
 			</form>
 
@@ -213,7 +238,7 @@ abstract class BEWPI_Abstract_Settings {
 	 *
 	 */
 	public static function display_settings_errors() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'bewpi_general_settings';
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
 		settings_errors( $current_tab );
 	}
 

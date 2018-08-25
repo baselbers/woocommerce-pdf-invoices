@@ -18,6 +18,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 	 * Implements main function for attaching invoice to email and show invoice buttons.
 	 */
 	final class BE_WooCommerce_PDF_Invoices {
+
+		/**
+		 * Plugin slug.
+		 */
+		const PLUGIN_SLUG = 'woocommerce-pdf-invoices';
+
 		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
@@ -234,7 +240,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Setup default options.
 		 */
 		public function setup_options() {
-			BEWPI_Abstract_Settings::load_settings();
+			BEWPI_Abstract_Settings::load_setting_tabs();
 
 			foreach ( BEWPI_Abstract_Settings::$setting_tabs as $id => $tab ) {
 				new $tab['class']();
@@ -369,9 +375,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @return array
 		 */
-		function add_plugin_action_links( $links ) {
+		public function add_plugin_action_links( $links ) {
 			// add settings link.
-			$settings_url   = add_query_arg( array( 'page' => 'bewpi-invoices' ), admin_url( 'admin.php' ) );
+			$settings_url   = add_query_arg( array( 'page' => WPI()::PLUGIN_SLUG ), admin_url( 'admin.php' ) );
 			$settings_title = __( 'Settings', 'woocommerce-pdf-invoices' );
 			array_unshift( $links, sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title ) );
 
@@ -404,7 +410,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public static function get_screen_ids() {
 			$screen_ids = array(
-				'woocommerce_page_bewpi-invoices',
+				'woocommerce_page_' . WPI()::PLUGIN_SLUG,
 				'edit-shop_order',
 				'shop_order',
 			);
@@ -464,7 +470,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @return string
 		 */
-		function add_emailitin_as_recipient( $headers, $status, $order ) {
+		public function add_emailitin_as_recipient( $headers, $status, $order ) {
 			// Only attach to emails with WC_Order object.
 			if ( ! $order instanceof WC_Order ) {
 				return $headers;
@@ -749,7 +755,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 				echo '</p>';
 
-			} // End if().
+			}
 
 			do_action( 'bewpi_order_page_after_meta_box_details_end', $post->ID );
 		}

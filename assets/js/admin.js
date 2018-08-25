@@ -116,7 +116,7 @@
             }
         }
 
-        if ( pagenow === 'woocommerce_page_bewpi-invoices' ) {
+        if ( pagenow === 'woocommerce_page_woocommerce-pdf-invoices' ) {
             var template = document.querySelector('select#bewpi-template-name');
             if (template !== null) {
 

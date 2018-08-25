@@ -10,8 +10,10 @@
  * @version     1.0.0
  */
 
-$settings_url = admin_url( 'admin.php?page=bewpi-invoices' );
+$settings_url = add_query_arg( array( 'page' => WPI()::PLUGIN_SLUG ), admin_url( 'admin.php' ) );
 ?>
 <div class="updated notice notice-success is-dismissible" data-dismissible="activation-forever">
-	<p><?php printf( __( 'The settings of WooCommerce PDF Invoices are available <a href="%1$s">on this page</a>.', 'woocommerce-pdf-invoices' ), $settings_url ); ?></p>
+	<p>
+		<?php printf( __( 'The settings of WooCommerce PDF Invoices are available <a href="%1$s">on this page</a>.', 'woocommerce-pdf-invoices' ), esc_url( $settings_url ) ); ?>
+	</p>
 </div>

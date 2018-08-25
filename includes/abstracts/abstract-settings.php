@@ -16,6 +16,13 @@ defined( 'ABSPATH' ) or exit;
 abstract class BEWPI_Abstract_Settings {
 
 	/**
+	 * Setting ID.
+	 *
+	 * @var string
+	 */
+	protected $id = 'general';
+
+	/**
 	 * Option name prefix.
 	 *
 	 * @var string
@@ -58,13 +65,18 @@ abstract class BEWPI_Abstract_Settings {
 	protected $defaults = array();
 
 	/**
-	 * Settings classes.
+	 * Submit button text.
+	 *
+	 * @var null
+	 */
+	private $submit_button_text = null;
+
+	/**
+	 * Setting tab config data.
 	 *
 	 * @var array
 	 */
-	private static $settings = array();
-
-	private $errors = array();
+	public static $setting_tabs = array();
 
 	/**
 	 * BEWPI_Abstract_Settings constructor.
@@ -75,29 +87,30 @@ abstract class BEWPI_Abstract_Settings {
 		$this->set_defaults();
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
-
-		if ( 'manage_options' !== self::settings_capability() ) {
-			add_filter( 'option_page_capability_' . $this->settings_key, array( __CLASS__, 'settings_capability' ) );
-		}
-
 	}
 
 	/**
 	 * Initialize hooks.
 	 */
 	public static function init_hooks() {
-		add_action( 'admin_init', array( __CLASS__, 'load_settings' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
 	}
 
 	/**
-	 * Load all settings classes.
+	 * Load settings.
 	 */
 	public static function load_settings() {
-		$settings[]     = new BEWPI_General_Settings();
-		$settings[]     = new BEWPI_Template_Settings();
-		self::$settings = apply_filters( 'bewpi_settings', $settings );
+		$setting_tabs['general']  = array(
+			'class' => 'BEWPI_General_Settings',
+			'label' => __( 'General', 'woocommerce-pdf-invoices' ),
+		);
+		$setting_tabs['template'] = array(
+			'class' => 'BEWPI_Template_Settings',
+			'label' => __( 'Template', 'woocommerce-pdf-invoices' ),
+		);
+
+		self::$setting_tabs = apply_filters( 'wpi_setting_tabs', $setting_tabs );
 	}
 
 	/**
@@ -136,11 +149,27 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 * WooCommerce PDF Invoices settings page.
+	 * Load settings based on active tab.
+	 *
+	 * @throws Exception Cannot find settings class.
 	 */
 	public static function display_options_page() {
-		$current_tab  = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'bewpi_general_settings';
-		$sidebar_path = apply_filters( 'bewpi_sidebar_path', WPI_DIR . '/includes/admin/views/html-sidebar.php' );
+		self::load_settings();
+
+		$current_tab  = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : 'general';
+
+		/**
+		 * Setting annotation.
+		 *
+		 * @var BEWPI_Abstract_Settings $current_setting setting object.
+		 */
+		if ( isset( self::$setting_tabs[ $current_tab ] ) ) {
+			$current_setting = new self::$setting_tabs[ $current_tab ]['class']();
+		} else {
+			throw new Exception( 'No settings class found.' );
+		}
+
+		$sidebar_path = apply_filters( 'wpi_sidebar_path', WPI_DIR . '/includes/admin/views/html-sidebar.php' );
 		$width        = sprintf( 'style="width: %s;"', $sidebar_path ? '75%' : '100%' );
 		?>
 
@@ -148,24 +177,21 @@ abstract class BEWPI_Abstract_Settings {
 
 			<h2 class="nav-tab-wrapper">
 				<?php
-				foreach ( self::$settings as $setting ) {
-					$active = $current_tab === $setting->settings_key ? 'nav-tab-active' : '';
-					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', $active, $setting->settings_key, $setting->settings_tab );
-				}
-
-				// Backwards compatibility.
-				$tabs = apply_filters( 'bewpi_settings_tabs', array() );
-				foreach ( $tabs as $settings_key => $settings_tab ) {
-					$active = $current_tab === $settings_key ? 'nav-tab-active' : '';
-					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>', $active, $settings_key, $settings_tab );
+				foreach ( self::$setting_tabs as $id => $tab ) {
+					$active = $current_tab === $id ? 'nav-tab-active' : '';
+					printf( '<a class="nav-tab %1$s" href="?page=bewpi-invoices&tab=%2$s">%3$s</a>',
+						esc_attr( $active ),
+						esc_attr( $id ),
+						esc_html( $tab['label'] )
+					);
 				}
 				?>
 			</h2>
-			<form method="post" action="options.php" enctype="multipart/form-data" <?php echo $width; ?>>
+			<form method="post" action="options.php" enctype="multipart/form-data" <?php echo esc_html( $width ); ?>>
 				<?php
-				settings_fields( $current_tab );
-				do_settings_sections( $current_tab );
-				submit_button();
+				settings_fields( $current_setting->settings_key );
+				do_settings_sections( $current_setting->settings_key );
+				submit_button( $current_setting->get_submit_button_text() );
 				?>
 			</form>
 
@@ -511,4 +537,22 @@ abstract class BEWPI_Abstract_Settings {
 	 * @return mixed
 	 */
 	public abstract function sanitize( $input );
+
+	/**
+	 * Set submit button text.
+	 *
+	 * @param string $text
+	 */
+	public function set_submit_button_text( $text ) {
+		$this->submit_button_text = $text;
+	}
+
+	/**
+	 * Get submit button text.
+	 *
+	 * @return null
+	 */
+	public function get_submit_button_text() {
+		return $this->submit_button_text;
+	}
 }

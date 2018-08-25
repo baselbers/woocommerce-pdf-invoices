@@ -14,12 +14,7 @@
  * WC tested up to: 3.4.4
  */
 
-defined( 'ABSPATH' ) or exit;
-
-/**
- * @deprecated instead use WPI_VERSION.
- */
-define( 'BEWPI_VERSION', '2.9.16' );
+defined( 'ABSPATH' ) || exit;
 
 define( 'WPI_VERSION', '2.9.17' );
 
@@ -27,30 +22,8 @@ define( 'WPI_VERSION', '2.9.17' );
  * Load WooCommerce PDF Invoices plugin.
  */
 function _bewpi_load_plugin() {
-
 	if ( ! class_exists( 'WooCommerce' ) ) {
 		return;
-	}
-
-	/**
-	 * @deprecated instead use `WPI_FILE`.
-	 */
-	if ( ! defined( 'BEWPI_FILE' ) ) {
-		define( 'BEWPI_FILE', __FILE__ );
-	}
-
-	/**
-	 * @deprecated instead use `WPI_DIR`.
-	 */
-	if ( ! defined( 'BEWPI_DIR' ) ) {
-		define( 'BEWPI_DIR', plugin_dir_path( __FILE__ ) );
-	}
-
-	/**
-	 * @deprecated instead use `plugin_basename( WPI_FILE )`.
-	 */
-	if ( ! defined( 'BEWPI_PLUGIN_BASENAME' ) ) {
-		define( 'BEWPI_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 	}
 
 	if ( ! defined( 'WPI_FILE' ) ) {
@@ -68,31 +41,20 @@ function _bewpi_load_plugin() {
 	/**
 	 * Main instance of BE_WooCommerce_PDF_Invoices.
 	 *
-	 * @since  2.5.0
-	 * @deprecated Use WPI() instead.
-	 *
-	 * @return BE_WooCommerce_PDF_Invoices
-	 */
-	function BEWPI() {
-		return BE_WooCommerce_PDF_Invoices::instance();
-	}
-	BEWPI();
-
-	/**
-	 * Main instance of BE_WooCommerce_PDF_Invoices.
-	 *
 	 * @since  2.9.1
 	 * @return BE_WooCommerce_PDF_Invoices
 	 */
 	function WPI() {
 		return BE_WooCommerce_PDF_Invoices::instance();
 	}
+
 	WPI();
 
 	if ( is_admin() ) {
 		_bewpi_on_plugin_update();
 	}
 }
+
 add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 
 /**
@@ -103,10 +65,14 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 function _bewpi_on_plugin_update() {
 	$current_version = get_site_option( 'bewpi_version' );
 
+	// On first time plugin install.
 	if ( false === $current_version ) {
 
 		// First time creation of directories.
 		WPI()->setup_directories();
+
+		// Set default options.
+		WPI()->setup_options();
 
 		add_site_option( 'bewpi_version', WPI_VERSION );
 
@@ -114,6 +80,9 @@ function _bewpi_on_plugin_update() {
 
 		// Update directories.
 		WPI()->setup_directories();
+
+		// Set default options.
+		WPI()->setup_options();
 
 		// temporary change max execution time to higher value to prevent internal server errors.
 		$max_execution_time = (int) ini_get( 'max_execution_time' );
@@ -190,7 +159,7 @@ function update_email_type_options() {
  */
 function update_postmeta() {
 	$posts = get_posts( array(
-		'numberposts' => -1,
+		'numberposts' => - 1,
 		'post_type'   => 'shop_order',
 		'post_status' => array_keys( wc_get_order_statuses() ),
 		'fields'      => 'ids',
@@ -215,7 +184,7 @@ function update_postmeta() {
 /**
  * Create full path postmeta for all orders that have a pdf invoice generated.
  *
- * @param int   $post_id Post ID or WC Order ID.
+ * @param int   $post_id          Post ID or WC Order ID.
  * @param array $template_options User template options.
  *
  * @since 2.6.0
@@ -251,7 +220,7 @@ function create_pdf_path_postmeta( $post_id, $template_options ) {
 /**
  * Format date postmeta to mysql date.
  *
- * @param int    $post_id Post ID or WC Order ID.
+ * @param int    $post_id     Post ID or WC Order ID.
  * @param string $date_format User option date format.
  *
  * @since 2.6.0
@@ -300,7 +269,18 @@ function move_pdf_invoices() {
  */
 function update_email_types_options_to_recursive() {
 	$general_options = get_option( 'bewpi_general_settings' );
-	$email_types     = array( 'new_order', 'customer_on_hold_order', 'customer_processing_order', 'customer_completed_order', 'customer_invoice', 'new_renewal_order', 'customer_completed_switch_order', 'customer_processing_renewal_order', 'customer_completed_renewal_order', 'customer_renewal_invoice' );
+	$email_types     = array(
+		'new_order',
+		'customer_on_hold_order',
+		'customer_processing_order',
+		'customer_completed_order',
+		'customer_invoice',
+		'new_renewal_order',
+		'customer_completed_switch_order',
+		'customer_processing_renewal_order',
+		'customer_completed_renewal_order',
+		'customer_renewal_invoice'
+	);
 
 	foreach ( $email_types as $email_type ) {
 		if ( isset( $general_options[ $email_type ] ) ) {
@@ -321,7 +301,7 @@ function update_email_types_options_to_recursive() {
  */
 function update_email_types_options() {
 	$general_settings = get_option( 'bewpi_general_settings' );
-	$email_types = array();
+	$email_types      = array();
 
 	foreach ( (array) $general_settings['bewpi_email_types'] as $email_type => $enabled ) {
 		if ( $enabled ) {
@@ -343,4 +323,5 @@ function _bewpi_on_plugin_activation() {
 	add_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
 }
+
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

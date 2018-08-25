@@ -89,50 +89,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		private function define_constants() {
 			$wp_upload_dir = wp_upload_dir();
 
-			/**
-			 * URL.
-			 *
-			 * @deprecated instead use WPI_URL.
-			 *
-			 * @since 2.7.0
-			 */
-			if ( ! defined( 'BEWPI_URL' ) ) {
-				define( 'BEWPI_URL', plugins_url( '', BEWPI_FILE ) . '/' );
-			}
-
-			/**
-			 * Templates dir.
-			 *
-			 * @deprecated instead use WPI_DIR.
-			 *
-			 * @since 2.7.0
-			 */
-			if ( ! defined( 'BEWPI_TEMPLATES_DIR' ) ) {
-				define( 'BEWPI_TEMPLATES_DIR', BEWPI_DIR . 'includes/templates' );
-			}
-
-			/**
-			 * Custom templates directory.
-			 *
-			 * @deprecated instead use WPI_TEMPLATES_DIR.
-			 *
-			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/invoices.
-			 */
-			if ( ! defined( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR' ) ) {
-				define( 'BEWPI_CUSTOM_TEMPLATES_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-templates/invoices' );
-			}
-
-			/**
-			 * Attachments/invoices directory.
-			 *
-			 * @deprecated use WPI_ATTACHMENTS_DIR instead.
-			 *
-			 * @since 2.7.0 moved to uploads/woocommerce-pdf-invoices/attachments.
-			 */
-			if ( ! defined( 'BEWPI_INVOICES_DIR' ) ) {
-				define( 'BEWPI_INVOICES_DIR', $wp_upload_dir['basedir'] . '/bewpi-invoices' );
-			}
-
 			if ( ! defined( 'WPI_URL' ) ) {
 				define( 'WPI_URL', untrailingslashit( plugins_url( '', WPI_FILE ) ) );
 			}
@@ -272,6 +228,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 			do_action( 'bewpi_after_setup_directories' );
+		}
+
+		/**
+		 * Setup default options.
+		 */
+		public function setup_options() {
+			BEWPI_Abstract_Settings::load_settings();
+
+			foreach ( BEWPI_Abstract_Settings::$setting_tabs as $id => $tab ) {
+				new $tab['class']();
+			}
 		}
 
 		/**

@@ -12,7 +12,7 @@
 
 $reason_deactivation_url = 'http://wcpdfinvoices.com/what-made-you-deactivate';
 global $status, $page, $s;
-$bewpi_plugin_file = basename( dirname( BEWPI_FILE ) ) . '/' . basename( BEWPI_FILE );
+$bewpi_plugin_file = basename( dirname( WPI_FILE ) ) . '/' . basename( WPI_FILE );
 $deactivate_url = wp_nonce_url( 'plugins.php?action=deactivate&amp;plugin=' . $bewpi_plugin_file . '&amp;plugin_status=' . $status . '&amp;paged=' . $page . '&amp;s=' . $s, 'deactivate-plugin_' . $bewpi_plugin_file );
 ?>
 <div class="notice inline notice-alt notice-warning">

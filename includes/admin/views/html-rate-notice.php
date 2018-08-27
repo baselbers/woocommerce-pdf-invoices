@@ -13,7 +13,23 @@
 $current_user   = wp_get_current_user();
 $user_firstname = ! empty( $current_user->user_firstname ) ? ' ' . $current_user->user_firstname : '';
 $rate_url       = 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform';
+$action         = 'dismiss_notice_rate';
 ?>
-<div class="updated notice notice-success is-dismissible">
-	<p><?php printf( __( 'Hi%1$s! You\'re using <b>WooCommerce PDF Invoices</b> for some time now and we would appreciate your <a href="%2$s" target="_blank">★★★★★</a> rating. It will support future development big-time.', 'woocommerce-pdf-invoices' ), esc_html( $user_firstname ), $rate_url ); ?></p>
+<style>
+	.wpi.notice.is-dismissible button[type=button].notice-dismiss {
+		display: none;
+	}
+</style>
+<div class="wpi notice notice-success is-dismissible">
+	<p>
+		<?php
+		printf( __( 'Hi%1$s! You\'re using %2$s for some time now and we would appreciate your %3$s rating. It will support future development big-time.', 'woocommerce-pdf-invoices' ), esc_html( $user_firstname ), '<b>WooCommerce PDF Invoices</b>', '<a href="' . esc_url( $rate_url ) . '" target="_blank">★★★★★</a>' );
+		?>
+	</p>
+	<form action="" method="post">
+		<input type="hidden" name="wpi_action" value="<?php echo esc_attr( $action ); ?>"/>
+		<input type="hidden" name="nonce" value="<?php echo esc_attr( wp_create_nonce( $action ) ); ?>"/>
+		<button type="submit" class="notice-dismiss"><span
+				class="screen-reader-text"><?php __( 'Dismiss this notice.' ); ?></span></button>
+	</form>
 </div>

@@ -10,7 +10,7 @@
  * @version     1.0.0
  */
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Class BEWPI_Admin_Notices.
@@ -21,10 +21,54 @@ class BEWPI_Admin_Notices {
 	 * Constructor.
 	 */
 	public static function init_hooks() {
+		add_action( 'admin_init', array( __CLASS__, 'dismiss_notice_rate' ) );
+		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
 		add_action( 'wp_ajax_dismiss-notice', array( __CLASS__, 'dismiss_notice' ) );
 		add_action( 'wp_ajax_deactivation-notice', array( __CLASS__, 'admin_notice_deactivation' ) );
-		//add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_activation' ) );
+	}
+
+	/**
+	 * Dismiss notices.
+	 */
+	public static function dismiss_notice_rate() {
+		if ( ! isset( $_POST['wpi_action'] ) || ! isset( $_POST['nonce'] ) ) {
+			return;
+		}
+
+		$action = sanitize_key( $_POST['wpi_action'] );
+		if ( 'dismiss_notice_rate' !== $action ) {
+			return;
+		}
+
+		if ( wp_verify_nonce( sanitize_key( $_POST['nonce'] ), $action ) ) {
+			set_site_transient( WPI()::PREFIX . $action, 1 );
+		}
+	}
+
+	/**
+	 * Admin notice for administrator to rate plugin on wordpress.org.
+	 */
+	public static function admin_notice_rate() {
+		if ( get_site_transient( 'wpi_dismiss_notice_rate' ) ) {
+			return;
+		}
+
+		// user needs to be an administrator.
+		if ( false === current_user_can( 'manage_options' ) || false === current_user_can( 'install_plugins' ) ) {
+			return;
+		}
+
+		// install date should be valid.
+		$install_date = WPI()->get_install_date();
+		if ( false === $install_date ) {
+			return;
+		}
+
+		// at least 10 days should be past to display notice.
+		if ( new DateTime( '10 days ago' ) >= $install_date ) {
+			include WPI_DIR . '/includes/admin/views/html-rate-notice.php';
+		}
 	}
 
 	/**
@@ -67,46 +111,6 @@ class BEWPI_Admin_Notices {
 			return false;
 		} else {
 			return true;
-		}
-	}
-
-	/**
-	 * Get plugin install date.
-	 *
-	 * @return DateTime|bool
-	 */
-	private static function get_install_date() {
-		if ( version_compare( WPI_VERSION, '2.6.1' ) >= 0 ) {
-			// since 2.6.1+ option name changed and date has mysql format.
-			return DateTime::createFromFormat( 'Y-m-d H:i:s', get_site_option( 'bewpi_install_date' ) );
-		}
-
-		return DateTime::createFromFormat( 'Y-m-d', get_site_option( 'bewpi-install-date' ) );
-	}
-
-	/**
-	 * Admin notice for administrator to rate plugin on wordpress.org.
-	 */
-	public static function admin_notice_rate() {
-		// notice needs to be inactive.
-		if ( ! self::is_admin_notice_active( 'rate-forever' ) ) {
-			return;
-		}
-
-		// user needs to be an administrator.
-		if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'install_plugins' ) ) {
-			return;
-		}
-
-		// install date should be valid.
-		$install_date = self::get_install_date();
-		if ( false === $install_date ) {
-			return;
-		}
-
-		// at least 10 days should be past to display notice.
-		if ( new DateTime( '10 days ago' ) >= $install_date ) {
-			include( WPI_DIR . '/includes/admin/views/html-rate-notice.php' );
 		}
 	}
 

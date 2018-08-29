@@ -163,10 +163,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'add_plugin_action_links',
 			) );
 			add_filter( 'plugin_row_meta', array( $this, 'add_plugin_row_meta' ), 10, 2 );
-			add_action( 'admin_notices', array( $this, 'admin_notice_rate' ) );
 
 			BEWPI_Abstract_Settings::init_hooks();
 
+			// Fair enough to let people disable relatively 'annoying' notices.
 			if ( defined( 'DISABLE_NAG_NOTICES' ) && false === DISABLE_NAG_NOTICES ) {
 				BEWPI_Admin_Notices::init_hooks();
 			}

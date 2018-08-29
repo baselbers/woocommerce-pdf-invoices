@@ -21,11 +21,26 @@ class BEWPI_Admin_Notices {
 	 * Constructor.
 	 */
 	public static function init_hooks() {
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_scripts' ) );
 		add_action( 'admin_init', array( __CLASS__, 'dismiss_notice_rate' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_rate' ) );
 		add_action( 'wp_ajax_dismiss-notice', array( __CLASS__, 'dismiss_notice' ) );
 		add_action( 'wp_ajax_deactivation-notice', array( __CLASS__, 'admin_notice_deactivation' ) );
 		add_action( 'admin_notices', array( __CLASS__, 'admin_notice_activation' ) );
+	}
+
+	/**
+	 * Load admin scripts.
+	 */
+	public function admin_scripts() {
+		global $pagenow;
+
+		wp_register_script( 'wpi_deactivate_js', WPI_URL . '/assets/js/deactivate.js', array(), WPI_VERSION, true );
+		wp_localize_script( 'wpi_deactivate_js', 'WPI_DEACTIVATE', array( 'nonce' => wp_create_nonce( 'deactivation-notice' ) ) );
+
+		if ( 'plugins.php' === $pagenow ) {
+			wp_enqueue_script( 'wpi_deactivate_js' );
+		}
 	}
 
 	/**

@@ -23,8 +23,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order        = wc_get_order( $order_id );
-			$this->type         = 'invoice/simple';
+			$this->order = wc_get_order( $order_id );
+			$this->type  = 'invoice/simple';
 			WPI()->templater()->set_invoice( $this );
 			parent::__construct( $order_id );
 		}
@@ -95,25 +95,29 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		public function get_invoice_info() {
 
 			return apply_filters( 'wpi_invoice_information_meta', array(
-				'invoice_number' => array(
+				'invoice_number'  => array(
 					'title' => __( 'Invoice #:', 'woocommerce-pdf-invoices' ),
 					'value' => $this->get_formatted_number(),
 				),
-				'invoice_date' => array(
+				'invoice_date'    => array(
 					'title' => __( 'Invoice Date:', 'woocommerce-pdf-invoices' ),
 					'value' => $this->get_formatted_date(),
 				),
-				'order_date' => array(
+				'order_date'      => array(
 					'title' => __( 'Order Date:', 'woocommerce-pdf-invoices' ),
 					'value' => $this->get_formatted_order_date(),
 				),
-				'order_number' => array(
+				'order_number'    => array(
 					'title' => __( 'Order Number:', 'woocommerce-pdf-invoices' ),
 					'value' => $this->order->get_order_number(),
 				),
-				'payment_method' => array(
+				'payment_method'  => array(
 					'title' => __( 'Payment Method:', 'woocommerce-pdf-invoices' ),
 					'value' => $this->order->get_payment_method_title(),
+				),
+				'shipping_method' => array(
+					'title' => __( 'Shipping Method:', 'woocommerce-pdf-invoices' ),
+					'value' => $this->order->get_shipping_method(),
 				),
 			), $this );
 		}
@@ -135,6 +139,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 			}
 
 			$subtotal -= $this->order->get_total_discount();
+
 			return wc_price( $subtotal, array( 'currency' => $this->order->get_currency() ) );
 		}
 
@@ -162,6 +167,7 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		public function get_total() {
 			if ( $this->order->get_total_refunded() > 0 ) {
 				$total_after_refund = $this->order->get_total() - $this->order->get_total_refunded();
+
 				return '<del class="total-without-refund">' . wc_price( $this->order->get_total(), array( 'currency' => $this->order->get_currency() ) ) . '</del> <ins>' . wc_price( $total_after_refund, array( 'currency' => $this->order->get_currency() ) ) . '</ins>';
 			}
 

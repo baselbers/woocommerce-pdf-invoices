@@ -346,8 +346,9 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.0 - September 1, 2018 =
+= 3.0.0 - October, 2018 =
 
+- Added: Filters to add (custom) customer address fields.
 - Improved: Options not loading on every request.
 - Improved: Only show admin notices when enabled within wp-config.php.
 - Improved: Admin notices JS code only loading on plugins.php page.

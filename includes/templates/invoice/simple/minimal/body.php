@@ -28,11 +28,11 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 
 <div class="title">
 	<div>
-		<h2><?php echo esc_html( $templater->get_option( 'bewpi_title' ) ); ?></h2>
+		<h2><?php echo esc_html( WPI()->get_option( 'template', 'title' ) ); ?></h2>
 	</div>
 	<div class="watermark">
 		<?php
-		if ( $templater->get_option( 'bewpi_show_payment_status' ) && $order->is_paid() ) {
+		if ( WPI()->get_option( 'template', 'show_payment_status' ) && $order->is_paid() ) {
 			printf( '<h2 class="green">%s</h2>', esc_html__( 'Paid', 'woocommerce-pdf-invoices' ) );
 		}
 
@@ -46,29 +46,32 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			<?php
 			/**
 			 * Invoice object.
-			 * 
+			 *
 			 * @var BEWPI_Invoice $invoice.
 			 */
-			foreach ( $invoice->get_invoice_info() as $id => $info ) {
-				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
+			foreach ( $invoice->get_invoice_info() as $info_id => $info ) {
+				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $info_id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
 				echo '<br>';
 			}
 			?>
 		</td>
 
 		<td>
-		
 			<?php
-	       		printf( '<strong>%s</strong><br />', esc_html__( 'Bill to:', 'woocommerce-pdf-invoices' ) );
+			printf( '<strong>%s</strong><br />', esc_html__( 'Bill to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_billing_address;
+
+			do_action( 'wpi_after_formatted_billing_address', $invoice );
 			?>
 		</td>
 
 		<td>
 			<?php
-			if ( $templater->get_option( 'bewpi_show_ship_to' ) && ! WPI()->has_only_virtual_products( $order ) ) {
+			if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $order ) && ! empty( $formatted_shipping_address ) ) {
 				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $formatted_shipping_address;
+
+				do_action( 'wpi_after_formatted_shipping_address', $invoice );
 			}
 			?>
 		</td>
@@ -116,7 +119,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<tr class="total">
 			<td width="50%">
 				<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
-            </td>
+			</td>
 
 			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
 				<?php echo $total['label']; ?>
@@ -136,16 +139,16 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<td>
 			<?php
 			// Customer notes.
-			if ( $templater->get_option( 'bewpi_show_customer_notes' ) ) {
+			if ( WPI()->get_option( 'template', 'show_customer_notes' ) ) {
 				// Note added by customer.
 				$customer_note = BEWPI_WC_Order_Compatibility::get_customer_note( $order );
 				if ( $customer_note ) {
-					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $customer_note ) );
+					printf( '<strong>' . __( 'Note from customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br>', nl2br( $customer_note ) );
 				}
 
 				// Notes added by administrator on 'Edit Order' page.
 				foreach ( $order->get_customer_order_notes() as $custom_order_note ) {
-					printf( '<strong>' . __( 'Note to customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br />', nl2br( $custom_order_note->comment_content ) );
+					printf( '<strong>' . __( 'Note to customer: %s', 'woocommerce-pdf-invoices' ) . '</strong><br>', nl2br( $custom_order_note->comment_content ) );
 				}
 			}
 			?>
@@ -156,9 +159,8 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 		<td>
 			<?php
 			// Zero Rated VAT message.
-			if ( 'true' === $templater->get_meta( '_vat_number_is_valid' ) && count( $order->get_tax_totals() ) === 0 ) {
-				_e( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' );
-				printf( '<br />' );
+			if ( 'true' === WPI()->get_meta( $order, '_vat_number_is_valid' ) && count( $order->get_tax_totals() ) === 0 ) {
+				echo esc_html__( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' ) . '<br>';
 			}
 			?>
 		</td>
@@ -166,14 +168,14 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 
 <?php if ( $terms ) { ?>
-	<!-- Using div to position absolute the block. -->
-	<div class="terms">
-		<table>
-			<tr>
-				<td style="border: 1px solid #000;">
-					<?php echo nl2br( $terms ); ?>
-				</td>
-			</tr>
-		</table>
-	</div>
-<?php }
+<!-- Using div to position absolute the block. -->
+<div class="terms">
+	<table>
+		<tr>
+			<td style="border: 1px solid #000;">
+				<?php echo nl2br( $terms ); ?>
+			</td>
+		</tr>
+	</table>
+</div>
+<?php } ?>

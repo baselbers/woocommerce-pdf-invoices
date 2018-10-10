@@ -32,7 +32,6 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	</tr>
 	<tr class="information">
 		<td width="50%">
-			
 			<?php
 			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $document->get_formatted_order_date() );
 			printf( '<br />' );
@@ -50,6 +49,8 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 			<?php
 			printf( '<strong>%s</strong><br />', __( 'Bill to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_billing_address;
+
+			do_action( 'wpi_after_formatted_billing_address', $invoice );
 			?>
 		</td>
 
@@ -57,6 +58,8 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 			<?php
 			printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_shipping_address;
+
+			do_action( 'wpi_after_formatted_shipping_address', $invoice );
 			?>
 		</td>
 	</tr>

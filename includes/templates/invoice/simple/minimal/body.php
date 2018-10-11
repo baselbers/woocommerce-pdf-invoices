@@ -50,6 +50,10 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			 * @var BEWPI_Invoice $invoice.
 			 */
 			foreach ( $invoice->get_invoice_info() as $info_id => $info ) {
+				if ( empty( $info['value'] ) ) {
+					continue;
+				}
+
 				printf( '<span class="%1$s">%2$s %3$s</span>', esc_attr( $info_id ), esc_html( $info['title'] ), esc_html( $info['value'] ) );
 				echo '<br>';
 			}

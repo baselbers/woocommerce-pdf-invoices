@@ -352,6 +352,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 - Improved: Options not loading on every request.
 - Improved: Only show admin notices when enabled within wp-config.php.
 - Improved: Admin notices JS code only loading on plugins.php page.
+- Fixed: Not printing invoice details which have empty values.
 
 = 2.9.17 - August 9, 2018 =
 

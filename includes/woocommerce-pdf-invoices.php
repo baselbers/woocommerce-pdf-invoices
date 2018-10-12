@@ -125,6 +125,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public function load_plugin_textdomain() {
 			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-pdf-invoices' );
 
+			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/loco/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
 			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
 			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, 'woocommerce-pdf-invoices/lang' );
 		}

@@ -91,6 +91,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 					'_line_tax',
 					'_wc_cog_item_cost',
 					'_wc_cog_item_total_cost',
+					'_reduced_stock',
 				) );
 
 				$hidden_order_itemmeta = apply_filters( 'bewpi_hidden_order_itemmeta', $hidden_order_itemmeta );

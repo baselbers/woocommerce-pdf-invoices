@@ -4,11 +4,9 @@
 	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
 	<rule ref="WordPress">
 		<exclude name="WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid" />
-		<exclude name="WordPress.VIP.SuperGlobalInputUsage" />
 		<exclude name="WordPress.VIP.FileSystemWritesDisallow.FileWriteDetected" />
 		<exclude name="WordPress.VIP.RestrictedFunctions.error_log" />
 		<exclude name="WordPress.VIP.RestrictedFunctions.file_get_contents" />
-		<exclude name="WordPress.XSS.EscapeOutput" />
 		<exclude name="WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar" />
 	</rule>
 </ruleset>

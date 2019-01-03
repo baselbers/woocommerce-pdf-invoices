@@ -123,11 +123,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @since 2.6.5 removed 'bewpi_lang_dir' filter. WordPress made update-safe WP_LANG_DIR directory.
 		 */
 		public function load_plugin_textdomain() {
-			$locale = apply_filters( 'plugin_locale', get_locale(), 'woocommerce-pdf-invoices' );
+			$locale = apply_filters( 'plugin_locale', determine_locale(), 'woocommerce-pdf-invoices' );
 
-			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/loco/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
-			load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' );
-			load_plugin_textdomain( 'woocommerce-pdf-invoices', false, 'woocommerce-pdf-invoices/lang' );
+			if ( ! load_textdomain( 'woocommerce-pdf-invoices', WP_LANG_DIR . '/loco/plugins/woocommerce-pdf-invoices-' . $locale . '.mo' ) ) {
+				load_plugin_textdomain( 'woocommerce-pdf-invoices', false, 'woocommerce-pdf-invoices/lang' );
+			}
 		}
 
 		/**

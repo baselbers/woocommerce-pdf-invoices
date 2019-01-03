@@ -350,6 +350,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 - Added: Debug settings tab with debug information.
 - Added: Loading textdomain from Loco Translate folder wp-content/languages/loco/plugins.
 - Added: Filters to add (custom) customer address fields.
+- Improved: Translations and updated language files.
 - Improved: Options not loading on every request.
 - Improved: Only show admin notices when enabled within wp-config.php.
 - Improved: Admin notices JS code only loading on plugins.php page.

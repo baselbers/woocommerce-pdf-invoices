@@ -146,6 +146,11 @@ abstract class BEWPI_Abstract_Settings {
 		);
 
 		self::$setting_tabs = apply_filters( 'wpi_setting_tabs', $setting_tabs );
+
+		self::$setting_tabs['debug'] = array(
+			'class' => 'BEWPI_Debug_Settings',
+			'label' => __( 'Debug', 'woocommerce-pdf-invoices' ),
+		);
 	}
 
 	/**
@@ -216,6 +221,9 @@ abstract class BEWPI_Abstract_Settings {
 				<?php
 				settings_fields( self::$setting->settings_key );
 				do_settings_sections( self::$setting->settings_key );
+
+				self::$setting->display_custom_settings();
+
 				submit_button( self::$setting->get_submit_button_text() );
 				?>
 			</form>
@@ -580,4 +588,11 @@ abstract class BEWPI_Abstract_Settings {
 	public function get_submit_button_text() {
 		return $this->submit_button_text;
 	}
+
+	/**
+	 * Display additional custom settings.
+	 *
+	 * @return mixed
+	 */
+	protected function display_custom_settings() {}
 }

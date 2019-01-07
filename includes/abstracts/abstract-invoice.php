@@ -299,20 +299,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				parent::delete( $this->full_path );
 			}
 
-			// yearly sub-folders.
-			if ( (bool) WPI()->get_option( 'template', 'reset_counter_yearly' ) ) {
-				// Make new year dir.
-				$year_dir = WPI_ATTACHMENTS_DIR . '/' . $this->year;
-				if ( ! is_dir( $year_dir ) ) {
-					wp_mkdir_p( $year_dir );
-				}
-
-				$pdf_path = $this->year . '/' . $this->get_formatted_number() . '.pdf';
-			} else {
-				// one folder for all invoices.
-				$pdf_path = $this->get_formatted_number() . '.pdf';
-			}
-
+			$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
 			$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;
 			$this->filename  = basename( $this->full_path );
 
@@ -327,6 +314,25 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			parent::generate( $destination );
 
 			return $this->full_path;
+		}
+
+		/**
+		 * Get relative PDF path.
+		 *
+		 * @return string
+		 */
+		public function get_rel_pdf_path() {
+			// yearly sub-folders.
+			if ( false === (bool) WPI()->get_option( 'template', 'reset_counter_yearly' ) ) {
+				return '';
+			}
+
+			$year_subdir = WPI_ATTACHMENTS_DIR . '/' . $this->year;
+			if ( ! is_dir( $year_subdir ) ) {
+				wp_mkdir_p( $year_subdir );
+			}
+
+			return $this->year;
 		}
 
 		/**
@@ -385,9 +391,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add column header data.
 		 *
-		 * @param array  $data Column header data.
-		 * @param string $key Column name.
-		 * @param string $label Column title.
+		 * @param array  $data        Column header data.
+		 * @param string $key         Column name.
+		 * @param string $label       Column title.
 		 * @param string $tax_display Display tax label.
 		 */
 		public function add_column( &$data, $key, $label, $tax_display = '' ) {
@@ -416,9 +422,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Adds line item description to columns data array.
 		 *
-		 * @param array         $data line item data.
+		 * @param array         $data    line item data.
 		 * @param int           $item_id item ID.
-		 * @param WC_Order_Item $item item object.
+		 * @param WC_Order_Item $item    item object.
 		 */
 		public function add_description_column_data( &$data, $item_id, $item ) {
 			ob_start();
@@ -439,9 +445,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Adds line item quantity to columns data array.
 		 *
-		 * @param array  $data line item data.
+		 * @param array  $data    line item data.
 		 * @param int    $item_id item ID.
-		 * @param object $item item object.
+		 * @param object $item    item object.
 		 */
 		public function add_quantity_column_data( &$data, $item_id, $item ) {
 			$data['quantity'] = $item['qty'];
@@ -450,10 +456,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Adds line item total incl. tax to columns data array.
 		 *
-		 * @param array  $data line item data.
+		 * @param array  $data    line item data.
 		 * @param int    $item_id item ID.
-		 * @param object $item item object.
-		 * @param bool   $ex_tax Excluding tax.
+		 * @param object $item    item object.
+		 * @param bool   $ex_tax  Excluding tax.
 		 */
 		public function add_total_column_data( &$data, $item_id, $item, $ex_tax = true ) {
 			$data['total'] = $this->order->get_formatted_line_subtotal( $item, $ex_tax ? 'excl' : 'incl' );
@@ -491,7 +497,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for subtotal.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_subtotal_row( &$total_rows, $tax_display ) {
@@ -507,7 +513,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for discounts.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_discount_row( &$total_rows, $tax_display ) {
@@ -522,7 +528,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for shipping.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_shipping_row( &$total_rows, $tax_display ) {
@@ -537,7 +543,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for fees.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_fee_rows( &$total_rows, $tax_display ) {
@@ -546,7 +552,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				/**
 				 * Fee annotations.
 				 *
-				 * @var string            $id WooCommerce ID.
+				 * @var string            $id  WooCommerce ID.
 				 * @var WC_Order_Item_Fee $fee WooCommerce Fee.
 				 */
 				foreach ( $fees as $id => $fee ) {
@@ -568,7 +574,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for taxes.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_tax_rows( &$total_rows, $tax_display ) {
@@ -596,7 +602,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		/**
 		 * Add total row for grand total.
 		 *
-		 * @param array  $total_rows totals.
+		 * @param array  $total_rows  totals.
 		 * @param string $tax_display 'excl' or 'incl'.
 		 */
 		protected function add_order_item_totals_total_row( &$total_rows, $tax_display ) {
@@ -705,8 +711,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			$columns_count = $this->get_columns_count( $taxes_count );
 			$colspan       = $this->get_colspan( $columns_count );
 			?>
-            <style>
-                <?php
+			<style>
+				<?php
 				// Create css for outlining the product cells.
 				$righter_product_row_tds_css = "";
 				for ( $td = $colspan['left'] + 1; $td <= $columns_count; $td++ ) {
@@ -719,10 +725,10 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 				}
 				echo $righter_product_row_tds_css;
 				?>
-                tr.product-row td:nth-child(1) {
-                    width: <?php echo $this->desc_cell_width; ?>;
-                }
-            </style>
+				tr.product-row td:nth-child(1) {
+					width: <?php echo $this->desc_cell_width; ?>;
+				}
+			</style>
 			<?php
 		}
 
@@ -768,7 +774,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			if ( $columns_count <= 4 ) :
 				$number_of_left_half_columns = 1;
 				$this->desc_cell_width       = '48%';
-            elseif ( $columns_count <= 6 ) :
+			elseif ( $columns_count <= 6 ) :
 				$number_of_left_half_columns = 2;
 				$this->desc_cell_width       = '35.50%';
 			endif;
@@ -787,7 +793,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return bool
 		 *
 		 * @deprecated moved to WPI()->templater().
-		 * @since 2.5.3
+		 * @since      2.5.3
 		 */
 		public function has_only_virtual_products() {
 			foreach ( $this->order->get_items( 'line_item' ) as $item ) {
@@ -811,6 +817,15 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 			}
 
 			return false;
+		}
+
+		/**
+		 * Get invoice date.
+		 *
+		 * @return DateTime
+		 */
+		public function get_date() {
+			return new DateTime( $this->date );
 		}
 
 		/**

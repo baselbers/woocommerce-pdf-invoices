@@ -332,5 +332,14 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		public function get_type() {
 			return $this->type;
 		}
+
+		/**
+		 * Get filename.
+		 *
+		 * @return string
+		 */
+		public function get_filename() {
+			return $this->filename;
+		}
 	}
 }

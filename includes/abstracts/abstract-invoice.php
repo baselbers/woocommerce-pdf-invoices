@@ -812,7 +812,8 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		 * @return bool
 		 */
 		public function is_vat_exempt() {
-			if ( count( $this->order->get_taxes() ) === 0 && 'true' === WPI()->get_meta( $this->order, '_vat_number_is_valid' ) ) {
+			$is_vat_exempt = count( $this->order->get_taxes() ) === 0 && 'true' === WPI()->get_meta( $this->order, '_vat_number_is_valid' );
+			if ( apply_filters( 'wpi_is_vat_exempt', $is_vat_exempt, $this ) ) {
 				return true;
 			}
 

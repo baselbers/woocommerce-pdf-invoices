@@ -14,6 +14,12 @@
  * @package WooCommerce_PDF_Invoices/Templates
  * @version 0.0.1
  */
+
+$templater             = WPI()->templater();
+$invoice               = $templater->invoice;
+$company_phone         = WPI()->get_option( 'template', 'company_phone' );
+$company_email_address = WPI()->get_option( 'template', 'company_email_address' );
+$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' )
 ?>
 
 <table cellpadding="0" cellspacing="0">
@@ -29,7 +35,25 @@
 		</td>
 
 		<td>
-			<?php echo nl2br( WPI()->get_option( 'template', 'company_address' ) ); ?>
+			<?php
+			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
+				echo $invoice->get_formatted_base_address();
+			} else {
+				echo nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
+			}
+
+			if ( '' !== $company_phone ) {
+				echo sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
+			}
+
+			if ( '' !== $company_email_address ) {
+				echo sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
+			}
+
+			if ( '' !== $company_vat_id ) {
+				printf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
+			}
+			?>
 		</td>
 	</tr>
 </table>

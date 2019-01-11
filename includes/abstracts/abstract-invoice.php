@@ -634,6 +634,25 @@ if ( ! class_exists( 'BEWPI_Abstract_Invoice' ) ) {
 		}
 
 		/**
+		 * Get formatted store address.
+		 *
+		 * @return string
+		 */
+		public function get_formatted_base_address() {
+			$address = array(
+				'company'   => WPI()->get_option( 'template', 'company_name' ),
+				'address_1' => WC()->countries->get_base_address(),
+				'address_2' => WC()->countries->get_base_address_2(),
+				'city'      => WC()->countries->get_base_city(),
+				'state'     => WC()->countries->get_base_state(),
+				'postcode'  => WC()->countries->get_base_postcode(),
+				'country'   => WC()->countries->get_base_country(),
+			);
+
+			return WC()->countries->get_formatted_address( $address ) . '<br>';
+		}
+
+		/**
 		 * Backwards compatibility.
 		 *
 		 * @deprecated Use `generate()` instead.

@@ -42,15 +42,15 @@ $company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' )
 				echo nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
 			}
 
-			if ( '' !== $company_phone ) {
+			if ( ! empty( $company_phone ) ) {
 				echo sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
 			}
 
-			if ( '' !== $company_email_address ) {
+			if ( ! empty( $company_email_address ) ) {
 				echo sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
 			}
 
-			if ( '' !== $company_vat_id ) {
+			if ( ! empty( $company_vat_id ) ) {
 				printf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
 			}
 			?>

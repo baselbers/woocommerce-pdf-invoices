@@ -319,19 +319,18 @@ Use below filter to change the invoice date.
  * Change invoice date to order date in order to regenerate old invoices and keep the date.
  *
  * @param string                 $invoice_date date of invoice.
- * @param BEWPI_Abstract_Invoice $invoice invoice object.
+ * @param BEWPI_Abstract_Invoice $invoice      invoice object.
  *
- * @return string
+ * @return string needs to be in mysql format.
  */
 function change_invoice_date_to_order_date( $invoice_date, $invoice ) {
-   $date_completed = $invoice->order->get_date_completed();
+	// get_date_paid() or get_date_created().
+	$date_completed = $invoice->order->get_date_completed();
+	if ( null !== $date_completed ) {
+		return $date_completed->date( 'Y-m-d H:i:s' );
+	}
 
-   if ( null === $date_completed ) {
-      return $invoice_date;
-   }
-
-   // needs to be in mysql format.
-   return $date_completed;
+	return $invoice_date;
 }
 add_filter( 'wpi_invoice_date', 'change_invoice_date_to_order_date', 10, 2 );
 `

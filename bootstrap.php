@@ -1,17 +1,17 @@
 <?php
 /**
- * Plugin Name:       WooCommerce PDF Invoices
- * Plugin URI:        https://wordpress.org/plugins/woocommerce-pdf-invoices
- * Description:       Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
- * Version:           3.0.0
- * Author:            Bas Elbers
- * Author URI:        http://wcpdfinvoices.com
- * License:           GPL-2.0+
- * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       woocommerce-pdf-invoices
- * Domain Path:       /lang
- * WC requires at least: 2.6.14
- * WC tested up to: 3.5.3
+ * Plugin Name:             WooCommerce PDF Invoices
+ * Plugin URI:              https://wordpress.org/plugins/woocommerce-pdf-invoices
+ * Description:             Automatically generate and attach customizable PDF Invoices to WooCommerce emails and connect with Dropbox, Google Drive, OneDrive or Egnyte.
+ * Version:                 3.0.0
+ * Author:                  Bas Elbers
+ * Author URI:              http://wcpdfinvoices.com
+ * License:                 GPL-2.0+
+ * License URI:             http://www.gnu.org/licenses/gpl-2.0.txt
+ * Text Domain:             woocommerce-pdf-invoices
+ * Domain Path:             /lang
+ * WC requires at least:    3.0.0
+ * WC tested up to:         3.5.4
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -54,6 +54,7 @@ function _bewpi_load_plugin() {
 		add_action( 'admin_init', '_bewpi_on_plugin_update' );
 	}
 }
+
 add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
 
 /**
@@ -79,4 +80,5 @@ function _bewpi_on_plugin_activation() {
 	add_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
 }
+
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );

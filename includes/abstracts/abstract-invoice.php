@@ -67,30 +67,11 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 */
 	public function __construct( $order_id ) {
 		parent::__construct();
-
-		// Number.
-		$number = get_post_meta( $order_id, '_bewpi_invoice_number', true );
-		if ( empty( $number ) ) {
-			$number = $this->get_next_invoice_number();
-		}
-
-		$this->number = $number;
-
-		// Date and year.
-		$date = apply_filters( 'wpi_invoice_date', get_post_meta( $order_id, '_bewpi_invoice_date', true ), $this );
-		if ( empty( $date ) ) {
-			$date = current_time( 'mysql' );
-		}
-
-		$this->date = $date;
-		$this->year = date_i18n( 'Y', strtotime( $this->date ) );
-
-		// PDF file.
-		$full_path = self::exists( $order_id );
-		if ( false !== $full_path ) {
-			$this->full_path = $full_path;
-			$this->filename  = basename( $this->full_path );
-		}
+		$this->number    = get_post_meta( $order_id, '_bewpi_invoice_number', true );
+		$this->date      = apply_filters( 'wpi_invoice_date', get_post_meta( $order_id, '_bewpi_invoice_date', true ), $this );
+		$this->year      = date_i18n( 'Y', strtotime( $this->date ) );
+		$this->full_path = self::exists( $order_id );
+		$this->filename  = basename( $this->full_path );
 	}
 
 	/**
@@ -240,11 +221,6 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 * @return int
 	 */
 	protected function get_next_invoice_number() {
-		// uses WooCommerce order numbers as invoice numbers?
-		if ( 'woocommerce_order_number' === WPI()->get_option( 'invoice_number_type' ) ) {
-			return $this->order->get_order_number();
-		}
-
 		// check if user did a counter reset.
 		$next_number = get_transient( 'bewpi_next_invoice_number' );
 		if ( false !== $next_number ) {
@@ -305,6 +281,19 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	public function generate( $destination = 'F' ) {
 		if ( false !== $this->full_path ) {
 			parent::delete( $this->full_path );
+		}
+
+		if ( empty( $this->number ) ) {
+			// Use WooCommerce order numbers as invoice numbers?
+			if ( 'woocommerce_order_number' === WPI()->get_option( 'invoice_number_type' ) ) {
+				$this->number = $this->order->get_order_number();
+			} else {
+				$this->number = $this->get_next_invoice_number();
+			}
+		}
+
+		if ( empty( $this->date ) ) {
+			$this->date = current_time( 'mysql' );
 		}
 
 		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';

@@ -19,7 +19,7 @@ $templater             = WPI()->templater();
 $invoice               = $templater->invoice;
 $company_phone         = WPI()->get_option( 'template', 'company_phone' );
 $company_email_address = WPI()->get_option( 'template', 'company_email_address' );
-$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' )
+$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' );
 ?>
 
 <table cellpadding="0" cellspacing="0">

@@ -1023,6 +1023,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
+		 * Get allowed roles to download/view invoice.
+		 *
+		 * @return array.
+		 */
+		public function get_allowed_roles() {
+			return apply_filters( 'wpi_allowed_roles_to_download_invoice', array( 'administrator', 'shop_manager' ) );
+		}
+
+		/**
 		 * Get prefix.
 		 *
 		 * @return string

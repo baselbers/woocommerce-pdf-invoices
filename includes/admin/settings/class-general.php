@@ -183,19 +183,6 @@ class BEWPI_General_Settings extends BEWPI_Abstract_Settings {
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
 			),
-			array(
-				'id'       => 'bewpi-mpdf-debug',
-				'name'     => $this->prefix . 'mpdf_debug',
-				'title'    => '',
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'debug',
-				'type'     => 'checkbox',
-				'desc'     => __( 'Enable mPDF debugging', 'woocommerce-pdf-invoices' )
-				              . '<br/><div class="bewpi-notes">' . __( 'Enable if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
-				'class'    => 'bewpi-checkbox-option-title',
-				'default'  => 0,
-			),
 		);
 
 		return apply_filters( 'bewpi_general_settings', $settings );

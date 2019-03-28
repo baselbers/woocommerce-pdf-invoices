@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2019-01-03 15:50+0100\n"
-"PO-Revision-Date: 2019-01-03 15:50+0100\n"
+"POT-Creation-Date: 2019-03-28 10:03+0100\n"
+"PO-Revision-Date: 2019-03-28 10:03+0100\n"
 "Last-Translator: Anders Sorensen <anders@zorensen.no>\n"
 "Language-Team: \n"
 "Language: nb\n"
@@ -90,7 +90,7 @@ msgstr "Aktiv"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:26
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:137
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:409
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:414
 msgid "Premium"
 msgstr "Premium"
 
@@ -217,28 +217,28 @@ msgid "Attach to Emails"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:297
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:399
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:432
 msgid "Prefix"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:308
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:410
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:443
 msgid "Suffix"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:319
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:421
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:454
 msgid "Format"
 msgstr "Format"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:324
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:426
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:459
 #, php-format
 msgid "Available placeholders: %s."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:326
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:428
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:461
 #, php-format
 msgid "<b>Note:</b> %s is required and slashes aren't supported."
 msgstr ""
@@ -385,12 +385,12 @@ msgid "Global invoice successfully generated!"
 msgstr "Global faktura generert! "
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:646
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:651
 msgid "View invoice"
 msgstr "Vis faktura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:728
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:733
 msgid "View"
 msgstr "Vis"
 
@@ -428,86 +428,86 @@ msgstr ""
 msgid "PDF Credit Notes"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:310
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:306
 #, php-format
 msgid ""
 "<a href=\"%1$s\" class=\"%2$s\" target=\"%3$s\">PDF Credit Note (%4$s)</a> "
 "for Refund #%5$s."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:316
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:312
 #, php-format
 msgid "created on %1$s at %2$s"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:318
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:752
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:314
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:757
 msgid "Delete"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:324
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:320
 msgid "There are no credit notes yet."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:336
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:332
 msgid "Create PDF Credit Notes for selected refund(s)"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:366
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:362
 msgid "Credit note"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:417
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:413
 #, fuzzy
 #| msgid "Email to customer"
 msgid "Email credit note to customer"
 msgstr "E-post til kunde"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:584
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:569
 msgid "Partially Refunded Order"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:600
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:585
 #, fuzzy
 #| msgid "Header Options"
 msgid "Credit Note #:"
 msgstr "Overskriftsvalg"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:605
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:704
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:590
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:709
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Date:"
 msgstr "Ordre dato: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:612
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:597
 #: woocommerce-pdf-invoices/includes/class-invoice.php:99
 #, fuzzy
 #| msgid "Invoice"
 msgid "Invoice #:"
 msgstr "Faktura"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:617
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:602
 #: woocommerce-pdf-invoices/includes/class-invoice.php:103
 #, fuzzy
 #| msgid "Invoice to"
 msgid "Invoice Date:"
 msgstr "Kunde"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:624
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:609
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Order #:"
 msgstr "Ordre dato: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:629
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:614
 #: woocommerce-pdf-invoices/includes/class-invoice.php:107
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Order Date:"
 msgstr "Ordre dato: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:635
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:620
 #: woocommerce-pdf-invoices/includes/class-invoice.php:115
 #, fuzzy
 #| msgid "<b>Payment method</b> %s"
@@ -551,12 +551,12 @@ msgid "Select more then one order to generate a global invoice."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:723
 msgid "Yes"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:723
 msgid "No"
 msgstr ""
 
@@ -574,23 +574,37 @@ msgstr ""
 msgid "Due Date:"
 msgstr "Ordre dato: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:86
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:98
+msgid "Bulk Generate UBL"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:397
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:243
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:268
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:712
+#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
+msgid "Discount"
+msgstr "Rabatt"
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:90
 msgid ""
 "Instead consider creating a Cancelled PDF invoice by changing the order "
 "status to Cancelled."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:107
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:111
 #, fuzzy
 #| msgid "Cancel"
 msgid "Cancelled"
 msgstr "Slett"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:120
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:124
 msgid "Advanced Table Content"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:121
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:125
 msgid ""
 "Enable Advanced Table Content settings to fully customize line item columns "
 "and total rows. When enabled the standard Table Content settings will be "
@@ -598,139 +612,130 @@ msgid ""
 "template is not supported."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:148
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:152
 msgid "Enable Advanced Table Content"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:160
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:164
 msgid "Show SKU as meta data"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:167
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:171
 msgid "Display tax totals"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:175
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:179
 msgid "Itemized"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:176
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:180
 msgid "As a single total"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:182
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:186
 #, fuzzy
 #| msgid "Left footer column."
 msgid "Line item columns"
 msgstr "Venstre footer kolonne."
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:191
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:423
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:195
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:442
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:48
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:409
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:412
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:53
 msgid "Description"
 msgstr "Produkt"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:196
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:201
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:432
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:437
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:200
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:205
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:451
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:456
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:57
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:60
 msgid "Cost"
 msgstr "Pris"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:206
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:210
 msgid "Quantity"
 msgstr "Aantal"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:216
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:221
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:284
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:289
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:446
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:451
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:946
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:220
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:225
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:293
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:465
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:470
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:973
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:411
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:414
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:71
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:276
 msgid "Total"
 msgstr "Totalt"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:230
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:234
 #, fuzzy
 #| msgid "Total"
 msgid "Total rows"
 msgstr "Totalt"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:239
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:264
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:678
-#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:505
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
-msgid "Discount"
-msgstr "Rabatt"
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:244
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:269
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:710
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:248
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:744
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:517
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:216
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:232
 msgid "Shipping"
 msgstr "Frakt"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:279
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:253
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:212
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:243
 msgid "Fee"
 msgstr "Avgift"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:254
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:259
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:654
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:258
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:689
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:469
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
 msgid "Subtotal"
 msgstr "Delsum"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:303
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:307
 #, fuzzy
 #| msgid "Show tax"
 msgid "Show tax labels"
 msgstr "Toon BTW"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:364
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:368
 msgid "SKU:"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:397
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:887
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:416
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:914
 #, php-format
 msgid "VAT %s"
 msgstr "MVA %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:427
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:446
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:59
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:410
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:62
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:79
 msgid "Qty"
 msgstr "Ant"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1085
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1112
 msgid "Request invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1133
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1160
 #, php-format
 msgid "Coupon(s): %s"
 msgstr ""
@@ -843,6 +848,31 @@ msgstr ""
 msgid "%1$s of %2$s"
 msgstr ""
 
+#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:45
+#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:46
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:41
+#, php-format
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
+#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:49
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:50
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:45
+#, fuzzy, php-format
+#| msgid "Email us"
+msgid "Email: %s"
+msgstr "Send oss en e-post"
+
+#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:53
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:54
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:49
+#, fuzzy, php-format
+#| msgid "VAT %s"
+msgid "VAT ID: %s"
+msgstr "MVA %s"
+
 #: woocommerce-pdf-invoices-premium/includes/templates/emails/customer-credit-note.php:25
 #, fuzzy
 #| msgid "Order Date: %s"
@@ -866,18 +896,12 @@ msgstr "Ordre dato: %s"
 msgid "Invoice to"
 msgstr "Kunde"
 
-#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
-#, php-format
-msgid "Phone: %s"
-msgstr "Telefon: %s"
-
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:30
 msgid "Global Invoice"
 msgstr "Global faktura"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:53
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:457
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:490
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:57
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:71
 msgid "SKU"
@@ -892,12 +916,12 @@ msgstr "MVA"
 msgid "Order #%d - %s"
 msgstr "Ordre #%d - %s"
 
-#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:104
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:391
+#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:105
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:396
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:105
+#: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:106
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:62
 msgid "Support"
 msgstr "Hjelp"
@@ -907,33 +931,33 @@ msgstr "Hjelp"
 msgid "Paid"
 msgstr "Betalt"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:501
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:504
 msgid "Subtotal:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:516
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:519
 msgid "Discount:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:531
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:534
 msgid "Shipping:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:604
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:607
 msgid "Total:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:673
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:695
 #, php-format
 msgid "VAT Number: %s"
 msgstr "MVA nummber: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:691
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:713
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Ordrenummer: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:884
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:917
 #, php-format
 msgid "%s of %s"
 msgstr "%s av %s"
@@ -949,45 +973,45 @@ msgstr "Generelt"
 msgid "Template"
 msgstr "Mal"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:153
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:152
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:24
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:760
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:765
 msgid "Debug"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:179
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:178
 msgid "Invoices"
 msgstr "PDF Faktura"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:260
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
 msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:269
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:268
 #, php-format
 msgid "Version %s"
 msgstr "Versjon %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:382
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:381
 #, fuzzy
 #| msgid "Choose"
 msgid "Choose&hellip;"
 msgstr "Velg"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:383
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:382
 msgid "Column"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:392
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:391
 #, fuzzy
 #| msgid "Select a year"
 msgid "Select all"
 msgstr "Velg et år"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:393
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:392
 #, fuzzy
 #| msgid "Select a month"
 msgid "Select none"
@@ -1003,12 +1027,10 @@ msgid "Plugin Configuration"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:68
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:194
 msgid "Enable mPDF debugging"
 msgstr "Aktiver mPDF feilsøking"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:69
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:195
 msgid "Enable if you aren't able to create an invoice."
 msgstr ""
 
@@ -1242,14 +1264,10 @@ msgid "Disable Packing Slips"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:210
-msgid "Company name"
-msgstr "Firmanavn"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:221
 msgid "Company logo"
 msgstr "Firmalogo"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:226
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:215
 #, php-format
 msgid ""
 "Use the <a href=\"%1$s\">Media Library</a> to <a href=\"%2$s\">upload</a> or "
@@ -1257,16 +1275,20 @@ msgid ""
 "\" target=\"_blank\">File URL</a>."
 msgstr ""
 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:221
+msgid "Company name"
+msgstr "Firmanavn"
+
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:232
 msgid "Company address"
 msgstr "Firmaadresse"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:237
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:248
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:270
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:309
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:321
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:332
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:303
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:342
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:354
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:365
 #, php-format
 msgid "Allowed HTML tags: %s."
 msgstr ""
@@ -1276,116 +1298,134 @@ msgid "Company details"
 msgstr "Firmadetaljer"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:254
+#, fuzzy
+#| msgid "Company name"
+msgid "Company phone"
+msgstr "Firmanavn"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:265
+#, fuzzy
+#| msgid "Company address"
+msgid "Company email address"
+msgstr "Firmaadresse"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:276
+#, fuzzy
+#| msgid "Company name"
+msgid "Company VAT ID"
+msgstr "Firmanavn"
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:287
 msgid "Title"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:259
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:292
 msgid "Change the name of the invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:260
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:841
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:846
 msgid "Invoice"
 msgstr "Faktura"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:265
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:298
 msgid "Thank you text"
 msgstr "Takk skal du ha -tekst"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:271
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:304
 msgid "Visible in big colored bar directly after invoice total."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:282
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:315
 msgid "Show customers shipping address"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:284
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:317
 msgid ""
 "Customers shipping address won't be visible when order has only virtual "
 "products."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:297
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:330
 msgid "Show customer notes"
 msgstr "Vis kundenotat"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:304
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:337
 msgid "Terms & conditions, policies etc."
 msgstr "Betingelser, vilkår etc."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:310
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:343
 #, php-format
 msgid ""
 "Visible below customer notes and above footer. Want to attach additional "
 "pages to the invoice? Take a look at <a href=\"%1$s\">%2$s</a> plugin."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:316
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:349
 msgid "Left footer column."
 msgstr "Venstre footer kolonne."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:327
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:360
 msgid "Right footer column."
 msgstr "Høyre footer kolonne."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:338
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:371
 msgid "Type"
 msgstr "Type"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:345
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:378
 msgid "WooCommerce order number"
 msgstr "WooCommerce bestillingsnummer"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:346
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:379
 msgid "Sequential number"
 msgstr "Sekvensielt nummer"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:358
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:391
 msgid "Reset invoice counter"
 msgstr "Tilbakestill fakturateller"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:366
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:399
 msgid "Next"
 msgstr "Neste"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:371
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:404
 msgid "Next invoice number when resetting counter."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:373
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:406
 msgid ""
 "<b>Note:</b> Only available for Sequential numbering. All PDF invoices with "
 "invoice number greater then next invoice number will be deleted!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:383
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:416
 msgid "Digits"
 msgstr "Tegn"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:440
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:473
 msgid "Reset yearly"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:442
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:475
 msgid "Automatically reset invoice numbers on new year's day."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:444
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:477
 msgid ""
 "<b>Note</b>: You will have to generate all invoices again when changing "
 "option."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:481
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:514
 msgid "Tax (item)"
 msgstr "Skatt (element)"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:493
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:526
 msgid "Tax (total)"
 msgstr "Skatt (totalt)"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:564
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:597
 msgid ""
 "Company logo not found. Upload the image to the Media Library and try again."
 msgstr ""
@@ -1629,47 +1669,47 @@ msgstr ""
 msgid "Product"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:609
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:614
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:661
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:683
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:666
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:688
 msgid "PDF Invoice"
 msgstr "PDF Faktura"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:698
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:703
 msgid "Create"
 msgstr "Opprett"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:708
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:713
 #, fuzzy
 #| msgid "VAT Number: %s"
 msgid "Number:"
 msgstr "MVA nummber: %s"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:717
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:722
 msgid "Sent?"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:735
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:740
 msgid "Update"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:740
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:745
 #, fuzzy
 #| msgid "Are you sure to delete the invoice?"
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Er du sikker på at du vil slette fakturaen?"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:744
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:749
 #, php-format
 msgid ""
 "You will be missing a PDF invoice with invoice number %d and thus creating "
 "an accounting gap!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:747
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:752
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr ""
@@ -1830,9 +1870,6 @@ msgstr ""
 
 #~ msgid "File should be less then 2MB."
 #~ msgstr "Filen bør være under 2 megabyte."
-
-#~ msgid "Email us"
-#~ msgstr "Send oss en e-post"
 
 #~ msgid ""
 #~ "Invoice with invoice number %s not found. First create invoice and try "

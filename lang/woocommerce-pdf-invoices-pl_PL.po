@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-28 10:03+0100\n"
-"PO-Revision-Date: 2019-03-28 10:03+0100\n"
+"POT-Creation-Date: 2019-04-14 13:10+0200\n"
+"PO-Revision-Date: 2019-04-14 13:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: info@wcpdfinvoices.com\n"
 "Language: pl_PL\n"
@@ -559,9 +559,13 @@ msgid "Bulk Generate UBL"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:397
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:243
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:268
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:712
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:205
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:215
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:258
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:471
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:481
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:792
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
@@ -613,7 +617,7 @@ msgid "Line item columns"
 msgstr "Lewa kolumna stopki."
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:195
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:442
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:457
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:48
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:412
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:53
@@ -621,25 +625,25 @@ msgid "Description"
 msgstr "Opis"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:200
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:205
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:451
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:456
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:210
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:466
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:476
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:57
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:60
 msgid "Cost"
 msgstr "Cena bez podatku"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:210
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:220
 msgid "Quantity"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:220
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:225
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:293
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:465
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:470
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:973
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:230
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:240
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:303
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:308
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:494
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:499
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1053
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:414
@@ -648,15 +652,22 @@ msgstr ""
 msgid "Total"
 msgstr "Razem"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:234
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:235
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:489
+#, fuzzy
+#| msgid "Discount"
+msgid "Total Discount"
+msgstr "Zniżka"
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
 #, fuzzy
 #| msgid "Total"
 msgid "Total rows"
 msgstr "Razem"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:248
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:744
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:824
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
@@ -665,33 +676,33 @@ msgstr "Razem"
 msgid "Shipping"
 msgstr "Wysyłka"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:253
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:268
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:298
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:212
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:243
 msgid "Fee"
 msgstr "Opłaty"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:258
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:689
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:278
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:769
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
 msgid "Subtotal"
 msgstr "Podsuma"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:307
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:322
 msgid "Show tax labels"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:416
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:914
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:431
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:994
 #, php-format
 msgid "VAT %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:446
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:461
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:59
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:62
@@ -699,11 +710,11 @@ msgstr ""
 msgid "Qty"
 msgstr "Ilość"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1112
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1192
 msgid "Request invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1160
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1240
 #, php-format
 msgid "Coupon(s): %s"
 msgstr ""

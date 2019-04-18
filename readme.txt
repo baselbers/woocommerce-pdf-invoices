@@ -344,7 +344,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.0 - October, 2018 =
+= 3.0.0 - April, 2019 =
 
 - Added: Debug settings tab with debug information.
 - Added: Loading textdomain from Loco Translate folder wp-content/languages/loco/plugins.

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-14 13:10+0200\n"
-"PO-Revision-Date: 2019-04-14 13:10+0200\n"
+"POT-Creation-Date: 2019-04-18 21:11+0200\n"
+"PO-Revision-Date: 2019-04-18 21:11+0200\n"
 "Last-Translator: Kolja Spyra <service@kolja-spyra.de>\n"
 "Language-Team: Kolja Spyra - service@kolja-spyra.de\n"
 "Language: de_DE@formal\n"
@@ -589,7 +589,7 @@ msgstr "Bulk Erstellung von PDF Rechnungen"
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:471
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:481
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:792
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:807
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
@@ -673,7 +673,7 @@ msgstr "Menge"
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:308
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:494
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:499
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1053
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1068
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:414
@@ -695,7 +695,7 @@ msgstr "Gesamt Zeilen"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:824
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:839
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
@@ -713,7 +713,7 @@ msgstr "Zahlungsgebühr"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:278
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:769
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:784
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
@@ -725,7 +725,7 @@ msgid "Show tax labels"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:431
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:994
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1009
 #, php-format
 msgid "VAT %s"
 msgstr "USt %s"
@@ -738,11 +738,11 @@ msgstr "USt %s"
 msgid "Qty"
 msgstr "Anz"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1192
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1207
 msgid "Request invoice"
 msgstr "Rechnung anfordern"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1240
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1255
 #, php-format
 msgid "Coupon(s): %s"
 msgstr "Gutschein(e): %s"

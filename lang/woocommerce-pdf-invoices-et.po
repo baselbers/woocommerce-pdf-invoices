@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-14 13:10+0200\n"
-"PO-Revision-Date: 2019-04-14 13:10+0200\n"
+"POT-Creation-Date: 2019-04-18 21:11+0200\n"
+"PO-Revision-Date: 2019-04-18 21:11+0200\n"
 "Last-Translator: Jüri Laur <jyri@jyrilaur.com>\n"
 "Language-Team: Jüri Laur\n"
 "Language: et\n"
@@ -565,7 +565,7 @@ msgstr ""
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:471
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:481
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:792
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:807
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
@@ -643,7 +643,7 @@ msgstr ""
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:308
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:494
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:499
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1053
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1068
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:414
@@ -667,7 +667,7 @@ msgstr "Kokku"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:824
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:839
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
@@ -685,7 +685,7 @@ msgstr "Tasu"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:278
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:769
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:784
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
@@ -697,7 +697,7 @@ msgid "Show tax labels"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:431
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:994
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1009
 #, fuzzy, php-format
 #| msgid "VAT Number: %s"
 msgid "VAT %s"
@@ -711,11 +711,11 @@ msgstr "KMKR nr: %s"
 msgid "Qty"
 msgstr "TK"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1192
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1207
 msgid "Request invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1240
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1255
 #, php-format
 msgid "Coupon(s): %s"
 msgstr ""

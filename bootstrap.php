@@ -16,7 +16,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'WPI_VERSION', '3.0.0' );
+define( 'WPI_VERSION', '3.0.1' );
 
 /**
  * Load WooCommerce PDF Invoices plugin.

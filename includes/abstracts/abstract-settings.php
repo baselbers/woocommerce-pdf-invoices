@@ -116,7 +116,7 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public static function admin_init() {
 		// Only load settings on settings saved or page load.
-		if ( isset( $_GET['key'] ) && md5( WPI()::PLUGIN_SLUG ) === $_GET['key'] || isset( $_GET['page'] ) && WPI()::PLUGIN_SLUG === $_GET['page'] ) {
+		if ( isset( $_GET['key'] ) && md5( WPI()->get_plugin_slug() ) === $_GET['key'] || isset( $_GET['page'] ) && WPI()->get_plugin_slug() === $_GET['page'] ) {
 			self::load_setting_tabs();
 
 			self::$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
@@ -175,7 +175,7 @@ abstract class BEWPI_Abstract_Settings {
 	 * Add submenu to WooCommerce menu and display options page.
 	 */
 	public static function add_wc_submenu_options_page() {
-		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), WPI()::PLUGIN_SLUG, array(
+		add_submenu_page( 'woocommerce', __( 'Invoices', 'woocommerce-pdf-invoices' ), __( 'Invoices', 'woocommerce-pdf-invoices' ), self::settings_capability(), WPI()->get_plugin_slug(), array(
 			__CLASS__,
 			'display_options_page',
 		) );
@@ -207,7 +207,7 @@ abstract class BEWPI_Abstract_Settings {
 					printf( '<a class="nav-tab %1$s" href="%2$s">%3$s</a>',
 						esc_attr( $active ),
 						add_query_arg( array(
-							'page' => WPI()::PLUGIN_SLUG,
+							'page' => WPI()->get_plugin_slug(),
 							'tab'  => $id,
 						), '' ),
 						esc_html( $tab['label'] )
@@ -216,7 +216,7 @@ abstract class BEWPI_Abstract_Settings {
 				?>
 			</h2>
 			<form method="post"
-			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()::PLUGIN_SLUG ); ?>"
+			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
 			      enctype="multipart/form-data" <?php echo esc_html( $width ); ?>>
 				<?php
 				settings_fields( self::$setting->settings_key );

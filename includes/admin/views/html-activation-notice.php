@@ -10,7 +10,7 @@
  * @version     1.0.0
  */
 
-$settings_url = add_query_arg( array( 'page' => WPI()::PLUGIN_SLUG ), admin_url( 'admin.php' ) );
+$settings_url = add_query_arg( array( 'page' => WPI()->get_plugin_slug() ), admin_url( 'admin.php' ) );
 ?>
 <div class="updated notice notice-success is-dismissible" data-dismissible="activation-forever">
 	<p>

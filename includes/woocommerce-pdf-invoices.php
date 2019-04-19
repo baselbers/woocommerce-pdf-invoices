@@ -392,7 +392,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function add_plugin_action_links( $links ) {
 			// add settings link.
-			$settings_url   = add_query_arg( array( 'page' => WPI()::PLUGIN_SLUG ), admin_url( 'admin.php' ) );
+
+
+			$settings_url   = add_query_arg( array( 'page' => WPI()->get_plugin_slug() ), admin_url( 'admin.php' ) );
 			$settings_title = __( 'Settings', 'woocommerce-pdf-invoices' );
 			array_unshift( $links, sprintf( '<a href="%1$s">%2$s</a>', $settings_url, $settings_title ) );
 
@@ -402,8 +404,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Add links to row meta on plugins.php page.
 		 *
-		 * @param array $links row meta.
-		 * @param string $file plugin basename.
+		 * @param array  $links row meta.
+		 * @param string $file  plugin basename.
 		 *
 		 * @return array
 		 */
@@ -425,7 +427,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public static function get_screen_ids() {
 			$screen_ids = array(
-				'woocommerce_page_' . WPI()::PLUGIN_SLUG,
+				'woocommerce_page_' . WPI()->get_plugin_slug(),
 				'edit-shop_order',
 				'shop_order',
 			);
@@ -480,8 +482,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Add "Email It In" email address as BCC to WooCommerce email.
 		 *
 		 * @param string $headers email headers.
-		 * @param string $status email name.
-		 * @param object $order WooCommerce order.
+		 * @param string $status  email name.
+		 * @param object $order   WooCommerce order.
 		 *
 		 * @return string
 		 */
@@ -520,9 +522,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Attach a generated invoice to WooCommerce emails.
 		 *
-		 * @param array $attachments attachments.
-		 * @param string $status name of email.
-		 * @param object $order order.
+		 * @param array  $attachments attachments.
+		 * @param string $status      name of email.
+		 * @param object $order       order.
 		 *
 		 * @return array.
 		 */
@@ -672,10 +674,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Display invoice button html.
 		 *
-		 * @param string $title title attribute of button.
-		 * @param int $order_id WC_ORDER id.
-		 * @param string $action action create, view or cancel.
-		 * @param array $attributes additional attributes.
+		 * @param string $title      title attribute of button.
+		 * @param int    $order_id   WC_ORDER id.
+		 * @param string $action     action create, view or cancel.
+		 * @param array  $attributes additional attributes.
 		 */
 		private function show_invoice_button( $title, $order_id, $action, $attributes = array() ) {
 			$url = wp_nonce_url( add_query_arg( array(
@@ -817,8 +819,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Display download link on My Account page.
 		 *
-		 * @param array $actions my account order table actions.
-		 * @param WC_Order $order WooCommerce order object.
+		 * @param array    $actions my account order table actions.
+		 * @param WC_Order $order   WooCommerce order object.
 		 *
 		 * @return mixed
 		 */
@@ -902,7 +904,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * Get option by group and name.
 		 *
 		 * @param string $group Option group name (without 'bewpi_' prefix and '_settings' suffix). Available groups are: 'general', 'template' and 'premium'.
-		 * @param string $name Option name (without 'bewpi_' prefix).
+		 * @param string $name  Option name (without 'bewpi_' prefix).
 		 *
 		 * @return bool|mixed
 		 */
@@ -932,7 +934,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Get tax or vat label.
 		 *
-		 * @param bool $incl Including tax or vat.
+		 * @param bool $incl  Including tax or vat.
 		 * @param bool $small text font size.
 		 *
 		 * @return string
@@ -965,9 +967,9 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Get order property.
 		 *
-		 * @param WC_Order $order order object.
-		 * @param string $prop order property.
-		 * @param string $context display context.
+		 * @param WC_Order $order   order object.
+		 * @param string   $prop    order property.
+		 * @param string   $context display context.
 		 *
 		 * @return mixed
 		 */
@@ -978,8 +980,8 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Get order meta.
 		 *
-		 * @param WC_Order $order Order object.
-		 * @param string $meta_key Post meta key.
+		 * @param WC_Order $order    Order object.
+		 * @param string   $meta_key Post meta key.
 		 *
 		 * @return bool/string
 		 */
@@ -1038,6 +1040,15 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function get_prefix() {
 			return $this->prefix;
+		}
+
+		/**
+		 * Get plugin slug.
+		 *
+		 * @return string
+		 */
+		public function get_plugin_slug() {
+			return self::PLUGIN_SLUG;
 		}
 
 		/**

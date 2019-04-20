@@ -50,9 +50,6 @@ class BEWPI_General_Settings extends BEWPI_Abstract_Settings {
 			'interface'     => array(
 				'title' => __( 'Interface Options', 'woocommerce-pdf-invoices' ),
 			),
-			'debug'         => array(
-				'title' => __( 'Debug Options', 'woocommerce-pdf-invoices' ),
-			),
 		);
 
 		return $sections;

@@ -37,7 +37,7 @@ $company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' );
 		<td>
 			<?php
 			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-				echo $invoice->get_formatted_base_address();
+				echo WPI()->get_formatted_base_address();
 			} else {
 				echo nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
 			}

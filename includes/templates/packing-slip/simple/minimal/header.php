@@ -15,6 +15,9 @@
  * @version 0.0.1
  */
 
+$company_phone         = WPI()->get_option( 'template', 'company_phone' );
+$company_email_address = WPI()->get_option( 'template', 'company_email_address' );
+$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' );
 ?>
 
 <table>
@@ -32,7 +35,7 @@
 		<td>
 			<?php
 			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-				echo $invoice->get_formatted_base_address();
+				echo WPI()->get_formatted_base_address();
 			} else {
 				echo nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
 			}

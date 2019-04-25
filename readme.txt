@@ -348,6 +348,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 - Fixed: Using order number as invoice number.
 - Fixed: Fatal error sabre ubl_invoice dependency.
+- Fixed: Formatted base address not showing on packing slips.
 
 = 3.0.1 - April, 2019 =
 

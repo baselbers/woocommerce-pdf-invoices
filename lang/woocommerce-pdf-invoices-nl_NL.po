@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-18 21:11+0200\n"
-"PO-Revision-Date: 2019-04-18 21:11+0200\n"
+"POT-Creation-Date: 2019-04-25 14:17+0200\n"
+"PO-Revision-Date: 2019-04-25 14:17+0200\n"
 "Last-Translator: admin <dev@wcpdfinvoices.com>\n"
 "Language-Team: Nederlands\n"
 "Language: nl_NL\n"
@@ -95,7 +95,7 @@ msgstr "Actief"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:26
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:137
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:414
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:416
 msgid "Premium"
 msgstr "Premium"
 
@@ -214,7 +214,7 @@ msgstr ""
 "behoren met komma's gescheiden te worden."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:286
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:71
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:68
 msgid "Attach to Emails"
 msgstr "Voeg toe aan emails"
 
@@ -387,12 +387,12 @@ msgid "Global invoice successfully generated!"
 msgstr "Globale factuur succesvol gegenereerd!"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:651
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:653
 msgid "View invoice"
 msgstr "Toon factuur"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:733
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:735
 msgid "View"
 msgstr "Bekijk"
 
@@ -446,7 +446,7 @@ msgid "created on %1$s at %2$s"
 msgstr "aangemaakt op %1$s om %2$s"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:314
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:757
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:759
 msgid "Delete"
 msgstr "Verwijder"
 
@@ -475,7 +475,7 @@ msgid "Credit Note #:"
 msgstr "Creditnota #:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:590
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:709
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:711
 msgid "Date:"
 msgstr "Besteldatum:"
 
@@ -545,12 +545,12 @@ msgid "Select more then one order to generate a global invoice."
 msgstr "Selecteer meer dan één bestelling om een global factuur te genereren."
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:723
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:725
 msgid "Yes"
 msgstr "Ja"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:723
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:725
 msgid "No"
 msgstr "Nee"
 
@@ -858,14 +858,14 @@ msgstr "%1$s van %2$s"
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:46
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:41
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:44
 #, php-format
 msgid "Phone: %s"
 msgstr "Tel: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:49
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:50
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:45
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:48
 #, fuzzy, php-format
 #| msgid "Email subject"
 msgid "Email: %s"
@@ -873,7 +873,7 @@ msgstr "E-mail onderwerp"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:53
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:54
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:49
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:52
 #, fuzzy, php-format
 #| msgid "VAT %s"
 msgid "VAT ID: %s"
@@ -919,7 +919,7 @@ msgid "Order #%d - %s"
 msgstr "Bestelling #%d - %s"
 
 #: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:105
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:396
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:398
 msgid "Settings"
 msgstr "Opties"
 
@@ -949,17 +949,17 @@ msgstr "Verzending:"
 msgid "Total:"
 msgstr "Totaal:"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:695
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:676
 #, php-format
 msgid "VAT Number: %s"
 msgstr "BTW nummer: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:713
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:694
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Aankoopnummer: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:917
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:898
 #, php-format
 msgid "%s of %s"
 msgstr "%s van %s"
@@ -977,7 +977,7 @@ msgstr "Template"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:152
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:24
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:765
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:767
 msgid "Debug"
 msgstr "Debug"
 
@@ -1071,35 +1071,31 @@ msgstr ""
 msgid "Interface Options"
 msgstr "Interface Opties"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:54
-msgid "Debug Options"
-msgstr "Debug Opties"
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:79
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:76
 msgid "New order"
 msgstr "Nieuwe bestelling"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:84
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:81
 msgid "Order on-hold"
 msgstr "Bestelling in-de-wacht"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:89
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:86
 msgid "Processing order"
 msgstr "Bestelling in behandeling"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:94
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:91
 msgid "Completed order"
 msgstr "Bestelling afgerond"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:99
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:96
 msgid "Customer invoice"
 msgstr "Klant factuur"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:113
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:110
 msgid "Disable for free products"
 msgstr "Deactiveer voor gratis producten"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:115
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:112
 msgid ""
 "Skip automatic PDF invoice generation for orders containing only free "
 "products."
@@ -1107,23 +1103,23 @@ msgstr ""
 "Sla automatische PDF factuur generatie over voor bestellingen met alleen "
 "gratis producten."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:123
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:120
 msgid "View PDF"
 msgstr "Bekijk PDF"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:130
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:127
 msgid "Download"
 msgstr "Download"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:131
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:128
 msgid "Open in new browser tab/window"
 msgstr "Openen in nieuw browser tabblad/venster"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:143
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:140
 msgid "Enable download from my account"
 msgstr "Activeer download vanaf account"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:145
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:142
 msgid ""
 "By default PDF is only downloadable when order has been paid, so order "
 "status should be Processing or Completed."
@@ -1131,24 +1127,24 @@ msgstr ""
 "Standaard is PDF alleen te downloaden als de bestelling is betaald, dus de "
 "bestelstatus zal In behandeling of Afgerond moeten zijn."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:158
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:155
 msgid "Enable Email It In"
 msgstr "Activeer Email It In"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:165
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:162
 msgid "Email It In account"
 msgstr "Email It In account"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:170
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:167
 #, php-format
 msgid "Get your account from your %1$s <a href=\"%2$s\">user account</a>."
 msgstr "Voer het %1$s <a href=\"%2$s\">gebruiker account</a> in."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:181
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:178
 msgid "Enable Invoice Number column"
 msgstr "Activeer factuurnummer kolom"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:182
+#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:179
 msgid "Display invoice numbers on Shop Order page."
 msgstr "Toon factuurnummers op Bestellingen pagina."
 
@@ -1346,7 +1342,7 @@ msgid "Change the name of the invoice."
 msgstr "Verander de naam van de factuur."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:846
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:848
 msgid "Invoice"
 msgstr "Factuur"
 
@@ -1721,36 +1717,36 @@ msgstr "Verzendmethode: %s"
 msgid "Product"
 msgstr "Artikel"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:614
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:616
 msgid "Invoice No."
 msgstr "Factuurnr."
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:666
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:688
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:668
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:690
 msgid "PDF Invoice"
 msgstr "PDF Factuur"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:703
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:705
 msgid "Create"
 msgstr "Genereer"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:713
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:715
 msgid "Number:"
 msgstr "Nummer:"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:722
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:724
 msgid "Sent?"
 msgstr "Verstuurd?"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:740
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:742
 msgid "Update"
 msgstr "Update"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:745
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:747
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Weet u zeker dat u de factuur wilt verwijderen?"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:749
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:751
 #, php-format
 msgid ""
 "You will be missing a PDF invoice with invoice number %d and thus creating "
@@ -1759,7 +1755,10 @@ msgstr ""
 "Je zult een PDF factuur met nummer %d missen en daarom een boekhoudkundig "
 "gat creëren!"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:752
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:754
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr "In plaats daarvan overweeg Geannuleerde PDF facturen met %s."
+
+#~ msgid "Debug Options"
+#~ msgstr "Debug Opties"

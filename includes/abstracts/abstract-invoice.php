@@ -285,7 +285,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 
 		if ( empty( $this->number ) ) {
 			// Use WooCommerce order numbers as invoice numbers?
-			if ( 'woocommerce_order_number' === WPI()->get_option( 'invoice_number_type' ) ) {
+			if ( 'woocommerce_order_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
 				$this->number = $this->order->get_order_number();
 			} else {
 				$this->number = $this->get_next_invoice_number();

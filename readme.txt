@@ -344,6 +344,11 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
+= 3.0.3 - May 5, 2019 =
+
+- Fixed: Debug button not showing on edit order page.
+- Fixed: Accessing constant directly from function causing syntax errors.
+
 = 3.0.2 - April 25, 2019 =
 
 - Fixed: Using order number as invoice number.

@@ -57,7 +57,7 @@ class BEWPI_Admin_Notices {
 		}
 
 		if ( wp_verify_nonce( sanitize_key( $_POST['nonce'] ), $action ) ) {
-			set_site_transient( WPI()::PREFIX . $action, 1 );
+			set_site_transient( WPI()->get_plugin_prefix() . $action, 1 );
 		}
 	}
 

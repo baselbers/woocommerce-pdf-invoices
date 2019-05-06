@@ -45,13 +45,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		public $settings = array();
 
 		/**
-		 * Prefix.
-		 *
-		 * @var string.
-		 */
-		private $prefix = 'wpi_';
-
-		/**
 		 * Main BE_WooCommerce_PDF_Invoices instance.
 		 *
 		 * @return BE_WooCommerce_PDF_Invoices
@@ -1034,12 +1027,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Get prefix.
+		 * Get plugin prefix.
 		 *
 		 * @return string
 		 */
-		public function get_prefix() {
-			return $this->prefix;
+		public function get_plugin_prefix() {
+			return self::PREFIX;
 		}
 
 		/**

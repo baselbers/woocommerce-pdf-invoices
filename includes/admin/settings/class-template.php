@@ -144,7 +144,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'section'  => 'general',
 				'type'     => 'text',
 				'desc'     => sprintf( __( '<a href="%s">Format</a> of invoice date and order date.', 'woocommerce-pdf-invoices' ), 'http://php.net/manual/en/datetime.formats.date.php' ),
-				'default'  => get_option( 'date_format' ),
+				'default'  => 'Y-m-d H:i:s',
 				'attrs'    => array( 'required' ),
 			),
 			array(

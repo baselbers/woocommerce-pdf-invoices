@@ -68,7 +68,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	public function __construct( $order_id ) {
 		parent::__construct();
 		$this->number    = get_post_meta( $order_id, '_bewpi_invoice_number', true );
-		$this->date      = apply_filters( 'wpi_invoice_date', get_post_meta( $order_id, '_bewpi_invoice_date', true ), $this );
+		$this->date      = apply_filters( 'wpi_invoice_custom_date', get_post_meta( $order_id, '_bewpi_invoice_date', true ), $this );
 		$this->year      = date_i18n( 'Y', strtotime( $this->date ) );
 		$this->full_path = self::exists( $order_id );
 		$this->filename  = basename( $this->full_path );
@@ -293,7 +293,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		}
 
 		if ( empty( $this->date ) ) {
-			$this->date = current_time( 'mysql' );
+			$this->date = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
 		}
 
 		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
@@ -636,12 +636,13 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 * @return string
 	 */
 	public function get_formatted_company_address() {
+		$company               = WPI()->get_option( 'template', 'company_name' );
 		$company_phone         = WPI()->get_option( 'template', 'company_phone' );
 		$company_email_address = WPI()->get_option( 'template', 'company_email_address' );
 		$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' );
 
 		if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-			$formatted_company_address = WPI()->get_formatted_base_address();
+			$formatted_company_address = WPI()->get_formatted_base_address( $company );
 		} else {
 			$formatted_company_address = nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
 		}

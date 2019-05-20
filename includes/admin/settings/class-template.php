@@ -234,8 +234,8 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'page'     => $this->settings_key,
 				'section'  => 'header',
 				'type'     => 'text',
-				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
-				'default'  => '',
+				'desc'     => sprintf( __( 'Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and the WooCommerce store address is used.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
+				'default'  => BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ? WPI()->get_formatted_base_address() : '',
 			),
 			array(
 				'id'       => 'bewpi-company-details',

@@ -42,6 +42,12 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 				printf( '<br />' );
 				printf( __( 'Shipping Method: %s', 'woocommerce-pdf-invoices' ), $shipping_method );
 			}
+
+			$payment_method = $order->get_payment_method_title();
+			if ( $payment_method ) {
+				printf( '<br />' );
+				printf( __( 'Payment Method: %s', 'woocommerce-pdf-invoices' ), $payment_method );
+			}
 			?>
 		</td>
 

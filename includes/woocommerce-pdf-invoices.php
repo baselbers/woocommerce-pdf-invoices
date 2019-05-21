@@ -1051,7 +1051,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 */
 		public function get_formatted_base_address() {
 			$address = array(
-				'company'   => WPI()->get_option( 'template', 'company_name' ),
+				'company'   => self::get_option( 'template', 'company_name' ),
 				'address_1' => WC()->countries->get_base_address(),
 				'address_2' => WC()->countries->get_base_address_2(),
 				'city'      => WC()->countries->get_base_city(),
@@ -1061,6 +1061,37 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			);
 
 			return WC()->countries->get_formatted_address( $address ) . '<br>';
+		}
+
+		/**
+		 * Get formatted company address.
+		 *
+		 * @return string
+		 */
+		public function get_formatted_company_address() {
+			$company_phone         = self::get_option( 'template', 'company_phone' );
+			$company_email_address = self::get_option( 'template', 'company_email_address' );
+			$company_vat_id        = self::get_option( 'template', 'company_vat_id' );
+
+			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
+				$formatted_company_address = self::get_formatted_base_address();
+			} else {
+				$formatted_company_address = nl2br( self::get_option( 'template', 'company_address' ) ) . '<br>';
+			}
+
+			if ( ! empty( $company_phone ) ) {
+				$formatted_company_address .= sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
+			}
+
+			if ( ! empty( $company_email_address ) ) {
+				$formatted_company_address .= sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
+			}
+
+			if ( ! empty( $company_vat_id ) ) {
+				$formatted_company_address .= sprintf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
+			}
+
+			return $formatted_company_address;
 		}
 
 		/**

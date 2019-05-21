@@ -631,38 +631,6 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	}
 
 	/**
-	 * Get formatted company address.
-	 *
-	 * @return string
-	 */
-	public function get_formatted_company_address() {
-		$company               = WPI()->get_option( 'template', 'company_name' );
-		$company_phone         = WPI()->get_option( 'template', 'company_phone' );
-		$company_email_address = WPI()->get_option( 'template', 'company_email_address' );
-		$company_vat_id        = WPI()->get_option( 'template', 'company_vat_id' );
-
-		if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-			$formatted_company_address = WPI()->get_formatted_base_address( $company );
-		} else {
-			$formatted_company_address = nl2br( WPI()->get_option( 'template', 'company_address' ) ) . '<br>';
-		}
-
-		if ( ! empty( $company_phone ) ) {
-			$formatted_company_address .= sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
-		}
-
-		if ( ! empty( $company_email_address ) ) {
-			$formatted_company_address .= sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
-		}
-
-		if ( ! empty( $company_vat_id ) ) {
-			$formatted_company_address .= sprintf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
-		}
-
-		return $formatted_company_address;
-	}
-
-	/**
 	 * Backwards compatibility.
 	 *
 	 * @deprecated Use `generate()` instead.

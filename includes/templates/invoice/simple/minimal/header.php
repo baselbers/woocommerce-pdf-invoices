@@ -14,10 +14,6 @@
  * @package WooCommerce_PDF_Invoices/Templates
  * @version 0.0.1
  */
-
-$templater                 = WPI()->templater();
-$invoice                   = $templater->invoice;
-$formatted_company_address = $invoice->get_formatted_company_address();
 ?>
 
 <table cellpadding="0" cellspacing="0">
@@ -33,7 +29,7 @@ $formatted_company_address = $invoice->get_formatted_company_address();
 		</td>
 
 		<td>
-			<?php echo $formatted_company_address; ?>
+			<?php echo WPI()->get_formatted_company_address(); ?>
 		</td>
 	</tr>
 </table>

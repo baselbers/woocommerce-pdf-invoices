@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -344,7 +344,11 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.3 - May 5, 2019 =
+= 3.0.4 - May 21, 2019 =
+
+- Fixed: Moving get_formatted_base_address() to WPI() instance.
+
+= 3.0.3 - May 20, 2019 =
 
 - Improved: Renamed 'wpi_invoice_date' filter to 'wpi_invoice_custom_date'.
 - Fixed: Debug button not showing on edit order page.

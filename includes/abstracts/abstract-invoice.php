@@ -67,8 +67,8 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 */
 	public function __construct( $order_id ) {
 		parent::__construct();
+		$this->date      = get_post_meta( $order_id, '_bewpi_invoice_date', true );
 		$this->number    = get_post_meta( $order_id, '_bewpi_invoice_number', true );
-		$this->date      = apply_filters( 'wpi_invoice_custom_date', get_post_meta( $order_id, '_bewpi_invoice_date', true ), $this );
 		$this->year      = date_i18n( 'Y', strtotime( $this->date ) );
 		$this->full_path = self::exists( $order_id );
 		$this->filename  = basename( $this->full_path );

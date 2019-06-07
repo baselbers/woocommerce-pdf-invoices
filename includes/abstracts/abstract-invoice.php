@@ -292,9 +292,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			}
 		}
 
-		if ( empty( $this->date ) ) {
-			$this->date = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
-		}
+		$this->date = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
 
 		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
 		$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;

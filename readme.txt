@@ -346,7 +346,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 = 3.0.6 - June 7, 2019 =
 
--
+-IImproved: Sequential invoice numbering by refactoring code.
 
 = 3.0.5 - May 31, 2019 =
 

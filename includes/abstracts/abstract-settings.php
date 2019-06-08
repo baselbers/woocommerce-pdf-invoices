@@ -434,7 +434,7 @@ abstract class BEWPI_Abstract_Settings {
 		<input id="<?php echo $args['id']; ?>"
 		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
 		       type="<?php echo $args['type']; ?>"
-		       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number() + 1 ); ?>"
+		       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( 				(int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
 			<?php
 			if ( isset( $args['attrs'] ) ) {
 				foreach ( $args['attrs'] as $attr ) {

@@ -75,6 +75,15 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	}
 
 	/**
+	 * Get invoice yeat.
+	 *
+	 * @return int
+	 */
+	public function get_year() {
+		return (int) $this->year;
+	}
+
+	/**
 	 * Invoice number.
 	 *
 	 * @return int
@@ -232,7 +241,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			return $next_number;
 		}
 
-		$max_invoice_number = self::get_max_invoice_number();
+		$max_invoice_number = self::get_max_invoice_number( $this->year );
 		$next_number        = $max_invoice_number + 1;
 
 		return $next_number;
@@ -241,9 +250,11 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	/**
 	 * Return highest invoice number.
 	 *
+	 * @param int $year invoice year.
+	 *
 	 * @return int
 	 */
-	public static function get_max_invoice_number() {
+	public static function get_max_invoice_number( $year ) {
 		global $wpdb;
 
 		if ( false === (bool) WPI()->get_option( 'reset_counter_yearly' ) ) {
@@ -254,7 +265,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 						INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
 					WHERE pm1.meta_key = %s AND YEAR(pm1.meta_value) = %d AND pm2.meta_key = %s",
 				'_bewpi_invoice_date',
-				(int) date_i18n( 'Y', current_time( 'timestamp' ) ),
+				(int) $year,
 				'_bewpi_invoice_number'
 			);
 		} else {
@@ -283,23 +294,22 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			parent::delete( $this->full_path );
 		}
 
-		if ( empty( $this->number ) ) {
-			// Use WooCommerce order numbers as invoice numbers?
-			if ( 'woocommerce_order_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
-				$this->number = $this->order->get_order_number();
-			} else {
-				$this->number = $this->get_next_invoice_number();
-			}
-		}
-
 		$this->date = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
+		$this->year = date_i18n( 'Y', strtotime( $this->date ) );
+
+		// Use WooCommerce order numbers as invoice numbers?
+		if ( 'woocommerce_order_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
+			$this->number = $this->order->get_order_number();
+		} else {
+			$this->number = $this->get_next_invoice_number();
+		}
 
 		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
 		$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;
 		$this->filename  = basename( $this->full_path );
 
 		// update invoice data in db.
-		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
+		$order_id = $this->order->get_id();
 		update_post_meta( $order_id, '_bewpi_invoice_date', $this->date );
 		update_post_meta( $order_id, '_bewpi_invoice_number', $this->number );
 		update_post_meta( $order_id, '_bewpi_invoice_pdf_path', $pdf_path );

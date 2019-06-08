@@ -141,7 +141,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 			<input id="<?php echo $args['id']; ?>"
 			       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
 			       type="<?php echo $args['type']; ?>"
-			       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number() + 1 ); ?>"
+			       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( (int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
 				<?php
 				if ( isset ( $args['attrs'] ) ) {
 					foreach ( $args['attrs'] as $attr ) {
@@ -155,9 +155,9 @@ if ( ! class_exists( 'BEWPI_Abstract_Setting' ) ) {
 		}
 
 		public function input_callback( $args ) {
-			$options             = get_option( $args['page'] );
-			$class               = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
-			$is_checkbox         = $args['type'] === 'checkbox';
+			$options     = get_option( $args['page'] );
+			$class       = ( isset( $args['class'] ) ) ? $args['class'] : "bewpi-notes";
+			$is_checkbox = $args['type'] === 'checkbox';
 			if ( $is_checkbox ) { ?>
 				<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
 			<?php } ?>

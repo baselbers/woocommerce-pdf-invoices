@@ -738,7 +738,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 					// Create confirm message when deleting PDF invoice.
 					$message = __( 'Are you sure to delete the PDF invoice?', 'woocommerce-pdf-invoices' );
-					if ( 'sequential_number' === BEWPI_Invoice::get_number_type() && $invoice->get_number() !== BEWPI_Abstract_Invoice::get_max_invoice_number() ) {
+					if ( 'sequential_number' === BEWPI_Invoice::get_number_type() && $invoice->get_number() !== BEWPI_Abstract_Invoice::get_max_invoice_number( $invoice->get_year() ) ) {
 
 						/* translators: $d: invoice number */
 						$message .= ' ' . sprintf( __( 'You will be missing a PDF invoice with invoice number %d and thus creating an accounting gap!', 'woocommerce-pdf-invoices' ), $invoice->get_number() );

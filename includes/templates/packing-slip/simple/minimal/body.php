@@ -15,13 +15,13 @@
  * @version 0.0.1
  */
 
-$templater                      = WPI()->templater();
-$order                          = $templater->order;
-$document   			= $templater->packing_slip;
-$formatted_shipping_address     = $order->get_formatted_shipping_address();
-$formatted_billing_address      = $order->get_formatted_billing_address();
-$line_items                     = $order->get_items( 'line_item' );
-$color                          = $templater->get_option( 'bewpi_color_theme' );
+$templater                  = WPI()->templater();
+$order                      = $templater->order;
+$packing_slip               = $templater->packing_slip;
+$formatted_shipping_address = $order->get_formatted_shipping_address();
+$formatted_billing_address  = $order->get_formatted_billing_address();
+$line_items                 = $order->get_items( 'line_item' );
+$color                      = $templater->get_option( 'bewpi_color_theme' );
 ?>
 
 <table>
@@ -33,7 +33,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 	<tr class="information">
 		<td width="50%">
 			<?php
-			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $document->get_formatted_order_date() );
+			printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $packing_slip->get_formatted_order_date() );
 			printf( '<br />' );
 			printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $order->get_order_number() );
 
@@ -56,7 +56,7 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 			printf( '<strong>%s</strong><br />', __( 'Bill to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_billing_address;
 
-			do_action( 'wpi_after_formatted_billing_address', $invoice );
+			do_action( 'wpi_after_formatted_billing_address', $packing_slip );
 			?>
 		</td>
 
@@ -65,26 +65,26 @@ $color                          = $templater->get_option( 'bewpi_color_theme' );
 			printf( '<strong>%s</strong><br />', __( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_shipping_address;
 
-			do_action( 'wpi_after_formatted_shipping_address', $invoice );
+			do_action( 'wpi_after_formatted_shipping_address', $packing_slip );
 			?>
 		</td>
 	</tr>
 </table>
 <table>
 	<thead>
-		<tr class="heading" bgcolor="<?php echo $color; ?>;">
-			<th>
-				<?php _e( 'SKU', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+	<tr class="heading" bgcolor="<?php echo $color; ?>;">
+		<th>
+			<?php _e( 'SKU', 'woocommerce-pdf-invoices' ); ?>
+		</th>
 
-			<th>
-				<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
-			</th>
+		<th>
+			<?php _e( 'Product', 'woocommerce-pdf-invoices' ); ?>
+		</th>
 
-			<th>
-				<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
-			</th>
-		</tr>
+		<th>
+			<?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?>
+		</th>
+	</tr>
 	</thead>
 	<tbody>
 	<?php

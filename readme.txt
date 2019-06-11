@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 5.2
-Stable tag: 3.0.6
+Stable tag: 3.0.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -344,9 +344,13 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
+= 3.0.7 - June 11, 2019 =
+
+- Fixed: Packing slip not displaying custom meta and user meta fields.
+
 = 3.0.6 - June 7, 2019 =
 
--IImproved: Sequential invoice numbering by refactoring code.
+- Improved: Sequential invoice numbering by refactoring code.
 
 = 3.0.5 - May 31, 2019 =
 

@@ -162,7 +162,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 					WHERE (pm1.meta_key = '_bewpi_invoice_date' AND YEAR(pm1.meta_value) = %d)
       						AND (pm2.meta_key = '_bewpi_invoice_number' AND pm2.meta_value >= %d)
       						AND (pm3.meta_key = '_bewpi_invoice_pdf_path')",
-				(int) date_i18n( 'Y', current_time( 'timestamp' ) ),
+				(int) $this->year,
 				$from_number
 			) ); // db call ok; no-cache ok.
 		} else {
@@ -202,7 +202,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
       						AND (pm2.meta_key = %s AND pm2.meta_value >= %d)
       						AND (pm3.meta_key = %s)",
 				'_bewpi_invoice_date',
-				(int) date_i18n( 'Y', current_time( 'timestamp' ) ),
+				(int) $this->year,
 				'_bewpi_invoice_number',
 				$from_number,
 				'_bewpi_invoice_pdf_path'

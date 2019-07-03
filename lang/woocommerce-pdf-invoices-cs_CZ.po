@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-25 14:17+0200\n"
-"PO-Revision-Date: 2019-04-25 14:17+0200\n"
+"POT-Creation-Date: 2019-07-03 16:06+0200\n"
+"PO-Revision-Date: 2019-07-03 16:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -85,7 +85,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:26
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:137
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:416
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:409
 msgid "Premium"
 msgstr "Premium"
 
@@ -149,50 +149,75 @@ msgid ""
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:230
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:479
+msgid "Date type"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:235
+msgid "Which date should be used for the generation of invoices."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:237
+msgid "Current"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:238
+#, fuzzy
+#| msgid "Order date"
+msgid "Order paid"
+msgstr "Datum objednávky"
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:239
+#, fuzzy
+#| msgid "Order date"
+msgid "Order created"
+msgstr "Datum objednávky"
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:246
 #, fuzzy
 #| msgid "Add additional PDF's to customer invoices."
 msgid "Additional customer billing fields"
 msgstr "Přidejte dodatečné PDF soubory k zákaznickým fakturám."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:235
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:251
 #, php-format
 msgid ""
 "Use for example %s or custom post-/usermeta fields. The fields will be "
 "displayed below the billing address."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:241
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:257
 #, fuzzy
 #| msgid "Add additional PDF's to customer invoices."
 msgid "Additional customer shipping fields"
 msgstr "Přidejte dodatečné PDF soubory k zákaznickým fakturám."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:246
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:262
 #, php-format
 msgid ""
 "Use for example %s or custom post-/usermeta fields. The fields will be "
 "displayed below the shipping address."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:252
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:268
 msgid "PDF attachment"
 msgstr "Příloha PDF"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:257
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:273
 msgid "Add for example a PDF with your terms & conditions."
 msgstr "Přidejte například soubor PDF s obchodními podmínkami."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:268
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:284
 #, fuzzy
 #| msgid "Show customer notes"
 msgid "Show used coupons"
 msgstr "Zobrazit poznámky zákazníka"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:275
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:291
 msgid "Suppliers"
 msgstr "Dodavatelé"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:280
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:296
 #, fuzzy
 #| msgid ""
 #| "<b>Hint</b>: Send customer invoices to suppliers' Cloud Storages by "
@@ -206,51 +231,51 @@ msgstr ""
 "<b>Tip</b>: Posílejte faktury do zákaznických cloudových úložišť snadno "
 "přidáním e-mailových adres Email It In. E-mailové adresy oddělujte čárkami."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:286
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:302
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:68
 msgid "Attach to Emails"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:297
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:313
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:432
 msgid "Prefix"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:308
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:324
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:443
 msgid "Suffix"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:319
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:335
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:454
 msgid "Format"
 msgstr "Formát"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:324
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:340
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:459
 #, php-format
 msgid "Available placeholders: %s."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:326
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:342
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:461
 #, php-format
 msgid "<b>Note:</b> %s is required and slashes aren't supported."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:338
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:354
 msgid "Enable customer generation"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:340
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:356
 msgid "Let customers generate a global invoice from their account"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:348
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:364
 msgid "Customer generation period"
 msgstr "Perioda zákaznického generování"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:353
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:369
 msgid ""
 "Should your customers have the ability to generate a global invoice by month "
 "or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
@@ -258,101 +283,97 @@ msgstr ""
 "Mám mít zákazník možnost generovat globální faktury měsíčně nebo ročně?<br/"
 "><strong>Poznámka:</strong> Zákaznické generování má být povolené."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:355
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:371
 msgid "Month"
 msgstr "Měsíc"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:356
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:372
 msgid "Year"
 msgstr "Rok"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:368
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:384
 msgid "Send to your Cloud Storage"
 msgstr "Poslat do cloudového úložiště"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:380
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:396
 msgid "Email to customer"
 msgstr "E-mail zákazníkovi"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:392
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:408
 msgid "Email to supplier(s)"
 msgstr "E-mail dodavatelům"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:399
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:415
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:146
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:146
 msgid "Email subject"
 msgstr "Předmět e-mailu"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:404
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:420
 msgid "Subject for the global invoice email."
 msgstr "Předmět globálního fakturačního e-mailu"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:411
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:427
 msgid "Email message"
 msgstr "Obsah e-mailu"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:416
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:432
 msgid "Message for the global invoice email."
 msgstr "Obsah globálního fakturačního e-mailu."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:428
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:444
 msgid "Enable reminder"
 msgstr "Povolit upozorňování"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:435
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:451
 #, fuzzy
 #| msgid "Days until reminder"
 msgid "Days until due date"
 msgstr "Počet dnů do upozornění"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:440
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:456
 #, fuzzy
 #| msgid "Number of days from starting date until reminder date."
 msgid "Number of days from order or invoice date until due date."
 msgstr "Počet dnů od počátečního data do data upozornění."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:449
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:465
 msgid "Days until reminder"
 msgstr "Počet dnů do upozornění"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:454
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:470
 msgid "Number of days from order or invoice date until reminder date."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:463
-msgid "Date type"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:468
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:484
 msgid "Choose the type of date to count from."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:470
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:486
 msgid "Order date"
 msgstr "Datum objednávky"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:471
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:487
 msgid "Invoice date"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:483
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:499
 msgid "Enable Request Invoice."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:559
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:575
 msgid "File to large."
 msgstr "Soubor je příliš velký."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:565
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:581
 msgid "Only PDF files are allowed."
 msgstr "Jsou povoleny pouze soubory PDF."
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:591
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:607
 msgid "Remove"
 msgstr "Odebrat"
 
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:595
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:611
 msgid "Choose"
 msgstr "Zvolit"
 
@@ -384,12 +405,12 @@ msgid "Global invoice successfully generated!"
 msgstr "Globální faktura byla úspěšně vygenerována!"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:653
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:646
 msgid "View invoice"
 msgstr "Prohlédnout fakturu"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:735
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:728
 msgid "View"
 msgstr "Prohlédnout"
 
@@ -440,7 +461,7 @@ msgid "created on %1$s at %2$s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:314
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:759
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:752
 msgid "Delete"
 msgstr ""
 
@@ -462,51 +483,51 @@ msgstr ""
 msgid "Email credit note to customer"
 msgstr "E-mail zákazníkovi"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:569
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:567
 msgid "Partially Refunded Order"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:585
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:583
 #, fuzzy
 #| msgid "Header Options"
 msgid "Credit Note #:"
 msgstr "Nastavení záhlaví"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:590
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:711
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:588
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:704
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Date:"
 msgstr "Datum objednávky: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:597
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:595
 #: woocommerce-pdf-invoices/includes/class-invoice.php:99
 #, fuzzy
 #| msgid "Invoice"
 msgid "Invoice #:"
 msgstr "Faktura"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:602
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:600
 #: woocommerce-pdf-invoices/includes/class-invoice.php:103
 #, fuzzy
 #| msgid "Invoice to"
 msgid "Invoice Date:"
 msgstr "Fakturační adresa"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:609
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:607
 #, fuzzy
 #| msgid "Order date"
 msgid "Order #:"
 msgstr "Datum objednávky"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:614
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:612
 #: woocommerce-pdf-invoices/includes/class-invoice.php:107
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Order Date:"
 msgstr "Datum objednávky: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:620
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:618
 #: woocommerce-pdf-invoices/includes/class-invoice.php:115
 #, fuzzy
 #| msgid "<b>Payment method</b> %s"
@@ -550,12 +571,12 @@ msgid "Select more then one order to generate a global invoice."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:725
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
 msgid "Yes"
 msgstr "Ano"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:725
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
 msgid "No"
 msgstr "Ne"
 
@@ -578,30 +599,30 @@ msgid "Bulk Generate UBL"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:397
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:205
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:215
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:258
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:283
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:471
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:481
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:807
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:219
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:229
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:301
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:326
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:521
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:531
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:899
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
 msgid "Discount"
 msgstr "Sleva"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:90
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:104
 msgid ""
 "Instead consider creating a Cancelled PDF invoice by changing the order "
 "status to Cancelled."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:124
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:138
 msgid "Advanced Table Content"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:125
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:139
 msgid ""
 "Enable Advanced Table Content settings to fully customize line item columns "
 "and total rows. When enabled the standard Table Content settings will be "
@@ -609,84 +630,96 @@ msgid ""
 "template is not supported."
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:152
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:166
 msgid "Enable Advanced Table Content"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:164
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:178
 msgid "Show SKU as meta data"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:171
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:185
 msgid "Display tax totals"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:179
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:193
 msgid "Itemized"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:180
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:194
 msgid "As a single total"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:186
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:200
 #, fuzzy
 #| msgid "Left footer column."
 msgid "Line item columns"
 msgstr "Levý sloupec zápatí"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:195
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:457
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:209
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:507
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:48
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:412
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:420
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:53
 msgid "Description"
 msgstr "Popis"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:200
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:210
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:466
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:476
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:214
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:224
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:516
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:526
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:57
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:60
 msgid "Cost"
 msgstr "Cena za kus"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:220
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:234
 msgid "Quantity"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:230
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:240
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:303
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:308
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:494
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:499
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1068
-#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
-#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:414
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:71
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:276
-msgid "Total"
-msgstr "Celkem"
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:235
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:489
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:244
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:254
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:540
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:550
 #, fuzzy
 #| msgid "Discount"
 msgid "Total Discount"
 msgstr "Sleva"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:259
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:346
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:351
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:545
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:555
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1160
+#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
+#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:422
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:71
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:276
+msgid "Total"
+msgstr "Celkem"
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
+msgid "Force tax rate percentages"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:285
+#, fuzzy
+#| msgid "Show customer notes"
+msgid "Show discounted amounts"
+msgstr "Zobrazit poznámky zákazníka"
+
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:292
 #, fuzzy
 #| msgid "Total"
 msgid "Total rows"
 msgstr "Celkem"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:263
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:288
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:839
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:306
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:331
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:931
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
@@ -695,46 +728,46 @@ msgstr "Celkem"
 msgid "Shipping"
 msgstr "Dopravné"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:268
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:298
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:311
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:341
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:212
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:243
 msgid "Fee"
 msgstr "Poplatky"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:278
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:784
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:316
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:321
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:876
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
 msgid "Subtotal"
 msgstr "Mezisoučet"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:322
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:365
 msgid "Show tax labels"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:431
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1009
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:475
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1101
 #, fuzzy, php-format
 #| msgid "VAT Number: %s"
 msgid "VAT %s"
 msgstr "DIČ: %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:461
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:511
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:59
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:413
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:421
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:62
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:79
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:85
 msgid "Qty"
 msgstr "Počet kusů"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1207
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1299
 msgid "Request invoice"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1255
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1347
 #, php-format
 msgid "Coupon(s): %s"
 msgstr ""
@@ -805,27 +838,27 @@ msgid "Credit Note"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:57
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:50
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:56
 msgid "Bill to:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:64
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:19
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:23
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:59
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:65
 msgid "Ship to:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:138
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:150
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:125
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:131
 #, php-format
 msgid "Note from customer: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:143
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:155
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:130
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:136
 #, php-format
 msgid "Note to customer: %s"
 msgstr ""
@@ -843,31 +876,6 @@ msgstr ""
 #, php-format
 msgid "%1$s of %2$s"
 msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:45
-#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:46
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:44
-#, php-format
-msgid "Phone: %s"
-msgstr "Telefon: %s"
-
-#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:49
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:50
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:48
-#, fuzzy, php-format
-#| msgid "Email us"
-msgid "Email: %s"
-msgstr "Napište nám"
-
-#: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/header.php:53
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/header.php:54
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/header.php:52
-#, fuzzy, php-format
-#| msgid "VAT Number: %s"
-msgid "VAT ID: %s"
-msgstr "DIČ: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/emails/customer-credit-note.php:25
 #, fuzzy
@@ -892,6 +900,13 @@ msgstr "Datum objednávky: %s"
 msgid "Invoice to"
 msgstr "Fakturační adresa"
 
+#: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1083
+#, php-format
+msgid "Phone: %s"
+msgstr "Telefon: %s"
+
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:30
 msgid "Global Invoice"
 msgstr "Globální faktura"
@@ -899,7 +914,7 @@ msgstr "Globální faktura"
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:53
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:490
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:57
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:71
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:77
 msgid "SKU"
 msgstr "Číslo zboží"
 
@@ -913,7 +928,7 @@ msgid "Order #%d - %s"
 msgstr "Objednávka #%d - %s"
 
 #: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:105
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:398
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:391
 msgid "Settings"
 msgstr "Nastavení"
 
@@ -926,33 +941,33 @@ msgstr "Podpora"
 msgid "Paid"
 msgstr "Placeno"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:504
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:512
 msgid "Subtotal:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:519
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:527
 msgid "Discount:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:534
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:542
 msgid "Shipping:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:607
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:615
 msgid "Total:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:676
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:684
 #, php-format
 msgid "VAT Number: %s"
 msgstr "DIČ: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:694
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:702
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Číslo objednávky: %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:898
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:906
 #, php-format
 msgid "%s of %s"
 msgstr "%s z %s"
@@ -970,7 +985,7 @@ msgstr "Šablona"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:152
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:24
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:767
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:760
 msgid "Debug"
 msgstr ""
 
@@ -1264,6 +1279,16 @@ msgid "Company address"
 msgstr "Adresa firmy"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:237
+#, php-format
+msgid ""
+"Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and "
+"the WooCommerce store address is used."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:243
+msgid "Company details"
+msgstr "Detaily o firmě"
+
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:248
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:303
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:342
@@ -1272,10 +1297,6 @@ msgstr "Adresa firmy"
 #, php-format
 msgid "Allowed HTML tags: %s."
 msgstr ""
-
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:243
-msgid "Company details"
-msgstr "Detaily o firmě"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:254
 #, fuzzy
@@ -1304,7 +1325,7 @@ msgid "Change the name of the invoice."
 msgstr "Změnit označení faktury."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:848
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:841
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -1643,54 +1664,72 @@ msgstr ""
 msgid "Shipping Method: %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:75
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:49
+#, fuzzy, php-format
+#| msgid "<b>Payment method</b> %s"
+msgid "Payment Method: %s"
+msgstr "<b>Platební metoda</b> %s"
+
+#: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:81
 msgid "Product"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:616
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:609
 msgid "Invoice No."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:668
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:690
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:661
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:683
 msgid "PDF Invoice"
 msgstr "PDF faktura"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:705
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:698
 msgid "Create"
 msgstr "Vytvořit"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:715
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:708
 #, fuzzy
 #| msgid "VAT Number: %s"
 msgid "Number:"
 msgstr "DIČ: %s"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:724
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:717
 msgid "Sent?"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:742
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:735
 msgid "Update"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:747
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:740
 #, fuzzy
 #| msgid "Are you sure to delete the invoice?"
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Opravdu chcete fakturu zrušit?"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:751
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:744
 #, php-format
 msgid ""
 "You will be missing a PDF invoice with invoice number %d and thus creating "
 "an accounting gap!"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:754
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:747
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr ""
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1087
+#, fuzzy, php-format
+#| msgid "Email us"
+msgid "Email: %s"
+msgstr "Napište nám"
+
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1091
+#, fuzzy, php-format
+#| msgid "VAT Number: %s"
+msgid "VAT ID: %s"
+msgstr "DIČ: %s"
 
 #~ msgid "Debug Options"
 #~ msgstr "Možnosti debugování"

@@ -50,7 +50,7 @@
 <aside class="bewpi-sidebar about">
 	<h3><?php _e( 'About', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
-		<?php _e( 'This plugin is an open source project wich aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'woocommerce-pdf-invoices' ); ?>
+		<?php _e( 'This plugin is an open source project which aims to fill the invoicing gap of <a href="http://www.woothemes.com/woocommerce">WooCommerce</a>.' , 'woocommerce-pdf-invoices' ); ?>
 	</p>
 	<?php
 	echo '<b>' . sprintf( __( 'Version: %s', 'woocommerce-pdf-invoices' ), WPI_VERSION ) . '</b>';

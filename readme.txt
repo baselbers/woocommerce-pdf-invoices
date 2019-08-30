@@ -344,7 +344,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.8 - June 28, 2019 =
+= 3.0.8 - August 30, 2019 =
 
 - Fixed: Reset invoice counter not deleting invoices.
 

@@ -217,7 +217,7 @@ abstract class BEWPI_Abstract_Settings {
 			</h2>
 			<form method="post"
 			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
-			      enctype="multipart/form-data" <?php echo esc_html( $width ); ?>>
+			      enctype="multipart/form-data" <?php echo $width; ?>>
 				<?php
 				settings_fields( self::$setting->settings_key );
 				do_settings_sections( self::$setting->settings_key );

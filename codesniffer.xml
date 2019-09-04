@@ -8,5 +8,6 @@
 		<exclude name="WordPress.VIP.RestrictedFunctions.error_log" />
 		<exclude name="WordPress.VIP.RestrictedFunctions.file_get_contents" />
 		<exclude name="WordPress.NamingConventions.ValidVariableName.NotSnakeCaseMemberVar" />
+		<exclude name="WordPress.WP.I18n.MissingTranslatorsComment" />
 	</rule>
 </ruleset>

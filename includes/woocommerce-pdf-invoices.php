@@ -874,7 +874,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 *
 		 * @param int $order_id order ID.
 		 *
-		 * @return BEWPI_Abstract_Invoice
+		 * @return BEWPI_Invoice
 		 */
 		public function get_invoice( $order_id ) {
 

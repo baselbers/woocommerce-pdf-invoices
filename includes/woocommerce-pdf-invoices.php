@@ -367,9 +367,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					$invoice->update();
 					break;
 				case 'debug':
-					$invoice   = new BEWPI_Invoice( $order_id );
-					$full_path = $invoice->update();
-					BEWPI_Invoice::view( $full_path );
+					$full_path = BEWPI_Abstract_Invoice::exists( $order_id );
+					if ( false === $full_path ) {
+						$invoice   = new BEWPI_Invoice( $order_id );
+						$full_path = $invoice->generate();
+						BEWPI_Invoice::view( $full_path );
+					} else {
+						$invoice   = new BEWPI_Invoice( $order_id );
+						$full_path = $invoice->update();
+						BEWPI_Invoice::view( $full_path );
+					}
 					break;
 			}
 
@@ -694,7 +701,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$invoice = new BEWPI_Invoice( $post->ID );
 
 			if ( ! $invoice->get_full_path() ) {
-
 				$this->show_invoice_button( __( 'Create', 'woocommerce-pdf-invoices' ), $post->ID, 'create', array( 'class="button grant_access order-page invoice wpi"' ) );
 
 			} else {
@@ -755,16 +761,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 					) );
 				}
 
-				// display button to view invoice in debug mode.
-				if ( (bool) WPI()->get_option( 'debug', 'mpdf_debug' ) ) {
-					$this->show_invoice_button( __( 'Debug', 'woocommerce-pdf-invoices' ), $post->ID, 'debug', array(
-						'class="button grant_access order-page invoice wpi"',
-						'target="_blank"',
-					) );
-				}
-
 				echo '</p>';
 
+			}
+
+			// display button to view invoice in debug mode.
+			if ( (bool) WPI()->get_option( 'debug', 'mpdf_debug' ) ) {
+				$this->show_invoice_button( __( 'Debug', 'woocommerce-pdf-invoices' ), $post->ID, 'debug', array(
+					'class="button grant_access order-page invoice wpi"',
+					'target="_blank"',
+				) );
 			}
 
 			do_action( 'bewpi_order_page_after_meta_box_details_end', $post->ID );
@@ -884,9 +890,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		/**
 		 * Set order for templater directly after creation to fetch order data.
 		 *
+		 * @param int $order_id WC_Order ID.
+		 *
 		 * @since 2.9.3 Do not use second and third parameters since several plugins do not use them. This prevents a fatal error.
 		 *
-		 * @param int $order_id WC_Order ID.
 		 */
 		public static function set_order( $order_id ) {
 			$order = wc_get_order( $order_id );

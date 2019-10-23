@@ -88,6 +88,11 @@ if ( ! class_exists( 'BEWPI_Debug_Log' ) ) {
 
 			// Generate line.
 			$level_name = self::get_level_name( $level );
+
+			if ( is_array( $message ) ) {
+				$message = print_r( $message, true );
+			}
+
 			$message    = sprintf( 'WooCommerce PDF Invoices %s: %s', $level_name, $message );
 
 			return error_log( $message );

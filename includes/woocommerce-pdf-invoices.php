@@ -476,6 +476,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				wp_enqueue_script( 'wc-enhanced-select' );
 				wp_enqueue_script( 'jquery-ui-sortable' );
 			}
+
+			if ( isset( $_GET['page'] ) && 'woocommerce-pdf-invoices' === $_GET['page'] ) {
+				wp_enqueue_media();
+			}
 		}
 
 		/**

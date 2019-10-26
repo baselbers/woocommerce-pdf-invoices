@@ -357,7 +357,7 @@ abstract class BEWPI_Abstract_Settings {
 				?>
 				<option
 					value="<?php echo esc_attr( $key ); ?>" <?php selected( $options[ $args['name'] ], $key ); ?>><?php echo esc_html( $label ); ?></option>
-				<?php
+			<?php
 			endforeach;
 			?>
 		</select>
@@ -434,7 +434,7 @@ abstract class BEWPI_Abstract_Settings {
 		<input id="<?php echo $args['id']; ?>"
 		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
 		       type="<?php echo $args['type']; ?>"
-		       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( 				(int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
+		       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( (int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
 			<?php
 			if ( isset( $args['attrs'] ) ) {
 				foreach ( $args['attrs'] as $attr ) {
@@ -497,6 +497,70 @@ abstract class BEWPI_Abstract_Settings {
 		          rows="5"
 		><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
 		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
+		<?php
+	}
+
+	/**
+	 * Add additional file option callback.
+	 *
+	 * @param array $args Field arguments.
+	 */
+	public function upload_callback( $args ) {
+		$options       = get_option( $args['page'] );
+		$attachment_id = $options[ $args['name'] ];
+		$file_url      = wp_get_attachment_url( $attachment_id );
+		?>
+		<p class="form-field">
+			<input type="hidden" class="file_id" name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . ']' ); ?>" value="<?php echo esc_attr( $attachment_id ); ?>"/>
+			<input type="<?php echo esc_attr( $args['type'] ); ?>" class="file_url" placeholder="<?php echo esc_attr( $file_url ); ?>" value="<?php echo esc_attr( $file_url ); ?>"/>
+			<button class="button upload_image_button" data-uploader_button_text="<?php _e( 'Use file', 'woocommerce-pdf-invoices' ); ?>"><?php _e( 'Upload', 'woocommerce-pdf-invoices' ); ?></button>
+		</p>
+		<script type="text/javascript">
+            // Uploading files
+            var file_frame;
+            var file_target_input;
+            var file_id_input;
+
+            jQuery('.upload_image_button').live('click', function (event) {
+
+                event.preventDefault();
+
+                file_target_input = jQuery(this).closest('.form-field').find('.file_url');
+                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+
+                // If the media frame already exists, reopen it.
+                if (file_frame) {
+                    file_frame.open();
+                    return;
+                }
+
+                // Create the media frame.
+                file_frame = wp.media.frames.file_frame = wp.media({
+                    title: jQuery(this).data('uploader_title'),
+                    button: {
+                        text: jQuery(this).data('uploader_button_text')
+                    },
+                    multiple: false  // Set to true to allow multiple files to be selected,
+                });
+
+                // When an image is selected, run a callback.
+                file_frame.on('select', function () {
+                    // We set multiple to false so only get one image from the uploader
+                    attachment = file_frame.state().get('selection').first().toJSON();
+
+                    jQuery(file_target_input).val(attachment.url);
+                    jQuery(file_id_input).val(attachment.id);
+                });
+
+                // Finally, open the modal
+                file_frame.open();
+            });
+
+            jQuery('.upload_image_button').closest('.form-field').find('.file_url').on('change', function (event) {
+                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+                jQuery(file_id_input).val('');
+            });
+		</script>
 		<?php
 	}
 
@@ -594,5 +658,6 @@ abstract class BEWPI_Abstract_Settings {
 	 *
 	 * @return mixed
 	 */
-	protected function display_custom_settings() {}
+	protected function display_custom_settings() {
+	}
 }

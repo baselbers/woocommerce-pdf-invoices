@@ -344,7 +344,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.9 - October 25, 2019 =
+= 3.0.9 - October 26, 2019 =
 
 - Improved: Custom logo upload setting by using the native media library.
 

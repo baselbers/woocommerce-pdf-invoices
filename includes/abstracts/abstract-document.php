@@ -135,14 +135,16 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$mpdf_params['orientation']
 			);
 
-			// add company logo image as a variable.
-			$wp_upload_dir = wp_upload_dir();
-			$image_url     = $this->template_options['bewpi_company_logo'];
-			if ( ! empty( $image_url ) ) {
+			// Add company logo image as a variable.
+			// As of 3.0.9 we've improved the media upload settings feature and so bewpi_company_logo contains the id of the attachment.
+			$attachment = WPI()->get_option( 'template', 'company_logo' );
+			if ( ! empty( $attachment ) ) {
 				// use absolute path due to probability of (local)host misconfiguration.
 				// problems with shared hosting when one ip is configured to multiple users/environments.
-				$image_path         = str_replace( $wp_upload_dir['baseurl'], $wp_upload_dir['basedir'], $image_url );
-				$mpdf->company_logo = file_get_contents( $image_path );
+				$attachment_path = get_attached_file( $attachment );
+				if ( false !== $attachment_path ) {
+					$mpdf->company_logo = file_get_contents( $attachment_path );
+				}
 			}
 
 			// Show legacy paid watermark.

@@ -2,7 +2,7 @@
 	<tr>
 		<td class="logo" width="50%">
 			<?php
-			if ( WPI()->templater()->get_logo_url() ) {
+			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
 				printf( '<img class="company-logo" src="var:company_logo"/>' );
 			} else {
 				printf( '<h1 class="company-logo">%s</h1>', esc_html( WPI()->templater()->get_option( 'bewpi_company_name' ) ) );

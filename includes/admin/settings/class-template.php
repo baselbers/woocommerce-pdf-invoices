@@ -91,8 +91,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 	 * @return array
 	 */
 	private function get_fields() {
-		$company_logo = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'thumbnail' );
-
 		$settings = array(
 			array(
 				'id'       => 'bewpi-template-name',
@@ -208,12 +206,12 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'id'       => 'bewpi-company-logo',
 				'name'     => $this->prefix . 'company_logo',
 				'title'    => __( 'Company logo', 'woocommerce-pdf-invoices' ),
-				'callback' => array( $this, 'input_callback' ),
+				'callback' => array( $this, 'upload_callback' ),
 				'page'     => $this->settings_key,
 				'section'  => 'header',
 				'type'     => 'text',
-				'desc'     => sprintf( __( 'Use the <a href="%1$s">Media Library</a> to <a href="%2$s">upload</a> or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="%3$s" target="_blank">File URL</a>.', 'woocommerce-pdf-invoices' ), 'media-new.php', 'upload.php', 'https://codex.wordpress.org/Media_Library_Screen#Attachment_Details' ),
-				'default'  => ( is_array( $company_logo ) ) ? $company_logo[0] : '',
+				'desc'     => '',
+				'default'  => '',
 			),
 			array(
 				'id'       => 'bewpi-company-name',
@@ -577,29 +575,8 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				continue;
 			}
 
-			if ( 'bewpi_company_logo' === $key ) {
-				continue;
-			}
-
 			// strip all html and php tags and properly handle quoted strings.
 			$output[ $key ] = $this->strip_str( stripslashes( $input[ $key ] ) );
-		}
-
-		if ( isset( $input['bewpi_company_logo'] ) ) {
-			if ( ! empty( $input['bewpi_company_logo'] ) ) {
-				$image_url = $this->validate_image( $input['bewpi_company_logo'] );
-				if ( $image_url ) {
-					$output['bewpi_company_logo'] = $image_url;
-				} else {
-					add_settings_error(
-						esc_attr( $this->settings_key ),
-						'file-not-found',
-						__( 'Company logo not found. Upload the image to the Media Library and try again.', 'woocommerce-pdf-invoices' )
-					);
-				}
-			} else {
-				$output['bewpi_company_logo'] = '';
-			}
 		}
 
 		if ( isset( $input['bewpi_reset_counter'] ) && $input['bewpi_reset_counter'] ) {
@@ -607,37 +584,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 		}
 
 		return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );
-	}
-
-	/**
-	 * Validate image against modified urls and check for extension.
-	 *
-	 * @param string $image_url source url of the image.
-	 *
-	 * @return bool|string false or image url.
-	 */
-	public function validate_image( $image_url ) {
-		$image_url = esc_url_raw( $image_url, array( 'http', 'https' ) );
-		$query     = array(
-			'post_type'  => 'attachment',
-			'fields'     => 'ids',
-			'meta_query' => array(
-				array(
-					'key'     => '_wp_attached_file',
-					'value'   => basename( $image_url ),
-					'compare' => 'LIKE',
-				),
-			)
-		);
-
-		$ids = get_posts( $query );
-		if ( count( $ids ) === 0 ) {
-			WPI()->logger()->error( sprintf( 'Image %s not found in post table.', basename( $image_url ) ) );
-
-			return false;
-		}
-
-		return wp_get_attachment_image_url( $ids[0], 'full' );
 	}
 
 	/**

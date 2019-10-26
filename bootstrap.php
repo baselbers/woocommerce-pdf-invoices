@@ -41,8 +41,8 @@ function _bewpi_load_plugin() {
 	/**
 	 * Main instance of BE_WooCommerce_PDF_Invoices.
 	 *
-	 * @since  2.9.1
 	 * @return BE_WooCommerce_PDF_Invoices
+	 * @since  2.9.1
 	 */
 	function WPI() {
 		return BE_WooCommerce_PDF_Invoices::instance();
@@ -63,6 +63,14 @@ add_action( 'plugins_loaded', '_bewpi_load_plugin', 10 );
  * @since 2.5.0
  */
 function _bewpi_on_plugin_update() {
+	// As per 3.0.9 we need to change the company logo to the attachment id.
+	$company_logo_url = WPI()->get_option( 'template', 'company_logo' );
+	if ( version_compare( WPI_VERSION, '3.0.9' ) >= 0 && ! empty( $company_logo_url ) && filter_var( $company_logo_url, FILTER_VALIDATE_URL ) ) {
+		$template_settings                       = get_option( 'bewpi_template_settings' );
+		$template_settings['bewpi_company_logo'] = (string) attachment_url_to_postid( $company_logo_url );
+		update_option( 'bewpi_template_settings', $template_settings );
+	}
+
 	if ( WPI_VERSION !== get_site_option( 'bewpi_version' ) ) {
 		WPI()->setup_directories();
 		WPI()->setup_options();

@@ -326,17 +326,6 @@ class BEWPI_Template {
 	}
 
 	/**
-	 * Get the company logo URL.
-	 *
-	 * @deprecated use 'esc_url_raw( WPI()->get_option( 'template', 'company_logo' )' instead.
-	 *
-	 * @return string The actual url from the Media Library.
-	 */
-	public function get_logo_url() {
-		return esc_url_raw( $this->get_option( 'bewpi_company_logo' ) );
-	}
-
-	/**
 	 * Get template options by key.
 	 *
 	 * @param string $name the option key.

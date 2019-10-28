@@ -430,4 +430,15 @@ class BEWPI_Template {
 	public function set_packing_slip( $packing_slip ) {
 		$this->packing_slip = $packing_slip;
 	}
+
+	/**
+	 * Get the company logo URL.
+	 *
+	 * @deprecated
+	 *
+	 * @return string The actual url from the Media Library.
+	 */
+	public function get_logo_url() {
+		return esc_url_raw( $this->get_option( 'bewpi_company_logo' ) );
+	}
 }

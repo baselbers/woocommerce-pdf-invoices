@@ -269,6 +269,17 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'default'  => '',
 			),
 			array(
+				'id'       => 'bewpi-company-registration-number',
+				'name'     => $this->prefix . 'company_registration_number',
+				'title'    => __( 'Company Registration Number', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'input_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'header',
+				'type'     => 'text',
+				'desc'     => '',
+				'default'  => '',
+			),
+			array(
 				'id'       => 'bewpi-company-vat-id',
 				'name'     => $this->prefix . 'company_vat_id',
 				'title'    => __( 'Company VAT ID', 'woocommerce-pdf-invoices' ),

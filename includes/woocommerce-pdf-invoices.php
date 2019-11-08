@@ -1080,9 +1080,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		public function get_formatted_company_address() {
-			$company_phone         = self::get_option( 'template', 'company_phone' );
-			$company_email_address = self::get_option( 'template', 'company_email_address' );
-			$company_vat_id        = self::get_option( 'template', 'company_vat_id' );
+			$company_phone               = self::get_option( 'template', 'company_phone' );
+			$company_email_address       = self::get_option( 'template', 'company_email_address' );
+			$company_registration_number = self::get_option( 'template', 'company_registration_number' );
+			$company_vat_id              = self::get_option( 'template', 'company_vat_id' );
 
 			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
 				$formatted_company_address = self::get_formatted_base_address();
@@ -1096,6 +1097,10 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			if ( ! empty( $company_email_address ) ) {
 				$formatted_company_address .= sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
+			}
+
+			if ( ! empty( $company_registration_number ) ) {
+				$formatted_company_address .= sprintf( __( 'CRN: %s', 'woocommerce-pdf-invoices' ), $company_registration_number ) . '<br>';
 			}
 
 			if ( ! empty( $company_vat_id ) ) {

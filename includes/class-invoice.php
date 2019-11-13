@@ -10,7 +10,7 @@
  * @version     2.5.4
  */
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 	/**
@@ -23,8 +23,9 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * @param int $order_id WooCommerce Order ID.
 		 */
 		public function __construct( $order_id ) {
-			$this->order = wc_get_order( $order_id );
-			$this->type  = 'invoice/simple';
+			$this->order  = wc_get_order( $order_id );
+			$this->type   = 'invoice/simple';
+			$this->number = $this->calculate_number();
 			WPI()->templater()->set_invoice( $this );
 			parent::__construct( $order_id );
 		}
@@ -63,8 +64,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		/**
 		 * Check if PDF invoice is sent to client.
 		 *
-		 * @since 2.9.4
 		 * @return bool
+		 * @since 2.9.4
 		 */
 		public function is_sent() {
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
@@ -87,6 +88,131 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 			$number_type = WPI()->get_option( 'template', 'invoice_number_type' );
 
 			return (string) $number_type;
+		}
+
+		/**
+		 * Delete invoice PDF files.
+		 *
+		 * @param int $from_number Invoice number where to start from.
+		 */
+		private function delete_pdf_invoices( $from_number = 0 ) {
+			global $wpdb;
+
+			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
+				// get formatted numbers by year and greater then given invoice number.
+				$files = $wpdb->get_col( $wpdb->prepare(
+					"SELECT pm3.meta_value AS pdf_path FROM wp_postmeta pm1
+						INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
+  						INNER JOIN wp_postmeta pm3 ON pm1.post_id = pm3.post_id
+					WHERE (pm1.meta_key = '_bewpi_invoice_date' AND YEAR(pm1.meta_value) = %d)
+      						AND (pm2.meta_key = '_bewpi_invoice_number' AND pm2.meta_value >= %d)
+      						AND (pm3.meta_key = '_bewpi_invoice_pdf_path')",
+					(int) $this->year,
+					$from_number
+				) ); // db call ok; no-cache ok.
+			} else {
+				// get formatted numbers greater then given invoice number.
+				$files = $wpdb->get_col( $wpdb->prepare(
+					"SELECT pm2.meta_value AS pdf_path FROM wp_postmeta pm1
+						INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
+					WHERE (pm1.meta_key = '_bewpi_invoice_number' AND pm1.meta_value >= %d)
+      						AND (pm2.meta_key = '_bewpi_invoice_pdf_path')",
+					$from_number
+				) ); // db call ok; no-cache ok.
+			}
+
+			// delete pdf files.
+			foreach ( $files as $pdf_path ) {
+				parent::delete( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
+			}
+		}
+
+		/**
+		 * Delete invoice post meta information.
+		 *
+		 * @param int $from_number Invoice number from which to delete.
+		 *
+		 * @return false|int
+		 */
+		private function delete_invoice_meta( $from_number = 0 ) {
+			global $wpdb;
+
+			if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
+				// delete by year and greater then given invoice number.
+				$query = $wpdb->prepare(
+					"DELETE pm1, pm2, pm3 FROM $wpdb->postmeta pm1
+  						INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
+  						INNER JOIN $wpdb->postmeta pm3 ON pm1.post_id = pm3.post_id
+					WHERE (pm1.meta_key = %s AND YEAR(pm1.meta_value) = %d)
+      						AND (pm2.meta_key = %s AND pm2.meta_value >= %d)
+      						AND (pm3.meta_key = %s)",
+					'_bewpi_invoice_date',
+					(int) $this->year,
+					'_bewpi_invoice_number',
+					$from_number,
+					'_bewpi_invoice_pdf_path'
+				);
+			} else {
+				// delete by greater then given invoice number.
+				$query = $wpdb->prepare(
+					"DELETE pm1, pm2 FROM $wpdb->postmeta pm1
+						INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
+					WHERE (pm1.meta_key = %s AND pm1.meta_value >= %d)
+							AND (pm2.meta_key = %s OR pm2.meta_key = %s)",
+					'_bewpi_invoice_number',
+					$from_number,
+					'_bewpi_invoice_date',
+					'_bewpi_invoice_pdf_path'
+				);
+			}
+
+			return $wpdb->query( $query ); // db call ok; no-cache ok. WPCS: unprepared SQL OK.
+		}
+
+		/**
+		 * Counter reset.
+		 */
+		private function do_counter_reset() {
+			$next_number = get_transient( 'bewpi_next_invoice_number' );
+			if ( false !== $next_number ) {
+				$this->delete_pdf_invoices( $next_number );
+				$this->delete_invoice_meta( $next_number );
+				delete_transient( 'bewpi_next_invoice_number' );
+			}
+
+			return (int) $next_number;
+		}
+
+		/**
+		 * Calculate invoice number.
+		 *
+		 * $return int
+		 */
+		public function calculate_number() {
+			// Using order number as the invoice number?
+			if ( 'woocommerce_order_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
+				return $this->order->get_order_number();
+			}
+
+			// User did invoice number reset?
+			if ( true === (bool) WPI()->get_option( 'template', 'reset_counter' ) ) {
+				$number = $this->do_counter_reset();
+				if ( 0 === $number ) {
+					throw new RuntimeException( 'Could not reset invoice number counter.' );
+				}
+
+				return $number;
+			}
+
+			// Increment invoice number.
+			$number = (int) get_option( 'bewpi_invoice_number' );
+			if ( false === (bool) $number ) {
+				$number = 1;
+			}
+
+			$number++;
+
+			return $number;
 		}
 
 		/**
@@ -126,9 +252,9 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		 * Formatted custom order subtotal.
 		 * Shipping including or excluding tax.
 		 *
+		 * @return string
 		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 *
-		 * @return string
 		 */
 		public function get_formatted_subtotal() {
 			$subtotal = $this->order->get_subtotal();
@@ -146,9 +272,9 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		/**
 		 * Formatted custom order total.
 		 *
+		 * @return string
 		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 *
-		 * @return string
 		 */
 		public function get_formatted_total() {
 			if ( $this->order->get_total_refunded() > 0 ) {
@@ -161,8 +287,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		/**
 		 * Custom order total.
 		 *
-		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 * @return string
+		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 */
 		public function get_total() {
 			if ( $this->order->get_total_refunded() > 0 ) {
@@ -177,8 +303,8 @@ if ( ! class_exists( 'BEWPI_Invoice' ) ) {
 		/**
 		 * Custom order subtotal.
 		 *
-		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 * @return float|mixed|void
+		 * @deprecated No longer used within template files. Custom templates should be replaced.
 		 */
 		public function get_subtotal() {
 			$subtotal = $this->order->get_subtotal();

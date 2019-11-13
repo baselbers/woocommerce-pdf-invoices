@@ -146,108 +146,6 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	}
 
 	/**
-	 * Delete invoice PDF files.
-	 *
-	 * @param int $from_number Invoice number where to start from.
-	 */
-	private function delete_pdf_invoices( $from_number = 0 ) {
-		global $wpdb;
-
-		if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
-			// get formatted numbers by year and greater then given invoice number.
-			$files = $wpdb->get_col( $wpdb->prepare(
-				"SELECT pm3.meta_value AS pdf_path FROM wp_postmeta pm1
-						INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
-  						INNER JOIN wp_postmeta pm3 ON pm1.post_id = pm3.post_id
-					WHERE (pm1.meta_key = '_bewpi_invoice_date' AND YEAR(pm1.meta_value) = %d)
-      						AND (pm2.meta_key = '_bewpi_invoice_number' AND pm2.meta_value >= %d)
-      						AND (pm3.meta_key = '_bewpi_invoice_pdf_path')",
-				(int) $this->year,
-				$from_number
-			) ); // db call ok; no-cache ok.
-		} else {
-			// get formatted numbers greater then given invoice number.
-			$files = $wpdb->get_col( $wpdb->prepare(
-				"SELECT pm2.meta_value AS pdf_path FROM wp_postmeta pm1
-						INNER JOIN wp_postmeta pm2 ON pm1.post_id = pm2.post_id
-					WHERE (pm1.meta_key = '_bewpi_invoice_number' AND pm1.meta_value >= %d)
-      						AND (pm2.meta_key = '_bewpi_invoice_pdf_path')",
-				$from_number
-			) ); // db call ok; no-cache ok.
-		}
-
-		// delete pdf files.
-		foreach ( $files as $pdf_path ) {
-			parent::delete( WPI_ATTACHMENTS_DIR . '/' . $pdf_path );
-		}
-	}
-
-	/**
-	 * Delete invoice post meta information.
-	 *
-	 * @param int $from_number Invoice number from which to delete.
-	 *
-	 * @return false|int
-	 */
-	private function delete_invoice_meta( $from_number = 0 ) {
-		global $wpdb;
-
-		if ( (bool) $this->template_options['bewpi_reset_counter_yearly'] ) {
-			// delete by year and greater then given invoice number.
-			$query = $wpdb->prepare(
-				"DELETE pm1, pm2, pm3 FROM $wpdb->postmeta pm1
-  						INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
-  						INNER JOIN $wpdb->postmeta pm3 ON pm1.post_id = pm3.post_id
-					WHERE (pm1.meta_key = %s AND YEAR(pm1.meta_value) = %d)
-      						AND (pm2.meta_key = %s AND pm2.meta_value >= %d)
-      						AND (pm3.meta_key = %s)",
-				'_bewpi_invoice_date',
-				(int) $this->year,
-				'_bewpi_invoice_number',
-				$from_number,
-				'_bewpi_invoice_pdf_path'
-			);
-		} else {
-			// delete by greater then given invoice number.
-			$query = $wpdb->prepare(
-				"DELETE pm1, pm2 FROM $wpdb->postmeta pm1
-						INNER JOIN $wpdb->postmeta pm2 ON pm1.post_id = pm2.post_id
-					WHERE (pm1.meta_key = %s AND pm1.meta_value >= %d)
-							AND (pm2.meta_key = %s OR pm2.meta_key = %s)",
-				'_bewpi_invoice_number',
-				$from_number,
-				'_bewpi_invoice_date',
-				'_bewpi_invoice_pdf_path'
-			);
-		}
-
-		return $wpdb->query( $query ); // db call ok; no-cache ok. WPCS: unprepared SQL OK.
-	}
-
-	/**
-	 * Get next invoice number from db.
-	 *
-	 * @return int
-	 */
-	protected function get_next_invoice_number() {
-		// check if user did a counter reset.
-		$next_number = get_transient( 'bewpi_next_invoice_number' );
-		if ( false !== $next_number ) {
-			$this->delete_pdf_invoices( $next_number );
-			$this->delete_invoice_meta( $next_number );
-
-			delete_transient( 'bewpi_next_invoice_number' );
-
-			return $next_number;
-		}
-
-		$max_invoice_number = self::get_max_invoice_number( $this->year );
-		$next_number        = $max_invoice_number + 1;
-
-		return $next_number;
-	}
-
-	/**
 	 * Return highest invoice number.
 	 *
 	 * @param int $year invoice year.
@@ -297,11 +195,9 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		$this->date = apply_filters( 'wpi_invoice_date', current_time( 'mysql' ), $this );
 		$this->year = date_i18n( 'Y', strtotime( $this->date ) );
 
-		// Use WooCommerce order numbers as invoice numbers?
-		if ( 'woocommerce_order_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
-			$this->number = $this->order->get_order_number();
-		} else {
-			$this->number = $this->get_next_invoice_number();
+		// Update invoice number when using sequential numbering.
+		if ( 'sequential_number' === WPI()->get_option( 'template', 'invoice_number_type' ) ) {
+			update_option( 'bewpi_invoice_number', $this->number );
 		}
 
 		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';

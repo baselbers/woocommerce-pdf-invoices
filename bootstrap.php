@@ -88,5 +88,9 @@ function _bewpi_on_plugin_activation() {
 	add_site_option( 'bewpi_install_date', current_time( 'mysql' ) );
 	set_transient( 'bewpi-admin-notice-activation', true, 30 );
 }
-
 register_activation_hook( __FILE__, '_bewpi_on_plugin_activation' );
+
+function _bewpi_on_plugin_uninstall() {
+    delete_site_option('bewpi_version' );
+}
+register_uninstall_hook( __FILE__, '_bewpi_on_plugin_uninstall' );

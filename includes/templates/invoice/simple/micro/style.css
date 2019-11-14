@@ -1,3 +1,7 @@
+table, tr, td, div, p {
+    /*border:1px solid black;*/
+}
+
 table {
     font-family: Arial, sans-serif;
 }
@@ -7,6 +11,7 @@ table.company {
 h1.company-logo {
     color: black;
 }
+
 table {
     border-collapse: collapse;
     font-size: 14px;
@@ -117,6 +122,12 @@ td.company-details, td.payment {
     vertical-align: top;
     width: 50%;
 }
+
+td.page-number {
+    margin: 0 auto;
+    width: 5%;
+}
+
 .foot td {
     border: 1px solid white;
     font-size: 12px;

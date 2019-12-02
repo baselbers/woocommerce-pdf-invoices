@@ -74,17 +74,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 		 * @return bool
 		 */
 		private static function packing_slips_enabled() {
-			if ( WPI()->get_option( 'template', 'disable_packing_slips' ) ) {
-				return false;
-			}
-
-			// There is no packing slip available for micro template.
-			$template_name = WPI()->get_option( 'template', 'template_name' );
-			if ( strpos( $template_name, 'micro' ) !== false ) {
-				return false;
-			}
-
-			return true;
+			return ! (bool) WPI()->get_option( 'template', 'disable_packing_slips' );
 		}
 
 		/**

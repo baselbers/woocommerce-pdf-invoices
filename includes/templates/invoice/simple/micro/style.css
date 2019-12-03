@@ -1,151 +1,195 @@
+/*** Start Helper Classes ***/
+
+/* Enable this to see the invoice structure */
 table, tr, td, div, p {
-    /*border:1px solid black;*/
+	/*border: 1px solid black;*/
 }
 
 table {
-    font-family: Arial, sans-serif;
-}
-table.company {
-    overflow: hidden;
-}
-h1.company-logo {
-    color: black;
+	font-family: Arial, sans-serif;
+	border-collapse: collapse;
+	font-size: 14px;
+	width: 100%;
+	color: #757575;
 }
 
-table {
-    border-collapse: collapse;
-    font-size: 14px;
-    width: 100%;
-    color: #757575;
-}
-.align-left { text-align: left; }
-.align-right { text-align: right; }
-.company .info,
-.company .logo {
-    text-align: left;
-    vertical-align: middle;
-    font-size: 14px !important;
-}
-table.two-column {
-    margin: 40px 0;
-    width: 100%;
-}
-.two-column td {
-    text-align: left;
-    vertical-align: top;
-}
-table.products th {
-    border-bottom: 2px solid #A5A5A5;
-}
-table.products td{
-    vertical-align: top;
-}
-table.products td, table.products th {
-    padding: 5px;
-}
-#terms-notes {
-    margin-top: 30px;
-}
-tr.product-row td {
-    border-bottom: 1px solid #CECECE;
-}
-td.total, td.grand-total {
-    border-top: 4px solid #8D8D8D;
-    padding-bottom: 0; margin-bottom: 0;
-}
-td.grand-total {
-    font-size: 16px !important;
-}
-table, tbody, h1 {
-    margin: 0;
-    padding: 0;
-}
+/* Font Size for the Text Box Price, Invoice Title and Company Name */
 h1 {
-    font-size: 36px;
-}
-span.payment-status {
-    font-size: 14px;
-    font-weight: normal;
-}
-.nowrap {
-    white-space: nowrap;
-}
-.invoice-head {
-    margin-bottom: 30px;
-    margin-right: -64px;
-}
-.invoice-head td {
-    text-align: left;
-}
-.invoice-head .title {
-    color: #525252;
-}
-td.invoice-details {
-    vertical-align: top;
-    /*line-height: 30px;*/
-}
-td.invoice-details span {
-    font-size: 14px;
-}
-.number {
-    font-size: 16px;
-}
-.small-font {
-    font-size: 14px;
-}
-.total-amount {
-    padding: 20px 20px 30px 20px;
-    width: 54%;
-}
-.total-amount, .total-amount h1 {
-    color: white;
-    font-size: 14px;
-}
-div.item-attribute {
-    font-size: 12px;
-    margin-top: 10px;
-}
-.invoice {
-    margin-bottom: 20px;
-}
-.foot {
-    margin: 0 -64px;
-}
-.foot td.border {
-    padding: 20px 40px;
-    width: 100%;
-    text-align: center;
-}
-td.company-details, td.payment {
-    padding: 20px 40px 0;
-    text-align: center;
-    vertical-align: top;
-    width: 50%;
+	font-size: 32px;
 }
 
-td.page-number {
-    margin: 0 auto;
-    width: 5%;
+/*** Start Header Classes ***/
+.logo {
+	width: 50%;
+	padding-top: 60px;
+	padding-left: 60px;
+}
+
+h1.company-name {
+	color: #525252;
+}
+
+.info {
+	width: 50%;
+	padding-top: 60px;
+}
+
+.refunded {
+	color: #a00 !important;
+}
+
+.total-without-refund {
+	color: #757575 !important;
+}
+
+/*** Start Body Classes ***/
+.invoice-to {
+	width: 50%;
+	vertical-align: top;
+	padding-left: 60px;
+	padding-bottom: 30px;
+}
+
+.ship-to {
+	width: 50%;
+	vertical-align: top;
+	padding-bottom: 30px;
+}
+
+.invoice-details {
+	padding-left: 60px;
+	color: #525252;
+}
+
+td.invoice-details {
+	width: 50%;
+	vertical-align: top;
+}
+
+.total-amount {
+	width: 50%;
+	padding: 20px 20px 30px 20px;
+	text-align: justify;
+}
+
+.total-amount, .total-amount h1 {
+	color: white;
+}
+
+table.products th {
+	border-bottom: 2px solid #A5A5A5;
+}
+
+.product-lines {
+	padding-top: 40px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+/* First Header */
+table tr.heading th:nth-child(1) {
+	text-align: left;
+	width: 30%;
+}
+
+/* Every header */
+table tr.heading th {
+	text-align: right;
+}
+
+/* The invoice item, quantity, price, VAT, total */
+table tbody tr.item td {
+	text-align: right;
+	border-bottom: 1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+/* Whitespace between line items and line calculations */
+table tr.spacer td {
+	padding-top: 50px;
+}
+
+/* CSS for Order Total excluding VAT */
+.order-total-ex-vat {
+	padding-top: 5px;
+	border-top: 4px solid #CECECE;
+}
+
+/* CSS for Order Total including VAT */
+.order-total-incl-vat {
+	padding-top: 5px;
+	border-top: 4px solid #CECECE;
+}
+
+/* The invoice item description */
+table tbody tr.item td:nth-child(1) {
+	text-align: left;
+}
+
+.line-spacing {
+	padding-bottom: 10px;
+}
+
+/* Whitespace left side of line items */
+tr.total td:nth-child(1) {
+	width: 50%;
+}
+
+/* Line items left side */
+tr.total td:nth-child(2) {
+	width: 25%;
+}
+
+/* Line items right side */
+tr.total td:nth-child(3) {
+	width: 25%;
+	text-align: right;
+}
+
+/* CSS for the Div controlling customer notes and other information */
+.extra-info {
+	padding-top: 40px;
+	padding-left: 50px;
+	padding-right: 50px;
+}
+
+#terms-notes {
+	margin-top: 10px;
+}
+
+/*** Start Footer Classes ***/
+.foot {
+	margin-bottom: 30px;
 }
 
 .foot td {
-    border: 1px solid white;
-    font-size: 12px;
+	border: 1px solid white;
+	font-size: 12px;
 }
-.refunded {
-    color: #a00 !important;
+
+.foot td.border {
+	padding: 20px 40px;
+	width: 100%;
+	text-align: center;
 }
-.total-without-refund {
-    color: #757575 !important;
+
+td.left-footer-column {
+	padding: 20px 40px 0;
+	text-align: left;
+	vertical-align: top;
+	width: 45%;
 }
-/* End change colors */
-.space td {
-    padding-bottom: 30px;
+
+td.middle-footer-column {
+	margin: 0 auto;
+	width: 10%;
 }
-table.products td {
-    overflow: hidden;
+
+td.right-footer-column {
+	padding: 20px 40px 0;
+	text-align: right;
+	vertical-align: top;
+	width: 45%;
 }
-.total-amount p {
-    font-weight: bold;
-    font-size: 16px;
-}
+

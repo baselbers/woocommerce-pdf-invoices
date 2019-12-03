@@ -352,7 +352,7 @@ class BEWPI_Template {
 	 *
 	 * @return bool
 	 */
-	private static function has_placeholder( $value ) {
+	public static function has_placeholder( $value ) {
 		foreach ( self::$placeholders as $placeholder ) {
 			if ( strpos( $value, $placeholder ) !== false ) {
 				return true;
@@ -369,7 +369,7 @@ class BEWPI_Template {
 	 *
 	 * @return string
 	 */
-	private function replace_placeholders( $value ) {
+	public function replace_placeholders( $value ) {
 		$payment_gateway = wc_get_payment_gateway_by_order( $this->order );
 
 		$value = str_replace(

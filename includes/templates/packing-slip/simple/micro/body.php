@@ -38,8 +38,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		<tr>
 			<td>
 				<h1 class="title"><?php esc_attr_e( 'Packing Slip', 'woocommerce-pdf-invoices' ); ?></h1>
-				<span class="number"
-				      style="color: <?php echo $is_theme_text_black ? 'black' : esc_attr( $theme_color ); ?>;"><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $packing_slip->order->get_order_number() ) ); ?></span><br/>
+				<span style="color: <?php echo $is_theme_text_black ? 'black' : esc_attr( $theme_color ); ?>;" class="number"><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $packing_slip->order->get_order_number() ) ); ?></span><br>
 				<span><?php echo esc_html( $packing_slip->get_formatted_order_date() ); ?></span>
 			</td>
 		</tr>

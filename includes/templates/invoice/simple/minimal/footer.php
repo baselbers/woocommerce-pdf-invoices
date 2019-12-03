@@ -14,16 +14,23 @@
  * @package WooCommerce_PDF_Invoices/Templates
  * @version 0.0.1
  */
-
+$right_footer_column = WPI()->get_option( 'template', 'right_footer_column' );
 ?>
 
 <table class="footer">
 	<tr>
 		<td>
-			<?php echo nl2br( WPI()->templater()->get_option( 'bewpi_left_footer_column' ) ); ?>
+			<?php echo nl2br( WPI()->get_option( 'template', 'left_footer_column' ) ); ?>
 		</td>
-		<td width="20%">
-			<?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?>
-		</td>
+
+		<?php if ( ! empty( $right_footer_column ) ) { ?>
+			<td>
+				<?php echo nl2br( $right_footer_column  ); ?>
+			</td>
+		<?php } else { ?>
+			<td width="20%">
+				<?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?>
+			</td>
+		<?php } ?>
 	</tr>
 </table>

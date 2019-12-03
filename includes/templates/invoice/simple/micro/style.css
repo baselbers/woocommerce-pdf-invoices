@@ -110,13 +110,8 @@ table tr.spacer td {
 	padding-top: 50px;
 }
 
-/* CSS for Order Total excluding VAT */
-.order-total-ex-vat {
-	padding-top: 5px;
-	border-top: 4px solid #CECECE;
-}
-
-/* CSS for Order Total including VAT */
+/* Order Total */
+.order-total-ex-vat,
 .order-total-incl-vat {
 	padding-top: 5px;
 	border-top: 4px solid #CECECE;
@@ -147,15 +142,11 @@ tr.total td:nth-child(3) {
 	text-align: right;
 }
 
-/* CSS for the Div controlling customer notes and other information */
+/* Div controlling customer notes and other information */
 .extra-info {
 	padding-top: 40px;
 	padding-left: 50px;
 	padding-right: 50px;
-}
-
-#terms-notes {
-	margin-top: 10px;
 }
 
 /*** Start Footer Classes ***/
@@ -166,30 +157,22 @@ tr.total td:nth-child(3) {
 .foot td {
 	border: 1px solid white;
 	font-size: 12px;
-}
-
-.foot td.border {
-	padding: 20px 40px;
-	width: 100%;
-	text-align: center;
+	vertical-align: middle;
+	padding: 20px 50px 0;
 }
 
 td.left-footer-column {
-	padding: 20px 40px 0;
 	text-align: left;
-	vertical-align: top;
-	width: 45%;
+	width: 40%;
 }
 
 td.middle-footer-column {
-	margin: 0 auto;
-	width: 10%;
+	width: 20%;
+	text-align: center;
 }
 
 td.right-footer-column {
-	padding: 20px 40px 0;
 	text-align: right;
-	vertical-align: top;
-	width: 45%;
+	width: 40%;
 }
 

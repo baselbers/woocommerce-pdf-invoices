@@ -16,7 +16,7 @@
  */
 
 $templater                  = WPI()->templater();
-$order                      = $templater->order;
+$order                      = $invoice->order;
 $invoice                    = $templater->invoice;
 $line_items                 = $order->get_items( 'line_item' );
 $formatted_shipping_address = $order->get_formatted_shipping_address();
@@ -25,6 +25,11 @@ $columns                    = $invoice->get_columns();
 $color                      = WPI()->get_option( 'color_theme' );
 $terms                      = WPI()->get_option( 'terms' );
 $order_item_totals          = $invoice->get_order_item_totals();
+
+// Header and footer margin and padding.
+$this->mpdf->setAutoTopMargin    = 'stretch';
+$this->mpdf->setAutoBottomMargin = 'stretch';
+$this->mpdf->autoMarginPadding   = 25; // mm.
 ?>
 
 <div class="title">

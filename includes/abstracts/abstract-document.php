@@ -155,11 +155,6 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$this->mpdf->showImageErrors = true;
 			}
 
-			// Layout.
-			$this->mpdf->setAutoTopMargin    = 'stretch';
-			$this->mpdf->setAutoBottomMargin = 'stretch';
-			$this->mpdf->autoMarginPadding   = 0;
-
 			// Font.
 			$this->mpdf->autoScriptToLang = true;
 			$this->mpdf->autoLangToFont   = true;

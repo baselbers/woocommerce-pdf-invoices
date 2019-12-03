@@ -29,8 +29,7 @@
 				?>
 			</td>
 			<td class="info">
-				<p><?php echo nl2br( WPI()->templater()->get_option( 'bewpi_company_address' ) ); ?></p>
-				<p><?php echo nl2br( WPI()->templater()->get_option( 'bewpi_company_details' ) ); ?></p>
+				<?php echo WPI()->get_formatted_company_address(); ?>
 			</td>
 		</tr>
 	</table>

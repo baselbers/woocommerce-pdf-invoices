@@ -918,7 +918,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'group'  => $group,
 				'suffix' => '_settings',
 			) );
-			//$option = apply_filters( 'bewpi_option', false, $group, $name );
 
 			$options = get_option( join( '', $option_name ) );
 			if ( false === $options ) {
@@ -931,6 +930,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			$option = $options[ 'bewpi_' . $name ];
 			$hook   = sprintf( 'bewpi_pre_option-%1$s-%2$s', $group, $name );
+
+			// Replace placeholders.
+			$templater = WPI()->templater();
+			if ( $templater::has_placeholder( $option ) ) {
+				$option = $templater->replace_placeholders( $option );
+			}
 
 			return apply_filters( $hook, $option );
 		}

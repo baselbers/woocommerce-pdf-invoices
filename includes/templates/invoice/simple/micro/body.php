@@ -2,37 +2,42 @@
 $templater           = WPI()->templater();
 $invoice             = $templater->invoice;
 $columns             = $invoice->get_columns();
-$theme_color         = $this->template_options['bewpi_color_theme'];
-$is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
-$columns_count       = 4;
+$theme_color         = WPI()->get_option( 'template', 'color_theme' );
+$is_theme_text_black = WPI()->get_option( 'template', 'theme_text_black' );
 
+// Paid watermark.
 if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->is_paid() ) {
-	$this->packing_slip->showWatermarkText  = true;
-	$this->packing_slip->watermarkTextAlpha = '0.2';
-	$this->packing_slip->watermarkImgBehind = false;
+	$this->mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
+	$this->mpdf->showWatermarkText  = true;
+	$this->mpdf->watermarkTextAlpha = '0.2';
+	$this->mpdf->watermarkImgBehind = false;
 }
+
+// Header and footer margin and padding.
+$this->mpdf->setAutoTopMargin    = 'stretch';
+$this->mpdf->setAutoBottomMargin = 'stretch';
+$this->mpdf->autoMarginPadding   = 25; // mm.
 ?>
 
 <table>
 	<tbody>
 	<tr>
 		<td class="invoice-to">
-			<b><?php _e( 'Invoice to:', 'woocommerce-pdf-invoices' ); ?></b><br/>
+			<b><?php _e( 'Invoice to:', 'woocommerce-pdf-invoices' ); ?></b><br>
 			<?php
-			echo $invoice->order->get_formatted_billing_address() . '<br/>';
-			// Billing phone.
-			$billing_phone = method_exists( 'WC_Order', 'get_billing_phone' ) ? $invoice->order->get_billing_phone() : $invoice->order->billing_phone;
-			echo $billing_phone ? sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $billing_phone ) : '';
+			echo $invoice->order->get_formatted_billing_address() . '<br>';
+
+			do_action( 'wpi_after_formatted_billing_address', $invoice );
 			?>
 		</td>
 		<?php
-		$formatted_shipping_address = $invoice->order->get_formatted_shipping_address();
-		if ( $this->template_options['bewpi_show_ship_to'] && ! empty( $formatted_shipping_address ) && ! $this->has_only_virtual_products() ) { ?>
-			<td class="ship-to">
-				<b><?php _e( 'Ship to:', 'woocommerce-pdf-invoices' ); ?></b><br/>
-				<?php echo $formatted_shipping_address; ?>
-			</td>
-		<?php } ?>
+		if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $invoice->order ) && ! empty( $formatted_shipping_address ) ) {
+			printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+			echo $formatted_shipping_address;
+
+			do_action( 'wpi_after_formatted_shipping_address', $invoice );
+		}
+		?>
 	</tr>
 	</tbody>
 </table>
@@ -41,17 +46,14 @@ if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->
 	<tbody>
 	<tr>
 		<td class="invoice-details">
-			<h1 class="title"><?php echo WPI()->templater()->get_option( 'bewpi_title' ); ?></h1>
-			<span class="number"
-			      style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
-			<span><?php echo $this->get_formatted_invoice_date(); ?></span><br/>
-			<span><?php echo "Order #" . $invoice->get_number(); ?></span>
+			<h1 class="title"><?php echo esc_html( WPI()->get_option( 'template', 'title' ) ); ?></h1>
+			<span class="number" style="color: <?php echo $is_theme_text_black ? 'black' : esc_attr( $theme_color ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
+			<span><?php echo esc_html( $this->get_formatted_invoice_date() ); ?></span><br/>
+			<span><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $invoice->order->get_order_number() ) ); ?></span>
 		</td>
-		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) {
-			echo 'style="color: black;"';
-		} ?>>
+		<td class="total-amount" bgcolor="<?php echo esc_attr( $theme_color ); ?>" <?php echo $is_theme_text_black ? 'style="color: black;"' : ''; ?>>
 			<h1 class="amount"><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
-			<p><?php echo WPI()->templater()->get_option( 'bewpi_intro_text' ); ?></p>
+			<p><?php echo WPI()->get_option( 'template', 'intro_text' ); ?></p>
 		</td>
 	</tr>
 	</tbody>
@@ -60,7 +62,7 @@ if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->
 <div class="product-lines">
 	<table class="products">
 		<thead>
-		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
+		<tr class="heading">
 			<?php
 			foreach ( $columns as $key => $data ) {
 				$templater->display_header_recursive( $key, $data );
@@ -71,14 +73,6 @@ if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->
 		<tbody>
 		<?php
 		foreach ( $invoice->get_columns_data() as $index => $row ) {
-			echo '<tr class="item">';
-
-			// Display row data.
-			foreach ( $row as $column_key => $data ) {
-				$templater->display_data_recursive( $column_key, $data );
-			}
-
-			echo '</tr>';
 			echo '<tr class="item">';
 
 			// Display row data.
@@ -128,21 +122,21 @@ if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->
 	<table id="terms-notes">
 		<tr>
 			<td><?php echo nl2br( WPI()->templater()->get_option( 'bewpi_terms' ) ); ?></td>
-			<td class="border" colspan="3">
-
+			<td class="border">
 				<?php
-				if ( $this->template_options['bewpi_show_customer_notes'] ) :
+				// Customer notes.
+				if ( WPI()->get_option( 'template', 'show_customer_notes' ) ) {
 					// Note added by customer.
-					$customer_note = method_exists( 'WC_Order', 'get_customer_note' ) ? $invoice->order->get_customer_note() : $invoice->order->customer_note;
+					$customer_note = esc_html( BEWPI_WC_Order_Compatibility::get_customer_note( $invoice->order ) );
 					if ( $customer_note ) {
-						echo '<p><strong>' . __( 'Customer note', 'woocommerce-pdf-invoices' ) . ' </strong> ' . $customer_note . '</p>';
+						echo '<p><strong>' . __( 'Note from customer: ', 'woocommerce-pdf-invoices' ) . '</strong>' . nl2br( $customer_note ) . '</p>';
 					}
-					// Notes added by administrator on order details page.
-					$customer_order_notes = $invoice->order->get_customer_order_notes();
-					if ( count( $customer_order_notes ) > 0 ) {
-						echo '<p><strong>' . __( 'Customer note', 'woocommerce-pdf-invoices' ) . ' </strong>' . $customer_order_notes[0]->comment_content . '</p>';
+
+					// Notes added by administrator on 'Edit Order' page.
+					foreach ( $invoice->order->get_customer_order_notes() as $custom_order_note ) {
+						echo '<p><strong>' . __( 'Note to customer:', 'woocommerce-pdf-invoices' ) . '</strong> ' . nl2br( $custom_order_note->comment_content ) . '</p>';
 					}
-				endif;
+				}
 				?>
 			</td>
 		</tr>
@@ -150,8 +144,8 @@ if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->
 			<td>
 				<?php
 				// Zero Rated VAT message.
-				if ( 'true' === WPI()->get_meta( $invoice, '_vat_number_is_valid' ) && count( $invoice->get_tax_totals() ) === 0 ) {
-					echo esc_html__( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' ) . '<br>';
+				if ( 'true' === WPI()->get_meta( $invoice->order, '_vat_number_is_valid' ) && count( $invoice->order->get_tax_totals() ) === 0 ) {
+					echo '<p>' . esc_html__( 'Zero rated for VAT as customer has supplied EU VAT number', 'woocommerce-pdf-invoices' ) . '</p>';
 				}
 				?>
 			</td>

@@ -38,32 +38,28 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 	 */
 	private function get_sections() {
 		$sections = apply_filters( 'wpi_template_sections', array(
-			'general'         => array(
+			'general'        => array(
 				'title'       => __( 'General Options', 'woocommerce-pdf-invoices' ),
 				'description' => sprintf( __( 'Want to customize the template? The <a href="%s">FAQ</a> will give you a brief description.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/plugins/woocommerce-pdf-invoices' ),
 			),
-			'invoice_number'  => array(
+			'invoice_number' => array(
 				'title' => __( 'Invoice Number Options', 'woocommerce-pdf-invoices' ),
 			),
-			'packing_slips'   => array(
+			'packing_slips'  => array(
 				'title'       => __( 'Packing Slips Options', 'woocommerce-pdf-invoices' ),
 				'description' => __( 'Packing slips are <strong>only available</strong> when using minimal template.', 'woocommerce-pdf-invoices' ),
 			),
-			'header'          => array(
+			'header'         => array(
 				'title'       => __( 'Header Options', 'woocommerce-pdf-invoices' ),
 				'description' => __( 'The header will be visible on every page.', 'woocommerce-pdf-invoices' ),
 			),
-			'body'            => array(
+			'body'           => array(
 				'title'       => __( 'Body Options', 'woocommerce-pdf-invoices' ),
 				'description' => __( 'Configuration options for the body of the template. .', 'woocommerce-pdf-invoices' ),
 			),
-			'footer'          => array(
+			'footer'         => array(
 				'title'       => __( 'Footer Options', 'woocommerce-pdf-invoices' ),
 				'description' => __( 'The footer will be visible on every page.', 'woocommerce-pdf-invoices' ),
-			),
-			'visible_columns' => array(
-				'title'       => __( 'Table Content', 'woocommerce-pdf-invoices' ),
-				'description' => __( 'Enable or disable the columns.', 'woocommerce-pdf-invoices' ),
 			),
 		) );
 
@@ -146,36 +142,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'attrs'    => array( 'required' ),
 			),
 			array(
-				'id'       => 'bewpi-display-prices-incl-tax',
-				'name'     => $this->prefix . 'display_prices_incl_tax',
-				'title'    => '',
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'general',
-				'type'     => 'checkbox',
-				'desc'     => __( 'Display prices including tax', 'woocommerce-pdf-invoices' )
-				              . '<br/><div class="bewpi-notes">'
-				              . __( 'Line item totals will be including tax. <br/><b>Note</b>: Subtotal will still be excluding tax, so disable it within the visible columns section.', 'woocommerce-pdf-invoices' )
-				              . '</div>',
-				'class'    => 'bewpi-checkbox-option-title',
-				'default'  => 0,
-			),
-			array(
-				'id'       => 'bewpi-shipping-taxable',
-				'name'     => $this->prefix . 'shipping_taxable',
-				'title'    => '',
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'general',
-				'type'     => 'checkbox',
-				'desc'     => __( 'Shipping taxable', 'woocommerce-pdf-invoices' )
-				              . '<br/><div class="bewpi-notes">'
-				              . __( 'Enable to display subtotal including shipping.', 'woocommerce-pdf-invoices' )
-				              . '</div>',
-				'class'    => 'bewpi-checkbox-option-title',
-				'default'  => 0,
-			),
-			array(
 				'id'       => 'bewpi-show-payment-status',
 				'name'     => $this->prefix . 'show_payment_status',
 				'title'    => '',
@@ -234,17 +200,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => sprintf( __( 'Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and the WooCommerce store address is used.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 				'default'  => BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ? WPI()->get_formatted_base_address() : '',
-			),
-			array(
-				'id'       => 'bewpi-company-details',
-				'name'     => $this->prefix . 'company_details',
-				'title'    => __( 'Company details', 'woocommerce-pdf-invoices' ),
-				'callback' => array( $this, 'textarea_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'header',
-				'type'     => 'text',
-				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
-				'default'  => '',
 			),
 			array(
 				'id'       => 'bewpi-company-phone',
@@ -487,18 +442,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '</div>',
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
-			),
-			array(
-				'id'       => 'bewpi-show-sku',
-				'name'     => $this->prefix . 'show_sku',
-				'title'    => '',
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'visible_columns',
-				'type'     => 'checkbox',
-				'desc'     => __( 'SKU', 'woocommerce-pdf-invoices' ),
-				'class'    => 'bewpi-checkbox-option-title',
-				'default'  => 0,
 			),
 			array(
 				'id'       => 'bewpi-show-subtotal',

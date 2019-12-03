@@ -2,13 +2,14 @@
 $theme_color            = $this->template_options['bewpi_color_theme'];
 $is_theme_text_black    = $this->template_options['bewpi_theme_text_black'];
 $columns_count          = 4;
-echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
+$line_items             = $order->get_items( 'line_item' );
+
 ?>
 <table class="two-column customer">
 	<tbody>
 	<tr>
 		<td class="address small-font" width="50%">
-			<b><?php _e( 'Invoice to', 'woocommerce-pdf-invoices' ); ?></b><br/>
+			<b><?php _e( 'Invoice to:', 'woocommerce-pdf-invoices' ); ?></b><br/>
 			<?php
 			echo $this->order->get_formatted_billing_address() . '<br/>';
 			// Billing phone.
@@ -34,10 +35,9 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 			<h1 class="title"><?php echo WPI()->templater()->get_option( 'bewpi_title' ); ?></h1>
 			<span class="number" style="color: <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;"><?php echo $this->get_formatted_number(); ?></span><br/>
 			<span><?php echo $this->get_formatted_invoice_date(); ?></span><br/><br/>
-			<span><?php printf( __( 'Order Number: %s', 'woocommerce-pdf-invoices' ), $this->order->get_order_number() ); ?></span><br/>
-			<span><?php printf( __( 'Order Date: %s', 'woocommerce-pdf-invoices' ), $this->get_formatted_order_date() ); ?></span><br/>
-			<?php $this->display_purchase_order_number(); ?><br/>
-			<?php $this->display_vat_number(); ?>
+
+			<?php WPI()->templater()->get_meta( '_po_number' ); ?><br/>
+			<?php WPI()->templater()->get_meta( '_vat_number' ); ?>
 		</td>
 		<td class="total-amount" bgcolor="<?php echo $theme_color; ?>" <?php if ( $is_theme_text_black ) echo 'style="color: black;"'; ?>>
 			<h1 class="amount"><?php echo wc_price( $this->order->get_total() - $this->order->get_total_refunded(), array( 'currency' => $this->order->get_currency() ) ); ?></h1>
@@ -52,14 +52,7 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		<!-- Description -->
 		<th class="align-left"><?php _e( 'Description', 'woocommerce-pdf-invoices' ); ?></th>
 		<!-- SKU -->
-		<?php if ( $this->template_options['bewpi_show_sku'] ) { ?>
-			<?php $columns_count++; ?>
-			<th class="align-left"><?php _e( 'SKU', 'woocommerce-pdf-invoices' ); ?></th>
-		<?php } ?>
-		<!-- Cost -->
-		<th class="align-left"><?php _e( 'Cost', 'woocommerce-pdf-invoices' ); ?></th>
-		<!-- Qty -->
-		<th class="align-left"><?php _e( 'Qty', 'woocommerce-pdf-invoices' ); ?></th>
+
 		<!-- Tax -->
 		<?php if ( $this->template_options['bewpi_show_tax'] && wc_tax_enabled() && empty( $legacy_order ) ) { ?>
 			<?php foreach ( $this->order->get_taxes() as $tax_item ) { ?>
@@ -77,6 +70,8 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 		$product = $this->order->get_product_from_item( $item ); ?>
 		<tr class="product-row">
 			<td>
+                <span><b><?php printf( __( 'Order #%s', 'woocommerce-pdf-invoices' ), $this->order->get_order_number() ); ?></b></span>
+                <span><b><?php printf( __( '- %s', 'woocommerce-pdf-invoices' ), $this->get_formatted_order_date() ); ?></span></b><br/>
 				<?php echo esc_html( $item['name'] );
 				global $wpdb;
 
@@ -96,7 +91,8 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 
 				$hidden_order_itemmeta = apply_filters( 'bewpi_hidden_order_itemmeta', $hidden_order_itemmeta );
 
-				foreach ( $this->order->has_meta( $item_id ) as $meta ) {
+				// Changed has_meta to get_meta
+				foreach ( $this->order->get_meta( $item_id ) as $meta ) {
 					// Skip hidden core fields.
 					if ( in_array( $meta['meta_key'], $hidden_order_itemmeta, true ) ) {
 						continue;
@@ -112,8 +108,8 @@ echo $this->outlining_columns_html( count( $this->order->get_taxes() ) );
 						$term               = get_term_by( 'slug', $meta['meta_value'], wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
 						$meta['meta_key']   = wc_attribute_label( wc_sanitize_taxonomy_name( $meta['meta_key'] ) );
 						$meta['meta_value'] = isset( $term->name ) ? $term->name : $meta['meta_value'];
-					} else {
-						$meta['meta_key'] = apply_filters( 'woocommerce_attribute_label', wc_attribute_label( $meta['meta_key'], $product ), $meta['meta_key'] );
+					} else {                //              Name of filter                Array               $Name              $Product    Int 1           Int 2
+						$meta['meta_key'] = apply_filters( 'woocommerce_attribute_label', wc_attribute_label( $meta['meta_key'], $product ), $meta['meta_key'], 3 );
 					}
 
 					echo '<div class="item-attribute"><span style="font-weight: bold;">' . wp_kses_post( rawurldecode( $meta['meta_key'] ) ) . ': </span>' . wp_kses_post( rawurldecode( $meta['meta_value'] ) ) . '</div>';

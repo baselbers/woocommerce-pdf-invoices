@@ -18,3 +18,4 @@ $is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 		</td>
 	</tr>
 </table>
+</div>

@@ -8,7 +8,7 @@
  * @version     1.0.0
  */
 
-defined( 'ABSPATH' ) or exit;
+defined( 'ABSPATH' ) || exit;
 
 if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 	/**
@@ -80,6 +80,13 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		protected $template_options = array();
 
 		/**
+		 * PDF library object.
+		 *
+		 * @var mPDF $mpdf .
+		 */
+		private $mpdf;
+
+		/**
 		 * BEWPI_Abstract_Document constructor.
 		 */
 		public function __construct() {
@@ -94,34 +101,29 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * Generate document.
 		 *
 		 * @param string $destination Destination mode for file.
+		 *
+		 * @throws MpdfException
 		 */
 		public function generate( $destination = 'F' ) {
 			// Use ttfontdata from uploads folder.
 			define( '_MPDF_TTFONTDATAPATH', WPI_UPLOADS_DIR . '/mpdf/ttfontdata/' );
 
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
-
-			do_action( 'bewpi_before_invoice_content', $order_id );
-
-			// Only use default font with version 2.6.2- because we defining font in template.
-			$default_font    = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
-			$is_new_template = strpos( strtolower( $this->template_options['bewpi_template_name'] ), 'minimal' ) !== false;
+			do_action( 'bewpi_before_invoice_content', $this->order->get_id() );
 
 			$mpdf_params = apply_filters( 'bewpi_mpdf_options', array(
 				'mode'              => 'utf-8',
-				'format'            => '',
+				'format'            => 'A4',
 				'default_font_size' => 0,
-				'default_font'      => $default_font,
-				'margin_left'       => ( $is_new_template ) ? 0 : 14,
-				'margin_right'      => ( $is_new_template ) ? 0 : 14,
-				'margin_top'        => ( $is_new_template ) ? 0 : 14,
+				'default_font'      => '',
+				'margin_left'       => 0,
+				'margin_right'      => 0,
+				'margin_top'        => 0,
 				'margin_bottom'     => 0,
-				'margin_header'     => ( $is_new_template ) ? 0 : 14,
-				'margin_footer'     => ( $is_new_template ) ? 0 : 6,
+				'margin_header'     => 0,
+				'margin_footer'     => 0,
 				'orientation'       => 'P',
 			) );
-			/* @var mPDF $mpdf */
-			$mpdf = new mPDF(
+			$this->mpdf  = new mPDF(
 				$mpdf_params['mode'],
 				$mpdf_params['format'],
 				$mpdf_params['default_font_size'],
@@ -143,36 +145,28 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				// problems with shared hosting when one ip is configured to multiple users/environments.
 				$attachment_path = get_attached_file( $attachment );
 				if ( false !== $attachment_path ) {
-					$mpdf->company_logo = file_get_contents( $attachment_path );
+					$this->mpdf->company_logo = file_get_contents( $attachment_path );
 				}
-			}
-
-			// Show legacy paid watermark.
-			if ( strpos( $this->template_options['bewpi_template_name'], 'micro' ) !== false && $this->template_options['bewpi_show_payment_status'] && strpos( $this->type, 'invoice' ) !== false && $this->order->is_paid() ) {
-				$mpdf->SetWatermarkText( __( 'Paid', 'woocommerce-pdf-invoices' ) );
-				$mpdf->showWatermarkText  = true;
-				$mpdf->watermarkTextAlpha = '0.2';
-				$mpdf->watermarkImgBehind = false;
 			}
 
 			// mPDF debugging.
 			if ( WPI()->get_option( 'general', 'mpdf_debug' ) ) {
-				$mpdf->debug           = true;
-				$mpdf->showImageErrors = true;
+				$this->mpdf->debug           = true;
+				$this->mpdf->showImageErrors = true;
 			}
 
 			// Layout.
-			$mpdf->setAutoTopMargin    = 'stretch';
-			$mpdf->setAutoBottomMargin = 'stretch';
-			$mpdf->autoMarginPadding   = ( $is_new_template ) ? 25 : 10;
+			$this->mpdf->setAutoTopMargin    = 'stretch';
+			$this->mpdf->setAutoBottomMargin = 'stretch';
+			$this->mpdf->autoMarginPadding   = 0;
 
 			// Font.
-			$mpdf->autoScriptToLang = true;
-			$mpdf->autoLangToFont   = true;
-			$mpdf->baseScript       = 1;
-			$mpdf->autoVietnamese   = true;
-			$mpdf->autoArabic       = true;
-			$mpdf->useSubstitutions = true;
+			$this->mpdf->autoScriptToLang = true;
+			$this->mpdf->autoLangToFont   = true;
+			$this->mpdf->baseScript       = 1;
+			$this->mpdf->autoVietnamese   = true;
+			$this->mpdf->autoArabic       = true;
+			$this->mpdf->useSubstitutions = true;
 
 			// Template.
 			$html = $this->get_html();
@@ -183,20 +177,20 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			if ( ! empty( $html['header'] ) ) {
-				$mpdf->SetHTMLHeader( $html['header'] );
+				$this->mpdf->SetHTMLHeader( $html['header'] );
 			}
 
 			if ( ! empty( $html['footer'] ) ) {
-				$mpdf->SetHTMLFooter( $html['footer'] );
+				$this->mpdf->SetHTMLFooter( $html['footer'] );
 			}
 
-			$mpdf = apply_filters( 'bewpi_mpdf', $mpdf, $this );
+			$this->mpdf = apply_filters( 'bewpi_mpdf', $this->mpdf, $this );
 
-			$mpdf->WriteHTML( $html['style'] . $html['body'] );
+			$this->mpdf->WriteHTML( $html['style'] . $html['body'] );
 
-			do_action( 'bewpi_after_invoice_content', $order_id );
+			do_action( 'bewpi_after_invoice_content', $this->order->get_id() );
 
-			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $mpdf, $this );
+			$this->mpdf = apply_filters( 'bewpi_mpdf_after_write', $this->mpdf, $this );
 
 			if ( 'F' === $destination ) {
 				$name = $this->full_path;
@@ -204,7 +198,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 				$name = $this->filename;
 			}
 
-			$mpdf->Output( $name, $destination );
+			$this->mpdf->Output( $name, $destination );
 
 			if ( 'F' !== $destination ) {
 				exit;
@@ -252,8 +246,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 		 * @param string $full_path absolute path to PDF file.
 		 */
 		public static function view( $full_path ) {
-			$general_options = get_option( 'bewpi_general_settings' );
-			$type            = ( 'browser' === $general_options['bewpi_view_pdf'] ) ? 'inline' : 'attachment';
+			$type = 'browser' === (string) WPI()->get_option( 'general', 'view_pdf' ) ? 'inline' : 'attachment';
 
 			header( 'Content-type: application/pdf' );
 			header( 'Content-Disposition: ' . $type . '; filename="' . basename( $full_path ) . '"' );

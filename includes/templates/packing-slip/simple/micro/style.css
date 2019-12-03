@@ -1,196 +1,123 @@
+.header {
+	padding-top: 60px;
+}
+
 table, tr, td, div, p {
-    border:1px solid black;
-}
-
-table {
-    font-family: Arial, sans-serif;
-}
-
-table.company {
-    overflow: hidden;
-}
-
-h1.company-logo {
-    color: black;
-}
-
-table {
-    border-collapse: collapse;
-    font-size: 14px;
-    width: 100%;
-    color: #757575;
-}
-
-.align-left {
-    text-align: left;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.company .info,
-.company .logo {
-    text-align: left;
-    vertical-align: middle;
-    font-size: 14px !important;
-}
-
-table.two-column {
-    margin: 40px 0;
-    width: 100%;
-}
-
-.two-column td {
-    text-align: left;
-    vertical-align: top;
-}
-
-table.products th {
-    border-bottom: 2px solid #A5A5A5;
-}
-
-table.products td {
-    vertical-align: top;
-}
-
-table.products td, table.products th {
-    padding: 5px;
-}
-
-#terms-notes {
-    margin-top: 30px;
-}
-
-tr.product-row td {
-    border-bottom: 1px solid #CECECE;
-}
-
-table, tbody, h1 {
-    margin: 0;
-    padding: 0;
+	border: 1px solid black;
 }
 
 h1 {
-    font-size: 36px;
+	font-size: 36px;
 }
 
-span.payment-status {
-    font-size: 14px;
-    font-weight: normal;
+table {
+	font-family: dejavusanscondensed, Arial, sans-serif;
+	font-size: 14px;
+	border-collapse: collapse;
+	width: 100%;
+	color: #757575;
+	margin: 0;
+	padding: 0;
 }
 
-.nowrap {
-    white-space: nowrap;
+/* Company logo and address */
+
+table.company tr td {
+	vertical-align: middle;
+	width: 50%;
 }
 
-.invoice-head {
-    margin-bottom: 30px;
-    margin-right: -64px;
+/* Customer addresses */
+
+table.customer-address tr td {
+	vertical-align: top;
+	padding-bottom: 60px;
 }
 
-.invoice-head td {
-    text-align: left;
+/* Invoice title and details */
+
+table.invoice-details {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-.invoice-head .title {
-    color: #525252;
+table.invoice-details tr td {
+	width: 50%;
 }
 
-/* Description header */
-table tr.heading th {
-    text-align: left;
+table.invoice-details td.title {
+	color: #525252;
 }
 
-table tr.heading th:nth-child(3) {
-    text-align: center;
+/* Products */
+
+table.products {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-/* The invoice item, quantity, price, VAT, total */
-table tbody tr.item td {
-    border-bottom: 1px solid;
-    padding-top: 10px;
-    padding-bottom: 10px;
+table.products th {
+	border-bottom: 2px solid #A5A5A5;
 }
 
-table tr.item td:nth-child(3) {
-    text-align: center;
+table.products tr.heading th {
+	text-align: left;
 }
 
-td.invoice-details {
-    vertical-align: top;
-    /*line-height: 30px;*/
+table.products tr.heading th:nth-child(3) {
+	text-align: center;
 }
 
-td.invoice-details span {
-    font-size: 14px;
+table.products tr.item td {
+	border-bottom: 1px solid #eee;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
-.number {
-    font-size: 16px;
+table.products tr.item td:nth-child(3) {
+	text-align: center;
 }
 
-.small-font {
-    font-size: 14px;
+/* Customer notes */
+
+table.customer-notes {
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
-table tr.spacer td {
-    padding-top: 20px;
-}
-
-div.item-attribute {
-    font-size: 12px;
-    margin-top: 10px;
-}
-
-.invoice {
-    margin-bottom: 20px;
-}
-
-.foot {
-    margin: 0 -64px;
-}
+/* Footer */
 
 .foot td.border {
-    padding: 20px 40px;
-    width: 100%;
-    text-align: center;
+	padding: 20px 40px;
+	width: 100%;
+	text-align: center;
 }
 
 td.left-footer-column {
-    padding: 20px 40px 0;
-    text-align: left;
-    vertical-align: top;
-    width: 50%;
+	padding: 20px 40px 0;
+	text-align: left;
+	vertical-align: top;
+	width: 50%;
 }
 
 td.middle-footer-column {
-    margin: 0 auto;
-    width: 5%;
+	margin: 0 auto;
+	width: 5%;
 }
 
 td.right-footer-column {
-    padding: 20px 50px 0;
-    text-align: right;
-    vertical-align: top;
-    width: 50%;
+	padding: 20px 50px 0;
+	text-align: right;
+	vertical-align: top;
+	width: 50%;
 }
 
 .foot td {
-    border: 1px solid white;
-    font-size: 12px;
+	border: 1px solid white;
+	font-size: 12px;
 }
 
-/* End change colors */
-.space td {
-    padding-bottom: 30px;
-}
-
-table.products td {
-    overflow: hidden;
-}
-
-.total-amount p {
-    font-weight: bold;
-    font-size: 16px;
+span.payment-status {
+	font-size: 14px;
+	font-weight: normal;
 }

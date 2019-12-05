@@ -25,7 +25,7 @@ $right_footer_column = WPI()->get_option( 'template', 'right_footer_column' );
 
 		<?php if ( ! empty( $right_footer_column ) ) { ?>
 			<td>
-				<?php echo nl2br( $right_footer_column  ); ?>
+				<?php echo nl2br( $right_footer_column ); ?>
 			</td>
 		<?php } else { ?>
 			<td width="20%">

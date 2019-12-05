@@ -16,13 +16,14 @@
  */
 
 $templater                  = WPI()->templater();
-$order                      = $invoice->order;
 $invoice                    = $templater->invoice;
+$order                      = $invoice->order;
 $line_items                 = $order->get_items( 'line_item' );
 $formatted_shipping_address = $order->get_formatted_shipping_address();
 $formatted_billing_address  = $order->get_formatted_billing_address();
 $columns                    = $invoice->get_columns();
-$color                      = WPI()->get_option( 'color_theme' );
+$theme_color_background     = WPI()->get_option( 'template', 'color_theme_background' );
+$theme_color_text           = WPI()->get_option( 'template', 'color_theme_text' );
 $terms                      = WPI()->get_option( 'terms' );
 $order_item_totals          = $invoice->get_order_item_totals();
 
@@ -87,12 +88,20 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		</td>
 	</tr>
 </table>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<thead>
-	<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
+	<tr class="heading" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>;">
 		<?php
 		foreach ( $columns as $key => $data ) {
-			$templater->display_header_recursive( $key, $data );
+			if ( is_array( $data ) ) {
+				foreach ( $data as $k => $d ) {
+					printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $k ), esc_attr( $theme_color_text ), $d );
+				}
+
+				continue;
+			}
+
+			printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $key ), esc_attr( $theme_color_text ), $data );
 		}
 		?>
 	</tr>
@@ -101,10 +110,16 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	<?php
 	foreach ( $invoice->get_columns_data() as $index => $row ) {
 		echo '<tr class="item">';
+		foreach ( $row as $key => $data ) {
+			if ( is_array( $data ) ) {
+				foreach ( $data as $k => $d ) {
+					printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $d );
+				}
 
-		// Display row data.
-		foreach ( $row as $column_key => $data ) {
-			$templater->display_data_recursive( $column_key, $data );
+				continue;
+			}
+
+			printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $data );
 		}
 
 		echo '</tr>';
@@ -118,7 +133,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	</tbody>
 </table>
 
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tbody>
 
 	<?php
@@ -153,7 +168,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	</tbody>
 </table>
 
-<table class="notes" cellpadding="0" cellspacing="0">
+<table class="notes">
 	<tr>
 		<td>
 			<?php

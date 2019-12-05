@@ -77,7 +77,7 @@ td.invoice-details {
 }
 
 table.products th {
-	border-bottom: 2px solid #A5A5A5;
+	border-bottom: 1px solid #A5A5A5;
 }
 
 .product-lines {
@@ -111,10 +111,10 @@ table tr.spacer td {
 }
 
 /* Order Total */
-.order-total-ex-vat,
-.order-total-incl-vat {
-	padding-top: 5px;
-	border-top: 4px solid #CECECE;
+table tr.total td.order-total-ex-vat,
+table tr.total td.order-total-incl-vat {
+	border-top: 2px solid #CECECE;
+	font-weight: bold;
 }
 
 /* The invoice item description */

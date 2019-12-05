@@ -1,26 +1,22 @@
 <?php
-/**
- * PDF packing slip footer template that will be visible on every page.
- *
- * This template can be overridden by copying it to youruploadsfolder/woocommerce-pdf-invoices/templates/packing-slip/simple/yourtemplatename/footer.php.
- *
- * HOWEVER, on occasion WooCommerce PDF Invoices will need to update template files and you
- * (the theme developer) will need to copy the new files to your theme to
- * maintain compatibility. We try to do this as little as possible, but it does
- * happen. When this occurs the version of the template file will be bumped and
- * the readme will list any important changes.
- *
- * @author  Bas Elbers
- * @package WooCommerce_PDF_Invoices/Templates
- * @version 0.0.1
- */
-
+$theme_color         = $this->template_options['bewpi_color_theme'];
+$is_theme_text_black = $this->template_options['bewpi_theme_text_black'];
 ?>
+<div class="footer">
+	<table class="foot border"
+	       style="border-top: 4px solid <?php echo ( $is_theme_text_black ) ? 'black' : $theme_color; ?>;">
+		<tr>
+			<td class="left-footer-column">
+				<p></p>
+			</td>
 
-<table class="footer">
-	<tr>
-		<td>
-			<?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?>
-		</td>
-	</tr>
-</table>
+			<td class="middle-footer-column">
+				<p></p>
+			</td>
+
+			<td class="right-footer-column">
+				<p><?php printf( __( '%1$s of %2$s', 'woocommerce-pdf-invoices' ), '{PAGENO}', '{nbpg}' ); ?></p>
+			</td>
+		</tr>
+	</table>
+</div>

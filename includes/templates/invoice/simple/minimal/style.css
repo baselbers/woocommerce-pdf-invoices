@@ -1,98 +1,98 @@
 table, tr, td, div, p {
-    /*border:1px solid black;*/
-}
-
-h1, h2, h3, h4, h5, h6{
-    padding:0;
-    margin:0;
-}
-
-table, div {
-    font-family: dejavusanscondensed, Arial, sans-serif;
+	/*border:1px solid black;*/
 }
 
 table {
-    width: 100%;
-    line-height: normal;
-    color: #555;
-    font-size: 12px;
-    margin-left: 80px; /* Invoice margin */
-    margin-right: 80px; /* Invoice margin */
+	border-spacing: 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
+}
+
+table, div {
+	font-family: dejavusanscondensed, Arial, sans-serif;
+}
+
+table {
+	width: 100%;
+	line-height: normal;
+	color: #555;
+	font-size: 12px;
+	margin-left: 80px; /* Invoice margin */
+	margin-right: 80px; /* Invoice margin */
 }
 
 table td, table th {
-    padding:5px;
-    vertical-align:top;
-    line-height: inherit;
+	padding: 5px;
+	vertical-align: top;
+	line-height: inherit;
 }
 
 table tr.top td {
-   padding-top: 75px;
+	padding-top: 75px;
 }
 
 /* Invoice information */
-table tr.top td:nth-child(2){
-    text-align:right;
+table tr.top td:nth-child(2) {
+	text-align: right;
 }
 
 div.title div {
-    padding: 5px;
-    width: 35%;
-    float: left;
-    margin-left: 80px; /* Invoice margin */
-    line-height: 55px;
+	padding: 5px;
+	width: 35%;
+	float: left;
+	margin-left: 80px; /* Invoice margin */
+	line-height: 55px;
 }
 
 div.title div.watermark {
-    float: right;
-    margin-right: 80px; /* Invoice margin */
-    line-height: normal;
+	float: right;
+	margin-right: 80px; /* Invoice margin */
+	line-height: normal;
 }
 
 div.title div.watermark h2 {
-    font-family: serif;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 10px 7px;
-    border-radius: 10px;
-    opacity: 0.8;
-    text-align: center;
-    width: 130px;
-    float:right;
+	font-family: serif;
+	text-transform: uppercase;
+	font-weight: bold;
+	padding: 10px 7px;
+	border-radius: 10px;
+	opacity: 0.8;
+	text-align: center;
+	width: 130px;
+	float: right;
 }
 
 div.title div.watermark h2.green {
-    color: green;
-    border: 3px solid green;
+	color: green;
+	border: 3px solid green;
 }
 
 div.title div.watermark h2.red {
-    color: red;
-    border: 3px solid red;
+	color: red;
+	border: 3px solid red;
 }
 
 table tr.information td {
-    padding-bottom: 20px;
+	padding-bottom: 20px;
 }
 
 /* Customer billing address */
-table tr.information td:nth-child(3){
-    text-align: right;
+table tr.information td:nth-child(3) {
+	text-align: right;
 }
 
-table tr.heading th:nth-child(1) {
-    width: 50%;
+table tr.heading th,
+table tr.item td {
+	text-align: center;
 }
 
 table tr.heading th:nth-child(1),
 table tr.item td:nth-child(1) {
-    text-align: left;
-}
-
-table tr.heading th {
-    font-weight: bold;
-    color: #FFFFFF;
-    text-align: center;
+	text-align: left;
+	width: 50%;
 }
 
 table tr.heading th.total,
@@ -101,53 +101,55 @@ table tr.heading th.total_incl_vat,
 table tr.item td.total,
 table tr.item td.total_ex_vat,
 table tr.item td.total_incl_vat {
-    text-align: right;
+	text-align: right;
 }
 
 table tr.item td {
-    border-bottom: 1px solid #eee;
-    text-align: center;
+	border-bottom: 1px solid #eee;
+	text-align: center;
 }
 
 table tr.spacer td {
-    padding-top: 20px;
+	padding-top: 20px;
 }
 
-/* Totals */
 table tr.total td.border {
-    border-top: 2px solid #eee;
-    font-weight: bold;
+	border-top: 2px solid #eee;
+
 }
+
+/* Black lines for the Totals */
+table tr.total td.order-total-ex-vat,
+table tr.total td.order-total-incl-vat {
+	border-top: 2px solid black;
+	font-weight: bold;
+}
+
 
 small.shipped_via {
-    display: none;
-}
-
-/* Dynamic class */
-table tr.total td.order-total{
-    border-top: 2px solid #000;
+	display: none;
 }
 
 table.notes {
-    margin-top: 40px;
+	margin-top: 40px;
 }
 
 div.terms {
-    margin-top: 40px;
-    position: absolute;
-    bottom: 120px;
+	margin-top: 40px;
+	position: absolute;
+	bottom: 120px;
 }
 
 table.footer {
-    padding-top: 20px;
-    padding-bottom: 20px; /* Invoice margin */
-    width: 100%;
+	padding-top: 20px;
+	padding-bottom: 20px; /* Invoice margin */
+	width: 100%;
 }
 
 table.footer tr td {
-    vertical-align: bottom;
+	vertical-align: bottom;
 }
 
 table.footer tr td:nth-child(2) {
-    text-align: right;
+	text-align: right;
 }

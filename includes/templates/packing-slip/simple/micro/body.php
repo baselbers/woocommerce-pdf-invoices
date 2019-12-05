@@ -14,7 +14,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	<table class="customer-address">
 		<tbody>
 		<tr>
-			<td>
+			<td class="bill-to">
 				<?php
 				printf( '<strong>%s</strong><br />', esc_html__( 'Bill to:', 'woocommerce-pdf-invoices' ) );
 				echo $packing_slip->order->get_formatted_billing_address();
@@ -22,7 +22,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 				do_action( 'wpi_after_formatted_billing_address', $packing_slip );
 				?>
 			</td>
-			<td>
+			<td class="ship-to">
 				<?php
 				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $packing_slip->order->get_formatted_shipping_address();
@@ -116,3 +116,4 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			</td>
 		</tr>
 	</table>
+</div>

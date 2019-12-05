@@ -1,9 +1,9 @@
 <?php
-$templater           = WPI()->templater();
-$invoice             = $templater->invoice;
-$columns             = $invoice->get_columns();
-$theme_color         = WPI()->get_option( 'template', 'color_theme' );
-$is_theme_text_black = WPI()->get_option( 'template', 'theme_text_black' );
+$templater              = WPI()->templater();
+$invoice                = $templater->invoice;
+$columns                = $invoice->get_columns();
+$theme_color_background = WPI()->get_option( 'template', 'color_theme_background' );
+$theme_color_text       = WPI()->get_option( 'template', 'color_theme_text' );
 
 // Paid watermark.
 if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->is_paid() ) {
@@ -47,11 +47,13 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	<tr>
 		<td class="invoice-details">
 			<h1 class="title"><?php echo esc_html( WPI()->get_option( 'template', 'title' ) ); ?></h1>
-			<span class="number" style="color: <?php echo $is_theme_text_black ? 'black' : esc_attr( $theme_color ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
+			<span class="number"
+			      style="color:<?php echo esc_attr( $theme_color_background ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
 			<span><?php echo esc_html( $this->get_formatted_invoice_date() ); ?></span><br/>
 			<span><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $invoice->order->get_order_number() ) ); ?></span>
 		</td>
-		<td class="total-amount" bgcolor="<?php echo esc_attr( $theme_color ); ?>" <?php echo $is_theme_text_black ? 'style="color: black;"' : ''; ?>>
+		<td class="total-amount"
+		    bgcolor="<?php echo esc_attr( $theme_color_background ); ?>" style="color:<?php echo esc_attr( $theme_color_text ); ?>">
 			<h1 class="amount"><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
 			<p><?php echo WPI()->get_option( 'template', 'intro_text' ); ?></p>
 		</td>
@@ -62,10 +64,18 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 <div class="product-lines">
 	<table class="products">
 		<thead>
-		<tr class="heading">
+		<tr class="heading" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>;">
 			<?php
 			foreach ( $columns as $key => $data ) {
-				$templater->display_header_recursive( $key, $data );
+				if ( is_array( $data ) ) {
+					foreach ( $data as $k => $d ) {
+						printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $k ), esc_attr( $theme_color_text ), $d );
+					}
+
+					continue;
+				}
+
+				printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $key ), esc_attr( $theme_color_text ), $data );
 			}
 			?>
 		</tr>
@@ -74,10 +84,16 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		<?php
 		foreach ( $invoice->get_columns_data() as $index => $row ) {
 			echo '<tr class="item">';
+			foreach ( $row as $key => $data ) {
+				if ( is_array( $data ) ) {
+					foreach ( $data as $k => $d ) {
+						printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $d );
+					}
 
-			// Display row data.
-			foreach ( $row as $column_key => $data ) {
-				$templater->display_data_recursive( $column_key, $data );
+					continue;
+				}
+
+				printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $data );
 			}
 
 			echo '</tr>';

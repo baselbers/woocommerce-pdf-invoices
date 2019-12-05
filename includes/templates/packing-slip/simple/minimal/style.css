@@ -1,3 +1,5 @@
+/* Start Helper Classes */
+/* Enable this to see packing slip structure */
 table, tr, td, div, p {
     /*border: 1px solid black;*/
 }
@@ -18,8 +20,6 @@ table {
     line-height: normal;
     color: #555;
     font-size: 12px;
-    margin-left: 80px; /* Document margin */
-    margin-right: 80px; /* Document margin */
 }
 
 table td, table th {
@@ -28,53 +28,109 @@ table td, table th {
     line-height: inherit;
 }
 
-table tr.top td {
-    padding-top: 80px;
+/* Start Header Classes */
+div.header {
+    padding: 60px 60px 0px 60px
 }
 
-/* Top information */
-table tr.top td:nth-child(2){
+/* Company logo and address */
+table td.logo {
+    width: 50%;
+    vertical-align: middle;
+}
+
+/* Customer addresses */
+table td.address {
+    width: 50%;
     text-align: right;
 }
 
-table tr.title td {
-    margin-left: 80px; /* Document margin */
-    line-height: 55px;
+
+/* Start Body Classes */
+div.body {
+    padding: 0px 60px;
 }
 
-table tr.information td {
-    padding-bottom: 20px;
+table.customer-address tr td {
+    vertical-align: top;
+    padding-bottom: 60px;
 }
 
-/* Customer billing address */
-table tr.information td:nth-child(3){
+table td.title-information {
+    width: 50%;
+}
+
+table td.bill-to {
+    width: 25%;
+}
+
+table td.ship-to {
+    width: 25%;
     text-align: right;
 }
 
-table tr.heading th {
-    font-weight: bold;
+/* Invoice title and details */
+table.invoice-details {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+table.invoice-details td.title {
+    color: #525252;
+}
+
+table.products tr.heading th {
     text-align: left;
-    color: #FFFFFF;
 }
 
-table tr.item td{
-    border-bottom: 1px solid #eee;
+table.products tr.heading th:nth-child(3) {
+    text-align: center;
 }
 
-table.notes {
-    margin-top: 40px;
+table.products tr.item td {
+    border-bottom: 1px solid #555;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
-table.footer {
-    margin-top: 20px;
-    margin-bottom: 20px; /* Document margin */
+table.products tr.item td:nth-child(3) {
+    text-align: center;
+}
+
+/* Customer notes */
+table.customer-notes {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Start Footer Classes */
+.footer {
+    padding: 0px 60px 30px 60px;
+}
+
+.foot border {
     width: 100%;
+    text-align: center;
 }
 
-table.footer tr td {
-    vertical-align: bottom;
+td.left-footer-column {
+    vertical-align: top;
+    width: 50%;
 }
 
-table.footer tr td {
+td.middle-footer-column {
+    text-align: center;
+    margin: 0 auto;
+    width: 5%;
+}
+
+td.right-footer-column {
     text-align: right;
+    vertical-align: top;
+    width: 50%;
+}
+
+.foot td {
+    border: 1px solid white;
+    font-size: 12px;
 }

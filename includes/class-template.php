@@ -262,8 +262,10 @@ class BEWPI_Template {
 	 *
 	 * @param string $key Column ID.
 	 * @param array  $data Column or column label.
+	 * @deprecated since 05/12/2019.
 	 */
 	public function display_header_recursive( $key, $data ) {
+		_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices 4.0.0' );
 		if ( is_array( $data ) ) {
 			foreach ( $data as $k => $d ) {
 				$this->display_header_recursive( $k, $d );
@@ -280,8 +282,10 @@ class BEWPI_Template {
 	 *
 	 * @param string $key Column ID.
 	 * @param array  $data Column or column label.
+	 * @deprecated since 05/12/2019.
 	 */
 	public function display_data_recursive( $key, $data ) {
+		_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices 4.0.0' );
 		if ( is_array( $data ) ) {
 			foreach ( $data as $k => $d ) {
 				$this->display_data_recursive( $k, $d );

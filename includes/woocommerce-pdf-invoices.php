@@ -1085,13 +1085,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		public function get_formatted_company_address() {
-			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-				$formatted_company_address = self::get_formatted_base_address();
-			} else {
-				$formatted_company_address = nl2br( self::get_option( 'template', 'company_address' ) ) . '<br>';
-			}
-
-			return $formatted_company_address;
+			return nl2br( (string) self::get_option( 'template', 'company_address' ) );
 		}
 
 		/**

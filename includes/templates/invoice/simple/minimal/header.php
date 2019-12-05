@@ -29,10 +29,12 @@
 		</td>
 
 		<td>
-			<?php
-			echo WPI()->get_formatted_company_address();
-			echo WPI()->get_formatted_company_details();
-			?>
+			<p>
+				<?php
+				echo WPI()->get_formatted_company_address() . '<br>';
+				echo WPI()->get_formatted_company_details();
+				?>
+			</p>
 		</td>
 	</tr>
 </table>

@@ -55,7 +55,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 			),
 			'body'           => array(
 				'title'       => __( 'Body Options', 'woocommerce-pdf-invoices' ),
-				'description' => __( 'Configuration options for the body of the template. .', 'woocommerce-pdf-invoices' ),
+				'description' => __( 'Configuration options for the body of the template.', 'woocommerce-pdf-invoices' ),
 			),
 			'footer'         => array(
 				'title'       => __( 'Footer Options', 'woocommerce-pdf-invoices' ),
@@ -124,21 +124,6 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'color',
 				'desc'     => '',
 				'default'  => '#000000',
-			),
-			array(
-				'id'       => 'bewpi-theme-text-black',
-				'name'     => $this->prefix . 'theme_text_black',
-				'title'    => '',
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'general',
-				'type'     => 'checkbox',
-				'desc'     => __( 'Display theme text in black color', 'woocommerce-pdf-invoices' )
-				              . '<br/><div class="bewpi-notes">'
-				              . __( 'Enable if you\'ve set the color theme to white or some other light color.', 'woocommerce-pdf-invoices' )
-				              . '</div>',
-				'class'    => 'bewpi-checkbox-option-title',
-				'default'  => 0,
 			),
 			array(
 				'id'       => 'bewpi-date-format',

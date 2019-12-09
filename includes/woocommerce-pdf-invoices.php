@@ -1101,11 +1101,11 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			$company_vat_id              = self::get_option( 'template', 'company_vat_id' );
 
 			if ( ! empty( $company_phone ) ) {
-				$formatted_company_details .= sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
+				$formatted_company_details .= sprintf( __( '%s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
 			}
 
 			if ( ! empty( $company_email_address ) ) {
-				$formatted_company_details .= sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
+				$formatted_company_details .= sprintf( __( '%s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
 			}
 
 			if ( ! empty( $company_registration_number ) ) {

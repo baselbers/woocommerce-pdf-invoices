@@ -3,22 +3,10 @@
 
 	var setting = {};
 
-	setting.settings = ['bewpi-theme-text-black', 'bewpi-intro-text'];
+	setting.settings = ['bewpi-intro-text'];
 
 	setting.enableDisableNextInvoiceNumbering = function (elem) {
 		document.getElementById('bewpi-next-invoice-number').readOnly = !elem.checked;
-	};
-
-	setting.switchSettings = function (event) {
-		var display = (event.target.value.toLowerCase().indexOf('micro') !== -1) ? 'table-row' : 'none';
-
-		setting.settings.forEach(function (settingId) {
-				var settingElem = document.getElementById(settingId);
-				if (settingElem) {
-					settingElem.parentElement.parentElement.style.display = display;
-				}
-			}
-		)
 	};
 
 	var notice = {};

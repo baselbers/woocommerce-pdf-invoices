@@ -16,23 +16,28 @@
  */
 ?>
 
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tr class="top">
-		<td>
+		<td class="logo">
 			<?php
 			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
-				printf( '<img src="var:company_logo" style="max-height:100px;"/>' );
+				printf( '<img src="var:company_logo" style="max-height:150px;"/>' );
 			} else {
 				printf( '<h2>%s</h2>', esc_html( WPI()->get_option( 'template', 'company_name' ) ) );
 			}
 			?>
 		</td>
-
-		<td>
+		<td class="details">
 			<p>
 				<?php
-				echo WPI()->get_formatted_company_address() . '<br>';
 				echo WPI()->get_formatted_company_details();
+				?>
+			</p>
+		</td>
+		<td class="info">
+			<p>
+				<?php
+				echo WPI()->get_formatted_company_address();
 				?>
 			</p>
 		</td>

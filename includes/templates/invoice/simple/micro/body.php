@@ -1,9 +1,10 @@
 <?php
-$templater              = WPI()->templater();
-$invoice                = $templater->invoice;
-$columns                = $invoice->get_columns();
-$theme_color_background = WPI()->get_option( 'template', 'color_theme_background' );
-$theme_color_text       = WPI()->get_option( 'template', 'color_theme_text' );
+$templater                  = WPI()->templater();
+$invoice                    = $templater->invoice;
+$columns                    = $invoice->get_columns();
+$formatted_shipping_address = $invoice->order->get_formatted_shipping_address();
+$theme_color_background     = WPI()->get_option( 'template', 'color_theme_background' );
+$theme_color_text           = WPI()->get_option( 'template', 'color_theme_text' );
 
 // Paid watermark.
 if ( WPI()->get_option( 'template', 'show_payment_status' ) && $invoice->order->is_paid() ) {
@@ -30,14 +31,16 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			do_action( 'wpi_after_formatted_billing_address', $invoice );
 			?>
 		</td>
-		<?php
-		if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $invoice->order ) && ! empty( $formatted_shipping_address ) ) {
-			printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
-			echo $formatted_shipping_address;
+		<td class="ship-to">
+			<?php
+			if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $invoice->order ) && ! empty( $formatted_shipping_address ) ) {
+				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+				echo $formatted_shipping_address;
 
-			do_action( 'wpi_after_formatted_shipping_address', $invoice );
-		}
-		?>
+				do_action( 'wpi_after_formatted_shipping_address', $invoice );
+			}
+			?>
+		</td>
 	</tr>
 	</tbody>
 </table>
@@ -53,7 +56,8 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			<span><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $invoice->order->get_order_number() ) ); ?></span>
 		</td>
 		<td class="total-amount"
-		    bgcolor="<?php echo esc_attr( $theme_color_background ); ?>" style="color:<?php echo esc_attr( $theme_color_text ); ?>">
+		    bgcolor="<?php echo esc_attr( $theme_color_background ); ?>"
+		    style="color:<?php echo esc_attr( $theme_color_text ); ?>">
 			<h1 class="amount"><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
 			<p><?php echo WPI()->get_option( 'template', 'intro_text' ); ?></p>
 		</td>
@@ -135,10 +139,12 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 </div>
 
 <div class="extra-info">
-	<table id="terms-notes">
+	<table>
 		<tr>
-			<td><?php echo nl2br( WPI()->templater()->get_option( 'bewpi_terms' ) ); ?></td>
-			<td class="border">
+			<td class="terms">
+				<?php echo nl2br( WPI()->templater()->get_option( 'bewpi_terms' ) ); ?>
+			</td>
+			<td class="notes">
 				<?php
 				// Customer notes.
 				if ( WPI()->get_option( 'template', 'show_customer_notes' ) ) {
@@ -150,7 +156,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 
 					// Notes added by administrator on 'Edit Order' page.
 					foreach ( $invoice->order->get_customer_order_notes() as $custom_order_note ) {
-						echo '<p><strong>' . __( 'Note to customer:', 'woocommerce-pdf-invoices' ) . '</strong> ' . nl2br( $custom_order_note->comment_content ) . '</p>';
+						echo '<p><strong>' . __( 'Note to customer:', 'woocommerce-pdf-invoices' ) . '</strong>' . nl2br( $custom_order_note->comment_content ) . '</p>';
 					}
 				}
 				?>

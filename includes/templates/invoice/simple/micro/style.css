@@ -32,6 +32,8 @@ h1.company-name {
 .info {
 	width: 50%;
 	padding-top: 60px;
+	vertical-align: bottom;
+	font-size: 12px;
 }
 
 .refunded {
@@ -112,9 +114,14 @@ table tr.spacer td {
 
 /* Order Total */
 table tr.total td.order-total-ex-vat,
-table tr.total td.order-total-incl-vat {
-	border-top: 2px solid #CECECE;
+table tr.total td.order-total-incl-vat,
+table tr.total td.order-total {
+	border-top: 2px solid #ece9ee;
 	font-weight: bold;
+}
+
+table tr.total td.border {
+	border-top: 1px solid #eee;
 }
 
 /* The invoice item description */
@@ -145,12 +152,24 @@ tr.total td:nth-child(3) {
 /* Div controlling customer notes and other information */
 .extra-info {
 	padding-top: 40px;
-	padding-left: 50px;
-	padding-right: 50px;
+	padding-left: 60px;
+	padding-right: 60px;
+}
+
+.terms {
+	vertical-align: top;
+	width: 50%;
+	padding-right: 5px;
+}
+
+.notes {
+	vertical-align: top;
+	width: 50%;
 }
 
 /*** Start Footer Classes ***/
 .foot {
+	border-top: 4px solid #ece9ee;
 	margin-bottom: 30px;
 }
 

@@ -1,136 +1,136 @@
 /* Start Helper Classes */
 /* Enable this to see packing slip structure */
 table, tr, td, div, p {
-    /*border: 1px solid black;*/
+	/*border: 1px solid black;*/
 }
 
-h1, h2, h3, h4, h5, h6{
-    padding: 0;
-    margin: 0;
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
 }
 
 table, div {
-    font-family: dejavusanscondensed, Arial, sans-serif;
+	font-family: dejavusanscondensed, Arial, sans-serif;
 }
 
 table {
-    width: 100%;
-    border-spacing: 0;
-    border-collapse: collapse;
-    line-height: normal;
-    color: #555;
-    font-size: 12px;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	line-height: normal;
+	color: #555;
+	font-size: 12px;
 }
 
 table td, table th {
-    padding: 5px;
-    vertical-align: top;
-    line-height: inherit;
+	padding: 5px;
+	vertical-align: top;
+	line-height: inherit;
 }
 
 /* Start Header Classes */
 div.header {
-    padding: 60px 60px 0px 60px
+	padding: 60px 60px 0px 60px
 }
 
 /* Company logo and address */
 table td.logo {
-    width: 50%;
-    vertical-align: middle;
+	width: 50%;
+	vertical-align: middle;
 }
 
 /* Customer addresses */
 table td.address {
-    width: 50%;
-    text-align: right;
+	width: 50%;
+	text-align: right;
 }
 
 
 /* Start Body Classes */
 div.body {
-    padding: 0px 60px;
+	padding: 0px 60px;
 }
 
 table.customer-address tr td {
-    vertical-align: top;
-    padding-bottom: 60px;
+	vertical-align: top;
+	padding-bottom: 60px;
 }
 
 table td.title-information {
-    width: 50%;
+	width: 50%;
 }
 
 table td.bill-to {
-    width: 25%;
+	width: 25%;
 }
 
 table td.ship-to {
-    width: 25%;
-    text-align: right;
+	width: 25%;
+	text-align: right;
 }
 
 /* Invoice title and details */
 table.invoice-details {
-    margin-top: 15px;
-    margin-bottom: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 table.invoice-details td.title {
-    color: #525252;
+	color: #525252;
 }
 
 table.products tr.heading th {
-    text-align: left;
+	text-align: left;
 }
 
 table.products tr.heading th:nth-child(3) {
-    text-align: center;
+	text-align: center;
 }
 
 table.products tr.item td {
-    border-bottom: 1px solid #555;
-    padding-top: 10px;
-    padding-bottom: 10px;
+	border-bottom: 1px solid #555;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
 
 table.products tr.item td:nth-child(3) {
-    text-align: center;
+	text-align: center;
 }
 
 /* Customer notes */
 table.customer-notes {
-    margin-top: 15px;
-    margin-bottom: 15px;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }
 
 /* Start Footer Classes */
 .footer {
-    padding: 0px 60px 30px 60px;
+	padding: 0px 60px 30px 60px;
 }
 
 .foot border {
-    width: 100%;
-    text-align: center;
+	width: 100%;
+	text-align: center;
 }
 
 td.left-footer-column {
-    vertical-align: top;
-    width: 50%;
+	vertical-align: top;
+	width: 50%;
 }
 
 td.middle-footer-column {
-    text-align: center;
-    margin: 0 auto;
-    width: 5%;
+	text-align: center;
+	margin: 0 auto;
+	width: 5%;
 }
 
 td.right-footer-column {
-    text-align: right;
-    vertical-align: top;
-    width: 50%;
+	text-align: right;
+	vertical-align: top;
+	width: 50%;
 }
 
 .foot td {
-    border: 1px solid white;
-    font-size: 12px;
+	border: 1px solid white;
+	font-size: 12px;
 }

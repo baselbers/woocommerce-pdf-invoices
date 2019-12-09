@@ -1,5 +1,8 @@
+/*** Start Helper Classes ***/
+
+/* Enable this to see the invoice structure */
 table, tr, td, div, p {
-	/*border:1px solid black;*/
+	/*border: 1px solid black;*/
 }
 
 table {
@@ -26,19 +29,28 @@ table {
 
 table td, table th {
 	padding: 5px;
-	vertical-align: top;
 	line-height: inherit;
 }
 
+/*** Start Header Classes ***/
 table tr.top td {
-	padding-top: 75px;
+	padding-top: 60px;
+	vertical-align: middle;
 }
 
-/* Invoice information */
-table tr.top td:nth-child(2) {
+td.details {
+	width: 30%;
 	text-align: right;
+	font-size: 12px;
 }
 
+td.info {
+	width: 25%;
+	text-align: left;
+	font-size: 12px;
+}
+
+/*** Start Body Classes ***/
 div.title div {
 	padding: 5px;
 	width: 35%;
@@ -76,11 +88,18 @@ div.title div.watermark h2.red {
 }
 
 table tr.information td {
+	vertical-align: top;
 	padding-bottom: 20px;
 }
 
-/* Customer billing address */
-table tr.information td:nth-child(3) {
+.bill-to {
+	width: 25%;
+	vertical-align: top;
+}
+
+.ship-to {
+	width: 25%;
+	vertical-align: top;
 	text-align: right;
 }
 
@@ -120,7 +139,8 @@ table tr.total td.border {
 
 /* Black lines for the Totals */
 table tr.total td.order-total-ex-vat,
-table tr.total td.order-total-incl-vat {
+table tr.total td.order-total-incl-vat,
+table tr.total td.order-total {
 	border-top: 2px solid black;
 	font-weight: bold;
 }
@@ -140,6 +160,7 @@ div.terms {
 	bottom: 120px;
 }
 
+/*** Start Footer Classes ***/
 table.footer {
 	padding-top: 20px;
 	padding-bottom: 20px; /* Invoice margin */

@@ -3,7 +3,7 @@ $theme_color         = WPI()->get_option( 'template', 'color_theme' );
 $is_theme_text_black = WPI()->get_option( 'template', 'theme_text_black' );
 ?>
 
-<table class="foot border" style="border-top: 4px solid <?php echo $is_theme_text_black ? 'black' : esc_attr( $theme_color ); ?>;">
+<table class="foot border">
 	<tr>
 		<td class="left-footer-column">
 			<p><?php echo nl2br( WPI()->get_option( 'template', 'left_footer_column' ) ); ?></p>

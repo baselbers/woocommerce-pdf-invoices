@@ -47,7 +47,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		?>
 	</div>
 </div>
-<table cellpadding="0" cellspacing="0">
+<table>
 	<tr class="information">
 		<td width="50%">
 			<?php
@@ -67,7 +67,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			?>
 		</td>
 
-		<td>
+		<td class="bill-to">
 			<?php
 			printf( '<strong>%s</strong><br />', esc_html__( 'Bill to:', 'woocommerce-pdf-invoices' ) );
 			echo $formatted_billing_address;
@@ -76,7 +76,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			?>
 		</td>
 
-		<td>
+		<td class="ship-to">
 			<?php
 			if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $order ) && ! empty( $formatted_shipping_address ) ) {
 				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );

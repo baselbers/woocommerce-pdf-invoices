@@ -933,7 +933,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// Replace placeholders.
 			$templater = WPI()->templater();
-			if ( $templater::has_placeholder( $option ) ) {
+			if ( false === is_array( $option ) && $templater::has_placeholder( $option ) ) {
 				$option = $templater->replace_placeholders( $option );
 			}
 

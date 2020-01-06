@@ -344,9 +344,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.12 - December 3, 2019 =
+= 3.0.12 - January 6, 2019 =
 
 - Improved: Formatted company address and details by splitting into separate functions.
+- Fixed: Replacing placeholders while getting options.
 
 = 3.0.11 - November 8, 2019 =
 

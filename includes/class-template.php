@@ -342,7 +342,7 @@ class BEWPI_Template {
 		$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 		$value    = apply_filters( $name, $template_options[ $name ], $name, $order_id );
 
-		if ( self::has_placeholder( $value ) ) {
+		if ( false === is_array( $value ) && self::has_placeholder( $value ) ) {
 			$value = $this->replace_placeholders( $value );
 		}
 

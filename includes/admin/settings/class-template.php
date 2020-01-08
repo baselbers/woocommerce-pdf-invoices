@@ -87,6 +87,9 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 	 * @return array
 	 */
 	private function get_fields() {
+		$ex_tax_or_vat  = WC()->countries->ex_tax_or_vat();
+		$inc_tax_or_vat = WC()->countries->inc_tax_or_vat();
+
 		$settings = array(
 			array(
 				'id'       => 'bewpi-template-name',
@@ -276,6 +279,193 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '<br/><div class="bewpi-notes">'
 				              . __( 'Customers shipping address won\'t be visible when order has only virtual products.', 'woocommerce-pdf-invoices' )
 				              . '</div>',
+				'class'    => 'bewpi-checkbox-option-title',
+				'default'  => 1,
+			),
+			array(
+				'id'       => 'bewpi-show-sku-meta',
+				'name'     => 'bewpi_show_sku_meta',
+				'title'    => '',
+				'callback' => array( $this, 'input_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'checkbox',
+				'desc'     => __( 'Show SKU as meta data', 'woocommerce-pdf-invoices' ),
+				'class'    => 'bewpi-checkbox-option-title',
+				'default'  => 1,
+			),
+			array(
+				'id'       => 'bewpi-tax-total-display',
+				'name'     => 'bewpi_tax_total_display',
+				'title'    => __( 'Display tax totals', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'select_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'select',
+				'desc'     => '',
+				'default'  => get_option( 'woocommerce_tax_total_display' ),
+				'options'  => array(
+					'itemized' => __( 'Itemized', 'woocommerce-pdf-invoices' ),
+					'single'   => __( 'As a single total', 'woocommerce-pdf-invoices' ),
+				),
+			),
+			array(
+				'id'       => 'bewpi-columns',
+				'name'     => 'bewpi_columns',
+				'title'    => __( 'Line item columns', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'multi_select_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'multiple_select',
+				'desc'     => '',
+				'class'    => 'bewpi-columns',
+				'options'  => apply_filters( 'wpi_body_columns_options', array(
+					'description'             => array(
+						'name'    => __( 'Description', 'woocommerce-pdf-invoices' ),
+						'value'   => 'description',
+						'default' => 1,
+					),
+					'cost_ex_vat'             => array(
+						'name'    => __( 'Cost', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'cost_ex_vat',
+						'default' => 1,
+					),
+					'discount_ex_vat'         => array(
+						'name'    => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'discount_ex_vat',
+						'default' => 0,
+					),
+					'cost_incl_vat'           => array(
+						'name'    => __( 'Cost', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'cost_incl_vat',
+						'default' => 0,
+					),
+					'discount_incl_vat'       => array(
+						'name'    => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'discount_incl_vat',
+						'default' => 0,
+					),
+					'quantity'                => array(
+						'name'    => __( 'Quantity', 'woocommerce-pdf-invoices' ),
+						'value'   => 'quantity',
+						'default' => 1,
+					),
+					'vat'                     => array(
+						'name'    => WC()->countries->tax_or_vat(),
+						'value'   => 'vat',
+						'default' => 1,
+					),
+					'total_discount_ex_vat'   => array(
+						'name'    => __( 'Total Discount', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'total_discount_ex_vat',
+						'default' => 0,
+					),
+					'total_ex_vat'            => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'total_ex_vat',
+						'default' => 1,
+					),
+					'total_discount_incl_vat' => array(
+						'name'    => __( 'Total Discount', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'total_discount_incl_vat',
+						'default' => 0,
+					),
+					'total_incl_vat'          => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'total_incl_vat',
+						'default' => 0,
+					),
+				) ),
+			),
+			array(
+				'id'       => 'bewpi-show-discounted-amounts',
+				'name'     => 'bewpi_show_discounted_amounts',
+				'title'    => '',
+				'callback' => array( $this, 'input_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'checkbox',
+				'desc'     => __( 'Show discounted amounts', 'woocommerce-pdf-invoices' ),
+				'class'    => 'bewpi-checkbox-option-title',
+				'default'  => 0,
+			),
+			array(
+				'id'       => 'bewpi-totals',
+				'name'     => 'bewpi_totals',
+				'title'    => __( 'Total rows', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'multi_select_callback' ),
+				'page'     => 'bewpi_template_settings',
+				'section'  => 'body',
+				'type'     => 'multiple_select',
+				'desc'     => '',
+				'class'    => 'bewpi-totals',
+				'options'  => apply_filters( 'wpi_body_totals_options', array(
+					'discount_ex_vat'   => array(
+						'name'    => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'discount_ex_vat',
+						'default' => 1,
+					),
+					'shipping_ex_vat'   => array(
+						'name'    => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'shipping_ex_vat',
+						'default' => 1,
+					),
+					'fee_ex_vat'        => array(
+						'name'    => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'fee_ex_vat',
+						'default' => 1,
+					),
+					'subtotal_ex_vat'   => array(
+						'name'    => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'subtotal_ex_vat',
+						'default' => 1,
+					),
+					'subtotal_incl_vat' => array(
+						'name'    => __( 'Subtotal', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'subtotal_incl_vat',
+						'default' => 0,
+					),
+					'discount_incl_vat' => array(
+						'name'    => __( 'Discount', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'discount_incl_vat',
+						'default' => 0,
+					),
+					'shipping_incl_vat' => array(
+						'name'    => __( 'Shipping', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'shipping_incl_vat',
+						'default' => 0,
+					),
+					'vat'               => array(
+						'name'    => WC()->countries->tax_or_vat(),
+						'value'   => 'vat',
+						'default' => 1,
+					),
+					'fee_incl_vat'      => array(
+						'name'    => __( 'Fee', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'fee_incl_vat',
+						'default' => 0,
+					),
+					'total_ex_vat'      => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $ex_tax_or_vat,
+						'value'   => 'total_ex_vat',
+						'default' => 0,
+					),
+					'total_incl_vat'    => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ) . ' ' . $inc_tax_or_vat,
+						'value'   => 'total_incl_vat',
+						'default' => 1,
+					),
+				) ),
+			),
+			array(
+				'id'       => 'bewpi-show-tax-labels',
+				'name'     => 'bewpi_show_tax_labels',
+				'title'    => '',
+				'callback' => array( $this, 'input_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'checkbox',
+				'desc'     => __( 'Show tax labels', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
 			),

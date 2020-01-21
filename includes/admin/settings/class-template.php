@@ -123,7 +123,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'section'  => 'general',
 				'type'     => 'color',
 				'desc'     => '',
-				'default'  => '#000000',
+				'default'  => '#FFFFFF',
 			),
 			array(
 				'id'       => 'bewpi-date-format',

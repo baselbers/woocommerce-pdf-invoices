@@ -58,15 +58,14 @@ class BEWPI_Debug_Settings extends BEWPI_Abstract_Settings {
 	private function get_fields() {
 		$settings = array(
 			array(
-				'id'       => 'bewpi-mpdf-debug',
-				'name'     => $this->prefix . 'mpdf_debug',
+				'id'       => 'bewpi-debug',
+				'name'     => $this->prefix . 'debug',
 				'title'    => '',
 				'callback' => array( $this, 'input_callback' ),
 				'page'     => $this->settings_key,
 				'section'  => 'general',
 				'type'     => 'checkbox',
-				'desc'     => __( 'Enable mPDF debugging', 'woocommerce-pdf-invoices' )
-				              . '<br/><div class="bewpi-notes">' . __( 'Enable if you aren\'t able to create an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
+				'desc'     => __( 'Enable debugging', 'woocommerce-pdf-invoices' ) . '<br><div class="bewpi-notes">' . __( 'Enable when developing a custom template or when having trouble generating an invoice.', 'woocommerce-pdf-invoices' ) . '</div>',
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => (bool) WPI()->get_option( 'general', 'mpdf_debug' ) ? 1 : 0,
 			),

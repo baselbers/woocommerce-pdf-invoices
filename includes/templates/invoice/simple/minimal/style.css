@@ -75,7 +75,6 @@ div.title div.watermark h2 {
 	font-weight: bold;
 	padding: 10px 7px;
 	border-radius: 10px;
-	opacity: 0.8;
 	text-align: center;
 	width: 130px;
 	float: right;
@@ -96,14 +95,16 @@ table tr.information td {
 	padding-bottom: 20px;
 }
 
-.bill-to {
-	width: 25%;
-	vertical-align: top;
+table tr.information td.primary {
+	width: 50%;
 }
 
-.ship-to {
+table tr.information td.bill-to {
 	width: 25%;
-	vertical-align: top;
+}
+
+table tr.information td.ship-to {
+	width: 25%;
 	text-align: right;
 }
 
@@ -167,6 +168,10 @@ div.terms {
 	margin-top: 40px;
 	position: absolute;
 	bottom: 120px;
+}
+
+div.terms table tr td {
+	border: 1px solid #000;
 }
 
 /*** Start Footer Classes ***/

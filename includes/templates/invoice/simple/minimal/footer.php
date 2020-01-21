@@ -14,6 +14,7 @@
  * @package WooCommerce_PDF_Invoices/Templates
  * @version 0.0.1
  */
+
 $right_footer_column = WPI()->get_option( 'template', 'right_footer_column' );
 ?>
 

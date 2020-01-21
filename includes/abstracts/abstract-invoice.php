@@ -346,6 +346,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 * @param string $destination pdf generation mode.
 	 *
 	 * @return string $full_path Full path to PDF invoice file.
+	 * @throws MpdfException Some mPDF exceptions.
 	 */
 	public function update( $destination = 'F' ) {
 		parent::delete( $this->full_path );
@@ -651,6 +652,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 * Get invoice date.
 	 *
 	 * @return DateTime
+	 * @throws Exception Emits Exception in case of an error.
 	 */
 	public function get_date() {
 		return new DateTime( $this->date );

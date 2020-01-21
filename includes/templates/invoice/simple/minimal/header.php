@@ -16,8 +16,8 @@
  */
 ?>
 
-<table>
-	<tr class="top">
+<table class="top">
+	<tr>
 		<td class="logo">
 			<?php
 			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
@@ -27,19 +27,8 @@
 			}
 			?>
 		</td>
-		<td class="details">
-			<p>
-				<?php
-				echo WPI()->get_formatted_company_details();
-				?>
-			</p>
-		</td>
-		<td class="info">
-			<p>
-				<?php
-				echo WPI()->get_formatted_company_address();
-				?>
-			</p>
+		<td>
+			<?php echo WPI()->get_formatted_company_address() . '<br>' . WPI()->get_formatted_company_details(); ?>
 		</td>
 	</tr>
 </table>

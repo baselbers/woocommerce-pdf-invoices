@@ -93,15 +93,17 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	<tr class="heading" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>;">
 		<?php
 		foreach ( $columns as $key => $data ) {
+			$class = str_replace( '_', '-', $key );
+
 			if ( is_array( $data ) ) {
 				foreach ( $data as $k => $d ) {
-					printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $k ), esc_attr( $theme_color_text ), $d );
+					printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $class ), esc_attr( $theme_color_text ), $d );
 				}
 
 				continue;
 			}
 
-			printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $key ), esc_attr( $theme_color_text ), $data );
+			printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $class ), esc_attr( $theme_color_text ), $data );
 		}
 		?>
 	</tr>
@@ -111,15 +113,17 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	foreach ( $invoice->get_columns_data() as $index => $row ) {
 		echo '<tr class="item">';
 		foreach ( $row as $key => $data ) {
+			$class = str_replace( '_', '-', $key );
+
 			if ( is_array( $data ) ) {
 				foreach ( $data as $k => $d ) {
-					printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $d );
+					printf( '<td class="%1$s">%2$s</td>', esc_attr( $class ), $d );
 				}
 
 				continue;
 			}
 
-			printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $data );
+			printf( '<td class="%1$s">%2$s</td>', esc_attr( $class ), $data );
 		}
 
 		echo '</tr>';
@@ -147,7 +151,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			// Only display row for first element and use rowspan.
 			if ( $rowspan > 0 ) {
 				?>
-				<td width="50%" rowspan="<?php echo esc_attr( $rowspan ); ?>">
+				<td class="custom-text" rowspan="<?php echo esc_attr( $rowspan ); ?>">
 					<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
 				</td>
 				<?php
@@ -155,11 +159,11 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 			}
 			?>
 
-			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
+			<td class="<?php echo esc_attr( $class ); ?>">
 				<?php echo $total['label']; ?>
 			</td>
 
-			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>">
+			<td class="<?php echo esc_attr( $class ); ?>">
 				<?php echo str_replace( '&nbsp;', '', $total['value'] ); ?>
 			</td>
 		</tr>

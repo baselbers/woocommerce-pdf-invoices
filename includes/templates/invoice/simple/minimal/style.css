@@ -2,11 +2,11 @@
 
 /* Enable this to see the invoice structure */
 table, tr, td, div, p {
-	/*border: 1px solid black;*/
+	border: 1px solid black;
 }
 
 table {
-	border-spacing: 0px;
+	border-spacing: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -33,9 +33,13 @@ table td, table th {
 }
 
 /*** Start Header Classes ***/
-table tr.top td {
+table.top td {
 	padding-top: 60px;
 	vertical-align: middle;
+}
+
+table.top td:nth-child(2) {
+	text-align: right;
 }
 
 td.details {
@@ -105,7 +109,8 @@ table tr.information td {
 
 table tr.heading th,
 table tr.item td {
-	text-align: center;
+	text-align: right;
+	vertical-align: top;
 }
 
 table tr.heading th:nth-child(1),
@@ -114,27 +119,32 @@ table tr.item td:nth-child(1) {
 	width: 50%;
 }
 
-table tr.heading th.total,
-table tr.heading th.total_ex_vat,
-table tr.heading th.total_incl_vat,
-table tr.item td.total,
-table tr.item td.total_ex_vat,
-table tr.item td.total_incl_vat {
-	text-align: right;
-}
-
 table tr.item td {
 	border-bottom: 1px solid #eee;
-	text-align: center;
 }
 
 table tr.spacer td {
 	padding-top: 20px;
 }
 
-table tr.total td.border {
+/** Totals **/
+table tr.total td {
 	border-top: 2px solid #eee;
+}
 
+table tr.total td.custom-text {
+	width: 50%;
+	vertical-align: top;
+}
+
+table tr.total td:nth-child(2) {
+	text-align: left;
+	width: 25%;
+}
+
+table tr.total td:nth-child(3) {
+	text-align: right;
+	width: 25%;
 }
 
 /* Black lines for the Totals */
@@ -144,7 +154,6 @@ table tr.total td.order-total {
 	border-top: 2px solid black;
 	font-weight: bold;
 }
-
 
 small.shipped_via {
 	display: none;

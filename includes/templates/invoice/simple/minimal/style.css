@@ -2,7 +2,7 @@
 
 /* Enable this to see the invoice structure */
 table, tr, td, div, p {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
 table {

@@ -136,6 +136,7 @@ table tr.total td {
 table tr.total td.custom-text {
 	width: 50%;
 	vertical-align: top;
+	border: none;
 }
 
 table tr.total td:nth-child(2) {

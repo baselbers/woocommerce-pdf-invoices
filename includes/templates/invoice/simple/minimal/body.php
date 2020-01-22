@@ -15,8 +15,9 @@
  * @version 0.0.1
  */
 
-$invoice          = WPI()->templater()->invoice;
-$theme_color_text = WPI()->get_option( 'template', 'color_theme_text' );
+$invoice                = WPI()->templater()->invoice;
+$theme_color_text       = WPI()->get_option( 'template', 'color_theme_text' );
+$theme_color_background = WPI()->get_option( 'template', 'color_theme_background' );
 
 // Header and footer margin and padding.
 $this->mpdf->setAutoTopMargin    = 'stretch';
@@ -75,9 +76,10 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		</td>
 	</tr>
 </table>
+
 <table>
 	<thead>
-	<tr class="heading" style="background-color:<?php echo esc_attr( WPI()->get_option( 'template', 'color_theme_background' ) ); ?>;">
+	<tr class="heading" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>;">
 		<?php
 		foreach ( $invoice->get_columns() as $key => $data ) {
 			$class = str_replace( '_', '-', $key );

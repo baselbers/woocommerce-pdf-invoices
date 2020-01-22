@@ -1,12 +1,6 @@
-/*** Start Helper Classes ***/
-
 /* Enable this to see the invoice structure */
-table, tr, td, div, p {
+table, tr, td, div, p, h1, h2, h3, h4, h5, h6 {
 	/*border: 1px solid black;*/
-}
-
-table {
-	border-spacing: 0;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -18,18 +12,19 @@ table, div {
 	font-family: dejavusanscondensed, Arial, sans-serif;
 }
 
+table th,
+table td {
+	padding: 5px;
+}
+
 table {
+	border-spacing: 0;
 	width: 100%;
 	line-height: normal;
 	color: #555;
 	font-size: 12px;
 	margin-left: 80px; /* Invoice margin */
 	margin-right: 80px; /* Invoice margin */
-}
-
-table td, table th {
-	padding: 5px;
-	line-height: inherit;
 }
 
 /*** Start Header Classes ***/
@@ -55,8 +50,11 @@ td.info {
 }
 
 /*** Start Body Classes ***/
-div.title div {
+div.title {
 	padding: 5px;
+}
+
+div.title div {
 	width: 35%;
 	float: left;
 	margin-left: 80px; /* Invoice margin */
@@ -112,6 +110,7 @@ table tr.heading th,
 table tr.item td {
 	text-align: right;
 	vertical-align: top;
+	padding: 5px;
 }
 
 table tr.heading th:nth-child(1),
@@ -131,6 +130,7 @@ table tr.spacer td {
 /** Totals **/
 table tr.total td {
 	border-top: 2px solid #eee;
+	padding: 5px;
 }
 
 table tr.total td.custom-text {

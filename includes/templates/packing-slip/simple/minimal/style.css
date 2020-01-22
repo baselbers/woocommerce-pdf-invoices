@@ -1,6 +1,6 @@
 /* Enable this to see the invoice structure */
 table, tr, td, div, p, h1, h2, h3, h4, h5, h6 {
-	border: 1px solid black;
+	/*border: 1px solid black;*/
 }
 
 h1, h2, h3, h4, h5, h6 {

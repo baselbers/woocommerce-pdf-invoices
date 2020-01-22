@@ -1,7 +1,21 @@
 <?php
-$templater                  = WPI()->templater();
-$invoice                    = $templater->invoice;
-$columns                    = $invoice->get_columns();
+/**
+ * PDF invoice body template that will be visible on every page.
+ *
+ * This template can be overridden by copying it to youruploadsfolder/woocommerce-pdf-invoices/templates/invoice/simple/yourtemplatename/body.php.
+ *
+ * HOWEVER, on occasion WooCommerce PDF Invoices will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @author  Bas Elbers
+ * @package WooCommerce_PDF_Invoices/Templates
+ * @version 0.0.1
+ */
+
+$invoice                    = WPI()->templater()->invoice;
 $formatted_shipping_address = $invoice->order->get_formatted_shipping_address();
 $theme_color_background     = WPI()->get_option( 'template', 'color_theme_background' );
 $theme_color_text           = WPI()->get_option( 'template', 'color_theme_text' );
@@ -20,13 +34,13 @@ $this->mpdf->setAutoBottomMargin = 'stretch';
 $this->mpdf->autoMarginPadding   = 25; // mm.
 ?>
 
-<table>
+<table class="customer-addresses">
 	<tbody>
 	<tr>
 		<td class="invoice-to">
-			<b><?php _e( 'Invoice to:', 'woocommerce-pdf-invoices' ); ?></b><br>
 			<?php
-			echo $invoice->order->get_formatted_billing_address() . '<br>';
+			printf( '<strong>%s</strong><br>', esc_html__( 'Invoice to:', 'woocommerce-pdf-invoices' ) );
+			echo $invoice->order->get_formatted_billing_address();
 
 			do_action( 'wpi_after_formatted_billing_address', $invoice );
 			?>
@@ -34,7 +48,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		<td class="ship-to">
 			<?php
 			if ( WPI()->get_option( 'template', 'show_ship_to' ) && ! WPI()->has_only_virtual_products( $invoice->order ) && ! empty( $formatted_shipping_address ) ) {
-				printf( '<strong>%s</strong><br />', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
+				printf( '<strong>%s</strong><br>', esc_html__( 'Ship to:', 'woocommerce-pdf-invoices' ) );
 				echo $formatted_shipping_address;
 
 				do_action( 'wpi_after_formatted_shipping_address', $invoice );
@@ -45,21 +59,24 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	</tbody>
 </table>
 
-<table>
+<table class="information">
 	<tbody>
 	<tr>
 		<td class="invoice-details">
 			<h1 class="title"><?php echo esc_html( WPI()->get_option( 'template', 'title' ) ); ?></h1>
-			<span class="number"
-			      style="color:<?php echo esc_attr( $theme_color_background ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
+			<span class="number" style="color:<?php echo esc_attr( $theme_color_background ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
 			<span><?php echo esc_html( $this->get_formatted_invoice_date() ); ?></span><br/>
 			<span><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $invoice->order->get_order_number() ) ); ?></span>
 		</td>
-		<td class="total-amount"
-		    bgcolor="<?php echo esc_attr( $theme_color_background ); ?>"
-		    style="color:<?php echo esc_attr( $theme_color_text ); ?>">
-			<h1 class="amount"><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
-			<p><?php echo WPI()->get_option( 'template', 'intro_text' ); ?></p>
+		<td class="total-amount" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>; color:<?php echo esc_attr( $theme_color_text ); ?>">
+			<h1><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
+
+			<?php
+			$intro_text = WPI()->get_option( 'template', 'intro_text' );
+			if ( '' !== $intro_text ) {
+				printf( '<p>%s</p>', $intro_text );
+			}
+			?>
 		</td>
 	</tr>
 	</tbody>
@@ -70,16 +87,18 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		<thead>
 		<tr class="heading" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>;">
 			<?php
-			foreach ( $columns as $key => $data ) {
+			foreach ( $invoice->get_columns() as $key => $data ) {
+				$class = str_replace( '_', '-', $key );
+
 				if ( is_array( $data ) ) {
 					foreach ( $data as $k => $d ) {
-						printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $k ), esc_attr( $theme_color_text ), $d );
+						printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $class ), esc_attr( $theme_color_text ), $d );
 					}
 
 					continue;
 				}
 
-				printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $key ), esc_attr( $theme_color_text ), $data );
+				printf( '<th class="%1$s" style="color:%2$s;">%3$s</th>', esc_attr( $class ), esc_attr( $theme_color_text ), $data );
 			}
 			?>
 		</tr>
@@ -88,16 +107,19 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		<?php
 		foreach ( $invoice->get_columns_data() as $index => $row ) {
 			echo '<tr class="item">';
+
 			foreach ( $row as $key => $data ) {
+				$class = str_replace( '_', '-', $key );
+
 				if ( is_array( $data ) ) {
 					foreach ( $data as $k => $d ) {
-						printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $d );
+						printf( '<td class="%1$s">%2$s</td>', esc_attr( $class ), $d );
 					}
 
 					continue;
 				}
 
-				printf( '<td class="%1$s">%2$s</td>', esc_attr( $key ), $data );
+				printf( '<td class="%1$s">%2$s</td>', esc_attr( $class ), $data );
 			}
 
 			echo '</tr>';
@@ -119,17 +141,24 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		foreach ( $order_item_totals as $key => $total ) {
 			$class = str_replace( '_', '-', $key );
 			?>
-
 			<tr class="total">
-				<td>
-					<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
-				</td>
+				<?php
+				// Only display row for first element and use rowspan.
+				if ( $rowspan > 0 ) {
+					?>
+					<td class="custom-text" rowspan="<?php echo esc_attr( $rowspan ); ?>">
+						<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
+					</td>
+					<?php
+					$rowspan = 0;
+				}
+				?>
 
-				<td class="border line-spacing <?php echo esc_attr( $class ); ?>">
+				<td class="<?php echo esc_attr( $class ); ?>">
 					<?php echo $total['label']; ?>
 				</td>
 
-				<td class="border line-spacing <?php echo esc_attr( $class ); ?>">
+				<td class="<?php echo esc_attr( $class ); ?>">
 					<?php echo str_replace( '&nbsp;', '', $total['value'] ); ?>
 				</td>
 			</tr>

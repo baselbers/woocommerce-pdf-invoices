@@ -1,80 +1,81 @@
-/*** Start Helper Classes ***/
-
 /* Enable this to see the invoice structure */
 table, tr, td, div, p {
-	/*border: 1px solid black;*/
+	border: 1px solid black;
 }
 
 table {
 	font-family: Arial, sans-serif;
 	border-collapse: collapse;
-	font-size: 14px;
+	font-size: 12px;
 	width: 100%;
 	color: #757575;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	padding: 0;
+	margin: 0;
 }
 
 /* Font Size for the Text Box Price, Invoice Title and Company Name */
 h1 {
 	font-size: 32px;
+
+}
+
+table th,
+table td {
+	padding: 5px;
 }
 
 /*** Start Header Classes ***/
-.logo {
+table tr td.logo {
 	width: 50%;
-	padding-top: 60px;
-	padding-left: 60px;
+	padding-top: 65px; /* Invoice margin */
+	padding-left: 65px; /* Invoice margin */
 }
 
 h1.company-name {
 	color: #525252;
 }
 
-.info {
+table tr td.info {
 	width: 50%;
-	padding-top: 60px;
+	padding-top: 65px; /* Invoice margin */
+	padding-right: 65px; /* Invoice margin */
 	vertical-align: bottom;
 	font-size: 12px;
 }
 
-.refunded {
-	color: #a00 !important;
-}
-
-.total-without-refund {
-	color: #757575 !important;
-}
-
 /*** Start Body Classes ***/
-.invoice-to {
-	width: 50%;
-	vertical-align: top;
-	padding-left: 60px;
-	padding-bottom: 30px;
+table.customer-addresses {
+	margin-left: 60px; /* Invoice margin */
+	margin-right: 60px; /* Invoice margin */
+	margin-bottom: 30px;
 }
 
-.ship-to {
+table tr td.invoice-to {
 	width: 50%;
 	vertical-align: top;
-	padding-bottom: 30px;
 }
 
-.invoice-details {
-	padding-left: 60px;
+table tr td.ship-to {
+	width: 50%;
+	vertical-align: top;
+}
+
+table.information {
+	margin-left: 60px; /* Invoice margin */
+}
+
+table tr td.invoice-details {
 	color: #525252;
-}
-
-td.invoice-details {
-	width: 50%;
+	width: 46%;
 	vertical-align: top;
 }
 
-.total-amount {
-	width: 50%;
+table tr td.total-amount {
 	padding: 20px 20px 30px 20px;
 	text-align: justify;
-}
-
-.total-amount, .total-amount h1 {
 	color: white;
 }
 
@@ -91,7 +92,7 @@ table.products th {
 /* First Header */
 table tr.heading th:nth-child(1) {
 	text-align: left;
-	width: 30%;
+	width: 50%;
 }
 
 /* Every header */
@@ -129,8 +130,8 @@ table tbody tr.item td:nth-child(1) {
 	text-align: left;
 }
 
-.line-spacing {
-	padding-bottom: 10px;
+tr.total td.custom-text {
+	vertical-align: top;
 }
 
 /* Whitespace left side of line items */
@@ -194,4 +195,3 @@ td.right-footer-column {
 	text-align: right;
 	width: 40%;
 }
-

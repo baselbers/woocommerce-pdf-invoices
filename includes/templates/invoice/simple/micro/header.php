@@ -14,28 +14,22 @@
  * @package WooCommerce_PDF_Invoices/Templates
  * @version 0.0.1
  */
+
 ?>
 
-<div class="top">
-	<table>
-		<tr>
-			<td class="logo">
-				<?php
-				if ( WPI()->get_option( 'template', 'company_logo' ) ) {
-					printf( '<img class="company-logo" src="var:company_logo" style="max-height:150px;"/>' );
-				} else {
-					printf( '<h1 class="company-name">%s</h1>', esc_html( WPI()->templater()->get_option( 'bewpi_company_name' ) ) );
-				}
-				?>
-			</td>
-			<td class="info">
-				<p>
-				<?php
-				echo WPI()->get_formatted_company_address() . "<br><br>";
-				echo WPI()->get_formatted_company_details();
-				?>
-				</p>
-			</td>
-		</tr>
-	</table>
-</div>
+<table class="top">
+	<tr>
+		<td class="logo">
+			<?php
+			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
+				printf( '<img class="company-logo" src="var:company_logo" style="max-height:150px;"/>' );
+			} else {
+				printf( '<h1 class="company-name">%s</h1>', esc_html( WPI()->templater()->get_option( 'bewpi_company_name' ) ) );
+			}
+			?>
+		</td>
+		<td class="info">
+			<?php echo WPI()->get_formatted_company_address() . '<br>' . WPI()->get_formatted_company_details(); ?>
+		</td>
+	</tr>
+</table>

@@ -3,8 +3,11 @@ table, tr, td, div, p {
 	/*border: 1px solid black;*/
 }
 
+* {
+	font-family: Arial, dejavusanscondensed, sans-serif;
+}
+
 table {
-	font-family: Arial, sans-serif;
 	border-collapse: collapse;
 	font-size: 12px;
 	width: 100%;

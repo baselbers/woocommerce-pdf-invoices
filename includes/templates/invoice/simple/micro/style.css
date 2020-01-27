@@ -81,6 +81,8 @@ table tr td.total-amount {
 
 table.line-items {
 	margin-top: 25px;
+	margin-left: 70px; /* Invoice margin */
+	margin-right: 70px; /* Invoice margin */
 }
 
 table.line-items tr.heading th {

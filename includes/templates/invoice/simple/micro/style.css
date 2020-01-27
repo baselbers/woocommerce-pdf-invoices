@@ -81,8 +81,9 @@ table tr td.total-amount {
 
 table.line-items {
 	margin-top: 25px;
-	margin-left: 70px; /* Invoice margin */
-	margin-right: 70px; /* Invoice margin */
+	padding: 5px;
+	margin-left: 65px; /* Invoice margin */
+	margin-right: 65px; /* Invoice margin */
 }
 
 table.line-items tr.heading th {
@@ -154,23 +155,23 @@ tr.total td:nth-child(3) {
 }
 
 /*** Start Footer Classes ***/
+div.foot-border {
+	margin-top: 30px;
+}
+
 table.foot {
-	margin-top: 20px;
-	margin-bottom: 20px;
+	margin: 10px 65px 20px; /* Invoice margin */
 }
 
 table.foot td {
 	border: 1px solid white;
 	font-size: 12px;
 	vertical-align: top;
-	padding-top: 15px;
 }
 
 table.foot tr td.left {
 	text-align: left;
 	width: 44%;
-	padding-left: 65px; /* Invoice margin + general padding */
-	padding-right: 5px;
 }
 
 table.foot tr td.mid {
@@ -181,6 +182,4 @@ table.foot tr td.mid {
 table.foot tr td.right {
 	text-align: right;
 	width: 44%;
-	padding-left: 5px;
-	padding-right: 65px; /* Invoice margin + general padding */
 }

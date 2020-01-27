@@ -24,7 +24,7 @@
 			if ( WPI()->get_option( 'template', 'company_logo' ) ) {
 				printf( '<img class="company-logo" src="var:company_logo" style="max-height:150px;"/>' );
 			} else {
-				printf( '<h1 class="company-name">%s</h1>', esc_html( WPI()->templater()->get_option( 'bewpi_company_name' ) ) );
+				printf( '<h1 class="company-name">%s</h1>', esc_html( WPI()->get_option( 'template', 'company_name' ) ) );
 			}
 			?>
 		</td>

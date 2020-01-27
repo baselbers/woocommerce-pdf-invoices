@@ -71,7 +71,7 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 		</td>
 		<td class="total-amount"
 		    style="background-color:<?php echo esc_attr( $theme_color_background ); ?>; color:<?php echo esc_attr( $theme_color_text ); ?>">
-			<h1><?php echo wc_price( $invoice->order->get_total() - $invoice->order->get_total_refunded(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
+			<h1><?php echo wc_price( $invoice->order->get_total(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
 
 			<?php
 			$intro_text = WPI()->get_option( 'template', 'intro_text' );

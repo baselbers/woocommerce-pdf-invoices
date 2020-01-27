@@ -17,7 +17,8 @@
 
 $theme_color_background = WPI()->get_option( 'template', 'color_theme_background' );
 ?>
-<table class="foot" style="border-top: 6px solid <?php echo esc_attr( $theme_color_background ); ?>;">
+<div class="foot-border" style="border-top: 6px solid <?php echo esc_attr( $theme_color_background ); ?>;"></div>
+<table class="foot">
 	<tr>
 		<td class="left">
 			<p><?php echo nl2br( WPI()->get_option( 'template', 'left_footer_column' ) ); ?></p>

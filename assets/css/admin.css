@@ -80,6 +80,14 @@ table.wpi.order-page-meta-box.pdf-invoice tr td:last-child {
 
 a.wpi.order-page.invoice.button {
     margin: 4px !important;
+    min-width: 60px;
+    text-align: center;
+}
+
+a.wpi.order-page.packing-slip.button {
+    margin: 4px !important;
+    min-width: 60px;
+    text-align: center;
 }
 
 .bewpi-notes {

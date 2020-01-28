@@ -64,13 +64,11 @@ $this->mpdf->autoMarginPadding   = 25; // mm.
 	<tr>
 		<td class="invoice-details">
 			<h1 class="title"><?php echo esc_html( WPI()->get_option( 'template', 'title' ) ); ?></h1>
-			<span class="number"
-			      style="color:<?php echo esc_attr( $theme_color_background ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
+			<span class="number" style="color:<?php echo esc_attr( $theme_color_background ); ?>;"><?php echo esc_html( $invoice->get_formatted_number() ); ?></span><br/>
 			<span><?php echo esc_html( $this->get_formatted_invoice_date() ); ?></span><br/>
 			<span><?php printf( esc_html__( 'Order #%s', 'woocommerce-pdf-invoices' ), esc_html( $invoice->order->get_order_number() ) ); ?></span>
 		</td>
-		<td class="total-amount"
-		    style="background-color:<?php echo esc_attr( $theme_color_background ); ?>; color:<?php echo esc_attr( $theme_color_text ); ?>">
+		<td class="total-amount" style="background-color:<?php echo esc_attr( $theme_color_background ); ?>; color:<?php echo esc_attr( $theme_color_text ); ?>">
 			<h1><?php echo wc_price( $invoice->order->get_total(), array( 'currency' => $invoice->order->get_currency() ) ); ?></h1>
 
 			<?php

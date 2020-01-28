@@ -87,6 +87,9 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 	 * @return array
 	 */
 	private function get_fields() {
+		$ex_tax_or_vat  = WC()->countries->ex_tax_or_vat();
+		$inc_tax_or_vat = WC()->countries->inc_tax_or_vat();
+
 		$settings = array(
 			array(
 				'id'       => 'bewpi-template-name',
@@ -102,6 +105,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '</div>',
 				'options'  => $this->get_template_options(),
 				'default'  => 'minimal',
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-color-theme-background',
@@ -113,6 +117,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'color',
 				'desc'     => '',
 				'default'  => '#000000',
+				'priority' => 1,
 			),
 			array(
 				'id'       => 'bewpi-color-theme-text',
@@ -124,6 +129,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'color',
 				'desc'     => '',
 				'default'  => '#FFFFFF',
+				'priority' => 2,
 			),
 			array(
 				'id'       => 'bewpi-date-format',
@@ -136,6 +142,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => sprintf( __( '<a href="%s">Format</a> of invoice date and order date.', 'woocommerce-pdf-invoices' ), 'http://php.net/manual/en/datetime.formats.date.php' ),
 				'default'  => 'Y-m-d H:i:s',
 				'attrs'    => array( 'required' ),
+				'priority' => 3,
 			),
 			array(
 				'id'       => 'bewpi-show-payment-status',
@@ -151,6 +158,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '</div>',
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 0,
+				'priority' => 4,
 			),
 			array(
 				'id'       => 'bewpi-packing-slips',
@@ -163,6 +171,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Disable Packing Slips', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 0,
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-company-logo',
@@ -174,6 +183,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-company-name',
@@ -185,6 +195,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => get_bloginfo(),
+				'priority' => 1,
 			),
 			array(
 				'id'       => 'bewpi-company-address',
@@ -196,6 +207,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => sprintf( __( 'Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and the WooCommerce store address is used.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 				'default'  => BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ? WPI()->get_formatted_base_address() : '',
+				'priority' => 2,
 			),
 			array(
 				'id'       => 'bewpi-company-phone',
@@ -207,6 +219,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 3,
 			),
 			array(
 				'id'       => 'bewpi-company-email_address',
@@ -218,6 +231,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 4,
 			),
 			array(
 				'id'       => 'bewpi-company-registration-number',
@@ -229,6 +243,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 5,
 			),
 			array(
 				'id'       => 'bewpi-company-vat-id',
@@ -240,6 +255,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 6,
 			),
 			array(
 				'id'       => 'bewpi-title',
@@ -251,18 +267,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => __( 'Change the name of the invoice.', 'woocommerce-pdf-invoices' ),
 				'default'  => __( 'Invoice', 'woocommerce-pdf-invoices' ),
-			),
-			array(
-				'id'       => 'bewpi-intro-text',
-				'name'     => $this->prefix . 'intro_text',
-				'title'    => __( 'Thank you text', 'woocommerce-pdf-invoices' ),
-				'callback' => array( $this, 'textarea_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'header',
-				'type'     => 'text',
-				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ) . ' '
-				              . __( 'Visible in big colored bar directly after invoice total.', 'woocommerce-pdf-invoices' ),
-				'default'  => '',
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-show-ship-to',
@@ -278,6 +283,83 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '</div>',
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 2,
+			),
+			array(
+				'id'       => 'bewpi-show-sku-meta',
+				'name'     => 'bewpi_show_sku_meta',
+				'title'    => '',
+				'callback' => array( $this, 'input_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'checkbox',
+				'desc'     => __( 'Show SKU as meta data', 'woocommerce-pdf-invoices' ),
+				'class'    => 'bewpi-checkbox-option-title',
+				'default'  => 1,
+				'priority' => 3,
+			),
+			array(
+				'id'       => 'bewpi-columns',
+				'name'     => 'bewpi_columns',
+				'title'    => __( 'Line item columns', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'multi_select_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'multiple_select',
+				'desc'     => '',
+				'class'    => 'bewpi-columns',
+				'options'  => apply_filters( 'wpi_body_columns_options', array(
+					'description' => array(
+						'name'    => __( 'Description', 'woocommerce-pdf-invoices' ),
+						'value'   => 'description',
+						'default' => 1,
+					),
+					'quantity'    => array(
+						'name'    => __( 'Quantity', 'woocommerce-pdf-invoices' ),
+						'value'   => 'quantity',
+						'default' => 1,
+					),
+					'total'       => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ),
+						'value'   => 'total',
+						'default' => 1,
+					),
+				), $this ),
+				'priority' => 5,
+			),
+			array(
+				'id'       => 'bewpi-totals',
+				'name'     => 'bewpi_totals',
+				'title'    => __( 'Total rows', 'woocommerce-pdf-invoices' ),
+				'callback' => array( $this, 'multi_select_callback' ),
+				'page'     => $this->settings_key,
+				'section'  => 'body',
+				'type'     => 'multiple_select',
+				'desc'     => '',
+				'class'    => 'bewpi-totals',
+				'options'  => apply_filters( 'wpi_body_totals_options', array(
+					'shipping' => array(
+						'name'    => __( 'Shipping', 'woocommerce-pdf-invoices' ),
+						'value'   => 'shipping',
+						'default' => 1,
+					),
+					'fee'      => array(
+						'name'    => __( 'Fee', 'woocommerce-pdf-invoices' ),
+						'value'   => 'fee',
+						'default' => 1,
+					),
+					'vat'      => array(
+						'name'    => WC()->countries->tax_or_vat(),
+						'value'   => 'vat',
+						'default' => 1,
+					),
+					'total'    => array(
+						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ),
+						'value'   => 'total',
+						'default' => 1,
+					),
+				), $this ),
+				'priority' => 6,
 			),
 			array(
 				'id'       => 'bewpi-show-customer-notes',
@@ -290,6 +372,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Show customer notes', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 8,
 			),
 			array(
 				'id'       => 'bewpi-terms',
@@ -302,6 +385,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ) . ' '
 				              . sprintf( __( 'Visible below customer notes and above footer. Want to attach additional pages to the invoice? Take a look at <a href="%1$s">%2$s</a> plugin.', 'woocommerce-pdf-invoices' ), 'http://wcpdfinvoices.com', 'WooCommerce PDF Invoices Premium' ),
 				'default'  => '',
+				'priority' => 9,
 			),
 			array(
 				'id'       => 'bewpi-left-footer-column',
@@ -313,6 +397,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 				'default'  => '',
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-right-footer-column',
@@ -324,6 +409,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => sprintf( __( 'Allowed HTML tags: %s.', 'woocommerce-pdf-invoices' ), self::formatted_html_tags() ),
 				'default'  => '',
+				'priority' => 1,
 			),
 			array(
 				'id'       => 'bewpi-invoice-number-type',
@@ -339,6 +425,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 					'sequential_number'        => __( 'Sequential number', 'woocommerce-pdf-invoices' ),
 				),
 				'default'  => 'sequential_number',
+				'priority' => 0,
 			),
 			array(
 				'id'       => 'bewpi-reset-counter',
@@ -352,6 +439,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 0,
 				'attrs'    => array( 'onchange="bewpi.setting.enableDisableNextInvoiceNumbering(this)"' ),
+				'priority' => 1,
 			),
 			array(
 				'id'       => 'bewpi-next-invoice-number',
@@ -369,6 +457,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 					'readonly',
 					'min="1"',
 				),
+				'priority' => 2,
 			),
 			array(
 				'id'       => 'bewpi-invoice-number-digits',
@@ -385,6 +474,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 					'max="20"',
 					'required',
 				),
+				'priority' => 3,
 			),
 			array(
 				'id'       => 'bewpi-invoice-number-prefix',
@@ -396,6 +486,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 4,
 			),
 			array(
 				'id'       => 'bewpi-invoice-number-suffix',
@@ -407,6 +498,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'type'     => 'text',
 				'desc'     => '',
 				'default'  => '',
+				'priority' => 5,
 			),
 			array(
 				'id'       => 'bewpi-invoice-number-format',
@@ -421,6 +513,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . sprintf( __( '<b>Note:</b> %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[number]</code>' ),
 				'default'  => '[number]-[Y]',
 				'attrs'    => array( 'required' ),
+				'priority' => 6,
 			),
 			array(
 				'id'       => 'bewpi-reset-counter-yearly',
@@ -438,6 +531,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				              . '</div>',
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 7,
 			),
 			array(
 				'id'       => 'bewpi-show-subtotal',
@@ -450,6 +544,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Subtotal', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 1,
 			),
 			array(
 				'id'       => 'bewpi-show-tax',
@@ -462,6 +557,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Tax (item)', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 0,
+				'priority' => 2,
 			),
 			array(
 				'id'       => 'bewpi-show-tax-row',
@@ -474,6 +570,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Tax (total)', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 3,
 			),
 			array(
 				'id'       => 'bewpi-show-discount',
@@ -486,6 +583,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Discount', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 4,
 			),
 			array(
 				'id'       => 'bewpi-show-shipping',
@@ -498,10 +596,21 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => __( 'Shipping', 'woocommerce-pdf-invoices' ),
 				'class'    => 'bewpi-checkbox-option-title',
 				'default'  => 1,
+				'priority' => 5,
 			),
 		);
 
-		return apply_filters( 'wpi_template_settings', $settings, $this );
+		$settings = apply_filters( 'wpi_template_settings', $settings, $this );
+
+		usort( $settings, function ( $item1, $item2 ) {
+			if ( $item1['priority'] === $item2['priority'] ) {
+				return 0;
+			}
+
+			return $item1['priority'] < $item2['priority'] ? - 1 : 1;
+		} );
+
+		return $settings;
 	}
 
 	/**

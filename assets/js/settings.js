@@ -13,6 +13,23 @@
 		return false;
 	});
 
+	// Field validation error tips
+	$( document.body )
+
+		.on( 'init_tooltips', function() {
+
+			$( '.tips, .help_tip, .woocommerce-help-tip' ).tipTip( {
+				'attribute': 'data-tip',
+				'fadeIn': 50,
+				'fadeOut': 50,
+				'delay': 200
+			} );
+
+		});
+
+	// Tooltips
+	$( document.body ).trigger( 'init_tooltips' );
+
 	$( window ).load( function () {
 		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).sortable();
 		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).disableSelection();

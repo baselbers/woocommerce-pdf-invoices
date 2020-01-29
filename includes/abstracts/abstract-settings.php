@@ -350,19 +350,17 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public function select_callback( $args ) {
 		$options = get_option( $args['page'] );
-		?>
-		<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
-			<?php
-			foreach ( $args['options'] as $key => $label ) :
-				?>
-				<option
-					value="<?php echo esc_attr( $key ); ?>" <?php selected( $options[ $args['name'] ], $key ); ?>><?php echo esc_html( $label ); ?></option>
-			<?php
-			endforeach;
-			?>
-		</select>
-		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-		<?php
+		$name    = $args['page'] . '[' . $args['name'] . ']';
+		$value   = $options[ $args['name'] ];
+
+		echo wc_help_tip( $args['desc'] );
+		printf( '<select id="%s" name="%s">', esc_attr( $args['id'] ), esc_attr( $name ) );
+
+		foreach ( $args['options'] as $key => $label ) {
+			printf( '<option value="%s" %s>%s</option>', esc_attr( $key ), selected( $value, $key, false ), esc_html( $label ) );
+		}
+
+		printf( '</select>' );
 	}
 
 	/**
@@ -396,30 +394,22 @@ abstract class BEWPI_Abstract_Settings {
 	/**
 	 * Reset counter field.
 	 *
-	 * @param string $args Field arguments.
+	 * @param array $args Field arguments.
 	 */
 	public function reset_counter_callback( $args ) {
-		$class = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
-		?>
-		<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
-		<input id="<?php echo $args['id']; ?>"
-			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-			type="<?php echo $args['type']; ?>"
-			value="1"
-			<?php
-			checked( (bool) get_transient( 'bewpi_next_invoice_number' ) );
+		$options    = get_option( $args['page'] );
+		$name       = $args['page'] . '[' . $args['name'] . ']';
+		$value      = $options[ $args['name'] ];
+		$attributes = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
+		$label      = isset( $args['label'] ) ? $args['label'] : '';
+		$checkbox   = sprintf( '<input type="checkbox" id="%s" name="%s" value="%s" %s %s/>', $args['id'], $name, true, checked( true, (int) $value, false ), $attributes );
+		$hidden     = sprintf( '<input type="hidden" name="%s" value="%s" />', esc_html( $name ), false );
 
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
-			}
-			?>
-		/>
-		<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>">
-			<?php echo $args['desc']; ?>
-		</label>
-		<?php
+		printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
+
+		if ( isset( $args['desc'] ) ) {
+			printf( '<p class="description">%s</p>', $args['desc'] );
+		}
 	}
 
 	/**
@@ -428,23 +418,14 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function next_invoice_number_callback( $args ) {
-		$class               = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
+		$name                = $args['page'] . '[' . $args['name'] . ']';
+		$attributes          = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
 		$next_invoice_number = get_transient( 'bewpi_next_invoice_number' );
-		?>
-		<input id="<?php echo $args['id']; ?>"
-			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-			type="<?php echo $args['type']; ?>"
-			value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( (int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
-			<?php
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
-			}
-			?>
-		/>
-		<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
-		<?php
+		$year                = (int) date_i18n( 'Y', current_time( 'timestamp' ) );
+		$value               = false === $next_invoice_number ? BEWPI_Abstract_Invoice::get_max_invoice_number( $year ) + 1 : $next_invoice_number;
+
+		echo wc_help_tip( $args['desc'] );
+		printf( '<input id="%s" name="%s" type="%s" value="%d" %s />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ), $attributes );
 	}
 
 	/**
@@ -453,35 +434,24 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function input_callback( $args ) {
-		$options     = get_option( $args['page'] );
-		$class       = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
-		$is_checkbox = 'checkbox' === $args['type'];
-		if ( $is_checkbox ) { ?>
-			<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
-		<?php } ?>
-		<input id="<?php echo $args['id']; ?>"
-			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-			type="<?php echo $args['type']; ?>"
-			value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
+		$options    = get_option( $args['page'] );
+		$name       = $args['page'] . '[' . $args['name'] . ']';
+		$value      = $options[ $args['name'] ];
+		$attributes = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
 
-			<?php
-			if ( $is_checkbox ) {
-				checked( $options[ $args['name'] ] );
-			}
+		if ( 'checkbox' === $args['type'] ) {
+			$label    = isset( $args['label'] ) ? $args['label'] : '';
+			$checkbox = sprintf( '<input type="checkbox" id="%s" name="%s" value="%s" %s %s/>', $args['id'], $name, true, checked( true, (int) $value, false ), $attributes );
+			$hidden   = sprintf( '<input type="hidden" name="%s" value="%s" />', esc_html( $name ), false );
+			printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
 
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
+			if ( isset( $args['desc'] ) ) {
+				printf( '<p class="description">%s</p>', $args['desc'] );
 			}
-			?>
-		/>
-		<?php if ( $is_checkbox ) { ?>
-			<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
-		<?php } else { ?>
-			<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
-		<?php } ?>
-		<?php
+		} else {
+			echo wc_help_tip( $args['desc'] );
+			printf( '<input id="%s" name="%s" type="%s" value="%s" />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ) );
+		}
 	}
 
 	/**
@@ -491,14 +461,11 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public function textarea_callback( $args ) {
 		$options = get_option( $args['page'] );
-		wc_help_tip( 'test' );
-		?>
-		<textarea id="<?php echo $args['id']; ?>"
-			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-			rows="5"
-		><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
-		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-		<?php
+		$name    = $args['page'] . '[' . $args['name'] . ']';
+		$value   = $options[ $args['name'] ];
+
+		echo wc_help_tip( $args['desc'] );
+		printf( '<textarea id="%s" name="%s" rows="%d">%s</textarea>', esc_attr( $args['id'] ), esc_attr( $name ), 5, esc_textarea( $value ) );
 	}
 
 	/**
@@ -580,7 +547,10 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ), true ) ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array(
+					'multiple_checkbox',
+					'multiple_select'
+				), true ) ) {
 				// Add options defaults.
 				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );
@@ -619,20 +589,11 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 * Get the formatted html setting id.
+	 * Sanitize settings.
 	 *
-	 * @param string $id String to format.
+	 * @param array $input Settings.
 	 *
-	 * @return string.
-	 */
-	public static function get_formatted_setting_id( $id ) {
-		return str_replace( '_', '-', WPI()->get_prefix() . $id );
-	}
-
-	/**
-	 * @param $input
-	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public abstract function sanitize( $input );
 

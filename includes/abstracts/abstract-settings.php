@@ -491,6 +491,7 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public function textarea_callback( $args ) {
 		$options = get_option( $args['page'] );
+		wc_help_tip( 'test' );
 		?>
 		<textarea id="<?php echo $args['id']; ?>"
 			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
@@ -579,11 +580,7 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && in_array( $field['type'], array(
-					'multiple_checkbox',
-					'multiple_select'
-				) )
-			) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ), true ) ) {
 				// Add options defaults.
 				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );

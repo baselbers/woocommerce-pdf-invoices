@@ -99,10 +99,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'page'     => $this->settings_key,
 				'section'  => 'general',
 				'type'     => 'text',
-				'desc'     => sprintf( __( 'Create a custom template by copying it from %1$s to %2$s.', 'woocommerce-pdf-invoices' ), '<code>plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple</code>', '<code>uploads/woocommerce-pdf-invoices/templates/invoice/simple</code>' )
-				              . '<br><div class="bewpi-notes">'
-				              . sprintf( __( '<strong>Note:</strong> The %1$s template will probably no longer be supported in future versions, consider using the %2$s template.', 'woocommerce-pdf-invoices' ), '<strong>micro</strong>', '<strong>minimal</strong>' )
-				              . '</div>',
+				'desc'     => sprintf( __( 'Create a custom template by copying it from %1$s to %2$s.', 'woocommerce-pdf-invoices' ), '<code>plugins/woocommerce-pdf-invoices/includes/templates/invoice/simple</code>', '<code>uploads/woocommerce-pdf-invoices/templates/invoice/simple</code>' ),
 				'options'  => $this->get_template_options(),
 				'default'  => 'minimal',
 				'priority' => 0,
@@ -338,24 +335,24 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'desc'     => '',
 				'class'    => 'bewpi-totals',
 				'options'  => apply_filters( 'wpi_body_totals_options', array(
-					'shipping' => array(
+					'shipping_ex_vat' => array(
 						'name'    => __( 'Shipping', 'woocommerce-pdf-invoices' ),
-						'value'   => 'shipping',
+						'value'   => 'shipping_ex_vat',
 						'default' => 1,
 					),
-					'fee'      => array(
+					'fee_ex_vat'      => array(
 						'name'    => __( 'Fee', 'woocommerce-pdf-invoices' ),
-						'value'   => 'fee',
+						'value'   => 'fee_ex_vat',
 						'default' => 1,
 					),
-					'vat'      => array(
+					'vat'             => array(
 						'name'    => WC()->countries->tax_or_vat(),
 						'value'   => 'vat',
 						'default' => 1,
 					),
-					'total'    => array(
+					'total_incl_vat'  => array(
 						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ),
-						'value'   => 'total',
+						'value'   => 'total_incl_vat',
 						'default' => 1,
 					),
 				), $this ),

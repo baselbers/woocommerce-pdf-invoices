@@ -434,7 +434,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			}
 		}
 
-		return $data;
+		return apply_filters( 'wpi_get_invoice_columns', $data, $this );
 	}
 
 	/**

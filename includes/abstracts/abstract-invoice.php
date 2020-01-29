@@ -562,7 +562,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 *
 	 * @return float
 	 */
-	private function get_fee_subtotal() {
+	protected function get_fee_subtotal() {
 		$subtotal = 0.00;
 
 		foreach ( $this->order->get_fees() as $fee ) {

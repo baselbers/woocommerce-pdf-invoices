@@ -307,7 +307,7 @@ abstract class BEWPI_Abstract_Settings {
 	protected static function formatted_number_placeholders() {
 		$placeholders = array( '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
 
-		return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
+		return '<code>' . join( '</code> <code>', $placeholders ) . '</code>';
 	}
 
 	/**
@@ -353,7 +353,6 @@ abstract class BEWPI_Abstract_Settings {
 		$name    = $args['page'] . '[' . $args['name'] . ']';
 		$value   = $options[ $args['name'] ];
 
-		echo wc_help_tip( $args['desc'] );
 		printf( '<select id="%s" name="%s">', esc_attr( $args['id'] ), esc_attr( $name ) );
 
 		foreach ( $args['options'] as $key => $label ) {
@@ -385,7 +384,6 @@ abstract class BEWPI_Abstract_Settings {
 			}
 			?>
 		</select>
-		<?php echo ( $args['desc'] ) ? $args['desc'] : ''; ?>
 		<a class="select_all button" href="#"><?php _e( 'Select all', 'woocommerce-pdf-invoices' ); ?></a> <a
 			class="select_none button" href="#"><?php _e( 'Select none', 'woocommerce-pdf-invoices' ); ?></a>
 		<?php
@@ -407,7 +405,7 @@ abstract class BEWPI_Abstract_Settings {
 
 		printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
 
-		if ( isset( $args['desc'] ) ) {
+		if ( isset( $args['desc'] ) && '' !== $args['desc'] ) {
 			printf( '<p class="description">%s</p>', $args['desc'] );
 		}
 	}
@@ -424,7 +422,6 @@ abstract class BEWPI_Abstract_Settings {
 		$year                = (int) date_i18n( 'Y', current_time( 'timestamp' ) );
 		$value               = false === $next_invoice_number ? BEWPI_Abstract_Invoice::get_max_invoice_number( $year ) + 1 : $next_invoice_number;
 
-		echo wc_help_tip( $args['desc'] );
 		printf( '<input id="%s" name="%s" type="%s" value="%d" %s />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ), $attributes );
 	}
 
@@ -445,11 +442,10 @@ abstract class BEWPI_Abstract_Settings {
 			$hidden   = sprintf( '<input type="hidden" name="%s" value="%s" />', esc_html( $name ), false );
 			printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
 
-			if ( isset( $args['desc'] ) ) {
+			if ( isset( $args['desc'] ) && '' !== $args['desc'] ) {
 				printf( '<p class="description">%s</p>', $args['desc'] );
 			}
 		} else {
-			echo wc_help_tip( $args['desc'] );
 			printf( '<input id="%s" name="%s" type="%s" value="%s" />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ) );
 		}
 	}
@@ -460,12 +456,12 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function textarea_callback( $args ) {
-		$options = get_option( $args['page'] );
-		$name    = $args['page'] . '[' . $args['name'] . ']';
-		$value   = $options[ $args['name'] ];
+		$options     = get_option( $args['page'] );
+		$name        = $args['page'] . '[' . $args['name'] . ']';
+		$value       = $options[ $args['name'] ];
+		$placeholder = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
 
-		echo wc_help_tip( $args['desc'] );
-		printf( '<textarea id="%s" name="%s" rows="%d">%s</textarea>', esc_attr( $args['id'] ), esc_attr( $name ), 5, esc_textarea( $value ) );
+		printf( '<textarea id="%s" name="%s" rows="%d" placeholder="%s">%s</textarea>', esc_attr( $args['id'] ), esc_attr( $name ), 5, esc_attr( $placeholder ), esc_textarea( $value ) );
 	}
 
 	/**

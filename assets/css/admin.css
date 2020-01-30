@@ -9,6 +9,10 @@ input[type="radio"] {
 	margin: -4px 6px 0 0;
 }
 
+.form-table th {
+	padding: 2px -24px 0 0;
+}
+
 .form-table td label {
 	margin: 4px 0;
 	display: inline-block;
@@ -22,6 +26,11 @@ input[type="radio"] {
 
 .form-table td p.description {
 	margin: 4px 0 7px;
+}
+
+.form-table th .woocommerce-help-tip {
+	margin: 2px -10px 0 0;
+	float: right;
 }
 
 div.wpi form div.notice {

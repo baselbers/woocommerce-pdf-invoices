@@ -243,18 +243,18 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'priority' => 5,
 			),
 			array(
-				'id'         => 'bewpi-invoice-number-format',
-				'name'       => $this->prefix . 'invoice_number_format',
-				'title'      => __( 'Format', 'woocommerce-pdf-invoices' ) . wc_help_tip( sprintf( __( 'The available placeholders are %s', 'woocommerce-pdf-invoices' ), self::formatted_number_placeholders() ) ),
-				'callback'   => array( $this, 'input_callback' ),
-				'page'       => $this->settings_key,
-				'section'    => 'invoice_number',
-				'type'       => 'text',
-				'placholder' => '[number]',
-				'desc'       => '',
-				'default'    => '[number]-[Y]',
-				'attrs'      => array( 'required' ),
-				'priority'   => 6,
+				'id'          => 'bewpi-invoice-number-format',
+				'name'        => $this->prefix . 'invoice_number_format',
+				'title'       => __( 'Format', 'woocommerce-pdf-invoices' ) . wc_help_tip( sprintf( __( 'The available placeholders are %s', 'woocommerce-pdf-invoices' ), self::formatted_number_placeholders() ) ),
+				'callback'    => array( $this, 'input_callback' ),
+				'page'        => $this->settings_key,
+				'section'     => 'invoice_number',
+				'type'        => 'text',
+				'placeholder' => '[number]',
+				'desc'        => '',
+				'default'     => '[number]-[Y]',
+				'attrs'       => array( 'required' ),
+				'priority'    => 6,
 			),
 			array(
 				'id'       => 'bewpi-reset-counter-yearly',
@@ -562,9 +562,11 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 
 		if ( ! isset( $input['bewpi_invoice_number_format'] ) || false === strpos( $input['bewpi_invoice_number_format'], '[number]' ) ) {
 			$error          = new stdClass();
-			$error->message = __( 'Invoice number format field must contain at least the placeholder: [number].', 'woocommerce-pdf-invoices' );
+			$error->message = __( 'Invoice number format field must contain at least the [number] placeholder.', 'woocommerce-pdf-invoices' );
 			$error->type    = 'error';
 			$this->add_error( $error );
+
+			$output['bewpi_invoice_number_format'] = '[number]';
 		} else {
 			$output['bewpi_invoice_number_format'] = sanitize_text_field( $input['bewpi_invoice_number_format'] );
 		}

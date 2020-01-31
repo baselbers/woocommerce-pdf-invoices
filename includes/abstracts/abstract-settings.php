@@ -100,6 +100,8 @@ abstract class BEWPI_Abstract_Settings {
 		$this->set_defaults();
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
+
+		add_action( 'admin_notices', array( $this, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -108,7 +110,6 @@ abstract class BEWPI_Abstract_Settings {
 	public static function init_hooks() {
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
-		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -243,11 +244,10 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 *
+	 * Display settings errors.
 	 */
-	public static function display_settings_errors() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
-		settings_errors( $current_tab );
+	public function display_settings_errors() {
+		settings_errors( $this->settings_key );
 	}
 
 	/**
@@ -432,10 +432,11 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function input_callback( $args ) {
-		$options    = get_option( $args['page'] );
-		$name       = $args['page'] . '[' . $args['name'] . ']';
-		$value      = $options[ $args['name'] ];
-		$attributes = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
+		$options     = get_option( $args['page'] );
+		$name        = $args['page'] . '[' . $args['name'] . ']';
+		$value       = $options[ $args['name'] ];
+		$attributes  = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
+		$placeholder = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
 
 		if ( 'checkbox' === $args['type'] ) {
 			$label    = isset( $args['label'] ) ? $args['label'] : '';
@@ -447,7 +448,7 @@ abstract class BEWPI_Abstract_Settings {
 				printf( '<p class="description">%s</p>', $args['desc'] );
 			}
 		} else {
-			printf( '<input id="%s" name="%s" type="%s" value="%s" />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ) );
+			printf( '<input id="%s" name="%s" type="%s" value="%s" placeholder="%s" />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ), esc_attr( $placeholder ) );
 		}
 	}
 
@@ -544,10 +545,7 @@ abstract class BEWPI_Abstract_Settings {
 
 		// Remove multiple checkbox types from settings.
 		foreach ( $fields as $index => $field ) {
-			if ( isset( $field['type'] ) && in_array( $field['type'], array(
-					'multiple_checkbox',
-					'multiple_select'
-				), true ) ) {
+			if ( isset( $field['type'] ) && in_array( $field['type'], array( 'multiple_checkbox', 'multiple_select' ), true ) ) {
 				// Add options defaults.
 				$defaults[ $field['name'] ] = array_keys( array_filter( wp_list_pluck( $field['options'], 'default', 'value' ) ) );
 				unset( $fields[ $index ] );
@@ -597,7 +595,7 @@ abstract class BEWPI_Abstract_Settings {
 	/**
 	 * Set submit button text.
 	 *
-	 * @param string $text
+	 * @param string $text Button text.
 	 */
 	public function set_submit_button_text( $text ) {
 		$this->submit_button_text = $text;

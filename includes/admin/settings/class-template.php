@@ -129,17 +129,18 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'priority' => 2,
 			),
 			array(
-				'id'       => 'bewpi-date-format',
-				'name'     => $this->prefix . 'date_format',
-				'title'    => __( 'Date format', 'woocommerce-pdf-invoices' ),
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'general',
-				'type'     => 'text',
-				'desc'     => sprintf( __( '<a href="%s">Format</a> of invoice date and order date.', 'woocommerce-pdf-invoices' ), 'http://php.net/manual/en/datetime.formats.date.php' ),
-				'default'  => 'Y-m-d H:i:s',
-				'attrs'    => array( 'required' ),
-				'priority' => 3,
+				'id'          => 'bewpi-date-format',
+				'name'        => $this->prefix . 'date_format',
+				'title'       => __( 'Date format', 'woocommerce-pdf-invoices' ),
+				'callback'    => array( $this, 'input_callback' ),
+				'page'        => $this->settings_key,
+				'section'     => 'general',
+				'type'        => 'text',
+				'placeholder' => 'd-m-Y',
+				'desc'        => sprintf( __( '<a href="%s">Format</a> of invoice date and order date.', 'woocommerce-pdf-invoices' ), 'http://php.net/manual/en/datetime.formats.date.php' ),
+				'default'     => 'Y-m-d H:i:s',
+				'attrs'       => array( 'required' ),
+				'priority'    => 3,
 			),
 			array(
 				'id'       => 'bewpi-show-payment-status',
@@ -498,19 +499,20 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'priority' => 5,
 			),
 			array(
-				'id'       => 'bewpi-invoice-number-format',
-				'name'     => $this->prefix . 'invoice_number_format',
-				'title'    => __( 'Format', 'woocommerce-pdf-invoices' ),
-				'callback' => array( $this, 'input_callback' ),
-				'page'     => $this->settings_key,
-				'section'  => 'invoice_number',
-				'type'     => 'text',
-				'desc'     => sprintf( __( 'Available placeholders: %s.', 'woocommerce-pdf-invoices' ), self::formatted_number_placeholders() )
-				              . '<br>'
-				              . sprintf( __( '<b>Note:</b> %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[number]</code>' ),
-				'default'  => '[number]-[Y]',
-				'attrs'    => array( 'required' ),
-				'priority' => 6,
+				'id'          => 'bewpi-invoice-number-format',
+				'name'        => $this->prefix . 'invoice_number_format',
+				'title'       => __( 'Format', 'woocommerce-pdf-invoices' ),
+				'callback'    => array( $this, 'input_callback' ),
+				'page'        => $this->settings_key,
+				'section'     => 'invoice_number',
+				'type'        => 'text',
+				'placeholder' => '[number]',
+				'desc'        => sprintf( __( 'Available placeholders: %s.', 'woocommerce-pdf-invoices' ), self::formatted_number_placeholders() )
+				                 . '<br>'
+				                 . sprintf( __( '<b>Note:</b> %s is required and slashes aren\'t supported.', 'woocommerce-pdf-invoices' ), '<code>[number]</code>' ),
+				'default'     => '[number]-[Y]',
+				'attrs'       => array( 'required' ),
+				'priority'    => 6,
 			),
 			array(
 				'id'       => 'bewpi-reset-counter-yearly',
@@ -637,6 +639,15 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 
 		if ( isset( $input['bewpi_reset_counter'] ) && $input['bewpi_reset_counter'] ) {
 			set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
+		}
+
+		if ( ! isset( $input['bewpi_invoice_number_format'] ) || false === strpos( $input['bewpi_invoice_number_format'], '[number]' ) ) {
+			$error          = new stdClass();
+			$error->message = __( 'Invoice number format field must contain at least the placeholder: [number].', 'woocommerce-pdf-invoices' );
+			$error->type    = 'error';
+			$this->add_error( $error );
+		} else {
+			$output['bewpi_invoice_number_format'] = sanitize_text_field( $input['bewpi_invoice_number_format'] );
 		}
 
 		return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );

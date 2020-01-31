@@ -100,8 +100,6 @@ abstract class BEWPI_Abstract_Settings {
 		$this->set_defaults();
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
-
-		add_action( 'admin_notices', array( $this, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -110,6 +108,7 @@ abstract class BEWPI_Abstract_Settings {
 	public static function init_hooks() {
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
+		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -217,8 +216,8 @@ abstract class BEWPI_Abstract_Settings {
 				?>
 			</h2>
 			<form method="post"
-			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
-			      enctype="multipart/form-data" <?php echo $width; ?>>
+				action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
+				enctype="multipart/form-data" <?php echo $width; ?>>
 				<?php
 				settings_fields( self::$setting->settings_key );
 				do_settings_sections( self::$setting->settings_key );
@@ -244,10 +243,11 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 * Display settings errors.
+	 *
 	 */
-	public function display_settings_errors() {
-		settings_errors( $this->settings_key );
+	public static function display_settings_errors() {
+		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
+		settings_errors( $current_tab );
 	}
 
 	/**
@@ -307,7 +307,7 @@ abstract class BEWPI_Abstract_Settings {
 	protected static function formatted_number_placeholders() {
 		$placeholders = array( '[number]', '[order-number]', '[order-date]', '[m]', '[Y]', '[y]' );
 
-		return '<code>' . join( '</code>, <code>', $placeholders ) . '</code>';
+		return '<code>' . join( '</code> <code>', $placeholders ) . '</code>';
 	}
 
 	/**
@@ -350,19 +350,16 @@ abstract class BEWPI_Abstract_Settings {
 	 */
 	public function select_callback( $args ) {
 		$options = get_option( $args['page'] );
-		?>
-		<select id="<?php echo $args['id']; ?>" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>">
-			<?php
-			foreach ( $args['options'] as $key => $label ) :
-				?>
-				<option
-					value="<?php echo esc_attr( $key ); ?>" <?php selected( $options[ $args['name'] ], $key ); ?>><?php echo esc_html( $label ); ?></option>
-			<?php
-			endforeach;
-			?>
-		</select>
-		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-		<?php
+		$name    = $args['page'] . '[' . $args['name'] . ']';
+		$value   = $options[ $args['name'] ];
+
+		printf( '<select id="%s" name="%s">', esc_attr( $args['id'] ), esc_attr( $name ) );
+
+		foreach ( $args['options'] as $key => $label ) {
+			printf( '<option value="%s" %s>%s</option>', esc_attr( $key ), selected( $value, $key, false ), esc_html( $label ) );
+		}
+
+		printf( '</select>' );
 	}
 
 	/**
@@ -376,11 +373,11 @@ abstract class BEWPI_Abstract_Settings {
 		$options      = array_merge( array_flip( $selections ), $args['options'] );
 		?>
 		<select multiple="multiple"
-		        name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
-		        title="<?php echo esc_attr( $args['title'] ); ?>"
-		        data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
-		        aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ); ?>"
-		        class="wc-enhanced-select">
+			name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
+			title="<?php echo esc_attr( $args['title'] ); ?>"
+			data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+			aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ); ?>"
+			class="wc-enhanced-select">
 			<?php
 			foreach ( $options as $id => $option ) {
 				echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $id, $selections, true ), true, false ) . '>' . $option['name'] . '</option>';
@@ -396,30 +393,22 @@ abstract class BEWPI_Abstract_Settings {
 	/**
 	 * Reset counter field.
 	 *
-	 * @param string $args Field arguments.
+	 * @param array $args Field arguments.
 	 */
 	public function reset_counter_callback( $args ) {
-		$class = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
-		?>
-		<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
-		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-		       value="1"
-			<?php
-			checked( (bool) get_transient( 'bewpi_next_invoice_number' ) );
+		$options    = get_option( $args['page'] );
+		$name       = $args['page'] . '[' . $args['name'] . ']';
+		$value      = $options[ $args['name'] ];
+		$attributes = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
+		$label      = isset( $args['label'] ) ? $args['label'] : '';
+		$checkbox   = sprintf( '<input type="checkbox" id="%s" name="%s" value="%s" %s %s/>', $args['id'], $name, true, checked( true, (int) $value, false ), $attributes );
+		$hidden     = sprintf( '<input type="hidden" name="%s" value="%s" />', esc_html( $name ), false );
 
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
-			}
-			?>
-		/>
-		<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>">
-			<?php echo $args['desc']; ?>
-		</label>
-		<?php
+		printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
+
+		if ( isset( $args['desc'] ) && '' !== $args['desc'] ) {
+			printf( '<p class="description">%s</p>', $args['desc'] );
+		}
 	}
 
 	/**
@@ -428,28 +417,13 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function next_invoice_number_callback( $args ) {
-		$class               = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
+		$name                = $args['page'] . '[' . $args['name'] . ']';
+		$attributes          = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
 		$next_invoice_number = get_transient( 'bewpi_next_invoice_number' );
-		?>
-		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-			<?php if ( ! isset( $args['placeholder'] ) ) { ?>
-				placeholder=""<?php ;
-			} else { ?>
-				placeholder="<?php echo $args['placeholder']; ?>"
-			<?php } ?>
-			   value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( (int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
-			<?php
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
-			}
-			?>
-		/>
-		<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
-		<?php
+		$year                = (int) date_i18n( 'Y', current_time( 'timestamp' ) );
+		$value               = false === $next_invoice_number ? BEWPI_Abstract_Invoice::get_max_invoice_number( $year ) + 1 : $next_invoice_number;
+
+		printf( '<input id="%s" name="%s" type="%s" value="%d" %s />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ), $attributes );
 	}
 
 	/**
@@ -458,40 +432,23 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function input_callback( $args ) {
-		$options     = get_option( $args['page'] );
-		$class       = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
-		$is_checkbox = 'checkbox' === $args['type'];
-		if ( $is_checkbox ) { ?>
-			<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
-		<?php } ?>
-		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-			<?php if ( ! isset( $args['placeholder'] ) ) { ?>
-				placeholder=""<?php ;
-			} else { ?>
-				placeholder="<?php echo $args['placeholder']; ?>"
-			<?php } ?>
-			   value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
+		$options    = get_option( $args['page'] );
+		$name       = $args['page'] . '[' . $args['name'] . ']';
+		$value      = $options[ $args['name'] ];
+		$attributes = isset( $args['attrs'] ) ? implode( ' ', $args['attrs'] ) : '';
 
-			<?php
-			if ( $is_checkbox ) {
-				checked( $options[ $args['name'] ] );
-			}
+		if ( 'checkbox' === $args['type'] ) {
+			$label    = isset( $args['label'] ) ? $args['label'] : '';
+			$checkbox = sprintf( '<input type="checkbox" id="%s" name="%s" value="%s" %s %s/>', $args['id'], $name, true, checked( true, (int) $value, false ), $attributes );
+			$hidden   = sprintf( '<input type="hidden" name="%s" value="%s" />', esc_html( $name ), false );
+			printf( '<label for="%s">%s</label>', esc_attr( $args['id'] ), $hidden . $checkbox . esc_html( $label ) );
 
-			if ( isset( $args['attrs'] ) ) {
-				foreach ( $args['attrs'] as $attr ) {
-					echo $attr . ' ';
-				}
+			if ( isset( $args['desc'] ) && '' !== $args['desc'] ) {
+				printf( '<p class="description">%s</p>', $args['desc'] );
 			}
-			?>
-		/>
-		<?php if ( $is_checkbox ) { ?>
-			<label for="<?php echo $args['id']; ?>" class="<?php echo $class; ?>"><?php echo $args['desc']; ?></label>
-		<?php } else { ?>
-			<div class="<?php echo $class; ?>"><?php echo $args['desc']; ?></div>
-		<?php } ?>
-		<?php
+		} else {
+			printf( '<input id="%s" name="%s" type="%s" value="%s" />', esc_attr( $args['id'] ), esc_attr( $name ), esc_attr( $args['type'] ), esc_attr( $value ) );
+		}
 	}
 
 	/**
@@ -500,15 +457,12 @@ abstract class BEWPI_Abstract_Settings {
 	 * @param array $args Field arguments.
 	 */
 	public function textarea_callback( $args ) {
-		$options = get_option( $args['page'] );
-		wc_help_tip( 'test' );
-		?>
-		<textarea id="<?php echo $args['id']; ?>"
-		          name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		          rows="5"
-		><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
-		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
-		<?php
+		$options     = get_option( $args['page'] );
+		$name        = $args['page'] . '[' . $args['name'] . ']';
+		$value       = $options[ $args['name'] ];
+		$placeholder = isset( $args['placeholder'] ) ? $args['placeholder'] : '';
+
+		printf( '<textarea id="%s" name="%s" rows="%d" placeholder="%s">%s</textarea>', esc_attr( $args['id'] ), esc_attr( $name ), 5, esc_attr( $placeholder ), esc_textarea( $value ) );
 	}
 
 	/**
@@ -523,58 +477,58 @@ abstract class BEWPI_Abstract_Settings {
 		?>
 		<p class="form-field">
 			<input type="hidden" class="file_id"
-			       name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . ']' ); ?>"
-			       value="<?php echo esc_attr( $attachment_id ); ?>"/>
+				name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . ']' ); ?>"
+				value="<?php echo esc_attr( $attachment_id ); ?>"/>
 			<input type="<?php echo esc_attr( $args['type'] ); ?>" class="file_url"
-			       placeholder="<?php echo esc_attr( $file_url ); ?>" value="<?php echo esc_attr( $file_url ); ?>"/>
+				placeholder="<?php echo esc_attr( $file_url ); ?>" value="<?php echo esc_attr( $file_url ); ?>"/>
 			<button class="button upload_image_button"
-			        data-uploader_button_text="<?php _e( 'Use file', 'woocommerce-pdf-invoices' ); ?>"><?php _e( 'Upload', 'woocommerce-pdf-invoices' ); ?></button>
+				data-uploader_button_text="<?php _e( 'Use file', 'woocommerce-pdf-invoices' ); ?>"><?php _e( 'Upload', 'woocommerce-pdf-invoices' ); ?></button>
 		</p>
 		<script type="text/javascript">
-            // Uploading files
-            var file_frame;
-            var file_target_input;
-            var file_id_input;
+			// Uploading files
+			var file_frame;
+			var file_target_input;
+			var file_id_input;
 
-            jQuery('.upload_image_button').live('click', function (event) {
+			jQuery('.upload_image_button').live('click', function (event) {
 
-                event.preventDefault();
+				event.preventDefault();
 
-                file_target_input = jQuery(this).closest('.form-field').find('.file_url');
-                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+				file_target_input = jQuery(this).closest('.form-field').find('.file_url');
+				file_id_input = jQuery(this).closest('.form-field').find('.file_id');
 
-                // If the media frame already exists, reopen it.
-                if (file_frame) {
-                    file_frame.open();
-                    return;
-                }
+				// If the media frame already exists, reopen it.
+				if (file_frame) {
+					file_frame.open();
+					return;
+				}
 
-                // Create the media frame.
-                file_frame = wp.media.frames.file_frame = wp.media({
-                    title: jQuery(this).data('uploader_title'),
-                    button: {
-                        text: jQuery(this).data('uploader_button_text')
-                    },
-                    multiple: false  // Set to true to allow multiple files to be selected,
-                });
+				// Create the media frame.
+				file_frame = wp.media.frames.file_frame = wp.media({
+					title: jQuery(this).data('uploader_title'),
+					button: {
+						text: jQuery(this).data('uploader_button_text')
+					},
+					multiple: false  // Set to true to allow multiple files to be selected,
+				});
 
-                // When an image is selected, run a callback.
-                file_frame.on('select', function () {
-                    // We set multiple to false so only get one image from the uploader
-                    attachment = file_frame.state().get('selection').first().toJSON();
+				// When an image is selected, run a callback.
+				file_frame.on('select', function () {
+					// We set multiple to false so only get one image from the uploader
+					attachment = file_frame.state().get('selection').first().toJSON();
 
-                    jQuery(file_target_input).val(attachment.url);
-                    jQuery(file_id_input).val(attachment.id);
-                });
+					jQuery(file_target_input).val(attachment.url);
+					jQuery(file_id_input).val(attachment.id);
+				});
 
-                // Finally, open the modal
-                file_frame.open();
-            });
+				// Finally, open the modal
+				file_frame.open();
+			});
 
-            jQuery('.upload_image_button').closest('.form-field').find('.file_url').on('change', function (event) {
-                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
-                jQuery(file_id_input).val('');
-            });
+			jQuery('.upload_image_button').closest('.form-field').find('.file_url').on('change', function (event) {
+				file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+				jQuery(file_id_input).val('');
+			});
 		</script>
 		<?php
 	}
@@ -632,20 +586,11 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 * Get the formatted html setting id.
+	 * Sanitize settings.
 	 *
-	 * @param string $id String to format.
+	 * @param array $input Settings.
 	 *
-	 * @return string.
-	 */
-	public static function get_formatted_setting_id( $id ) {
-		return str_replace( '_', '-', WPI()->get_prefix() . $id );
-	}
-
-	/**
-	 * @param $input
-	 *
-	 * @return mixed
+	 * @return array
 	 */
 	public abstract function sanitize( $input );
 

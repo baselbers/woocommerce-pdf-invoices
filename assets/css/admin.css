@@ -1,203 +1,250 @@
 div.wpi form {
-    display: block;
-    float: left;
-    box-sizing: border-box;
+	display: block;
+	float: left;
+	box-sizing: border-box;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+	margin: -4px 6px 0 0;
+}
+
+.form-table th {
+	padding: 2px -24px 0 0;
+}
+
+.form-table td label {
+	margin: 4px 0;
+	display: inline-block;
+}
+
+.form-table .select2-container,
+.form-table select,
+.form-table textarea {
+	margin-bottom: 3px;
+}
+
+.form-table td p.description {
+	margin: 4px 0 7px;
+}
+
+.form-table th .woocommerce-help-tip {
+	margin: 2px -10px 0 0;
+	float: right;
 }
 
 div.wpi form div.notice {
-    margin-left: 0;
-    margin-right: 0;
+	margin-left: 0;
+	margin-right: 0;
 }
 
 div.wpi form ul {
-    margin: 0;
+	margin: 0;
 }
 
 div.wpi form input[type="checkbox"]:disabled + label {
-    color: #999;
+	color: #999;
 }
 
 div.wpi form select,
 div.wpi form input[type="text"],
 div.wpi form textarea,
 div.wpi form .select2-container {
-    width: 348px;
+	width: 348px;
 }
 
 div.wpi form .select2-container {
-    display: block;
+	display: block;
 }
 
 div.wpi form tr.bewpi-columns .select2-container {
-    width: 100% !important;
+	width: 100% !important;
 }
 
 div.wpi form input[type="number"],
 div.wpi form input[type="color"] {
-    width: 70px;
+	width: 70px;
 }
 
 div.wpi form .select2-container {
-    margin-bottom: 3px;
+	margin-bottom: 3px;
 }
 
 div.wpi form .select2-container ul li div,
 div.wpi form .select2-container ul li {
-    cursor: move !important;
+	cursor: move !important;
 }
 
 div.wpi form tr.bewpi-totals li {
-    clear: left;
+	clear: left;
 }
 
 a.wpi.shop-order-action {
-    background-repeat: no-repeat !important;
-    background-position: center center !important;
-    text-indent: -9999px;
-    position: relative;
-    padding: 0 !important;
-    height: 2em !important;
-    width: 2em;
+	background-repeat: no-repeat !important;
+	background-position: center center !important;
+	text-indent: -9999px;
+	position: relative;
+	padding: 0 !important;
+	height: 2em !important;
+	width: 2em;
 }
 
 a.wpi.shop-order-action.invoice {
-    background-image: url(../images/invoice-icon.png) !important;
+	background-image: url(../images/invoice-icon.png) !important;
 }
 
 a.wpi.shop-order-action.packing-slip {
-    background-image: url(../images/packing-slip-icon.png) !important;
+	background-image: url(../images/packing-slip-icon.png) !important;
 }
 
 table.wpi.order-page-meta-box.pdf-invoice {
-    margin-bottom: 10px;
-    width: 100%;
+	margin-bottom: 10px;
+	width: 100%;
 }
 
 table.wpi.order-page-meta-box.pdf-invoice tr td:last-child {
-    text-align: right;
-    font-weight: bold;
+	text-align: right;
+	font-weight: bold;
 }
 
 a.wpi.order-page.invoice.button {
-    margin: 4px !important;
-    min-width: 60px;
-    text-align: center;
+	margin: 4px !important;
+	min-width: 60px;
+	text-align: center;
 }
 
 a.wpi.order-page.packing-slip.button {
-    margin: 4px !important;
-    min-width: 60px;
-    text-align: center;
+	margin: 4px !important;
+	min-width: 60px;
+	text-align: center;
 }
 
 .bewpi-notes {
-    cursor: default;
-    font-size: 13px;
-    font-style: italic;
-    margin-top: 3px;
+	cursor: default;
+	font-size: 13px;
+	font-style: italic;
+	margin-top: 3px;
 }
+
 #bewpi-plugin-activated-notice button.notice-dismiss {
-    display: none;
+	display: none;
 }
+
 .manage-column.column-bewpi_invoice_number {
-    width: 8%;
+	width: 8%;
 }
 
 /* Sidebar */
 .bewpi-sidebar {
-    width: 25%;
-    box-sizing: border-box;
-    display: block;
-    float: right;
-    clear: right;
-    border: 1px solid #ccc;
-    background-color: white;
-    padding: 0 20px 20px;
-    margin-top: 20px;
+	width: 25%;
+	box-sizing: border-box;
+	display: block;
+	float: right;
+	clear: right;
+	border: 1px solid #ccc;
+	background-color: white;
+	padding: 0 20px 20px;
+	margin-top: 20px;
 }
+
 .bewpi-sidebar.premium h3 {
-    color: white;
+	color: white;
 }
+
 .bewpi-sidebar.premium {
-    background: #222;
-    color: #ccc !important;
+	background: #222;
+	color: #ccc !important;
 }
+
 .bewpi-sidebar.support .btn {
-    margin: 10px 10px 10px 0;
+	margin: 10px 10px 10px 0;
 }
+
 .bewpi-sidebar.support .github.btn {
-    margin-bottom: -3px !important;
-    margin-top: 20px;
+	margin-bottom: -3px !important;
+	margin-top: 20px;
 }
+
 .bewpi-sidebar.support .twitter.btn {
-    margin-bottom: 0 !important;
+	margin-bottom: 0 !important;
 }
+
 #bewpi-mc-embed-signup {
-    background: #222;
-    clear:left;
+	background: #222;
+	clear: left;
 }
+
 #bewpi-mc-embed-signup form {
-    margin: 0 !important;
-    padding: 0;
-    float: none;
+	margin: 0 !important;
+	padding: 0;
+	float: none;
 }
+
 #bewpi-mc-embed-signup input[type="text"] {
-    width: 100%;
+	width: 100%;
 }
+
 .bewpi-learn-more {
-    padding: 10px 0;
-    background-color: #F48C2D;
-    color: white;
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
-    font-size: 15px;
-    text-align: center;
+	padding: 10px 0;
+	background-color: #F48C2D;
+	color: white;
+	text-decoration: none;
+	display: block;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
 }
+
 .bewpi-learn-more:hover {
-    background-color: #EE7600;
-    color: white;
+	background-color: #EE7600;
+	color: white;
 }
+
 #bewpi-mc-embed-signup input.button {
-    margin: 0 !important;
+	margin: 0 !important;
 }
+
 #bewpi-mc-embedded-subscribe:hover {
-    background-color: #EE7600 !important;
+	background-color: #EE7600 !important;
 }
+
 #bewpi-mc-embedded-subscribe {
-    padding: 10px 0;
-    background-color: #F48C2D;
-    color: white;
-    text-decoration: none;
-    display: block;
-    font-weight: bold;
-    font-size: 15px;
-    text-align: center;
-    border-radius: 0;
-    box-shadow: none;
-    height: auto;
-    width: 100%;
-    line-height: normal;
-    border: none;
+	padding: 10px 0;
+	background-color: #F48C2D;
+	color: white;
+	text-decoration: none;
+	display: block;
+	font-weight: bold;
+	font-size: 15px;
+	text-align: center;
+	border-radius: 0;
+	box-shadow: none;
+	height: auto;
+	width: 100%;
+	line-height: normal;
+	border: none;
 }
+
 #bewpi-mce-EMAIL {
-    width: 100%;
-    border-radius: 0;
-    margin-top: 20px;
-    margin-left: 0;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+	width: 100%;
+	border-radius: 0;
+	margin-top: 20px;
+	margin-left: 0;
+	border: 1px solid #ccc;
+	padding: 10px;
+	margin-bottom: 10px;
 }
+
 .bewpi-no-spam {
-    font-size: 11px;
-    text-align: center;
-    margin-top: 1px !important;
+	font-size: 11px;
+	text-align: center;
+	margin-top: 1px !important;
 }
+
 /* End sidebar */
 
 @media screen and (max-width: 790px) {
-    .bewpi-sidebar {
-        display: none;
-    }
+	.bewpi-sidebar {
+		display: none;
+	}
 }

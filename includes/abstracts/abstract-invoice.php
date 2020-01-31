@@ -428,7 +428,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 					$data[ $column ] = __( 'Quantity', 'woocommerce-pdf-invoices' );
 					break;
 
-				case 'total':
+				case 'total_ex_vat':
 					$data[ $column ] = __( 'Total', 'woocommerce-pdf-invoices' );
 					break;
 			}
@@ -464,9 +464,8 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 						$this->add_quantity_column_data( $row, $item_id, $item );
 						break;
 
-					case 'total':
-						$prices_include_tax = WPI()->get_prop( $this->order, 'prices_include_tax' );
-						$this->add_total_column_data( $row, $item_id, $item, (bool) $prices_include_tax );
+					case 'total_ex_vat':
+						$this->add_total_column_data( $row, $item_id, $item, false );
 						break;
 				}
 			}
@@ -514,13 +513,13 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	/**
 	 * Adds line item total incl. tax to columns data array.
 	 *
-	 * @param array  $row      Column data.
-	 * @param int    $item_id  Item ID.
-	 * @param object $item     Item object.
-	 * @param bool   $incl_tax Including tax.
+	 * @param array                 $row      Column data.
+	 * @param int                   $item_id  Item ID.
+	 * @param WC_Order_Item_Product $item     Item object.
+	 * @param bool                  $incl_tax Including tax.
 	 */
 	public function add_total_column_data( &$row, $item_id, $item, $incl_tax = false ) {
-		$row['total'] = wc_price( $item->get_total(), array( 'currency' => WPI()->get_currency( $this->order ) ) );
+		$row['total_ex_vat'] = wc_price( $item->get_total(), array( 'currency' => WPI()->get_currency( $this->order ) ) );
 	}
 
 	/**

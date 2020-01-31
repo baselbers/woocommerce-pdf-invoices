@@ -425,7 +425,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 					),
 					'total'       => array(
 						'name'    => __( 'Total', 'woocommerce-pdf-invoices' ),
-						'value'   => 'total',
+						'value'   => 'total_ex_vat',
 						'default' => 1,
 					),
 				), $this ),

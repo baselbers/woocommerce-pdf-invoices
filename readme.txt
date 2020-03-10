@@ -344,8 +344,9 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.12 - January 21, 2019 =
+= 3.0.12 - March 10, 2019 =
 
+- Improved: NL translation files thanks to @freasy.
 - Improved: Invoice template.
 - Improved: Formatted company address and details by splitting into separate functions.
 - Fixed: Replacing placeholders while getting options.

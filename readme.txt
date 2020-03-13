@@ -346,6 +346,8 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 = 3.0.12 - March 10, 2019 =
 
+- Added: Filter 'wpi_invoice_number'.
+- Improved: Filter 'bewpi_formatted_invoice_number' to 'wpi_formatted_invoice_number'.
 - Improved: NL translation files thanks to @freasy.
 - Improved: Invoice template.
 - Improved: Formatted company address and details by splitting into separate functions.

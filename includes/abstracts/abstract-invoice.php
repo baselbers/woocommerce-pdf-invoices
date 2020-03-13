@@ -123,7 +123,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		// Add prefix and suffix directly.
 		$formatted_invoice_number = WPI()->get_option( 'template', 'invoice_number_prefix' ) . $formatted_invoice_number . WPI()->get_option( 'template', 'invoice_number_suffix' );
 
-		return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
+		return apply_filters( 'wpi_formatted_invoice_number', $formatted_invoice_number, $this );
 	}
 
 	/**
@@ -244,7 +244,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		$max_invoice_number = self::get_max_invoice_number( $this->year );
 		$next_number        = $max_invoice_number + 1;
 
-		return $next_number;
+		return apply_filters( 'wpi_invoice_number', $next_number, $this );
 	}
 
 	/**

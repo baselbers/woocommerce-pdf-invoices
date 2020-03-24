@@ -47,7 +47,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 			),
 			'packing_slips'  => array(
 				'title'       => __( 'Packing Slips Options', 'woocommerce-pdf-invoices' ),
-				'description' => __( 'Packing slips are <strong>only available</strong> when using minimal template.', 'woocommerce-pdf-invoices' ),
+				'description' => '',
 			),
 			'header'         => array(
 				'title'       => __( 'Header Options', 'woocommerce-pdf-invoices' ),
@@ -180,7 +180,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'section'  => 'invoice_number',
 				'type'     => 'checkbox',
 				'label'    => __( 'Reset invoice counter', 'woocommerce-pdf-invoices' ),
-				'desc'     => __( 'Enable and determine next invoice number by changing the Next field below.', 'woocommerce-pdf-invoices' ),
+				'desc'     => __( 'Enable to reset the invoice numbering with the invoice number shown in the option below.', 'woocommerce-pdf-invoices' ),
 				'default'  => false,
 				'attrs'    => array( 'onchange="bewpi.setting.enableDisableNextInvoiceNumbering(this)"' ),
 				'priority' => 1,
@@ -476,7 +476,7 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 				'section'  => 'body',
 				'type'     => 'checkbox',
 				'label'    => __( 'Show customer notes', 'woocommerce-pdf-invoices' ),
-				'desc'     => '',
+				'desc'     => __( 'Show the customer notes that have been applied within the order and during checkout.', 'woocommerce-pdf-invoices' ),
 				'default'  => 1,
 				'priority' => 8,
 			),

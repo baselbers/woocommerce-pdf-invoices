@@ -480,7 +480,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 			}
 
 
-
 			if ( isset( $_GET['page'] ) && 'woocommerce-pdf-invoices' === $_GET['page'] ) {
 				wp_enqueue_media();
 			}
@@ -794,23 +793,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			// by default order status should be Processing or Completed.
-			$order = wc_get_order( $atts['order_id'] );
-			if ( ! $order->is_paid() ) {
-				return;
-			}
-
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
+			$order_id = (int) $atts['order_id'];
 			$invoice  = new BEWPI_Invoice( $order_id );
-			if ( ! $invoice->get_full_path() ) {
+			if ( '' === $invoice->get_full_path() ) {
 				return;
 			}
 
-			$url = add_query_arg( array(
-				'bewpi_action' => 'view',
-				'post'         => $order_id,
-				'nonce'        => wp_create_nonce( 'view' ),
-			) );
+			$order = wc_get_order( $order_id );
+			// By default order status should be Processing or Completed.
+			if ( false === apply_filters( 'wpi_show_download_invoice_shortcode', $order->is_paid(), $invoice ) ) {
+				return;
+			}
 
 			$tags = array(
 				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
@@ -818,8 +811,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'{formatted_invoice_date}'   => $invoice->get_formatted_date(),
 				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
 			);
-			// find and replace placeholders.
+			// Find and replace placeholders.
 			$title = str_replace( array_keys( $tags ), array_values( $tags ), $atts['title'] );
+
+			$args = array(
+				'bewpi_action' => 'view',
+				'post'         => $order_id,
+				'nonce'        => wp_create_nonce( 'view' ),
+			);
+			$url  = add_query_arg( $args );
+
 			printf( '<a href="%1$s">%2$s</a>', esc_attr( $url ), esc_html( $title ) );
 		}
 
@@ -832,23 +833,27 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return mixed
 		 */
 		public function add_my_account_pdf( $actions, $order ) {
-			$order = wc_get_order( $order );
-
-			if ( ! WPI()->get_option( 'general', 'download_invoice_account' ) || ! $order->is_paid() ) {
+			if ( false === (bool) WPI()->get_option( 'general', 'download_invoice_account' ) ) {
 				return $actions;
 			}
 
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
-			$invoice  = new BEWPI_Invoice( $order_id );
-			if ( ! $invoice->get_full_path() ) {
+			// By default order status should be Processing or Completed.
+			$order   = wc_get_order( $order );
+			$invoice = new BEWPI_Invoice( $order->get_id() );
+			if ( '' === $invoice->get_full_path() ) {
 				return $actions;
 			}
 
-			$url = add_query_arg( array(
+			if ( false === apply_filters( 'wpi_show_my_account_pdf', $order->is_paid(), $invoice ) ) {
+				return $actions;
+			}
+
+			$args = array(
 				'bewpi_action' => 'view',
-				'post'         => $order_id,
+				'post'         => $order->get_id(),
 				'nonce'        => wp_create_nonce( 'view' ),
-			) );
+			);
+			$url  = add_query_arg( $args );
 
 			$actions['invoice'] = array(
 				'url'  => $url,

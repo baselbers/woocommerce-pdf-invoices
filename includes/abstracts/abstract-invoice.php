@@ -304,9 +304,9 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			$this->number = $this->get_next_invoice_number();
 		}
 
-		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
+		$this->filename  = apply_filters( 'wpi_pdf_invoice_filename', $this->get_formatted_number() . '.pdf', $this );
+		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->filename;
 		$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;
-		$this->filename  = basename( $this->full_path );
 
 		// update invoice data in db.
 		$order_id = $this->order->get_id();

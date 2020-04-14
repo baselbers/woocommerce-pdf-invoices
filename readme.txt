@@ -344,8 +344,9 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.12 - March 24, 2020 =
+= 3.0.12 - April 14, 2020 =
 
+- Added: Filter 'wpi_pdf_invoice_filename' to change the name of the pdf invoice file.
 - Added: Filters 'wpi_show_my_account_pdf' and 'wpi_show_download_invoice_shortcode' to override displaying the invoice based on paid status.
 - Added: Filter 'wpi_invoice_number' to change the invoice number.
 - Improved: Filter 'bewpi_formatted_invoice_number' to 'wpi_formatted_invoice_number'.

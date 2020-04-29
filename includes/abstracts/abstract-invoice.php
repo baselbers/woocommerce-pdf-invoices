@@ -314,9 +314,11 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		update_post_meta( $order_id, '_bewpi_invoice_number', $this->number );
 		update_post_meta( $order_id, '_bewpi_invoice_pdf_path', $pdf_path );
 
-		do_action( 'bewpi_before_document_generation', $this->type, $order_id );
+		do_action( 'wpi_before_document_generation', $this, $order_id );
 
 		parent::generate( $destination );
+
+		do_action( 'wpi_after_document_generation', $this, $order_id );
 
 		return $this->full_path;
 	}

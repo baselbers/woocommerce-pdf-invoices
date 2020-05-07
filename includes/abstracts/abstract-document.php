@@ -101,7 +101,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 			$order_id = BEWPI_WC_Order_Compatibility::get_id( $this->order );
 
-			do_action( 'bewpi_before_invoice_content', $order_id );
+			do_action( 'wpi_before_invoice_content', $order_id, $this );
 
 			// Only use default font with version 2.6.2- because we defining font in template.
 			$default_font    = ( version_compare( WPI_VERSION, '2.6.2' ) <= 0 ) ? 'opensans' : '';
@@ -194,7 +194,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 
 			$mpdf->WriteHTML( $html['style'] . $html['body'] );
 
-			do_action( 'bewpi_after_invoice_content', $order_id );
+			do_action( 'wpi_after_invoice_content', $order_id, $this );
 
 			$mpdf = apply_filters( 'bewpi_mpdf_after_write', $mpdf, $this );
 

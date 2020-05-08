@@ -3,10 +3,10 @@ msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-30 14:12+0200\n"
-"PO-Revision-Date: 2019-08-30 14:12+0200\n"
-"Last-Translator: iduran <iduran@solucionesc2.com>\n"
-"Language-Team: \n"
-"Language: it_IT\n"
+"PO-Revision-Date: 2020-05-08 13:13+0000\n"
+"Last-Translator: Maurizio\n"
+"Language-Team: Italiano\n"
+"Language: it-IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,10 +19,12 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Loco-Target-Locale: es_ES\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Poedit-SearchPath-0: woocommerce-pdf-invoices\n"
 "X-Poedit-SearchPath-1: woocommerce-pdf-invoices-premium\n"
 "X-Poedit-SearchPathExcluded-0: woocommerce-pdf-invoices/lib\n"
+"X-Loco-Version: 2.3.3; wp-5.4.1\n"
+"X-Loco-Template: lang/woocommerce-pdf-invoices-it_IT.po"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/class-updater.php:165
 #, php-format
@@ -31,122 +33,126 @@ msgid ""
 "premium support, we offer you a 30%% discount when you <a href=\"%2$s\" "
 "target=\"_blank\">renew your license</a>."
 msgstr ""
+"Ooops, la tua licenza per %1$s è scaduta. Per continuare a ricevere gli "
+"aggiornamenti e il supporto premium ti offriamo uno sconto del 30%% se "
+"decidi di <a href=\"%2$s\" target=\"_blank\">rinnovare la tua licenza</a>."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:29
+#:  
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:69
+#:  
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:110
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:189
 msgid "License"
-msgstr ""
+msgstr "Licenza"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:35
 msgid "Activate License"
-msgstr ""
+msgstr "Attiva Licenza"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:37
 msgid "Deactivate License"
-msgstr ""
+msgstr "Disattiva licenza"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:81
-#, fuzzy
-#| msgid "General Options"
 msgid "License Options"
-msgstr "Opzioni generali"
+msgstr "Opzioni Licenza"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:82
 msgid ""
 "An active license will give you the ability to always receive the latest "
 "updates with the latest features and premium support."
 msgstr ""
+"Una licenza attiva ti darà la possibilità di ricevere regolarmente gli "
+"ultimi aggiornamenti e avrai diritto all'assistenza premium."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:99
 msgid "Activation email"
-msgstr ""
+msgstr "Email di attivazione"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:104
 #, php-format
 msgid ""
 "Enter your activation email from %s to receive updates and premium support."
 msgstr ""
+"Inserisci la tua mail di attivazione da %s per ricevere gli aggiornamenti e "
+"il supporto premium."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:115
 #, php-format
 msgid "Enter your license key from %s to receive updates and premium support."
 msgstr ""
+"Inserisci la tua chiave di licenza da %s per ricevere gli aggiornamenti e il "
+"supporto premium."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:133
 msgid "License key cannot be empty."
-msgstr ""
+msgstr "La chiave delle licenza non può essere vuota"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:142
 msgid "Activation email cannot be empty."
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:195
-msgid "Inactive"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:197
-msgid "Active"
-msgstr ""
+msgstr "La email di attivazione non può essere vuota."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:26
+#:  
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:137
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:409
+#:  woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:409
 msgid "Premium"
 msgstr "Premium"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:191
 msgid "Template Options"
-msgstr ""
+msgstr "Opzioni modello"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:194
 msgid "Supplier Options"
-msgstr ""
+msgstr "Opzioni Fornitori"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:195
 msgid "Send customer invoice automatically to your supplier(s)."
-msgstr ""
+msgstr "Invia automaticamente ai tuoi fornitori le fatture dei clienti."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:198
-#, fuzzy
-#| msgid "Header Options"
 msgid "Credit Note Options"
-msgstr "Opzioni intestazione"
+msgstr "Opzioni Nota Credito"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:201
-#, fuzzy
-#| msgid "Invoice Number Options"
 msgid "Credit Note Number Options"
-msgstr "Opzioni Numero di fattura"
+msgstr "Opzioni Numero Nota Credito"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:204
 msgid "Global Invoice Options"
-msgstr ""
+msgstr "Opzioni fatture globali"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:205
 msgid ""
 "Generate global invoices on Orders page by selecting multiple orders and "
 "applying action or let customers generate periodically from My Account page. "
-"<strong>Global invoices are only supported when using the micro template!</"
-"strong>"
+"<strong>Global invoices are only supported when using the micro template!"
+"</strong>"
 msgstr ""
+"Genera le fatture globali sulle pagine di  Ordine selezionando ordini "
+"multipli e applicando la procedura oppure permetti ai clienti di generarle "
+"in autonomia dalla pagina Il Mio Account. <strong>Le fatture globali sono "
+"supportate solo utilizzando il modello micro!</strong>"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:208
 msgid "Reminder Options"
-msgstr ""
+msgstr "Opzioni promemoria"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:209
 #, php-format
 msgid ""
-"Automatically send PDF invoice after a specific period of time. When "
-"enabled, a new <a href=\"%s\">Customer invoice reminder</a> email will be "
-"used to send the PDF invoice."
+"Automatically send PDF invoice after a specific period of time. When enabled,"
+" a new <a href=\"%s\">Customer invoice reminder</a> email will be used to "
+"send the PDF invoice."
 msgstr ""
+"Invia le fatture PDF automaticamente dopo un certo periodo di tempo. Se "
+"abilitato, una mail di <a href=\"%s\">Promemoria fattura cliente</a> verrà "
+"utilizzata per inviare la fattura PDF."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:212
 msgid "Request Invoice Options"
-msgstr ""
+msgstr "Opzioni Richiedi fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:213
 msgid ""
@@ -154,35 +160,35 @@ msgid ""
 "field will be added on the checkout page so customers can request a PDF "
 "invoice."
 msgstr ""
+"Lascia che un cliente decida di generare una fattura PDF. Se abilitato, "
+"verrà aggiunta un'opzione di spunta alla pagina del pagamento con la quale "
+"il cliente può richiedere una fattura PDF."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:230
+#:  
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:479
 msgid "Date type"
-msgstr ""
+msgstr "Tipo data"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:235
 msgid "Which date should be used for the generation of invoices."
-msgstr ""
+msgstr "La data da utilizzare per la generazione delle fatture."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:237
 msgid "Current"
-msgstr ""
+msgstr "Attuale"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:238
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Order paid"
-msgstr "Data Ordine: %s"
+msgstr "Ordine pagato"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:239
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Order created"
-msgstr "Data Ordine: %s"
+msgstr "Ordine creato"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:246
 msgid "Additional customer billing fields"
-msgstr ""
+msgstr "Campi di fatturazione addizionali"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:251
 #, php-format
@@ -190,10 +196,12 @@ msgid ""
 "Use for example %s or custom post-/usermeta fields. The fields will be "
 "displayed below the billing address."
 msgstr ""
+"Utilizza, ad esempio, %s o un campo personalizzato post-/usermeta. Il campo "
+"verrà visualizzato sotto l'indirizzo di fatturazione."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:257
 msgid "Additional customer shipping fields"
-msgstr ""
+msgstr "Campi di spedizione addizionali"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:262
 #, php-format
@@ -201,24 +209,24 @@ msgid ""
 "Use for example %s or custom post-/usermeta fields. The fields will be "
 "displayed below the shipping address."
 msgstr ""
+"Utilizza, ad esempio, %s o un campo personalizzato post-/usermeta. Il campo "
+"verrà visualizzato sotto l'indirizzo di spedizione."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:268
 msgid "PDF attachment"
-msgstr ""
+msgstr "Allegato PDF"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:273
 msgid "Add for example a PDF with your terms & conditions."
-msgstr ""
+msgstr "Per esempio aggiungi un PDF con i termini e le condizioni di vendita."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:284
-#, fuzzy
-#| msgid "Show customer notes"
 msgid "Show used coupons"
-msgstr "Mostra note del cliente"
+msgstr "Mostra coupon utilizzati"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:291
 msgid "Suppliers"
-msgstr ""
+msgstr "Fornitori"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:296
 msgid ""
@@ -226,215 +234,228 @@ msgid ""
 "adding their Email It In email addresses. Email addresses need to be "
 "seperated by comma's."
 msgstr ""
+"<b>Suggerimento</b>: Invia le fatture dei clienti all'Archivio Cloud "
+"semplicemente aggiungento i loro indirizzi mail di Email It In. I vari "
+"indirizzi dovranno essere reparati con delle virgole."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:302
-#: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:68
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-general.php:68
 msgid "Attach to Emails"
-msgstr ""
+msgstr "Allega ad Email"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:313
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:432
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:432
 msgid "Prefix"
-msgstr ""
+msgstr "Prefisso"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:324
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:443
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:443
 msgid "Suffix"
-msgstr ""
+msgstr "Suffisso"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:335
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:454
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:454
 msgid "Format"
 msgstr "Formato"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:340
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:459
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:459
 #, php-format
 msgid "Available placeholders: %s."
-msgstr ""
+msgstr "Segnalibri disponibili: %s."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:342
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:461
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:461
 #, php-format
 msgid "<b>Note:</b> %s is required and slashes aren't supported."
-msgstr ""
+msgstr "<b>Nota:</b> %s è richiesto e le barre (/) non sono supportate."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:354
 msgid "Enable customer generation"
-msgstr ""
+msgstr "Abilita generazione personalizzata"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:356
 msgid "Let customers generate a global invoice from their account"
 msgstr ""
+"Lascia che i clienti possano generare fatture globali dal proprio accoiunt"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:364
 msgid "Customer generation period"
-msgstr ""
+msgstr "Periodo di generazione personalizzato"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:369
 msgid ""
 "Should your customers have the ability to generate a global invoice by month "
 "or by year?<br/><strong>Note:</strong> Customer generation should be enabled."
 msgstr ""
+"I tuoi clienti possono avere la possibilità di creare una fattura globale al "
+"mese o all'anno?<br/><strong>Nota:</strong> Dovrai abilitare anche la "
+"generazione da parte del cliente."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:371
 msgid "Month"
-msgstr ""
+msgstr "Mese"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:372
 msgid "Year"
-msgstr ""
+msgstr "Anno"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:384
 msgid "Send to your Cloud Storage"
-msgstr ""
+msgstr "Invia all'Archivio Cloud"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:396
 msgid "Email to customer"
-msgstr ""
+msgstr "Mail al cliente"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:408
 msgid "Email to supplier(s)"
-msgstr ""
+msgstr "Mail al fornitore"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:415
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:146
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:146
 msgid "Email subject"
-msgstr ""
+msgstr "Oggetto mail"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:420
 msgid "Subject for the global invoice email."
-msgstr ""
+msgstr "Oggetto per la mail di invio globale"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:427
 msgid "Email message"
-msgstr ""
+msgstr "Messaggio mail"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:432
 msgid "Message for the global invoice email."
-msgstr ""
+msgstr "Messaggio per la mail della fatturazione globale"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:444
 msgid "Enable reminder"
-msgstr ""
+msgstr "Abilita promemoria"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:451
 msgid "Days until due date"
-msgstr ""
+msgstr "Giorni alla scadenza"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:456
 msgid "Number of days from order or invoice date until due date."
 msgstr ""
+"Numero di giorni dalla data dell'ordine o della fattura al momento della "
+"scadenza."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:465
 msgid "Days until reminder"
-msgstr ""
+msgstr "Giorni al promemoria"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:470
 msgid "Number of days from order or invoice date until reminder date."
 msgstr ""
+"Numero di giorni dalla data dell'ordine o della fattura al momento del "
+"promemoria."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:484
 msgid "Choose the type of date to count from."
-msgstr ""
+msgstr "Seleziona il tipo di data dalla quale far partire il conteggio."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:486
 msgid "Order date"
-msgstr ""
+msgstr "Data Ordine"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:487
 msgid "Invoice date"
-msgstr ""
+msgstr "Data Fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:499
 msgid "Enable Request Invoice."
-msgstr ""
+msgstr "Abilita Richiedi Fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:575
 msgid "File to large."
-msgstr ""
+msgstr "File troppo grande."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:581
 msgid "Only PDF files are allowed."
-msgstr ""
+msgstr "Sono permessi solo file PDF."
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:607
 msgid "Remove"
-msgstr ""
+msgstr "Cancella"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:611
 msgid "Choose"
-msgstr ""
+msgstr "Seleziona"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-credit-note.php:12
 #, php-format
 msgid "PDF Credit Note %1$s"
-msgstr ""
+msgstr "Nota Credito PDF %1$s"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:10
 msgid "Generate Global Invoice"
-msgstr ""
+msgstr "Genera fattura globale"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:20
 msgid "Select a month"
-msgstr ""
+msgstr "Seleziona un mese"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:33
 msgid "Select a year"
-msgstr ""
+msgstr "Seleziona un anno"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-customer-generation.php:47
 msgid "Generate invoice"
-msgstr ""
+msgstr "Genera fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:16
 msgid "Global invoice successfully generated!"
-msgstr ""
+msgstr "La fattura globale è stata generata correttamente!"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:646
+#:  woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:646
 msgid "View invoice"
 msgstr "Vedi fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:728
+#:  woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:728
 msgid "View"
 msgstr "Mostra"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:37
 msgid "Bulk Export PDF Invoices"
-msgstr ""
+msgstr "Esporta in blocco fattura PDF"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:38
 msgid "Bulk Export PDF Packing Slips"
-msgstr ""
+msgstr "Esporta in blocco Etichette di Spedizione in PDF"
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:85
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:79
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:85 
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:79 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:78
 msgid "No order selected."
-msgstr ""
+msgstr "Nessun ordine selezionato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:37
 msgid "Bulk Generate PDF Invoices"
-msgstr ""
+msgstr "Genera Fatture PDF in blocco"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:38
 msgid "Bulk Generate PDF Packing Slips"
-msgstr ""
+msgstr "Genera Etichette di Spedzione PDF in blocco"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:39
 msgid "Bulk Generate PDF Credit Notes"
-msgstr ""
+msgstr "Genera Note di Credito PDF in blocco"
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:36
 msgid "Bulk Print PDF Packing Slips"
-msgstr ""
+msgstr "Stampa Etichette di Spedizione PDF in blocco"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:162
 msgid "PDF Credit Notes"
-msgstr ""
+msgstr "Note Credito PDF"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:306
 #, php-format
@@ -442,81 +463,71 @@ msgid ""
 "<a href=\"%1$s\" class=\"%2$s\" target=\"%3$s\">PDF Credit Note (%4$s)</a> "
 "for Refund #%5$s."
 msgstr ""
+"<a href=\"%1$s\" class=\"%2$s\" target=\"%3$s\">Nota Credito PDF (%4$s)</a> "
+"per il Rimborso #%5$s."
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:312
 #, php-format
 msgid "created on %1$s at %2$s"
-msgstr ""
+msgstr "creato il %1$s alle %2$s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:314
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:314 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:752
 msgid "Delete"
-msgstr ""
+msgstr "Cancella"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:320
 msgid "There are no credit notes yet."
-msgstr ""
+msgstr "Non ci sono ancora Note di Credito"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:332
 msgid "Create PDF Credit Notes for selected refund(s)"
-msgstr ""
+msgstr "Genera Note di Credito PDF per i rimborsi selzionati"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:362
 msgid "Credit note"
-msgstr ""
+msgstr "Nota Credito"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:413
 msgid "Email credit note to customer"
-msgstr ""
+msgstr "Invia la mail con la Nota di Credito al cliente"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:567
 msgid "Partially Refunded Order"
-msgstr ""
+msgstr "Ordine rimborsato parzialmente"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:583
-#, fuzzy
-#| msgid "Header Options"
 msgid "Credit Note #:"
-msgstr "Opzioni intestazione"
+msgstr "No. Nota Credito"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:588
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:588 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:704
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Date:"
-msgstr "Data Ordine: %s"
+msgstr "Data:"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:595
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:595 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:99
-#, fuzzy
-#| msgid "Invoice"
 msgid "Invoice #:"
-msgstr "Fattura"
+msgstr "No. Fattura:"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:600
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:600 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:103
-#, fuzzy
-#| msgid "Invoice to"
 msgid "Invoice Date:"
-msgstr "Indirizzo Fatturazione"
+msgstr "Data Fattura:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:607
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Order #:"
-msgstr "Data Ordine: %s"
+msgstr "No. Ordine:"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:612
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:612 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:107
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Order Date:"
-msgstr "Data Ordine: %s"
+msgstr "Data Ordine:"
 
-#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:618
+#: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:618 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:115
 msgid "Payment Method:"
-msgstr ""
+msgstr "Modalità di  Pagamento:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-install.php:87
 #, php-format
@@ -524,74 +535,78 @@ msgid ""
 "%1$s requires %2$s to be activated. Install and activate it and you should "
 "be good to go! :)"
 msgstr ""
+"%1$s richiede %2$s per poter essere attivato. Installalo e attivalo e potrai "
+"procedere!"
 
 #: woocommerce-pdf-invoices-premium/includes/class-install.php:96
 #, php-format
 msgid ""
-"%1$s requires at least %2$s. Update it and get the best out of both "
-"plugins. :)"
+"%1$s requires at least %2$s. Update it and get the best out of both plugins. "
+":)"
 msgstr ""
+"%1$s richiede almeno %2$s. Aggiornalo e potrai ottenere il meglio da "
+"entrambi i plugin!"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:228
 msgid "Invalid request"
-msgstr ""
+msgstr "Richiesta non valida"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:248
 msgid "No orders found."
-msgstr ""
+msgstr "Nessun ordine trovato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:295
 msgid "Generate global invoice"
-msgstr ""
+msgstr "Genera fattura globale"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:323
 msgid ""
 "Could not generate the invoice. Global invoices are only supported when "
 "using the micro template."
 msgstr ""
+"Non posso generare la fattura. Le fatture globali sono supportate solo se "
+"viene utilizzato il modello micro."
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-global.php:336
 msgid "Select more then one order to generate a global invoice."
-msgstr ""
+msgstr "Selziona più di un ordine per generare una fattura globale."
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
 msgid "Yes"
-msgstr ""
+msgstr "Sì"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:97 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:718
 msgid "No"
-msgstr ""
+msgstr "No"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:100
 msgid "Reminder on:"
-msgstr ""
+msgstr "Promemoria il:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:105
 msgid "Reminder sent?"
-msgstr ""
+msgstr "Promemoria inviato?"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:321
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Due Date:"
-msgstr "Data Ordine: %s"
+msgstr "Data Scadenza:"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:98
 msgid "Bulk Generate UBL"
-msgstr ""
+msgstr "Genera UBL in blocco"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:397
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:219
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:229
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:301
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:326
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:521
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:531
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:899
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-ubl.php:397 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:219 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:229 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:301 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:326 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:521 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:531 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:899 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:173
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:538 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:208
 msgid "Discount"
 msgstr "Sconto"
@@ -601,16 +616,12 @@ msgid ""
 "Instead consider creating a Cancelled PDF invoice by changing the order "
 "status to Cancelled."
 msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:125
-#, fuzzy
-#| msgid "Cancel"
-msgid "Cancelled"
-msgstr "Cancella"
+"E' preferibile creare una fattura PDF cancellata modificando lo status "
+"dell'ordine in Cancellato."
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:138
 msgid "Advanced Table Content"
-msgstr ""
+msgstr "Contenuto Avanzato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:139
 msgid ""
@@ -619,286 +630,301 @@ msgid ""
 "ignored. When using a custom template, make sure to update it! Micro "
 "template is not supported."
 msgstr ""
+"Abilita scheda opzioni Contenuto Avanzato per personalizzare righe e colonne."
+" Se abilitata, le impostazioni di Tabella Contenuto verranno ignorate. Se "
+"utilizzi un modello personalizzato ricordati di aggiornarlo! Il modello "
+"Micro non è supportato."
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:166
 msgid "Enable Advanced Table Content"
-msgstr ""
+msgstr "Abilita la scheda Contenuto Avanzato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:178
 msgid "Show SKU as meta data"
-msgstr ""
+msgstr "Visualizza SKU come meta dato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:185
 msgid "Display tax totals"
-msgstr ""
+msgstr "Visualizza il totale imposte"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:193
 msgid "Itemized"
-msgstr ""
+msgstr "Articolato"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:194
 msgid "As a single total"
-msgstr ""
+msgstr "Come totale singolo"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:200
-#, fuzzy
-#| msgid "Visible Columns"
 msgid "Line item columns"
-msgstr "Colonne visibili"
+msgstr "Colonne articolo"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:209
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:507
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:209 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:507 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:48
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:420
+#:  woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:420 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:53
 msgid "Description"
 msgstr "Descrizione"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:214
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:224
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:516
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:526
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:214 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:224 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:516 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:526 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:57
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:60
 msgid "Cost"
 msgstr "Prezzo"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:234
 msgid "Quantity"
-msgstr ""
+msgstr "Quantità"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:244
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:254
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:540
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:244 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:254 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:540 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:550
-#, fuzzy
-#| msgid "Discount"
 msgid "Total Discount"
-msgstr "Sconto"
+msgstr "Sconto totale"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:259
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:346
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:351
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:545
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:555
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1160
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:249 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:259 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:346 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:351 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:545 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:555 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1160 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
+#:  
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:422
+#:  woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:422 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:71
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:276
 msgid "Total"
 msgstr "Totale"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:273
 msgid "Force tax rate percentages"
-msgstr ""
+msgstr "Forza percentuali imposta"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:285
-#, fuzzy
-#| msgid "Show customer notes"
 msgid "Show discounted amounts"
-msgstr "Mostra note del cliente"
+msgstr "Visualizza importi scontati"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:292
-#, fuzzy
-#| msgid "Total"
 msgid "Total rows"
 msgstr "Totale"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:306
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:331
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:931
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:306 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:331 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:931 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:182
+#:  
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:200
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:550 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:216
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:232
 msgid "Shipping"
 msgstr "Spedizione"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:311
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:341
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:311 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:341 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:212
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:243
 msgid "Fee"
 msgstr "Quota"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:316
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:321
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:876
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:316 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:321 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:876 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:191
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:502 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:224
 msgid "Subtotal"
 msgstr "Subtotale"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:365
 msgid "Show tax labels"
-msgstr ""
+msgstr "Visualizza etichette imposte"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:426
-msgid "SKU:"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:475
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:475 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1101
 #, php-format
 msgid "VAT %s"
-msgstr ""
+msgstr "IVA %s"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:511
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:511 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:59
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:421
+#:  woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:421 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:62
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:85
 msgid "Qty"
 msgstr "Q.tà"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1299
 msgid "Request invoice"
-msgstr ""
+msgstr "Richiedi fattura"
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1347
 #, php-format
 msgid "Coupon(s): %s"
-msgstr ""
+msgstr "Coupon(s): %s"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:43
-#, fuzzy
-#| msgid "Customer note"
 msgid "Customer credit note"
-msgstr "Nota Cliente"
+msgstr "Nota Credito Cliente"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:44
 msgid ""
 "Customer credit note emails can be sent to customers containing their PDF "
 "Credit Note."
 msgstr ""
+"Le mail con le Note di Credito possono essere inviate ai clienti con il PDF "
+"in allegato."
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:50
 msgid "Credit note for order {order_number} from {order_date}"
-msgstr ""
+msgstr "Nota Credito per Ordine {order_number} del {order_date}"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:51
 msgid "Credit note for order {order_number}"
-msgstr ""
+msgstr "Nota Credito per Ordine {order_number}"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:149
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:158
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:149
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:158
 #, php-format
 msgid "Defaults to %s"
-msgstr ""
+msgstr "Predefinito a %s"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:155
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:155
 msgid "Email heading"
-msgstr ""
+msgstr "Intestazione mail"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:164
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:164
 msgid "Email type"
-msgstr ""
+msgstr "Tipo mail"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:166
+#:  
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
 msgid "Choose which format of email to send."
-msgstr ""
+msgstr "Selziona il formato email da utilizzare."
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:43
 msgid "Customer invoice reminder"
-msgstr ""
+msgstr "Promemoria fattura personalizzato"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:44
 msgid ""
 "Customer invoice reminder emails can be sent to customers containing their "
 "order information and payment links."
 msgstr ""
+"Le mail con il promemoria per la fattura possono essere inviate al cliente "
+"complete di numero ordine e link per il pagamento."
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:49
 msgid "Invoice reminder for order {order_number} from {order_date}"
-msgstr ""
+msgstr "Promemoria fattura per ordine {order_number} del {order_date}"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:50
 msgid "Invoice reminder for order {order_number}"
-msgstr ""
+msgstr "Promemoria fattura per ordine {order_number}"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:38
 msgid "Credit Note"
-msgstr ""
+msgstr "Nota Credito"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:57
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:65
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:56
 msgid "Bill to:"
-msgstr ""
+msgstr "Fatturare a:"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:64
+#:  
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:19
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:23
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:75
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:65
 msgid "Ship to:"
-msgstr ""
+msgstr "Spedire a:"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:138
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:150
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:131
 #, php-format
 msgid "Note from customer: %s"
-msgstr ""
+msgstr "Note del cliente: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:143
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:155
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:136
 #, php-format
 msgid "Note to customer: %s"
-msgstr ""
+msgstr "Note per il cliente: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:155
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:315
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:167
 msgid "Zero rated for VAT as customer has supplied EU VAT number"
-msgstr ""
+msgstr "IVA a zero se il cliente fornisce una P.IVA Europea"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/footer.php:26
+#:  
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/footer.php:15
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/footer.php:12
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/footer.php:26
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/footer.php:23
 #, php-format
 msgid "%1$s of %2$s"
-msgstr ""
+msgstr "%1$s di %2$s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/emails/customer-credit-note.php:25
-#, fuzzy
-#| msgid "Order Date: %s"
 msgid "Order:"
-msgstr "Data Ordine: %s"
+msgstr "Ordine:"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/emails/plain/customer-credit-note.php:23
-#, fuzzy, php-format
-#| msgid "Order Number: %s"
+#, php-format
 msgid "Order number: %s"
 msgstr "Ordine Numero: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/emails/plain/customer-credit-note.php:24
-#, fuzzy, php-format
-#| msgid "Order Date: %s"
+#, php-format
 msgid "Order date: %s"
 msgstr "Data Ordine: %s"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:9
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:11
 msgid "Invoice to"
 msgstr "Indirizzo Fatturazione"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1083
+#:  woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1083
 #, php-format
 msgid "Phone: %s"
 msgstr "Telefono: %s"
@@ -908,8 +934,9 @@ msgid "Global Invoice"
 msgstr "Fattura Globale"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:53
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:490
+#:  woocommerce-pdf-invoices/includes/admin/settings/class-template.php:490 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:57
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:77
 msgid "SKU"
 msgstr "SKU"
@@ -924,67 +951,66 @@ msgid "Order #%d - %s"
 msgstr "Ordine #%d - %s"
 
 #: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:105
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:391
+#:  woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:391
 msgid "Settings"
 msgstr "Impostazioni"
 
 #: woocommerce-pdf-invoices-premium/includes/woocommerce-pdf-invoices-premium.php:106
-#: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:62
+#:  woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:62
 msgid "Support"
 msgstr "Supporto"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-document.php:150
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:36
 msgid "Paid"
 msgstr "Pagato"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:512
 msgid "Subtotal:"
-msgstr ""
+msgstr "Totale parziale:"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:527
 msgid "Discount:"
-msgstr ""
+msgstr "Sconto:"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:542
 msgid "Shipping:"
-msgstr ""
+msgstr "Spedizione:"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:615
 msgid "Total:"
-msgstr ""
+msgstr "Totale:"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:684
 #, php-format
 msgid "VAT Number: %s"
-msgstr ""
+msgstr "Numero P.IVA: %s"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:702
 #, php-format
 msgid "Purchase Order Number: %s"
-msgstr ""
+msgstr "Ordine di Acquisto No.: %s"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:906
 #, php-format
 msgid "%s of %s"
-msgstr ""
+msgstr "%s di %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:141
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:141 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:24
 msgid "General"
 msgstr "Generale"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:145
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:24
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:145 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:24 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:100
 msgid "Template"
 msgstr "Tema"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:152
-#: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:24
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:152 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:24 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:760
 msgid "Debug"
-msgstr ""
+msgstr "Debug"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:178
 msgid "Invoices"
@@ -996,44 +1022,38 @@ msgid ""
 "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
+"Se ti piace <strong>WooCommerce PDF Invoices</strong> ti preghiamo di "
+"lasciare una valutazione <a href=\"%s\">★★★★★</a>. Grazie mille in anticipo!"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:268
 #, php-format
 msgid "Version %s"
 msgstr "Versione %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:381
-msgid "Choose&hellip;"
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:382
-msgid "Column"
-msgstr ""
-
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:391
 msgid "Select all"
-msgstr ""
+msgstr "Seleziona tutto"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:392
 msgid "Select none"
-msgstr ""
+msgstr "Deseleziona tutto"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:40
+#: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:40 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:42
 msgid "General Options"
 msgstr "Opzioni generali"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:44
 msgid "Plugin Configuration"
-msgstr ""
+msgstr "Configurazione plugin"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:68
 msgid "Enable mPDF debugging"
-msgstr ""
+msgstr "Abilita debug mPDF"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-debug.php:69
 msgid "Enable if you aren't able to create an invoice."
-msgstr ""
+msgstr "Abilita se non sei in grado di generare una fattura."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:40
 msgid "Email Options"
@@ -1047,10 +1067,14 @@ msgid ""
 "automatically generate the PDF invoice. Want to attach PDF documents to many "
 "more email types? Take a look at %2$s."
 msgstr ""
+"La fattura PDF verrà generata quando WooCommerce invierà la relativa mail. "
+"L'invio mail dovrebbe essere <a href=\"%1$s\">abilitato</a> affinchè il PDF "
+"venga generato in automatico. Vuoi allegare i documenti PDF a più tipi di "
+"mail? Guarda qui: %2$s."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:44
 msgid "Download Options"
-msgstr ""
+msgstr "Opzioni scaricamento"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:47
 msgid "Cloud Storage Options"
@@ -1059,21 +1083,24 @@ msgstr "Opzioni di Cloud Storage"
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:48
 #, php-format
 msgid ""
-"Sign-up at <a href=\"%1$s\">Email It In</a> to send invoices to your "
-"Dropbox, OneDrive, Google Drive or Egnyte and enter your account below."
+"Sign-up at <a href=\"%1$s\">Email It In</a> to send invoices to your Dropbox,"
+" OneDrive, Google Drive or Egnyte and enter your account below."
 msgstr ""
+"Autenticati con <a href=\"%1$s\">Email It In</a> per inviare le fatture al "
+"tuo Dropbox, OneDrive, Google Drive o Egnyte e inserisci il tuo account qui "
+"sotto."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:51
 msgid "Interface Options"
-msgstr ""
+msgstr "Opzioni interfaccia"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:76
 msgid "New order"
-msgstr ""
+msgstr "Nuovo Ordine"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:81
 msgid "Order on-hold"
-msgstr ""
+msgstr "Ordine in sopeso"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:86
 msgid "Processing order"
@@ -1089,56 +1116,60 @@ msgstr "Fattura Cliente"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:110
 msgid "Disable for free products"
-msgstr ""
+msgstr "Disabilita per prodotti gratuiti"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:112
 msgid ""
 "Skip automatic PDF invoice generation for orders containing only free "
 "products."
 msgstr ""
+"Non genera automaticamente fatture PDF se l'ordine contiene solo prodotti "
+"gratuiti."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:120
 msgid "View PDF"
-msgstr ""
+msgstr "Visualizza PDF"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:127
 msgid "Download"
-msgstr ""
+msgstr "Scarica"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:128
 msgid "Open in new browser tab/window"
-msgstr ""
+msgstr "Apri in una nuova scheda/finestra del browser"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:140
 msgid "Enable download from my account"
-msgstr ""
+msgstr "Abilita 'scarica dal mio account'"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:142
 msgid ""
 "By default PDF is only downloadable when order has been paid, so order "
 "status should be Processing or Completed."
 msgstr ""
+"Il PDF può essere scaricato solo dopo che la fattura è stata pagata; in "
+"questo modo lo status dell'ordine viene messo a Processato o Completato."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:155
 msgid "Enable Email It In"
-msgstr "Abilita email It In"
+msgstr "Abilita Email It In"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:162
 msgid "Email It In account"
-msgstr "Conto Email It In"
+msgstr "Account Email It In"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:167
 #, php-format
 msgid "Get your account from your %1$s <a href=\"%2$s\">user account</a>."
-msgstr ""
+msgstr "Ottieni il tuo account %1$s <a href=\"%2$s\">cliccando qui</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:178
 msgid "Enable Invoice Number column"
-msgstr ""
+msgstr "Abilita colonna Numero Fattura"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-general.php:179
 msgid "Display invoice numbers on Shop Order page."
-msgstr ""
+msgstr "Visualizza il numero della fattura sulla pagina Ordini del negozio."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:43
 #, php-format
@@ -1146,6 +1177,8 @@ msgid ""
 "Want to customize the template? The <a href=\"%s\">FAQ</a> will give you a "
 "brief description."
 msgstr ""
+"Vuoi personalizzare il modello? Le <a href=\"%s\">FAQ</a> ti spiegano "
+"velocemente come fare."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:46
 msgid "Invoice Number Options"
@@ -1153,13 +1186,15 @@ msgstr "Opzioni Numero di fattura"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:49
 msgid "Packing Slips Options"
-msgstr ""
+msgstr "Opzioni Etichette di Spedizione"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:50
 msgid ""
 "Packing slips are <strong>only available</strong> when using minimal "
 "template."
 msgstr ""
+"Le etichette di spedizione <strong>sono disponibili solamente</strong> "
+"quando si usa il modello minimal."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:53
 msgid "Header Options"
@@ -1167,17 +1202,15 @@ msgstr "Opzioni intestazione"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:54
 msgid "The header will be visible on every page."
-msgstr ""
+msgstr "L'intestazione sarà visibile su ogni pagina."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:57
-#, fuzzy
-#| msgid "Header Options"
 msgid "Body Options"
-msgstr "Opzioni intestazione"
+msgstr "Opzioni corpo"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:58
 msgid "Configuration options for the body of the template. ."
-msgstr ""
+msgstr "Opzioni di configurazione per il corpo del modello."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:61
 msgid "Footer Options"
@@ -1185,11 +1218,11 @@ msgstr "Opzioni piè "
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:62
 msgid "The footer will be visible on every page."
-msgstr ""
+msgstr "Il piè di pagina sarà visibile su ogni pagina."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:65
 msgid "Table Content"
-msgstr ""
+msgstr "Contenuto tabella"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:66
 msgid "Enable or disable the columns."
@@ -1198,7 +1231,7 @@ msgstr "Abilitare o disabilitare le colonne."
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:105
 #, php-format
 msgid "Create a custom template by copying it from %1$s to %2$s."
-msgstr ""
+msgstr "Crea un modello personalizzato copiandolo da %1$s a %2$s."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:107
 #, php-format
@@ -1206,6 +1239,8 @@ msgid ""
 "<strong>Note:</strong> The %1$s template will probably no longer be "
 "supported in future versions, consider using the %2$s template."
 msgstr ""
+"<strong>Nota:</strong> Il modello %1$s non sarà probabilmente più supportato "
+"dalle future versioni. E' consigliabile utilizzare il modello %2$s."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:115
 msgid "Color theme"
@@ -1213,12 +1248,14 @@ msgstr "Colore tema"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:131
 msgid "Display theme text in black color"
-msgstr ""
+msgstr "Visualizza il testo del tema in colore nero"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:133
 msgid ""
 "Enable if you've set the color theme to white or some other light color."
 msgstr ""
+"Abilita se hai impostato il colore del tema a 'bianco' o un altro colore "
+"chiaro."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:141
 msgid "Date format"
@@ -1227,7 +1264,7 @@ msgstr "Formatto data"
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:146
 #, php-format
 msgid "<a href=\"%s\">Format</a> of invoice date and order date."
-msgstr ""
+msgstr "<a href=\"%s\">Formato</a> della data Ordine e Fattura."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:158
 msgid "Display prices including tax"
@@ -1252,15 +1289,15 @@ msgstr "Attiva per visualizzare il subtotale complesivo di spedizione."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:188
 msgid "Mark invoice as paid"
-msgstr "Contrassegna fattura come pagato"
+msgstr "Contrassegna ls fattura come pagata"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:190
 msgid "Invoice will be watermarked when order has been paid."
-msgstr "Fattura sarà filigranata quando l'ordine è stato pagato."
+msgstr "La fattura sarà filigranata quando l'ordine è stato pagato."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:203
 msgid "Disable Packing Slips"
-msgstr ""
+msgstr "Disabilita Etichette Spedizione"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:210
 msgid "Company logo"
@@ -1270,13 +1307,16 @@ msgstr "Logo azienda"
 #, php-format
 msgid ""
 "Use the <a href=\"%1$s\">Media Library</a> to <a href=\"%2$s\">upload</a> or "
-"choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href=\"%3$s"
-"\" target=\"_blank\">File URL</a>."
+"choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a "
+"href=\"%3$s\" target=\"_blank\">File URL</a>."
 msgstr ""
+"Usa la <a href=\"%1$s\">Libreria Media</a> per <a href=\"%2$s\">caricare</a> "
+"o selzionare un file .jpg, .jpeg, .gif o .png quindi copia e incolla il "
+"relativo <a href=\"%3$s\" target=\"_blank\">URL file</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:221
 msgid "Company name"
-msgstr "Nome zienda"
+msgstr "Ragione Sociale"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:232
 msgid "Company address"
@@ -1288,68 +1328,69 @@ msgid ""
 "Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and "
 "the WooCommerce store address is used."
 msgstr ""
+"Stringhe HTML consentite: %s. A partire da WooCommerce 3.0 questo parametro "
+"viene ignorato e al suo posto viene utilizzato l'indirizzo del negozio "
+"impostato in WooCommerce stesso."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:243
 msgid "Company details"
 msgstr "Dettagli azienda"
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:248
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:303
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:342
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:354
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:248 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:303 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:342 
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:354 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:365
 #, php-format
 msgid "Allowed HTML tags: %s."
-msgstr ""
+msgstr "Stringhe HTML consentite: %s."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:254
-#, fuzzy
-#| msgid "Company name"
 msgid "Company phone"
-msgstr "Nome zienda"
+msgstr "Telefono"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:265
-#, fuzzy
-#| msgid "Company address"
 msgid "Company email address"
-msgstr "Indirizzo azienda"
+msgstr "Email azienda"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:276
-#, fuzzy
-#| msgid "Company name"
 msgid "Company VAT ID"
-msgstr "Nome zienda"
+msgstr "P.IVA"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:287
 msgid "Title"
-msgstr ""
+msgstr "Titolo"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:292
 msgid "Change the name of the invoice."
-msgstr ""
+msgstr "Modifica il titolo della fattura."
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:293 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:841
 msgid "Invoice"
 msgstr "Fattura"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:298
 msgid "Thank you text"
-msgstr ""
+msgstr "Testo ringraziamento"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:304
 msgid "Visible in big colored bar directly after invoice total."
 msgstr ""
+"Visibile all'interno di una grossa barra colorata appena sotto il totale "
+"della fattura."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:315
 msgid "Show customers shipping address"
-msgstr ""
+msgstr "Visualizza l'indirizzo di spedizione del cliente"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:317
 msgid ""
 "Customers shipping address won't be visible when order has only virtual "
 "products."
 msgstr ""
+"L'indirizzo di spedizione del cliente non dovrebbe essere visibile se "
+"l'ordine contiene solo prodotti virtuali."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:330
 msgid "Show customer notes"
@@ -1365,14 +1406,17 @@ msgid ""
 "Visible below customer notes and above footer. Want to attach additional "
 "pages to the invoice? Take a look at <a href=\"%1$s\">%2$s</a> plugin."
 msgstr ""
+"Visibile sotto le note del cliente e sopra il piè di pagina. Vuoi allegare "
+"altre pagine alla fattura? Prendi in considerazione il plugin <a "
+"href=\"%1$s\">%2$s</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:349
 msgid "Left footer column."
-msgstr ""
+msgstr "Colonna sinistra piè di pagina"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:360
 msgid "Right footer column."
-msgstr ""
+msgstr "Colonna destra piè di  pagina"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:371
 msgid "Type"
@@ -1396,13 +1440,15 @@ msgstr "Prossimo"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:404
 msgid "Next invoice number when resetting counter."
-msgstr ""
+msgstr "Prossimo numero fattura all'azzeramento del contatore."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:406
 msgid ""
 "<b>Note:</b> Only available for Sequential numbering. All PDF invoices with "
 "invoice number greater then next invoice number will be deleted!"
 msgstr ""
+"<b>Nota:</b> Disponibile solo per numerazione sequenziale. Tutte le fatture "
+"PDF con un numero maggiore della prossima fattura verranno cancellate!"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:416
 msgid "Digits"
@@ -1410,30 +1456,32 @@ msgstr "Cifre"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:473
 msgid "Reset yearly"
-msgstr ""
+msgstr "Azzera annualmente"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:475
 msgid "Automatically reset invoice numbers on new year's day."
-msgstr ""
+msgstr "Azzera il numeratore automaticamente all'inizio di ogni anno."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:477
 msgid ""
 "<b>Note</b>: You will have to generate all invoices again when changing "
 "option."
 msgstr ""
+"<b>Nota</b>: Dovrai generare nuovamente tutte le fatture se modifichi questa "
+"opzione."
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:514
 msgid "Tax (item)"
-msgstr ""
+msgstr "Imposta (articolo)"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:526
 msgid "Tax (total)"
-msgstr ""
+msgstr "Tasse (totale)"
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:597
 msgid ""
 "Company logo not found. Upload the image to the Media Library and try again."
-msgstr ""
+msgstr "Logo non trovato. Carica un'immagine nella Libreria Media e riprova."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
@@ -1441,14 +1489,19 @@ msgid ""
 "The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on "
 "this page</a>."
 msgstr ""
+"Le impostazioni di WooCommerce PDF Invoices sono disponibili <a "
+"href=\"%1$s\">su questa pagina</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
 msgid ""
-"Before we deactivate WooCommerce PDF Invoices, would you care to <a href="
-"\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? "
-"<a href=\"%2$s\">No, deactivate now</a>."
+"Before we deactivate WooCommerce PDF Invoices, would you care to <a "
+"href=\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for "
+"you? <a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
+"Prima di disattivare WooCommerce PDF Invoices ti chiediamo se <a "
+"href=\"%1$s\" target=\"_blank\">puoi farci sapere il perchè</a> così saremo "
+"in grado di migliorarlo? <a href=\"%2$s\">No, disattiva subito</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-rate-notice.php:26
 #, php-format
@@ -1456,95 +1509,111 @@ msgid ""
 "Hi%1$s! You're using %2$s for some time now and we would appreciate your "
 "%3$s rating. It will support future development big-time."
 msgstr ""
+"Hey %1$s! Stai utilizzando %2$s da un po' di tempo e saremmo felici di "
+"ricevere una tua valutazione %3$1. Ci aiuterà per lo sviluppo futuro."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-rate-notice.php:33
 msgid "Dismiss this notice."
-msgstr ""
+msgstr "Nascondi questo avviso."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
 msgid "WooCommerce PDF Invoices Premium"
-msgstr ""
+msgstr "WooCommerce PDF Invoices Premium"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
 msgid ""
 "This plugin offers a premium version which comes with the following features:"
 msgstr ""
+"Questo plugin è disponibile anche in versione premium con le seguenti "
+"funzionalità:"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:5
 msgid ""
 "Attach PDF invoices to many more email types including third party plugins."
 msgstr ""
+"Allega le fatture PDF a diversi tipi di email incluse quelle relative a "
+"plugin di terze parti."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:6
 msgid ""
 "Send credit notes and cancelled PDF invoices when refunding or cancelling "
 "order."
 msgstr ""
+"Invia note credito e fatture PDF cancellate quando si rimborsa o si cancella "
+"un ordine."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:7
 msgid ""
 "Fully customize the table content by modifying line item columns and total "
 "rows."
-msgstr ""
+msgstr "Personalizza il contenuto modificando le righe, le colonne e i totali."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:8
 msgid ""
 "Automatically send PDF invoices as a reminder configurable within a specific "
 "period of time."
 msgstr ""
+"Invia automaticamente le fatture PDF come promemoria entro uno specifico "
+"periodo di tempo."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:9
 msgid ""
 "Let customers decide if they would like to get a PDF invoice on checkout."
 msgstr ""
+"Lascia che il cliente possa decidere di  ricevere la fattura PDF al momento "
+"del pagamento."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:10
 msgid "Change the font of the PDF invoices."
-msgstr ""
+msgstr "Modifica il font delle fatture PDF."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:12
 msgid ""
 "Generate PDF invoices in multiple languages (WPML and Polylang compatible)."
 msgstr ""
+"Genera le fatture PDF in diverse lingue (compatibile con WPML e Polylang)."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:13
 msgid "Bulk generate PDF invoices."
-msgstr ""
+msgstr "Genera Fatture PDF in blocco"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:14
 msgid "Bulk export and/or download PDF invoices."
-msgstr ""
+msgstr "Esporta e/o scarica fatture PDF in blocco."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:15
 msgid "Bill periodically by generating and sending global invoices."
-msgstr ""
+msgstr "Fattura periodicamente generando ed inviando documenti raggruppati."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:16
 msgid "Add additional PDF's to PDF invoices."
-msgstr ""
+msgstr "Aggiungi PDF addizionali alle fatture PDF."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:17
 msgid "Send PDF invoices to multiple recipients."
-msgstr ""
+msgstr "Invia le fatture PDF a più destinatari."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:18
 #, php-format
 msgid "Attach invoices to <a href=\"%s\">WooCommerce Subscriptions</a> emails."
 msgstr ""
+"Allega le fatture alle mail di <a href=\"%s\">Sottoscrizione WooCommerce</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:20
 msgid "Learn more"
-msgstr ""
+msgstr "Approfondisci"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:23
 msgid "Stay up-to-date"
-msgstr ""
+msgstr "Resta aggiornato."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:27
 msgid ""
 "We're constantly developing new features, stay up-to-date by subscribing to "
 "our newsletter."
 msgstr ""
+"Stiamo costantemente sviluppando nuove caratteristiche quindi rimani "
+"aggiornato iscrivendoti alla nostra newsletter."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:33
 msgid "Your email address"
@@ -1568,26 +1637,30 @@ msgid ""
 "<a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>."
 msgstr ""
 "Questo plugin è un progetto open source che mira a colmare il gap di "
-"fatturazione <a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</"
-"a>."
+"fatturazione <a href=\"http://www.woothemes.com/woocommerce\">WooCommerce</a>"
+"."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:56
 #, php-format
 msgid "Version: %s"
-msgstr ""
+msgstr "Versione: %s"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:58
 #, php-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Autore: %s"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:64
 #, php-format
 msgid ""
 "We will never ask for donations, but to guarantee future development, we do "
-"need your support. Please show us your appreciation by leaving a <a href="
-"\"%1$s\">★★★★★</a> rating and vote for <a href=\"%2$s\">works</a>."
+"need your support. Please show us your appreciation by leaving a <a "
+"href=\"%1$s\">★★★★★</a> rating and vote for <a href=\"%2$s\">works</a>."
 msgstr ""
+"Non chiederemo mai donazioni ma, per garantire uno sviluppo futuro, abbiamo "
+"bisogno del tuo supporto. Dimostraci il tuo apprezzamento lasciando una "
+"valutazione <a href=\"%1$s\">★★★★★</a> e vota per <a href=\"%2$s\">il nostro "
+"lavoro</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
 msgid ""
@@ -1597,7 +1670,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:93
 msgid "Need Help?"
-msgstr "Ho bisogno di aiuto?"
+msgstr "Hai bisogno di aiuto?"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:95
 msgid "Frequently Asked Questions"
@@ -1612,32 +1685,30 @@ msgid "Request a feature"
 msgstr "Richiedi una funzione"
 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:111
-#, fuzzy
-#| msgid "Order Number: %s"
 msgid "Order Number:"
-msgstr "Ordine Numero: %s"
+msgstr "Ordine Numero:"
 
 #: woocommerce-pdf-invoices/includes/class-invoice.php:119
-#, fuzzy
-#| msgid "Shipping"
 msgid "Shipping Method:"
-msgstr "Spedizione"
+msgstr "Modalità di Spedizione:"
 
 #: woocommerce-pdf-invoices/includes/class-packing-slip.php:68
 msgid "View packing slip"
-msgstr ""
+msgstr "Visualizza etichetta di  spedizione"
 
 #: woocommerce-pdf-invoices/includes/compatibility/class-wc-core-compatibility.php:245
 msgid "WooCommerce"
-msgstr ""
+msgstr "WooCommerce"
 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:37
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:38
 #, php-format
 msgid "Order Number: %s"
 msgstr "Ordine Numero: %s"
 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:38
+#:  
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:36
 #, php-format
 msgid "Order Date: %s"
@@ -1645,40 +1716,41 @@ msgstr "Data Ordine: %s"
 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:269
 msgid "VAT 0%"
-msgstr ""
+msgstr "IVA 0%"
 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:285
 msgid "Refunded"
 msgstr "Rimborsato"
 
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:301
+#:  
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:306
 msgid "Customer note"
 msgstr "Nota Cliente"
 
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:30
 msgid "Packing Slip"
-msgstr ""
+msgstr "Etichetta Spedizione"
 
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:43
 #, php-format
 msgid "Shipping Method: %s"
-msgstr ""
+msgstr "Modalità di Spedizione: %s"
 
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:49
 #, php-format
 msgid "Payment Method: %s"
-msgstr ""
+msgstr "Modalità di Pagamento: %s"
 
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:81
 msgid "Product"
-msgstr ""
+msgstr "Prodotto"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:609
 msgid "Invoice No."
-msgstr ""
+msgstr "No. Fattura"
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:661
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:661 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:683
 msgid "PDF Invoice"
 msgstr "PDF Invoice"
@@ -1688,22 +1760,18 @@ msgid "Create"
 msgstr "Crea"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:708
-#, fuzzy
-#| msgid "Order Number: %s"
 msgid "Number:"
-msgstr "Ordine Numero: %s"
+msgstr "Numero:"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:717
 msgid "Sent?"
-msgstr ""
+msgstr "Inviato?"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:735
 msgid "Update"
-msgstr ""
+msgstr "Aggiorna"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:740
-#, fuzzy
-#| msgid "Are you sure to delete the invoice?"
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Sei sicuro di voler eliminare la fattura?"
 
@@ -1713,245 +1781,20 @@ msgid ""
 "You will be missing a PDF invoice with invoice number %d and thus creating "
 "an accounting gap!"
 msgstr ""
+"Hai saltato una fattura PDF con il numero %d e questo ha causato un buco in "
+"contabilità!"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:747
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
-msgstr ""
+msgstr "E' preferibile utilizzare fatture PDF cancellate con %s."
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1087
-#, fuzzy, php-format
-#| msgid "Email us"
+#, php-format
 msgid "Email: %s"
-msgstr "Mandaci una email"
+msgstr "Email: %s"
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1091
 #, php-format
 msgid "VAT ID: %s"
-msgstr ""
-
-#, fuzzy
-#~| msgid "Subtotal"
-#~ msgid "Subtotal %s"
-#~ msgstr "Subtotale"
-
-#, fuzzy
-#~| msgid "Discount"
-#~ msgid "Discount %s"
-#~ msgstr "Sconto"
-
-#, fuzzy
-#~| msgid "Total"
-#~ msgid "Total %s"
-#~ msgstr "Totale"
-
-#~ msgid "Ship to"
-#~ msgstr "Indirizzo Spedizione"
-
-#, fuzzy
-#~| msgid "Order Date: %s"
-#~ msgid "Date: %s"
-#~ msgstr "Data Ordine: %s"
-
-#, fuzzy
-#~| msgid "Order #%d - %s"
-#~ msgid "Order #: %s"
-#~ msgstr "Ordine #%d - %s"
-
-#~ msgid "Invoiced on:"
-#~ msgstr "Fatturato in:"
-
-#~ msgid "Invoice number:"
-#~ msgstr "Numero di fattura:"
-
-#~ msgid "<b>Version</b>: "
-#~ msgstr "<b>Versione</b>: "
-
-#~ msgid ""
-#~ "<b>Author</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
-#~ msgstr ""
-#~ "<b>Autore</b>: <a href=\"https://github.com/baselbers\">Bas Elbers</a>"
-
-#~ msgid "These are the general template options."
-#~ msgstr "Queste sono le opzioni generali della tema."
-
-#~ msgid "These are the invoice number options."
-#~ msgstr "Queste sono le opzioni numero di fattura."
-
-#~ msgid "[prefix]"
-#~ msgstr "[prefisso]"
-
-#~ msgid "[suffix]"
-#~ msgstr "[suffisso]"
-
-#~ msgid "Invoice %s (PDF)"
-#~ msgstr "Fattura %s (PDF)"
-
-#~ msgid "Remove logo"
-#~ msgstr "Elimina logo"
-
-#~ msgid "File is invalid and contains either '..' or './'."
-#~ msgstr "File non è valido o contiene  '..' o './'."
-
-#~ msgid "File is invalid and contains ':' after the first character."
-#~ msgstr "File non è valido e contiene ':' dopo il primo carattere."
-
-#~ msgid "File should be less then 2MB."
-#~ msgstr "Il file deve essere inferiore a 2MB."
-
-#~ msgid "Reset on 1st of january"
-#~ msgstr "Ripristina il 1 gennaio"
-
-#~ msgid "Attach to Email"
-#~ msgstr "Allega a e-mail"
-
-#~ msgid "Attach to New order Email"
-#~ msgstr "Allega a e-mail ordine nuovo"
-
-#~ msgid "Get your account from your Email It In %suser account%s."
-#~ msgstr "Ottieni il tuo account dal Email It In%suser account%s."
-
-#~ msgid ""
-#~ "Signup at %s to send invoices to your Dropbox, OneDrive, Google Drive or "
-#~ "Egnyte and enter your account below."
-#~ msgstr ""
-#~ "Iscriviti al%s per inviare le fatture al vostro Dropbox, Microsoft "
-#~ "Onedrive, Google Drive o Egnyte e inserisci il tuo conto qui sotto."
-
-#~ msgid "%sFormat%s of invoice date and order date."
-#~ msgstr "%sFormat%s di data della fattura e la data dell'ordine."
-
-#~ msgid "The header will be visible on every page. "
-#~ msgstr "L'intestazione sarà visibile in ogni pagina."
-
-#~ msgid ""
-#~ "Alrighty then! <a href=\"%s\">Let's start configuring <strong>WooCommerce "
-#~ "PDF Invoices</strong></a>."
-#~ msgstr ""
-#~ "Bene allora! <a href=\"%s\">Cominciamo la configurazione "
-#~ "<strong>WooCommerce PDF Fattura</strong></a>."
-
-#~ msgid ""
-#~ "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
-#~ "%s★★★★★%s rating. A huge thank you in advance!"
-#~ msgstr ""
-#~ "Se ti piace <strong>WooCommerce PDF Fattura</strong> ti preghiamo di "
-#~ "lasciare un% s ★★★★★% s voto. Un enorme grazie in anticipo!"
-
-#~ msgid "Cancel invoice"
-#~ msgstr "Cancella fattura"
-
-#~ msgid "Create invoice"
-#~ msgstr "Creare fattura"
-
-#~ msgid ""
-#~ "You are working with <b>WooCommerce PDF Invoices</b> for some time now. "
-#~ "We really need your ★★★★★ rating. It will support future development big-"
-#~ "time. A huge thanks in advance and keep up the good work! <br /> <a "
-#~ "href='%s' target='_blank'>Yes, will do it right away!</a> - <a "
-#~ "href='%s'>No, already done it!</a>"
-#~ msgstr ""
-#~ "You are working with <b>WooCommerce PDF Invoices</b> for some time now. "
-#~ "We really need your ★★★★★ rating. It will support future development big-"
-#~ "time. A huge thanks in advance and keep up the good work! <br /> <a "
-#~ "href='%s' target='_blank'>Yes, will do it right away!</a> - <a "
-#~ "href='%s'>No, already done it!</a>"
-
-#~ msgid ""
-#~ "Whoops, no template found. Please select a template on the Template "
-#~ "settings page first."
-#~ msgstr ""
-#~ "Ops, nessun modello trovato. Selezionare prima un modello nella pagina "
-#~ "delle impostazioni."
-
-#~ msgid ""
-#~ "We will never ask for donations, but to garantee future development, we "
-#~ "do need your support. Please show us your appreciation by leaving a <a "
-#~ "href=\"https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-"
-#~ "invoices?rate=5#postform\">★★★★★</a> rating and vote for <a href="
-#~ "\"https://wordpress.org/plugins/woocommerce-pdf-invoices/\">works</a>."
-#~ msgstr ""
-#~ "Non chiederemo mai donazioni, ma a garanzia della sviluppo futuro, "
-#~ "abbiamo bisogno del vostro supporto. Vi preghiamo di mostrare il vostro "
-#~ "apprezzamento lasciando una <a href=\"https://wordpress.org/support/view/"
-#~ "plugin-reviews/woocommerce-pdf-invoices?rate=5#postform\">★★★★★</"
-#~ "a>valutazione e votare<a href=\"https://wordpress.org/plugins/woocommerce-"
-#~ "pdf-invoices/\">works</a>."
-
-#~ msgid "Feel free to use "
-#~ msgstr "Sentitevi liberi di usare"
-
-#~ msgid ""
-#~ "<b>Note</b>: If your logo doesn't show up, try to enable "
-#~ "<code>allow_url_fopen</code>."
-#~ msgstr ""
-#~ "<b>Nota</b>: Se il logo non compare, prova ad utilizzare "
-#~ "<code>allow_url_fopen</code>."
-
-#~ msgid "Intro text"
-#~ msgstr "Testo introduttivo"
-
-#~ msgid ""
-#~ "Reset the invoice counter and start with next invoice number. %s %sNote:"
-#~ "%s Only available with sequential numbering type and you need to check "
-#~ "the checkbox to actually reset the value."
-#~ msgstr ""
-#~ "Azzerare il contatore della fattura e iniziare con il prossimo numero "
-#~ "della fattura. %s %sNota:%s Disponibile solo con numerazione sequenziale "
-#~ "è sara necessario abilitare la casella per ripristinare realmente il "
-#~ "valore."
-
-#~ msgid ""
-#~ "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s "
-#~ "is required and slashes aren't supported."
-#~ msgstr ""
-#~ "Non esitare di utilizzare i segnaposto %s %s %s %s %s and %s. %s %sNota:"
-#~ "%s %s è obbligatorio e i slash non sono supportati."
-
-#~ msgid "Tax"
-#~ msgstr "Imposta"
-
-#~ msgid "The footer will be visible on every page. "
-#~ msgstr "Il piè sarà visibile in ogni pagina."
-
-#~ msgid "Invoicing on Steroids"
-#~ msgstr "Invoicing on Steroids"
-
-#~ msgid ""
-#~ "We're working on a more powerful version of this invoicing plugin. Be the "
-#~ "first to know when we're ready to launch and receive a unique one-time "
-#~ "discount!"
-#~ msgstr ""
-#~ "Stiamo lavorando su una versione più potente di questo plugin. Puoi "
-#~ "essere il primo a sapere quando saremo pronti a lanciare e riceverai uno "
-#~ "sconto unico!"
-
-#~ msgid "%sPayment%s via"
-#~ msgstr "%sPagamento%s via"
-
-#~ msgid ""
-#~ "Feel free to use the placeholders %s %s %s %s %s and %s. %s %sNote:%s %s "
-#~ "is required."
-#~ msgstr ""
-#~ "No dude en utilizar los marcadores de posición %s %s %s %s %s y %s. %s "
-#~ "%sNote:%s %s es necesario."
-
-#~ msgid "Subtotal will be including tax and excluding discount and shipping."
-#~ msgstr "Subtotal es incluyendo impuestos y excepto el descuento y el envío."
-
-#~ msgid ""
-#~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
-#~ "Please show us your appreciation by leaving a ★★★★★ rating. A huge thank "
-#~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
-#~ "away!</a> - <a href='%s'>No, already done it!</a>"
-#~ msgstr ""
-#~ "Gracias por usar <b>WooCommerce PDF Facturas</b> por algún tiempo ahora. "
-#~ "Por favor, mostrar su agradecimiento al dejar una calificación ★★★★★. Un "
-#~ "enorme gracias por adelantado! <br /> <a href='%s' target='_blank'>Sí, lo "
-#~ "hará de inmediato!</a> - <a href='%s'>No, ya hecho!</a>"
-
-#~ msgid "Order Number %s"
-#~ msgstr "Número de pedido: %s"
-
-#~ msgid "Order Date %s"
-#~ msgstr "Fecha del pedido: %s"
+msgstr "P.IVA: %s"

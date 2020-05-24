@@ -344,9 +344,11 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.12 - May 7, 2020 =
+= 3.0.12 - May 24, 2020 =
 
 - Added: param to filters wpi_after_invoice_content and wpi_before_invoice_content and changed prefix.
+- Improved: Invoice number format only allowing letters, numbers, whitespaces and hyphens minuses.
+- Fixed: Settings error notices not showing.
 
 = 3.0.11 - November 8, 2019 =
 

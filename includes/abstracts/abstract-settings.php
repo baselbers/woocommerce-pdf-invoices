@@ -100,6 +100,8 @@ abstract class BEWPI_Abstract_Settings {
 		$this->set_defaults();
 
 		register_setting( $this->settings_key, $this->settings_key, array( $this, 'sanitize' ) );
+
+		add_action( 'admin_notices', array( $this, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -108,7 +110,6 @@ abstract class BEWPI_Abstract_Settings {
 	public static function init_hooks() {
 		add_action( 'admin_init', array( __CLASS__, 'admin_init' ) );
 		add_action( 'admin_menu', array( __CLASS__, 'add_wc_submenu_options_page' ) );
-		add_action( 'admin_notices', array( __CLASS__, 'display_settings_errors' ) );
 	}
 
 	/**
@@ -243,11 +244,10 @@ abstract class BEWPI_Abstract_Settings {
 	}
 
 	/**
-	 *
+	 * Display settings errors.
 	 */
-	public static function display_settings_errors() {
-		$current_tab = isset( $_GET['tab'] ) ? sanitize_key( $_GET['tab'] ) : self::$current_tab;
-		settings_errors( $current_tab );
+	public function display_settings_errors() {
+		settings_errors( $this->settings_key );
 	}
 
 	/**
@@ -332,6 +332,17 @@ abstract class BEWPI_Abstract_Settings {
 		$str = preg_replace( '/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i', '<$1$2>', $str );
 
 		return strip_tags( $str, '<b><i><br><br/>' );
+	}
+
+	/**
+	 * Strip characters.
+	 *
+	 * @param string $value Value.
+	 *
+	 * @return string
+	 */
+	protected function strip_invoice_number( $value ) {
+		return (string) preg_replace( "/[^a-zA-Z0-9-\s]/", '', $value );
 	}
 
 	/**

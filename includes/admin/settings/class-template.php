@@ -594,6 +594,42 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 			set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
 		}
 
+		if ( isset( $input['bewpi_invoice_number_prefix'] ) ) {
+
+			$output['bewpi_invoice_number_prefix'] = $this->strip_invoice_number( $input['bewpi_invoice_number_prefix'] );
+
+			if ( $output['bewpi_invoice_number_prefix'] !== $input['bewpi_invoice_number_prefix'] ) {
+				$error          = new stdClass();
+				$error->message = __( 'Invoice Number Prefix contains a character which is not allowed.', 'woocommerce-pdf-invoices' );
+				$error->type    = 'error';
+				$this->add_error( $error );
+			}
+		}
+
+		if ( isset( $input['bewpi_invoice_number_format'] ) ) {
+
+			$output['bewpi_invoice_number_format'] = $this->strip_invoice_number( $input['bewpi_invoice_number_format'] );
+
+			if ( $output['bewpi_invoice_number_format'] !== $input['bewpi_invoice_number_format'] ) {
+				$error          = new stdClass();
+				$error->message = __( 'Invoice Number Format contains a character which is not allowed.', 'woocommerce-pdf-invoices' );
+				$error->type    = 'error';
+				$this->add_error( $error );
+			}
+		}
+
+		if ( isset( $input['bewpi_invoice_number_suffix'] ) ) {
+
+			$output['bewpi_invoice_number_suffix'] = $this->strip_invoice_number( $input['bewpi_invoice_number_suffix'] );
+
+			if ( $output['bewpi_invoice_number_suffix'] !== $input['bewpi_invoice_number_suffix'] ) {
+				$error          = new stdClass();
+				$error->message = __( 'Invoice Number Suffix contains a character which is not allowed.', 'woocommerce-pdf-invoices' );
+				$error->type    = 'error';
+				$this->add_error( $error );
+			}
+		}
+
 		return apply_filters( 'bewpi_sanitized_' . $this->settings_key, $output, $input );
 	}
 

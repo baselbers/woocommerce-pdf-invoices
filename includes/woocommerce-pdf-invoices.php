@@ -175,7 +175,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			// @todo Move to BEWPI_Invoice class.
 			add_action( 'woocommerce_admin_order_actions_end', array( $this, 'add_admin_order_pdf' ) );
-			add_action( 'add_meta_boxes', array( $this, 'add_admin_order_pdf_meta_box' ) );
+			add_action( 'add_meta_boxes', array( $this, 'add_admin_order_pdf_meta_box' ), 10 );
 			add_filter( 'manage_edit-shop_order_columns', array( $this, 'add_invoice_number_column' ), 999 );
 			add_action( 'manage_shop_order_posts_custom_column', array( $this, 'invoice_number_column_data' ), 2 );
 		}
@@ -790,23 +790,17 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				return;
 			}
 
-			// by default order status should be Processing or Completed.
-			$order = wc_get_order( $atts['order_id'] );
-			if ( ! $order->is_paid() ) {
-				return;
-			}
-
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
+			$order_id = (int) $atts['order_id'];
 			$invoice  = new BEWPI_Invoice( $order_id );
-			if ( ! $invoice->get_full_path() ) {
+			if ( '' === $invoice->get_full_path() ) {
 				return;
 			}
 
-			$url = add_query_arg( array(
-				'bewpi_action' => 'view',
-				'post'         => $order_id,
-				'nonce'        => wp_create_nonce( 'view' ),
-			) );
+			$order = wc_get_order( $order_id );
+			// By default order status should be Processing or Completed.
+			if ( false === apply_filters( 'wpi_show_download_invoice_shortcode', $order->is_paid(), $invoice ) ) {
+				return;
+			}
 
 			$tags = array(
 				'{formatted_invoice_number}' => $invoice->get_formatted_number(),
@@ -814,8 +808,16 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'{formatted_invoice_date}'   => $invoice->get_formatted_date(),
 				'{formatted_order_date}'     => $invoice->get_formatted_order_date(),
 			);
-			// find and replace placeholders.
+			// Find and replace placeholders.
 			$title = str_replace( array_keys( $tags ), array_values( $tags ), $atts['title'] );
+
+			$args = array(
+				'bewpi_action' => 'view',
+				'post'         => $order_id,
+				'nonce'        => wp_create_nonce( 'view' ),
+			);
+			$url  = add_query_arg( $args );
+
 			printf( '<a href="%1$s">%2$s</a>', esc_attr( $url ), esc_html( $title ) );
 		}
 
@@ -828,23 +830,27 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return mixed
 		 */
 		public function add_my_account_pdf( $actions, $order ) {
-			$order = wc_get_order( $order );
-
-			if ( ! WPI()->get_option( 'general', 'download_invoice_account' ) || ! $order->is_paid() ) {
+			if ( false === (bool) WPI()->get_option( 'general', 'download_invoice_account' ) ) {
 				return $actions;
 			}
 
-			$order_id = BEWPI_WC_Order_Compatibility::get_id( $order );
-			$invoice  = new BEWPI_Invoice( $order_id );
-			if ( ! $invoice->get_full_path() ) {
+			// By default order status should be Processing or Completed.
+			$order   = wc_get_order( $order );
+			$invoice = new BEWPI_Invoice( $order->get_id() );
+			if ( '' === $invoice->get_full_path() ) {
 				return $actions;
 			}
 
-			$url = add_query_arg( array(
+			if ( false === apply_filters( 'wpi_show_my_account_pdf', $order->is_paid(), $invoice ) ) {
+				return $actions;
+			}
+
+			$args = array(
 				'bewpi_action' => 'view',
-				'post'         => $order_id,
+				'post'         => $order->get_id(),
 				'nonce'        => wp_create_nonce( 'view' ),
-			) );
+			);
+			$url  = add_query_arg( $args );
 
 			$actions['invoice'] = array(
 				'url'  => $url,
@@ -918,7 +924,6 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 				'group'  => $group,
 				'suffix' => '_settings',
 			) );
-			//$option = apply_filters( 'bewpi_option', false, $group, $name );
 
 			$options = get_option( join( '', $option_name ) );
 			if ( false === $options ) {
@@ -931,6 +936,12 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 
 			$option = $options[ 'bewpi_' . $name ];
 			$hook   = sprintf( 'bewpi_pre_option-%1$s-%2$s', $group, $name );
+
+			// Replace placeholders.
+			$templater = WPI()->templater();
+			if ( false === is_array( $option ) && $templater::has_placeholder( $option ) ) {
+				$option = $templater->replace_placeholders( $option );
+			}
 
 			return apply_filters( $hook, $option );
 		}
@@ -1080,34 +1091,38 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		 * @return string
 		 */
 		public function get_formatted_company_address() {
+			return nl2br( (string) self::get_option( 'template', 'company_address' ) );
+		}
+
+		/**
+		 * Formatted company details.
+		 *
+		 * @return string
+		 */
+		public function get_formatted_company_details() {
+			$formatted_company_details   = '';
 			$company_phone               = self::get_option( 'template', 'company_phone' );
 			$company_email_address       = self::get_option( 'template', 'company_email_address' );
 			$company_registration_number = self::get_option( 'template', 'company_registration_number' );
 			$company_vat_id              = self::get_option( 'template', 'company_vat_id' );
 
-			if ( BEWPI_WC_Core_Compatibility::is_wc_version_gte_3_0() ) {
-				$formatted_company_address = self::get_formatted_base_address();
-			} else {
-				$formatted_company_address = nl2br( self::get_option( 'template', 'company_address' ) ) . '<br>';
-			}
-
 			if ( ! empty( $company_phone ) ) {
-				$formatted_company_address .= sprintf( __( 'Phone: %s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
+				$formatted_company_details .= sprintf( __( '%s', 'woocommerce-pdf-invoices' ), $company_phone ) . '<br>';
 			}
 
 			if ( ! empty( $company_email_address ) ) {
-				$formatted_company_address .= sprintf( __( 'Email: %s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
+				$formatted_company_details .= sprintf( __( '%s', 'woocommerce-pdf-invoices' ), $company_email_address ) . '<br>';
 			}
 
 			if ( ! empty( $company_registration_number ) ) {
-				$formatted_company_address .= sprintf( __( 'CRN: %s', 'woocommerce-pdf-invoices' ), $company_registration_number ) . '<br>';
+				$formatted_company_details .= sprintf( __( 'CRN: %s', 'woocommerce-pdf-invoices' ), $company_registration_number ) . '<br>';
 			}
 
 			if ( ! empty( $company_vat_id ) ) {
-				$formatted_company_address .= sprintf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
+				$formatted_company_details .= sprintf( __( 'VAT ID: %s', 'woocommerce-pdf-invoices' ), $company_vat_id );
 			}
 
-			return $formatted_company_address;
+			return $formatted_company_details;
 		}
 
 		/**

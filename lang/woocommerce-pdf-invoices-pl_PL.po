@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-29 13:13+0200\n"
-"PO-Revision-Date: 2020-05-29 13:13+0200\n"
+"POT-Creation-Date: 2020-05-29 16:29+0200\n"
+"PO-Revision-Date: 2020-05-29 16:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: info@wcpdfinvoices.com\n"
 "Language: pl_PL\n"
@@ -23,6 +23,7 @@ msgstr ""
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: woocommerce-pdf-invoices\n"
 "X-Poedit-SearchPath-1: woocommerce-pdf-invoices-premium\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/class-updater.php:165
 #, php-format
@@ -373,6 +374,7 @@ msgid "View invoice"
 msgstr "Zobacz fakturę"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/views/html-global-notice.php:17
+#: woocommerce-pdf-invoices/includes/class-packing-slip.php:179
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:738
 msgid "View"
 msgstr "Zobacz"
@@ -620,7 +622,7 @@ msgstr "Lewa kolumna stopki."
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:209
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:458
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:48
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:420
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:422
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:53
 msgid "Description"
 msgstr "Opis"
@@ -656,7 +658,7 @@ msgstr "Zniżka"
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1097
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:77
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:235
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:422
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:424
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:71
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:276
 msgid "Total"
@@ -713,7 +715,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:462
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:59
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:421
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:423
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:62
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:85
 msgid "Qty"
@@ -863,7 +865,6 @@ msgstr "Płatnik faktury"
 
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:14
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:16
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1095
 #, php-format
 msgid "Phone: %s"
 msgstr "Nr telefonu: %s"
@@ -898,33 +899,33 @@ msgstr "Wsparcie / Pomoc"
 msgid "Paid"
 msgstr "Zapłacona"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:512
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:514
 msgid "Subtotal:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:527
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:529
 msgid "Discount:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:542
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:544
 msgid "Shipping:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:609
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:611
 msgid "Total:"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:736
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:732
 #, php-format
 msgid "%s of %s"
 msgstr "%s z %s"
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:783
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:779
 #, php-format
 msgid "VAT Number: %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:801
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-invoice.php:797
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr ""
@@ -1283,7 +1284,7 @@ msgid "Change the name of the invoice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:302
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:851
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:857
 msgid "Invoice"
 msgstr "Faktura"
 
@@ -1388,11 +1389,16 @@ msgstr "Podatek (całkowity)"
 msgid "Invoice Number Prefix contains a character which is not allowed."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:615
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:611
+msgid ""
+"Invoice number format field must contain at least the [number] placeholder."
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:621
 msgid "Invoice Number Format contains a character which is not allowed."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:627
+#: woocommerce-pdf-invoices/includes/admin/settings/class-template.php:633
 msgid "Invoice Number Suffix contains a character which is not allowed."
 msgstr ""
 
@@ -1585,8 +1591,13 @@ msgstr "Numer zamówienia: %s"
 msgid "Shipping Method:"
 msgstr "Wysyłka"
 
-#: woocommerce-pdf-invoices/includes/class-packing-slip.php:68
+#: woocommerce-pdf-invoices/includes/class-packing-slip.php:69
 msgid "View packing slip"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/class-packing-slip.php:143
+#: woocommerce-pdf-invoices/includes/class-packing-slip.php:166
+msgid "PDF Packing Slip"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/compatibility/class-wc-core-compatibility.php:245
@@ -1683,21 +1694,26 @@ msgstr ""
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1099
-#, fuzzy, php-format
-#| msgid "Email us"
-msgid "Email: %s"
-msgstr "Napisz do nas"
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1110
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1114
+#, php-format
+msgid "%s"
+msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1103
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1118
 #, php-format
 msgid "CRN: %s"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1107
+#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1122
 #, php-format
 msgid "VAT ID: %s"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Email us"
+#~ msgid "Email: %s"
+#~ msgstr "Napisz do nas"
 
 #, fuzzy
 #~| msgid "Subtotal"

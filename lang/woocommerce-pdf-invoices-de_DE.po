@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-29 13:12+0200\n"
-"PO-Revision-Date: 2020-05-29 13:12+0200\n"
+"POT-Creation-Date: 2020-05-29 16:29+0200\n"
+"PO-Revision-Date: 2020-05-29 16:29+0200\n"
 "Last-Translator: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language-Team: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language: de\n"
@@ -27,50 +27,50 @@ msgstr ""
 msgid "Paid"
 msgstr "Bezahlt"
 
-#: includes/abstracts/abstract-invoice.php:420
+#: includes/abstracts/abstract-invoice.php:422
 #: includes/templates/invoice/simple/micro/body.php:53
 msgid "Description"
 msgstr "Beschreibung"
 
-#: includes/abstracts/abstract-invoice.php:421
+#: includes/abstracts/abstract-invoice.php:423
 #: includes/templates/invoice/simple/micro/body.php:62
 #: includes/templates/packing-slip/simple/minimal/body.php:85
 msgid "Qty"
 msgstr "Anz"
 
-#: includes/abstracts/abstract-invoice.php:422
+#: includes/abstracts/abstract-invoice.php:424
 #: includes/templates/invoice/simple/micro/body.php:71
 #: includes/templates/invoice/simple/micro/body.php:276
 msgid "Total"
 msgstr "Gesamt"
 
-#: includes/abstracts/abstract-invoice.php:512
+#: includes/abstracts/abstract-invoice.php:514
 msgid "Subtotal:"
 msgstr "Zwischensumme:"
 
-#: includes/abstracts/abstract-invoice.php:527
+#: includes/abstracts/abstract-invoice.php:529
 msgid "Discount:"
 msgstr "Rabatt:"
 
-#: includes/abstracts/abstract-invoice.php:542
+#: includes/abstracts/abstract-invoice.php:544
 msgid "Shipping:"
 msgstr "Lieferung:"
 
-#: includes/abstracts/abstract-invoice.php:609
+#: includes/abstracts/abstract-invoice.php:611
 msgid "Total:"
 msgstr "Gesamt:"
 
-#: includes/abstracts/abstract-invoice.php:736
+#: includes/abstracts/abstract-invoice.php:732
 #, php-format
 msgid "%s of %s"
 msgstr "%s von %s"
 
-#: includes/abstracts/abstract-invoice.php:783
+#: includes/abstracts/abstract-invoice.php:779
 #, php-format
 msgid "VAT Number: %s"
 msgstr "Steuernummer: %s"
 
-#: includes/abstracts/abstract-invoice.php:801
+#: includes/abstracts/abstract-invoice.php:797
 #, php-format
 msgid "Purchase Order Number: %s"
 msgstr "Bestellnummer: %s"
@@ -458,7 +458,7 @@ msgid "Change the name of the invoice."
 msgstr "Bezeichnung der Rechnung."
 
 #: includes/admin/settings/class-template.php:302
-#: includes/woocommerce-pdf-invoices.php:851
+#: includes/woocommerce-pdf-invoices.php:857
 msgid "Invoice"
 msgstr "Rechnung"
 
@@ -620,11 +620,16 @@ msgstr "Versand"
 msgid "Invoice Number Prefix contains a character which is not allowed."
 msgstr ""
 
-#: includes/admin/settings/class-template.php:615
+#: includes/admin/settings/class-template.php:611
+msgid ""
+"Invoice number format field must contain at least the [number] placeholder."
+msgstr ""
+
+#: includes/admin/settings/class-template.php:621
 msgid "Invoice Number Format contains a character which is not allowed."
 msgstr ""
 
-#: includes/admin/settings/class-template.php:627
+#: includes/admin/settings/class-template.php:633
 msgid "Invoice Number Suffix contains a character which is not allowed."
 msgstr ""
 
@@ -865,9 +870,20 @@ msgstr "Zahlungsmethode:"
 msgid "Shipping Method:"
 msgstr "Versandart:"
 
-#: includes/class-packing-slip.php:68
+#: includes/class-packing-slip.php:69
 msgid "View packing slip"
 msgstr "Lieferschein ansehen"
+
+#: includes/class-packing-slip.php:143 includes/class-packing-slip.php:166
+#, fuzzy
+#| msgid "Packing Slip"
+msgid "PDF Packing Slip"
+msgstr "Lieferschein"
+
+#: includes/class-packing-slip.php:179
+#: includes/woocommerce-pdf-invoices.php:738
+msgid "View"
+msgstr "Anzeigen"
 
 #: includes/compatibility/class-wc-core-compatibility.php:245
 msgid "WooCommerce"
@@ -878,7 +894,6 @@ msgid "Invoice to"
 msgstr "Rechnungsadresse"
 
 #: includes/templates/invoice/simple/micro/body.php:16
-#: includes/woocommerce-pdf-invoices.php:1095
 #, php-format
 msgid "Phone: %s"
 msgstr "Telefon: %s"
@@ -1014,10 +1029,6 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nein"
 
-#: includes/woocommerce-pdf-invoices.php:738
-msgid "View"
-msgstr "Anzeigen"
-
 #: includes/woocommerce-pdf-invoices.php:745
 msgid "Update"
 msgstr "Aktualisieren"
@@ -1046,17 +1057,18 @@ msgstr "Stattdessen die von abgerechneten PDF-Rechnungen mit %s verwenden."
 msgid "Delete"
 msgstr "﻿Löschen"
 
-#: includes/woocommerce-pdf-invoices.php:1099
+#: includes/woocommerce-pdf-invoices.php:1110
+#: includes/woocommerce-pdf-invoices.php:1114
 #, php-format
-msgid "Email: %s"
-msgstr "E-Mail: %s"
+msgid "%s"
+msgstr ""
 
-#: includes/woocommerce-pdf-invoices.php:1103
+#: includes/woocommerce-pdf-invoices.php:1118
 #, php-format
 msgid "CRN: %s"
 msgstr ""
 
-#: includes/woocommerce-pdf-invoices.php:1107
+#: includes/woocommerce-pdf-invoices.php:1122
 #, php-format
 msgid "VAT ID: %s"
 msgstr "USt-IdNr.: %s"
@@ -1076,6 +1088,9 @@ msgstr "USt-IdNr.: %s"
 #~ msgstr ""
 #~ "Logo nicht gefunden. Am besten das Bild in die Mediathek hochladen und es "
 #~ "erneut versuchen."
+
+#~ msgid "Email: %s"
+#~ msgstr "E-Mail: %s"
 
 #~ msgid ""
 #~ "Whoops, your license for %1$s has expired. To keep receiving updates and "

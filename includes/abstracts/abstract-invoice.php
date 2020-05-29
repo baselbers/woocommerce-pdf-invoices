@@ -123,7 +123,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		// Add prefix and suffix directly.
 		$formatted_invoice_number = WPI()->get_option( 'template', 'invoice_number_prefix' ) . $formatted_invoice_number . WPI()->get_option( 'template', 'invoice_number_suffix' );
 
-		return apply_filters( 'bewpi_formatted_invoice_number', $formatted_invoice_number, $this->type );
+		return apply_filters( 'wpi_formatted_invoice_number', $formatted_invoice_number, $this );
 	}
 
 	/**
@@ -244,7 +244,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		$max_invoice_number = self::get_max_invoice_number( $this->year );
 		$next_number        = $max_invoice_number + 1;
 
-		return $next_number;
+		return apply_filters( 'wpi_invoice_number', $next_number, $this );
 	}
 
 	/**
@@ -304,9 +304,9 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 			$this->number = $this->get_next_invoice_number();
 		}
 
-		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->get_formatted_number() . '.pdf';
+		$this->filename  = apply_filters( 'wpi_pdf_invoice_filename', $this->get_formatted_number() . '.pdf', $this );
+		$pdf_path        = $this->get_rel_pdf_path() . '/' . $this->filename;
 		$this->full_path = WPI_ATTACHMENTS_DIR . '/' . $pdf_path;
-		$this->filename  = basename( $this->full_path );
 
 		// update invoice data in db.
 		$order_id = $this->order->get_id();
@@ -314,9 +314,11 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		update_post_meta( $order_id, '_bewpi_invoice_number', $this->number );
 		update_post_meta( $order_id, '_bewpi_invoice_pdf_path', $pdf_path );
 
-		do_action( 'bewpi_before_document_generation', $this->type, $order_id );
+		do_action( 'wpi_before_document_generation', $this, $order_id );
 
 		parent::generate( $destination );
+
+		do_action( 'wpi_after_document_generation', $this, $order_id );
 
 		return $this->full_path;
 	}
@@ -638,13 +640,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 	 * @return bool
 	 */
 	public function is_vat_exempt() {
-		// @todo 'yes' === $this->get_meta( 'is_vat_exempt' ) or get_is_vat_exempt.
-		$is_vat_exempt = count( $this->order->get_taxes() ) === 0 && 'true' === WPI()->get_meta( $this->order, '_vat_number_is_valid' );
-		if ( apply_filters( 'wpi_is_vat_exempt', $is_vat_exempt, $this ) ) {
-			return true;
-		}
-
-		return false;
+		return apply_filters( 'wpi_is_vat_exempt', 'yes' === WPI()->get_meta( $this->order, 'is_vat_exempt' ), $this );
 	}
 
 	/**

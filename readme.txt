@@ -4,7 +4,7 @@ Donate link:
 Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 5.4
-Stable tag: 3.0.12
+Stable tag: 3.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -344,11 +344,21 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.0.12 - May 24, 2020 =
+= 3.1.0 - May 29, 2020 =
 
-- Added: param to filters wpi_after_invoice_content and wpi_before_invoice_content and changed prefix.
+- Added: Packing slip meta box to Edit Order page to generate packing slip.
+- Added: Param to filters wpi_after_invoice_content and wpi_before_invoice_content and changed prefix.
+- Added: Filter 'wpi_after_document_generation'.
+- Added: Filter 'wpi_pdf_invoice_filename' to change the name of the pdf invoice file.
+- Added: Filters 'wpi_show_my_account_pdf' and 'wpi_show_download_invoice_shortcode' to override displaying the invoice based on paid status.
+- Added: Filter 'wpi_invoice_number' to change the invoice number.
+- Improved: Filter 'bewpi_formatted_invoice_number' to 'wpi_formatted_invoice_number'.
+- Improved: NL translation files thanks to @freasy.
 - Improved: Invoice number format only allowing letters, numbers, whitespaces and hyphens minuses.
+- Improved: Formatted company address and details by splitting into separate functions.
 - Fixed: Settings error notices not showing.
+- Fixed: Replacing placeholders while getting options.
+- Fixed: mPDFs fatal error while using PHP 7.4.
 
 = 3.0.11 - November 8, 2019 =
 

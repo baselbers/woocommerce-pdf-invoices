@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-30 14:12+0200\n"
-"PO-Revision-Date: 2019-08-30 14:12+0200\n"
+"POT-Creation-Date: 2020-05-29 13:12+0200\n"
+"PO-Revision-Date: 2020-05-29 13:12+0200\n"
 "Last-Translator: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language-Team: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language: de\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: bootstrap.php\n"
@@ -22,7 +22,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/abstracts/abstract-document.php:150
+#: includes/abstracts/abstract-document.php:152
 #: includes/templates/invoice/simple/minimal/body.php:36
 msgid "Paid"
 msgstr "Bezahlt"
@@ -56,43 +56,43 @@ msgstr "Rabatt:"
 msgid "Shipping:"
 msgstr "Lieferung:"
 
-#: includes/abstracts/abstract-invoice.php:615
+#: includes/abstracts/abstract-invoice.php:609
 msgid "Total:"
 msgstr "Gesamt:"
 
-#: includes/abstracts/abstract-invoice.php:684
-#, php-format
-msgid "VAT Number: %s"
-msgstr "Steuernummer: %s"
-
-#: includes/abstracts/abstract-invoice.php:702
-#, php-format
-msgid "Purchase Order Number: %s"
-msgstr "Bestellnummer: %s"
-
-#: includes/abstracts/abstract-invoice.php:906
+#: includes/abstracts/abstract-invoice.php:736
 #, php-format
 msgid "%s of %s"
 msgstr "%s von %s"
 
-#: includes/abstracts/abstract-settings.php:141
+#: includes/abstracts/abstract-invoice.php:783
+#, php-format
+msgid "VAT Number: %s"
+msgstr "Steuernummer: %s"
+
+#: includes/abstracts/abstract-invoice.php:801
+#, php-format
+msgid "Purchase Order Number: %s"
+msgstr "Bestellnummer: %s"
+
+#: includes/abstracts/abstract-settings.php:142
 #: includes/admin/settings/class-general.php:24
 msgid "General"
 msgstr "Allgemein"
 
-#: includes/abstracts/abstract-settings.php:145
+#: includes/abstracts/abstract-settings.php:146
 #: includes/admin/settings/class-template.php:24
-#: includes/admin/settings/class-template.php:100
+#: includes/admin/settings/class-template.php:98
 msgid "Template"
 msgstr "Vorlage"
 
-#: includes/abstracts/abstract-settings.php:152
+#: includes/abstracts/abstract-settings.php:153
 #: includes/admin/settings/class-debug.php:24
-#: includes/woocommerce-pdf-invoices.php:760
+#: includes/woocommerce-pdf-invoices.php:774
 msgid "Debug"
 msgstr "Fehlersuche"
 
-#: includes/abstracts/abstract-settings.php:178
+#: includes/abstracts/abstract-settings.php:179
 msgid "Invoices"
 msgstr "Rechnungen"
 
@@ -110,21 +110,29 @@ msgstr ""
 msgid "Version %s"
 msgstr "Version %s"
 
-#: includes/abstracts/abstract-settings.php:381
+#: includes/abstracts/abstract-settings.php:392
 msgid "Choose&hellip;"
 msgstr "Auswählen&hellip;"
 
-#: includes/abstracts/abstract-settings.php:382
+#: includes/abstracts/abstract-settings.php:393
 msgid "Column"
 msgstr "Spalte"
 
-#: includes/abstracts/abstract-settings.php:391
+#: includes/abstracts/abstract-settings.php:402
 msgid "Select all"
 msgstr "Alle auswählen"
 
-#: includes/abstracts/abstract-settings.php:392
+#: includes/abstracts/abstract-settings.php:403
 msgid "Select none"
 msgstr "Nichts auswählen"
+
+#: includes/abstracts/abstract-settings.php:527
+msgid "Use file"
+msgstr ""
+
+#: includes/abstracts/abstract-settings.php:527
+msgid "Upload"
+msgstr ""
 
 #: includes/admin/settings/class-debug.php:40
 #: includes/admin/settings/class-template.php:42
@@ -319,14 +327,14 @@ msgstr "Tabellen Inhalte"
 msgid "Enable or disable the columns."
 msgstr "Aktivieren oder deaktivieren dieser Spalten."
 
-#: includes/admin/settings/class-template.php:105
+#: includes/admin/settings/class-template.php:103
 #, php-format
 msgid "Create a custom template by copying it from %1$s to %2$s."
 msgstr ""
 "Zum erstellen einer individualisierten Vorlage, die Dateien von %1$s nach "
 "%2$s kopieren."
 
-#: includes/admin/settings/class-template.php:107
+#: includes/admin/settings/class-template.php:105
 #, php-format
 msgid ""
 "<strong>Note:</strong> The %1$s template will probably no longer be "
@@ -336,33 +344,33 @@ msgstr ""
 "wahrscheinlich nicht mehr unterstützt, wir empfehlen die Verwendung der %2$s-"
 "Vorlage."
 
-#: includes/admin/settings/class-template.php:115
+#: includes/admin/settings/class-template.php:113
 msgid "Color theme"
 msgstr "Farbthema"
 
-#: includes/admin/settings/class-template.php:131
+#: includes/admin/settings/class-template.php:129
 msgid "Display theme text in black color"
 msgstr "Theme-Text in Schwarz anzeigen"
 
-#: includes/admin/settings/class-template.php:133
+#: includes/admin/settings/class-template.php:131
 msgid ""
 "Enable if you've set the color theme to white or some other light color."
 msgstr "Aktivieren, sofern sie die Farbe hell oder weiß gewählt haben."
 
-#: includes/admin/settings/class-template.php:141
+#: includes/admin/settings/class-template.php:139
 msgid "Date format"
 msgstr "Datumsformat"
 
-#: includes/admin/settings/class-template.php:146
+#: includes/admin/settings/class-template.php:144
 #, php-format
 msgid "<a href=\"%s\">Format</a> of invoice date and order date."
 msgstr "<a href=\"%s\">Format</a> von Rechnungsdatum und Bestelldatum."
 
-#: includes/admin/settings/class-template.php:158
+#: includes/admin/settings/class-template.php:156
 msgid "Display prices including tax"
 msgstr "Preise inklusive Steuern anzeigen"
 
-#: includes/admin/settings/class-template.php:160
+#: includes/admin/settings/class-template.php:158
 msgid ""
 "Line item totals will be including tax. <br/><b>Note</b>: Subtotal will "
 "still be excluding tax, so disable it within the visible columns section."
@@ -371,110 +379,103 @@ msgstr ""
 "Zwischensumme wird noch ohne Steuern sein, deaktivieren sie die Spalten im "
 "sichtbaren Bereich."
 
-#: includes/admin/settings/class-template.php:173
+#: includes/admin/settings/class-template.php:171
 msgid "Shipping taxable"
 msgstr "Versand besteuerbar"
 
-#: includes/admin/settings/class-template.php:175
+#: includes/admin/settings/class-template.php:173
 msgid "Enable to display subtotal including shipping."
 msgstr "Aktivieren, um Zwischensumme einschließlich Versand anzuzeigen."
 
-#: includes/admin/settings/class-template.php:188
+#: includes/admin/settings/class-template.php:186
 msgid "Mark invoice as paid"
 msgstr "Rechnung als bezahlt markieren"
 
-#: includes/admin/settings/class-template.php:190
+#: includes/admin/settings/class-template.php:188
 msgid "Invoice will be watermarked when order has been paid."
 msgstr ""
 "Die Rechnung wird mit einem Wasserzeichen versehen werden, wenn die "
 "Bestellung bezahlt wurde."
 
-#: includes/admin/settings/class-template.php:203
+#: includes/admin/settings/class-template.php:201
 msgid "Disable Packing Slips"
 msgstr "Lieferscheine deaktivieren"
 
-#: includes/admin/settings/class-template.php:210
+#: includes/admin/settings/class-template.php:208
 msgid "Company logo"
 msgstr "Firmenlogo"
 
-#: includes/admin/settings/class-template.php:215
-#, php-format
-msgid ""
-"Use the <a href=\"%1$s\">Media Library</a> to <a href=\"%2$s\">upload</a> or "
-"choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href=\"%3$s"
-"\" target=\"_blank\">File URL</a>."
-msgstr ""
-"Die <a href=\"%1$s\">Mediathek</a> zum <a href=\"%2$s\">hochladen</a> "
-"verwenden oder die <a href=\"%3$s\" target=\"_blank\">Datei-URL</a> einer ."
-"jpg, .jpeg, .gif oder .png Datei kopieren."
-
-#: includes/admin/settings/class-template.php:221
+#: includes/admin/settings/class-template.php:219
 msgid "Company name"
 msgstr "Firmenname"
 
-#: includes/admin/settings/class-template.php:232
+#: includes/admin/settings/class-template.php:230
 msgid "Company address"
 msgstr "Firmenanschrift"
 
-#: includes/admin/settings/class-template.php:237
+#: includes/admin/settings/class-template.php:235
 #, php-format
 msgid ""
 "Allowed HTML tags: %s. Since WooCommerce +3.0 this setting is ignored and "
 "the WooCommerce store address is used."
 msgstr ""
 
-#: includes/admin/settings/class-template.php:243
+#: includes/admin/settings/class-template.php:241
 msgid "Company details"
 msgstr "Firmendetails"
 
-#: includes/admin/settings/class-template.php:248
-#: includes/admin/settings/class-template.php:303
-#: includes/admin/settings/class-template.php:342
-#: includes/admin/settings/class-template.php:354
-#: includes/admin/settings/class-template.php:365
+#: includes/admin/settings/class-template.php:246
+#: includes/admin/settings/class-template.php:312
+#: includes/admin/settings/class-template.php:351
+#: includes/admin/settings/class-template.php:363
+#: includes/admin/settings/class-template.php:374
 #, php-format
 msgid "Allowed HTML tags: %s."
 msgstr "Erlaubte HTML-Tags: %s."
 
-#: includes/admin/settings/class-template.php:254
+#: includes/admin/settings/class-template.php:252
 msgid "Company phone"
 msgstr "Telefonnummer des Unternehmens"
 
-#: includes/admin/settings/class-template.php:265
+#: includes/admin/settings/class-template.php:263
 msgid "Company email address"
 msgstr "E-Mail-Adresse des Unternehmens"
 
-#: includes/admin/settings/class-template.php:276
+#: includes/admin/settings/class-template.php:274
+msgid "Company Registration Number"
+msgstr ""
+
+#: includes/admin/settings/class-template.php:285
 msgid "Company VAT ID"
 msgstr "USt-IdNr. des Unternehmens"
 
-#: includes/admin/settings/class-template.php:287
+#: includes/admin/settings/class-template.php:296
 msgid "Title"
 msgstr "Titel"
 
-#: includes/admin/settings/class-template.php:292
+#: includes/admin/settings/class-template.php:301
 msgid "Change the name of the invoice."
 msgstr "Bezeichnung der Rechnung."
 
-#: includes/admin/settings/class-template.php:293
-#: includes/woocommerce-pdf-invoices.php:841
+#: includes/admin/settings/class-template.php:302
+#: includes/woocommerce-pdf-invoices.php:851
 msgid "Invoice"
 msgstr "Rechnung"
 
-#: includes/admin/settings/class-template.php:298
+#: includes/admin/settings/class-template.php:307
 msgid "Thank you text"
 msgstr "“Danke für die Bestellung”-Text"
 
-#: includes/admin/settings/class-template.php:304
+#: includes/admin/settings/class-template.php:313
 msgid "Visible in big colored bar directly after invoice total."
 msgstr ""
 "Sichtbar in einem großem farbigen Balken, direkt nach der Rechnungssumme."
 
-#: includes/admin/settings/class-template.php:315
+#: includes/admin/settings/class-template.php:324
 msgid "Show customers shipping address"
 msgstr "Lieferadresse des Kunden anzeigen"
 
-#: includes/admin/settings/class-template.php:317
+#: includes/admin/settings/class-template.php:326
 msgid ""
 "Customers shipping address won't be visible when order has only virtual "
 "products."
@@ -482,15 +483,15 @@ msgstr ""
 "Lieferadressen werden nur sichtbar sein, wenn die Bestellung keine "
 "virtuellen Produkte enthält."
 
-#: includes/admin/settings/class-template.php:330
+#: includes/admin/settings/class-template.php:339
 msgid "Show customer notes"
 msgstr "Kundennotizen anzeigen"
 
-#: includes/admin/settings/class-template.php:337
+#: includes/admin/settings/class-template.php:346
 msgid "Terms & conditions, policies etc."
 msgstr "AGB‚ Richtlinien etc."
 
-#: includes/admin/settings/class-template.php:343
+#: includes/admin/settings/class-template.php:352
 #, php-format
 msgid ""
 "Visible below customer notes and above footer. Want to attach additional "
@@ -500,39 +501,39 @@ msgstr ""
 "Seiten zur Rechnung anzuhängen wird die <a href=\"%1$s\">%2$s </a> "
 "Erweiterung benötigt."
 
-#: includes/admin/settings/class-template.php:349
+#: includes/admin/settings/class-template.php:358
 msgid "Left footer column."
 msgstr "Linke Fußzeilen Spalte."
 
-#: includes/admin/settings/class-template.php:360
+#: includes/admin/settings/class-template.php:369
 msgid "Right footer column."
 msgstr "Rechte Fußzeilen Spalte."
 
-#: includes/admin/settings/class-template.php:371
+#: includes/admin/settings/class-template.php:380
 msgid "Type"
 msgstr "Art"
 
-#: includes/admin/settings/class-template.php:378
+#: includes/admin/settings/class-template.php:387
 msgid "WooCommerce order number"
 msgstr "WooCommerce Bestellnummer"
 
-#: includes/admin/settings/class-template.php:379
+#: includes/admin/settings/class-template.php:388
 msgid "Sequential number"
 msgstr "Aufeinanderfolgende Nummerierung"
 
-#: includes/admin/settings/class-template.php:391
+#: includes/admin/settings/class-template.php:400
 msgid "Reset invoice counter"
 msgstr "Rechnungs-Zähler zurücksetzen"
 
-#: includes/admin/settings/class-template.php:399
+#: includes/admin/settings/class-template.php:408
 msgid "Next"
 msgstr "Weiter"
 
-#: includes/admin/settings/class-template.php:404
+#: includes/admin/settings/class-template.php:413
 msgid "Next invoice number when resetting counter."
 msgstr "Die nächste Rechnungsnummer beim Zurücksetzen des Zählers."
 
-#: includes/admin/settings/class-template.php:406
+#: includes/admin/settings/class-template.php:415
 msgid ""
 "<b>Note:</b> Only available for Sequential numbering. All PDF invoices with "
 "invoice number greater then next invoice number will be deleted!"
@@ -541,43 +542,43 @@ msgstr ""
 "der Rechnungsnummer, die größer ist, als die nächste Rechnungsnummer werden "
 "gelöscht!"
 
-#: includes/admin/settings/class-template.php:416
+#: includes/admin/settings/class-template.php:425
 msgid "Digits"
 msgstr "Ziffern"
 
-#: includes/admin/settings/class-template.php:432
+#: includes/admin/settings/class-template.php:441
 msgid "Prefix"
 msgstr "Präfix"
 
-#: includes/admin/settings/class-template.php:443
+#: includes/admin/settings/class-template.php:452
 msgid "Suffix"
 msgstr "Suffix"
 
-#: includes/admin/settings/class-template.php:454
+#: includes/admin/settings/class-template.php:463
 msgid "Format"
 msgstr "Format"
 
-#: includes/admin/settings/class-template.php:459
+#: includes/admin/settings/class-template.php:468
 #, php-format
 msgid "Available placeholders: %s."
 msgstr "Verfügbare Platzhalter: %s."
 
-#: includes/admin/settings/class-template.php:461
+#: includes/admin/settings/class-template.php:470
 #, php-format
 msgid "<b>Note:</b> %s is required and slashes aren't supported."
 msgstr ""
 "<b>Hinweis:</b> %s sind erforderlich und Schrägstriche werden nicht "
 "unterstützt."
 
-#: includes/admin/settings/class-template.php:473
+#: includes/admin/settings/class-template.php:482
 msgid "Reset yearly"
 msgstr "Jährlich zurücksetzen"
 
-#: includes/admin/settings/class-template.php:475
+#: includes/admin/settings/class-template.php:484
 msgid "Automatically reset invoice numbers on new year's day."
 msgstr "Rechnungszählung am Neujahrstag automatisch zurücksetzen."
 
-#: includes/admin/settings/class-template.php:477
+#: includes/admin/settings/class-template.php:486
 msgid ""
 "<b>Note</b>: You will have to generate all invoices again when changing "
 "option."
@@ -585,42 +586,47 @@ msgstr ""
 "<b>Hinweis</b>: Alle Rechnungen müssen beim Wechsel dieser Einstellung "
 "erneut generiert werden."
 
-#: includes/admin/settings/class-template.php:490
+#: includes/admin/settings/class-template.php:499
 #: includes/templates/invoice/simple/micro/body.php:57
 #: includes/templates/packing-slip/simple/minimal/body.php:77
 msgid "SKU"
 msgstr "Artikelnummer"
 
-#: includes/admin/settings/class-template.php:502
+#: includes/admin/settings/class-template.php:511
 #: includes/templates/invoice/simple/micro/body.php:224
 msgid "Subtotal"
 msgstr "Zwischensumme"
 
-#: includes/admin/settings/class-template.php:514
+#: includes/admin/settings/class-template.php:523
 msgid "Tax (item)"
 msgstr "Mehrwertsteuer (der Bestellposition)"
 
-#: includes/admin/settings/class-template.php:526
+#: includes/admin/settings/class-template.php:535
 msgid "Tax (total)"
 msgstr "Steuer (Gesamt)"
 
-#: includes/admin/settings/class-template.php:538
+#: includes/admin/settings/class-template.php:547
 #: includes/templates/invoice/simple/micro/body.php:208
 msgid "Discount"
 msgstr "Rabatt"
 
-#: includes/admin/settings/class-template.php:550
+#: includes/admin/settings/class-template.php:559
 #: includes/templates/invoice/simple/micro/body.php:216
 #: includes/templates/invoice/simple/micro/body.php:232
 msgid "Shipping"
 msgstr "Versand"
 
-#: includes/admin/settings/class-template.php:597
-msgid ""
-"Company logo not found. Upload the image to the Media Library and try again."
+#: includes/admin/settings/class-template.php:603
+msgid "Invoice Number Prefix contains a character which is not allowed."
 msgstr ""
-"Logo nicht gefunden. Am besten das Bild in die Mediathek hochladen und es "
-"erneut versuchen."
+
+#: includes/admin/settings/class-template.php:615
+msgid "Invoice Number Format contains a character which is not allowed."
+msgstr ""
+
+#: includes/admin/settings/class-template.php:627
+msgid "Invoice Number Suffix contains a character which is not allowed."
+msgstr ""
 
 #: includes/admin/views/html-activation-notice.php:17
 #, php-format
@@ -872,7 +878,7 @@ msgid "Invoice to"
 msgstr "Rechnungsadresse"
 
 #: includes/templates/invoice/simple/micro/body.php:16
-#: includes/woocommerce-pdf-invoices.php:1083
+#: includes/woocommerce-pdf-invoices.php:1095
 #, php-format
 msgid "Phone: %s"
 msgstr "Telefon: %s"
@@ -963,65 +969,65 @@ msgstr "Zahlungsart: %s"
 msgid "Product"
 msgstr "Produkt"
 
-#: includes/woocommerce-pdf-invoices.php:391
+#: includes/woocommerce-pdf-invoices.php:398
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: includes/woocommerce-pdf-invoices.php:409
+#: includes/woocommerce-pdf-invoices.php:416
 msgid "Premium"
 msgstr "Premium"
 
-#: includes/woocommerce-pdf-invoices.php:609
+#: includes/woocommerce-pdf-invoices.php:620
 msgid "Invoice No."
 msgstr "Rechnungsnr."
 
-#: includes/woocommerce-pdf-invoices.php:646
+#: includes/woocommerce-pdf-invoices.php:657
 msgid "View invoice"
 msgstr "Rechnung anzeigen"
 
-#: includes/woocommerce-pdf-invoices.php:661
-#: includes/woocommerce-pdf-invoices.php:683
+#: includes/woocommerce-pdf-invoices.php:672
+#: includes/woocommerce-pdf-invoices.php:694
 msgid "PDF Invoice"
 msgstr "Rechnung"
 
-#: includes/woocommerce-pdf-invoices.php:698
+#: includes/woocommerce-pdf-invoices.php:708
 msgid "Create"
 msgstr "Erstellen"
 
-#: includes/woocommerce-pdf-invoices.php:704
+#: includes/woocommerce-pdf-invoices.php:714
 msgid "Date:"
 msgstr "Datum:"
 
-#: includes/woocommerce-pdf-invoices.php:708
+#: includes/woocommerce-pdf-invoices.php:718
 msgid "Number:"
 msgstr "Nummer:"
 
-#: includes/woocommerce-pdf-invoices.php:717
+#: includes/woocommerce-pdf-invoices.php:727
 msgid "Sent?"
 msgstr "Senden?"
 
-#: includes/woocommerce-pdf-invoices.php:718
+#: includes/woocommerce-pdf-invoices.php:728
 msgid "Yes"
 msgstr "Ja"
 
-#: includes/woocommerce-pdf-invoices.php:718
+#: includes/woocommerce-pdf-invoices.php:728
 msgid "No"
 msgstr "Nein"
 
-#: includes/woocommerce-pdf-invoices.php:728
+#: includes/woocommerce-pdf-invoices.php:738
 msgid "View"
 msgstr "Anzeigen"
 
-#: includes/woocommerce-pdf-invoices.php:735
+#: includes/woocommerce-pdf-invoices.php:745
 msgid "Update"
 msgstr "Aktualisieren"
 
-#: includes/woocommerce-pdf-invoices.php:740
+#: includes/woocommerce-pdf-invoices.php:750
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Sicher, dass die PDF-Rechnung gelöscht werden soll?"
 
 #. translators: $d: invoice number
-#: includes/woocommerce-pdf-invoices.php:744
+#: includes/woocommerce-pdf-invoices.php:754
 #, php-format
 msgid ""
 "You will be missing a PDF invoice with invoice number %d and thus creating "
@@ -1031,24 +1037,45 @@ msgstr ""
 "entsteht so eine Buchhaltungslücke!"
 
 #. translators: %s: plugin name.
-#: includes/woocommerce-pdf-invoices.php:747
+#: includes/woocommerce-pdf-invoices.php:757
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr "Stattdessen die von abgerechneten PDF-Rechnungen mit %s verwenden."
 
-#: includes/woocommerce-pdf-invoices.php:752
+#: includes/woocommerce-pdf-invoices.php:762
 msgid "Delete"
 msgstr "﻿Löschen"
 
-#: includes/woocommerce-pdf-invoices.php:1087
+#: includes/woocommerce-pdf-invoices.php:1099
 #, php-format
 msgid "Email: %s"
 msgstr "E-Mail: %s"
 
-#: includes/woocommerce-pdf-invoices.php:1091
+#: includes/woocommerce-pdf-invoices.php:1103
+#, php-format
+msgid "CRN: %s"
+msgstr ""
+
+#: includes/woocommerce-pdf-invoices.php:1107
 #, php-format
 msgid "VAT ID: %s"
 msgstr "USt-IdNr.: %s"
+
+#~ msgid ""
+#~ "Use the <a href=\"%1$s\">Media Library</a> to <a href=\"%2$s\">upload</a> "
+#~ "or choose a .jpg, .jpeg, .gif or .png file and copy and paste the <a href="
+#~ "\"%3$s\" target=\"_blank\">File URL</a>."
+#~ msgstr ""
+#~ "Die <a href=\"%1$s\">Mediathek</a> zum <a href=\"%2$s\">hochladen</a> "
+#~ "verwenden oder die <a href=\"%3$s\" target=\"_blank\">Datei-URL</a> "
+#~ "einer .jpg, .jpeg, .gif oder .png Datei kopieren."
+
+#~ msgid ""
+#~ "Company logo not found. Upload the image to the Media Library and try "
+#~ "again."
+#~ msgstr ""
+#~ "Logo nicht gefunden. Am besten das Bild in die Mediathek hochladen und es "
+#~ "erneut versuchen."
 
 #~ msgid ""
 #~ "Whoops, your license for %1$s has expired. To keep receiving updates and "

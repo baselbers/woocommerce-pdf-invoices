@@ -342,7 +342,7 @@ abstract class BEWPI_Abstract_Settings {
 	 * @return string
 	 */
 	protected function strip_invoice_number( $value ) {
-		return (string) preg_replace( "/[^a-zA-Z0-9-\s]/", '', $value );
+		return (string) preg_replace( '/[^a-zA-Z0-9-_.\s\[\]]/', '', $value );
 	}
 
 	/**

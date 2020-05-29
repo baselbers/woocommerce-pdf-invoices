@@ -594,6 +594,15 @@ class BEWPI_Template_Settings extends BEWPI_Abstract_Settings {
 			set_transient( 'bewpi_next_invoice_number', intval( $input['bewpi_next_invoice_number'] ) );
 		}
 
+		if ( ! isset( $input['bewpi_invoice_number_format'] ) || false === strpos( $input['bewpi_invoice_number_format'], '[number]' ) ) {
+			$error          = new stdClass();
+			$error->message = __( 'Invoice number format field must contain at least the [number] placeholder.', 'woocommerce-pdf-invoices' );
+			$error->type    = 'error';
+			$this->add_error( $error );
+
+			$output['bewpi_invoice_number_format'] = '[number]';
+		}
+
 		if ( isset( $input['bewpi_invoice_number_prefix'] ) ) {
 
 			$output['bewpi_invoice_number_prefix'] = $this->strip_invoice_number( $input['bewpi_invoice_number_prefix'] );

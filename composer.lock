@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/baselbers/mpdf.git",
-                "reference": "fad15b4731fca00c56f9fdf58d5b50de42124df6"
+                "reference": "5efa0e41c98568161f41c399787bb79fb5f712e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/fad15b4731fca00c56f9fdf58d5b50de42124df6",
-                "reference": "fad15b4731fca00c56f9fdf58d5b50de42124df6",
+                "url": "https://api.github.com/repos/baselbers/mpdf/zipball/5efa0e41c98568161f41c399787bb79fb5f712e0",
+                "reference": "5efa0e41c98568161f41c399787bb79fb5f712e0",
                 "shasum": ""
             },
             "require": {
@@ -66,7 +66,7 @@
                 "source": "https://github.com/mpdf/mpdf",
                 "docs": "http://mpdf.github.io"
             },
-            "time": "2020-05-13T13:27:50+00:00"
+            "time": "2020-06-17T19:40:45+00:00"
         },
         {
             "name": "setasign/fpdi",
@@ -207,12 +207,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/WordPress/WordPress-Coding-Standards.git",
-                "reference": "b5a453203114cc2284b1a614c4953456fbe4f546"
+                "reference": "7da1894633f168fe244afc6de00d141f27517b62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/b5a453203114cc2284b1a614c4953456fbe4f546",
-                "reference": "b5a453203114cc2284b1a614c4953456fbe4f546",
+                "url": "https://api.github.com/repos/WordPress/WordPress-Coding-Standards/zipball/7da1894633f168fe244afc6de00d141f27517b62",
+                "reference": "7da1894633f168fe244afc6de00d141f27517b62",
                 "shasum": ""
             },
             "require": {
@@ -222,6 +222,7 @@
             "require-dev": {
                 "dealerdirect/phpcodesniffer-composer-installer": "^0.5 || ^0.6",
                 "phpcompatibility/php-compatibility": "^9.0",
+                "phpcsstandards/phpcsdevtools": "^1.0",
                 "phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
             },
             "suggest": {
@@ -244,7 +245,7 @@
                 "standards",
                 "wordpress"
             ],
-            "time": "2020-02-04T02:52:06+00:00"
+            "time": "2020-05-13T23:57:56+00:00"
         }
     ],
     "aliases": [],

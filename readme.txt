@@ -344,7 +344,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.1.0 - May 29, 2020 =
+= 3.1.0 - June 17, 2020 =
 
 - Added: Packing slip meta box to Edit Order page to generate packing slip.
 - Added: Param to filters wpi_after_invoice_content and wpi_before_invoice_content and changed prefix.
@@ -358,7 +358,7 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 - Improved: Formatted company address and details by splitting into separate functions.
 - Fixed: Settings error notices not showing.
 - Fixed: Replacing placeholders while getting options.
-- Fixed: mPDFs fatal error while using PHP 7.4.
+- Fixed: mPDF compatibility with PHP 7.4.
 
 = 3.0.11 - November 8, 2019 =
 

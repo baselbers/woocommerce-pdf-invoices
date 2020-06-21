@@ -156,7 +156,7 @@ if ( ! class_exists( 'BEWPI_Abstract_Document' ) ) {
 			}
 
 			// mPDF debugging.
-			if ( WPI()->get_option( 'general', 'mpdf_debug' ) ) {
+			if ( WPI()->get_option( 'debug', 'mpdf_debug' ) ) {
 				$mpdf->debug           = true;
 				$mpdf->showImageErrors = true;
 			}

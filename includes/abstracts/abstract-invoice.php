@@ -438,7 +438,7 @@ abstract class BEWPI_Abstract_Invoice extends BEWPI_Abstract_Document {
 		echo esc_html( $item['name'] );
 
 		do_action( 'wpi_order_item_meta_start', $item, $this->order );
-		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order );
+		do_action( 'woocommerce_order_item_meta_start', $item_id, $item, $this->order, false );
 
 		WPI()->templater()->display_item_meta( $item );
 

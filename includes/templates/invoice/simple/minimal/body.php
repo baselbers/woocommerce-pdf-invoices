@@ -15,15 +15,15 @@
  * @version 0.0.1
  */
 
-$templater                      = WPI()->templater();
-$order                          = $templater->order;
-$invoice                        = $templater->invoice;
-$line_items                     = $order->get_items( 'line_item' );
-$formatted_shipping_address     = $order->get_formatted_shipping_address();
-$formatted_billing_address      = $order->get_formatted_billing_address();
-$columns                        = $invoice->get_columns();
-$color                          = $templater->get_option( 'bewpi_color_theme' );
-$terms                          = $templater->get_option( 'bewpi_terms' );
+$templater                  = WPI()->templater();
+$invoice                    = $templater->invoice;
+$order                      = $invoice->order;
+$line_items                 = $order->get_items( 'line_item' );
+$formatted_shipping_address = $order->get_formatted_shipping_address();
+$formatted_billing_address  = $order->get_formatted_billing_address();
+$columns                    = $invoice->get_columns();
+$color                      = $templater->get_option( 'bewpi_color_theme' );
+$terms                      = $templater->get_option( 'bewpi_terms' );
 ?>
 
 <div class="title">
@@ -47,7 +47,7 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			/**
 			 * Invoice object.
 			 *
-			 * @var BEWPI_Invoice $invoice.
+			 * @var BEWPI_Invoice $invoice .
 			 */
 			foreach ( $invoice->get_invoice_info() as $info_id => $info ) {
 				if ( empty( $info['value'] ) ) {
@@ -80,16 +80,21 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 			?>
 		</td>
 	</tr>
+	<tr class="custom-information">
+		<td>
+			<?php echo apply_filters( 'wpi_custom_information', '', $invoice ); ?>
+		</td>
+	</tr>
 </table>
 <table cellpadding="0" cellspacing="0">
 	<thead>
-		<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
-			<?php
-			foreach ( $columns as $key => $data ) {
-				$templater->display_header_recursive( $key, $data );
-			}
-			?>
-		</tr>
+	<tr class="heading" bgcolor="<?php echo esc_attr( $color ); ?>;">
+		<?php
+		foreach ( $columns as $key => $data ) {
+			$templater->display_header_recursive( $key, $data );
+		}
+		?>
+	</tr>
 	</thead>
 	<tbody>
 	<?php
@@ -116,6 +121,8 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 	<tbody>
 
 	<?php
+	$i      = 1;
+	$length = count( $invoice->get_order_item_totals() );
 	foreach ( $invoice->get_order_item_totals() as $key => $total ) {
 		$class = str_replace( '_', '-', $key );
 		?>
@@ -125,16 +132,19 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 				<?php do_action( 'wpi_order_item_totals_left', $key, $invoice ); ?>
 			</td>
 
-			<td width="25%" align="left" class="border <?php echo esc_attr( $class ); ?>">
+			<td width="25%" align="left" class="border <?php echo $i === $length ? 'last' : ''; ?> <?php echo esc_attr( $class ); ?>">
 				<?php echo $total['label']; ?>
 			</td>
 
-			<td width="25%" align="right" class="border <?php echo esc_attr( $class ); ?>">
+			<td width="25%" align="right" class="border <?php echo $i === $length ? 'last' : ''; ?> <?php echo esc_attr( $class ); ?>">
 				<?php echo str_replace( '&nbsp;', '', $total['value'] ); ?>
 			</td>
 		</tr>
 
-	<?php } ?>
+		<?php
+		$i ++;
+	}
+	?>
 	</tbody>
 </table>
 
@@ -172,14 +182,14 @@ $terms                          = $templater->get_option( 'bewpi_terms' );
 </table>
 
 <?php if ( $terms ) { ?>
-<!-- Using div to position absolute the block. -->
-<div class="terms">
-	<table>
-		<tr>
-			<td style="border: 1px solid #000;">
-				<?php echo nl2br( $terms ); ?>
-			</td>
-		</tr>
-	</table>
-</div>
+	<!-- Using div to position absolute the block. -->
+	<div class="terms">
+		<table>
+			<tr>
+				<td style="border: 1px solid #000;">
+					<?php echo nl2br( $terms ); ?>
+				</td>
+			</tr>
+		</table>
+	</div>
 <?php } ?>

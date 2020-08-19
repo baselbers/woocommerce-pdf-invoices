@@ -116,16 +116,15 @@ table tr.spacer td {
 /* Totals */
 table tr.total td.border {
     border-top: 2px solid #eee;
+}
+
+table tr.total td.last {
+    border-top: 2px solid #000;
     font-weight: bold;
 }
 
 small.shipped_via {
     display: none;
-}
-
-/* Dynamic class */
-table tr.total td.order-total{
-    border-top: 2px solid #000;
 }
 
 table.notes {

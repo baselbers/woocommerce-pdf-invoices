@@ -344,8 +344,9 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
-= 3.1.2 - July 9, 2020 =
+= 3.1.2 - August 27, 2020 =
 
+- Fixed: jQuery .live() has been removed.
 - Fixed: Inconsistent number of args passed to woocommerce_order_item_meta_start thanks to @cyjosh.
 
 = 3.1.1 - June 21, 2020 =

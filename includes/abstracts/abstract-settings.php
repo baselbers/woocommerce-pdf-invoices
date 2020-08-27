@@ -217,8 +217,8 @@ abstract class BEWPI_Abstract_Settings {
 				?>
 			</h2>
 			<form method="post"
-			      action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
-			      enctype="multipart/form-data" <?php echo $width; ?>>
+				action="options.php?tab=<?php echo self::$current_tab; ?>&key=<?php echo md5( WPI()->get_plugin_slug() ); ?>"
+				enctype="multipart/form-data" <?php echo $width; ?>>
 				<?php
 				settings_fields( self::$setting->settings_key );
 				do_settings_sections( self::$setting->settings_key );
@@ -387,11 +387,11 @@ abstract class BEWPI_Abstract_Settings {
 		$options      = array_merge( array_flip( $selections ), $args['options'] );
 		?>
 		<select multiple="multiple"
-		        name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
-		        title="<?php echo esc_attr( $args['title'] ); ?>"
-		        data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
-		        aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
-		        class="wc-enhanced-select">
+			name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . '][]' ); ?>"
+			title="<?php echo esc_attr( $args['title'] ); ?>"
+			data-placeholder="<?php esc_attr_e( 'Choose&hellip;', 'woocommerce-pdf-invoices' ); ?>"
+			aria-label="<?php esc_attr_e( 'Column', 'woocommerce-pdf-invoices' ) ?>"
+			class="wc-enhanced-select">
 			<?php
 			foreach ( $options as $id => $option ) {
 				echo '<option value="' . esc_attr( $option['value'] ) . '" ' . selected( in_array( $id, $selections, true ), true, false ) . '>' . $option['name'] . '</option>';
@@ -414,9 +414,9 @@ abstract class BEWPI_Abstract_Settings {
 		?>
 		<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
 		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-		       value="1"
+			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			type="<?php echo $args['type']; ?>"
+			value="1"
 			<?php
 			checked( (bool) get_transient( 'bewpi_next_invoice_number' ) );
 
@@ -441,11 +441,13 @@ abstract class BEWPI_Abstract_Settings {
 	public function next_invoice_number_callback( $args ) {
 		$class               = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
 		$next_invoice_number = get_transient( 'bewpi_next_invoice_number' );
+		$max_invoice_number  = BEWPI_Invoice::get_max_number();
+
 		?>
 		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-		       value="<?php echo esc_attr( ( false !== $next_invoice_number ) ? $next_invoice_number : BEWPI_Abstract_Invoice::get_max_invoice_number( (int) date_i18n( 'Y', current_time( 'timestamp' ) ) ) + 1 ); ?>"
+			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			type="<?php echo $args['type']; ?>"
+			value="<?php echo esc_attr( false !== $next_invoice_number ? $next_invoice_number : $max_invoice_number + 1 ); ?>"
 			<?php
 			if ( isset( $args['attrs'] ) ) {
 				foreach ( $args['attrs'] as $attr ) {
@@ -471,9 +473,9 @@ abstract class BEWPI_Abstract_Settings {
 			<input type="hidden" name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>" value="0"/>
 		<?php } ?>
 		<input id="<?php echo $args['id']; ?>"
-		       name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		       type="<?php echo $args['type']; ?>"
-		       value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
+			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			type="<?php echo $args['type']; ?>"
+			value="<?php echo $is_checkbox ? 1 : esc_attr( $options[ $args['name'] ] ); ?>"
 
 			<?php
 			if ( $is_checkbox ) {
@@ -504,8 +506,8 @@ abstract class BEWPI_Abstract_Settings {
 		$options = get_option( $args['page'] );
 		?>
 		<textarea id="<?php echo $args['id']; ?>"
-		          name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
-		          rows="5"
+			name="<?php echo $args['page'] . '[' . $args['name'] . ']'; ?>"
+			rows="5"
 		><?php echo esc_textarea( $options[ $args['name'] ] ); ?></textarea>
 		<div class="bewpi-notes"><?php echo $args['desc']; ?></div>
 		<?php
@@ -522,55 +524,59 @@ abstract class BEWPI_Abstract_Settings {
 		$file_url      = wp_get_attachment_url( $attachment_id );
 		?>
 		<p class="form-field">
-			<input type="hidden" class="file_id" name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . ']' ); ?>" value="<?php echo esc_attr( $attachment_id ); ?>"/>
-			<input type="<?php echo esc_attr( $args['type'] ); ?>" class="file_url" placeholder="<?php echo esc_attr( $file_url ); ?>" value="<?php echo esc_attr( $file_url ); ?>"/>
-			<button class="button upload_image_button" data-uploader_button_text="<?php _e( 'Use file', 'woocommerce-pdf-invoices' ); ?>"><?php _e( 'Upload', 'woocommerce-pdf-invoices' ); ?></button>
+			<input type="hidden" class="file_id"
+				name="<?php echo esc_attr( $args['page'] . '[' . $args['name'] . ']' ); ?>"
+				value="<?php echo esc_attr( $attachment_id ); ?>"/>
+			<input type="<?php echo esc_attr( $args['type'] ); ?>" class="file_url"
+				placeholder="<?php echo esc_attr( $file_url ); ?>" value="<?php echo esc_attr( $file_url ); ?>"/>
+			<button class="button upload_image_button"
+				data-uploader_button_text="<?php _e( 'Use file', 'woocommerce-pdf-invoices' ); ?>"><?php _e( 'Upload', 'woocommerce-pdf-invoices' ); ?></button>
 		</p>
 		<script type="text/javascript">
-            // Uploading files
-            var file_frame;
-            var file_target_input;
-            var file_id_input;
+			// Uploading files
+			var file_frame;
+			var file_target_input;
+			var file_id_input;
 
-            jQuery('.upload_image_button').live('click', function (event) {
+			jQuery('.upload_image_button').on('click', function (event) {
 
-                event.preventDefault();
+				event.preventDefault();
 
-                file_target_input = jQuery(this).closest('.form-field').find('.file_url');
-                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+				file_target_input = jQuery(this).closest('.form-field').find('.file_url');
+				file_id_input = jQuery(this).closest('.form-field').find('.file_id');
 
-                // If the media frame already exists, reopen it.
-                if (file_frame) {
-                    file_frame.open();
-                    return;
-                }
+				// If the media frame already exists, reopen it.
+				if (file_frame) {
+					file_frame.open();
+					return;
+				}
 
-                // Create the media frame.
-                file_frame = wp.media.frames.file_frame = wp.media({
-                    title: jQuery(this).data('uploader_title'),
-                    button: {
-                        text: jQuery(this).data('uploader_button_text')
-                    },
-                    multiple: false  // Set to true to allow multiple files to be selected,
-                });
+				// Create the media frame.
+				file_frame = wp.media.frames.file_frame = wp.media({
+					title: jQuery(this).data('uploader_title'),
+					button: {
+						text: jQuery(this).data('uploader_button_text')
+					},
+					multiple: false  // Set to true to allow multiple files to be selected,
+				});
 
-                // When an image is selected, run a callback.
-                file_frame.on('select', function () {
-                    // We set multiple to false so only get one image from the uploader
-                    attachment = file_frame.state().get('selection').first().toJSON();
+				// When an image is selected, run a callback.
+				file_frame.on('select', function () {
+					// We set multiple to false so only get one image from the uploader
+					attachment = file_frame.state().get('selection').first().toJSON();
 
-                    jQuery(file_target_input).val(attachment.url);
-                    jQuery(file_id_input).val(attachment.id);
-                });
+					jQuery(file_target_input).val(attachment.url);
+					jQuery(file_id_input).val(attachment.id);
+				});
 
-                // Finally, open the modal
-                file_frame.open();
-            });
+				// Finally, open the modal
+				file_frame.open();
+			});
 
-            jQuery('.upload_image_button').closest('.form-field').find('.file_url').on('change', function (event) {
-                file_id_input = jQuery(this).closest('.form-field').find('.file_id');
-                jQuery(file_id_input).val('');
-            });
+			jQuery('.upload_image_button').closest('.form-field').find('.file_url').on('change', function (event) {
+				file_id_input = jQuery(this).closest('.form-field').find('.file_id');
+				jQuery(file_id_input).val('');
+			});
 		</script>
 		<?php
 	}

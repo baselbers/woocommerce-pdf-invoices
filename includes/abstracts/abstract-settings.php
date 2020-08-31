@@ -441,7 +441,7 @@ abstract class BEWPI_Abstract_Settings {
 	public function next_invoice_number_callback( $args ) {
 		$class               = isset( $args['class'] ) ? $args['class'] : 'bewpi-notes';
 		$next_invoice_number = get_transient( 'bewpi_next_invoice_number' );
-		$max_invoice_number  = BEWPI_Invoice::get_max_number();
+		$max_invoice_number  = BEWPI_Invoice::get_max_invoice_number( date( 'Y' ) );
 
 		?>
 		<input id="<?php echo $args['id']; ?>"

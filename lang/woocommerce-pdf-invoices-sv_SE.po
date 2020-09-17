@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2020-05-29 16:29+0200\n"
-"PO-Revision-Date: 2020-05-29 16:29+0200\n"
+"POT-Creation-Date: 2020-09-17 14:38+0200\n"
+"PO-Revision-Date: 2020-09-17 14:38+0200\n"
 "Last-Translator: Mikael Akerlund <mikael.akerlund@sponsorhjalpen.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
@@ -383,13 +383,13 @@ msgstr "Visa"
 msgid "Bulk Export PDF Invoices"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:38
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:40
 msgid "Bulk Export PDF Packing Slips"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:85
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:79
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:78
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:88
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:82
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:157
 msgid "No order selected."
 msgstr ""
 
@@ -398,15 +398,26 @@ msgid "Bulk Generate PDF Invoices"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:38
-msgid "Bulk Generate PDF Packing Slips"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:39
 msgid "Bulk Generate PDF Credit Notes"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:36
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:41
+msgid "Bulk Generate PDF Packing Slips"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:35
+#, fuzzy
+#| msgid "PDF Invoice"
+msgid "Bulk Print PDF Invoices"
+msgstr "PDF Faktura"
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:38
 msgid "Bulk Print PDF Packing Slips"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:113
+#, php-format
+msgid "Orders #%s do not contain an invoice."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:162
@@ -825,14 +836,14 @@ msgid "Ship to:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:138
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:150
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:160
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:131
 #, php-format
 msgid "Note from customer: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:143
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:155
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:165
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:136
 #, php-format
 msgid "Note to customer: %s"
@@ -840,7 +851,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:155
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:315
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:167
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:177
 msgid "Zero rated for VAT as customer has supplied EU VAT number"
 msgstr ""
 
@@ -993,11 +1004,11 @@ msgstr ""
 msgid "Select none"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:527
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:533
 msgid "Use file"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:527
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:533
 msgid "Upload"
 msgstr ""
 

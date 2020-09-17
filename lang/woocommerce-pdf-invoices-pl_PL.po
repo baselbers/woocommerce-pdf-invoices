@@ -1,26 +1,24 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-29 16:29+0200\n"
-"PO-Revision-Date: 2020-05-29 16:29+0200\n"
-"Last-Translator: \n"
-"Language-Team: info@wcpdfinvoices.com\n"
+"POT-Creation-Date: 2020-09-17 14:38+0200\n"
+"PO-Revision-Date: 2020-09-17 14:38+0200\n"
+"Last-Translator: Kolja Spyra <mail@kolja-spyra.de>\n"
+"Language-Team: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language: pl_PL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
-"X-Poedit-KeywordsList: _e;__\n"
 "X-Poedit-Basepath: ../..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: bootstrap.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: woocommerce-pdf-invoices\n"
 "X-Poedit-SearchPath-1: woocommerce-pdf-invoices-premium\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
@@ -36,6 +34,7 @@ msgstr ""
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:29
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:69
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:110
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:194
 msgid "License"
 msgstr ""
 
@@ -80,6 +79,14 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:142
 msgid "Activation email cannot be empty."
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:200
+msgid "Inactive"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:202
+msgid "Active"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:26
@@ -383,13 +390,13 @@ msgstr "Zobacz"
 msgid "Bulk Export PDF Invoices"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:38
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:40
 msgid "Bulk Export PDF Packing Slips"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:85
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:79
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:78
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-export.php:88
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:82
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:157
 msgid "No order selected."
 msgstr ""
 
@@ -398,21 +405,31 @@ msgid "Bulk Generate PDF Invoices"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:38
-msgid "Bulk Generate PDF Packing Slips"
-msgstr ""
-
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:39
 msgid "Bulk Generate PDF Credit Notes"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:36
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-generate.php:41
+msgid "Bulk Generate PDF Packing Slips"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:35
+msgid "Bulk Print PDF Invoices"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:38
 msgid "Bulk Print PDF Packing Slips"
+msgstr ""
+
+#: woocommerce-pdf-invoices-premium/includes/class-bulk-print.php:113
+#, php-format
+msgid "Orders #%s do not contain an invoice."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:162
 msgid "PDF Credit Notes"
 msgstr ""
 
+#. translators: credit note.
 #: woocommerce-pdf-invoices-premium/includes/class-credit-note.php:306
 #, php-format
 msgid ""
@@ -581,6 +598,12 @@ msgid ""
 "status to Cancelled."
 msgstr ""
 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:125
+#, fuzzy
+#| msgid "Cancel"
+msgid "Cancelled"
+msgstr "Usuń"
+
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:138
 msgid "Advanced Table Content"
 msgstr ""
@@ -707,6 +730,10 @@ msgstr "Podsuma"
 msgid "Show tax labels"
 msgstr ""
 
+#: woocommerce-pdf-invoices-premium/includes/class-invoice.php:414
+msgid "SKU:"
+msgstr ""
+
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:432
 #: woocommerce-pdf-invoices-premium/includes/class-invoice.php:1044
 #, php-format
@@ -755,6 +782,10 @@ msgstr ""
 msgid "Credit note for order {order_number}"
 msgstr ""
 
+#. translators: %s: default subject
+#. translators: %s: default heading
+#. translators: %s: default subject
+#. translators: %s: default heading
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:149
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:158
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:149
@@ -801,6 +832,7 @@ msgid "Credit Note"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:57
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:65
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:56
 msgid "Bill to:"
 msgstr ""
@@ -808,19 +840,20 @@ msgstr ""
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:64
 #: woocommerce-pdf-invoices-premium/includes/templates/invoice/global/micro/body.php:19
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:23
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:75
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:65
 msgid "Ship to:"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:138
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:150
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:160
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:131
 #, php-format
 msgid "Note from customer: %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:143
-#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:155
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:165
 #: woocommerce-pdf-invoices/includes/templates/packing-slip/simple/minimal/body.php:136
 #, php-format
 msgid "Note to customer: %s"
@@ -828,6 +861,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/templates/credit-note/simple/minimal/body.php:155
 #: woocommerce-pdf-invoices/includes/templates/invoice/simple/micro/body.php:315
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:177
 msgid "Zero rated for VAT as customer has supplied EU VAT number"
 msgstr ""
 
@@ -896,6 +930,7 @@ msgid "Support"
 msgstr "Wsparcie / Pomoc"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-document.php:152
+#: woocommerce-pdf-invoices/includes/templates/invoice/simple/minimal/body.php:36
 msgid "Paid"
 msgstr "Zapłacona"
 
@@ -963,6 +998,14 @@ msgstr ""
 msgid "Version %s"
 msgstr "Wersja %s"
 
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:392
+msgid "Choose&hellip;"
+msgstr ""
+
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:393
+msgid "Column"
+msgstr ""
+
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:402
 msgid "Select all"
 msgstr ""
@@ -971,11 +1014,11 @@ msgstr ""
 msgid "Select none"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:527
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:533
 msgid "Use file"
 msgstr ""
 
-#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:527
+#: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:533
 msgid "Upload"
 msgstr ""
 
@@ -1682,6 +1725,7 @@ msgstr ""
 msgid "Are you sure to delete the PDF invoice?"
 msgstr "Czy na pewno chcesz usunąć fakturę?"
 
+#. translators: $d: invoice number
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:754
 #, php-format
 msgid ""
@@ -1689,6 +1733,7 @@ msgid ""
 "an accounting gap!"
 msgstr ""
 
+#. translators: %s: plugin name.
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:757
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
@@ -1745,11 +1790,6 @@ msgstr ""
 
 #~ msgid "Send customer invoices directly to suppliers and others."
 #~ msgstr "Wysyłaj faktury bezpośrednio do dostawców i innych."
-
-#, fuzzy
-#~| msgid "Cancel"
-#~ msgid "Cancelled"
-#~ msgstr "Usuń"
 
 #~ msgid "Visible Columns"
 #~ msgstr "Widoczne kolumny"

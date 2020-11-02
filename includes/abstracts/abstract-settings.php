@@ -186,7 +186,7 @@ abstract class BEWPI_Abstract_Settings {
 	 * Capabilities needed for managing the settings of this plugin.
 	 */
 	public static function settings_capability() {
-		return apply_filters( 'bewpi_settings_capability', 'manage_options' );
+		return apply_filters( 'bewpi_settings_capability', 'manage_woocommerce' );
 	}
 
 	/**

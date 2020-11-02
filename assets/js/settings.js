@@ -1,24 +1,24 @@
 /* global settings */
-( function( $ ) {
+(function ($) {
 	// Select all/none
-	$( '.wpi' ).on( 'click', '.select_all', function() {
-		$( this ).closest( 'td' ).find( 'select option' ).attr( 'selected', 'selected' );
-		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
+	$('.wpi').on('click', '.select_all', function () {
+		$(this).closest('td').find('select option').attr('selected', 'selected');
+		$(this).closest('td').find('select').trigger('change');
 		return false;
 	});
 
-	$( '.wpi' ).on( 'click', '.select_none', function() {
-		$( this ).closest( 'td' ).find( 'select option' ).removeAttr( 'selected' );
-		$( this ).closest( 'td' ).find( 'select' ).trigger( 'change' );
+	$('.wpi').on('click', '.select_none', function () {
+		$(this).closest('td').find('select option').removeAttr('selected');
+		$(this).closest('td').find('select').trigger('change');
 		return false;
 	});
 
-	$( window ).load( function () {
-		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).sortable();
-		$( '.wpi .bewpi-columns, .wpi .bewpi-totals' ).find( 'ul' ).disableSelection();
+	$(window).on('load', function () {
+		$('.wpi .bewpi-columns, .wpi .bewpi-totals').find('ul').sortable();
+		$('.wpi .bewpi-columns, .wpi .bewpi-totals').find('ul').disableSelection();
 
-		$( '.wpi .bewpi-columns ul, .wpi .bewpi-totals ul' ).sortable({
-			stop: function( event, ui ) {
+		$('.wpi .bewpi-columns ul, .wpi .bewpi-totals ul').sortable({
+			stop: function (event, ui) {
 
 				var tr = $(event.target.closest('tr'));
 
@@ -49,4 +49,4 @@
 		});
 	});
 
-})( jQuery );
+})(jQuery);

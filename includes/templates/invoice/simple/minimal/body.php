@@ -81,7 +81,7 @@ $terms                      = $templater->get_option( 'bewpi_terms' );
 		</td>
 	</tr>
 	<tr class="custom-information">
-		<td>
+		<td colspan="3">
 			<?php echo apply_filters( 'wpi_custom_information', '', $invoice ); ?>
 		</td>
 	</tr>

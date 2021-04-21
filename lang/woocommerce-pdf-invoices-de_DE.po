@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-17 14:37+0200\n"
-"PO-Revision-Date: 2020-09-17 14:37+0200\n"
+"POT-Creation-Date: 2020-11-16 22:59+0100\n"
+"PO-Revision-Date: 2020-11-16 22:59+0100\n"
 "Last-Translator: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language-Team: Kolja Spyra <mail@kolja-spyra.de>\n"
 "Language: de\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: bootstrap.php\n"
@@ -24,11 +24,15 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/class-updater.php:165
-#, php-format
+#, fuzzy, php-format
+#| msgid ""
+#| "Whoops, your license for %1$s has expired. To keep receiving updates and "
+#| "premium support, we offer you a 30%% discount when you <a href=\"%2$s\" "
+#| "target=\"_blank\">renew your license</a>."
 msgid ""
 "Whoops, your license for %1$s has expired. To keep receiving updates and "
-"premium support, we offer you a 30%% discount when you <a href=\"%2$s\" "
-"target=\"_blank\">renew your license</a>."
+"premium support, we offer you a %s discount when you <a href=\"%2$s\" target="
+"\"_blank\">renew your license</a>."
 msgstr ""
 "Ups, die Lizenz für %1$s ist abgelaufen. Um weiterhin Aktualisierungen und "
 "Premium-Support zu erhalten, bieten wir einen Rabatt von 30%%, wenn man <a "
@@ -317,7 +321,7 @@ msgstr "E-Mail an den Lieferanten"
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:414
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:146
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:146
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:148
 msgid "Email subject"
 msgstr "E-Mail Betreff"
 
@@ -586,7 +590,7 @@ msgstr "Erinnerung an:"
 msgid "Reminder sent?"
 msgstr "Mahnung geschickt?"
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:321
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:320
 msgid "Due Date:"
 msgstr "Fälligkeitsdatum:"
 
@@ -804,24 +808,24 @@ msgstr "Rechnungskorrektur zur Bestellung {order_number}"
 #. translators: %s: default heading
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:149
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:158
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:149
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:158
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:151
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:160
 #, php-format
 msgid "Defaults to %s"
 msgstr "Standard auf %s"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:155
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:155
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:157
 msgid "Email heading"
 msgstr "E-Mail Kopfzeile"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:164
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:164
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
 msgid "Email type"
 msgstr "E-Mail-Typ"
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:166
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:168
 msgid "Choose which format of email to send."
 msgstr "Format für E-Mail-Versand auswählen."
 
@@ -1807,12 +1811,6 @@ msgstr ""
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
 msgstr "Stattdessen die von abgerechneten PDF-Rechnungen mit %s verwenden."
-
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1110
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1114
-#, php-format
-msgid "%s"
-msgstr ""
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1118
 #, php-format

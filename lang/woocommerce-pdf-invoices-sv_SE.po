@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: WooCommerce PDF Invoices\n"
-"POT-Creation-Date: 2020-09-17 14:38+0200\n"
-"PO-Revision-Date: 2020-09-17 14:38+0200\n"
+"POT-Creation-Date: 2020-11-16 23:00+0100\n"
+"PO-Revision-Date: 2020-11-16 23:00+0100\n"
 "Last-Translator: Mikael Akerlund <mikael.akerlund@sponsorhjalpen.se>\n"
 "Language-Team: \n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ../..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
@@ -24,8 +24,8 @@ msgstr ""
 #, php-format
 msgid ""
 "Whoops, your license for %1$s has expired. To keep receiving updates and "
-"premium support, we offer you a 30%% discount when you <a href=\"%2$s\" "
-"target=\"_blank\">renew your license</a>."
+"premium support, we offer you a %s discount when you <a href=\"%2$s\" target="
+"\"_blank\">renew your license</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-license.php:29
@@ -291,7 +291,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/admin/settings/class-premium.php:414
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:146
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:146
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:148
 msgid "Email subject"
 msgstr ""
 
@@ -560,7 +560,7 @@ msgstr ""
 msgid "Reminder sent?"
 msgstr ""
 
-#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:321
+#: woocommerce-pdf-invoices-premium/includes/class-invoice-reminder.php:320
 #, fuzzy
 #| msgid "Order Date: %s"
 msgid "Due Date:"
@@ -778,24 +778,24 @@ msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:149
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:158
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:149
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:158
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:151
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:160
 #, php-format
 msgid "Defaults to %s"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:155
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:155
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:157
 msgid "Email heading"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:164
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:164
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
 msgid "Email type"
 msgstr ""
 
 #: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-credit-note.php:166
-#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:166
+#: woocommerce-pdf-invoices-premium/includes/emails/class-wc-email-invoice-reminder.php:168
 msgid "Choose which format of email to send."
 msgstr ""
 
@@ -1717,12 +1717,6 @@ msgstr ""
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:757
 #, php-format
 msgid "Instead consider using Cancelled PDF invoices with %s."
-msgstr ""
-
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1110
-#: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1114
-#, php-format
-msgid "%s"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/woocommerce-pdf-invoices.php:1118

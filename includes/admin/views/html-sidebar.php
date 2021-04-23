@@ -60,9 +60,6 @@
 	<p>
 		<?php printf( __( 'We will never ask for donations, but to guarantee future development, we do need your support. Please show us your appreciation by leaving a <a href="%1$s">★★★★★</a> rating and vote for <a href="%2$s">works</a>.', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform', 'https://wordpress.org/plugins/woocommerce-pdf-invoices/' ); ?>
 	</p>
-	<!--<div class="github btn">
-		<iframe src="https://ghbtns.com/github-btn.html?user=baselbers&repo=woocommerce-pdf-invoices&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
-	</div>-->
 	<!-- FB share -->
 	<!--<div id="fb-root"></div>
 	<div class="btn">

@@ -344,6 +344,10 @@ Since version 2.9.4 the plugin removed the ability to update the PDF invoice whe
 
 == Changelog ==
 
+= 3.1.6 - April 23, 2021 =
+
+- Removed: Iframe and other sidebar social media links.
+
 = 3.1.5 - April 21, 2021 =
 
 - Improved: Translation files.

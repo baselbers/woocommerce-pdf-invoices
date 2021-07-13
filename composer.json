@@ -8,20 +8,9 @@
   "authors": [
     {
       "name": "Bas Elbers",
-      "email": "info@wcpdfinvoices.com"
+      "email": "support@wcpdfinvoices.com"
     }
   ],
-  "scripts": {
-    "post-install-cmd": [
-      "xrstf\\Composer52\\Generator::onPostInstallCmd"
-    ],
-    "post-update-cmd": [
-      "xrstf\\Composer52\\Generator::onPostInstallCmd"
-    ],
-    "post-autoload-dump": [
-      "xrstf\\Composer52\\Generator::onPostInstallCmd"
-    ]
-  },
   "repositories": [
     {
       "type": "vcs",
@@ -29,8 +18,7 @@
     }
   ],
   "require": {
-    "php": ">=5.2.14",
-    "xrstf/composer-php52": "1.*",
+    "php": ">=5.6",
     "mpdf/mpdf": "dev-mpdf"
   },
   "require-dev": {

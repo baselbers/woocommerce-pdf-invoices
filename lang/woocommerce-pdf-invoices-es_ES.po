@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce PDF Invoices\n"
+"Project-Id-Version: Invoices for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-16 22:59+0100\n"
 "PO-Revision-Date: 2020-11-16 22:59+0100\n"
@@ -1028,10 +1028,10 @@ msgstr "Facturas"
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
 msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
+"If you like <strong>Invoices for WooCommerce</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
-"Si te gusta <strong>WooCommerce PDF Invoices</strong>, por favor, déjanos "
+"Si te gusta <strong>Invoices for WooCommerce</strong>, por favor, déjanos "
 "una valoración <a href=\"%s\">★★★★★</a>. ¡Muchas gracias!"
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:268
@@ -1528,34 +1528,34 @@ msgstr ""
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
 msgid ""
-"The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on "
+"The settings of Invoices for WooCommerce are available <a href=\"%1$s\">on "
 "this page</a>."
 msgstr ""
-"Los ajustes de  WooCommerce PDF Invoices están disponibles <a href=\"%1$s"
+"Los ajustes de  Invoices for WooCommerce están disponibles <a href=\"%1$s"
 "\">en esta página</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
 msgid ""
-"Before we deactivate WooCommerce PDF Invoices, would you care to <a href="
+"Before we deactivate Invoices for WooCommerce, would you care to <a href="
 "\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? "
 "<a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
-"Antes de desactivar WooCommerce PDF Invoices, ¿podrías <a href=\"%1$s\" "
+"Antes de desactivar Invoices for WooCommerce, ¿podrías <a href=\"%1$s\" "
 "target=\"_blank\">decirnos por qué</a> quieres hacerlo, de manera que lo "
 "podamos mejorar? <a href=\"%2$s\">No, desactivar ahora</a>."
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-rate-notice.php:26
 #, fuzzy, php-format
 #| msgid ""
-#| "Hi%1$s! You're using <b>WooCommerce PDF Invoices</b> for some time now "
+#| "Hi%1$s! You're using <b>Invoices for WooCommerce</b> for some time now "
 #| "and we would appreciate your <a href=\"%2$s\" target=\"_blank\">★★★★★</a> "
 #| "rating. It will support future development big-time."
 msgid ""
 "Hi%1$s! You're using %2$s for some time now and we would appreciate your "
 "%3$s rating. It will support future development big-time."
 msgstr ""
-"¡Hola%1$s! Llevas usando <b>WooCommerce PDF Invoices</b> un tiempo y "
+"¡Hola%1$s! Llevas usando <b>Invoices for WooCommerce</b> un tiempo y "
 "apreciaríamos mucho tu valoración <a href=\"%2$s\" target=\"_blank\">★★★★★</"
 "a>. Nos ayudaría mucho para seguir desarrollándolo."
 
@@ -1564,8 +1564,8 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
-msgid "WooCommerce PDF Invoices Premium"
-msgstr "WooCommerce PDF Invoices Premium"
+msgid "Invoices for WooCommerce Premium"
+msgstr "Invoices for WooCommerce Premium"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
 msgid ""
@@ -1707,7 +1707,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
 msgid ""
-"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+"Checkout this amazing free Invoices for WooCommerce plugin for WordPress!"
 msgstr ""
 "¡Échale un vistazo a este increíble plugin gratuito de facturas PDF para "
 "Wordpress y WooCommerce!"
@@ -2140,7 +2140,7 @@ msgstr "IVA 0%"
 #~ msgstr "Subtotal es incluyendo impuestos y excepto el descuento y el envío."
 
 #~ msgid ""
-#~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "Thank you for using <b>Invoices for WooCommerce</b> for some time now. "
 #~ "Please show us your appreciation by leaving a ★★★★★ rating. A huge thank "
 #~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
 #~ "away!</a> - <a href='%s'>No, already done it!</a>"

@@ -11,7 +11,7 @@
  * Text Domain:             woocommerce-pdf-invoices
  * Domain Path:             /lang
  * WC requires at least:    3.0.0
- * WC tested up to:         5.2
+ * WC tested up to:         5.7
  */
 
 defined( 'ABSPATH' ) || exit;
@@ -19,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 define( 'WPI_VERSION', '3.1.6' );
 
 /**
- * Load WooCommerce PDF Invoices plugin.
+ * Load Invoices for WooCommerce plugin.
  */
 function _bewpi_load_plugin() {
 	if ( ! class_exists( 'WooCommerce' ) ) {

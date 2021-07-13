@@ -1,6 +1,6 @@
-# WooCommerce PDF Invoices
+# Invoices for WooCommerce
 
-This is the WooCommerce PDF Invoices Github repository. Browse the source code, add your own issues and keep track of development.
+This is the Invoices for WooCommerce Github repository. Browse the source code, add your own issues and keep track of development.
 
 ## Support
 

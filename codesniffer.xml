@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WooCommerce PDF Invoices">
-	<description>WooCommerce PDF Invoices rules for PHP_CodeSniffer</description>
+<ruleset name="Invoices for WooCommerce">
+	<description>Invoices for WooCommerce rules for PHP_CodeSniffer</description>
 	<config name="installed_paths" value="vendor/wp-coding-standards/wpcs" />
 	<rule ref="WordPress">
 		<exclude name="WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid" />

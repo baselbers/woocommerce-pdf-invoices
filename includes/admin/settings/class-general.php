@@ -38,7 +38,7 @@ class BEWPI_General_Settings extends BEWPI_Abstract_Settings {
 		$sections = array(
 			'email'         => array(
 				'title'       => __( 'Email Options', 'woocommerce-pdf-invoices' ),
-				'description' => sprintf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice. Want to attach PDF documents to many more email types? Take a look at %2$s.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email', '<a href="https://wcpdfinvoices.com" target="_blank">WooCommerce PDF Invoices Premium</a>' ),
+				'description' => sprintf( __( 'The PDF invoice will be generated when WooCommerce sends the corresponding email. The email should be <a href="%1$s">enabled</a> in order to automatically generate the PDF invoice. Want to attach PDF documents to many more email types? Take a look at %2$s.', 'woocommerce-pdf-invoices' ), 'admin.php?page=wc-settings&tab=email', '<a href="https://wcpdfinvoices.com" target="_blank">Invoices for WooCommerce Premium</a>' ),
 			),
 			'download'      => array(
 				'title' => __( 'Download Options', 'woocommerce-pdf-invoices' ),

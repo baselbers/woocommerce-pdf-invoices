@@ -256,7 +256,7 @@ abstract class BEWPI_Abstract_Settings {
 	 * @return string
 	 */
 	public static function plugin_review_text() {
-		return sprintf( __( 'If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a href="%s">★★★★★</a> rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform' );
+		return sprintf( __( 'If you like <strong>Invoices for WooCommerce</strong> please leave us a <a href="%s">★★★★★</a> rating. A huge thank you in advance!', 'woocommerce-pdf-invoices' ), 'https://wordpress.org/support/view/plugin-reviews/woocommerce-pdf-invoices?rate=5#postform' );
 	}
 
 	/**

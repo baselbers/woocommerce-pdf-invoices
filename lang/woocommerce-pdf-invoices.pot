@@ -880,7 +880,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
-msgid "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
+msgid "If you like <strong>Invoices for WooCommerce</strong> please leave us a <a href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:268
@@ -1298,12 +1298,12 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
-msgid "The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on this page</a>."
+msgid "The settings of Invoices for WooCommerce are available <a href=\"%1$s\">on this page</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
-msgid "Before we deactivate WooCommerce PDF Invoices, would you care to <a href=\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? <a href=\"%2$s\">No, deactivate now</a>."
+msgid "Before we deactivate Invoices for WooCommerce, would you care to <a href=\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? <a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-rate-notice.php:26
@@ -1316,7 +1316,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
-msgid "WooCommerce PDF Invoices Premium"
+msgid "Invoices for WooCommerce Premium"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
@@ -1424,7 +1424,7 @@ msgid "We will never ask for donations, but to guarantee future development, we 
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
-msgid "Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+msgid "Checkout this amazing free Invoices for WooCommerce plugin for WordPress!"
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:93

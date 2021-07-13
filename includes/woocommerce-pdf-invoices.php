@@ -1,6 +1,6 @@
 <?php
 /**
- * Final WooCommerce PDF Invoices Class.
+ * Final Invoices for WooCommerce Class.
  *
  * Processes several hooks and filter callbacks.
  *
@@ -86,7 +86,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 		}
 
 		/**
-		 * Define WooCommerce PDF Invoices Constants.
+		 * Define Invoices for WooCommerce Constants.
 		 *
 		 * @since 2.5.0
 		 */
@@ -754,7 +754,7 @@ if ( ! class_exists( 'BE_WooCommerce_PDF_Invoices' ) ) {
 						$message .= ' ' . sprintf( __( 'You will be missing a PDF invoice with invoice number %d and thus creating an accounting gap!', 'woocommerce-pdf-invoices' ), $invoice->get_number() );
 
 						/* translators: %s: plugin name. */
-						$message .= ' ' . apply_filters( 'wpi_delete_invoice_confirm_message', sprintf( __( 'Instead consider using Cancelled PDF invoices with %s.', 'woocommerce-pdf-invoices' ), 'WooCommerce PDF Invoices Premium' ) );
+						$message .= ' ' . apply_filters( 'wpi_delete_invoice_confirm_message', sprintf( __( 'Instead consider using Cancelled PDF invoices with %s.', 'woocommerce-pdf-invoices' ), 'Invoices for WooCommerce Premium' ) );
 
 					}
 

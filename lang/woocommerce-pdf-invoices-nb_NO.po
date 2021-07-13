@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce PDF Invoices\n"
+"Project-Id-Version: Invoices for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-16 22:59+0100\n"
 "PO-Revision-Date: 2020-11-16 22:59+0100\n"
@@ -1008,7 +1008,7 @@ msgstr "PDF Faktura"
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
 msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
+"If you like <strong>Invoices for WooCommerce</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
@@ -1473,14 +1473,14 @@ msgstr ""
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
 msgid ""
-"The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on "
+"The settings of Invoices for WooCommerce are available <a href=\"%1$s\">on "
 "this page</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
 msgid ""
-"Before we deactivate WooCommerce PDF Invoices, would you care to <a href="
+"Before we deactivate Invoices for WooCommerce, would you care to <a href="
 "\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? "
 "<a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
@@ -1497,7 +1497,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
-msgid "WooCommerce PDF Invoices Premium"
+msgid "Invoices for WooCommerce Premium"
 msgstr "WooCommerce PDF Faktura Premium"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
@@ -1630,7 +1630,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
 msgid ""
-"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+"Checkout this amazing free Invoices for WooCommerce plugin for WordPress!"
 msgstr ""
 "Sjekk ut denne fantastiske og helt gratis utvidelsen WooCommerce PDF Faktura "
 "for WordPress!"
@@ -2045,7 +2045,7 @@ msgstr "MVA %s"
 #~ msgstr "Tilgang nektet"
 
 #~ msgid ""
-#~ "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+#~ "If you like <strong>Invoices for WooCommerce</strong> please leave us a "
 #~ "%s★★★★★%s rating. A huge thank you in advance!"
 #~ msgstr ""
 #~ "Om du liker <strong>WooCommerce PDF Faktura</strong>, vennligst gi oss en "
@@ -2058,7 +2058,7 @@ msgstr "MVA %s"
 #~ msgstr "Opprett faktura"
 
 #~ msgid ""
-#~ "You are working with <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "You are working with <b>Invoices for WooCommerce</b> for some time now. "
 #~ "We really need your ★★★★★ rating. It will support future development big-"
 #~ "time. A huge thanks in advance and keep up the good work! <br /> <a "
 #~ "href='%s' target='_blank'>Yes, will do it right away!</a> - <a "
@@ -2104,8 +2104,8 @@ msgstr "MVA %s"
 #~ "bestillingens betalingsmåte."
 
 #~ msgid ""
-#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
-#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
+#~ "<p><a href=\"%s\"><strong>Invoices for WooCommerce Premium</strong></a> "
+#~ "requires <a href=\"%s\"><strong>Invoices for WooCommerce</strong></a>. "
 #~ "Get the free version (%s+) and try again.</p>"
 #~ msgstr ""
 #~ "<p><a href=\"%s\"><strong>WooCommerce PDF Fakturaer Premium</strong></a> "
@@ -2189,12 +2189,12 @@ msgstr "MVA %s"
 #~ msgstr "Delsummen vil være inkludert mva, men ekskludert rabatt og frakt."
 
 #~ msgid ""
-#~ "Thank you for using <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "Thank you for using <b>Invoices for WooCommerce</b> for some time now. "
 #~ "Please show us your appreciation by leaving a ★★★★★ rating. A huge thank "
 #~ "you in advance! <br /> <a href='%s' target='_blank'>Yes, will do it right "
 #~ "away!</a> - <a href='%s'>No, already done it!</a>"
 #~ msgstr ""
-#~ "Takk for at du har benyttet <b>WooCommerce PDF Invoices</b> en liten "
+#~ "Takk for at du har benyttet <b>Invoices for WooCommerce</b> en liten "
 #~ "stund allerede. Vennligst vis oss din støtte ved å vurdere utvidelsen med "
 #~ "★★★★★. Tusen takk for støtten din! <br /> <a href='%s' "
 #~ "target='_blank'>Ja, jeg skal gjøre det med en gang!!</a> - <a "

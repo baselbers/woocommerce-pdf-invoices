@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: baaaaas
 Donate link: 
-Tags: woocommerce pdf invoices, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
+Tags: Invoices for WooCommerce, invoice, packing slips, delivery note, packing list, shipping list, generate, pdf, woocommerce, attachment, email, customer invoice, processing, vat, tax, sequential, number, dropbox, google drive, onedrive, egnyte, cloud, storage
 Requires at least: 4.0
 Tested up to: 5.7
 Stable tag: 3.1.6
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Automatically generate and attach customizable PDF Invoices and PDF Packing Slips for WooCommerce emails and directly send to Dropbox, Google Drive, OneDrive or Egnyte.
 
 == Description ==
-*Invoicing can be time consuming. Well, not anymore! WooCommerce PDF Invoices automates the invoicing process by generating and sending it to your customers.*
+*Invoicing can be time consuming. Well, not anymore! Invoices for WooCommerce automates the invoicing process by generating and sending it to your customers.*
 
 This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches it to WooCommerce email types of your choice and sends invoices to your customers' Dropbox, Google Drive, OneDrive or Egnyte. Choose between multiple clean and customizable templates.
 
@@ -28,7 +28,7 @@ This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches i
 - Download invoice from My Account page.
 - Mark invoices as paid.
 
-> **WooCommerce PDF Invoices Premium**<br /><br />
+> **Invoices for WooCommerce Premium**<br /><br />
 > This plugin offers a premium version which comes with the following features:<br /><br />
 > - Attach PDF invoices to many more email types including third party plugins<br />
 > - Send credit notes and cancelled PDF invoices<br />
@@ -42,7 +42,7 @@ This WooCommerce plugin generates PDF invoices and PDF packing slips, attaches i
 > - Add additional PDF files to PDF invoices<br />
 > - Send customer invoices directly to multiple recipients<br />
 > - Compatible with [WooCommerce Subscriptions](http://www.woothemes.com/products/woocommerce-subscriptions) plugin emails.<br /><br />
-> [Upgrade to WooCommerce PDF Invoices Premium >>](http://wcpdfinvoices.com)
+> [Upgrade to Invoices for WooCommerce Premium >>](http://wcpdfinvoices.com)
 
 #### Support
 
@@ -72,7 +72,7 @@ Contribute a translation on [GitHub](https://github.com/baselbers/woocommerce-pd
 #### Automatic installation
 Automatic installation is the easiest option as WordPress handles the file transfers itself and you don't even need to leave your web browser. To do an automatic install of WooCommerce, log in to your WordPress admin panel, navigate to the Plugins menu and click Add New.
 
-In the search field type "WooCommerce PDF Invoices" and click Search Plugins. Once you've found our plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking Install Now. After clicking that link you will be asked if you're sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
+In the search field type "Invoices for WooCommerce" and click Search Plugins. Once you've found our plugin you can view details about it such as the the point release, rating and description. Most importantly of course, you can install it by simply clicking Install Now. After clicking that link you will be asked if you're sure you want to install the plugin. Click yes and WordPress will automatically complete the installation.
 
 #### Manual installation
 The manual installation method involves downloading our plugin and uploading it to your webserver via your favourite FTP application.
@@ -109,7 +109,7 @@ To hide order item meta from the invoice, simply add the following filter to you
 
 `
 /**
- * Hide order itemmeta on WooCommerce PDF Invoices' invoice template.
+ * Hide order itemmeta on Invoices for WooCommerce' invoice template.
  *
  * @param array $hidden_order_itemmeta itemmeta.
  *

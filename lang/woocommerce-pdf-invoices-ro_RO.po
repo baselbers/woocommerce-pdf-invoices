@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce PDF Invoices\n"
+"Project-Id-Version: Invoices for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-16 22:59+0100\n"
 "PO-Revision-Date: 2020-11-16 22:59+0100\n"
@@ -991,7 +991,7 @@ msgstr "Facturi PDF"
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
 msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
+"If you like <strong>Invoices for WooCommerce</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
@@ -1449,14 +1449,14 @@ msgstr ""
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
 msgid ""
-"The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on "
+"The settings of Invoices for WooCommerce are available <a href=\"%1$s\">on "
 "this page</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
 msgid ""
-"Before we deactivate WooCommerce PDF Invoices, would you care to <a href="
+"Before we deactivate Invoices for WooCommerce, would you care to <a href="
 "\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? "
 "<a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
@@ -1473,7 +1473,7 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
-msgid "WooCommerce PDF Invoices Premium"
+msgid "Invoices for WooCommerce Premium"
 msgstr "WooCommerce Facturi PDF Premium"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
@@ -1604,7 +1604,7 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
 msgid ""
-"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+"Checkout this amazing free Invoices for WooCommerce plugin for WordPress!"
 msgstr ""
 "Verificați acest nemaipomenit plugin gratuit WooCommerce Facturi PDF pentru "
 "WordPress!"
@@ -1911,7 +1911,7 @@ msgstr ""
 #~ msgstr "Acces interzis"
 
 #~ msgid ""
-#~ "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+#~ "If you like <strong>Invoices for WooCommerce</strong> please leave us a "
 #~ "%s★★★★★%s rating. A huge thank you in advance!"
 #~ msgstr ""
 #~ "Dacă vă place <strong>WooCommerce Facturi PDF</strong> vă rugam să ne "
@@ -1924,7 +1924,7 @@ msgstr ""
 #~ msgstr "Crează factură"
 
 #~ msgid ""
-#~ "You are working with <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "You are working with <b>Invoices for WooCommerce</b> for some time now. "
 #~ "We really need your ★★★★★ rating. It will support future development big-"
 #~ "time. A huge thanks in advance and keep up the good work! <br /> <a "
 #~ "href='%s' target='_blank'>Yes, will do it right away!</a> - <a "

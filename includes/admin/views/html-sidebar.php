@@ -1,5 +1,5 @@
 <aside class="bewpi-sidebar premium">
-	<h3><?php _e( 'WooCommerce PDF Invoices Premium', 'woocommerce-pdf-invoices' ); ?></h3>
+	<h3><?php _e( 'Invoices for WooCommerce Premium', 'woocommerce-pdf-invoices' ); ?></h3>
 	<p>
 		<?php _e( 'This plugin offers a premium version which comes with the following features:', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Attach PDF invoices to many more email types including third party plugins.', 'woocommerce-pdf-invoices' ); ?><br/>
@@ -77,7 +77,7 @@
 		</div>
 	</div>
 	<div class="twitter btn">
-		<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="<?php _e( 'Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!', 'woocommerce-pdf-invoices' ); ?>">Tweet</a>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-url="https://wordpress.org/plugins/woocommerce-pdf-invoices/" data-text="<?php _e( 'Checkout this amazing free Invoices for WooCommerce plugin for WordPress!', 'woocommerce-pdf-invoices' ); ?>">Tweet</a>
 		<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 	</div>-->
 </aside>

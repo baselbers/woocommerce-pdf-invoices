@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: WooCommerce PDF Invoices\n"
+"Project-Id-Version: Invoices for WooCommerce\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-16 22:59+0100\n"
 "PO-Revision-Date: 2020-11-16 22:59+0100\n"
@@ -1008,7 +1008,7 @@ msgstr "Factures"
 #: woocommerce-pdf-invoices/includes/abstracts/abstract-settings.php:259
 #, php-format
 msgid ""
-"If you like <strong>WooCommerce PDF Invoices</strong> please leave us a <a "
+"If you like <strong>Invoices for WooCommerce</strong> please leave us a <a "
 "href=\"%s\">★★★★★</a> rating. A huge thank you in advance!"
 msgstr ""
 
@@ -1473,14 +1473,14 @@ msgstr ""
 #: woocommerce-pdf-invoices/includes/admin/views/html-activation-notice.php:17
 #, php-format
 msgid ""
-"The settings of WooCommerce PDF Invoices are available <a href=\"%1$s\">on "
+"The settings of Invoices for WooCommerce are available <a href=\"%1$s\">on "
 "this page</a>."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-deactivation-notice.php:19
 #, php-format
 msgid ""
-"Before we deactivate WooCommerce PDF Invoices, would you care to <a href="
+"Before we deactivate Invoices for WooCommerce, would you care to <a href="
 "\"%1$s\" target=\"_blank\">let us know why</a> so we can improve it for you? "
 "<a href=\"%2$s\">No, deactivate now</a>."
 msgstr ""
@@ -1497,8 +1497,8 @@ msgid "Dismiss this notice."
 msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:2
-msgid "WooCommerce PDF Invoices Premium"
-msgstr "WooCommerce PDF Invoices Premium"
+msgid "Invoices for WooCommerce Premium"
+msgstr "Invoices for WooCommerce Premium"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:4
 msgid ""
@@ -1631,9 +1631,9 @@ msgstr ""
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:88
 msgid ""
-"Checkout this amazing free WooCommerce PDF Invoices plugin for WordPress!"
+"Checkout this amazing free Invoices for WooCommerce plugin for WordPress!"
 msgstr ""
-"Essayez cet incroyable plugin gratuit WooCommerce PDF Invoices pour "
+"Essayez cet incroyable plugin gratuit Invoices for WooCommerce pour "
 "WordPress !"
 
 #: woocommerce-pdf-invoices/includes/admin/views/html-sidebar.php:93
@@ -2043,7 +2043,7 @@ msgstr "TVA %s"
 #~ "PDF Invoices</strong></a>."
 #~ msgstr ""
 #~ "Très bien ! <a href=\"%s\">Commençons la configuration de "
-#~ "<strong>WooCommerce PDF Invoices</strong></a>."
+#~ "<strong>Invoices for WooCommerce</strong></a>."
 
 #~ msgid "Invalid order ID"
 #~ msgstr "ID de commande invalide"
@@ -2052,10 +2052,10 @@ msgstr "TVA %s"
 #~ msgstr "Accès refusé"
 
 #~ msgid ""
-#~ "If you like <strong>WooCommerce PDF Invoices</strong> please leave us a "
+#~ "If you like <strong>Invoices for WooCommerce</strong> please leave us a "
 #~ "%s★★★★★%s rating. A huge thank you in advance!"
 #~ msgstr ""
-#~ "Si vous aimez <strong>WooCommerce PDF Invoices</strong> n'hésitez pas à "
+#~ "Si vous aimez <strong>Invoices for WooCommerce</strong> n'hésitez pas à "
 #~ "nous laisser un avis %s ★★★★★%s. Un grand merci à l'avance !"
 
 #~ msgid "Cancel invoice"
@@ -2065,13 +2065,13 @@ msgstr "TVA %s"
 #~ msgstr "Créer une facture"
 
 #~ msgid ""
-#~ "You are working with <b>WooCommerce PDF Invoices</b> for some time now. "
+#~ "You are working with <b>Invoices for WooCommerce</b> for some time now. "
 #~ "We really need your ★★★★★ rating. It will support future development big-"
 #~ "time. A huge thanks in advance and keep up the good work! <br /> <a "
 #~ "href='%s' target='_blank'>Yes, will do it right away!</a> - <a "
 #~ "href='%s'>No, already done it!</a>"
 #~ msgstr ""
-#~ "Vous travaillez avec des <b>WooCommerce PDF Invoices</b> depuis un "
+#~ "Vous travaillez avec des <b>Invoices for WooCommerce</b> depuis un "
 #~ "certain temps. Nous avons vraiment besoin de votre avis ★★★★★. Il "
 #~ "soutiendra le développement futur à long terme. Un grand merci à l’avance "
 #~ "et continuez votre bon travail !<br><a href=\"%s\" target=\"_blank\">Oui, "
@@ -2079,11 +2079,11 @@ msgstr "TVA %s"
 #~ "</a>"
 
 #~ msgid ""
-#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
-#~ "requires <a href=\"%s\"><strong>WooCommerce PDF Invoices</strong></a>. "
+#~ "<p><a href=\"%s\"><strong>Invoices for WooCommerce Premium</strong></a> "
+#~ "requires <a href=\"%s\"><strong>Invoices for WooCommerce</strong></a>. "
 #~ "Get the free version (%s+) and try again.</p>"
 #~ msgstr ""
-#~ "<p><a href=\"%s\"><strong>WooCommerce PDF Invoices Premium</strong></a> "
+#~ "<p><a href=\"%s\"><strong>Invoices for WooCommerce Premium</strong></a> "
 #~ "nécessite <a href=\"%s\"><strong>WooCommerce Invoices PDF</strong></a>. "
 #~ "Obtenez la version gratuite (%s+) et essayez à nouveau.</p>"
 

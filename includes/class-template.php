@@ -33,13 +33,13 @@ class BEWPI_Template {
 	 */
 	public $order;
 	/**
-	 * WooCommerce PDF Invoices invoice.
+	 * Invoices for WooCommerce invoice.
 	 *
 	 * @var BEWPI_Abstract_Invoice.
 	 */
 	public $invoice;
 	/**
-	 * WooCommerce PDF Invoices packing slip.
+	 * Invoices for WooCommerce packing slip.
 	 *
 	 * @var BEWPI_Packing_Slip.
 	 */
@@ -201,7 +201,7 @@ class BEWPI_Template {
 	 * @deprecated Make sure to remove it from your custom template since this will be removed in future releases.
 	 */
 	public function wc_display_item_meta( $item, $inline = false ) {
-		_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices 2.9.13', 'WPI()->templater()->display_item_meta( $item )' );
+		_deprecated_function( __FUNCTION__, 'Invoices for WooCommerce 2.9.13', 'WPI()->templater()->display_item_meta( $item )' );
 		if ( function_exists( 'wc_display_item_meta' ) ) {
 
 			if ( $inline ) {
@@ -227,7 +227,7 @@ class BEWPI_Template {
 	 * @return mixed
 	 */
 	public function strip_non_inline_tags( $string ) {
-		_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices 2.9.13', 'wp_filter_nohtml_kses()' );
+		_deprecated_function( __FUNCTION__, 'Invoices for WooCommerce 2.9.13', 'wp_filter_nohtml_kses()' );
 
 		return str_replace( array( '<p>', '</p>', '<br>', '</br>' ), '', $string );
 	}
@@ -241,7 +241,7 @@ class BEWPI_Template {
 	 * @deprecated No longer used within the template files since it is triggering a Fatal Error and does not get used anyway. Make sure to remove it from your custom template since this will be removed in future releases.
 	 */
 	public function wc_display_item_downloads( $item, $inline = false ) {
-		_deprecated_function( __FUNCTION__, 'WooCommerce PDF Invoices 2.9.13', 'wc_display_item_downloads( $item )' );
+		_deprecated_function( __FUNCTION__, 'Invoices for WooCommerce 2.9.13', 'wc_display_item_downloads( $item )' );
 		if ( function_exists( 'wc_display_item_downloads' ) ) {
 
 			if ( $inline ) {
@@ -425,7 +425,7 @@ class BEWPI_Template {
 	/**
 	 * Set invoice.
 	 *
-	 * @param BEWPI_Packing_Slip $packing_slip WooCommerce PDF Invoices invoice object.
+	 * @param BEWPI_Packing_Slip $packing_slip Invoices for WooCommerce invoice object.
 	 */
 	public function set_packing_slip( $packing_slip ) {
 		$this->packing_slip = $packing_slip;

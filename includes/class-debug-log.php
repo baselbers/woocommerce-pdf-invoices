@@ -93,7 +93,7 @@ if ( ! class_exists( 'BEWPI_Debug_Log' ) ) {
 				$message = print_r( $message, true );
 			}
 
-			$message    = sprintf( 'WooCommerce PDF Invoices %s: %s', $level_name, $message );
+			$message    = sprintf( 'Invoices for WooCommerce %s: %s', $level_name, $message );
 
 			return error_log( $message );
 		}

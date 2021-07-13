@@ -23,7 +23,7 @@ $action         = 'dismiss_notice_rate';
 <div class="wpi notice notice-success is-dismissible">
 	<p>
 		<?php
-		printf( __( 'Hi%1$s! You\'re using %2$s for some time now and we would appreciate your %3$s rating. It will support future development big-time.', 'woocommerce-pdf-invoices' ), esc_html( $user_firstname ), '<b>WooCommerce PDF Invoices</b>', '<a href="' . esc_url( $rate_url ) . '" target="_blank">★★★★★</a>' );
+		printf( __( 'Hi%1$s! You\'re using %2$s for some time now and we would appreciate your %3$s rating. It will support future development big-time.', 'woocommerce-pdf-invoices' ), esc_html( $user_firstname ), '<b>Invoices for WooCommerce</b>', '<a href="' . esc_url( $rate_url ) . '" target="_blank">★★★★★</a>' );
 		?>
 	</p>
 	<form action="" method="post">

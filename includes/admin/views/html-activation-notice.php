@@ -14,6 +14,6 @@ $settings_url = add_query_arg( array( 'page' => WPI()->get_plugin_slug() ), admi
 ?>
 <div class="updated notice notice-success is-dismissible" data-dismissible="activation-forever">
 	<p>
-		<?php printf( __( 'The settings of WooCommerce PDF Invoices are available <a href="%1$s">on this page</a>.', 'woocommerce-pdf-invoices' ), esc_url( $settings_url ) ); ?>
+		<?php printf( __( 'The settings of Invoices for WooCommerce are available <a href="%1$s">on this page</a>.', 'woocommerce-pdf-invoices' ), esc_url( $settings_url ) ); ?>
 	</p>
 </div>

@@ -12,7 +12,6 @@
 		- <?php _e( 'Generate PDF invoices in multiple languages (WPML and Polylang compatible).', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bulk generate PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Bulk export and/or download PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
-		- <?php _e( 'Bill periodically by generating and sending global invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Add additional PDF\'s to PDF invoices.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php _e( 'Send PDF invoices to multiple recipients.', 'woocommerce-pdf-invoices' ); ?><br/>
 		- <?php printf( __( 'Attach invoices to <a href="%s">WooCommerce Subscriptions</a> emails.', 'woocommerce-pdf-invoices' ), "http://www.woothemes.com/products/woocommerce-subscriptions/" ); ?><br/>

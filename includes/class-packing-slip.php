@@ -125,7 +125,7 @@ if ( ! class_exists( 'BEWPI_Packing_Slip' ) ) {
 				}
 			}
 
-			do_action( 'wpi_before_document_generation', $this->type, BEWPI_WC_Order_Compatibility::get_id( $this->order ) );
+			do_action( 'wpi_before_document_generation', $this, BEWPI_WC_Order_Compatibility::get_id( $this->order ) );
 
 			parent::generate( $destination );
 
